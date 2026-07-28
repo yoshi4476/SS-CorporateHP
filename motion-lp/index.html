@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Motif — Animate with Elegance, Not Overhead</title>
+  <meta name="description" content="Motif is a CSS-first, JS-light scroll animation library. Attribute-based, modular, performance oriented." />
+  <link rel="stylesheet" href="fonts/fonts.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- header stays outside the smooth layer: it is fixed on purpose -->
+  <header class="site-header">
+    <a class="logo" href="#top" data-magnetic>
+      Motif<span class="mono">v1.0</span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#showcase">Skill&nbsp;Hub</a>
+      <a href="#technical">Dev&nbsp;Guides</a>
+      <a href="https://www.npmjs.com" rel="noopener">NPM</a>
+      <a href="https://discord.com" rel="noopener">Discord</a>
+    </nav>
+  </header>
+
+  <!-- everything below is moved by the inertia layer -->
+  <div id="smooth-content">
+    <main id="top">
+
+      <!-- 1. hero ......................................................
+           data-anim-split on the headline: chars rise one by one. -->
+      <section class="hero">
+        <p class="mono" data-anim-fade>CSS-first scroll animation library</p>
+        <h1 data-anim-split style="--d:.15s">Animate with Elegance, Not&nbsp;Overhead</h1>
+        <div class="hero-sub">
+          <p class="tagline" data-anim-fade style="--d:.9s">CSS-First. JS-Light.</p>
+          <p class="mono" data-anim-fade style="--d:1.05s">1.9&nbsp;kB&nbsp;gzip&nbsp;·&nbsp;zero&nbsp;deps</p>
+        </div>
+        <div class="hero-cue" aria-hidden="true">
+          <span class="mono">Scroll</span>
+          <span class="cue-line"></span>
+        </div>
+      </section>
+
+      <!-- 2. value proposition ......................................... -->
+      <section class="section value">
+        <div class="container">
+          <p class="mono" data-anim-fade>Value</p>
+          <p class="statement" data-anim-fade style="--d:.1s">
+            One attribute in your markup.
+            <span class="accent">Zero</span> weight on your page.
+          </p>
+          <div class="value-grid">
+            <div data-anim-fade style="--d:.15s">
+              <strong>1.9&nbsp;kB</strong>
+              <span>gzipped, everything included</span>
+            </div>
+            <div data-anim-fade style="--d:.3s">
+              <strong>0</strong>
+              <span>dependencies, no build step required</span>
+            </div>
+            <div data-anim-fade style="--d:.45s">
+              <strong>60&nbsp;fps</strong>
+              <span>transform &amp; opacity only, GPU composited</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. philosophy ................................................
+           data-anim-progress feeds --progress to the section;
+           data-anim-sticky pins the panel; data-anim-words reveals
+           word by word as you scroll through 320vh. -->
+      <section class="philosophy" data-anim-progress>
+        <div class="philosophy-panel" data-anim-sticky>
+          <p data-anim-words aria-label="Mastery is not writing more code. It is removing every motion that has no meaning, until timing itself becomes the interface.">
+            <span class="word">Mastery</span> <span class="word">is</span>
+            <span class="word">not</span> <span class="word">writing</span>
+            <span class="word">more</span> <span class="word">code.</span>
+            <span class="word">It</span> <span class="word">is</span>
+            <span class="word">removing</span> <span class="word">every</span>
+            <span class="word">motion</span> <span class="word">that</span>
+            <span class="word">has</span> <span class="word">no</span>
+            <span class="word">meaning</span> <span class="word">—</span>
+            <span class="word em">until</span> <span class="word em">timing</span>
+            <span class="word em">itself</span> <span class="word em">becomes</span>
+            <span class="word em">the</span> <span class="word em">interface.</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. core principles ........................................... -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head" data-anim-fade>
+            <h2>Core principles</h2>
+            <p class="mono">Five, no more</p>
+          </div>
+          <div class="principles-list">
+            <article class="principle" data-anim-fade>
+              <h3>Modular Architecture</h3>
+              <p>Scroll, split, progress, cursor — each capability is an isolated ES module. Import what you use; the rest never ships.</p>
+            </article>
+            <article class="principle" data-anim-fade style="--d:.05s">
+              <h3>Attribute-Based Integration</h3>
+              <p>Behaviour lives in your markup as <em>data-anim-*</em> attributes. No configuration objects, no imperative choreography.</p>
+            </article>
+            <article class="principle" data-anim-fade style="--d:.1s">
+              <h3>Effortless Initialization</h3>
+              <p>One import, one call. Elements are discovered, split, observed and driven automatically — including content added later.</p>
+            </article>
+            <article class="principle" data-anim-fade style="--d:.15s">
+              <h3>Wide Range of Effects</h3>
+              <p>Fades, char reveals, scroll-bound progress, pinned panels, magnetic hovers — composed from one small, coherent core.</p>
+            </article>
+            <article class="principle" data-anim-fade style="--d:.2s">
+              <h3>Performance Oriented</h3>
+              <p>Transform and opacity only. One rAF loop for the whole page. Reads are batched; layout is never invalidated mid-frame.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. feature showcase .......................................... -->
+      <section class="section" id="showcase">
+        <div class="container">
+          <div class="section-head" data-anim-fade>
+            <h2>See it working</h2>
+            <p class="mono">Live on this page</p>
+          </div>
+
+          <div class="showcase-grid">
+            <!-- demo: progress -->
+            <article class="demo" data-anim-progress data-anim-fade>
+              <div class="demo-meta">
+                <p class="mono">01 — Scroll-bound</p>
+                <h3>Progress Control</h3>
+                <p>This card receives a live 0–1 progress value as it crosses the viewport. CSS maps it to any transform you like.</p>
+                <code>&lt;section data-anim-progress&gt;</code>
+              </div>
+              <div class="demo-stage">
+                <p class="progress-readout"><span data-progress-text>000</span><span class="accent">%</span></p>
+                <div class="progress-track"><div class="progress-fill"></div></div>
+                <div class="progress-dial" aria-hidden="true"></div>
+              </div>
+            </article>
+
+            <!-- demo: text splitting -->
+            <article class="demo" data-anim-fade>
+              <div class="demo-meta">
+                <p class="mono">02 — Typography</p>
+                <h3>Text Splitting</h3>
+                <p>Headlines are split per word and per character, revealed with a stagger — while screen readers still get the plain sentence.</p>
+                <code>&lt;h2 data-anim-split&gt;</code>
+              </div>
+              <div class="demo-stage">
+                <p class="split-demo-line" id="split-demo-line" data-anim-split>Precision you can feel.</p>
+                <button class="replay" id="split-replay" data-magnetic>Replay</button>
+              </div>
+            </article>
+
+            <!-- demo: cursor -->
+            <article class="demo" data-anim-fade>
+              <div class="demo-meta">
+                <p class="mono">03 — Pointer</p>
+                <h3>Cursor Tracking</h3>
+                <p>A lerped follower trails your pointer; magnetic elements pull toward it. Disabled automatically on touch devices.</p>
+                <code>&lt;button data-magnetic&gt;</code>
+              </div>
+              <div class="demo-stage">
+                <div class="cursor-pad" id="cursor-pad" data-cursor-grow>
+                  <div class="pad-follower" aria-hidden="true"></div>
+                  <span class="chip" data-magnetic>Hover</span>
+                  <span class="chip" data-magnetic>These</span>
+                  <span class="chip" data-magnetic>Chips</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. target audiences .......................................... -->
+      <section class="section">
+        <div class="container">
+          <div class="section-head" data-anim-fade>
+            <h2>Built for</h2>
+            <p class="mono">Three kinds of hands</p>
+          </div>
+          <div class="personas-grid">
+            <article class="persona" data-anim-fade>
+              <p class="mono">For the eye</p>
+              <div>
+                <h3>Designers</h3>
+                <p>Direct the motion from markup. Adjust easing, delay and stagger without touching a bundler — or a single line of JavaScript.</p>
+              </div>
+            </article>
+            <article class="persona" data-anim-fade style="--d:.1s">
+              <p class="mono">For the first time</p>
+              <div>
+                <h3>Beginners</h3>
+                <p>If you can write an HTML attribute, you can ship a scroll animation. The defaults are tuned so the first result already feels right.</p>
+              </div>
+            </article>
+            <article class="persona" data-anim-fade style="--d:.2s">
+              <p class="mono">For production</p>
+              <div>
+                <h3>Experienced Developers</h3>
+                <p>Tree-shakeable modules, a single rAF loop, no scroll hijacking, no global state. Audit the whole source in one coffee.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. technical details ......................................... -->
+      <section class="section" id="technical">
+        <div class="container">
+          <div class="section-head" data-anim-fade>
+            <h2>Under the hood</h2>
+            <p class="mono">Four decisions</p>
+          </div>
+          <div class="tech-list">
+            <article class="tech-item" data-anim-fade>
+              <h3>Native scroll, preserved</h3>
+              <p>Inertia is an interpolation layer on top of real scrolling — the scrollbar, anchors, and accessibility tools keep working. Smoothing is a single tuned lerp factor, <code>0.09</code>.</p>
+            </article>
+            <article class="tech-item" data-anim-fade>
+              <h3>Modular by design</h3>
+              <p>Every capability is an ES module with one export. <code>import { ProgressSystem }</code> costs you progress — nothing else rides along.</p>
+            </article>
+            <article class="tech-item" data-anim-fade>
+              <h3>Markup-driven configuration</h3>
+              <p>Attributes are the API: <code>data-anim-fade</code>, <code>data-anim-split</code>, <code>data-anim-progress</code>, <code>data-anim-sticky</code>. Per-element tuning via custom properties like <code>--d</code>.</p>
+            </article>
+            <article class="tech-item" data-anim-fade>
+              <h3>No layout shift</h3>
+              <p>Only <code>transform</code> and <code>opacity</code> are ever animated. Pinning is emulated with translates, so the document flow — and your CLS score — never move.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. CTA ....................................................... -->
+      <section class="cta section">
+        <p class="mono" data-anim-fade>Start here</p>
+        <h2 data-anim-split>Motion, mastered.</h2>
+        <div class="cta-row" data-anim-fade style="--d:.3s">
+          <a class="btn btn--solid" href="#top" data-magnetic>Learn More</a>
+          <a class="btn" href="#technical" data-magnetic>Dev Guides</a>
+          <a class="btn" href="#showcase" data-magnetic>Skill Hub</a>
+        </div>
+      </section>
+
+      <!-- 9. footer .................................................... -->
+      <footer class="site-footer">
+        <div class="footer-grid">
+          <div>
+            <a class="logo" href="#top">Motif<span class="mono">v1.0</span></a>
+            <p class="mono" style="margin-top:1rem">Animate with elegance,<br />not overhead.</p>
+          </div>
+          <nav aria-label="Site">
+            <h4>Navigate</h4>
+            <ul>
+              <li><a href="#showcase">Skill Hub</a></li>
+              <li><a href="#technical">Dev Guides</a></li>
+              <li><a href="#top">Top</a></li>
+            </ul>
+          </nav>
+          <div>
+            <h4>Package</h4>
+            <ul>
+              <li><a href="https://www.npmjs.com" rel="noopener">npm i motif-scroll</a></li>
+              <li><a href="#technical">Changelog</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://discord.com" rel="noopener">Discord</a></li>
+              <li><a href="https://github.com" rel="noopener">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <span>© 2026 Motif</span>
+          <span>Made with CSS, mostly.</span>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

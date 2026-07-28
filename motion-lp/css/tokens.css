@@ -1,0 +1,44 @@
+/* ------------------------------------------------------------------
+   Design tokens — Motif
+   Dark, quiet, precise. One restrained accent only.
+------------------------------------------------------------------- */
+:root {
+  /* color */
+  --bg: #0b0b0c;
+  --bg-raise: #111113;
+  --fg: #f2f2ee;
+  --fg-muted: #8f8f88;
+  --fg-faint: #55554f;
+  --accent: #c2b294; /* dulled greige-gold */
+  --line: rgb(242 242 238 / 0.08);
+  --line-strong: rgb(242 242 238 / 0.16);
+
+  /* type */
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.6vw, 2.5rem);
+  --text-2xl: clamp(2.2rem, 1.6rem + 3.2vw, 4.4rem);
+  --text-hero: clamp(2.6rem, 1.4rem + 6.4vw, 7.2rem);
+
+  /* rhythm */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --space-4: 4rem;
+  --space-5: 8rem;
+  --space-6: 12rem;
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --measure: 62ch;
+
+  /* shape */
+  --radius: 6px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.9s;
+}
