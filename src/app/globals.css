@@ -150,6 +150,25 @@ h4 {
   }
 }
 
+/* 波打つウォーターマーク文字 (WaveText.tsx)
+   --p (0→1) で先頭のブルーから末尾のシアンへ色を補間する */
+.wave-stroke {
+  -webkit-text-stroke: 1.5px
+    color-mix(in oklab, var(--color-pulse) calc((1 - var(--p, 0)) * 100%), var(--color-aqua));
+  color: transparent;
+}
+
+.wave-stroke-light {
+  -webkit-text-stroke: 1.5px
+    color-mix(
+      in oklab,
+      color-mix(in oklab, var(--color-glow) 70%, transparent)
+        calc((1 - var(--p, 0)) * 100%),
+      color-mix(in oklab, var(--color-aqua) 70%, transparent)
+    );
+  color: transparent;
+}
+
 /* ページ遷移ワイプ (PageTransition.tsx) */
 .page-wipe {
   position: fixed;

@@ -59,7 +59,7 @@ const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 1.8, suffix: "倍", label: "マップ経由アクション平均改善" },
   { value: 6, suffix: "事業", label: "AI×マーケの事業領域" },
   { value: 30, suffix: "%〜", label: "AI導入による工数削減目安" },
-  { value: 350, suffix: "万円", label: "AI導入補助金の補助上限(制度による)" },
+  { value: 350, suffix: "万円", label: "受発注・会計ソフトの補助上限" },
 ];
 
 const MARQUEE = [
@@ -123,7 +123,7 @@ export default function Home() {
               <CountUp value={90} duration={1.8} />
               <span className="ml-0.5 text-sm text-pulse">%+</span>
             </dd>
-            <dd className="text-[0.6rem] text-slate">採択率・上限350万円</dd>
+            <dd className="text-[0.6rem] text-slate">採択率・受発注/会計350万円</dd>
           </div>
           <div>
             <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Domains</dt>
@@ -652,12 +652,12 @@ export default function Home() {
               <div>
                 <p className="eyebrow">Subsidy</p>
                 <h2 id="subsidy-heading" className="mt-3 text-2xl font-bold md:text-4xl">
-                  AI導入の費用は、補助金で
+                  受発注・会計ソフトなら、
                   <br className="sm:hidden" />
-                  <mark className="marker">最大350万円圧縮</mark>できます
+                  <mark className="marker">最大350万円の枠</mark>が使えます
                 </h2>
                 <p className="mt-4 max-w-xl text-sm leading-8 text-slate">
-                  当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。採択通過率は90%以上、支援実績は50社以上。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
+                  当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。受発注ソフト・会計ソフトを対象とする枠なら補助上限は350万円です。採択通過率は90%以上、支援実績は50社以上。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
                 </p>
               </div>
               <div className="flex flex-col gap-3 md:items-end">

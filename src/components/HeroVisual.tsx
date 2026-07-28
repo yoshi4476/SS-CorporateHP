@@ -95,7 +95,7 @@ export default function HeroVisual({ className }: { className?: string }) {
               <p className="mt-1 text-[0.62rem] leading-4 text-slate">
                 補助金 採択通過率
                 <br />
-                上限<span className="num font-bold text-ink">350万円</span>
+                受発注・会計<span className="num font-bold text-ink">350万円</span>
               </p>
             </div>
           </div>
