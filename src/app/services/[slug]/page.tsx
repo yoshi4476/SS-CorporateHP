@@ -7,6 +7,7 @@ import { Reveal } from "@/components/motion";
 import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich } from "@/components/ui";
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
+import AioDetail from "@/components/AioDetail";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -254,6 +255,9 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* AIOページのみ: 背景・用語・実装層・測定・料金 */}
+      {service.slug === "aio" && <AioDetail />}
 
       {/* 補助金ページのみ: 要項・シミュレーション・スキーム・お金の流れ */}
       {service.slug === "ai-subsidy" && <SubsidyDetail />}
