@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich } from "@/components/ui";
 import { IndustryBars, RankTable } from "@/components/charts";
+import SubsidyDetail from "@/components/SubsidyDetail";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -253,6 +254,9 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* 補助金ページのみ: 要項・シミュレーション・スキーム・お金の流れ */}
+      {service.slug === "ai-subsidy" && <SubsidyDetail />}
 
       {/* MEOページのみ: 仕組み解説 + 実績データ */}
       {service.slug === "meo" && (
