@@ -26,6 +26,11 @@ export default function Footer() {
             </a>
             <br />
             受付時間: {site.hours}
+            <br />
+            Email:{" "}
+            <a href={`mailto:${site.contactEmail}`} className="text-white underline-offset-4 hover:underline">
+              {site.contactEmail}
+            </a>
           </p>
         </div>
 

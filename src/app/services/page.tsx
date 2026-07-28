@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import SenseNetwork from "@/components/SenseNetwork";
+import WaveText from "@/components/WaveText";
 import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
 import { services } from "@/lib/services";
@@ -43,12 +44,7 @@ export default function ServicesIndexPage() {
       {/* ヒーロー */}
       <section className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <p
-          aria-hidden
-          className="outline-text pointer-events-none absolute -top-2 right-0 select-none font-data text-[13vw] font-bold leading-none tracking-tighter opacity-25"
-        >
-          SERVICES
-        </p>
+        <WaveText text="SERVICES" className="pointer-events-none absolute -top-2 right-0 select-none text-[13vw] leading-none tracking-tighter opacity-25" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-12 md:grid-cols-[1.4fr_1fr] md:pb-16 md:pt-16">
           <div>
             <Reveal>

@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
+import WaveText from "@/components/WaveText";
 
 export default function NotFound() {
   return (
     <section className="relative overflow-hidden pt-16 md:pt-20">
       <div aria-hidden className="grid-field absolute inset-0" />
-      <p
-        aria-hidden
-        className="outline-text pointer-events-none absolute -top-4 right-0 select-none font-data text-[22vw] font-bold leading-none tracking-tighter opacity-20"
-      >
-        404
-      </p>
+      <WaveText text="404" className="pointer-events-none absolute -top-4 right-0 select-none text-[22vw] leading-none tracking-tighter opacity-20" />
       <div className="relative mx-auto max-w-5xl px-5 py-20 md:py-28">
         <span aria-hidden className="block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
         <p className="eyebrow mt-6">404 — Page Not Found</p>

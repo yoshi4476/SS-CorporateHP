@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
+import WaveText from "@/components/WaveText";
 import type { Metric } from "@/lib/services";
 
 /** ==text== をマーカー、**text** を太字に変換して描画する */
@@ -144,7 +145,7 @@ export function CtaBand({
             "radial-gradient(ellipse 60% 80% at 80% 20%, rgb(43 75 255 / 0.5), transparent 60%), radial-gradient(ellipse 40% 60% at 12% 90%, rgb(34 211 238 / 0.14), transparent 60%)",
         }}
       />
-      <p aria-hidden className="outline-text-light pointer-events-none absolute -bottom-4 left-0 select-none font-data text-[15vw] font-bold leading-none tracking-tighter">CONTACT</p>
+      <WaveText text="CONTACT" tone="light" className="pointer-events-none absolute -bottom-4 left-0 select-none text-[15vw] leading-none tracking-tighter" />
       <div className="relative mx-auto max-w-7xl px-5 py-24 text-center md:py-36">
         <Reveal>
           <p className="eyebrow !text-aqua">Contact</p>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import SplitText from "@/components/SplitText";
 import Hero3D from "@/components/Hero3D";
 import Logo3D from "@/components/Logo3D";
+import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
 import GrowthChart from "@/components/GrowthChart";
 import HorizontalRail from "@/components/HorizontalRail";
@@ -210,12 +211,7 @@ export default function Home() {
 
       {/* ステートメント */}
       <section id="vision" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
-        <p
-          aria-hidden
-          className="outline-text pointer-events-none absolute left-0 top-8 select-none font-data text-[11vw] font-bold leading-none tracking-tighter opacity-20"
-        >
-          VISION
-        </p>
+        <WaveText text="VISION" className="pointer-events-none absolute left-0 top-8 select-none text-[11vw] leading-none tracking-tighter opacity-20" />
         <div className="relative mx-auto max-w-7xl px-5 text-center">
           <Reveal>
             <p className="mx-auto max-w-4xl text-2xl font-black leading-[1.8] md:text-5xl md:leading-[1.7]">
@@ -356,12 +352,7 @@ export default function Home() {
               "radial-gradient(ellipse 55% 70% at 85% 15%, rgb(43 75 255 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(34 211 238 / 0.12), transparent 60%)",
           }}
         />
-        <p
-          aria-hidden
-          className="outline-text-light pointer-events-none absolute -top-1 right-0 select-none font-data text-[11vw] font-bold leading-none tracking-tighter"
-        >
-          NUMBERS
-        </p>
+        <WaveText text="NUMBERS" tone="light" className="pointer-events-none absolute -top-1 right-0 select-none text-[11vw] leading-none tracking-tighter" />
         <div className="relative mx-auto max-w-7xl px-5">
           <Reveal>
             <p className="eyebrow !text-aqua">Numbers</p>
@@ -428,12 +419,7 @@ export default function Home() {
 
       {/* AIO / 検索対策の権威セクション */}
       <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
-        <p
-          aria-hidden
-          className="outline-text pointer-events-none absolute right-0 top-4 select-none font-data text-[8vw] font-bold leading-none tracking-tighter opacity-20"
-        >
-          SEO×MEO×AIO
-        </p>
+        <WaveText text="SEO×MEO×AIO" className="pointer-events-none absolute right-0 top-4 select-none text-[8vw] leading-none tracking-tighter opacity-20" />
         <div className="relative mx-auto max-w-7xl px-5">
           <SectionHead
             en="SEO × MEO × AIO"

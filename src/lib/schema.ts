@@ -13,6 +13,7 @@ export const organizationSchema = {
   foundingDate: site.foundedISO,
   founder: { "@type": "Person", name: site.ceo },
   telephone: `+81-6-4305-7547`,
+  email: site.contactEmail,
   address: {
     "@type": "PostalAddress",
     postalCode: site.postal,

@@ -14,6 +14,5 @@ export const site = {
   foundedISO: "2020-03-10",
   capital: "500万円",
   banks: "三井住友銀行 / GMOあおぞらネット銀行",
-  // TODO: フォーム送信先が決まり次第設定 (現在はUIのみ)
-  contactEmail: "",
+  contactEmail: "info.ai@7senses.co.jp",
 };
