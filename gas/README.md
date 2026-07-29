@@ -6,10 +6,14 @@
 現在のURL (コーポレートサイトで使用中):
 
 ```
-https://script.google.com/macros/s/AKfycbzB_RZ1oft6SgZc_UAhLsSEPVy0ppYCYKgImLjw0Xi0DQLzCU9_i4smFf6OUM__wxKvDw/exec
+https://script.google.com/macros/s/AKfycbw9RRmWMJnR6lc9n4OmqOGECx4ZHKjdOpfPHFU88-2tQKxkoejbPvCLjr9Edc0Na1nu2w/exec
 ```
 
 ---
+
+> **重要**: デプロイURLは必ず `/exec` で終わるものを使ってください。
+> `/dev` は開発用URLで、スクリプト所有者のGoogleログインが必要なため、
+> 外部サイトからアクセスするとログイン画面が返り送信できません。
 
 ## パターン1: サーバーがあるサイト (Next.js / Node など) — 推奨
 
@@ -49,7 +53,7 @@ LPのHTML内、`<script>` の先頭にある次の行を書き換えるだけで
 const GAS_ENDPOINT = "";
 
 // 変更後
-const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbzB_RZ1oft6SgZc_UAhLsSEPVy0ppYCYKgImLjw0Xi0DQLzCU9_i4smFf6OUM__wxKvDw/exec";
+const GAS_ENDPOINT = "https://script.google.com/macros/s/AKfycbw9RRmWMJnR6lc9n4OmqOGECx4ZHKjdOpfPHFU88-2tQKxkoejbPvCLjr9Edc0Na1nu2w/exec";
 ```
 
 さらに `sendPayload` に `site` を足すと、どのサイトからの問い合わせか判別できます。
