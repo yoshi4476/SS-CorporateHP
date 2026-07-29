@@ -1,7 +1,18 @@
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead, Rich, FlowSteps } from "@/components/ui";
-import { glossary, layers, seoVsAio, metrics, plans, zeroClick, ownedMedia } from "@/lib/aio";
+import {
+  glossary,
+  layers,
+  seoVsAio,
+  metrics,
+  plans,
+  zeroClick,
+  ownedMedia,
+  tools,
+  monitored,
+  diagnostics,
+} from "@/lib/aio";
 import { site } from "@/lib/site";
 
 // AIOページ専用の詳細セクション群 (背景データ・用語・実装層・比較・測定・料金)。
@@ -202,8 +213,85 @@ export default function AioDetail() {
         </div>
       </section>
 
+      {/* 使用ツール */}
+      <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="tools-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Tools"
+            title="使用するツール"
+            lead="推測ではなく==実測==で運用します。計測はGoogle公式ツールで行い、現在地の把握には自社開発の無料診断ツールを使います。"
+          />
+
+          <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
+            {/* 計測に使うツール */}
+            <Reveal className="tilt overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
+              <div className="border-b border-line p-7 md:p-8">
+                <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
+                <h3 className="mt-2 text-lg font-bold">計測・運用に使うツール</h3>
+              </div>
+              <ul>
+                {tools.map((t) => (
+                  <li key={t.name} className="border-b border-line p-7 last:border-0 md:p-8">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h4 className="text-base font-bold">{t.name}</h4>
+                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-[0.62rem] font-bold text-pulse">
+                        {t.role}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-xs leading-7 text-slate">{t.detail}</p>
+                  </li>
+                ))}
+              </ul>
+              <div className="bg-mist/60 p-7 md:p-8">
+                <p className="text-xs font-bold">引用状況を定点観測する対象</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {monitored.map((m) => (
+                    <li
+                      key={m}
+                      className="font-data rounded-full border border-line-strong bg-raise px-3 py-1.5 text-[0.68rem] font-bold text-ink"
+                    >
+                      {m}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+
+            {/* 自社の無料診断ツール */}
+            <div className="grid gap-4">
+              <Reveal delay={0.08}>
+                <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Free Diagnostics</p>
+                <h3 className="mt-2 text-lg font-bold">自社開発の無料診断ツール</h3>
+                <p className="mt-3 text-xs leading-7 text-slate">
+                  運営メディア「AI集客ラボ」で公開しています。登録不要・その場で結果が出ます。
+                </p>
+              </Reveal>
+              {diagnostics.map((d, i) => (
+                <Reveal key={d.name} delay={0.12 + i * 0.07}>
+                  <a
+                    href={d.href}
+                    target="_blank"
+                    rel="noopener"
+                    className="tilt group block rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse"
+                  >
+                    <div className="flex items-baseline justify-between gap-3">
+                      <h4 className="text-base font-bold group-hover:text-pulse">{d.name}</h4>
+                      <span className="font-data shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-slate">
+                        {d.spec}
+                      </span>
+                    </div>
+                    <p className="mt-3 text-xs leading-7 text-slate">{d.body}</p>
+                    <p className="mt-4 text-[0.68rem] font-bold text-pulse">診断する ↗</p>
+                  </a>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 料金プラン */}
-      <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="plans-heading">
+      <section className="py-20 md:py-28" aria-labelledby="plans-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Plans"

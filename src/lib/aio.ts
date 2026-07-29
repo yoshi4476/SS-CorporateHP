@@ -100,6 +100,58 @@ export const ownedMedia = {
   ],
 } as const;
 
+/**
+ * 運用で使うツール。
+ * 出典: ai.7senses.co.jp/lp/ および ai.7senses.co.jp (AI集客ラボ)。
+ */
+export const tools: { name: string; role: string; detail: string }[] = [
+  {
+    name: "Google Analytics 4",
+    role: "流入と行動の計測",
+    detail: "AI経由と推定される流入から問い合わせまでの動きを追い、施策ごとの寄与を確認します。",
+  },
+  {
+    name: "Google Search Console",
+    role: "AI検索での表示の計測",
+    detail: "生成AIレポートで、AI Overview経由の表示回数・クリックを実測します。検索順位の把握もここで行います。",
+  },
+  {
+    name: "Googleビジネスプロフィール",
+    role: "マップ集客の運用",
+    detail: "NAP情報 (店名・住所・電話) の統一、口コミ返信、最新情報の投稿を実施します。",
+  },
+];
+
+/** 引用状況を定点観測する対象 */
+export const monitored: string[] = ["AI Overview", "ChatGPT", "Perplexity", "Gemini"];
+
+/** 自社で開発・公開している無料診断ツール */
+export const diagnostics: {
+  name: string;
+  spec: string;
+  body: string;
+  href: string;
+}[] = [
+  {
+    name: "MEO診断",
+    spec: "30秒・8問",
+    body: "Googleマップ集客の整備度を100点満点で採点。マップの3枠に入るために足りないものがわかります。",
+    href: "https://ai.7senses.co.jp/diagnosis/meo/",
+  },
+  {
+    name: "AIO診断",
+    spec: "30秒・8問",
+    body: "AI検索 (AI Overview・ChatGPT) への対応度を100点満点で採点。AIに引用されるために足りないものがわかります。",
+    href: "https://ai.7senses.co.jp/diagnosis/aio/",
+  },
+  {
+    name: "サイト無料採点",
+    spec: "URL入力だけ",
+    body: "サイトの技術対応を12項目・100点満点で自動採点。AIクローラー許可や構造化データまでチェックします。",
+    href: "https://ai.7senses.co.jp/site-audit/",
+  },
+];
+
 /** 料金プラン */
 export const plans: {
   name: string;
