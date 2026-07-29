@@ -152,36 +152,39 @@ export const diagnostics: {
   },
 ];
 
-/** 料金プラン */
+/**
+ * 料金プラン。金額は AI集客ラボ の集客支援サービス (ai.7senses.co.jp/lp/) に合わせています。
+ * 一律料金にしていないのは、課題も商圏も違うため。無料の現状分析の結果をもとに見積もります。
+ */
 export const plans: {
   name: string;
   price: string;
   unit: string;
   body: string;
-  term: string;
+  term?: string;
+  bonus?: string;
   featured?: boolean;
 }[] = [
   {
     name: "AIOサイト診断",
     price: "無料",
     unit: "0円",
-    body: "約30項目の診断 + 優先順位付き改善リスト + 報告会1回",
+    body: "約30項目の診断 + 優先順位付き改善リスト + 報告会1回。契約前に費用は発生しません。",
     term: "単発 (納期2週間)",
   },
   {
-    name: "AIOコンサルティング",
-    price: "15",
-    unit: "万円〜/月 (税別)",
-    body: "診断 + 被引用設計・実装 + 月次レポートと改善",
-    term: "6ヶ月〜推奨",
-    featured: true,
+    name: "SEO+AIO運用",
+    price: "個別",
+    unit: "お見積り",
+    body: "検索とAI検索の両方から見つかる状態へ。記事制作・構造化・計測レポートまで。",
   },
   {
-    name: "コンテンツ制作 追加",
+    name: "おまかせパック",
     price: "個別",
-    unit: "見積り",
-    body: "一次情報・FAQ記事の代行制作",
-    term: "都度",
+    unit: "お見積り",
+    body: "オウンドメディア+LPの構築・運用一式、記事60本/月、月次コンサルレポート、レポートにもとづくサイト改善の実装まで。",
+    bonus: "MEOスタンダード (月額3万円相当) が無料で付帯",
+    featured: true,
   },
 ];
 

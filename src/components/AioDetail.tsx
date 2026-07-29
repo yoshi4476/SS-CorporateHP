@@ -323,13 +323,24 @@ export default function AioDetail() {
                   <p className={`mt-5 flex-1 text-xs leading-7 ${p.featured ? "text-white/80" : "text-slate"}`}>
                     {p.body}
                   </p>
-                  <p
-                    className={`mt-5 border-t pt-4 text-[0.65rem] ${
-                      p.featured ? "border-white/20 text-white/70" : "border-line text-slate"
-                    }`}
-                  >
-                    契約期間: {p.term}
-                  </p>
+                  {p.bonus && (
+                    <p
+                      className={`mt-5 rounded-xl px-4 py-3 text-[0.68rem] font-bold leading-6 ${
+                        p.featured ? "bg-white/15 text-white" : "bg-pulse/5 text-pulse"
+                      }`}
+                    >
+                      特典: {p.bonus}
+                    </p>
+                  )}
+                  {p.term && (
+                    <p
+                      className={`mt-5 border-t pt-4 text-[0.65rem] ${
+                        p.featured ? "border-white/20 text-white/70" : "border-line text-slate"
+                      }`}
+                    >
+                      契約期間: {p.term}
+                    </p>
+                  )}
                 </article>
               </Reveal>
             ))}
@@ -354,8 +365,10 @@ export default function AioDetail() {
                 運営メディア「AI集客ラボ」で学ぶ ↗
               </a>
             </div>
-            <p className="mt-5 text-center text-[0.68rem] text-slate">
-              ※ 料金は2026年7月時点の参考価格です (税別)。正式なお見積りは無料相談でご提示します。
+            <p className="mt-5 text-center text-[0.68rem] leading-6 text-slate">
+              ※ 料金は2026年7月時点のもので、運営メディア「AI集客ラボ」の集客支援サービスの掲載内容に準じます。
+              <br />
+              課題も商圏も違うため一律料金にしていません。無料の現状分析の結果をもとに、必要な施策だけを組み合わせてお見積りします。
             </p>
           </Reveal>
         </div>
