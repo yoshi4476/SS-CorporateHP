@@ -18,7 +18,8 @@ type Payload = {
 };
 
 export async function POST(req: Request) {
-  const endpoint = process.env.GAS_ENDPOINT;
+  // 環境変数の登録経路によってはBOMや空白が混入するため取り除く
+  const endpoint = process.env.GAS_ENDPOINT?.replace(/^﻿/, "").trim();
   if (!endpoint) {
     return NextResponse.json(
       { error: "メール送信が未設定です。お手数ですがお電話にてご連絡ください。" },
