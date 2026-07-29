@@ -57,6 +57,8 @@ export async function POST(req: Request) {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body: JSON.stringify({
+        site: "corporate", // GAS側の SITES のキー (複数サイト共用のため)
+        type: "contact",
         name,
         email,
         message,
