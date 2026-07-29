@@ -27,10 +27,10 @@ git push -u origin main
 
 | 変数名 | 種別 | 値 |
 | --- | --- | --- |
-| `RESEND_API_KEY` | Secret | Resend で発行したAPIキー |
-| `CONTACT_FROM` | Text | `SEVEN SENSES <info.ai@7senses.co.jp>` |
+| `GAS_ENDPOINT` | Secret | Google Apps Script の `/exec` URL |
 
-`RESEND_API_KEY` が未設定でもサイトは動作しますが、
+GASの準備手順は [gas/contact-endpoint.gs](gas/contact-endpoint.gs) の冒頭コメントを参照してください。
+`GAS_ENDPOINT` が未設定でもサイトは動作しますが、
 お問い合わせフォームは「電話でご連絡ください」の案内になります。
 
 ## 4. 独自ドメイン

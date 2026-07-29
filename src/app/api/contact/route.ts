@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
 import { services } from "@/lib/services";
-import { site } from "@/lib/site";
 
 // お問い合わせ送信API。
-// RESEND_API_KEY 未設定時は 503 を返し、フォーム側で電話案内にフォールバックする。
+// 受信は Google Apps Script (gas/contact-endpoint.gs) が担当し、
+// GmailApp で info.ai@7senses.co.jp へ通知する。
+// サーバー経由で中継することで、GASのURLをブラウザに露出させない。
+// GAS_ENDPOINT 未設定時は 503 を返し、フォーム側で電話案内にフォールバックする。
 
 type Payload = {
   name?: string;
@@ -16,14 +17,9 @@ type Payload = {
   website?: string; // ハニーポット (人間は空のまま)
 };
 
-const escapeHtml = (s: string) =>
-  s.replace(/[&<>"']/g, (c) =>
-    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!,
-  );
-
 export async function POST(req: Request) {
-  const key = process.env.RESEND_API_KEY;
-  if (!key) {
+  const endpoint = process.env.GAS_ENDPOINT;
+  if (!endpoint) {
     return NextResponse.json(
       { error: "メール送信が未設定です。お手数ですがお電話にてご連絡ください。" },
       { status: 503 },
@@ -53,54 +49,34 @@ export async function POST(req: Request) {
 
   const serviceName =
     services.find((s) => s.slug === body.service)?.name ??
-    (body.service === "other" ? "その他・まだ決まっていない" : "未選択");
-
-  const rows: [string, string][] = [
-    ["お名前", name],
-    ["会社名・店舗名", (body.company ?? "").trim() || "—"],
-    ["メールアドレス", email],
-    ["電話番号", (body.tel ?? "").trim() || "—"],
-    ["ご興味のあるサービス", serviceName],
-  ];
-
-  const html = `
-    <div style="font-family:sans-serif;line-height:1.9;color:#0b1220">
-      <p style="font-size:13px;color:#55637a;margin:0 0 16px">
-        ${site.url} のお問い合わせフォームから送信されました。
-      </p>
-      <table style="border-collapse:collapse;width:100%;max-width:640px">
-        ${rows
-          .map(
-            ([k, v]) => `<tr>
-              <th style="text-align:left;padding:10px 14px;background:#eff3f9;border:1px solid #dfe6f0;width:180px;font-size:13px">${k}</th>
-              <td style="padding:10px 14px;border:1px solid #dfe6f0;font-size:14px">${escapeHtml(v)}</td>
-            </tr>`,
-          )
-          .join("")}
-        <tr>
-          <th style="text-align:left;padding:10px 14px;background:#eff3f9;border:1px solid #dfe6f0;vertical-align:top;font-size:13px">ご相談内容</th>
-          <td style="padding:10px 14px;border:1px solid #dfe6f0;font-size:14px;white-space:pre-wrap">${escapeHtml(message)}</td>
-        </tr>
-      </table>
-    </div>`;
-
-  const text = [...rows.map(([k, v]) => `${k}: ${v}`), "", "ご相談内容:", message].join("\n");
+    (body.service === "other" ? "その他・まだ決まっていない" : "");
 
   try {
-    const resend = new Resend(key);
-    const { error } = await resend.emails.send({
-      // 独自ドメインをResendで認証後、from を info.ai@7senses.co.jp 等に変更可
-      from: process.env.CONTACT_FROM ?? "SEVEN SENSES <onboarding@resend.dev>",
-      to: [site.contactEmail],
-      replyTo: email,
-      subject: `【サイトお問い合わせ】${name} 様${body.company ? ` (${body.company})` : ""}`,
-      html,
-      text,
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        company: (body.company ?? "").trim(),
+        tel: (body.tel ?? "").trim(),
+        service: serviceName,
+      }),
+      redirect: "follow",
     });
-    if (error) {
-      console.error("resend error", error);
+
+    if (!res.ok) {
+      console.error("GAS responded", res.status);
       return NextResponse.json({ error: "送信に失敗しました。" }, { status: 502 });
     }
+
+    // GAS は JSON を返すが、リダイレクト経由で HTML になる場合もあるため寛容に扱う
+    const text = await res.text();
+    if (text.includes('"ok":false')) {
+      return NextResponse.json({ error: "送信に失敗しました。" }, { status: 502 });
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error("contact route error", e);
