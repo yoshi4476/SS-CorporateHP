@@ -1,51 +1,88 @@
-# デプロイ手順 (Cloudflare Workers)
+# デプロイ手順 (Cloudflare Pages)
 
-このサイトは Next.js を [@opennextjs/cloudflare](https://opennext.js.org/cloudflare) で
-Cloudflare Workers 上に配信します。
+このサイトは Next.js を静的書き出し (`output: "export"`) して、
+Cloudflare Pages プロジェクト **`ss-corporate`** に配信します。
 
-## 1. GitHub リポジトリ
+サーバー機能を持たない構成にしている理由は、DNSを GMO (お名前.com) に置いたまま
+独自ドメインを当てられるようにするためです。DNSを Cloudflare に移管する必要がなく、
+**MXレコード (メール) に一切触らずに** サイトだけを差し替えられます。
 
-https://github.com/yoshi4476/SS-CorporateHP
+- 本番URL: https://www.7senses.co.jp (切替後)
+- Pages URL: https://ss-corporate.pages.dev
+
+## 1. ビルドとデプロイ
 
 ```bash
-git push -u origin main
+npm run cf:deploy
 ```
 
-## 2. Cloudflare ダッシュボードでの接続
+中身は `next build` → `node scripts/flatten-segments.mjs` (postbuild) →
+`wrangler pages deploy out --project-name=ss-corporate` です。
 
-1. [Workers & Pages](https://dash.cloudflare.com/) → **Create** → **Workers** → **Import a repository**
-2. `SS-CorporateHP` を選択
-3. ビルド設定:
+`scripts/flatten-segments.mjs` は Next.js 16 の静的書き出しの不一致を埋める後処理です。
+クライアントルーターは先読みファイルを `company/__next.company.__PAGE__.txt` の形で要求しますが、
+`next build` は `company/__next.company/__PAGE__.txt` として出力するため、
+そのままではページ遷移ごとに404が出ます。ドット区切りの別名を複製して両方に応答させています。
 
-| 項目 | 値 |
-| --- | --- |
-| Build command | `npm run cf:build` |
-| Deploy command | `npx wrangler deploy` |
-| Root directory | (空欄) |
+## 2. 独自ドメインの切替 (www.7senses.co.jp)
 
-## 3. 環境変数 (Settings → Variables and Secrets)
+DNSは GMO のまま、CNAMEを1本だけ書き換えます。**MXレコードは触らないこと。**
 
-| 変数名 | 種別 | 値 |
+### 2-1. Cloudflare 側 (先にこちら)
+
+[Pages → ss-corporate](https://dash.cloudflare.com/) → **Custom domains** →
+**Set up a domain** → `www.7senses.co.jp` を入力して追加。
+DNSがまだ向いていないため `Pending` 表示になりますが、正常です。
+
+### 2-2. GMO (お名前.com) 側
+
+DNSレコード設定で `www` のレコードを差し替えます。
+
+| ホスト名 | 種別 | 値 |
 | --- | --- | --- |
-| `GAS_ENDPOINT` | Secret | Google Apps Script の `/exec` URL |
+| `www` | CNAME | `ss-corporate.pages.dev` |
 
-GASの準備手順は [gas/contact-endpoint.gs](gas/contact-endpoint.gs) の冒頭コメントを参照してください。
-`GAS_ENDPOINT` が未設定でもサイトは動作しますが、
-お問い合わせフォームは「電話でご連絡ください」の案内になります。
+- **既存の `www` A レコード (157.120.209.21) は削除** します (CNAMEとA は共存できません)
+- `@` (ネイキッドドメイン) 、`MX`、`SPF/DKIM の TXT` は**変更しない**
+- 反映後、Cloudflare 側の Custom domains が `Active` になり、証明書が自動発行されます (数分〜数十分)
 
-## 4. 独自ドメイン
+同じ方式で `lp.7senses.co.jp` (Pages: `seven-hpunyou`) と
+`ai.7senses.co.jp` (Pages: `ss-aio-lp`) が既に稼働しています。
 
-Workers の **Settings → Domains & Routes** から `www.7senses.co.jp` を追加します。
-ドメインが Cloudflare で管理されていれば、DNSは自動設定されます。
+### 2-3. 切替前にやること
 
-公開後、[src/lib/site.ts](src/lib/site.ts) の `url` が本番ドメインと一致しているか確認してください
-(sitemap.xml・OGP・canonical に使用しています)。
+旧サイト (WordPress) のバックアップを取得してください。
+DNSを戻せば復旧できますが、サーバー側のデータ保全は別問題です。
+
+## 3. お問い合わせフォーム
+
+静的サイトなのでブラウザから Google Apps Script の Web アプリへ直接送信します。
+サーバー側の環境変数は使いません。
+
+| 設定 | 場所 |
+| --- | --- |
+| GASのエンドポイントURL | [src/lib/site.ts](src/lib/site.ts) の `gasEndpoint` |
+| 迷惑投稿除けの簡易キー | [src/lib/site.ts](src/lib/site.ts) の `formKey` |
+| 受信先メールアドレス | [gas/contact-endpoint.gs](gas/contact-endpoint.gs) の `SITES` |
+
+エンドポイントURLは公開されるため、GAS側で `formKey` の一致とハニーポットを確認しています。
+GAS のコードを更新したら「デプロイを管理」→ 鉛筆アイコン → バージョンを**新バージョン**にして
+更新してください (URLは変わりません)。
+
+## 4. 旧URLのリダイレクト
+
+静的書き出しでは `next.config.ts` の `redirects()` が無効になるため、
+[public/_redirects](public/_redirects) で定義しています。
+旧WordPressサイトのURL (`/g-ran/`・`/blog/*`・`/case/*`・終了事業のページ) を
+新しいページへ301で転送します。
 
 ## ローカルでの確認
 
 ```bash
 npm run dev          # 開発サーバー
-npm run build        # Next.js ビルド
-npm run cf:build     # Cloudflare 用ビルド
-npm run cf:preview   # Cloudflare ランタイムでプレビュー
+npm run build        # 静的書き出し (out/ が生成される)
+npm run cf:preview   # out/ を Pages ランタイムでプレビュー
 ```
+
+公開後、[src/lib/site.ts](src/lib/site.ts) の `url` が本番ドメインと一致しているか確認してください
+(sitemap.xml・OGP・canonical に使用しています)。

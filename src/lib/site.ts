@@ -15,4 +15,10 @@ export const site = {
   capital: "500万円",
   banks: "三井住友銀行 / GMOあおぞらネット銀行",
   contactEmail: "info.ai@7senses.co.jp",
+  // お問い合わせの受信先 (Google Apps Script Webアプリ)。
+  // 静的サイトのためブラウザから直接送信する = URLは公開される。
+  // 迷惑投稿対策として、GAS側で formKey とハニーポットを検証している。
+  gasEndpoint:
+    "https://script.google.com/macros/s/AKfycbw9RRmWMJnR6lc9n4OmqOGECx4ZHKjdOpfPHFU88-2tQKxkoejbPvCLjr9Edc0Na1nu2w/exec",
+  formKey: "7senses-corporate-2026",
 };

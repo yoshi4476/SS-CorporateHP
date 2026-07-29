@@ -1,7 +1,8 @@
 "use client";
 
-// お問い合わせフォーム。/api/contact に送信し、結果に応じて表示を切り替える。
-// 送信基盤 (RESEND_API_KEY) 未設定時はAPIが503を返し、電話案内にフォールバックする。
+// お問い合わせフォーム。Google Apps Script のWebアプリへ直接送信する。
+// Content-Type を text/plain にすることでCORSのプリフライトを回避し、
+// レスポンス ({"ok":true}) を読んで成功/失敗を判定できる。
 
 import { useState } from "react";
 import { services } from "@/lib/services";
@@ -31,20 +32,49 @@ export default function ContactForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const get = (k: string) => String(fd.get(k) ?? "").trim();
+
+    // ボット除け: 隠しフィールドが埋まっていたら送信せず成功扱い
+    if (get("website")) {
+      setState("sent");
+      return;
+    }
+
+    const email = get("email");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState("error");
+      setErrorMsg("メールアドレスの形式をご確認ください。");
+      return;
+    }
+
     setState("sending");
     setErrorMsg("");
 
-    const fd = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(fd.entries());
+    const slug = get("service");
+    const serviceName =
+      services.find((s) => s.slug === slug)?.name ??
+      (slug === "other" ? "その他・まだ決まっていない" : "");
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch(site.gasEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        // text/plain にするとプリフライトが発生せずCORSが通る
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          site: "corporate",
+          type: "contact",
+          formKey: site.formKey,
+          name: get("name"),
+          email,
+          company: get("company"),
+          tel: get("tel"),
+          service: serviceName,
+          message: get("message"),
+        }),
       });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok) {
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      if (res.ok && data.ok) {
         setState("sent");
       } else {
         setState("error");

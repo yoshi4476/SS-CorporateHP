@@ -41,6 +41,13 @@ var SITES = {
 var SHEET_ID = "";
 var SHEET_NAME = "contact";
 
+/**
+ * 静的サイトはブラウザから直接送信するためURLが公開されます。
+ * 無作為な迷惑投稿を弾くための簡易キー。サイト側の formKey と一致させます。
+ * 空にするとチェックを行いません。
+ */
+var FORM_KEYS = ["7senses-corporate-2026", "7senses-lp-2026", "7senses-lab-2026"];
+
 // ===== 受信 =====
 function doPost(e) {
   try {
@@ -49,6 +56,11 @@ function doPost(e) {
 
     // ハニーポット: ボットが埋めていたら成功を装って破棄
     if (data.website) return json({ ok: true });
+
+    // 簡易キー: 一致しない送信は成功を装って破棄
+    if (FORM_KEYS.length && FORM_KEYS.indexOf(str(data.formKey)) === -1) {
+      return json({ ok: true });
+    }
 
     var name = str(data.name);
     var email = str(data.email);

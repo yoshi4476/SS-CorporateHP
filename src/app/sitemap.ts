@@ -3,6 +3,9 @@ import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { site } from "@/lib/site";
 
+// 静的書き出し (output: export) でファイルとして生成させる
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return [

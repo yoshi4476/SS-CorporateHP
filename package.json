@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/flatten-segments.mjs",
     "start": "next start",
     "lint": "eslint",
-    "cf:build": "opennextjs-cloudflare build",
-    "cf:preview": "opennextjs-cloudflare preview",
-    "cf:deploy": "opennextjs-cloudflare deploy"
+    "cf:deploy": "next build && wrangler pages deploy out --project-name=ss-corporate",
+    "cf:preview": "next build && wrangler pages dev out"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
@@ -22,7 +22,6 @@
     "three": "^0.185.1"
   },
   "devDependencies": {
-    "@opennextjs/cloudflare": "^1.20.2",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

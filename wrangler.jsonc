@@ -1,14 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "ss-corporate-hp",
-  "main": ".open-next/worker.js",
-  "compatibility_date": "2026-07-29",
-  "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS"
-  },
-  "observability": {
-    "enabled": true
-  }
+  "name": "ss-corporate",
+  // 静的書き出し (next build → out/) を Cloudflare Pages に配信する構成。
+  "pages_build_output_dir": "out"
 }
