@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
-import { SectionHead } from "@/components/ui";
-import { glossary, layers, seoVsAio, metrics, plans, zeroClick } from "@/lib/aio";
+import { SectionHead, Rich, FlowSteps } from "@/components/ui";
+import { glossary, layers, seoVsAio, metrics, plans, zeroClick, ownedMedia } from "@/lib/aio";
 import { site } from "@/lib/site";
 
 // AIOページ専用の詳細セクション群 (背景データ・用語・実装層・比較・測定・料金)。
@@ -141,8 +141,69 @@ export default function AioDetail() {
         </div>
       </section>
 
+      {/* オウンドメディア運用 */}
+      <section className="py-20 md:py-28" aria-labelledby="owned-media-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Owned Media"
+            title="検索とAI検索の両方から選ばれるサイトへ"
+            lead="既存サイトの改善から、==記事制作・情報設計・アクセス分析==まで一括して支援します。オウンドメディア運用はAIO運用代行に含まれる施策のひとつです。"
+          />
+
+          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_1.05fr]">
+            {/* 支援内容 */}
+            <Reveal className="tilt flex flex-col rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
+              <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Scope</p>
+              <h3 className="mt-2 text-xl font-bold">支援内容</h3>
+              <ul className="mt-6 grid flex-1 gap-3 border-t border-line pt-6">
+                {ownedMedia.scope.map((s) => (
+                  <li key={s} className="flex items-start gap-3 text-sm leading-7">
+                    <span aria-hidden className="mt-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-pulse/10">
+                      <svg width="9" height="9" viewBox="0 0 14 14" className="text-pulse">
+                        <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    {s}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-7 flex items-baseline gap-3 border-t border-line pt-5">
+                <span className="text-xs font-bold text-slate">料金</span>
+                <span className="text-2xl font-bold text-pulse">{ownedMedia.price}</span>
+              </p>
+            </Reveal>
+
+            {/* 広告との違い */}
+            <Reveal delay={0.1} className="tilt flex flex-col rounded-3xl border border-pulse bg-pulse p-8 text-white shadow-lift md:p-10">
+              <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-aqua">Why It Works</p>
+              <h3 className="mt-2 text-xl font-bold text-white">{ownedMedia.why.title}</h3>
+              <p className="mt-5 flex-1 text-sm leading-8 text-white/85 [&_strong]:text-white">
+                <Rich text={ownedMedia.why.body} />
+              </p>
+              <div className="mt-7 grid gap-3 border-t border-white/20 pt-6 sm:grid-cols-3">
+                {ownedMedia.facts.map((f) => (
+                  <div key={f.label}>
+                    <p className="leading-none">
+                      <span className="num text-3xl font-bold text-white">{f.value}</span>
+                      <span className="ml-1 text-sm font-bold text-aqua">{f.suffix}</span>
+                    </p>
+                    <p className="mt-2 text-xs font-bold text-white">{f.label}</p>
+                    <p className="mt-1 text-[0.65rem] leading-5 text-white/70">{f.note}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          {/* リード獲得までの4段階 */}
+          <div className="mt-6">
+            <FlowSteps steps={[...ownedMedia.steps]} />
+          </div>
+        </div>
+      </section>
+
       {/* 料金プラン */}
-      <section className="py-20 md:py-28" aria-labelledby="plans-heading">
+      <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="plans-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Plans"
