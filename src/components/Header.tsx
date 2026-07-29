@@ -15,6 +15,7 @@ const MAIN_LINKS: { href: string; label: string; en: string }[] = [
   { href: "/", label: "トップ", en: "Top" },
   { href: "/services", label: "事業内容", en: "Services" },
   { href: "/company", label: "会社概要", en: "Company" },
+  { href: "/blog", label: "店舗経営ブログ", en: "Blog" },
   { href: "/news", label: "お知らせ", en: "News" },
   { href: "/contact", label: "無料相談", en: "Contact" },
 ];
@@ -116,6 +117,9 @@ export default function Header() {
                   </ul>
                 </div>
               </div>
+              <Link href="/blog" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
+                店舗経営ブログ
+              </Link>
               <Link href="/news" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
                 お知らせ
               </Link>
