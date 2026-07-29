@@ -1,0 +1,225 @@
+/**
+ * ブログ本文のスタイル。
+ * 本文HTMLは自動化エンジンが生成するため、Tailwindのクラスを持たない素のタグで届く。
+ * ここで一括して見た目を与える（globals.css の @theme トークンを流用）。
+ */
+.article-body {
+  font-size: 0.95rem;
+  line-height: 2;
+  color: var(--color-ink-soft);
+}
+@media (min-width: 768px) {
+  .article-body { font-size: 1rem; }
+}
+
+/* 冒頭の断言回答は少し大きく見せる（AI検索に抜き出される最重要部分） */
+.article-body > p:first-child {
+  font-size: 1.06em;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.article-body p { margin: 1.4em 0; }
+.article-body > *:first-child { margin-top: 0; }
+
+.article-body h2 {
+  margin: 2.6em 0 0.9em;
+  padding-left: 0.7em;
+  border-left: 4px solid var(--color-pulse);
+  font-size: 1.32em;
+  font-weight: 900;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+.article-body h3 {
+  margin: 2em 0 0.7em;
+  font-size: 1.12em;
+  font-weight: 800;
+  color: var(--color-ink);
+}
+.article-body h4 {
+  margin: 1.6em 0 0.5em;
+  font-size: 1em;
+  font-weight: 800;
+  color: var(--color-ink);
+}
+
+/* H2直下の1文結論は自動で強調（記事側に書き足さなくても効く） */
+.article-body h2 + p {
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.article-body strong {
+  font-weight: 700;
+  background: linear-gradient(transparent 62%, color-mix(in oklab, var(--color-aqua) 40%, #fff) 0);
+}
+
+.article-body em {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--color-pulse);
+  border-bottom: 1px dotted var(--color-pulse);
+}
+
+.article-body a {
+  color: var(--color-pulse);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { color: var(--color-pulse-deep); }
+
+.article-body ul,
+.article-body ol {
+  margin: 1.3em 0;
+  padding-left: 1.5em;
+}
+.article-body li { margin: 0.5em 0; }
+.article-body ul > li { list-style: disc; }
+.article-body ol > li { list-style: decimal; }
+
+/* 表は単体で意味が完結するように枠と色を明確にする */
+.article-body .table-wrap {
+  margin: 1.6em 0;
+  overflow-x: auto;
+}
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+.article-body th,
+.article-body td {
+  border: 1px solid var(--color-line);
+  padding: 0.7em 0.9em;
+  text-align: left;
+  vertical-align: top;
+}
+.article-body th {
+  background: var(--color-ink);
+  color: #fff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.article-body tbody tr:nth-child(even) td { background: var(--color-mist); }
+
+.article-body figure {
+  margin: 1.8em 0;
+}
+.article-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid var(--color-line);
+}
+.article-body figcaption {
+  margin-top: 0.6em;
+  font-size: 0.82em;
+  color: var(--color-slate);
+  text-align: center;
+}
+
+.article-body blockquote {
+  margin: 1.6em 0;
+  padding: 0.9em 1.2em;
+  border-left: 3px solid var(--color-line-strong);
+  background: var(--color-mist);
+  border-radius: 0 12px 12px 0;
+  color: var(--color-slate);
+}
+
+.article-body pre {
+  margin: 1.5em 0;
+  padding: 1.1em 1.2em;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: var(--color-ink);
+  color: #e8eeff;
+  font-size: 0.84em;
+  line-height: 1.8;
+}
+.article-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+.article-body :not(pre) > code {
+  padding: 0.15em 0.45em;
+  border-radius: 6px;
+  background: var(--color-mist);
+  color: var(--color-pulse-deep);
+}
+
+/* 定義ブロック・注意書き（エンジンが class を付けて出力する） */
+.article-body .def-box,
+.article-body .note-box {
+  margin: 1.6em 0;
+  padding: 1.1em 1.3em;
+  border-radius: 14px;
+  border: 1px solid var(--color-line);
+  background: var(--color-raise);
+}
+.article-body .def-box {
+  border-left: 4px solid var(--color-pulse);
+}
+.article-body .note-box {
+  border-left: 4px solid #f59e0b;
+  background: #fffbeb;
+}
+
+/* この記事でわかること */
+.article-body .summary-box {
+  margin: 0 0 2em;
+  padding: 1.2em 1.4em;
+  border-radius: 16px;
+  background: var(--color-mist);
+  border: 1px solid var(--color-line);
+}
+.article-body .summary-box > strong {
+  display: block;
+  margin-bottom: 0.5em;
+  background: none;
+  color: var(--color-pulse);
+}
+
+/* FAQ */
+.article-body details {
+  margin: 0.6em 0;
+  padding: 0.9em 1.2em;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-raise);
+}
+.article-body summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+.article-body details[open] summary { margin-bottom: 0.6em; }
+
+/* 目次 */
+.article-body .toc {
+  margin: 2em 0;
+  padding: 1.2em 1.4em;
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+  background: var(--color-raise);
+}
+.article-body .toc > strong {
+  background: none;
+  color: var(--color-pulse);
+}
+.article-body .toc ul { margin: 0.6em 0 0; padding-left: 1.2em; }
+.article-body .toc li { margin: 0.3em 0; list-style: none; }
+.article-body .toc a { text-decoration: none; }
+.article-body .toc a:hover { text-decoration: underline; }
+
+.article-body .txt-red { color: #dc2626; font-weight: 700; }
+.article-body .txt-blue { color: var(--color-pulse); font-weight: 700; }
+.article-body .big { font-size: 1.25em; font-weight: 800; }
+
+.article-body hr {
+  margin: 2.4em 0;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}

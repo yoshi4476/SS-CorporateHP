@@ -43,3 +43,6 @@ next-env.d.ts
 # cloudflare
 .open-next/
 .wrangler/
+
+# 表示確認用のサンプル記事（本番へは公開しない）
+/src/content/blog/_*.json
