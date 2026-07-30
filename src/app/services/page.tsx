@@ -51,7 +51,7 @@ export default function ServicesIndexPage() {
               <nav aria-label="パンくずリスト" className="text-xs text-slate">
                 <ol className="flex flex-wrap items-center gap-2">
                   <li>
-                    <Link href="/" className="hover:text-pulse">
+                    <Link href="/" className="tap hover:text-pulse">
                       トップ
                     </Link>
                   </li>

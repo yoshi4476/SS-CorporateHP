@@ -9,6 +9,11 @@
 import { useEffect } from "react";
 
 const MAGNET = 0.32;
+// ドローンが正確な位置を隠してしまうため、実際のカーソル位置には
+// 小さな照準を出し、ドローンは左上に離れた位置を遅れて追尾させる。
+const DRONE_OFF_X = -40;
+const DRONE_OFF_Y = -36;
+const DRONE_EASE = 0.085;
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
@@ -132,7 +137,13 @@ export default function Cursor() {
     const drone = document.createElement("div");
     drone.className = "cursor-drone";
     drone.innerHTML = DRONE_HTML;
-    document.body.append(drone);
+
+    // 実際のクリック位置を示す照準 (ドローンとは別に、遅れなく追従する)
+    const dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    dot.innerHTML = `<span class="cdot"></span><span class="cring"></span>`;
+
+    document.body.append(drone, dot);
     document.documentElement.classList.add("has-cursor");
     const rig = drone.querySelector<HTMLElement>(".drone-rig")!;
 
@@ -150,6 +161,7 @@ export default function Cursor() {
       const t = e.target as HTMLElement | null;
       const interactive = t?.closest?.("a, button, [data-cursor-grow]");
       drone.classList.toggle("is-hover", !!interactive);
+      dot.classList.toggle("is-hover", !!interactive);
 
       const m = t?.closest?.("[data-magnetic]") as HTMLElement | null;
       if (m) {
@@ -178,14 +190,15 @@ export default function Cursor() {
       clearTimeout(releaseTimer);
       downAt = performance.now();
       drone.classList.add("is-click");
+      dot.classList.add("is-click");
     };
     const onUp = () => {
       clearTimeout(releaseTimer);
       const held = performance.now() - downAt;
-      releaseTimer = window.setTimeout(
-        () => drone.classList.remove("is-click"),
-        Math.max(0, MIN_CLICK_MS - held),
-      );
+      releaseTimer = window.setTimeout(() => {
+        drone.classList.remove("is-click");
+        dot.classList.remove("is-click");
+      }, Math.max(0, MIN_CLICK_MS - held));
     };
     // pointerdown はマウス以外の入力でも発火し、mousedown より先に届く
     addEventListener("pointerdown", onDown, { passive: true });
@@ -195,13 +208,19 @@ export default function Cursor() {
 
     let raf = 0;
     const loop = () => {
-      const vx = x - pos.x;
-      const vy = y - pos.y;
-      pos.x = lerp(pos.x, x, 0.16);
-      pos.y = lerp(pos.y, y, 0.16);
-      // 姿勢: ベース48°の見下ろし + 移動方向へのピッチ/ロール
-      roll = lerp(roll, clamp(vx * 0.5, -32, 32), 0.12);
-      pitch = lerp(pitch, clamp(vy * 0.5, -26, 26), 0.12);
+      // 照準は遅れなく実際のカーソル位置へ
+      dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+      // ドローンは離れた位置を追いかける
+      const tx = x + DRONE_OFF_X;
+      const ty = y + DRONE_OFF_Y;
+      const vx = tx - pos.x;
+      const vy = ty - pos.y;
+      pos.x = lerp(pos.x, tx, DRONE_EASE);
+      pos.y = lerp(pos.y, ty, DRONE_EASE);
+      // 姿勢: ベース48°の見下ろし + 進行方向へのピッチ/ロール
+      roll = lerp(roll, clamp(vx * 0.5, -34, 34), 0.1);
+      pitch = lerp(pitch, clamp(vy * 0.5, -28, 28), 0.1);
       drone.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
       rig.style.transform = `rotateX(${(48 - pitch).toFixed(2)}deg) rotateY(${roll.toFixed(2)}deg)`;
       raf = requestAnimationFrame(loop);
@@ -217,6 +236,7 @@ export default function Cursor() {
       removeEventListener("pointercancel", onUp);
       removeEventListener("blur", onUp);
       drone.remove();
+      dot.remove();
       document.documentElement.classList.remove("has-cursor");
     };
   }, []);

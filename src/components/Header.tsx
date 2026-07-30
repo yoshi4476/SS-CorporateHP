@@ -84,7 +84,7 @@ export default function Header() {
             {/* インラインナビ (デスクトップのみ・メニュー展開中は非表示) */}
             <nav
               aria-label="ヘッダーナビゲーション"
-              className={`hidden items-center gap-6 transition-opacity duration-200 md:flex ${
+              className={`hidden items-center gap-6 transition-opacity duration-200 lg:flex ${
                 open ? "pointer-events-none opacity-0" : "opacity-100"
               }`}
             >
@@ -264,12 +264,12 @@ export default function Header() {
             >
               <div>
                 <p className="eyebrow !text-aqua">Services</p>
-                <ul className="mt-4 grid gap-2.5">
+                <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {services.map((s) => (
                     <li key={s.slug}>
                       <Link
                         href={`/services/${s.slug}`}
-                        className="text-sm text-white/70 transition-colors hover:text-white"
+                        className="tap text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {s.name}
                       </Link>
@@ -279,14 +279,14 @@ export default function Header() {
               </div>
               <div className="border-t border-white/10 pt-6">
                 <p className="eyebrow !text-aqua">Free Diagnostics — 無料簡易診断</p>
-                <ul className="mt-4 grid gap-2.5">
+                <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {diagnostics.map((d) => (
                     <li key={d.name}>
                       <a
                         href={d.href}
                         target="_blank"
                         rel="noopener"
-                        className="text-sm text-white/70 transition-colors hover:text-white"
+                        className="tap text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {d.name} ({d.spec}) ↗
                       </a>
@@ -307,13 +307,13 @@ export default function Header() {
                 </a>
                 <p className="mt-5 text-xs leading-6 text-white/50">
                   TEL:{" "}
-                  <a href={`tel:${site.tel.replaceAll("-", "")}`} className="num text-white hover:text-aqua">
+                  <a href={`tel:${site.tel.replaceAll("-", "")}`} className="tap num text-white hover:text-aqua">
                     {site.tel}
                   </a>
                   <br />
                   受付時間: {site.hours}
                 </p>
-                <Link href="/privacy" className="mt-3 inline-block text-[0.65rem] text-white/40 hover:text-white/70">
+                <Link href="/privacy" className="tap mt-3 text-[0.65rem] text-white/40 hover:text-white/70">
                   プライバシーポリシー
                 </Link>
               </div>

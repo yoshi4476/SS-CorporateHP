@@ -86,13 +86,13 @@ export default async function ServicePage({ params }: Props) {
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <Link href="/" className="hover:text-pulse">
+                  <Link href="/" className="tap hover:text-pulse">
                     トップ
                   </Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li>
-                  <Link href="/services" className="hover:text-pulse">
+                  <Link href="/services" className="tap hover:text-pulse">
                     事業内容
                   </Link>
                 </li>

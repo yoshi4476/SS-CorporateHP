@@ -411,7 +411,7 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal delay={0.15} className="mt-8 text-center">
-            <Link href="/services/meo" className="inline-flex items-center gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
+            <Link href="/services/meo" className="tap gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
               MEO運用代行の詳細を見る
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
                 <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
@@ -527,7 +527,7 @@ export default function Home() {
               <Reveal delay={0.2}>
                 <Link
                   href="/company"
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-aqua underline-offset-4 hover:underline"
+                  className="tap mt-8 gap-2 text-sm font-bold text-aqua underline-offset-4 hover:underline"
                 >
                   代表メッセージ・会社概要を見る
                   <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
@@ -710,7 +710,7 @@ export default function Home() {
             ))}
           </div>
           <Reveal delay={0.15} className="mt-8 text-center">
-            <Link href="/news" className="inline-flex items-center gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
+            <Link href="/news" className="tap gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
               お知らせ一覧を見る
               <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
                 <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />

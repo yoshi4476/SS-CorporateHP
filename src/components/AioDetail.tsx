@@ -11,6 +11,7 @@ import {
   ownedMedia,
   approaches,
   tools,
+  automation,
   monitored,
   diagnostics,
 } from "@/lib/aio";
@@ -329,6 +330,38 @@ export default function AioDetail() {
                 </Reveal>
               ))}
             </div>
+          </div>
+
+          {/* 運用を支える自動化 */}
+          <div className="mt-10">
+            <p className="eyebrow">Automation — 運用を支える自社の仕組み</p>
+            <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
+              月60本の記事を、品質を落とさずに出し続けることは手作業では成立しません。
+              <mark className="marker">記事の生成から公開まで、問い合わせの受信から記録まで</mark>
+              を自社で組んだ仕組みで自動化しているから、この運用量が可能になっています。
+            </p>
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              {automation.map((a, i) => (
+                <Reveal key={a.name} delay={i * 0.09}>
+                  <article className="tilt h-full rounded-2xl border border-line bg-raise p-7 shadow-card">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <h3 className="font-data text-xl font-bold text-pulse">{a.name}</h3>
+                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-[0.62rem] font-bold text-pulse">
+                        {a.role}
+                      </span>
+                    </div>
+                    <p className="mt-4 text-xs leading-7 text-slate">{a.detail}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+            <p className="mt-5 text-xs leading-7 text-slate">
+              ※ このサイト自体が同じ仕組みで動いています。お問い合わせフォームは Google Apps Script で受信し、
+              <Link href="/blog" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
+                店舗経営ブログ
+              </Link>
+              の記事は Python の自動化エンジンが生成・審査して公開しています。
+            </p>
           </div>
         </div>
       </section>

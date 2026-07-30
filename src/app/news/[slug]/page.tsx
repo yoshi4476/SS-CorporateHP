@@ -60,11 +60,11 @@ export default async function NewsDetailPage({ params }: Props) {
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <Link href="/" className="hover:text-pulse">トップ</Link>
+                  <Link href="/" className="tap hover:text-pulse">トップ</Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li>
-                  <Link href="/news" className="hover:text-pulse">お知らせ</Link>
+                  <Link href="/news" className="tap hover:text-pulse">お知らせ</Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li aria-current="page" className="text-ink">{item.title}</li>

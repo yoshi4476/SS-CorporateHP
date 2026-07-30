@@ -92,11 +92,11 @@ export default async function BlogDetailPage({ params }: Props) {
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <Link href="/" className="hover:text-pulse">トップ</Link>
+                  <Link href="/" className="tap hover:text-pulse">トップ</Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li>
-                  <Link href="/blog" className="hover:text-pulse">店舗経営ブログ</Link>
+                  <Link href="/blog" className="tap hover:text-pulse">店舗経営ブログ</Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li aria-current="page" className="text-ink">{post.title}</li>
