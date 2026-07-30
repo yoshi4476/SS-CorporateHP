@@ -9,7 +9,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { services } from "@/lib/services";
+import { diagnostics } from "@/lib/aio";
 import { site } from "@/lib/site";
+
+// 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
+const DIAGNOSIS_NOTE = "簡易診断のため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
 const MAIN_LINKS: { href: string; label: string; en: string }[] = [
   { href: "/", label: "トップ", en: "Top" },
@@ -126,6 +130,41 @@ export default function Header() {
               <Link href="/company" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
                 会社概要
               </Link>
+              <div className="group relative">
+                <span className="flex cursor-default items-center gap-1 py-6 text-sm font-medium text-ink transition-colors group-hover:text-pulse">
+                  無料簡易診断
+                  <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden className="mt-0.5 transition-transform group-hover:rotate-180">
+                    <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                  </svg>
+                </span>
+                <div className="invisible absolute right-0 top-full w-80 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="tilt rounded-2xl border border-line bg-raise p-2 shadow-lift">
+                    <ul>
+                      {diagnostics.map((d) => (
+                        <li key={d.name}>
+                          <a
+                            href={d.href}
+                            target="_blank"
+                            rel="noopener"
+                            className="flex items-baseline justify-between gap-3 rounded-xl px-4 py-2.5 transition-colors hover:bg-mist"
+                          >
+                            <span className="text-sm text-ink">{d.name} ↗</span>
+                            <span className="font-data shrink-0 text-[0.6rem] uppercase tracking-[0.12em] text-slate">
+                              {d.spec}
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-1 border-t border-line px-4 py-3 text-[0.65rem] leading-5 text-slate">
+                      {DIAGNOSIS_NOTE}
+                      <Link href="/contact" className="ml-1 font-bold text-pulse hover:underline">
+                        無料相談へ
+                      </Link>
+                    </p>
+                  </div>
+                </div>
+              </div>
               <Link
                 href="/contact"
                 data-magnetic
@@ -238,6 +277,25 @@ export default function Header() {
                   ))}
                 </ul>
               </div>
+              <div className="border-t border-white/10 pt-6">
+                <p className="eyebrow !text-aqua">Free Diagnostics — 無料簡易診断</p>
+                <ul className="mt-4 grid gap-2.5">
+                  {diagnostics.map((d) => (
+                    <li key={d.name}>
+                      <a
+                        href={d.href}
+                        target="_blank"
+                        rel="noopener"
+                        className="text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {d.name} ({d.spec}) ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-3 text-[0.65rem] leading-5 text-white/40">{DIAGNOSIS_NOTE}</p>
+              </div>
+
               <div className="border-t border-white/10 pt-6">
                 <a
                   href={site.lpUrl}

@@ -24,9 +24,9 @@
 /case/*           /services   301
 /case-cat/*       /services   301
 
-# 旧サイトのブログ → お知らせ
-/blog             /news   301
-/blog/*           /news   301
+# /blog は新ブログ (自動化エンジンが記事を投入) が使うため、転送しない。
+# 旧WordPressの記事URL (/blog/01/ 等) は404になる。移したい記事があれば
+# Search Console でクリック数の多いものを確認し、個別に転送を追加すること。
 
 # WordPress固有のパス
 /wp-admin/*       /   302
