@@ -37,6 +37,18 @@ var SITES = {
   default: { label: "セブンセンシズ", to: "info.ai@7senses.co.jp" },
 };
 
+/** 自動返信の署名に使う会社情報 */
+var COMPANY = {
+  name: "セブンセンシズ株式会社",
+  tel: "06-4305-7547",
+  hours: "9:00〜20:00 (土日祝休)",
+  address: "〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902",
+  url: "https://www.7senses.co.jp/",
+};
+
+/** 送信者への自動返信を行うか (false にすると社内通知だけになります) */
+var AUTO_REPLY = true;
+
 /** スプレッドシートにも記録する場合はシートIDを設定 (空なら記録しない) */
 var SHEET_ID = "";
 var SHEET_NAME = "contact";
@@ -86,6 +98,16 @@ function doPost(e) {
     };
 
     sendMail(payload);
+
+    // 自動返信が失敗しても、社内通知は成立させる (お問い合わせを落とさない)
+    if (AUTO_REPLY) {
+      try {
+        sendAutoReply(payload);
+      } catch (err) {
+        console.warn("auto reply failed: " + err);
+      }
+    }
+
     if (SHEET_ID) {
       appendRow([
         new Date(),
@@ -163,6 +185,112 @@ function sendMail(d) {
     htmlBody: html,
     replyTo: d.email, // 受信メールからそのまま返信できます
     name: d.site.label,
+  });
+}
+
+// ===== 送信者への自動返信 =====
+function sendAutoReply(d) {
+  var subject = "【" + COMPANY.name + "】お問い合わせを受け付けました";
+
+  var body =
+    d.name +
+    " 様\n\n" +
+    "このたびは" +
+    COMPANY.name +
+    "へお問い合わせいただき、ありがとうございます。\n" +
+    "以下の内容で受け付けました。担当者より通常1営業日以内にご返信します。\n\n" +
+    "──────────────────────\n" +
+    "お名前: " +
+    d.name +
+    "\n" +
+    "会社名・店舗名: " +
+    (d.company || "—") +
+    "\n" +
+    "メールアドレス: " +
+    d.email +
+    "\n" +
+    "電話番号: " +
+    (d.tel || "—") +
+    "\n" +
+    "ご興味のあるサービス: " +
+    (d.service || "未選択") +
+    "\n\n" +
+    "ご相談内容:\n" +
+    d.message +
+    "\n" +
+    "──────────────────────\n\n" +
+    "お急ぎの場合は、お電話でもご相談を承っております。\n" +
+    "TEL: " +
+    COMPANY.tel +
+    " (" +
+    COMPANY.hours +
+    ")\n\n" +
+    "※ このメールは自動送信です。このままご返信いただいても担当者に届きます。\n\n" +
+    COMPANY.name +
+    "\n" +
+    COMPANY.address +
+    "\n" +
+    COMPANY.url +
+    "\n";
+
+  var rows = [
+    ["お名前", d.name],
+    ["会社名・店舗名", d.company || "—"],
+    ["メールアドレス", d.email],
+    ["電話番号", d.tel || "—"],
+    ["ご興味のあるサービス", d.service || "未選択"],
+  ];
+
+  var html =
+    '<div style="font-family:sans-serif;line-height:1.9;color:#0b1220">' +
+    "<p>" +
+    esc(d.name) +
+    " 様</p>" +
+    "<p>このたびは" +
+    esc(COMPANY.name) +
+    "へお問い合わせいただき、ありがとうございます。<br>" +
+    "以下の内容で受け付けました。担当者より<strong>通常1営業日以内</strong>にご返信します。</p>" +
+    '<table style="border-collapse:collapse;width:100%;max-width:640px;margin:20px 0">' +
+    rows
+      .map(function (r) {
+        return (
+          '<tr><th style="text-align:left;padding:10px 14px;background:#eff3f9;border:1px solid #dfe6f0;width:180px;font-size:13px">' +
+          esc(r[0]) +
+          '</th><td style="padding:10px 14px;border:1px solid #dfe6f0;font-size:14px">' +
+          esc(r[1]) +
+          "</td></tr>"
+        );
+      })
+      .join("") +
+    '<tr><th style="text-align:left;padding:10px 14px;background:#eff3f9;border:1px solid #dfe6f0;vertical-align:top;font-size:13px">ご相談内容</th>' +
+    '<td style="padding:10px 14px;border:1px solid #dfe6f0;font-size:14px;white-space:pre-wrap">' +
+    esc(d.message) +
+    "</td></tr></table>" +
+    "<p style=\"font-size:14px\">お急ぎの場合は、お電話でもご相談を承っております。<br>" +
+    'TEL: <a href="tel:' +
+    COMPANY.tel.replace(/-/g, "") +
+    '" style="color:#2b4bff;font-weight:700">' +
+    esc(COMPANY.tel) +
+    "</a> (" +
+    esc(COMPANY.hours) +
+    ")</p>" +
+    '<p style="font-size:12px;color:#55637a">※ このメールは自動送信です。このままご返信いただいても担当者に届きます。</p>' +
+    '<hr style="border:none;border-top:1px solid #dfe6f0;margin:20px 0">' +
+    '<p style="font-size:12px;color:#55637a;line-height:1.8">' +
+    esc(COMPANY.name) +
+    "<br>" +
+    esc(COMPANY.address) +
+    '<br><a href="' +
+    COMPANY.url +
+    '" style="color:#2b4bff">' +
+    COMPANY.url +
+    "</a></p></div>";
+
+  GmailApp.sendEmail(d.email, subject, body, {
+    htmlBody: html,
+    // 返信すると社内の窓口に届く
+    replyTo: d.site.to,
+    name: COMPANY.name,
   });
 }
 

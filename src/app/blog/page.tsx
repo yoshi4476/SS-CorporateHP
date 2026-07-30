@@ -3,7 +3,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
-import { posts, blogCategories, displayDate } from "@/lib/blog";
+import { posts, usedCategories, displayDate } from "@/lib/blog";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const cats = Object.entries(blogCategories).filter(([slug]) =>
-    posts.some((p) => p.category === slug),
-  );
+  const cats = usedCategories();
 
   return (
     <>
@@ -43,15 +41,13 @@ export default function BlogPage() {
       {cats.length > 0 && (
         <section className="pb-2">
           <div className="mx-auto flex max-w-5xl flex-wrap gap-2 px-5">
-            {cats.map(([slug, name]) => (
+            {cats.map((c) => (
               <span
-                key={slug}
+                key={c.slug}
                 className="rounded-full border border-line bg-white px-4 py-1 text-xs font-bold text-slate"
               >
-                {name}
-                <span className="num ml-2 text-pulse">
-                  {posts.filter((p) => p.category === slug).length}
-                </span>
+                {c.name}
+                <span className="num ml-2 text-pulse">{c.count}</span>
               </span>
             ))}
           </div>

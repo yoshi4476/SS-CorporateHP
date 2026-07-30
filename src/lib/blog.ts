@@ -26,14 +26,6 @@ export type BlogPost = {
   readingMinutes: number;
 };
 
-export const blogCategories: Record<string, string> = {
-  management: "店舗経営",
-  hr: "採用・人材育成",
-  operation: "オペレーション改善",
-  dx: "店舗DX・AI活用",
-  case: "導入事例",
-};
-
 const CONTENT_DIR = path.join(process.cwd(), "src", "content", "blog");
 
 function readAll(): BlogPost[] {
@@ -60,6 +52,24 @@ export function getPost(slug: string) {
 
 export function postsByCategory(category: string) {
   return posts.filter((p) => p.category === category);
+}
+
+/**
+ * 記事に実際に付いているカテゴリの一覧。
+ *
+ * カテゴリの定義は管制塔 (SS-AIO-LP の sites/corporate.json) が持っており、
+ * 表示名は各記事のJSONに categoryName として書き込まれてくる。
+ * こちら側で一覧を持つと二重管理になり、管制塔でカテゴリを増やしたときに
+ * 表示が食い違うため、記事の値だけを見る。
+ */
+export function usedCategories(): { slug: string; name: string; count: number }[] {
+  const map = new Map<string, { name: string; count: number }>();
+  for (const p of posts) {
+    const cur = map.get(p.category);
+    if (cur) cur.count++;
+    else map.set(p.category, { name: p.categoryName || p.category, count: 1 });
+  }
+  return [...map].map(([slug, v]) => ({ slug, ...v }));
 }
 
 /** 同カテゴリを優先した関連記事 */
