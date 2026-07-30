@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name}|AIコンサルティング・MEO/AIO運用代行・システム開発`,
     description:
-      "MEO通算3,200社の実績。AIコンサルティングからAIO・システム開発まで、7つの事業で中小企業の成長を仕組み化します。",
+      "MEO通算3,200社の実績。AIコンサルティングからAIO・システム開発まで、6つの事業で中小企業の成長を仕組み化します。",
     images: [{ url: "/ogp.png", width: 1200, height: 630, alt: "セブンセンシズ株式会社 — あなたの会社を、AIの『答え』にする。" }],
   },
   twitter: {
@@ -70,6 +71,18 @@ export default function RootLayout({
       className={`${zen.variable} ${noto.variable} ${grotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        {/* Google Analytics 4。初期表示を妨げないよう操作可能になってから読み込む */}
+        {site.ga4Id && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga4" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4Id}');`}
+            </Script>
+          </>
+        )}
         <JsonLd data={organizationSchema} />
         <Header />
         <Cursor />

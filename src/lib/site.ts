@@ -5,6 +5,8 @@ export const site = {
   url: "https://www.7senses.co.jp",
   lpUrl: "https://lp.7senses.co.jp/",
   labUrl: "https://ai.7senses.co.jp/",
+  // Google Analytics 4 の測定ID。空にすると計測タグを出力しない。
+  ga4Id: "G-9NCYS5VPHY",
   tel: "06-4305-7547",
   hours: "9:00〜20:00(土・日・祝日を除く)",
   postal: "537-0003",
