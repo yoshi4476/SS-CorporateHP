@@ -276,7 +276,7 @@ export default function Home() {
 
               {/* 特長 3点 */}
               <ul className="mt-5 grid gap-2 border-t border-line pt-5 transition-colors duration-500 group-hover:border-white/20">
-                {s.points.map((p) => (
+                {s.points.slice(0, 3).map((p) => (
                   <li
                     key={p.title}
                     className="flex items-center gap-2.5 text-[0.8rem] font-medium text-ink transition-colors duration-500 group-hover:text-white/90"
@@ -293,17 +293,21 @@ export default function Home() {
 
               {/* 代表数値 + リンク */}
               <div className="mt-auto flex items-end justify-between gap-4 pt-5">
-                <p className="leading-none">
-                  <span className="num text-3xl font-bold transition-colors duration-500 group-hover:text-white md:text-4xl">
-                    {s.metrics[0].value}
-                  </span>
-                  <span className="ml-0.5 text-base font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
-                    {s.metrics[0].suffix}
-                  </span>
-                  <span className="mt-2 block text-[0.65rem] text-slate transition-colors duration-500 group-hover:text-white/60">
-                    {s.metrics[0].label}
-                  </span>
-                </p>
+                {s.metrics?.[0] ? (
+                  <p className="leading-none">
+                    <span className="num text-3xl font-bold transition-colors duration-500 group-hover:text-white md:text-4xl">
+                      {s.metrics[0].value}
+                    </span>
+                    <span className="ml-0.5 text-base font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
+                      {s.metrics[0].suffix}
+                    </span>
+                    <span className="mt-2 block text-[0.65rem] text-slate transition-colors duration-500 group-hover:text-white/60">
+                      {s.metrics[0].label}
+                    </span>
+                  </p>
+                ) : (
+                  <span />
+                )}
                 <p className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-pulse transition-colors duration-500 group-hover:text-white">
                   詳しく見る
                   <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">

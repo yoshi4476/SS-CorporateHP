@@ -110,7 +110,7 @@ export default function ServicesIndexPage() {
                   </p>
 
                   <ul className="mt-4 grid gap-1.5 border-t border-line pt-4 transition-colors duration-500 group-hover:border-white/20">
-                    {s.points.map((p) => (
+                    {s.points.slice(0, 3).map((p) => (
                       <li
                         key={p.title}
                         className="flex items-center gap-2 text-[0.78rem] font-medium text-ink transition-colors duration-500 group-hover:text-white/90"
@@ -124,17 +124,21 @@ export default function ServicesIndexPage() {
                   </ul>
 
                   <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-                    <p className="leading-none">
-                      <span className="num text-2xl font-bold transition-colors duration-500 group-hover:text-white md:text-3xl">
-                        {s.metrics[0].value}
-                      </span>
-                      <span className="ml-0.5 text-sm font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
-                        {s.metrics[0].suffix}
-                      </span>
-                      <span className="mt-1.5 block text-[0.6rem] text-slate transition-colors duration-500 group-hover:text-white/60">
-                        {s.metrics[0].label}
-                      </span>
-                    </p>
+                    {s.metrics?.[0] ? (
+                      <p className="leading-none">
+                        <span className="num text-2xl font-bold transition-colors duration-500 group-hover:text-white md:text-3xl">
+                          {s.metrics[0].value}
+                        </span>
+                        <span className="ml-0.5 text-sm font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
+                          {s.metrics[0].suffix}
+                        </span>
+                        <span className="mt-1.5 block text-[0.6rem] text-slate transition-colors duration-500 group-hover:text-white/60">
+                          {s.metrics[0].label}
+                        </span>
+                      </p>
+                    ) : (
+                      <span />
+                    )}
                     {s.price && (
                       <p className="shrink-0 rounded-full border border-line px-3 py-1.5 text-[0.62rem] font-bold text-slate transition-colors duration-500 group-hover:border-white/30 group-hover:text-white/80">
                         {s.price.split(" /")[0]}

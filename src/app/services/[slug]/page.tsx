@@ -166,11 +166,13 @@ export default async function ServicePage({ params }: Props) {
             )}
           </div>
 
-          <div className="mt-14 grid gap-5 sm:grid-cols-3">
-            {service.metrics.map((m, i) => (
-              <StatTile key={m.label} metric={m} delay={i * 0.08} />
-            ))}
-          </div>
+          {service.metrics && (
+            <div className="mt-14 grid gap-5 sm:grid-cols-3">
+              {service.metrics.map((m, i) => (
+                <StatTile key={m.label} metric={m} delay={i * 0.08} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -285,6 +287,45 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* 取り組み例 */}
+      {service.examples && (
+        <section className="border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              en="Examples"
+              title="実際の取り組み例"
+              lead="どんな状況で、何をして、どう変わったか。代表的なケースをご紹介します。"
+            />
+            <div className="mt-12 grid gap-5 lg:grid-cols-3">
+              {service.examples.map((ex, i) => (
+                <Reveal key={ex.situation} delay={i * 0.09}>
+                  <article className="tilt flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card md:p-8">
+                    <span className="num text-xs font-bold text-pulse">CASE 0{i + 1}</span>
+                    <div className="mt-5 grid gap-5">
+                      <div>
+                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-faint">Before</p>
+                        <p className="mt-2 text-sm font-bold leading-7">{ex.situation}</p>
+                      </div>
+                      <div className="border-t border-line pt-5">
+                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-pulse">Action</p>
+                        <p className="mt-2 text-xs leading-7 text-slate">{ex.action}</p>
+                      </div>
+                      <div className="rounded-2xl bg-pulse/5 p-5">
+                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-pulse">After</p>
+                        <p className="mt-2 text-xs font-medium leading-7 text-ink">{ex.result}</p>
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+            <p className="mt-6 text-xs leading-7 text-slate">
+              ※ 守秘義務のため、お客様が特定される情報は伏せています。数値での実績は、無料相談の際に該当する事例をご案内します。
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* 深掘り解説 */}
       <section className="bg-mist py-20 md:py-28" aria-labelledby="insight-heading">

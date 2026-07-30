@@ -168,10 +168,29 @@ export default function Cursor() {
     };
     addEventListener("mousemove", onMove, { passive: true });
 
-    const onDown = () => drone.classList.add("is-click");
-    const onUp = () => drone.classList.remove("is-click");
-    addEventListener("mousedown", onDown, { passive: true });
-    addEventListener("mouseup", onUp, { passive: true });
+    // 実際のクリックは100ms前後で終わるため、押した瞬間の演出が見えないまま
+    // 戻ってしまう。最低でもこの時間は着地状態を保つ。
+    const MIN_CLICK_MS = 190;
+    let downAt = 0;
+    let releaseTimer = 0;
+
+    const onDown = () => {
+      clearTimeout(releaseTimer);
+      downAt = performance.now();
+      drone.classList.add("is-click");
+    };
+    const onUp = () => {
+      clearTimeout(releaseTimer);
+      const held = performance.now() - downAt;
+      releaseTimer = window.setTimeout(
+        () => drone.classList.remove("is-click"),
+        Math.max(0, MIN_CLICK_MS - held),
+      );
+    };
+    // pointerdown はマウス以外の入力でも発火し、mousedown より先に届く
+    addEventListener("pointerdown", onDown, { passive: true });
+    addEventListener("pointerup", onUp, { passive: true });
+    addEventListener("pointercancel", onUp, { passive: true });
     addEventListener("blur", onUp);
 
     let raf = 0;
@@ -191,9 +210,11 @@ export default function Cursor() {
 
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(releaseTimer);
       removeEventListener("mousemove", onMove);
-      removeEventListener("mousedown", onDown);
-      removeEventListener("mouseup", onUp);
+      removeEventListener("pointerdown", onDown);
+      removeEventListener("pointerup", onUp);
+      removeEventListener("pointercancel", onUp);
       removeEventListener("blur", onUp);
       drone.remove();
       document.documentElement.classList.remove("has-cursor");

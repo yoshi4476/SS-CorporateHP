@@ -412,9 +412,10 @@ mark.marker-aqua {
   height: 100%;
   transform-style: preserve-3d;
   animation: drone-bob 3s ease-in-out infinite;
+  /* 離したときは、揚力を取り戻すようにゆっくり浮き上がる */
   transition:
-    scale 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    translate 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    scale 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* レイヤーごとの奥行き (視差の源) */
@@ -455,10 +456,13 @@ mark.marker-aqua {
 }
 
 /* クリック中: プロペラ停止 → 揚力を失って沈む */
+/* 押した瞬間は一気に沈ませる。ゆっくりだとクリックが終わるまでに動ききらない */
 .cursor-drone.is-click .drone-bob {
   animation-play-state: paused;
-  translate: 0 6px;
-  scale: 0.92;
+  translate: 0 10px;
+  scale: 0.85;
+  transition-duration: 0.09s;
+  transition-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
 }
 
 .cursor-drone.is-click .prop {
@@ -473,6 +477,7 @@ mark.marker-aqua {
 
 .cursor-drone.is-click .prop > circle {
   opacity: 0;
+  transition-duration: 0.07s;
 }
 
 .cursor-drone.is-click .prop > g:first-of-type {
@@ -486,9 +491,10 @@ mark.marker-aqua {
 /* 沈んだぶん接地影は大きく濃く */
 .cursor-drone.is-click .drone-shadow {
   animation-play-state: paused;
-  scale: 1.2;
+  scale: 1.35;
   opacity: 1;
   filter: blur(3px);
+  transition-duration: 0.09s;
 }
 
 /* 接地影: 浮遊と同期して伸縮 */
