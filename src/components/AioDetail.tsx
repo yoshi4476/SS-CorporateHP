@@ -339,7 +339,7 @@ export default function AioDetail() {
           <SectionHead
             en="Plans"
             title="診断は無料。まず現在地を知ってから。"
-            lead="いきなり運用契約は必要ありません。==約30項目の診断を無料==で受けて、改善リストだけ持ち帰ることもできます。"
+            lead="いきなり運用契約は必要ありません。==サイト診断を無料==で受けて、改善リストだけ持ち帰ることもできます。"
           />
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {plans.map((p, i) => (
