@@ -1,0 +1,46 @@
+name: Deploy to Cloudflare Pages
+
+# main への push で自動デプロイする。
+# 自動化エンジンがブログ記事を push しても、これがないとサイトに反映されない。
+#
+# Cloudflare Pages のプロジェクト ss-corporate は直接アップロード方式で作成済みで、
+# 後から Git 連携に変換できない。作り直すと www.7senses.co.jp の付け替えが必要になり
+# ダウンタイムが出るため、GitHub Actions から wrangler で配信する。
+#
+# 必要なシークレット (リポジトリの Settings → Secrets and variables → Actions):
+#   CLOUDFLARE_API_TOKEN   … 権限「Cloudflare Pages: 編集」のAPIトークン
+#   CLOUDFLARE_ACCOUNT_ID  … CloudflareのアカウントID
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# 記事が連続で push されても、最後の1回だけ配信されれば足りる
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # postbuild の flatten-segments.mjs までここで走る
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=ss-corporate --branch=main
