@@ -10,6 +10,7 @@ import PageTransition from "@/components/PageTransition";
 import IntroLoader from "@/components/IntroLoader";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/schema";
+import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 const zen = Zen_Kaku_Gothic_New({
@@ -46,8 +47,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     siteName: site.name,
     title: `${site.name}|AIコンサルティング・MEO/AIO運用代行・システム開発`,
-    description:
-      "MEO通算3,200社の実績。AIコンサルティングからAIO・システム開発まで、6つの事業で中小企業の成長を仕組み化します。",
+    description: `MEO通算3,200社の実績。AIコンサルティングからAIO・システム開発まで、${services.length}つの事業で中小企業の成長を仕組み化します。`,
     images: [{ url: "/ogp.png", width: 1200, height: 630, alt: "セブンセンシズ株式会社 — あなたの会社を、AIの『答え』にする。" }],
   },
   twitter: {

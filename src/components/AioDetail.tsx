@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead, Rich, FlowSteps } from "@/components/ui";
@@ -71,6 +72,21 @@ export default function AioDetail() {
               </table>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* 引用される構造 */}
+      <section className="pt-20 md:pt-28" aria-hidden>
+        <div className="mx-auto max-w-7xl px-5">
+          <Reveal>
+            <Image
+              src="/images/aio-citation.png"
+              alt="自社サイトの一次情報や構造化データが、AI Overview・ChatGPT・Perplexity・Geminiの回答に引用される流れを示した図"
+              width={1200}
+              height={660}
+              className="h-auto w-full rounded-3xl border border-line shadow-card"
+            />
+          </Reveal>
         </div>
       </section>
 

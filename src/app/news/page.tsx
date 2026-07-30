@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
@@ -27,6 +28,19 @@ export default function NewsPage() {
           <Reveal>
             <p className="eyebrow">News</p>
             <h1 className="mt-4 text-3xl font-black md:text-5xl">お知らせ</h1>
+            <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+              制度の新設・セミナー登壇・社内の取り組みなど、会社からのお知らせを掲載しています。
+            </p>
+          </Reveal>
+          <Reveal delay={0.12} className="mt-10">
+            <Image
+              src="/images/news-hero.png"
+              alt="お知らせ一覧のイメージ"
+              width={1200}
+              height={660}
+              className="h-auto w-full rounded-3xl border border-line shadow-card"
+              priority
+            />
           </Reveal>
         </div>
       </section>

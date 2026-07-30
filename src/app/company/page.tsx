@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "会社概要",
   description:
-    "セブンセンシズ株式会社の会社概要。代表挨拶・ミッション・会社情報。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など6つの事業を展開しています。",
+    `セブンセンシズ株式会社の会社概要。代表挨拶・ミッション・会社情報。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など${services.length}つの事業を展開しています。`,
   alternates: { canonical: "/company" },
 };
 
@@ -129,7 +129,7 @@ export default function CompanyPage() {
             <Reveal delay={0.1}>
               <div className="mt-8 grid max-w-2xl gap-5 text-sm leading-9 text-slate md:text-base">
                 <p>
-                  MEOで培った「検索に選ばれる技術」は、AI検索時代の<mark className="marker">AIO運用代行</mark>へ。現場で目にしてきた業務の非効率は、AIコンサルティングとシステム開発へ。導入コストの壁は、AI導入補助金支援へ——6つの事業はすべて、現場の課題から逆算して生まれました。だからこそ私たちの提案は机上の空論にならず、<strong className="font-bold text-ink">明日から動く施策</strong>としてお渡しできます。
+                  MEOで培った「検索に選ばれる技術」は、AI検索時代の<mark className="marker">AIO運用代行</mark>へ。現場で目にしてきた業務の非効率は、AIコンサルティングとシステム開発へ。導入コストの壁は、AI導入補助金支援へ——{services.length}つの事業はすべて、現場の課題から逆算して生まれました。だからこそ私たちの提案は机上の空論にならず、<strong className="font-bold text-ink">明日から動く施策</strong>としてお渡しできます。
                 </p>
                 <p>
                   また、全国でのセミナー登壇やオウンドメディア「AI集客ラボ」を通じて、うまくいった打ち手も、失敗から学んだことも、隠さず発信しています。ノウハウを公開できるのは、<mark className="marker">自社で実践し続けている自信</mark>があるからです。当サイト自体も、構造化データやllms.txtを実装した「AIに引用されるサイト」の実験場になっています。

@@ -12,7 +12,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "事業内容",
   description:
-    "セブンセンシズ株式会社の事業内容一覧。AIコンサルティング、システム開発、AI導入補助金支援、AIO運用代行(オウンドメディア×LP)、MEO運用代行(通算3,200社)、HP/LP制作の6事業を一気通貫で提供します。",
+    `セブンセンシズ株式会社の事業内容一覧。AIコンサルティング、システム開発、AI導入補助金支援、AIO運用代行(オウンドメディア×LP)、MEO運用代行(通算3,200社)、HP/LP制作の${services.length}事業を一気通貫で提供します。`,
   alternates: { canonical: "/services" },
 };
 
@@ -65,7 +65,7 @@ export default function ServicesIndexPage() {
               <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
               <p className="mt-7 max-w-2xl text-sm leading-9 text-slate md:text-base">
                 戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)。
-                <mark className="marker">6つの事業をひとつのチームで一気通貫</mark>
+                <mark className="marker">{services.length}つの事業をひとつのチームで一気通貫</mark>
                 に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
               </p>
             </Reveal>
@@ -76,7 +76,7 @@ export default function ServicesIndexPage() {
         </div>
       </section>
 
-      {/* 6事業 横展開グリッド */}
+      {/* 各事業の横展開グリッド */}
       <section className="border-t border-line bg-mist py-16 md:py-24" aria-label="事業一覧">
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -156,7 +156,7 @@ export default function ServicesIndexPage() {
               <div className="relative">
                 <p className="eyebrow !text-aqua">One Team</p>
                 <h2 className="mt-3 text-xl font-bold md:text-3xl">
-                  6つの事業は、単品でも。組み合わせれば、もっと。
+                  {services.length}つの事業は、単品でも。組み合わせれば、もっと。
                 </h2>
                 <p className="mt-4 max-w-xl text-sm leading-8 text-white/65">
                   「MEOだけ」「補助金だけ」のご依頼も歓迎です。ただ、戦略・実装・集客・資金をひとつのチームで設計すると、施策同士が噛み合い、成果の出る速度が変わります。まずは現状に合う入り口を無料相談でご提案します。

@@ -217,6 +217,18 @@ export default async function ServicePage({ params }: Props) {
               )}
             </div>
 
+            {service.sectionImage && (
+              <Reveal delay={0.12} className="mt-6">
+                <Image
+                  src={service.sectionImage.src}
+                  alt={service.sectionImage.alt}
+                  width={1200}
+                  height={660}
+                  className="h-auto w-full rounded-3xl border border-line shadow-card"
+                />
+              </Reveal>
+            )}
+
             {service.industries && (
               <div className="mt-10">
                 <p className="eyebrow">Industries — 適している業種</p>

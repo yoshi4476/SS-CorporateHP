@@ -57,7 +57,7 @@ const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 3200, suffix: "社", label: "MEO運用 通算支援実績" },
   { value: 94, suffix: "%", label: "運用サービス契約継続率" },
   { value: 1.8, suffix: "倍", label: "マップ経由アクション平均改善" },
-  { value: 6, suffix: "事業", label: "AI×マーケの事業領域" },
+  { value: services.length, suffix: "事業", label: "AI×マーケの事業領域" },
   { value: 30, suffix: "%〜", label: "AI導入による工数削減目安" },
   { value: 350, suffix: "万円", label: "受発注・会計ソフトの補助上限" },
 ];
@@ -236,8 +236,8 @@ export default function Home() {
           <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
             <SectionHead
               en="Services — Scroll →"
-              title="6つの事業が、ひとつにつながる"
-              lead="戦略(AIコンサル)・実装(開発・制作)・集客(MEO・AIO×オウンドメディア)・資金(補助金)——==6つの事業をひとつのチームで一気通貫==に支援します。"
+              title={`${services.length}つの事業が、ひとつにつながる`}
+              lead={`戦略(AIコンサル)・実装(開発・制作)・集客(MEO・AIO×オウンドメディア)・資金(補助金)——==${services.length}つの事業をひとつのチームで一気通貫==に支援します。`}
             />
             <Reveal delay={0.1} className="mx-auto w-full max-w-xs md:max-w-md lg:max-w-lg">
               <SenseNetwork className="animate-float h-auto w-full" />

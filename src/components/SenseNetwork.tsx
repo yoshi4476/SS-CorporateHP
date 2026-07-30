@@ -1,11 +1,25 @@
-const NODES: { x: number; y: number; label: string; sub: string }[] = [
-  { x: 260, y: 60, label: "AI", sub: "コンサル" },
-  { x: 433, y: 160, label: "DEV", sub: "開発" },
-  { x: 433, y: 360, label: "補助金", sub: "ベンダー" },
-  { x: 260, y: 460, label: "AIO", sub: "メディア×LP" },
-  { x: 87, y: 360, label: "MEO", sub: "3,200社" },
-  { x: 87, y: 160, label: "HP/LP", sub: "制作" },
+// 事業を増やすときはこの配列に1行足すだけでよい。座標は円周上に自動で振り直される。
+const LABELS: { label: string; sub: string }[] = [
+  { label: "AI", sub: "コンサル" },
+  { label: "DEV", sub: "開発" },
+  { label: "補助金", sub: "ベンダー" },
+  { label: "AIO", sub: "メディア×LP" },
+  { label: "MEO", sub: "3,200社" },
+  { label: "HP/LP", sub: "制作" },
 ];
+
+const CENTER = 260;
+const ORBIT = 200;
+
+// 真上を起点に等間隔で配置する
+const NODES = LABELS.map((n, i) => {
+  const rad = ((-90 + (i * 360) / LABELS.length) * Math.PI) / 180;
+  return {
+    ...n,
+    x: +(CENTER + ORBIT * Math.cos(rad)).toFixed(1),
+    y: +(CENTER + ORBIT * Math.sin(rad)).toFixed(1),
+  };
+});
 
 export default function SenseNetwork({ className }: { className?: string }) {
   return (
@@ -13,7 +27,7 @@ export default function SenseNetwork({ className }: { className?: string }) {
       viewBox="0 0 520 520"
       className={className}
       role="img"
-      aria-label="セブンセンシズの6つの事業がひとつにつながるネットワーク図"
+      aria-label={`セブンセンシズの${LABELS.length}つの事業がひとつにつながるネットワーク図`}
     >
       <defs>
         <radialGradient id="coreGrad" cx="35%" cy="30%" r="80%">
@@ -82,7 +96,7 @@ export default function SenseNetwork({ className }: { className?: string }) {
         SENSES
       </text>
 
-      {/* 7つの事業ノード */}
+      {/* 各事業のノード */}
       {NODES.map((n, i) => (
         <g key={`n-${i}`} className="animate-node" style={{ animationDelay: `${i * 0.45}s` }}>
           <circle cx={n.x} cy={n.y} r="38" fill="#ffffff" stroke="#dfe6f0" strokeWidth="1.5" />
