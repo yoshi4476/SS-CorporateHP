@@ -28,6 +28,25 @@ export type BlogPost = {
 
 const CONTENT_DIR = path.join(process.cwd(), "src", "content", "blog");
 
+/**
+ * 画像パスの補正 (管制塔側の不具合に対する防御)。
+ *
+ * 管制塔は画像を public/images/blog/<slug>/ に配置する一方、本文HTMLと
+ * eyecatch には /images/<slug>/ と書き出してくる (2026-07-30 時点で継続中)。
+ * そのままでは記事内の画像がすべて404になるため、読み込み時に直す。
+ * 正しいパスに対しては何も起きないので、管制塔が直っても支障はない。
+ */
+function fixImagePaths(p: BlogPost): BlogPost {
+  const from = `/images/${p.slug}/`;
+  const to = `/images/blog/${p.slug}/`;
+  if (!p.html.includes(from) && !p.eyecatch?.includes(from)) return p;
+  return {
+    ...p,
+    html: p.html.replaceAll(from, to),
+    ...(p.eyecatch ? { eyecatch: p.eyecatch.replaceAll(from, to) } : {}),
+  };
+}
+
 function readAll(): BlogPost[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
   const posts: BlogPost[] = [];
@@ -36,7 +55,7 @@ function readAll(): BlogPost[] {
     try {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, name), "utf8");
       const p = JSON.parse(raw) as BlogPost;
-      if (p.slug && p.title && p.html) posts.push(p);
+      if (p.slug && p.title && p.html) posts.push(fixImagePaths(p));
     } catch {
       // 壊れた記事ファイルはサイト全体を落とさず読み飛ばす
     }
