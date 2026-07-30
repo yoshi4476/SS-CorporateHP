@@ -10,6 +10,7 @@ import {
   zeroClick,
   ownedMedia,
   approaches,
+  scopeMatrix,
   tools,
   monitored,
   diagnostics,
@@ -159,17 +160,24 @@ export default function AioDetail() {
           <SectionHead
             en="Two Approaches"
             title="今あるサイトを直すか、記事で流入をつくるか"
-            lead="AIO運用代行には==2つの入り口==があります。すでにサイトがあるなら「SEO+AIO運用」、流入そのものを増やすなら「オウンドメディア運用」。どちらも当社が一貫して担当し、まとめてお任せいただくこともできます。"
+            lead="AIO運用代行には2つの入り口があります。おすすめは==オウンドメディア運用==です。「SEO+AIO運用」の支援内容をすべて含んだうえで、記事の量産とサイト改善の実装まで丸ごとお任せいただけます。"
           />
 
-          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-2">
+          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1.2fr_1fr]">
             {approaches.map((a, i) => (
               <Reveal key={a.key} delay={i * 0.1}>
                 <article
-                  className={`tilt flex h-full flex-col rounded-3xl border p-8 shadow-card md:p-10 ${
-                    a.featured ? "border-pulse bg-pulse text-white shadow-lift" : "border-line bg-raise"
+                  className={`tilt flex h-full flex-col rounded-3xl border p-8 md:p-10 ${
+                    a.featured
+                      ? "border-pulse bg-pulse text-white shadow-lift"
+                      : "border-line bg-raise shadow-card"
                   }`}
                 >
+                  {a.featured && (
+                    <span className="mb-5 w-fit rounded-full bg-aqua px-4 py-1.5 text-[0.68rem] font-bold text-ink">
+                      おすすめ・上位プラン
+                    </span>
+                  )}
                   <div className="flex items-baseline gap-3">
                     <span className={`num text-3xl font-bold ${a.featured ? "text-white/25" : "text-pulse/20"}`}>
                       0{i + 1}
@@ -182,12 +190,18 @@ export default function AioDetail() {
                       >
                         {a.en}
                       </p>
-                      <h3 className={`mt-1 text-xl font-bold ${a.featured ? "text-white" : ""}`}>{a.name}</h3>
+                      <h3 className={`mt-1 font-bold ${a.featured ? "text-3xl text-white md:text-4xl" : "text-xl"}`}>
+                        {a.name}
+                      </h3>
                     </div>
                   </div>
 
-                  <p className={`mt-6 text-lg font-bold leading-8 ${a.featured ? "text-white" : ""}`}>{a.catch}</p>
-                  <p className={`mt-3 text-sm leading-8 ${a.featured ? "text-white/85" : "text-slate"}`}>{a.lead}</p>
+                  <p className={`mt-6 font-bold leading-8 ${a.featured ? "text-2xl text-white" : "text-lg"}`}>
+                    {a.catch}
+                  </p>
+                  <p className={`mt-3 text-sm leading-8 ${a.featured ? "text-white/85" : "text-slate"}`}>
+                    {a.lead}
+                  </p>
 
                   <p
                     className={`mt-6 rounded-xl px-4 py-3 text-xs font-bold leading-6 ${
@@ -196,57 +210,85 @@ export default function AioDetail() {
                   >
                     こんな状態なら: {a.forWhom}
                   </p>
+                  {!a.bonus && <span aria-hidden className="mb-6" />}
 
-                  <p
-                    className={`font-data mt-8 text-[0.6rem] uppercase tracking-[0.24em] ${
-                      a.featured ? "text-aqua" : "text-pulse"
-                    }`}
-                  >
-                    Scope — 支援内容
-                  </p>
-                  <ul
-                    className={`mt-4 grid flex-1 gap-3 border-t pt-5 ${
-                      a.featured ? "border-white/20" : "border-line"
-                    }`}
-                  >
-                    {a.scope.map((s) => (
-                      <li
-                        key={s}
-                        className={`flex items-start gap-3 text-sm leading-7 ${a.featured ? "text-white/90" : ""}`}
-                      >
-                        <span
-                          aria-hidden
-                          className={`mt-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${
-                            a.featured ? "bg-white/20" : "bg-pulse/10"
-                          }`}
-                        >
-                          <svg width="9" height="9" viewBox="0 0 14 14" className={a.featured ? "text-white" : "text-pulse"}>
-                            <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        </span>
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
+                  {a.note && (
+                    <p className="mt-3 flex items-start gap-2 rounded-xl bg-aqua px-4 py-3 text-xs font-bold leading-6 text-ink">
+                      <span aria-hidden className="mt-1 shrink-0">
+                        <svg width="12" height="12" viewBox="0 0 14 14">
+                          <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      {a.note}
+                    </p>
+                  )}
 
                   {a.bonus && (
-                    <p
-                      className={`mt-6 rounded-xl px-4 py-3 text-[0.68rem] font-bold leading-6 ${
-                        a.featured ? "bg-white/15 text-white" : "bg-pulse/5 text-pulse"
-                      }`}
-                    >
+                    <p className="mb-6 mt-3 rounded-xl bg-white/15 px-4 py-3 text-xs font-bold leading-6 text-white">
                       特典: {a.bonus}
                     </p>
                   )}
 
-                  <p className={`mt-6 flex items-baseline gap-3 border-t pt-5 ${a.featured ? "border-white/20" : "border-line"}`}>
+                  <p className={`mt-auto flex items-baseline gap-3 border-t pt-5 ${a.featured ? "border-white/20" : "border-line"}`}>
                     <span className={`text-xs font-bold ${a.featured ? "text-white/70" : "text-slate"}`}>料金</span>
-                    <span className={`text-2xl font-bold ${a.featured ? "text-white" : "text-pulse"}`}>{a.price}</span>
+                    <span className={`font-bold ${a.featured ? "text-3xl text-white" : "text-2xl text-pulse"}`}>
+                      {a.price}
+                    </span>
                   </p>
                 </article>
               </Reveal>
             ))}
           </div>
+
+          {/* 支援内容の対応表 */}
+          <Reveal delay={0.15} className="tilt mt-6 overflow-x-auto rounded-3xl border border-line shadow-card">
+            <table className="w-full min-w-[640px] border-collapse bg-raise text-sm">
+              <caption className="sr-only">SEO+AIO運用とオウンドメディア運用の支援内容の比較</caption>
+              <thead>
+                <tr className="border-b border-line">
+                  <th scope="col" className="p-5 text-left text-xs font-medium text-slate">
+                    支援内容
+                  </th>
+                  <th scope="col" className="w-56 bg-pulse/5 p-5 text-center">
+                    <span className="text-sm font-bold text-pulse">オウンドメディア運用</span>
+                    <span className="mt-1 block text-[0.6rem] font-bold text-pulse/70">おすすめ</span>
+                  </th>
+                  <th scope="col" className="w-40 p-5 text-center text-sm font-bold text-slate">
+                    SEO+AIO運用
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {scopeMatrix.map((r) => (
+                  <tr key={r.item} className="border-b border-line last:border-0">
+                    <th scope="row" className="p-5 text-left text-xs font-medium leading-6 text-ink md:text-sm">
+                      {r.item}
+                    </th>
+                    <td className="bg-pulse/5 p-5 text-center">
+                      <span className="mx-auto flex h-6 w-6 items-center justify-center rounded-full bg-pulse">
+                        <svg width="12" height="12" viewBox="0 0 14 14" className="text-white" role="img" aria-label="対応">
+                          <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-5 text-center">
+                      {r.seoAio ? (
+                        <span className="mx-auto flex h-6 w-6 items-center justify-center rounded-full bg-pulse/10">
+                          <svg width="12" height="12" viewBox="0 0 14 14" className="text-pulse" role="img" aria-label="対応">
+                            <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                      ) : (
+                        <span className="text-faint" aria-label="対象外">
+                          —
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Reveal>
 
           {/* オウンドメディアが機能する理由 */}
           <Reveal delay={0.1}>

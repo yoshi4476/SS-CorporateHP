@@ -77,28 +77,11 @@ export const approaches: {
   catch: string;
   lead: string;
   forWhom: string;
-  scope: string[];
+  note?: string;
   price: string;
   bonus?: string;
   featured?: boolean;
 }[] = [
-  {
-    key: "seo-aio",
-    name: "SEO+AIO運用",
-    en: "Improve",
-    role: "今あるサイトを、選ばれる状態に直す",
-    catch: "検索とAI検索の両方から選ばれるサイトへ。",
-    lead: "既存サイトの改善から、記事制作・情報設計・アクセス分析まで一括して支援します。",
-    forWhom: "サイトはあるのに、問い合わせが増えない",
-    scope: [
-      "サイト構成・問い合わせ導線の改善",
-      "SEOキーワード設計・記事制作",
-      "実績・FAQなど信頼情報の追加",
-      "AIに理解・引用されやすい情報整理",
-      "GA4・Search Consoleによる分析・改善",
-    ],
-    price: "個別お見積り",
-  },
   {
     key: "owned-media",
     name: "オウンドメディア運用",
@@ -107,17 +90,43 @@ export const approaches: {
     catch: "広告費に頼らない流入を、記事で積み上げる。",
     lead: "記事制作からレポート・改善まで、集客の仕組みを丸ごとお任せいただくプランです。社内の作業はほぼゼロで、資産型の集客が積み上がります。",
     forWhom: "広告を止めると、流入も止まってしまう",
-    scope: [
-      "オウンドメディア+LPの構築・運用一式",
-      "検索データ分析によるKW選定",
-      "記事を月60本投稿 (毎日2本・品質審査つき)",
-      "月次コンサルレポート (毎月1日・PDF)",
-      "レポートにもとづくサイト改善の実装まで",
-    ],
+    note: "SEO+AIO運用の支援内容をすべて含みます",
     price: "個別お見積り",
     bonus: "MEOスタンダード (月額3万円相当) が無料で付帯",
     featured: true,
   },
+  {
+    key: "seo-aio",
+    name: "SEO+AIO運用",
+    en: "Improve",
+    role: "今あるサイトを、選ばれる状態に直す",
+    catch: "検索とAI検索の両方から選ばれるサイトへ。",
+    lead: "既存サイトの改善から、記事制作・情報設計・アクセス分析まで一括して支援します。",
+    forWhom: "サイトはあるのに、問い合わせが増えない",
+    price: "個別お見積り",
+  },
+];
+
+/**
+ * 支援内容の対応表。
+ * オウンドメディア運用は SEO+AIO運用 の上位にあたり、記事量産と構築・改善の実装が加わる。
+ */
+export const scopeMatrix: { item: string; seoAio: boolean; ownedMedia: boolean }[] = [
+  { item: "サイト構成・問い合わせ導線の改善", seoAio: true, ownedMedia: true },
+  { item: "SEOキーワード設計・記事制作", seoAio: true, ownedMedia: true },
+  { item: "実績・FAQなど信頼情報の追加", seoAio: true, ownedMedia: true },
+  { item: "AIに理解・引用されやすい情報整理", seoAio: true, ownedMedia: true },
+  { item: "GA4・Search Consoleによる分析・改善", seoAio: true, ownedMedia: true },
+  { item: "オウンドメディア+LPの構築・運用一式", seoAio: false, ownedMedia: true },
+  {
+    item: "検索データ分析によるKW選定 (AI検索で引用されやすいコンテンツタイプまで分析)",
+    seoAio: false,
+    ownedMedia: true,
+  },
+  { item: "記事を月60本投稿 (毎日2本・品質審査つき)", seoAio: false, ownedMedia: true },
+  { item: "月次コンサルレポート (毎月1日・PDF)", seoAio: false, ownedMedia: true },
+  { item: "レポートにもとづくサイト改善の実装まで", seoAio: false, ownedMedia: true },
+  { item: "MEOスタンダード (月額3万円相当) の無料付帯", seoAio: false, ownedMedia: true },
 ];
 
 /** オウンドメディア運用の考え方と、リードが届くまでの流れ */
