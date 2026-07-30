@@ -174,6 +174,70 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
+      {/* 用途・依頼内容・適した業種 */}
+      {(service.useCase || service.menu || service.industries) && (
+        <section className="border-y border-line py-20 md:py-24" aria-labelledby="usecase-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              en="Use Case"
+              title="どんなときに使うサービスか"
+              lead={`事業によって用途が違います。${service.name}が向いている場面と業種を整理しました。`}
+            />
+
+            <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
+              {service.useCase && (
+                <Reveal className="tilt rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
+                  <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Purpose</p>
+                  <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
+                  <p className="mt-5 text-sm leading-9 text-slate md:text-base">
+                    <Rich text={service.useCase.body} />
+                  </p>
+                </Reveal>
+              )}
+
+              {service.menu && (
+                <Reveal delay={0.1} className="tilt rounded-3xl border border-line bg-white p-8 shadow-card md:p-10">
+                  <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Menu</p>
+                  <h3 className="mt-2 text-xl font-bold">代表的なご依頼内容</h3>
+                  <ul className="mt-6 grid gap-3 border-t border-line pt-6">
+                    {service.menu.map((m) => (
+                      <li key={m} className="flex items-start gap-3 text-sm leading-7">
+                        <span aria-hidden className="mt-1.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-pulse/10">
+                          <svg width="9" height="9" viewBox="0 0 14 14" className="text-pulse">
+                            <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                        </span>
+                        {m}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              )}
+            </div>
+
+            {service.industries && (
+              <div className="mt-10">
+                <p className="eyebrow">Industries — 適している業種</p>
+                <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                  {service.industries.map((ind, i) => (
+                    <Reveal key={ind.name} delay={(i % 4) * 0.08}>
+                      <article className="tilt h-full rounded-2xl border border-line bg-white p-6 shadow-card">
+                        <span className="num text-xs font-bold text-pulse">0{i + 1}</span>
+                        <h3 className="mt-2 text-base font-bold leading-relaxed">{ind.name}</h3>
+                        <p className="mt-3 text-xs leading-7 text-slate">{ind.body}</p>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+                <p className="mt-6 text-xs leading-7 text-slate">
+                  ※ 上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* こんなお悩みありませんか */}
       <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading">
         <div className="mx-auto max-w-7xl px-5">

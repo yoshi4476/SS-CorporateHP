@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -70,19 +69,24 @@ export default function RootLayout({
       lang="ja"
       className={`${zen.variable} ${noto.variable} ${grotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
-        {/* Google Analytics 4。初期表示を妨げないよう操作可能になってから読み込む */}
+      {/*
+        Google Analytics 4。
+        Search Console の所有権確認はホームページの <head> 内にスニペットがあることを
+        条件にしているため、body ではなく head に直接出力する。
+      */}
+      <head>
         {site.ga4Id && (
           <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`}
-              strategy="afterInteractive"
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4Id}');`,
+              }}
             />
-            <Script id="ga4" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4Id}');`}
-            </Script>
           </>
         )}
+      </head>
+      <body className="min-h-full">
         <JsonLd data={organizationSchema} />
         <Header />
         <Cursor />
