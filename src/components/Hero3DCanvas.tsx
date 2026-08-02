@@ -128,26 +128,26 @@ function Assembly() {
       <group ref={spinner}>
         <points>
           <bufferGeometry ref={mainGeo} />
-          <pointsMaterial color="#2b4bff" size={0.032} sizeAttenuation transparent opacity={0.8} />
+          <pointsMaterial color="#1c3f7c" size={0.032} sizeAttenuation transparent opacity={0.8} />
         </points>
         <points>
           <bufferGeometry ref={accentGeo} />
-          <pointsMaterial color="#22d3ee" size={0.08} sizeAttenuation transparent opacity={0.95} />
+          <pointsMaterial color="#74c7d6" size={0.08} sizeAttenuation transparent opacity={0.95} />
         </points>
         {/* 『答え』の稜線 (組み上がった時のみ) */}
         <lineSegments geometry={edges}>
-          <lineBasicMaterial ref={edgesMat} color="#22d3ee" transparent opacity={0} />
+          <lineBasicMaterial ref={edgesMat} color="#74c7d6" transparent opacity={0} />
         </lineSegments>
       </group>
 
       {/* オービットリング */}
       <mesh rotation={[Math.PI / 2.4, 0, 0.35]}>
         <torusGeometry args={[2.7, 0.006, 8, 120]} />
-        <meshBasicMaterial color="#6d8cff" transparent opacity={0.28} />
+        <meshBasicMaterial color="#7d90ad" transparent opacity={0.28} />
       </mesh>
       <mesh rotation={[Math.PI / 1.85, 0.4, -0.25]}>
         <torusGeometry args={[3.2, 0.004, 8, 120]} />
-        <meshBasicMaterial color="#22d3ee" transparent opacity={0.18} />
+        <meshBasicMaterial color="#74c7d6" transparent opacity={0.18} />
       </mesh>
     </group>
   );

@@ -76,7 +76,7 @@ export function GaugeDonut({
           />
           <defs>
             <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#2b4bff" />
+              <stop offset="0%" stopColor="#1c3f7c" />
               <stop offset="100%" stopColor="#7a8cff" />
             </linearGradient>
           </defs>

@@ -62,14 +62,8 @@ const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
   { value: 350, suffix: "万円", label: "受発注・会計ソフトの補助上限" },
 ];
 
-const MARQUEE = [
-  "AI CONSULTING",
-  "SYSTEM DEVELOPMENT",
-  "AI SUBSIDY VENDOR",
-  "AIO × OWNED MEDIA",
-  "MEO 3,200 CLIENTS",
-  "WEB PRODUCTION",
-];
+// 帯は事業データから作る。事業を増やせばここも自動で増える。
+const MARQUEE = services.map((s) => ({ ja: s.name, en: s.en }));
 
 export default function Home() {
   const latestNews = news[0];
@@ -85,27 +79,28 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 42% 52% at 80% 28%, rgb(43 75 255 / 0.06), transparent 62%), radial-gradient(ellipse 30% 40% at 92% 72%, rgb(34 211 238 / 0.08), transparent 60%)",
+              "radial-gradient(ellipse 42% 52% at 80% 28%, rgb(28 63 124 / 0.06), transparent 62%), radial-gradient(ellipse 30% 40% at 92% 72%, rgb(116 199 214 / 0.08), transparent 60%)",
           }}
         />
         {/* 3Dロゴ (1文字ずつ波打つ) */}
-        <Logo3D className="absolute bottom-24 left-2 z-0 whitespace-nowrap text-[9vw] opacity-30 md:left-6" />
+        <Logo3D className="absolute bottom-10 left-2 z-0 whitespace-nowrap text-[9vw] opacity-[0.16] md:bottom-14 md:left-6" />
 
-        {/* フルスクリーン3D (CORE) — モバイルは中央上部に軽量表示 */}
-        <div aria-hidden className="absolute inset-0 opacity-45 md:hidden">
+        {/* 3D (CORE)。主役は文言なので、粒は薄く敷いて余白側へ寄せる */}
+        <div aria-hidden className="absolute inset-0 opacity-25 md:hidden">
           <Hero3D className="absolute inset-0" offset={[0, 1.3, -1.5]} />
         </div>
-        <div aria-hidden className="absolute inset-0 hidden md:block">
+        <div aria-hidden className="absolute inset-0 hidden opacity-[0.42] md:block">
           <Hero3D className="absolute inset-0" />
-          {/* 左側の可読性ガード */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to right, rgb(250 251 253 / 0.9) 0%, rgb(250 251 253 / 0.55) 34%, transparent 58%)",
-            }}
-          />
         </div>
+        {/* 左半分の可読性ガード。文字にかかる粒を確実に落とす */}
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.94) 38%, rgb(251 252 253 / 0.5) 56%, transparent 72%)",
+          }}
+        />
 
         {/* HUD実績バー (右下固定) */}
         <dl className="tilt absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md md:grid lg:right-14">
@@ -135,7 +130,8 @@ export default function Home() {
           </div>
         </dl>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-36 md:pt-20">
+        {/* 文言を上寄りに置き、下に空けた余白でウォーターマークを見せる */}
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-40 pt-28 md:pb-56 md:pt-16">
           {/* 左: コピー */}
           <div className="max-w-3xl">
             <Reveal>
@@ -192,15 +188,18 @@ export default function Home() {
 
         </div>
 
-        {/* 傾斜マーキー */}
-        <div className="relative z-10 -mx-4 pb-6 pt-4" aria-hidden>
-          <div className="tilt-band overflow-hidden bg-pulse py-3.5 text-white">
+        {/* 事業名の帯: 傾けず、日本語と英語を対で並べる */}
+        <div className="relative z-10" aria-hidden>
+          <div className="overflow-hidden border-y border-line bg-raise/80 py-4 backdrop-blur-sm">
             <div className="flex">
-              <div className="animate-marquee flex shrink-0 items-center gap-10 pr-10">
+              <div className="animate-marquee flex shrink-0 items-center">
                 {[...MARQUEE, ...MARQUEE].map((m, i) => (
-                  <span key={i} className="flex items-center gap-10 whitespace-nowrap font-data text-sm font-bold tracking-[0.28em]">
-                    {m}
-                    <span className="h-2 w-2 rounded-full bg-aqua" />
+                  <span key={i} className="flex shrink-0 items-baseline whitespace-nowrap">
+                    <span className="text-[0.82rem] font-bold tracking-wide text-ink">{m.ja}</span>
+                    <span className="font-data ml-3 text-[0.6rem] uppercase tracking-[0.22em] text-slate">
+                      {m.en}
+                    </span>
+                    <span aria-hidden className="mx-8 h-3 w-px bg-line-strong" />
                   </span>
                 ))}
               </div>
@@ -325,7 +324,7 @@ export default function Home() {
             <div
               aria-hidden
               className="absolute inset-0"
-              style={{ background: "radial-gradient(ellipse 70% 60% at 70% 20%, rgb(43 75 255 / 0.45), transparent 65%)" }}
+              style={{ background: "radial-gradient(ellipse 70% 60% at 70% 20%, rgb(28 63 124 / 0.45), transparent 65%)" }}
             />
             <div className="relative">
               <p className="font-data text-[0.7rem] uppercase tracking-[0.28em] text-aqua">Free Consulting</p>
@@ -353,7 +352,7 @@ export default function Home() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 55% 70% at 85% 15%, rgb(43 75 255 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(34 211 238 / 0.12), transparent 60%)",
+              "radial-gradient(ellipse 55% 70% at 85% 15%, rgb(28 63 124 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(116 199 214 / 0.12), transparent 60%)",
           }}
         />
         <WaveText text="NUMBERS" tone="light" className="pointer-events-none absolute -top-1 right-0 select-none text-[11vw] leading-none tracking-tighter" />

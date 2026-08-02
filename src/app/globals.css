@@ -1,29 +1,36 @@
 @import "tailwindcss";
 
-/* "PRISM" design language — cool white × electric blue × cyan.
-   清潔感 (氷のような白) × 革新性 (電光ブルー→シアンの流れ)。 */
+/* 配色 — 白 × 紺。
+   清潔感は白と余白で、厳格さは彩度を落とした紺と細い罫線で作る。
+   以前の電光ブルーとシアンは彩度が高く軽い印象になるため、
+   同じ役割のまま深い紺へ寄せている。変数名は変えずに値だけ差し替えた。 */
 @theme {
-  --color-paper: #fafbfd;
+  --color-paper: #fbfcfd;
   --color-raise: #ffffff;
-  --color-mist: #eff3f9;
-  --color-ink: #0b1220;
-  --color-ink-soft: #16213a;
-  --color-slate: #55637a;
-  --color-faint: #9aa8bc;
-  --color-line: #dfe6f0;
-  --color-line-strong: #c3d0e4;
-  --color-pulse: #2b4bff;
-  --color-pulse-deep: #1e36cc;
-  --color-aqua: #22d3ee;
-  --color-glow: #6d8cff;
+  --color-mist: #f1f4f8;
+  --color-ink: #0d1420;
+  --color-ink-soft: #18243a;
+  --color-slate: #5a6678;
+  --color-faint: #828d9e;
+  --color-line: #e2e6ec;
+  --color-line-strong: #c8cfda;
+  --color-pulse: #1c3f7c;
+  --color-pulse-deep: #122b57;
+  /* aqua は紺の面と塗りボタンの上で使うため、明るい側に置く。
+     1色で明暗どちらの背景でもコントラスト基準は満たせないので、
+     用途の多い「暗い面の上」に合わせている。 */
+  --color-aqua: #74c7d6;
+  --color-glow: #7d90ad;
 
   --font-display: var(--font-zen), "Hiragino Kaku Gothic ProN", sans-serif;
   --font-body: var(--font-noto), "Hiragino Kaku Gothic ProN", sans-serif;
   --font-data: var(--font-grotesk), var(--font-noto), sans-serif;
 
-  --shadow-lift: 0 24px 48px -24px rgb(11 18 32 / 0.22);
-  --shadow-card: 0 2px 10px -2px rgb(11 18 32 / 0.07);
-  --shadow-glow: 0 0 48px -8px rgb(43 75 255 / 0.5);
+  /* 影は浮かせるためではなく、紙が重なっている程度に留める。
+     区切りは影ではなく罫線 (--color-line) で作る。 */
+  --shadow-lift: 0 18px 40px -28px rgb(13 20 32 / 0.18);
+  --shadow-card: 0 1px 3px -1px rgb(13 20 32 / 0.06);
+  --shadow-glow: 0 12px 28px -18px rgb(28 63 124 / 0.45);
 }
 
 html {
@@ -137,23 +144,25 @@ h4 {
 .logo3d-pulse {
   color: var(--color-pulse);
   text-shadow:
-    1px 1px 0 #2440d8, 2px 2px 0 #1e38c2, 3px 3px 0 #1a30aa,
-    4px 4px 0 #152892, 5px 5px 0 #11207a, 6px 6px 14px rgb(43 75 255 / 0.45);
+    1px 1px 0 #1a3b73, 2px 2px 0 #17366a, 3px 3px 0 #143060,
+    4px 4px 0 #112a55, 5px 5px 0 #0e2449, 6px 6px 14px rgb(13 20 32 / 0.35);
 }
 
+/* 回転が深いと文字が横を向いて読めなくなる。
+   ウォーターマークとして常に読める範囲に留める。 */
 @keyframes logo3d-wave {
   0%,
   100% {
     transform: translateY(0) rotateY(0deg) translateZ(0);
   }
   28% {
-    transform: translateY(-0.16em) rotateY(24deg) translateZ(24px);
+    transform: translateY(-0.08em) rotateY(8deg) translateZ(8px);
   }
   55% {
-    transform: translateY(0.05em) rotateY(-16deg) translateZ(6px);
+    transform: translateY(0.03em) rotateY(-5deg) translateZ(2px);
   }
   78% {
-    transform: translateY(-0.03em) rotateY(6deg) translateZ(0);
+    transform: translateY(-0.01em) rotateY(2deg) translateZ(0);
   }
 }
 
@@ -315,18 +324,22 @@ h4 {
 }
 
 /* 蛍光マーカー強調 */
+/* 強調。蛍光ペンのような塗りは軽い印象になるため、
+   文字色と細い下線で示す。文中に何度出ても紙面が荒れない。 */
 mark.marker {
-  background: linear-gradient(transparent 52%, rgb(34 211 238 / 0.3) 52%);
-  color: inherit;
+  background: none;
+  color: var(--color-ink);
   font-weight: 700;
-  padding: 0 0.08em;
+  box-shadow: inset 0 -1px 0 0 var(--color-pulse);
+  padding-bottom: 0.06em;
 }
 
 mark.marker-aqua {
-  background: linear-gradient(transparent 52%, rgb(43 75 255 / 0.16) 52%);
-  color: inherit;
+  background: none;
+  color: var(--color-ink);
   font-weight: 700;
-  padding: 0 0.08em;
+  box-shadow: inset 0 -1px 0 0 var(--color-line-strong);
+  padding-bottom: 0.06em;
 }
 
 /* アウトライン文字 (超大型タイポ用) */
@@ -343,15 +356,6 @@ mark.marker-aqua {
 .outline-text-pulse {
   -webkit-text-stroke: 1.5px var(--color-pulse);
   color: transparent;
-}
-
-/* 傾斜マーキーバンド */
-.tilt-band {
-  transform: rotate(-2.5deg) scale(1.06);
-}
-
-.tilt-band-r {
-  transform: rotate(1.8deg) scale(1.06);
 }
 
 .mega-num {
@@ -651,8 +655,9 @@ mark.marker-aqua {
   }
 }
 
+/* 落ち着いて読める速度にする (速いと落ち着きがなくなる) */
 .animate-marquee {
-  animation: marquee 32s linear infinite;
+  animation: marquee 56s linear infinite;
 }
 
 /* SenseNetwork のパルス */

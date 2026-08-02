@@ -37,10 +37,10 @@ const DEFS = `
       <stop offset="100%" stop-color="#25334c" />
     </radialGradient>
     <radialGradient id="dDisc" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="rgb(109 140 255 / 0.04)" />
-      <stop offset="76%" stop-color="rgb(109 140 255 / 0.12)" />
-      <stop offset="92%" stop-color="rgb(34 211 238 / 0.35)" />
-      <stop offset="100%" stop-color="rgb(109 140 255 / 0.05)" />
+      <stop offset="0%" stop-color="rgb(125 144 173 / 0.04)" />
+      <stop offset="76%" stop-color="rgb(125 144 173 / 0.12)" />
+      <stop offset="92%" stop-color="rgb(116 199 214 / 0.35)" />
+      <stop offset="100%" stop-color="rgb(125 144 173 / 0.05)" />
     </radialGradient>
     <linearGradient id="dArm" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#41527a" />
@@ -71,13 +71,13 @@ const L_HULL = `${SVG_OPEN}${DEFS}
 // レイヤー3: 機体上部 + キャノピー + カメラ
 const L_TOP = `${SVG_OPEN}${DEFS}
   <ellipse cx="36" cy="36" rx="12.8" ry="9.4" fill="url(#dHull)" />
-  <path d="M25.5 33 Q36 26.5 46.5 33" fill="none" stroke="#22d3ee" stroke-width="1" stroke-linecap="round" opacity="0.75" />
-  <path d="M26.5 40.5 Q36 45.5 45.5 40.5" fill="none" stroke="#6d8cff" stroke-width="0.8" stroke-linecap="round" opacity="0.4" />
+  <path d="M25.5 33 Q36 26.5 46.5 33" fill="none" stroke="#74c7d6" stroke-width="1" stroke-linecap="round" opacity="0.75" />
+  <path d="M26.5 40.5 Q36 45.5 45.5 40.5" fill="none" stroke="#7d90ad" stroke-width="0.8" stroke-linecap="round" opacity="0.4" />
   <ellipse cx="33.6" cy="31.8" rx="6.2" ry="3.7" fill="url(#dCanopy)" />
   <ellipse cx="31.6" cy="30.6" rx="2.3" ry="1.1" fill="#ffffff" opacity="0.8" />
   <circle cx="36" cy="43.4" r="3" fill="#0a0f1c" />
   <circle cx="36" cy="43.4" r="1.8" fill="#14264d" />
-  <circle cx="36" cy="43.4" r="0.95" fill="#22d3ee" />
+  <circle cx="36" cy="43.4" r="0.95" fill="#74c7d6" />
   <circle cx="35.5" cy="42.9" r="0.35" fill="#eafcff" />
   <rect x="35.4" y="26.6" width="1.2" height="2.8" rx="0.6" fill="#41527a" />
   <circle cx="36" cy="26.2" r="0.9" fill="#ff5d5d" opacity="0.95" />
@@ -91,8 +91,8 @@ const L_PODS = `${SVG_OPEN}${DEFS}
     <circle cx="16" cy="56" r="5" fill="url(#dMotor)" /><circle cx="16" cy="56" r="5" fill="none" stroke="#0a1222" stroke-width="0.8" /><circle cx="16" cy="56" r="1.6" fill="#0a1222" />
     <circle cx="56" cy="56" r="5" fill="url(#dMotor)" /><circle cx="56" cy="56" r="5" fill="none" stroke="#0a1222" stroke-width="0.8" /><circle cx="56" cy="56" r="1.6" fill="#0a1222" />
   </g>
-  <circle cx="16" cy="16" r="1.1" fill="#22d3ee" /><circle cx="56" cy="16" r="1.1" fill="#22d3ee" />
-  <circle cx="16" cy="56" r="1.1" fill="#6d8cff" /><circle cx="56" cy="56" r="1.1" fill="#6d8cff" />
+  <circle cx="16" cy="16" r="1.1" fill="#74c7d6" /><circle cx="56" cy="16" r="1.1" fill="#74c7d6" />
+  <circle cx="16" cy="56" r="1.1" fill="#7d90ad" /><circle cx="56" cy="56" r="1.1" fill="#7d90ad" />
 </svg>`;
 
 // レイヤー5: プロペラ (最上層・回転)
@@ -100,7 +100,7 @@ function propGroup(cx: number, cy: number) {
   return `
   <g class="prop" style="--cx:${cx}px;--cy:${cy}px">
     <circle cx="${cx}" cy="${cy}" r="12.5" fill="url(#dDisc)" />
-    <path d="M${cx - 12.5} ${cy} A12.5 12.5 0 0 1 ${cx} ${cy - 12.5}" fill="none" stroke="#22d3ee" stroke-width="0.9" opacity="0.5" />
+    <path d="M${cx - 12.5} ${cy} A12.5 12.5 0 0 1 ${cx} ${cy - 12.5}" fill="none" stroke="#74c7d6" stroke-width="0.9" opacity="0.5" />
     <g opacity="0.6">
       <rect x="${cx - 11.8}" y="${cy - 1.25}" width="23.6" height="2.5" rx="1.25" fill="#aac2e8" />
       <rect x="${cx - 1.25}" y="${cy - 11.8}" width="2.5" height="23.6" rx="1.25" fill="#aac2e8" />

@@ -32,12 +32,12 @@ export default function SenseNetwork({ className }: { className?: string }) {
       <defs>
         <radialGradient id="coreGrad" cx="35%" cy="30%" r="80%">
           <stop offset="0%" stopColor="#7a8cff" />
-          <stop offset="55%" stopColor="#2b4bff" />
-          <stop offset="100%" stopColor="#1e36cc" />
+          <stop offset="55%" stopColor="#1c3f7c" />
+          <stop offset="100%" stopColor="#122b57" />
         </radialGradient>
         <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#2b4bff" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#22d3ee" stopOpacity="0.6" />
+          <stop offset="0%" stopColor="#1c3f7c" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#74c7d6" stopOpacity="0.6" />
         </linearGradient>
       </defs>
 
@@ -72,7 +72,7 @@ export default function SenseNetwork({ className }: { className?: string }) {
 
       {/* コア */}
       <circle cx="260" cy="260" r="64" fill="url(#coreGrad)" />
-      <circle cx="260" cy="260" r="76" fill="none" stroke="#2b4bff" strokeOpacity="0.25" strokeWidth="1.5" />
+      <circle cx="260" cy="260" r="76" fill="none" stroke="#1c3f7c" strokeOpacity="0.25" strokeWidth="1.5" />
       <text
         x="260"
         y="252"

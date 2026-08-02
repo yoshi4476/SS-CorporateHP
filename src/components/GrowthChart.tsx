@@ -54,8 +54,8 @@ export default function GrowthChart() {
       >
         <defs>
           <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2b4bff" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#2b4bff" stopOpacity="0.02" />
+            <stop offset="0%" stopColor="#1c3f7c" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#1c3f7c" stopOpacity="0.02" />
           </linearGradient>
         </defs>
 
@@ -85,7 +85,7 @@ export default function GrowthChart() {
         <motion.path
           d={linePath}
           fill="none"
-          stroke="#2b4bff"
+          stroke="#1c3f7c"
           strokeWidth="2"
           strokeLinecap="round"
           initial={reduce ? false : { pathLength: 0 }}
@@ -95,7 +95,7 @@ export default function GrowthChart() {
         />
 
         {/* 終点の直接ラベル */}
-        <circle cx={x(last)} cy={y(DATA[last].total)} r="5" fill="#2b4bff" stroke="#fff" strokeWidth="2" />
+        <circle cx={x(last)} cy={y(DATA[last].total)} r="5" fill="#1c3f7c" stroke="#fff" strokeWidth="2" />
         <text
           x={x(last) + 12}
           y={y(DATA[last].total) - 8}
@@ -114,7 +114,7 @@ export default function GrowthChart() {
         {hover !== null && (
           <g pointerEvents="none">
             <line x1={x(hover)} y1={PAD.top} x2={x(hover)} y2={y(0)} stroke="#0b1220" strokeOpacity="0.25" strokeWidth="1" />
-            <circle cx={x(hover)} cy={y(DATA[hover].total)} r="4.5" fill="#fff" stroke="#2b4bff" strokeWidth="2" />
+            <circle cx={x(hover)} cy={y(DATA[hover].total)} r="4.5" fill="#fff" stroke="#1c3f7c" strokeWidth="2" />
             <g transform={`translate(${Math.min(x(hover) + 10, W - 150)}, ${Math.max(y(DATA[hover].total) - 52, 6)})`}>
               <rect width="130" height="44" rx="8" fill="#0b1220" />
               <text x="12" y="18" fontSize="11" fill="#ffffffaa">

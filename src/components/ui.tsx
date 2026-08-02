@@ -118,7 +118,8 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
               </svg>
             </summary>
             <p className="flex items-start gap-3 border-t border-line pt-4 text-sm leading-8 text-slate">
-              <span className="font-data font-bold text-aqua">A.</span>
+              {/* 明るい面なので、暗い面用の aqua ではなく紺を使う */}
+              <span className="font-data font-bold text-pulse">A.</span>
               {f.a}
             </p>
           </details>
@@ -142,7 +143,7 @@ export function CtaBand({
         className="absolute inset-0 opacity-40"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 80% 20%, rgb(43 75 255 / 0.5), transparent 60%), radial-gradient(ellipse 40% 60% at 12% 90%, rgb(34 211 238 / 0.14), transparent 60%)",
+            "radial-gradient(ellipse 60% 80% at 80% 20%, rgb(28 63 124 / 0.5), transparent 60%), radial-gradient(ellipse 40% 60% at 12% 90%, rgb(116 199 214 / 0.14), transparent 60%)",
         }}
       />
       <WaveText text="CONTACT" tone="light" className="pointer-events-none absolute -bottom-4 left-0 select-none text-[15vw] leading-none tracking-tighter" />

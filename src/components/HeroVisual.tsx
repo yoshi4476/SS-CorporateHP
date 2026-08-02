@@ -57,13 +57,13 @@ export default function HeroVisual({ className }: { className?: string }) {
             <svg viewBox={`0 0 ${W} ${H}`} className="w-36" aria-hidden>
               <defs>
                 <linearGradient id="heroSpark" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2b4bff" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#2b4bff" stopOpacity="0.02" />
+                  <stop offset="0%" stopColor="#1c3f7c" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#1c3f7c" stopOpacity="0.02" />
                 </linearGradient>
               </defs>
               <path d={area} fill="url(#heroSpark)" />
-              <path d={line} fill="none" stroke="#2b4bff" strokeWidth="3" strokeLinecap="round" />
-              <circle cx={W} cy={H - (SPARK[SPARK.length - 1] / MAX) * H} r="6" fill="#22d3ee" stroke="#0b1220" strokeWidth="1.5" />
+              <path d={line} fill="none" stroke="#1c3f7c" strokeWidth="3" strokeLinecap="round" />
+              <circle cx={W} cy={H - (SPARK[SPARK.length - 1] / MAX) * H} r="6" fill="#74c7d6" stroke="#0b1220" strokeWidth="1.5" />
             </svg>
           </div>
         </div>
@@ -82,7 +82,7 @@ export default function HeroVisual({ className }: { className?: string }) {
                 cy="30"
                 r="24"
                 fill="none"
-                stroke="#2b4bff"
+                stroke="#1c3f7c"
                 strokeWidth="7"
                 strokeLinecap="round"
                 strokeDasharray={`${2 * Math.PI * 24 * 0.9} ${2 * Math.PI * 24}`}

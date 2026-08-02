@@ -215,7 +215,7 @@ export default function Header() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 55% 70% at 80% 15%, rgb(43 75 255 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(34 211 238 / 0.12), transparent 60%)",
+              "radial-gradient(ellipse 55% 70% at 80% 15%, rgb(28 63 124 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(116 199 214 / 0.12), transparent 60%)",
           }}
         />
         <p
