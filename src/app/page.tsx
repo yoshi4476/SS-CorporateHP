@@ -83,7 +83,8 @@ export default function Home() {
           }}
         />
         {/* 3Dロゴ (1文字ずつ波打つ) */}
-        <Logo3D className="absolute bottom-10 left-2 z-0 whitespace-nowrap text-[9vw] opacity-[0.16] md:bottom-14 md:left-6" />
+        {/* 可読性ガードより上に置く。z-0 のままだと後から重なるガードに隠れる */}
+        <Logo3D className="absolute bottom-10 left-2 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22] md:bottom-14 md:left-6" />
 
         {/* 3D (CORE)。主役は文言なので、粒は薄く敷いて余白側へ寄せる */}
         <div aria-hidden className="absolute inset-0 opacity-25 md:hidden">
