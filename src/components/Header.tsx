@@ -13,7 +13,7 @@ import { diagnostics } from "@/lib/aio";
 import { site } from "@/lib/site";
 
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
-const DIAGNOSIS_NOTE = "簡易診断のため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
+const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
 const MAIN_LINKS: { href: string; label: string; en: string }[] = [
   { href: "/", label: "トップ", en: "Top" },
@@ -131,8 +131,9 @@ export default function Header() {
                 会社概要
               </Link>
               <div className="group relative">
-                <span className="flex cursor-default items-center gap-1 py-6 text-sm font-medium text-ink transition-colors group-hover:text-pulse">
-                  無料簡易診断
+                {/* 相談の手前の入口なので、他の項目より少し目立たせる */}
+                <span className="flex cursor-default items-center gap-1.5 rounded-full border border-pulse/35 bg-pulse/5 px-4 py-2 text-sm font-bold text-pulse transition-colors group-hover:border-pulse group-hover:bg-pulse/10">
+                  無料セルフチェック
                   <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden className="mt-0.5 transition-transform group-hover:rotate-180">
                     <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
@@ -278,7 +279,7 @@ export default function Header() {
                 </ul>
               </div>
               <div className="border-t border-white/10 pt-6">
-                <p className="eyebrow !text-aqua">Free Diagnostics — 無料簡易診断</p>
+                <p className="eyebrow !text-aqua">Free Self-Check — 無料セルフチェック</p>
                 <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {diagnostics.map((d) => (
                     <li key={d.name}>

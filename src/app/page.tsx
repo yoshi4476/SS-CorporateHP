@@ -8,6 +8,7 @@ import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
 import GrowthChart from "@/components/GrowthChart";
 import HorizontalRail from "@/components/HorizontalRail";
+import SelfCheckBand from "@/components/SelfCheckBand";
 import JsonLd from "@/components/JsonLd";
 import { IndustryBars, GaugeDonut, RankTable } from "@/components/charts";
 import { Reveal, CountUp } from "@/components/motion";
@@ -420,6 +421,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* 無料セルフチェック (相談の手前の入口) */}
+      <SelfCheckBand />
 
       {/* AIO / 検索対策の権威セクション */}
       <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
