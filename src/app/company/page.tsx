@@ -16,7 +16,24 @@ export const metadata: Metadata = {
 
 const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   { label: "会社名", value: `${site.name}(${site.nameEn})` },
-  { label: "代表取締役", value: site.ceo },
+  {
+    // 経歴と執筆記事は AI集客ラボ の監修者ページに集約している。
+    // 実リンクを張ることで、検索エンジンとAIが「同一人物」と確認できる根拠になる。
+    label: "代表取締役",
+    value: (
+      <>
+        {site.ceo}
+        <a
+          href="https://ai.7senses.co.jp/author/haraguchi/"
+          target="_blank"
+          rel="noopener"
+          className="ml-3 text-xs text-pulse underline-offset-4 hover:underline"
+        >
+          経歴・執筆記事を見る
+        </a>
+      </>
+    ),
+  },
   { label: "設立", value: site.founded },
   { label: "資本金", value: site.capital },
   { label: "所在地", value: `〒${site.postal} ${site.address}` },
