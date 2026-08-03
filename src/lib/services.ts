@@ -23,8 +23,10 @@ export type Service = {
   menu?: string[];
   /** 用途セクションに置く図版 (scripts/make-visuals.py で生成) */
   sectionImage?: { src: string; alt: string };
-  /** 事業を代表する写真。カードの背景と詳細ページのヒーローで共用する */
+  /** 詳細ページのヒーロー画像。枠内に収めるので切り抜きや図版でもよい */
   image?: { src: string; alt: string };
+  /** 一覧カードの背景に全面で敷く写真。暗くかぶせるため実写のみ */
+  cardImage?: { src: string; alt: string };
   /** 適している業種と、その業種での使いどころ */
   industries?: { name: string; body: string }[];
   challenges: string[];
@@ -43,7 +45,11 @@ export const services: Service[] = [
     slug: "ai-consulting",
     image: {
       src: "/images/seminar-1.jpg",
-      alt: "経営者向けセミナーでAI活用を解説する代表",
+      alt: "経営者向けセミナーで登壇し、AI活用の進め方を解説する代表",
+    },
+    cardImage: {
+      src: "/images/seminar-1.jpg",
+      alt: "経営者向けセミナーで登壇する代表",
     },
     name: "AIコンサルティング",
     en: "AI Consulting",
@@ -340,7 +346,11 @@ export const services: Service[] = [
     slug: "ai-subsidy",
     image: {
       src: "/images/seminar-2.jpg",
-      alt: "補助金とAI活用をテーマにした経営者向けセミナーの様子",
+      alt: "補助金とAI導入をテーマにしたセミナーの会場の様子",
+    },
+    cardImage: {
+      src: "/images/seminar-2.jpg",
+      alt: "補助金セミナーの会場の様子",
     },
     name: "AI導入補助金ベンダー",
     en: "AI Subsidy Vendor",
@@ -458,7 +468,7 @@ export const services: Service[] = [
     slug: "aio",
     image: {
       src: "/images/customer.png",
-      alt: "スマートフォンで情報を調べる生活者",
+      alt: "スマートフォンで調べものをする生活者",
     },
     name: "AIO運用代行",
     en: "AI Optimization × Owned Media",
@@ -543,7 +553,11 @@ export const services: Service[] = [
     slug: "meo",
     image: {
       src: "/images/meo-illust.jpg",
-      alt: "スマートフォンの地図検索で店舗を探すユーザー",
+      alt: "スマートフォンの地図検索で店舗を探すイメージ",
+    },
+    cardImage: {
+      src: "/images/seminar-3.jpg",
+      alt: "店舗集客をテーマにしたセミナーで登壇する代表",
     },
     name: "MEO運用代行",
     en: "Map Engine Optimization",
@@ -627,10 +641,6 @@ export const services: Service[] = [
   },
   {
     slug: "web-production",
-    image: {
-      src: "/images/web-hero.png",
-      alt: "高速表示のホームページとスマートフォン表示のイメージ",
-    },
     name: "HP/LP制作",
     en: "Website & LP Production",
     short: "最新技術×成果起点のデザインで、集客につながるホームページ・LPを制作。",

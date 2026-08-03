@@ -24,24 +24,48 @@ export default function BusinessShowcase() {
               href={`/services/${s.slug}`}
               className={`group relative flex ${HEIGHT[i] ?? "h-[300px]"} w-full flex-col justify-end overflow-hidden rounded-2xl bg-ink`}
             >
-              {s.image && (
-                <Image
-                  src={s.image.src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-                />
+              {/*
+                写真がある事業は、写真を面として敷き暗くかぶせる。
+                合う写真がない事業に不適合な画像を敷くと破綻するため、
+                その場合は罫線と活字だけで組む。
+              */}
+              {s.cardImage ? (
+                <>
+                  <Image
+                    src={s.cardImage.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                  />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-90"
+                    style={{
+                      background:
+                        "linear-gradient(to top, rgb(13 20 32 / 0.92) 0%, rgb(13 20 32 / 0.72) 38%, rgb(13 20 32 / 0.38) 70%, rgb(13 20 32 / 0.25) 100%)",
+                    }}
+                  />
+                </>
+              ) : (
+                <>
+                  <span aria-hidden className="grid-field-dark absolute inset-0 opacity-70" />
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-80"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse 80% 70% at 78% 12%, rgb(28 63 124 / 0.55), transparent 62%)",
+                    }}
+                  />
+                  <span
+                    aria-hidden
+                    className="num absolute left-6 top-5 select-none text-[5rem] font-bold leading-none text-white/[0.07] md:left-8 md:top-6 md:text-[7rem]"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </>
               )}
-              {/* 文字を読ませるための覆い。下ほど濃くする */}
-              <span
-                aria-hidden
-                className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-90"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgb(13 20 32 / 0.92) 0%, rgb(13 20 32 / 0.72) 38%, rgb(13 20 32 / 0.38) 70%, rgb(13 20 32 / 0.25) 100%)",
-                }}
-              />
 
               {/* 右上の丸ボタン */}
               <span
