@@ -22,6 +22,12 @@
 .article-body p { margin: 1.4em 0; }
 .article-body > *:first-child { margin-top: 0; }
 
+/* 目次から飛んだとき、固定ヘッダーの下に見出しが潜らないようにする */
+.article-body h2,
+.article-body h3 {
+  scroll-margin-top: 6rem;
+}
+
 .article-body h2 {
   margin: 2.6em 0 0.9em;
   padding-left: 0.7em;

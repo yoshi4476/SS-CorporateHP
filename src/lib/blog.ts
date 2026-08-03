@@ -47,6 +47,43 @@ function fixImagePaths(p: BlogPost): BlogPost {
   };
 }
 
+/**
+ * アイキャッチの補完。
+ *
+ * 管制塔は画像を書き出しているのに、JSONの eyecatch を空のまま
+ * 送ってくることがある。実ファイルがあれば拾って、記事に画像がない
+ * 状態を避ける。
+ */
+function fillEyecatch(p: BlogPost): BlogPost {
+  if (p.eyecatch) return p;
+  const rel = `/images/blog/${p.slug}/eyecatch.png`;
+  const abs = path.join(process.cwd(), "public", rel.replace(/^\//, ""));
+  return fs.existsSync(abs) ? { ...p, eyecatch: rel } : p;
+}
+
+export type Heading = { id: string; text: string; level: 2 | 3 };
+
+/**
+ * 本文の見出しに id を振り、目次用の一覧を返す。
+ * 管制塔のHTMLは id を持たないことがあるため、こちらで補う。
+ */
+export function withToc(html: string): { html: string; headings: Heading[] } {
+  const headings: Heading[] = [];
+  let seq = 0;
+  const out = html.replace(
+    /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/g,
+    (whole, lv: string, attrs: string, inner: string) => {
+      const text = inner.replace(/<[^>]+>/g, "").trim();
+      if (!text) return whole;
+      const found = /id="([^"]+)"/.exec(attrs);
+      const id = found ? found[1] : `sec-${++seq}`;
+      headings.push({ id, text, level: Number(lv) as 2 | 3 });
+      return found ? whole : `<h${lv}${attrs} id="${id}">${inner}</h${lv}>`;
+    },
+  );
+  return { html: out, headings };
+}
+
 function readAll(): BlogPost[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
   const posts: BlogPost[] = [];
@@ -55,7 +92,7 @@ function readAll(): BlogPost[] {
     try {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, name), "utf8");
       const p = JSON.parse(raw) as BlogPost;
-      if (p.slug && p.title && p.html) posts.push(fixImagePaths(p));
+      if (p.slug && p.title && p.html) posts.push(fillEyecatch(fixImagePaths(p)));
     } catch {
       // 壊れた記事ファイルはサイト全体を落とさず読み飛ばす
     }
@@ -98,6 +135,13 @@ export function relatedPosts(slug: string, limit = 3) {
   const same = posts.filter((p) => p.slug !== slug && p.category === base.category);
   const others = posts.filter((p) => p.slug !== slug && p.category !== base.category);
   return [...same, ...others].slice(0, limit);
+}
+
+/** 前後の記事 (posts は新しい順) */
+export function adjacentPosts(slug: string) {
+  const i = posts.findIndex((p) => p.slug === slug);
+  if (i < 0) return { prev: undefined, next: undefined };
+  return { prev: posts[i + 1], next: posts[i - 1] };
 }
 
 /** 2026.07.30 形式の表示用日付 */
