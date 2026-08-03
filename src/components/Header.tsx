@@ -15,6 +15,12 @@ import { site } from "@/lib/site";
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
 const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
+// 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く
+const RELATED_SITES: { href: string; label: string; note: string }[] = [
+  { href: site.lpUrl, label: "AI導入補助金LP", note: "補助金を使ったAI導入の特設サイト" },
+  { href: site.labUrl, label: "AI集客ラボ", note: "AI検索・MEO・SEOの運営メディア" },
+];
+
 const MAIN_LINKS: { href: string; label: string; en: string }[] = [
   { href: "/", label: "トップ", en: "Top" },
   { href: "/services", label: "事業内容", en: "Services" },
@@ -130,6 +136,18 @@ export default function Header() {
               <Link href="/company" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
                 会社概要
               </Link>
+              {/* 自社で運営している別サイト。別タブで開くことが分かるよう ↗ を添える */}
+              {RELATED_SITES.map((r) => (
+                <a
+                  key={r.href}
+                  href={r.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="hidden text-sm font-medium text-slate transition-colors hover:text-pulse xl:block"
+                >
+                  {r.label} ↗
+                </a>
+              ))}
               <div className="group relative">
                 {/* 相談の手前の入口なので、他の項目より少し目立たせる */}
                 <span className="flex cursor-default items-center gap-1.5 rounded-full border border-pulse/35 bg-pulse/5 px-4 py-2 text-sm font-bold text-pulse transition-colors group-hover:border-pulse group-hover:bg-pulse/10">
@@ -298,15 +316,25 @@ export default function Header() {
               </div>
 
               <div className="border-t border-white/10 pt-6">
-                <a
-                  href={site.lpUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex items-center gap-2 rounded-full bg-aqua px-6 py-3 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
-                >
-                  AI導入補助金 特設サイト ↗
-                </a>
-                <p className="mt-5 text-xs leading-6 text-white/50">
+                <p className="eyebrow !text-aqua">Related Sites — 運営サイト</p>
+                <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
+                  {RELATED_SITES.map((r) => (
+                    <li key={r.href}>
+                      <a
+                        href={r.href}
+                        target="_blank"
+                        rel="noopener"
+                        className="tap text-sm text-white/70 transition-colors hover:text-white"
+                      >
+                        {r.label} ↗
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-xs leading-6 text-white/50">
                   TEL:{" "}
                   <a href={`tel:${site.tel.replaceAll("-", "")}`} className="tap num text-white hover:text-aqua">
                     {site.tel}

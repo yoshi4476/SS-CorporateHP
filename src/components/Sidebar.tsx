@@ -15,6 +15,7 @@ const PAGES: { href: string; label: string; external?: boolean }[] = [
   { href: "/news", label: "お知らせ" },
   { href: "/contact", label: "無料相談" },
   { href: site.lpUrl, label: "補助金LP", external: true },
+  { href: site.labUrl, label: "AI集客ラボ", external: true },
 ];
 
 const SECTIONS: { href: string; label: string }[] = [
