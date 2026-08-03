@@ -24,6 +24,16 @@
 /case/*           /services   301
 /case-cat/*       /services   301
 
+# 経理BPOへテーマを変更した際に取り下げた採用・人材系の記事。
+# 削除しただけだと404になり、検索結果やSNSからの流入を落とすため一覧へ送る。
+/blog/arubaito-souki-rishoku-fusegu     /blog   301
+/blog/biyoushitsu-staff-teichakuritsu   /blog   301
+/blog/inshokuten-arubaito-saiyou-kotsu  /blog   301
+/blog/kyuujinhyou-kakikata-tenpo        /blog   301
+/blog/shift-sakusei-koritsuka           /blog   301
+/blog/tencho-ikusei-houhou              /blog   301
+/blog/tenpo-staff-kyouiku-manual        /blog   301
+
 # /blog は新ブログ (自動化エンジンが記事を投入) が使うため、転送しない。
 # 旧WordPressの記事URL (/blog/01/ 等) は404になる。移したい記事があれば
 # Search Console でクリック数の多いものを確認し、個別に転送を追加すること。

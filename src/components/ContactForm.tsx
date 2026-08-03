@@ -4,6 +4,7 @@
 // Content-Type を text/plain にすることでCORSのプリフライトを回避し、
 // レスポンス ({"ok":true}) を読んで成功/失敗を判定できる。
 
+import Link from "next/link";
 import { useState } from "react";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -54,7 +55,7 @@ export default function ContactForm() {
     const slug = get("service");
     const serviceName =
       services.find((s) => s.slug === slug)?.name ??
-      (slug === "other" ? "その他・まだ決まっていない" : "");
+      (slug === "all" ? "まとめて相談したい" : slug === "other" ? "その他・まだ決まっていない" : "");
 
     try {
       const res = await fetch(site.gasEndpoint, {
@@ -66,8 +67,9 @@ export default function ContactForm() {
           type: "contact",
           formKey: site.formKey,
           name: get("name"),
-          email,
           company: get("company"),
+          contact: get("contact"),
+          email,
           tel: get("tel"),
           service: serviceName,
           message: get("message"),
@@ -94,7 +96,7 @@ export default function ContactForm() {
             <path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
-        <p className="mt-5 text-lg font-bold">お問い合わせを受け付けました</p>
+        <p className="mt-5 text-lg font-bold">お申し込みを受け付けました</p>
         <p className="mx-auto mt-4 max-w-md text-sm leading-8 text-slate">
           担当者より通常1営業日以内にご返信します。
           <br />
@@ -115,17 +117,43 @@ export default function ContactForm() {
       {/* ボット除け (視覚・支援技術ともに非表示) */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
+      {/* 特典の案内。記入欄のすぐ上に置き、書き忘れを防ぐ */}
+      <div className="rounded-2xl border border-pulse/30 bg-pulse/5 p-5">
+        <p className="text-sm font-bold text-ink">🎁 特典 (MEOスタンダード無料付帯) をご希望の方</p>
+        <p className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-slate">
+          特典コード
+          <span className="num rounded-lg bg-pulse px-4 py-1.5 text-lg font-bold tracking-[0.2em] text-white">
+            3010
+          </span>
+        </p>
+        <p className="mt-3 text-xs leading-6 text-slate">
+          を、下の「詳細 (任意)」欄に、ご相談内容とあわせてご記入ください。
+        </p>
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="お名前" required />
           <input required name="name" autoComplete="name" placeholder="山田 太郎" className={inputCls} disabled={busy} />
         </label>
         <label className="grid gap-2 text-xs font-bold text-ink">
-          <LabelText text="会社名・店舗名" />
-          <input name="company" autoComplete="organization" placeholder="株式会社◯◯" className={inputCls} disabled={busy} />
+          <LabelText text="会社名・店舗名" required />
+          <input required name="company" autoComplete="organization" placeholder="株式会社◯◯" className={inputCls} disabled={busy} />
         </label>
       </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
+        <label className="grid gap-2 text-xs font-bold text-ink">
+          <LabelText text="ご担当者様" required />
+          <input
+            required
+            name="contact"
+            autoComplete="off"
+            placeholder="部署・役職またはご担当者名"
+            className={inputCls}
+            disabled={busy}
+          />
+        </label>
         <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="メールアドレス" required />
           <input
@@ -138,33 +166,58 @@ export default function ContactForm() {
             disabled={busy}
           />
         </label>
+      </div>
+
+      <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="電話番号" />
           <input type="tel" name="tel" autoComplete="tel" placeholder="06-0000-0000" className={inputCls} disabled={busy} />
         </label>
-      </div>
-      <label className="grid gap-2 text-xs font-bold text-ink">
-        <LabelText text="ご興味のあるサービス" />
-        <select name="service" defaultValue="" className={inputCls} disabled={busy}>
-          <option value="">選択してください(任意)</option>
-          {services.map((s) => (
-            <option key={s.slug} value={s.slug}>
-              {s.name}
+        <label className="grid gap-2 text-xs font-bold text-ink">
+          <LabelText text="ご相談内容" required />
+          <select required name="service" defaultValue="" className={inputCls} disabled={busy}>
+            <option value="" disabled>
+              選択してください
             </option>
-          ))}
-          <option value="other">その他・まだ決まっていない</option>
-        </select>
-      </label>
+            {services.map((s) => (
+              <option key={s.slug} value={s.slug}>
+                {s.name}
+              </option>
+            ))}
+            <option value="all">まとめて相談したい</option>
+            <option value="other">その他・まだ決まっていない</option>
+          </select>
+        </label>
+      </div>
+
       <label className="grid gap-2 text-xs font-bold text-ink">
-        <LabelText text="ご相談内容" required />
+        <LabelText text="詳細 (任意)" />
         <textarea
-          required
           name="message"
           rows={5}
-          placeholder="現在の課題やご相談したい内容をご記入ください"
+          placeholder="現在の集客状況やお困りごとをご記入ください"
           className={inputCls}
           disabled={busy}
         />
+      </label>
+
+      <label className="flex items-start gap-3 text-xs leading-6 text-slate">
+        <input
+          required
+          type="checkbox"
+          name="agree"
+          className="mt-1 h-4 w-4 shrink-0 rounded border-line-strong accent-pulse"
+          disabled={busy}
+        />
+        <span>
+          <Link href="/privacy" className="font-bold text-pulse underline-offset-4 hover:underline">
+            プライバシーポリシー
+          </Link>
+          に同意する
+          <span className="ml-2 rounded bg-pulse px-1.5 py-0.5 text-[0.625rem] font-bold leading-none text-white">
+            必須
+          </span>
+        </span>
       </label>
 
       {state === "error" && (
@@ -185,14 +238,10 @@ export default function ContactForm() {
         data-magnetic
         className="mt-2 rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
       >
-        {busy ? "送信しています…" : "この内容で相談する"}
+        {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>
       <p className="text-xs leading-6 text-slate">
-        いただいた情報は、お問い合わせへの対応以外の目的では使用しません。詳しくは
-        <a href="/privacy" className="text-pulse underline-offset-4 hover:underline">
-          プライバシーポリシー
-        </a>
-        をご覧ください。
+        いただいた情報は、相談対応の目的以外には使用しません。
       </p>
     </form>
   );
