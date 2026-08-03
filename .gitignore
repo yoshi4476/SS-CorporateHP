@@ -46,3 +46,6 @@ next-env.d.ts
 
 # 表示確認用のサンプル記事（本番へは公開しない）
 /src/content/blog/_*.json
+
+# 元データ (取り込み済み。public/images に最適化して配置)
+/写真素材/

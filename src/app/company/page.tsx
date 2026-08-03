@@ -157,10 +157,10 @@ export default function CompanyPage() {
           <div className="grid grid-cols-3 gap-3">
             <Reveal className="col-span-2 row-span-2">
               <Image
-                src="/images/seminar-1.jpg"
-                alt="経営者向けセミナーでGoogleビジネスプロフィール活用を解説する代表"
-                width={700}
-                height={525}
+                src="/images/office-sign.jpg"
+                alt="オフィス入口に掲げられた社名サイン"
+                width={1536}
+                height={1024}
                 className="h-full w-full rounded-2xl object-cover shadow-card"
               />
             </Reveal>

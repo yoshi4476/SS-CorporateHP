@@ -44,12 +44,12 @@ export const services: Service[] = [
   {
     slug: "ai-consulting",
     image: {
-      src: "/images/seminar-1.jpg",
-      alt: "経営者向けセミナーで登壇し、AI活用の進め方を解説する代表",
+      src: "/images/biz-ai-consulting.jpg",
+      alt: "ホワイトボードに書かれたAI導入ロードマップを前に、進め方を検討する担当者",
     },
     cardImage: {
-      src: "/images/seminar-1.jpg",
-      alt: "経営者向けセミナーで登壇する代表",
+      src: "/images/biz-ai-consulting.jpg",
+      alt: "ホワイトボードに書かれたAI導入ロードマップを前に、進め方を検討する担当者",
     },
     name: "AIコンサルティング",
     en: "AI Consulting",
@@ -196,8 +196,12 @@ export const services: Service[] = [
   {
     slug: "system-development",
     image: {
-      src: "/images/dev-hero.png",
-      alt: "AIを組み込んだ業務システム開発のイメージ",
+      src: "/images/biz-system-development.jpg",
+      alt: "業務システムの管理画面を映した開発環境のデスク",
+    },
+    cardImage: {
+      src: "/images/biz-system-development.jpg",
+      alt: "業務システムの管理画面を映した開発環境のデスク",
     },
     name: "システム開発",
     en: "System Development",
@@ -345,12 +349,12 @@ export const services: Service[] = [
   {
     slug: "ai-subsidy",
     image: {
-      src: "/images/seminar-2.jpg",
-      alt: "補助金とAI導入をテーマにしたセミナーの会場の様子",
+      src: "/images/biz-ai-subsidy.jpg",
+      alt: "会議室で資料を示しながら導入計画を説明する様子",
     },
     cardImage: {
-      src: "/images/seminar-2.jpg",
-      alt: "補助金セミナーの会場の様子",
+      src: "/images/biz-ai-subsidy.jpg",
+      alt: "会議室で資料を示しながら導入計画を説明する様子",
     },
     name: "AI導入補助金ベンダー",
     en: "AI Subsidy Vendor",
@@ -467,8 +471,12 @@ export const services: Service[] = [
   {
     slug: "aio",
     image: {
-      src: "/images/customer.png",
-      alt: "スマートフォンで調べものをする生活者",
+      src: "/images/biz-aio.jpg",
+      alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",
+    },
+    cardImage: {
+      src: "/images/biz-aio.jpg",
+      alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",
     },
     name: "AIO運用代行",
     en: "AI Optimization × Owned Media",
@@ -552,12 +560,12 @@ export const services: Service[] = [
   {
     slug: "meo",
     image: {
-      src: "/images/meo-illust.jpg",
-      alt: "スマートフォンの地図検索で店舗を探すイメージ",
+      src: "/images/biz-meo.jpg",
+      alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
     },
     cardImage: {
-      src: "/images/seminar-3.jpg",
-      alt: "店舗集客をテーマにしたセミナーで登壇する代表",
+      src: "/images/biz-meo.jpg",
+      alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
     },
     name: "MEO運用代行",
     en: "Map Engine Optimization",
@@ -641,6 +649,14 @@ export const services: Service[] = [
   },
   {
     slug: "web-production",
+    image: {
+      src: "/images/biz-web-production.jpg",
+      alt: "眺望のよいオフィスでサイト制作を進めるデスク",
+    },
+    cardImage: {
+      src: "/images/biz-web-production.jpg",
+      alt: "眺望のよいオフィスでサイト制作を進めるデスク",
+    },
     name: "HP/LP制作",
     en: "Website & LP Production",
     short: "最新技術×成果起点のデザインで、集客につながるホームページ・LPを制作。",
