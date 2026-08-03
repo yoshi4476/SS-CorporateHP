@@ -24,7 +24,6 @@
  *   email   : メールアドレス    [必須]
  *   message : ご相談内容        [必須]
  *   company : 会社名・店舗名
- *   contact : ご担当者様 (部署・役職または担当者名)
  *   tel / service : 任意
  *   website : ハニーポット (値が入っていたら破棄)
  */
@@ -94,7 +93,6 @@ function doPost(e) {
       name: name,
       email: email,
       company: str(data.company),
-      contact: str(data.contact),
       tel: str(data.tel),
       service: str(data.service),
       message: message,
@@ -118,7 +116,6 @@ function doPost(e) {
         payload.type,
         name,
         payload.company,
-        payload.contact,
         email,
         payload.tel,
         payload.service,
@@ -146,7 +143,6 @@ function sendMail(d) {
     ["受信サイト", d.site.label],
     ["お名前", d.name],
     ["会社名・店舗名", d.company || "—"],
-    ["ご担当者様", d.contact || "—"],
     ["メールアドレス", d.email],
     ["電話番号", d.tel || "—"],
     ["ご興味のあるサービス", d.service || "未選択"],
@@ -211,9 +207,6 @@ function sendAutoReply(d) {
     "会社名・店舗名: " +
     (d.company || "—") +
     "\n" +
-    "ご担当者様: " +
-    (d.contact || "—") +
-    "\n" +
     "メールアドレス: " +
     d.email +
     "\n" +
@@ -244,7 +237,6 @@ function sendAutoReply(d) {
   var rows = [
     ["お名前", d.name],
     ["会社名・店舗名", d.company || "—"],
-    ["ご担当者様", d.contact || "—"],
     ["メールアドレス", d.email],
     ["電話番号", d.tel || "—"],
     ["ご興味のあるサービス", d.service || "未選択"],
@@ -315,7 +307,6 @@ function appendRow(values) {
         "種別",
         "お名前",
         "会社名",
-        "ご担当者",
         "メール",
         "電話",
         "サービス",

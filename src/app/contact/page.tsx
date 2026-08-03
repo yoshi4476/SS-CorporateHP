@@ -74,23 +74,6 @@ export default function ContactPage() {
                 </ol>
               </div>
             </Reveal>
-            <Reveal delay={0.26}>
-              <div className="tilt flex items-center gap-5 rounded-2xl border border-line bg-white p-6 shadow-card">
-                <Image
-                  src="/images/ceo.jpg"
-                  alt={`代表取締役 ${site.ceo}`}
-                  width={400}
-                  height={600}
-                  className="h-20 w-20 shrink-0 rounded-full object-cover object-top"
-                />
-                <div>
-                  <p className="text-sm font-bold">代表の{site.ceo.split(" ")[0]}が直接お話を伺います</p>
-                  <p className="mt-1.5 text-xs leading-6 text-slate">
-                    営業担当への取り次ぎはありません。通算3,200社を見てきた代表が、初回から直接ご相談に乗ります。
-                  </p>
-                </div>
-              </div>
-            </Reveal>
           </div>
         </div>
       </section>

@@ -68,7 +68,6 @@ export default function ContactForm() {
           formKey: site.formKey,
           name: get("name"),
           company: get("company"),
-          contact: get("contact"),
           email,
           tel: get("tel"),
           service: serviceName,
@@ -120,6 +119,9 @@ export default function ContactForm() {
       {/* 特典の案内。記入欄のすぐ上に置き、書き忘れを防ぐ */}
       <div className="rounded-2xl border border-pulse/30 bg-pulse/5 p-5">
         <p className="text-sm font-bold text-ink">🎁 特典 (MEOスタンダード無料付帯) をご希望の方</p>
+        <p className="mt-2 inline-block rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
+          オウンドメディア運営をご契約いただいたお客様専用
+        </p>
         <p className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-slate">
           特典コード
           <span className="num rounded-lg bg-pulse px-4 py-1.5 text-lg font-bold tracking-[0.2em] text-white">
@@ -144,17 +146,6 @@ export default function ContactForm() {
 
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold text-ink">
-          <LabelText text="ご担当者様" required />
-          <input
-            required
-            name="contact"
-            autoComplete="off"
-            placeholder="部署・役職またはご担当者名"
-            className={inputCls}
-            disabled={busy}
-          />
-        </label>
-        <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="メールアドレス" required />
           <input
             required
@@ -166,29 +157,27 @@ export default function ContactForm() {
             disabled={busy}
           />
         </label>
-      </div>
-
-      <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="電話番号" />
           <input type="tel" name="tel" autoComplete="tel" placeholder="06-0000-0000" className={inputCls} disabled={busy} />
         </label>
-        <label className="grid gap-2 text-xs font-bold text-ink">
-          <LabelText text="ご相談内容" required />
-          <select required name="service" defaultValue="" className={inputCls} disabled={busy}>
-            <option value="" disabled>
-              選択してください
-            </option>
-            {services.map((s) => (
-              <option key={s.slug} value={s.slug}>
-                {s.name}
-              </option>
-            ))}
-            <option value="all">まとめて相談したい</option>
-            <option value="other">その他・まだ決まっていない</option>
-          </select>
-        </label>
       </div>
+
+      <label className="grid gap-2 text-xs font-bold text-ink">
+        <LabelText text="ご相談内容" required />
+        <select required name="service" defaultValue="" className={inputCls} disabled={busy}>
+          <option value="" disabled>
+            選択してください
+          </option>
+          {services.map((s) => (
+            <option key={s.slug} value={s.slug}>
+              {s.name}
+            </option>
+          ))}
+          <option value="all">まとめて相談したい</option>
+          <option value="other">その他・まだ決まっていない</option>
+        </select>
+      </label>
 
       <label className="grid gap-2 text-xs font-bold text-ink">
         <LabelText text="詳細 (任意)" />
