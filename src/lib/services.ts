@@ -23,6 +23,8 @@ export type Service = {
   menu?: string[];
   /** 用途セクションに置く図版 (scripts/make-visuals.py で生成) */
   sectionImage?: { src: string; alt: string };
+  /** 事業を代表する写真。カードの背景と詳細ページのヒーローで共用する */
+  image?: { src: string; alt: string };
   /** 適している業種と、その業種での使いどころ */
   industries?: { name: string; body: string }[];
   challenges: string[];
@@ -39,6 +41,10 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "ai-consulting",
+    image: {
+      src: "/images/seminar-1.jpg",
+      alt: "経営者向けセミナーでAI活用を解説する代表",
+    },
     name: "AIコンサルティング",
     en: "AI Consulting",
     short: "業務の棚卸しからAI活用戦略の策定・定着まで、経営目線で伴走します。",
@@ -183,6 +189,10 @@ export const services: Service[] = [
   },
   {
     slug: "system-development",
+    image: {
+      src: "/images/dev-hero.png",
+      alt: "AIを組み込んだ業務システム開発のイメージ",
+    },
     name: "システム開発",
     en: "System Development",
     short: "AIを組み込んだ業務システム・Webアプリを、要件定義から運用まで一気通貫で開発。",
@@ -328,6 +338,10 @@ export const services: Service[] = [
   },
   {
     slug: "ai-subsidy",
+    image: {
+      src: "/images/seminar-2.jpg",
+      alt: "補助金とAI活用をテーマにした経営者向けセミナーの様子",
+    },
     name: "AI導入補助金ベンダー",
     en: "AI Subsidy Vendor",
     short: "受発注・会計ソフトなら最大350万円枠。申請支援から導入・報告まで一貫支援。",
@@ -442,6 +456,10 @@ export const services: Service[] = [
   },
   {
     slug: "aio",
+    image: {
+      src: "/images/customer.png",
+      alt: "スマートフォンで情報を調べる生活者",
+    },
     name: "AIO運用代行",
     en: "AI Optimization × Owned Media",
     short: "ChatGPT・AI Overviewに「引用される」サイトへ。無料診断×被引用設計×月次改善で運用代行。",
@@ -523,6 +541,10 @@ export const services: Service[] = [
   },
   {
     slug: "meo",
+    image: {
+      src: "/images/meo-illust.jpg",
+      alt: "スマートフォンの地図検索で店舗を探すユーザー",
+    },
     name: "MEO運用代行",
     en: "Map Engine Optimization",
     short: "通算3,200社を支援してきた店舗集客の主力事業。Googleマップ上位表示を運用代行。",
@@ -605,6 +627,10 @@ export const services: Service[] = [
   },
   {
     slug: "web-production",
+    image: {
+      src: "/images/web-hero.png",
+      alt: "高速表示のホームページとスマートフォン表示のイメージ",
+    },
     name: "HP/LP制作",
     en: "Website & LP Production",
     short: "最新技術×成果起点のデザインで、集客につながるホームページ・LPを制作。",

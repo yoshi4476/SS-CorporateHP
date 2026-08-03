@@ -7,7 +7,7 @@ import Logo3D from "@/components/Logo3D";
 import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
 import GrowthChart from "@/components/GrowthChart";
-import HorizontalRail from "@/components/HorizontalRail";
+import BusinessShowcase from "@/components/BusinessShowcase";
 import SelfCheckBand from "@/components/SelfCheckBand";
 import JsonLd from "@/components/JsonLd";
 import { IndustryBars, GaugeDonut, RankTable } from "@/components/charts";
@@ -236,7 +236,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 pt-20 md:pt-28">
           <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
             <SectionHead
-              en="Services — Scroll →"
+              en="Services"
               title={`${services.length}つの事業が、ひとつにつながる`}
               lead={`戦略(AIコンサル)・実装(開発・制作)・集客(MEO・AIO×オウンドメディア)・資金(補助金)——==${services.length}つの事業をひとつのチームで一気通貫==に支援します。`}
             />
@@ -245,105 +245,30 @@ export default function Home() {
             </Reveal>
           </div>
         </div>
-        <HorizontalRail heightVh={340}>
-          {services.map((s, i) => (
+        <div className="mx-auto max-w-7xl px-5 pb-20 pt-12 md:pb-28 md:pt-14">
+          <BusinessShowcase />
+          <Reveal delay={0.2}>
             <Link
-              key={s.slug}
-              href={`/services/${s.slug}`}
-              className="tilt group relative flex h-[70vh] min-h-[540px] w-[86vw] shrink-0 flex-col overflow-hidden rounded-3xl border border-line bg-raise p-7 shadow-card transition-colors duration-500 hover:bg-pulse sm:w-[460px] md:w-[520px] md:p-9"
+              href="/contact"
+              className="group mt-4 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl bg-ink p-8 text-white md:flex-row md:items-center md:p-10"
             >
-              <div className="flex items-start justify-between">
-                <p className="num text-6xl font-bold text-pulse/15 transition-colors duration-500 group-hover:text-white/25 md:text-7xl">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <span className="mt-1 flex h-12 w-12 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-white/40 group-hover:bg-white group-hover:text-pulse">
-                  <svg width="18" height="18" viewBox="0 0 14 14" aria-hidden className="transition-transform duration-500 group-hover:-rotate-45">
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                  </svg>
+              <span>
+                <span className="font-data block text-[0.62rem] uppercase tracking-[0.28em] text-aqua">
+                  Free Consulting
                 </span>
-              </div>
-              <p className="font-data mt-2 text-[0.68rem] uppercase tracking-[0.28em] text-pulse transition-colors duration-500 group-hover:text-aqua">
-                {s.en}
-              </p>
-              <h3 className="mt-2 text-2xl font-black leading-snug transition-colors duration-500 group-hover:text-white md:text-[1.75rem]">
-                {s.name}
-              </h3>
-              <p className="mt-3 text-[0.95rem] font-bold leading-7 transition-colors duration-500 group-hover:text-white md:text-base">
-                {s.lead}
-              </p>
-              <p className="mt-2.5 text-[0.8rem] leading-7 text-slate transition-colors duration-500 group-hover:text-white/75">
-                {s.short}
-              </p>
-
-              {/* 特長 3点 */}
-              <ul className="mt-5 grid gap-2 border-t border-line pt-5 transition-colors duration-500 group-hover:border-white/20">
-                {s.points.slice(0, 3).map((p) => (
-                  <li
-                    key={p.title}
-                    className="flex items-center gap-2.5 text-[0.8rem] font-medium text-ink transition-colors duration-500 group-hover:text-white/90"
-                  >
-                    <span aria-hidden className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-pulse/10 transition-colors duration-500 group-hover:bg-white/15">
-                      <svg width="9" height="9" viewBox="0 0 14 14" className="text-pulse transition-colors duration-500 group-hover:text-aqua">
-                        <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {p.title}
-                  </li>
-                ))}
-              </ul>
-
-              {/* 代表数値 + リンク */}
-              <div className="mt-auto flex items-end justify-between gap-4 pt-5">
-                {s.metrics?.[0] ? (
-                  <p className="leading-none">
-                    <span className="num text-3xl font-bold transition-colors duration-500 group-hover:text-white md:text-4xl">
-                      {s.metrics[0].value}
-                    </span>
-                    <span className="ml-0.5 text-base font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
-                      {s.metrics[0].suffix}
-                    </span>
-                    <span className="mt-2 block text-[0.65rem] text-slate transition-colors duration-500 group-hover:text-white/60">
-                      {s.metrics[0].label}
-                    </span>
-                  </p>
-                ) : (
-                  <span />
-                )}
-                <p className="inline-flex shrink-0 items-center gap-2 text-sm font-bold text-pulse transition-colors duration-500 group-hover:text-white">
-                  詳しく見る
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
-                </p>
-              </div>
-            </Link>
-          ))}
-          <Link
-            href="/contact"
-            className="tilt group relative flex h-[70vh] min-h-[540px] w-[86vw] shrink-0 flex-col justify-center overflow-hidden rounded-3xl bg-ink p-10 text-white sm:w-[460px] md:w-[520px]"
-          >
-            <div aria-hidden className="grid-field-dark absolute inset-0" />
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{ background: "radial-gradient(ellipse 70% 60% at 70% 20%, rgb(28 63 124 / 0.45), transparent 65%)" }}
-            />
-            <div className="relative">
-              <p className="font-data text-[0.7rem] uppercase tracking-[0.28em] text-aqua">Free Consulting</p>
-              <p className="mt-4 text-3xl font-black leading-snug md:text-4xl">
-                どの事業が合うか、
-                <br />
-                無料で診断します。
-              </p>
-              <span className="mt-8 inline-flex items-center gap-3 rounded-full bg-aqua px-7 py-3.5 text-sm font-bold text-ink transition-transform group-hover:-translate-y-0.5">
+                <span className="mt-3 block text-2xl font-black leading-snug md:text-3xl">
+                  どの事業が合うか、無料で診断します。
+                </span>
+              </span>
+              <span className="inline-flex shrink-0 items-center gap-3 rounded-full bg-aqua px-7 py-3.5 text-sm font-bold text-ink transition-transform group-hover:-translate-y-0.5">
                 相談してみる
                 <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
                   <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
                 </svg>
               </span>
-            </div>
-          </Link>
-        </HorizontalRail>
+            </Link>
+          </Reveal>
+        </div>
       </section>
 
       {/* 数字の壁 */}

@@ -14,34 +14,6 @@ import { site } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
-// 各サービスのヒーロー写真 (旧サイトから取得した素材)
-const HERO_IMAGE: Record<string, { src: string; alt: string }> = {
-  meo: {
-    src: "/images/meo-illust.jpg",
-    alt: "スマートフォンの地図検索で店舗を探すユーザーのイメージイラスト",
-  },
-  "ai-consulting": {
-    src: "/images/seminar-1.jpg",
-    alt: "経営者向けセミナーでAI・デジタル活用を解説する代表",
-  },
-  aio: {
-    src: "/images/customer.png",
-    alt: "スマートフォンで情報を調べる生活者",
-  },
-  "ai-subsidy": {
-    src: "/images/seminar-2.jpg",
-    alt: "補助金・AI活用をテーマにした経営者向けセミナーで解説する代表",
-  },
-  "system-development": {
-    src: "/images/dev-hero.png",
-    alt: "AIネイティブなシステム開発のイメージ (コードエディタとビルドターミナル)",
-  },
-  "web-production": {
-    src: "/images/web-hero.png",
-    alt: "高速表示スコア98のホームページとスマートフォン表示のイメージ",
-  },
-};
-
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
@@ -63,7 +35,7 @@ export default async function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   const others = services.filter((s) => s.slug !== service.slug);
-  const heroImage = HERO_IMAGE[service.slug];
+  const heroImage = service.image;
   const schemas = [
     serviceSchema(service.slug),
     faqSchema(service.faq),
