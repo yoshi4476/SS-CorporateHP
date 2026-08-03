@@ -374,7 +374,7 @@ export default function AioDetail() {
             <p className="mt-5 text-xs leading-7 text-slate">
               ※ このサイト自体が同じ仕組みで動いています。お問い合わせフォームは Google Apps Script で受信し、
               <Link href="/blog" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
-                店舗経営ブログ
+                経理BPOブログ
               </Link>
               の記事は Python の自動化エンジンが生成・審査して公開しています。
             </p>

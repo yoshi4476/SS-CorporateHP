@@ -1,7 +1,7 @@
 name: Deploy to Cloudflare Pages
 
 # main への push で自動デプロイする。
-# 自動化エンジンがブログ記事を push しても、これがないとサイトに反映されない。
+# 管制塔 (SS-AIO-LP) がブログ記事を push しても、これがないとサイトに反映されない。
 #
 # Cloudflare Pages のプロジェクト ss-corporate は直接アップロード方式で作成済みで、
 # 後から Git 連携に変換できない。作り直すと www.7senses.co.jp の付け替えが必要になり
@@ -15,15 +15,21 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # push を取りこぼしても、翌日には必ず最新が配信される保険。
+  # 管制塔は JST 13:00 に記事を作るので、その後の時間帯に置く。
+  schedule:
+    - cron: "0 6 * * *" # JST 15:00
 
-# 記事が連続で push されても、最後の1回だけ配信されれば足りる
+# 記事が連続で push されても、最後の1回だけ配信されれば足りる。
+# ただし配信中のものは中断しない (中断すると未配信のまま終わる)
 concurrency:
   group: pages-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -36,11 +42,33 @@ jobs:
 
       - run: npm ci
 
-      # postbuild の flatten-segments.mjs までここで走る
-      - run: npm run build
+      # 壊れた記事JSONが1本混ざっただけで全体の配信が止まらないよう、
+      # ビルド前に検査して、読めないものは除外する
+      - name: 記事データの検査
+        run: node scripts/check-posts.mjs
 
-      - uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name=ss-corporate --branch=main
+      # postbuild の flatten-segments.mjs までここで走る
+      - name: ビルド
+        run: npm run build
+
+      # 一時的な通信エラーで止まらないよう、配信は3回まで試す
+      - name: Cloudflare Pages へ配信
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          for i in 1 2 3; do
+            if npx --yes wrangler@4 pages deploy out \
+                 --project-name=ss-corporate --branch=main --commit-dirty=true; then
+              exit 0
+            fi
+            echo "配信に失敗しました。30秒後に再試行します ($i/3)"
+            sleep 30
+          done
+          echo "::error::3回試しても配信できませんでした"
+          exit 1
+
+      # 公開後、実際にページが返るところまで確認する。
+      # ここが落ちれば Actions が失敗として通知されるので、無言の停止を防げる
+      - name: 公開の確認
+        run: node scripts/verify-live.mjs

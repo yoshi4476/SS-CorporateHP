@@ -79,7 +79,7 @@ export default async function BlogDetailPage({ params }: Props) {
           ...(faqSchema ? [faqSchema] : []),
           breadcrumbSchema([
             { name: "トップ", path: "/" },
-            { name: "店舗経営ブログ", path: "/blog" },
+            { name: "経理BPOブログ", path: "/blog" },
             { name: post.title, path: `/blog/${post.slug}` },
           ]),
         ]}
@@ -96,7 +96,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 </li>
                 <li aria-hidden>/</li>
                 <li>
-                  <Link href="/blog" className="tap hover:text-pulse">店舗経営ブログ</Link>
+                  <Link href="/blog" className="tap hover:text-pulse">経理BPOブログ</Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li aria-current="page" className="text-ink">{post.title}</li>
