@@ -14,6 +14,8 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "ClaudeBot", allow: "/" },
       { userAgent: "PerplexityBot", allow: "/" },
       { userAgent: "Google-Extended", allow: "/" },
+      // Bing系はCopilotの参照元になるため明示的に許可する
+      { userAgent: "Bingbot", allow: "/" },
     ],
     sitemap: `${site.url}/sitemap.xml`,
   };
