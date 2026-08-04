@@ -328,7 +328,7 @@ export default async function ServicePage({ params }: Props) {
                   }`}
                 >
                   <div className="md:[direction:ltr]">
-                    <p className="num text-6xl font-bold text-pulse/15 md:text-8xl">
+                    <p className="num text-6xl font-bold text-pulse/30 md:text-8xl" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </p>
                     <h3 className="mt-2 border-l-4 border-pulse pl-5 text-xl font-bold leading-relaxed md:text-2xl">

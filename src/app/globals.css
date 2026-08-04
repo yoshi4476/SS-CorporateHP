@@ -11,7 +11,7 @@
   --color-ink: #0d1420;
   --color-ink-soft: #18243a;
   --color-slate: #5a6678;
-  --color-faint: #828d9e;
+  --color-faint: #647082;
   --color-line: #e2e6ec;
   --color-line-strong: #c8cfda;
   --color-pulse: #1c3f7c;
@@ -260,7 +260,37 @@ h4 {
   transform: translateY(-100%);
 }
 
-/* 進捗オーバーレイ (OGPビジュアルの上に重ねる) */
+/* 中央のロゴ。黒からゆっくり浮かび上がらせる */
+.intro-mark {
+  display: grid;
+  justify-items: center;
+  gap: 1.4rem;
+  animation: intro-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-tag {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  /* 黒地なので白の不透明度で読みやすさが決まる。0.55 未満だと4.5:1を割る */
+  color: rgb(255 255 255 / 0.58);
+}
+
+@keyframes intro-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* 進捗オーバーレイ */
 .intro-progress {
   position: absolute;
   inset-inline: 0;
@@ -275,7 +305,7 @@ h4 {
 .intro-bar {
   flex: 1;
   height: 3px;
-  background: rgb(11 18 32 / 0.12);
+  background: rgb(255 255 255 / 0.16);
   overflow: hidden;
   border-radius: 2px;
 }
@@ -283,7 +313,8 @@ h4 {
 .intro-bar i {
   display: block;
   height: 100%;
-  background: linear-gradient(to right, var(--color-pulse), var(--color-aqua));
+  /* 黒地なので、紺から始めると左半分が見えない。明るい側だけで組む */
+  background: linear-gradient(to right, var(--color-glow), var(--color-aqua));
   transform-origin: left;
 }
 
@@ -292,12 +323,12 @@ h4 {
   font-variant-numeric: tabular-nums;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--color-ink);
+  color: #fff;
   letter-spacing: -0.01em;
 }
 
 .intro-num span {
-  color: var(--color-pulse);
+  color: var(--color-aqua);
   font-size: 0.7em;
   margin-left: 1px;
 }

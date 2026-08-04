@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import ContactForm from "@/components/ContactForm";
+import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -14,6 +16,13 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "トップ", path: "/" },
+          { name: "お問い合わせ・無料相談", path: "/contact" },
+        ])}
+      />
+
       <section className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-12 md:pt-20">

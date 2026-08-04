@@ -266,7 +266,7 @@ export default function Header() {
                     <span className="text-3xl font-black tracking-tight transition-colors group-hover:text-aqua md:text-5xl">
                       {l.label}
                     </span>
-                    <span className="font-data hidden text-[0.65rem] uppercase tracking-[0.28em] text-white/40 md:inline">
+                    <span className="font-data hidden text-[0.65rem] uppercase tracking-[0.28em] text-white/60 md:inline">
                       {l.en}
                     </span>
                   </Link>
@@ -312,7 +312,7 @@ export default function Header() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-3 text-[0.65rem] leading-5 text-white/40">{DIAGNOSIS_NOTE}</p>
+                <p className="mt-3 text-[0.65rem] leading-5 text-white/60">{DIAGNOSIS_NOTE}</p>
               </div>
 
               <div className="border-t border-white/10 pt-6">
@@ -342,7 +342,7 @@ export default function Header() {
                   <br />
                   受付時間: {site.hours}
                 </p>
-                <Link href="/privacy" className="tap mt-3 text-[0.65rem] text-white/40 hover:text-white/70">
+                <Link href="/privacy" className="tap mt-3 text-[0.65rem] text-white/60 hover:text-white/70">
                   プライバシーポリシー
                 </Link>
               </div>

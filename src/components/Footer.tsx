@@ -94,7 +94,7 @@ export default function Footer() {
               {news.slice(0, 2).map((n) => (
                 <li key={n.slug}>
                   <Link href={`/news/${n.slug}`} className="tap transition-colors hover:text-white">
-                    <span className="num mr-2 text-white/40">{n.date}</span>
+                    <span className="num mr-2 text-white/60">{n.date}</span>
                     {n.title}
                   </Link>
                 </li>
@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-7xl px-5 py-6 text-xs text-white/40">
+        <p className="mx-auto max-w-7xl px-5 py-6 text-xs text-white/60">
           © {new Date().getFullYear()} {site.nameEn} All rights reserved.
         </p>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-// 初回イントロ: OGPビジュアルを全画面で見せ、カウンター 0→100 の後に上方向へワイプ。
+// 初回イントロ: 黒一色にロゴを出し、カウンター 0→100 の後に上方向へワイプして本編へ。
 // セッション中は1回のみ。reduced-motion では表示しない。
 //
 // カウンターは毎フレーム setState すると React の再描画が60回/秒走り、
@@ -62,9 +62,17 @@ export default function IntroLoader() {
 
   return (
     <div className={`intro ${state === "done" ? "is-done" : ""}`} aria-hidden>
-      {/* OGPビジュアルを最初の画面として全画面表示 */}
-      <Image src="/ogp.png" alt="" fill priority className="object-cover" sizes="100vw" />
-      {/* 進捗オーバーレイ */}
+      <div className="intro-mark">
+        <Image
+          src="/images/logo-jp.png"
+          alt=""
+          width={560}
+          height={200}
+          priority
+          className="logo-invert h-auto w-[min(60vw,26rem)]"
+        />
+        <p className="intro-tag">Osaka / AI Consulting &amp; Digital Marketing</p>
+      </div>
       <div className="intro-progress">
         <div className="intro-bar">
           <i ref={barRef} style={{ transform: "scaleX(0)" }} />

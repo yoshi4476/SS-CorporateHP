@@ -87,7 +87,7 @@ export default function ServicesIndexPage() {
                   className="tilt group flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card transition-colors duration-500 hover:bg-pulse md:p-8"
                 >
                   <div className="flex items-start justify-between">
-                    <p className="num text-6xl font-bold text-pulse/15 transition-colors duration-500 group-hover:text-white/25 md:text-7xl">
+                    <p className="num text-6xl font-bold text-pulse/30 transition-colors duration-500 group-hover:text-white/25 md:text-7xl" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </p>
                     <span className="mt-1 flex h-11 w-11 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-white/40 group-hover:bg-white group-hover:text-pulse">
