@@ -13,9 +13,11 @@ import { organizationSchema } from "@/lib/schema";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
+// 日本語フォントは1ウェイトあたり数百KBある。実際に描画されているウェイトだけ読む。
+// (計測: 見出しは 700 と 900 のみ。500 はどこにも当たっていなかった)
 const zen = Zen_Kaku_Gothic_New({
   variable: "--font-zen",
-  weight: ["500", "700", "900"],
+  weight: ["700", "900"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -29,7 +31,7 @@ const noto = Noto_Sans_JP({
 
 const grotesk = Space_Grotesk({
   variable: "--font-grotesk",
-  weight: ["400", "500", "700"],
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
 });
