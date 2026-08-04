@@ -2,7 +2,9 @@ export const site = {
   name: "セブンセンシズ株式会社",
   nameEn: "SEVEN SENSES Inc.",
   tagline: "Make your life more comfortable",
-  url: "https://www.7senses.co.jp",
+  // www は旧サイト (WordPress) へ戻すため、新サイトは corp を正とする。
+  // canonical・sitemap.xml・OGP・JSON-LD すべてここを見ている。
+  url: "https://corp.7senses.co.jp",
   lpUrl: "https://lp.7senses.co.jp/",
   labUrl: "https://ai.7senses.co.jp/",
   // Google Analytics 4 の測定ID。空にすると計測タグを出力しない。

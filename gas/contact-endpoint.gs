@@ -44,7 +44,7 @@ var COMPANY = {
   tel: "06-4305-7547",
   hours: "9:00〜20:00 (土日祝休)",
   address: "〒537-0003 大阪府大阪市東成区神路1丁目7-4 コンフォートビル901・902",
-  url: "https://www.7senses.co.jp/",
+  url: "https://corp.7senses.co.jp/",
 };
 
 /** 送信者への自動返信を行うか (false にすると社内通知だけになります) */

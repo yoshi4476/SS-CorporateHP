@@ -6,7 +6,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-const BASE = "https://www.7senses.co.jp";
+const BASE = "https://corp.7senses.co.jp";
 const UA = { "User-Agent": "seven-senses-deploy-check" };
 
 // 直近の記事1本を確認対象に含める (記事が実際に公開されたかを見る)

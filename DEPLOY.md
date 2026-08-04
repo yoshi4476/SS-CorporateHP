@@ -7,8 +7,12 @@ Cloudflare Pages プロジェクト **`ss-corporate`** に配信します。
 独自ドメインを当てられるようにするためです。DNSを Cloudflare に移管する必要がなく、
 **MXレコード (メール) に一切触らずに** サイトだけを差し替えられます。
 
-- 本番URL: https://www.7senses.co.jp (切替後)
+- 本番URL: https://corp.7senses.co.jp
 - Pages URL: https://ss-corporate.pages.dev
+
+`www.7senses.co.jp` から `corp.7senses.co.jp` への移行手順は
+[DOMAIN-MIGRATION.md](DOMAIN-MIGRATION.md) にある。以下「2. 独自ドメインの切替」は
+www を当てたときの記録で、手順そのものは corp でも同じ。
 
 ## 1. ビルドとデプロイ
 
