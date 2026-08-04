@@ -20,7 +20,6 @@ export const keywords: string[] = [
 /** メディアの実績・特徴 */
 export const facts: { value: string; suffix: string; label: string }[] = [
   { value: "4", suffix: "領域", label: "記帳・請求・支払・給与を一括で" },
-  { value: "3,200", suffix: "社", label: "バックオフィス支援の母体となる運用実績" },
   { value: "無料", suffix: "", label: "現状分析レポートをお渡し" },
   { value: "2026", suffix: "年基準", label: "インボイス・電帳法の最新運用で更新" },
 ];

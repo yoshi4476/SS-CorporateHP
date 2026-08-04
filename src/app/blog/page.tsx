@@ -112,7 +112,7 @@ export default function BlogPage() {
 
       {/* 実績タイル */}
       <section className="border-b border-line py-12 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 xl:grid-cols-3">
           {facts.map((f, i) => (
             <Reveal key={f.label} delay={i * 0.07}>
               <div className="border-l-2 border-pulse pl-5">
