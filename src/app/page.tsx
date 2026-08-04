@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
-import Hero3D from "@/components/Hero3D";
 import Logo3D from "@/components/Logo3D";
 import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
@@ -103,14 +102,7 @@ export default function Home() {
         {/* 可読性ガードより上に置く。z-0 のままだと後から重なるガードに隠れる */}
         <Logo3D className="absolute bottom-10 left-2 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22] md:bottom-14 md:left-6" />
 
-        {/* 3D (CORE)。主役は文言なので、粒は薄く敷いて余白側へ寄せる */}
-        <div aria-hidden className="absolute inset-0 opacity-25 md:hidden">
-          <Hero3D className="absolute inset-0" offset={[0, 1.3, -1.5]} />
-        </div>
-        <div aria-hidden className="absolute inset-0 hidden opacity-[0.26] md:block">
-          <Hero3D className="absolute inset-0" />
-        </div>
-        {/* 左半分の可読性ガード。文字にかかる粒と写真を落とす。
+        {/* 左半分の可読性ガード。写真を紙色に落としてコピーを読ませる。
             コピーが占める幅の割合が画面によって違うので、タブレットは深めに引く */}
         <div
           aria-hidden
