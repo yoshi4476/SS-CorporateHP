@@ -83,6 +83,22 @@ export default function Home() {
               "radial-gradient(ellipse 42% 52% at 80% 28%, rgb(28 63 124 / 0.06), transparent 62%), radial-gradient(ellipse 30% 40% at 92% 72%, rgb(116 199 214 / 0.08), transparent 60%)",
           }}
         />
+        {/* 背景写真。右側に見せ、コピーがのる左側は下のガードで紙色に溶かす */}
+        <div aria-hidden className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/images/hero-office.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[72%_center]"
+          />
+          {/* スマホはガードが効かず文字が写真に重なるため、全面を紙色で伏せる */}
+          <div className="absolute inset-0 bg-paper/85 md:hidden" />
+          {/* ヘッダーは背景が透明なので、写真の上端を紙色に落としてナビを読めるようにする */}
+          <div className="absolute inset-x-0 top-0 hidden h-28 bg-gradient-to-b from-paper via-paper/75 to-transparent md:block" />
+        </div>
+
         {/* 3Dロゴ (1文字ずつ波打つ) */}
         {/* 可読性ガードより上に置く。z-0 のままだと後から重なるガードに隠れる */}
         <Logo3D className="absolute bottom-10 left-2 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22] md:bottom-14 md:left-6" />
@@ -91,13 +107,22 @@ export default function Home() {
         <div aria-hidden className="absolute inset-0 opacity-25 md:hidden">
           <Hero3D className="absolute inset-0" offset={[0, 1.3, -1.5]} />
         </div>
-        <div aria-hidden className="absolute inset-0 hidden opacity-[0.42] md:block">
+        <div aria-hidden className="absolute inset-0 hidden opacity-[0.26] md:block">
           <Hero3D className="absolute inset-0" />
         </div>
-        {/* 左半分の可読性ガード。文字にかかる粒を確実に落とす */}
+        {/* 左半分の可読性ガード。文字にかかる粒と写真を落とす。
+            コピーが占める幅の割合が画面によって違うので、タブレットは深めに引く */}
         <div
           aria-hidden
-          className="absolute inset-0 hidden md:block"
+          className="absolute inset-0 hidden md:block lg:hidden"
+          style={{
+            background:
+              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.95) 52%, rgb(251 252 253 / 0.58) 72%, transparent 92%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 hidden lg:block"
           style={{
             background:
               "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.94) 38%, rgb(251 252 253 / 0.5) 56%, transparent 72%)",
@@ -134,13 +159,14 @@ export default function Home() {
 
         {/* 文言を上寄りに置き、下に空けた余白でウォーターマークを見せる */}
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-40 pt-28 md:pb-56 md:pt-16">
-          {/* 左: コピー */}
-          <div className="max-w-3xl">
+          {/* 左: コピー。min-w-0 が無いと、折り返せない見出しがflexの幅を押し広げて画面外にはみ出す */}
+          <div className="min-w-0 max-w-3xl">
             <Reveal>
               <span aria-hidden className="mb-6 block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
               <p className="eyebrow">Osaka / AI Consulting &amp; Digital Marketing</p>
             </Reveal>
-            <h1 className="mt-8 text-[10.5vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
+            {/* スマホは「AIの『答え』にする。」が最長。折り返せないため画面幅から逆算した値にしている */}
+            <h1 className="mt-8 text-[8.6vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
               <SplitText text="あなたの会社を、" />
               <br />
               <SplitText text="AIの『答え』にする。" className="text-pulse" startIndex={8} />
@@ -174,11 +200,11 @@ export default function Home() {
             <Reveal delay={0.3}>
               <Link
                 href={`/news/${latestNews.slug}`}
-                className="group mt-12 inline-flex items-center gap-3 border-t border-line pt-5 text-xs text-slate transition-colors hover:text-pulse"
+                className="group mt-12 flex max-w-full items-center gap-3 border-t border-line pt-5 text-xs text-slate transition-colors hover:text-pulse"
               >
-                <span className="font-data font-bold uppercase tracking-[0.2em] text-pulse">News</span>
-                <span className="num">{latestNews.date}</span>
-                <span className="max-w-72 truncate font-medium text-ink group-hover:text-pulse">
+                <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-pulse">News</span>
+                <span className="num shrink-0">{latestNews.date}</span>
+                <span className="min-w-0 flex-1 truncate font-medium text-ink group-hover:text-pulse sm:flex-none sm:max-w-72">
                   {latestNews.title}
                 </span>
                 <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse transition-transform group-hover:translate-x-1">
