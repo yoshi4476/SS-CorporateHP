@@ -60,7 +60,15 @@ export default async function BlogDetailPage({ params }: Props) {
     description: post.description,
     datePublished: post.date,
     dateModified: post.dateModified,
-    author: { "@id": `${site.url}/#organization` },
+    // 記事の著者は法人ではなく実在の個人にする。組織名だけでは
+    // 検索エンジンにもAIにも「誰の経験・専門性か」が伝わらない
+    author: {
+      "@type": "Person",
+      name: site.ceo,
+      jobTitle: "セブンセンシズ株式会社 代表取締役",
+      url: "https://ai.7senses.co.jp/author/haraguchi/",
+      worksFor: { "@id": `${site.url}/#organization` },
+    },
     publisher: { "@id": `${site.url}/#organization` },
     mainEntityOfPage: url,
     ...(post.eyecatch ? { image: `${site.url}${post.eyecatch}` } : {}),
