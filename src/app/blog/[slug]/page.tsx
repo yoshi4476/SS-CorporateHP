@@ -278,10 +278,25 @@ export default async function BlogDetailPage({ params }: Props) {
               )}
               <div className="rounded-3xl border border-line bg-mist p-6">
                 <p className="text-xs font-bold tracking-widest text-faint">監修</p>
-                <p className="mt-3 text-sm font-bold leading-relaxed">セブンセンシズ株式会社</p>
+                {/* 法人名だけでは「誰の経験か」が読者にもAIにも伝わらない。
+                    実在の個人と、経歴の実体があるページへ結び付ける */}
+                <p className="mt-3 text-sm font-bold leading-relaxed">
+                  {site.ceo}
+                  <span className="ml-2 text-xs font-medium text-slate">
+                    セブンセンシズ株式会社 代表取締役
+                  </span>
+                </p>
                 <p className="mt-2 text-[0.8rem] leading-relaxed text-slate">
                   経理BPO・AI導入支援・Web集客を手がけています。記事の内容について詳しく知りたい方はご相談ください。
                 </p>
+                <a
+                  href="https://ai.7senses.co.jp/author/haraguchi/"
+                  target="_blank"
+                  rel="noopener"
+                  className="mt-3 inline-block text-[0.8rem] text-pulse underline-offset-4 hover:underline"
+                >
+                  経歴・執筆記事を見る
+                </a>
                 <Link
                   href="/contact"
                   className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline"
