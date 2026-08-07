@@ -36,6 +36,21 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   },
   { label: "設立", value: site.founded },
   { label: "資本金", value: site.capital },
+  {
+    // 同名の別法人 (株式会社セブンセンシズ / 東京都目黒区) と取り違えられないよう、
+    // 人にも機械にも確認できる識別子を会社概要に明示する
+    label: "法人番号",
+    value: (
+      <a
+        href={`https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=${site.corporateNumber}`}
+        target="_blank"
+        rel="noopener"
+        className="num text-pulse underline-offset-4 hover:underline"
+      >
+        {site.corporateNumber} ↗
+      </a>
+    ),
+  },
   { label: "所在地", value: `〒${site.postal} ${site.address}` },
   {
     label: "電話番号",

@@ -18,6 +18,9 @@ export const site = {
   foundedISO: "2020-03-10",
   capital: "500万円",
   banks: "三井住友銀行 / GMOあおぞらネット銀行",
+  // 国税庁の法人番号。同名の別法人 (株式会社セブンセンシズ / 東京都目黒区 /
+  // 9120001168304) と機械的に区別できる唯一の識別子なので、構造化データにも載せる。
+  corporateNumber: "3120001227825",
   contactEmail: "info.ai@7senses.co.jp",
   // お問い合わせの受信先 (Google Apps Script Webアプリ)。
   // 静的サイトのためブラウザから直接送信する = URLは公開される。

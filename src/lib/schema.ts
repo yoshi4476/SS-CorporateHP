@@ -6,7 +6,15 @@ export const organizationSchema = {
   "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.name,
+  legalName: site.name,
   alternateName: ["SEVEN SENSES Inc.", "セブンセンシズ"],
+  // 法人番号。同名の別法人と名前だけでは区別できないため、機械が使える識別子を明示する
+  identifier: {
+    "@type": "PropertyValue",
+    name: "法人番号",
+    propertyID: "https://www.houjin-bangou.nta.go.jp/",
+    value: site.corporateNumber,
+  },
   url: site.url,
   logo: `${site.url}/images/logo.png`,
   slogan: site.tagline,
@@ -22,7 +30,14 @@ export const organizationSchema = {
     streetAddress: "神路1丁目7-4 コンフォートビル901・902",
     addressCountry: "JP",
   },
-  sameAs: [site.lpUrl, site.labUrl],
+  // 自社サイトだけでなく、法人番号で当社だと確定できる外部ページも並べる。
+  // 同名の別法人と混ざらないよう、法人番号がURLに入っているものだけを載せること。
+  sameAs: [
+    site.lpUrl,
+    site.labUrl,
+    `https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=${site.corporateNumber}`,
+    `https://alarmbox.jp/companyinfo/entities/${site.corporateNumber}`,
+  ],
   areaServed: "JP",
   description:
     "大阪のAIコンサルティング・デジタルマーケティング会社。AI導入支援、システム開発、MEO運用代行(通算3,200社)、AIO運用代行、オウンドメディア運用、HP/LP制作を提供。",
