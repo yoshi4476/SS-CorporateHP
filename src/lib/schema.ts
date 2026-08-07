@@ -40,7 +40,7 @@ export const organizationSchema = {
   ],
   areaServed: "JP",
   description:
-    "大阪のAIコンサルティング・デジタルマーケティング会社。AI導入支援、システム開発、MEO運用代行(通算3,200社)、AIO運用代行、オウンドメディア運用、HP/LP制作を提供。",
+    "大阪のAIコンサルティング・デジタルマーケティング会社。AI導入支援、システム開発、MEO運用代行(通算3,200店舗)、AIO運用代行、オウンドメディア運用、HP/LP制作を提供。",
   knowsAbout: [
     "AIコンサルティング",
     "AIO(AI最適化・LLMO)",

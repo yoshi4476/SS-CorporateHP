@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 
-// MEO運用 累計支援社数の推移 (実績値)
+// MEO運用 累計支援店舗数の推移 (実績値)
 const DATA: { year: string; total: number }[] = [
   { year: "2019", total: 150 },
   { year: "2020", total: 420 },
@@ -41,14 +41,14 @@ export default function GrowthChart() {
   return (
     <figure className="w-full">
       <figcaption className="mb-1 text-sm font-bold text-ink">
-        MEO運用 累計支援社数の推移
+        MEO運用 累計支援店舗数の推移
         <span className="ml-2 text-xs font-normal text-slate">(社)</span>
       </figcaption>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="w-full"
         role="img"
-        aria-label="MEO運用の累計支援社数は2019年から増え続け、2026年に通算3,200社に到達"
+        aria-label="MEO運用の累計支援店舗数は2019年から増え続け、2026年に通算3,200店舗に到達"
         onMouseMove={onMove}
         onMouseLeave={() => setHover(null)}
       >
@@ -104,7 +104,7 @@ export default function GrowthChart() {
           fill="#0b1220"
           className="num"
         >
-          3,200社
+          3,200店舗
         </text>
         <text x={x(last) + 12} y={y(DATA[last].total) + 8} fontSize="10" fill="#55637a">
           通算支援

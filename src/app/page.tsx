@@ -50,7 +50,7 @@ const COMPARE_ROWS: { label: string; seo: string; meo: string; aio: string }[] =
   { label: "ユーザーの行動", seo: "検索して比較する", meo: "近くの店舗を探す", aio: "AIに直接質問する" },
   { label: "目指す状態", seo: "検索上位に表示", meo: "地図上位で来店獲得", aio: "AIに引用・推薦される" },
   { label: "評価の軸", seo: "被リンク・コンテンツ品質", meo: "口コミ・情報の充実度", aio: "一次情報・構造化・実在性" },
-  { label: "当社の対応", seo: "HP制作・メディア運用", meo: "運用代行(通算3,200社)", aio: "AIO運用代行" },
+  { label: "当社の対応", seo: "HP制作・メディア運用", meo: "運用代行(通算3,200店舗)", aio: "AIO運用代行" },
 ];
 
 const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
@@ -165,7 +165,7 @@ export default function Home() {
             </h1>
             <Reveal delay={0.16}>
               <p className="mt-9 max-w-lg text-sm leading-9 text-slate md:text-[0.95rem]">
-                MEO運用<mark className="marker">通算3,200社</mark>の現場実績と、最新のAI技術。
+                MEO運用<mark className="marker">通算3,200店舗</mark>の現場実績と、最新のAI技術。
                 <br className="hidden md:block" />
                 集客と業務を数字で変える、大阪のAIコンサルティング会社です。
               </p>
@@ -332,7 +332,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Data"
-            title="通算3,200社が生んだ、実践データ"
+            title="通算3,200店舗が生んだ、実践データ"
             lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
           />
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -456,7 +456,7 @@ export default function Home() {
                   机上ではなく、現場から。
                 </h2>
                 <p className="mt-5 max-w-xl text-sm leading-8 text-white/65 md:text-base">
-                  全国でのセミナー登壇や店舗支援の現場——通算3,200社と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
+                  全国でのセミナー登壇や店舗支援の現場——通算3,200店舗と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
                 </p>
               </Reveal>
               <Reveal delay={0.12}>

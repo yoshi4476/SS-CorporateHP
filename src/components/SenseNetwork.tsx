@@ -4,7 +4,7 @@ const LABELS: { label: string; sub: string }[] = [
   { label: "DEV", sub: "開発" },
   { label: "補助金", sub: "ベンダー" },
   { label: "AIO", sub: "メディア×LP" },
-  { label: "MEO", sub: "3,200社" },
+  { label: "MEO", sub: "3,200店舗" },
   { label: "HP/LP", sub: "制作" },
 ];
 

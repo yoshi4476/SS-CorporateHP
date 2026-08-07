@@ -12,7 +12,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "事業内容",
   description:
-    `セブンセンシズ株式会社の事業内容一覧。AIコンサルティング、システム開発、AI導入補助金支援、AIO運用代行(オウンドメディア×LP)、MEO運用代行(通算3,200社)、HP/LP制作の${services.length}事業を一気通貫で提供します。`,
+    `セブンセンシズ株式会社の事業内容一覧。AIコンサルティング、システム開発、AI導入補助金支援、AIO運用代行(オウンドメディア×LP)、MEO運用代行(通算3,200店舗)、HP/LP制作の${services.length}事業を一気通貫で提供します。`,
   alternates: { canonical: "/services" },
 };
 
