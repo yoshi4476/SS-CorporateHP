@@ -82,8 +82,9 @@ export default function Home() {
               "radial-gradient(ellipse 42% 52% at 80% 28%, rgb(28 63 124 / 0.06), transparent 62%), radial-gradient(ellipse 30% 40% at 92% 72%, rgb(116 199 214 / 0.08), transparent 60%)",
           }}
         />
-        {/* 背景写真。右側に見せ、コピーがのる左側は下のガードで紙色に溶かす */}
-        <div aria-hidden className="absolute inset-0 overflow-hidden">
+        {/* 背景写真は lg 以上だけ。狭い画面で薄く敷くと、写真でも背景でもない
+            ぼんやりした影にしかならないため、下でひとつの写真ブロックとして出す */}
+        <div aria-hidden className="absolute inset-0 hidden overflow-hidden lg:block">
           <Image
             src="/images/hero-office.jpg"
             alt=""
@@ -92,26 +93,20 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-[72%_center]"
           />
-          {/* スマホはガードが効かず文字が写真に重なるため、全面を紙色で伏せる */}
-          <div className="absolute inset-0 bg-paper/85 md:hidden" />
           {/* ヘッダーは背景が透明なので、写真の上端を紙色に落としてナビを読めるようにする */}
-          <div className="absolute inset-x-0 top-0 hidden h-28 bg-gradient-to-b from-paper via-paper/75 to-transparent md:block" />
+          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper via-paper/75 to-transparent" />
         </div>
 
-        {/* 3Dロゴ (1文字ずつ波打つ) */}
-        {/* 可読性ガードより上に置く。z-0 のままだと後から重なるガードに隠れる */}
-        <Logo3D className="absolute bottom-10 left-2 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22] md:bottom-14 md:left-6" />
+        {/* 3Dロゴ (1文字ずつ波打つ)。可読性ガードより上に置く。
+            .logo3d 自身が display:flex を持つため hidden が効かない。
+            表示の切り替えは素の div でくるんで行う。
+            狭い画面は写真ブロックが下端まで埋まるので透かしは出さない。 */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
+          <Logo3D className="absolute bottom-14 left-6 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22]" />
+        </div>
 
-        {/* 左半分の可読性ガード。写真を紙色に落としてコピーを読ませる。
-            コピーが占める幅の割合が画面によって違うので、タブレットは深めに引く */}
-        <div
-          aria-hidden
-          className="absolute inset-0 hidden md:block lg:hidden"
-          style={{
-            background:
-              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.95) 52%, rgb(251 252 253 / 0.58) 72%, transparent 92%)",
-          }}
-        />
+        {/* 左半分の可読性ガード。背景写真を紙色に落としてコピーを読ませる。
+            写真を敷くのは lg 以上だけなので、ガードも lg 以上だけでよい */}
         <div
           aria-hidden
           className="absolute inset-0 hidden lg:block"
@@ -122,7 +117,7 @@ export default function Home() {
         />
 
         {/* HUD実績バー (右下固定) */}
-        <dl className="tilt absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md md:grid lg:right-14">
+        <dl className="tilt absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
           <div className="border-r border-line pr-2">
             <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Total Clients</dt>
             <dd className="num mt-1 text-2xl font-bold">
@@ -150,28 +145,67 @@ export default function Home() {
         </dl>
 
         {/* 文言を上寄りに置き、下に空けた余白でウォーターマークを見せる */}
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-40 pt-28 md:pb-56 md:pt-16">
-          {/* 左: コピー。min-w-0 が無いと、折り返せない見出しがflexの幅を押し広げて画面外にはみ出す */}
-          <div className="min-w-0 max-w-3xl">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-14 pt-8 lg:pb-56 lg:pt-16">
+          {/* 左: コピー。
+              min-w-0 が無いと、折り返せない見出しがflexの幅を押し広げて画面外にはみ出す。
+              w-full が無いとflexアイテムが内容幅に縮み、下の写真ブロックが右に余白を残す */}
+          <div className="w-full min-w-0 max-w-3xl lg:w-auto">
             <Reveal>
-              <span aria-hidden className="mb-6 block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
+              <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
               <p className="eyebrow">Osaka / AI Consulting &amp; Digital Marketing</p>
             </Reveal>
-            {/* スマホは「AIの『答え』にする。」が最長。折り返せないため画面幅から逆算した値にしている */}
-            <h1 className="mt-8 text-[8.6vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
+            {/* スマホは「AIの『答え』にする。」が最長で折り返せない。
+                320px でも1行に収まる値を画面幅から逆算している */}
+            <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
               <SplitText text="あなたの会社を、" />
               <br />
               <SplitText text="AIの『答え』にする。" className="text-pulse" startIndex={8} />
             </h1>
             <Reveal delay={0.16}>
-              <p className="mt-9 max-w-lg text-sm leading-9 text-slate md:text-[0.95rem]">
+              <p className="mt-6 max-w-lg text-sm leading-8 text-slate md:mt-9 md:leading-9 md:text-[0.95rem]">
                 MEO運用<mark className="marker">通算3,200店舗</mark>の現場実績と、最新のAI技術。
                 <br className="hidden md:block" />
                 集客と業務を数字で変える、大阪のAIコンサルティング会社です。
               </p>
             </Reveal>
+            {/* スマホ用の写真ブロック。薄い背景として敷くのをやめ、
+                実績の数字と組んだ1枚にした。数字はPCのHUDと同じもので、
+                これまでスマホでは非表示になっていた */}
+            <Reveal delay={0.2}>
+              {/* 幅が広がるほど縦も伸びてCTAが画面外へ出るため、横長に切り替える */}
+              <figure className="relative mt-7 aspect-[5/4] overflow-hidden rounded-3xl sm:aspect-[16/9] lg:hidden">
+                <Image
+                  src="/images/hero-office.jpg"
+                  alt="打ち合わせに向かう代表"
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover object-[66%_center]"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgb(13 20 32 / 0.92) 0%, rgb(13 20 32 / 0.35) 42%, transparent 70%)" }}
+                />
+                <dl className="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-1 px-4 pb-4 text-white">
+                  {[
+                    { n: 3200, unit: "社", label: "MEO通算支援" },
+                    { n: 90, unit: "%+", label: "補助金 採択率" },
+                    { n: services.length, unit: "事業", label: "一気通貫で支援" },
+                  ].map((s, i) => (
+                    <div key={s.label} className={i < 2 ? "border-r border-white/20 pr-1" : ""}>
+                      <dd className="num text-xl font-bold leading-none">
+                        <CountUp value={s.n} duration={1.6} />
+                        <span className="ml-0.5 text-xs text-aqua">{s.unit}</span>
+                      </dd>
+                      <dd className="mt-1.5 text-[0.6rem] leading-tight text-white/70">{s.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </figure>
+            </Reveal>
             <Reveal delay={0.24}>
-              <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
                 <Link
                   href="/contact"
                   data-magnetic className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
@@ -192,7 +226,7 @@ export default function Home() {
             <Reveal delay={0.3}>
               <Link
                 href={`/news/${latestNews.slug}`}
-                className="group mt-12 flex max-w-full items-center gap-3 border-t border-line pt-5 text-xs text-slate transition-colors hover:text-pulse"
+                className="group mt-8 flex max-w-full items-center gap-3 border-t border-line pt-5 text-xs text-slate transition-colors hover:text-pulse md:mt-12"
               >
                 <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-pulse">News</span>
                 <span className="num shrink-0">{latestNews.date}</span>

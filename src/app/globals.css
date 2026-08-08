@@ -94,10 +94,19 @@ h4 {
 
 .eyebrow {
   font-family: var(--font-data);
-  font-size: 0.75rem;
-  letter-spacing: 0.32em;
+  /* 字間が広いラベルなので、スマホでは折り返さない大きさまで落とす。
+     ヒーローの "Osaka / AI Consulting & Digital Marketing" が最長 */
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-pulse);
+}
+
+@media (min-width: 640px) {
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.32em;
+  }
 }
 
 .num {
