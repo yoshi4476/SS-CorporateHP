@@ -73,3 +73,17 @@ export const steps: { title: string; body: string }[] = [
     body: "現状分析レポートを添えて、どこから手を付けると効果が大きいかをご提案します。",
   },
 ];
+
+/**
+ * はじめて読む人のための順路。
+ *
+ * 記事が増えるほど「どれから読めばいいか」が分からなくなる。
+ * 検討の順番どおりに4本を並べ、迷わず入れるようにする。
+ * slug は管制塔が付けたもの。記事が取り下げられた場合は表示から自動で外れる。
+ */
+export const startHere: { slug: string; step: string; why: string }[] = [
+  { slug: "keiri-bpo-toha", step: "まず全体像", why: "経理BPOとは何か、記帳代行や人材派遣と何が違うのかを整理します。" },
+  { slug: "keiri-gaichuu-handan-kijun", step: "自社に向くか", why: "外注すべき状態かどうかを、5つの判断基準で確かめます。" },
+  { slug: "keiri-outsourcing-hiyou-souba", step: "いくらかかるか", why: "業務範囲ごとの費用相場と、抑えるための考え方を押さえます。" },
+  { slug: "keiri-daiko-erabikata", step: "どこに頼むか", why: "依頼先を比べる軸と、契約前に確認すべき項目を確認します。" },
+];

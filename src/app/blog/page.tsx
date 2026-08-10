@@ -4,8 +4,8 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
-import { posts, usedCategories, displayDate } from "@/lib/blog";
-import { keywords, facts, problems, glossary, steps } from "@/lib/bpo";
+import { posts, getPost, usedCategories, postsByCategory, displayDate } from "@/lib/blog";
+import { keywords, facts, problems, glossary, steps, startHere } from "@/lib/bpo";
 import { diagnostics } from "@/lib/aio";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -20,6 +20,13 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   const cats = usedCategories();
   const [lead, ...rest] = posts;
+  // 新着は先頭の3本だけ。残りはカテゴリ別で辿らせる
+  const recent = rest.slice(0, 3);
+  // 順路は記事が実在するものだけ。管制塔が取り下げても壊れない
+  const path = startHere
+    .map((s) => ({ ...s, post: getPost(s.slug) }))
+    .filter((s): s is typeof s & { post: NonNullable<typeof s.post> } => Boolean(s.post));
+  const byCategory = cats.map((c) => ({ ...c, items: postsByCategory(c.slug) }));
 
   return (
     <>
@@ -185,14 +192,17 @@ export default function BlogPage() {
 
           {cats.length > 0 && (
             <Reveal delay={0.08}>
+              {/* 件数つきのカテゴリ。押すと下のカテゴリ別一覧へ飛ぶ */}
               <ul className="mt-8 flex flex-wrap gap-2">
                 {cats.map((c) => (
-                  <li
-                    key={c.slug}
-                    className="rounded-full border border-line bg-raise px-4 py-1.5 text-xs font-bold text-ink"
-                  >
-                    {c.name}
-                    <span className="num ml-2 text-pulse">{c.count}</span>
+                  <li key={c.slug}>
+                    <a
+                      href={`#cat-${c.slug}`}
+                      className="tap inline-flex items-center rounded-full border border-line bg-raise px-4 py-1.5 text-xs font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                    >
+                      {c.name}
+                      <span className="num ml-2 text-pulse">{c.count}</span>
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -247,42 +257,28 @@ export default function BlogPage() {
                 </Link>
               </Reveal>
 
-              {rest.length > 0 && (
-                <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                  {rest.map((p, i) => (
-                    <Reveal key={p.slug} delay={(i % 3) * 0.07}>
+              {/* 直近の数本だけ横並びで見せる。全件は下のカテゴリ別で辿れる */}
+              {recent.length > 0 && (
+                <div className="mt-5 grid gap-5 md:grid-cols-3">
+                  {recent.map((p, i) => (
+                    <Reveal key={p.slug} delay={i * 0.07}>
                       <Link
                         href={`/blog/${p.slug}`}
-                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-raise shadow-card transition-colors hover:border-pulse/40"
+                        className="group flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse/40"
                       >
-                        <span className="relative block aspect-[16/9] overflow-hidden bg-mist">
-                          {p.eyecatch ? (
-                            <Image
-                              src={p.eyecatch}
-                              alt=""
-                              fill
-                              sizes="(max-width: 768px) 100vw, 33vw"
-                              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                            />
-                          ) : (
-                            <span aria-hidden className="grid-field absolute inset-0" />
-                          )}
+                        <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-pulse">
+                            {p.categoryName}
+                          </span>
+                          <time dateTime={p.date} className="num text-[0.68rem] text-slate">
+                            {displayDate(p.date)}
+                          </time>
                         </span>
-                        <span className="flex flex-1 flex-col p-6">
-                          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-pulse">
-                              {p.categoryName}
-                            </span>
-                            <time dateTime={p.date} className="num text-[0.68rem] text-slate">
-                              {displayDate(p.date)}
-                            </time>
-                          </span>
-                          <span className="mt-3 block flex-1 text-base font-bold leading-relaxed group-hover:text-pulse">
-                            {p.title}
-                          </span>
-                          <span className="mt-3 block text-xs leading-7 text-slate">
-                            約{p.readingMinutes}分で読めます
-                          </span>
+                        <span className="mt-3 block flex-1 text-base font-bold leading-relaxed group-hover:text-pulse">
+                          {p.title}
+                        </span>
+                        <span className="mt-3 block text-xs leading-7 text-slate">
+                          約{p.readingMinutes}分で読めます
                         </span>
                       </Link>
                     </Reveal>
@@ -293,6 +289,89 @@ export default function BlogPage() {
           )}
         </div>
       </section>
+
+      {/* はじめての方の順路。記事が増えるほど「どれから読むか」が要る */}
+      {path.length > 0 && (
+        <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="start-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              en="Start here"
+              title="はじめての方は、この順番で"
+              lead="検討の順番どおりに並べています。上から読めば、自社に必要かどうかと、いくらかかるかまで見当がつきます。"
+            />
+            <ol className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {path.map((p, i) => (
+                <Reveal key={p.post.slug} delay={i * 0.07}>
+                  <li className="h-full">
+                    <Link
+                      href={`/blog/${p.post.slug}`}
+                      className="group flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card transition-colors hover:border-pulse/40"
+                    >
+                      <span className="flex items-center gap-3">
+                        <span aria-hidden className="num grid h-7 w-7 shrink-0 place-items-center rounded-full bg-pulse text-[0.7rem] font-bold text-white">
+                          {i + 1}
+                        </span>
+                        <span className="font-data text-[0.62rem] uppercase tracking-[0.18em] text-pulse">
+                          {p.step}
+                        </span>
+                      </span>
+                      <span className="mt-4 block text-base font-bold leading-relaxed group-hover:text-pulse">
+                        {p.post.title}
+                      </span>
+                      <span className="mt-3 block flex-1 text-sm leading-7 text-slate">{p.why}</span>
+                      <span className="num mt-5 block text-xs text-faint">約{p.post.readingMinutes}分</span>
+                    </Link>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </section>
+      )}
+
+      {/* カテゴリ別の全記事。16本を超えると新着順のカードだけでは探せない */}
+      {byCategory.length > 0 && (
+        <section className="py-20 md:py-28" aria-labelledby="archive-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead en="Archive" title="テーマから探す" />
+            <div className="mt-12 grid gap-14">
+              {byCategory.map((c) => (
+                <div key={c.slug} id={`cat-${c.slug}`} className="scroll-mt-24">
+                  <Reveal>
+                    <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-ink pb-3">
+                      <h3 className="text-lg font-black md:text-xl">{c.name}</h3>
+                      <p className="num text-xs text-slate">{c.items.length}本</p>
+                    </div>
+                  </Reveal>
+                  <ul className="grid">
+                    {c.items.map((p, i) => (
+                      <Reveal key={p.slug} delay={Math.min(i, 5) * 0.04}>
+                        <li className="border-b border-line">
+                          <Link
+                            href={`/blog/${p.slug}`}
+                            className="group flex flex-wrap items-baseline gap-x-5 gap-y-1 py-4 md:flex-nowrap"
+                          >
+                            <time dateTime={p.date} className="num w-24 shrink-0 text-xs text-faint">
+                              {displayDate(p.date)}
+                            </time>
+                            <span className="min-w-0 flex-1 text-sm font-bold leading-7 text-ink transition-colors group-hover:text-pulse md:text-base">
+                              {p.title}
+                            </span>
+                            <span className="num shrink-0 text-xs text-faint">約{p.readingMinutes}分</span>
+                            <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="hidden shrink-0 text-pulse transition-transform group-hover:translate-x-1 md:block">
+                              <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                            </svg>
+                          </Link>
+                        </li>
+                      </Reveal>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* このメディアについて + 活用ステップ */}
       <section className="relative overflow-hidden border-t border-line bg-ink py-20 text-white md:py-28" aria-labelledby="about-heading">
