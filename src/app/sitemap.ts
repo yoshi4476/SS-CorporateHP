@@ -18,6 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
+    // 自社プロダクトのLP。契約獲得の入口なので事業ページと同じ優先度にする
+    { url: `${site.url}/rakushift`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    { url: `${site.url}/media-pipeline`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${site.url}/company`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/news`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     ...news.map((n) => ({

@@ -15,6 +15,12 @@ import { site } from "@/lib/site";
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
 const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
+// 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
+const PRODUCTS: { href: string; label: string }[] = [
+  { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
+  { href: "/media-pipeline", label: "SEOオウンドメディア全自動パイプライン" },
+];
+
 // 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く
 const RELATED_SITES: { href: string; label: string; note: string }[] = [
   { href: site.lpUrl, label: "AI導入補助金LP", note: "補助金を使ったAI導入の特設サイト" },
@@ -121,6 +127,22 @@ export default function Header() {
                           className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
                         >
                           {s.name}
+                        </Link>
+                      </li>
+                    ))}
+                    {/* 自社プロダクト。受託の事業とは性質が違うので線で区切る */}
+                    <li className="mt-1 border-t border-line pt-1">
+                      <p className="px-4 pb-1 pt-2 font-data text-[0.6rem] uppercase tracking-[0.2em] text-faint">
+                        Products
+                      </p>
+                    </li>
+                    {PRODUCTS.map((p) => (
+                      <li key={p.href}>
+                        <Link
+                          href={p.href}
+                          className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
+                        >
+                          {p.label}
                         </Link>
                       </li>
                     ))}
@@ -291,6 +313,18 @@ export default function Header() {
                         className="tap text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {s.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="border-t border-white/10 pt-6">
+                <p className="eyebrow !text-aqua">Products — 自社プロダクト</p>
+                <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
+                  {PRODUCTS.map((p) => (
+                    <li key={p.href}>
+                      <Link href={p.href} className="tap text-sm text-white/70 transition-colors hover:text-white">
+                        {p.label}
                       </Link>
                     </li>
                   ))}

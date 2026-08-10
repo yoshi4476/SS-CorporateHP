@@ -50,6 +50,20 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+          {/* 自社プロダクト。受託の事業と混ぜず、線で区切って並べる */}
+          <p className="eyebrow mb-4 mt-8 !text-aqua">Products</p>
+          <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
+            <li>
+              <Link href="/rakushift" className="tap transition-colors hover:text-white">
+                ラクシフトAI
+              </Link>
+            </li>
+            <li>
+              <Link href="/media-pipeline" className="tap transition-colors hover:text-white">
+                SEOオウンドメディア全自動パイプライン
+              </Link>
+            </li>
+          </ul>
         </nav>
 
         <div className="grid content-start gap-8">

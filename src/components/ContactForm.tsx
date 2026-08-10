@@ -52,10 +52,15 @@ export default function ContactForm() {
     setState("sending");
     setErrorMsg("");
 
+    // 受信側には表示名で届ける。選択肢を足したらここも足すこと (漏れると空欄で届く)
+    const EXTRA: Record<string, string> = {
+      rakushift: "ラクシフトAI (シフト自動作成)",
+      "media-pipeline": "SEOオウンドメディア全自動パイプライン",
+      all: "まとめて相談したい",
+      other: "その他・まだ決まっていない",
+    };
     const slug = get("service");
-    const serviceName =
-      services.find((s) => s.slug === slug)?.name ??
-      (slug === "all" ? "まとめて相談したい" : slug === "other" ? "その他・まだ決まっていない" : "");
+    const serviceName = services.find((s) => s.slug === slug)?.name ?? EXTRA[slug] ?? "";
 
     try {
       const res = await fetch(site.gasEndpoint, {
@@ -174,6 +179,9 @@ export default function ContactForm() {
               {s.name}
             </option>
           ))}
+          {/* 自社プロダクト。どちらの問い合わせか受信側で分かるようにする */}
+          <option value="rakushift">ラクシフトAI (シフト自動作成)</option>
+          <option value="media-pipeline">SEOオウンドメディア全自動パイプライン</option>
           <option value="all">まとめて相談したい</option>
           <option value="other">その他・まだ決まっていない</option>
         </select>

@@ -4,10 +4,32 @@ import JsonLd from "@/components/JsonLd";
 import SenseNetwork from "@/components/SenseNetwork";
 import WaveText from "@/components/WaveText";
 import { Reveal } from "@/components/motion";
-import { CtaBand } from "@/components/ui";
+import { CtaBand, SectionHead } from "@/components/ui";
 import { services } from "@/lib/services";
+import { rakushift } from "@/lib/rakushift";
+import { pipeline } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
+
+// 自社プロダクト。受託の6事業とは性質が違うので別枠で並べる
+const PRODUCTS = [
+  {
+    href: "/rakushift",
+    en: "Rakushift AI — SaaS",
+    name: rakushift.name,
+    catch: rakushift.catch,
+    body: "シフト作成を数理最適化AIと生成AIの二段構えで自動化するクラウドサービス。労働基準法を守った配置を数秒で組み上げます。飲食店・小売店・医療介護施設で利用されています。",
+    price: "月額3,380円〜",
+  },
+  {
+    href: "/media-pipeline",
+    en: `Owned Media Autopilot — ${pipeline.deliverable}`,
+    name: pipeline.name,
+    catch: pipeline.catch,
+    body: "メディアの器と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで自動で動きます。",
+    price: "個別お見積り",
+  },
+];
 
 export const metadata: Metadata = {
   title: "事業内容",
@@ -180,6 +202,45 @@ export default function ServicesIndexPage() {
               </div>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 自社プロダクト。受託と違い、そのまま契約できるものをここで並べる */}
+      <section className="border-y border-line bg-mist py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Products"
+            title="自社で作って、自社で使っているもの"
+            lead="受託だけでなく、当社が開発し、自社の現場で毎日動かしているプロダクトがあります。実物を見てからご判断ください。"
+          />
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {PRODUCTS.map((p, i) => (
+              <Reveal key={p.href} delay={i * 0.08}>
+                <Link
+                  href={p.href}
+                  className="tilt group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-colors duration-500 hover:border-pulse/40 md:p-10"
+                >
+                  <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">{p.en}</p>
+                  <h3 className="mt-3 text-xl font-black leading-snug group-hover:text-pulse md:text-2xl">
+                    {p.name}
+                  </h3>
+                  <p className="mt-2 text-sm font-bold leading-7 text-ink">{p.catch}</p>
+                  <p className="mt-3 flex-1 text-sm leading-8 text-slate">{p.body}</p>
+                  <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-5">
+                    <span className="rounded-full border border-line px-3 py-1.5 text-[0.62rem] font-bold text-slate">
+                      {p.price}
+                    </span>
+                    <span className="inline-flex items-center gap-2 text-sm font-bold text-pulse">
+                      詳しく見る
+                      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
+                        <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
