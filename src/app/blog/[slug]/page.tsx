@@ -20,6 +20,22 @@ import "./article.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
+// 記事の追従サイドバーに置く自社プロダクト。記事の読者がそのまま検討に進める導線
+const PRODUCT_LINKS = [
+  {
+    href: "/rakushift",
+    kind: "SaaS紹介",
+    name: "ラクシフトAI",
+    body: "シフト作成をAIに任せるクラウド。月額3,380円 (税込)〜",
+  },
+  {
+    href: "/aio-agent",
+    kind: "エージェント紹介",
+    name: "AIO（SEO）対策エージェント",
+    body: "記事を書いて出し続けるAIエージェントを、LPごと納品",
+  },
+];
+
 // 記事は全てビルド時に静的生成する（実行時にファイルを読まないため Workers 上でも安全）
 export const dynamicParams = false;
 
@@ -257,8 +273,10 @@ export default async function BlogDetailPage({ params }: Props) {
             )}
           </article>
 
+          {/* 慣性スクロール (#smooth-content が position:fixed) の下では position:sticky が
+              効かないため、追従はさせずに本文の横へ素直に並べる */}
           <aside className="hidden lg:block">
-            <div className="sticky top-28 space-y-6">
+            <div className="space-y-6">
               {headings.length >= 3 && (
                 <nav aria-label="目次" className="rounded-3xl border border-line bg-raise p-6">
                   <p className="text-xs font-bold tracking-widest text-faint">目次</p>
@@ -311,6 +329,28 @@ export default async function BlogDetailPage({ params }: Props) {
                     />
                   </svg>
                 </Link>
+              </div>
+
+              {/* 自社プロダクト。記事の読者がそのまま検討に進めるようにする */}
+              <div className="rounded-3xl border border-line bg-raise p-6">
+                <p className="text-xs font-bold tracking-widest text-faint">自社プロダクト</p>
+                <ul className="mt-4 grid gap-4">
+                  {PRODUCT_LINKS.map((p) => (
+                    <li key={p.href}>
+                      <Link href={p.href} className="group block">
+                        <span className="font-data text-[0.6rem] uppercase tracking-[0.18em] text-pulse">
+                          {p.kind}
+                        </span>
+                        <span className="mt-1 block text-sm font-bold leading-snug group-hover:text-pulse">
+                          {p.name}
+                        </span>
+                        <span className="mt-1.5 block text-[0.75rem] leading-relaxed text-slate">
+                          {p.body}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </aside>

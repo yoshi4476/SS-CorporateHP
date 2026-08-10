@@ -11,6 +11,9 @@ import { site } from "@/lib/site";
 const PAGES: { href: string; label: string; external?: boolean }[] = [
   { href: "/", label: "トップ" },
   { href: "/services", label: "事業内容" },
+  // 自社プロダクト。契約の入口なので、どのページからでも1クリックで行けるようにする
+  { href: "/rakushift", label: "SaaS紹介" },
+  { href: "/aio-agent", label: "エージェント紹介" },
   { href: "/company", label: "会社概要" },
   { href: "/news", label: "お知らせ" },
   { href: "/contact", label: "無料相談" },

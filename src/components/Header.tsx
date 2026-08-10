@@ -18,7 +18,7 @@ const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や�
 // 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
 const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
-  { href: "/media-pipeline", label: "SEOオウンドメディア全自動パイプライン" },
+  { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
 ];
 
 // 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く

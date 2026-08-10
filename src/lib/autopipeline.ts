@@ -1,13 +1,13 @@
 /**
- * 自社プロダクト「SEOオウンドメディア全自動パイプライン」の掲載データ。
+ * 自社プロダクト「AIO（SEO）対策エージェント」の掲載データ。
  *
  * 数値は当社が実際に運用している SS-AIO-LP (管制塔) の実装が出典。
  * 記事本数やサイト数が変わったらここも直すこと。
  */
 
 export const pipeline = {
-  name: "SEOオウンドメディア全自動パイプライン",
-  nameEn: "Owned Media Autopilot",
+  name: "AIO（SEO）対策エージェント",
+  nameEn: "AIO / SEO Agent",
   catch: "書き手を採用せずに、メディアを回す。",
   summary:
     "オウンドメディアの器 (LP・記事ページ) と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワードの選定から執筆・品質審査・公開・インデックス登録・順位の集計まで、人の手を介さずに毎日動きます。",
@@ -62,15 +62,23 @@ export const flow: { step: string; title: string; body: string }[] = [
   },
 ];
 
-/** 当社が自社で運用している実績。第三者の数字ではなく自社運用の実測 */
-export const running: { value: string; unit: string; label: string }[] = [
-  { value: "3", unit: "サイト", label: "同じ仕組みで並行運用中" },
-  { value: "73", unit: "本", label: "この仕組みで公開した記事" },
-  { value: "6", unit: "回/日", label: "自動で走る記事の生成" },
+/** 実際に動いているメディア。数字を並べるより、現物を見せる */
+export const evidence: { image: string; alt: string; title: string; body: string; href: string }[] = [
+  {
+    image: "/images/pipeline/media.jpg",
+    alt: "経理BPOブログの記事一覧ページ",
+    title: "メディアの器",
+    body: "記事一覧・キーワード帯・用語集・問い合わせ導線まで制作します。記事が少ない立ち上げ期でも、メディアとして成立する構成にします。",
+    href: "/blog",
+  },
+  {
+    image: "/images/pipeline/article.jpg",
+    alt: "自動で生成・公開された記事ページ",
+    title: "出てくる記事",
+    body: "アイキャッチ・目次・図版・出典リンク・FAQ・構造化データまで含めて生成されます。この記事も人の手を介さずに公開されたものです。",
+    href: "/blog/keiri-bpo-toha",
+  },
 ];
-
-export const runningNote =
-  "当社が自社メディア (AI集客ラボ・経理BPOブログ・AI導入補助金) で運用している実測値です。2026年8月時点。";
 
 /** 品質ゲート。ここが他の「AIで記事量産」との違い */
 export const gate: { title: string; body: string }[] = [

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { Reveal, CountUp } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { SectionHead, FaqList, FlowSteps } from "@/components/ui";
 import {
   pipeline,
   problems,
   flow,
-  running,
-  runningNote,
+  evidence,
   gate,
   aio,
   includes,
@@ -21,8 +21,8 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: `${pipeline.name}｜LP + AIエージェント`,
   description:
-    "オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで自動。当社が3サイト・73本を運用中の仕組みです。",
-  alternates: { canonical: "/media-pipeline" },
+    "オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで、人の手を介さずに毎日動きます。",
+  alternates: { canonical: "/aio-agent" },
 };
 
 export default function MediaPipelinePage() {
@@ -35,7 +35,7 @@ export default function MediaPipelinePage() {
     provider: { "@id": `${site.url}/#organization` },
     areaServed: "JP",
     description: pipeline.summary,
-    url: `${site.url}/media-pipeline`,
+    url: `${site.url}/aio-agent`,
     offers: { "@type": "Offer", priceCurrency: "JPY", description: "個別お見積り (規模と領域数による)" },
   };
   const faqLd = {
@@ -57,7 +57,7 @@ export default function MediaPipelinePage() {
           breadcrumbSchema([
             { name: "トップ", path: "/" },
             { name: "事業内容", path: "/services" },
-            { name: pipeline.name, path: "/media-pipeline" },
+            { name: pipeline.name, path: "/aio-agent" },
           ]),
         ]}
       />
@@ -76,7 +76,7 @@ export default function MediaPipelinePage() {
                 <li aria-current="page" className="text-ink">{pipeline.name}</li>
               </ol>
             </nav>
-            <p className="eyebrow mt-8">Owned Media Autopilot — {pipeline.deliverable}</p>
+            <p className="eyebrow mt-8">AIO / SEO Agent — {pipeline.deliverable}</p>
             <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.4rem]">
               書き手を採用せずに、
               <br />
@@ -105,19 +105,26 @@ export default function MediaPipelinePage() {
             </div>
           </Reveal>
 
+          {/* 数字を並べるより、実際に動いているものを見せる */}
           <Reveal delay={0.2}>
-            <dl className="mt-12 grid gap-6 border-t border-line pt-8 sm:grid-cols-3">
-              {running.map((m) => (
-                <div key={m.label}>
-                  <dd className="num text-4xl font-bold leading-none text-ink md:text-5xl">
-                    <CountUp value={Number(m.value)} />
-                    <span className="ml-1 text-base text-pulse">{m.unit}</span>
-                  </dd>
-                  <dt className="mt-3 text-xs leading-6 text-slate">{m.label}</dt>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-4 text-[0.7rem] leading-6 text-faint">{runningNote}</p>
+            <figure className="mt-12 overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
+              <Image
+                src="/images/pipeline/media.jpg"
+                alt="この仕組みが運用している経理BPOブログの記事一覧"
+                width={1600}
+                height={1000}
+                priority
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                className="h-auto w-full"
+              />
+              <figcaption className="border-t border-line px-6 py-4 text-xs leading-6 text-slate">
+                当社の
+                <Link href="/blog" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
+                  経理BPOブログ
+                </Link>
+                は、このページで説明している仕組みがそのまま動いています。
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -151,12 +158,43 @@ export default function MediaPipelinePage() {
             title="LP と AIエージェントを、セットで納品します"
             lead="器だけ作っても記事が出ません。エージェントだけ渡しても置き場所がありません。両方そろって初めて回ります。"
           />
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {/* 実物を先に見せてから、含まれるものを列挙する */}
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {evidence.map((e, i) => (
+              <Reveal key={e.title} delay={i * 0.08}>
+                <Link
+                  href={e.href}
+                  className="group block h-full overflow-hidden rounded-3xl border border-line bg-white shadow-card transition-colors hover:border-pulse/40"
+                >
+                  <Image
+                    src={e.image}
+                    alt={e.alt}
+                    width={1600}
+                    height={1000}
+                    sizes="(max-width: 1024px) 100vw, 620px"
+                    className="h-auto w-full border-b border-line"
+                  />
+                  <div className="p-7 md:p-8">
+                    <h3 className="text-lg font-bold leading-snug group-hover:text-pulse">{e.title}</h3>
+                    <p className="mt-3 text-sm leading-8 text-slate">{e.body}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-pulse">
+                      実物を見る
+                      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
+                        <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-2">
             {includes.map((c, i) => (
-              <Reveal key={c.title} delay={i * 0.07}>
-                <div className="tilt h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <h3 className="text-lg font-bold leading-snug">{c.title}</h3>
-                  <p className="mt-4 text-sm leading-8 text-slate">{c.body}</p>
+              <Reveal key={c.title} delay={i * 0.05}>
+                <div className="h-full rounded-2xl border-l-2 border-pulse bg-white py-5 pl-6 pr-5 shadow-card">
+                  <h3 className="text-sm font-bold md:text-base">{c.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate">{c.body}</p>
                 </div>
               </Reveal>
             ))}

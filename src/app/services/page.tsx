@@ -22,8 +22,8 @@ const PRODUCTS = [
     price: "月額3,380円〜",
   },
   {
-    href: "/media-pipeline",
-    en: `Owned Media Autopilot — ${pipeline.deliverable}`,
+    href: "/aio-agent",
+    en: `AIO / SEO Agent — ${pipeline.deliverable}`,
     name: pipeline.name,
     catch: pipeline.catch,
     body: "メディアの器と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで自動で動きます。",

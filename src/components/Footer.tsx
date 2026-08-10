@@ -59,8 +59,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/media-pipeline" className="tap transition-colors hover:text-white">
-                SEOオウンドメディア全自動パイプライン
+              <Link href="/aio-agent" className="tap transition-colors hover:text-white">
+                AIO（SEO）対策エージェント
               </Link>
             </li>
           </ul>

@@ -42,3 +42,6 @@
 /wp-admin/*       /   302
 /wp-login.php     /   302
 /xmlrpc.php       /   302
+
+# 自社プロダクトのLP。公開直後に名称変更したため旧スラッグを転送する
+/media-pipeline  /aio-agent  301
