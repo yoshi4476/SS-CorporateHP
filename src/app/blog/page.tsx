@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { Reveal, CountUp } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
 import { posts, getPost, usedCategories, postsByCategory, displayDate } from "@/lib/blog";
-import { keywords, facts, problems, glossary, steps, startHere } from "@/lib/bpo";
+import { keywords, glossary, steps, startHere } from "@/lib/bpo";
 import { diagnostics } from "@/lib/aio";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -117,74 +116,6 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* 実績タイル */}
-      <section className="border-b border-line py-12 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 xl:grid-cols-3">
-          {facts.map((f, i) => (
-            <Reveal key={f.label} delay={i * 0.07}>
-              <div className="border-l-2 border-pulse pl-5">
-                <p className="leading-none">
-                  <span className="num text-3xl font-bold text-ink md:text-4xl">
-                    {/^[\d,]+$/.test(f.value) ? (
-                      <CountUp value={Number(f.value.replaceAll(",", ""))} />
-                    ) : (
-                      f.value
-                    )}
-                  </span>
-                  {f.suffix && <span className="ml-1 text-base font-bold text-pulse">{f.suffix}</span>}
-                </p>
-                <p className="mt-3 text-xs leading-6 text-slate">{f.label}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* 読者の状態 */}
-      <section className="py-20 md:py-28" aria-labelledby="problem-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            en="Problem"
-            title="こんな状態になっていませんか"
-            lead="経理は、動いているうちは問題として表に出ません。==止まってから気づく==のがこの領域です。"
-          />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
-            {problems.map((p, i) => (
-              <Reveal key={p} delay={(i % 2) * 0.07}>
-                <div className="flex items-start gap-4 rounded-2xl border border-line bg-raise p-6 shadow-card">
-                  <span aria-hidden className="num mt-0.5 shrink-0 text-xs font-bold text-pulse">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-sm leading-7">{p}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 用語集 */}
-      <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="glossary-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            en="Glossary"
-            title="30秒でわかる、4つの用語"
-            lead="このメディアで繰り返し出てくる言葉です。ここだけ押さえれば記事が読めます。"
-          />
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {glossary.map((g, i) => (
-              <Reveal key={g.term} delay={(i % 4) * 0.07}>
-                <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
-                  <p className="text-lg font-bold text-pulse">{g.term}</p>
-                  <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
-                  <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 記事 */}
       <section id="latest" className="scroll-mt-24 py-20 md:py-28" aria-labelledby="latest-heading">
         <div className="mx-auto max-w-7xl px-5">
@@ -215,44 +146,35 @@ export default function BlogPage() {
             </p>
           ) : (
             <>
+              {/* アイキャッチには記事タイトルが描かれているため、一覧では出さない。
+                  隣にタイトルを置くと同じ文字が二度並んで読みにくくなる。
+                  画像は記事ページとOGPで使われる */}
               <Reveal delay={0.1}>
                 <Link
                   href={`/blog/${lead.slug}`}
-                  className="group mt-8 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card transition-colors hover:border-pulse/40 lg:grid-cols-[1.1fr_1fr]"
+                  className="group mt-8 block overflow-hidden rounded-3xl border border-line bg-raise p-8 shadow-card transition-colors hover:border-pulse/40 md:p-12"
                 >
-                  <span className="relative block aspect-[16/10] overflow-hidden bg-mist lg:aspect-auto lg:min-h-[320px]">
-                    {lead.eyecatch ? (
-                      <Image
-                        src={lead.eyecatch}
-                        alt=""
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 55vw"
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                      />
-                    ) : (
-                      <span aria-hidden className="grid-field absolute inset-0" />
-                    )}
+                  <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    <span className="rounded-full bg-pulse px-3 py-1 text-[0.65rem] font-bold text-white">
+                      最新
+                    </span>
+                    <span className="text-[0.7rem] font-bold text-pulse">{lead.categoryName}</span>
+                    <time dateTime={lead.date} className="num text-xs text-slate">
+                      {displayDate(lead.date)}
+                    </time>
+                    <span className="num text-[0.68rem] text-faint">約{lead.readingMinutes}分</span>
                   </span>
-                  <span className="flex flex-col justify-center p-7 md:p-10">
-                    <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span className="rounded-full bg-pulse/10 px-3 py-1 text-[0.65rem] font-bold text-pulse">
-                        {lead.categoryName}
-                      </span>
-                      <time dateTime={lead.date} className="num text-xs text-slate">
-                        {displayDate(lead.date)}
-                      </time>
-                      <span className="num text-[0.65rem] text-slate">約{lead.readingMinutes}分</span>
-                    </span>
-                    <span className="mt-4 block text-xl font-black leading-relaxed group-hover:text-pulse md:text-3xl">
-                      {lead.title}
-                    </span>
-                    <span className="mt-4 block text-sm leading-8 text-slate">{lead.description}</span>
-                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-pulse">
-                      続きを読む
-                      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
-                        <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                      </svg>
-                    </span>
+                  <span className="mt-5 block max-w-4xl text-2xl font-black leading-[1.5] group-hover:text-pulse md:text-4xl md:leading-[1.45]">
+                    {lead.title}
+                  </span>
+                  <span className="mt-5 block max-w-3xl text-sm leading-8 text-slate md:text-base md:leading-9">
+                    {lead.description}
+                  </span>
+                  <span className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-pulse">
+                    続きを読む
+                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
+                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
                   </span>
                 </Link>
               </Reveal>
@@ -372,6 +294,28 @@ export default function BlogPage() {
           </div>
         </section>
       )}
+
+      {/* 用語集 */}
+      <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="glossary-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Glossary"
+            title="30秒でわかる、4つの用語"
+            lead="このメディアで繰り返し出てくる言葉です。ここだけ押さえれば記事が読めます。"
+          />
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {glossary.map((g, i) => (
+              <Reveal key={g.term} delay={(i % 4) * 0.07}>
+                <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
+                  <p className="text-lg font-bold text-pulse">{g.term}</p>
+                  <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
+                  <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* このメディアについて + 活用ステップ */}
       <section className="relative overflow-hidden border-t border-line bg-ink py-20 text-white md:py-28" aria-labelledby="about-heading">
