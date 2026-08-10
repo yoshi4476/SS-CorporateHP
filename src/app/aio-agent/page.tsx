@@ -76,56 +76,72 @@ export default function MediaPipelinePage() {
                 <li aria-current="page" className="text-ink">{pipeline.name}</li>
               </ol>
             </nav>
-            <p className="eyebrow mt-8">AIO / SEO Agent — {pipeline.deliverable}</p>
-            <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.4rem]">
-              書き手を採用せずに、
-              <br />
-              <span className="text-pulse">メディアを回す。</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-sm leading-8 text-slate md:text-base md:leading-9">
-              {pipeline.summary}
-            </p>
           </Reveal>
 
-          <Reveal delay={0.12}>
-            <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link
-                href="/contact"
-                data-magnetic
-                className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
-              >
-                無料相談を予約する
-              </Link>
-              <Link
-                href="/blog"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-line-strong px-8 py-4 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-              >
-                この仕組みで動いているメディアを見る
-              </Link>
+          <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.02fr_1fr] lg:gap-14">
+            <div className="min-w-0">
+              <Reveal>
+                <p className="eyebrow">AIO / SEO Agent — {pipeline.deliverable}</p>
+                <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.2rem]">
+                  書き手を採用せずに、
+                  <br />
+                  <span className="text-pulse">メディアを回す。</span>
+                </h1>
+                <p className="mt-7 text-sm leading-8 text-slate md:text-base md:leading-9">
+                  {pipeline.summary}
+                </p>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+                  <Link
+                    href="/contact"
+                    data-magnetic
+                    className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  >
+                    無料相談を予約する
+                  </Link>
+                  <Link
+                    href="/blog"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-line-strong px-8 py-4 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  >
+                    動いているメディアを見る
+                  </Link>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
 
-          {/* 数字を並べるより、実際に動いているものを見せる */}
-          <Reveal delay={0.2}>
-            <figure className="mt-12 overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
-              <Image
-                src="/images/pipeline/media.jpg"
-                alt="この仕組みが運用している経理BPOブログの記事一覧"
-                width={1600}
-                height={1000}
-                priority
-                sizes="(max-width: 1280px) 100vw, 1200px"
-                className="h-auto w-full"
-              />
-              <figcaption className="border-t border-line px-6 py-4 text-xs leading-6 text-slate">
-                当社の
-                <Link href="/blog" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
-                  経理BPOブログ
-                </Link>
-                は、このページで説明している仕組みがそのまま動いています。
-              </figcaption>
-            </figure>
-          </Reveal>
+            {/* ヒーローの絵は画面写真ではなく、毎日エージェントが踏む工程そのもの。
+                この製品の価値は画面ではなく「止まらずに回ること」なので、それを見せる */}
+            <Reveal delay={0.1}>
+              <div className="tilt overflow-hidden rounded-3xl bg-ink shadow-lift">
+                <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4">
+                  <span aria-hidden className="h-2 w-2 rounded-full bg-aqua" />
+                  <p className="font-data text-[0.62rem] uppercase tracking-[0.22em] text-aqua">
+                    Agent — 毎日 自動実行
+                  </p>
+                </div>
+                <ol className="divide-y divide-white/8 px-6 py-2">
+                  {flow.map((f) => (
+                    <li key={f.step} className="flex items-center gap-4 py-3.5">
+                      <span aria-hidden className="num text-[0.7rem] font-bold text-white/30">
+                        {f.step}
+                      </span>
+                      <span className="min-w-0 flex-1 text-[0.82rem] font-medium leading-snug text-paper/90">
+                        {f.title}
+                      </span>
+                      <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden className="shrink-0 text-aqua">
+                        <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.45" />
+                        <path d="M5 8.2l2.1 2.1L11 6.4" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </li>
+                  ))}
+                </ol>
+                <p className="border-t border-white/10 px-6 py-4 text-[0.7rem] leading-6 text-paper/50">
+                  人が触るのは、テーマの追加と月次の確認だけです。
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -137,11 +153,13 @@ export default function MediaPipelinePage() {
             title="オウンドメディアは、続かないから効かない"
             lead="記事は積み上がって初めて効きます。止まった時点で、そこまでの投資が回収できなくなります。"
           />
-          <ul className="mt-10 grid gap-3 md:grid-cols-2">
+          <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2">
             {problems.map((p, i) => (
-              <Reveal key={p} delay={i * 0.06}>
-                <li className="flex gap-4 rounded-2xl border border-line bg-white px-6 py-5 text-sm leading-7 text-ink-soft shadow-card">
-                  <span aria-hidden className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-pulse" />
+              <Reveal key={p} delay={i * 0.05}>
+                <li className="flex h-full items-start gap-4 bg-white px-7 py-6 text-sm leading-8 text-ink-soft">
+                  <span aria-hidden className="num shrink-0 text-xs font-bold text-pulse/50">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {p}
                 </li>
               </Reveal>
@@ -210,17 +228,23 @@ export default function MediaPipelinePage() {
             title="毎日、この順番で動いています"
             lead="当社の管制塔が実際に走らせている工程です。人が触るのは、テーマの追加と月次の確認だけです。"
           />
-          <ol className="mt-10 grid gap-4">
+          {/* 工程が順に流れることが伝わるよう、縦線で繋いだ時系列にする */}
+          <ol className="relative mt-10 grid gap-0 pl-10 md:pl-14">
+            <span
+              aria-hidden
+              className="absolute inset-y-3 left-[0.9rem] w-px bg-gradient-to-b from-pulse via-pulse/30 to-transparent md:left-[1.4rem]"
+            />
             {flow.map((f, i) => (
-              <Reveal key={f.step} delay={i * 0.05}>
-                <li className="grid gap-4 rounded-3xl border border-line bg-white p-7 shadow-card md:grid-cols-[auto_1fr] md:gap-8 md:p-8">
-                  <span aria-hidden className="num text-3xl font-bold leading-none text-pulse/30 md:text-4xl">
-                    {f.step}
+              <Reveal key={f.step} delay={i * 0.04}>
+                <li className="relative pb-8 last:pb-0">
+                  <span
+                    aria-hidden
+                    className="absolute -left-10 top-1 grid h-[1.8rem] w-[1.8rem] place-items-center rounded-full border border-line bg-white md:-left-14"
+                  >
+                    <span className="num text-[0.62rem] font-bold text-pulse">{f.step}</span>
                   </span>
-                  <div>
-                    <h3 className="text-base font-bold md:text-lg">{f.title}</h3>
-                    <p className="mt-3 text-sm leading-8 text-slate">{f.body}</p>
-                  </div>
+                  <h3 className="text-base font-bold md:text-lg">{f.title}</h3>
+                  <p className="mt-2.5 max-w-3xl text-sm leading-8 text-slate">{f.body}</p>
                 </li>
               </Reveal>
             ))}
