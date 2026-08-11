@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import BlogList from "@/components/BlogList";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
-import { posts, usedCategories, displayDate } from "@/lib/blog";
+import { posts, displayDate } from "@/lib/blog";
 import { keywords, facts, problems, glossary, steps } from "@/lib/bpo";
 import { diagnostics } from "@/lib/aio";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -18,8 +19,18 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const cats = usedCategories();
   const [lead, ...rest] = posts;
+  // クライアントに渡すのは表示に使う項目だけ。本文HTMLは巨大なので含めない
+  const listItems = rest.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    category: p.category,
+    categoryName: p.categoryName,
+    date: p.date,
+    dateLabel: displayDate(p.date),
+    readingMinutes: p.readingMinutes,
+    ...(p.eyecatch ? { eyecatch: p.eyecatch } : {}),
+  }));
 
   return (
     <>
@@ -183,21 +194,6 @@ export default function BlogPage() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead en="Latest" title="新着記事" />
 
-          {cats.length > 0 && (
-            <Reveal delay={0.08}>
-              <ul className="mt-8 flex flex-wrap gap-2">
-                {cats.map((c) => (
-                  <li
-                    key={c.slug}
-                    className="rounded-full border border-line bg-raise px-4 py-1.5 text-xs font-bold text-ink"
-                  >
-                    {c.name}
-                    <span className="num ml-2 text-pulse">{c.count}</span>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          )}
 
           {posts.length === 0 ? (
             <p className="mt-10 rounded-2xl border border-line bg-raise px-6 py-12 text-center text-sm text-slate">
@@ -247,48 +243,7 @@ export default function BlogPage() {
                 </Link>
               </Reveal>
 
-              {rest.length > 0 && (
-                <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                  {rest.map((p, i) => (
-                    <Reveal key={p.slug} delay={(i % 3) * 0.07}>
-                      <Link
-                        href={`/blog/${p.slug}`}
-                        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-raise shadow-card transition-colors hover:border-pulse/40"
-                      >
-                        <span className="relative block aspect-[16/9] overflow-hidden bg-mist">
-                          {p.eyecatch ? (
-                            <Image
-                              src={p.eyecatch}
-                              alt=""
-                              fill
-                              sizes="(max-width: 768px) 100vw, 33vw"
-                              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                            />
-                          ) : (
-                            <span aria-hidden className="grid-field absolute inset-0" />
-                          )}
-                        </span>
-                        <span className="flex flex-1 flex-col p-6">
-                          <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                            <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-pulse">
-                              {p.categoryName}
-                            </span>
-                            <time dateTime={p.date} className="num text-[0.68rem] text-slate">
-                              {displayDate(p.date)}
-                            </time>
-                          </span>
-                          <span className="mt-3 block flex-1 text-base font-bold leading-relaxed group-hover:text-pulse">
-                            {p.title}
-                          </span>
-                          <span className="mt-3 block text-xs leading-7 text-slate">
-                            約{p.readingMinutes}分で読めます
-                          </span>
-                        </span>
-                      </Link>
-                    </Reveal>
-                  ))}
-                </div>
-              )}
+              <BlogList items={listItems} />
             </>
           )}
         </div>
