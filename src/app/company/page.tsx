@@ -185,7 +185,7 @@ export default function CompanyPage() {
                 alt="セミナー会場の様子"
                 width={700}
                 height={525}
-                className="tilt aspect-square w-full rounded-2xl object-cover"
+                className="aspect-square w-full rounded-2xl object-cover"
               />
             </Reveal>
             <Reveal delay={0.16}>
@@ -194,7 +194,7 @@ export default function CompanyPage() {
                 alt="登壇中の代表"
                 width={700}
                 height={525}
-                className="tilt aspect-square w-full rounded-2xl object-cover"
+                className="aspect-square w-full rounded-2xl object-cover"
               />
             </Reveal>
           </div>
@@ -205,7 +205,7 @@ export default function CompanyPage() {
       <section className="py-20 md:py-28" aria-labelledby="profile-heading">
         <div className="mx-auto max-w-5xl px-5">
           <SectionHead en="Profile" title="基本情報" />
-          <Reveal delay={0.1} className="tilt mt-10 overflow-hidden rounded-2xl border border-line shadow-card">
+          <Reveal delay={0.1} className="mt-10 overflow-hidden rounded-2xl border border-line shadow-card">
             <table className="w-full border-collapse bg-white text-sm">
               <tbody>
                 {OVERVIEW.map((row) => (

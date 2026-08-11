@@ -38,13 +38,13 @@ export default function ContactPage() {
 
       <section className="pb-20 pt-6 md:pb-28">
         <div className="mx-auto grid max-w-7xl items-start gap-10 px-5 lg:grid-cols-[1.5fr_1fr]">
-          <Reveal delay={0.08} className="tilt rounded-3xl border border-line bg-white p-7 shadow-card md:p-10">
+          <Reveal delay={0.08} className="rounded-3xl border border-line bg-white p-7 shadow-card md:p-10">
             <ContactForm />
           </Reveal>
 
           <div className="grid gap-5">
             <Reveal delay={0.14}>
-              <div className="tilt rounded-2xl bg-ink p-7 text-white">
+              <div className="rounded-2xl bg-ink p-7 text-white">
                 <p className="eyebrow !text-aqua">Tel</p>
                 <a
                   href={`tel:${site.tel.replaceAll("-", "")}`}
@@ -56,7 +56,7 @@ export default function ContactPage() {
               </div>
             </Reveal>
             <Reveal delay={0.2}>
-              <div className="tilt rounded-2xl border border-line bg-mist p-7">
+              <div className="rounded-2xl border border-line bg-mist p-7">
                 <div className="flex items-start justify-between gap-4">
                   <h2 className="text-sm font-bold">ご相談の流れ</h2>
                   <Image

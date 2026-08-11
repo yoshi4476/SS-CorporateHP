@@ -87,9 +87,9 @@ export default function MediaPipelinePage() {
               <Reveal>
                 <p className="eyebrow">AIO / SEO Agent — {pipeline.deliverable}</p>
                 <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.2rem]">
-                  書き手を採用せずに、
+                  広告費ではなく、
                   <br />
-                  <span className="text-pulse">メディアを回す。</span>
+                  <span className="text-pulse">資産を積む。</span>
                 </h1>
                 <p className="mt-7 text-sm leading-8 text-slate md:text-base md:leading-9">
                   {pipeline.summary}
@@ -99,8 +99,7 @@ export default function MediaPipelinePage() {
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                   <Link
                     href="/contact"
-                    data-magnetic
-                    className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     無料で試算を出してもらう
                   </Link>
@@ -128,7 +127,7 @@ export default function MediaPipelinePage() {
             {/* ヒーローの絵は画面写真ではなく、毎日エージェントが踏む工程そのもの。
                 この製品の価値は画面ではなく「止まらずに回ること」なので、それを見せる */}
             <Reveal delay={0.1}>
-              <div className="tilt overflow-hidden rounded-3xl bg-ink shadow-lift">
+              <div className="overflow-hidden rounded-3xl bg-ink shadow-lift">
                 <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4">
                   <span aria-hidden className="h-2 w-2 rounded-full bg-aqua" />
                   <p className="font-data text-[0.62rem] uppercase tracking-[0.22em] text-aqua">
@@ -165,8 +164,8 @@ export default function MediaPipelinePage() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Problem"
-            title="オウンドメディアは、続かないから効かない"
-            lead="記事は積み上がって初めて効きます。止まった時点で、そこまでの投資が回収できなくなります。"
+            title="広告は、止めた月から消える。記事は、残る。"
+            lead="広告費は毎月ゼロから買い直しますが、記事は一度書けば資産として残り続けます。1本ずつ積み上がるほど、問い合わせが広告予算に左右されなくなります。ただし、積み上がる前に更新が止まれば、資産にはなりません。"
           />
           <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2">
             {problems.map((p, i) => (
@@ -405,8 +404,7 @@ export default function MediaPipelinePage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料で試算を出してもらう
               </Link>

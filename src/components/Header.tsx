@@ -111,7 +111,7 @@ export default function Header() {
                   </svg>
                 </Link>
                 <div className="invisible absolute left-1/2 top-full w-72 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <ul className="tilt rounded-2xl border border-line bg-raise p-2 shadow-lift">
+                  <ul className="rounded-2xl border border-line bg-raise p-2 shadow-lift">
                     <li>
                       <Link
                         href="/services"
@@ -179,7 +179,7 @@ export default function Header() {
                   </svg>
                 </span>
                 <div className="invisible absolute right-0 top-full w-80 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="tilt rounded-2xl border border-line bg-raise p-2 shadow-lift">
+                  <div className="rounded-2xl border border-line bg-raise p-2 shadow-lift">
                     <ul>
                       {diagnostics.map((d) => (
                         <li key={d.name}>
@@ -208,8 +208,7 @@ export default function Header() {
               </div>
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white shadow-card transition-colors hover:bg-pulse"
+                  className="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white shadow-card transition-colors hover:bg-pulse"
               >
                 無料相談
               </Link>
@@ -221,8 +220,7 @@ export default function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
-            data-magnetic
-            className={`flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full shadow-card transition-colors duration-300 md:h-14 md:w-14 ${
+                  className={`flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full shadow-card transition-colors duration-300 md:h-14 md:w-14 ${
               open ? "bg-aqua" : "bg-pulse hover:bg-pulse-deep"
             }`}
           >

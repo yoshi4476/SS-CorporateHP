@@ -51,7 +51,7 @@ export default function NewsPage() {
             <Reveal key={n.slug} delay={i * 0.06}>
               <Link
                 href={`/news/${n.slug}`}
-                className="tilt group flex flex-wrap items-center gap-x-4 gap-y-1 rounded-2xl border border-line bg-white px-6 py-5 shadow-card transition-colors hover:border-pulse/40"
+                className="group flex flex-wrap items-center gap-x-4 gap-y-1 rounded-2xl border border-line bg-white px-6 py-5 shadow-card transition-colors hover:border-pulse/40"
               >
                 <time dateTime={n.dateISO} className="num text-xs text-slate">
                   {n.date}

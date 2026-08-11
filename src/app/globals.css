@@ -36,7 +36,7 @@
 html {
   scroll-behavior: smooth;
   /* body だけに指定すると値がviewportへ伝播してbody自身が clip しない。
-     3Dの傾き (.tilt) で要素が数十px はみ出すため、html 側でも止める。 */
+     要素が数十px はみ出すことがあるため、html 側でも止める。 */
   overflow-x: clip;
 }
 
@@ -342,7 +342,7 @@ h4 {
   margin-left: 1px;
 }
 
-/* 3Dチルト (TiltEffect.tsx が transform を書き込む) */
+
 /* ナビゲーションのリンク: 指で押す端末では44pxの高さを確保する。
    画面幅ではなくポインタ種別で判定しないと、タブレットで無効になる。 */
 .tap {
@@ -357,11 +357,7 @@ h4 {
   }
 }
 
-.tilt {
-  transform-style: preserve-3d;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
-}
+
 
 /* 蛍光マーカー強調 */
 /* 強調。蛍光ペンのような塗りは軽い印象になるため、

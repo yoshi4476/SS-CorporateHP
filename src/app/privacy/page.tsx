@@ -98,7 +98,7 @@ export default function PrivacyPage() {
         <div className="mx-auto grid max-w-4xl gap-8 px-5">
           {SECTIONS.map((s, i) => (
             <Reveal key={s.title} delay={Math.min(i * 0.04, 0.2)}>
-              <section className="tilt rounded-2xl border border-line bg-raise p-7 shadow-card">
+              <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
                 <h2 className="text-base font-bold md:text-lg">{s.title}</h2>
                 {s.body.map((p, j) => (
                   <p key={j} className="mt-3 text-sm leading-8 text-slate">
@@ -109,7 +109,7 @@ export default function PrivacyPage() {
             </Reveal>
           ))}
           <Reveal delay={0.2}>
-            <section className="tilt rounded-2xl border border-line bg-raise p-7 shadow-card">
+            <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
               <h2 className="text-base font-bold md:text-lg">10. お問い合わせ窓口</h2>
               <p className="mt-3 text-sm leading-8 text-slate">
                 {site.name}

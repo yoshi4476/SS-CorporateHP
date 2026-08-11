@@ -88,8 +88,7 @@ export default function BlogPage() {
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
               >
                 無料相談を申し込む
               </Link>
@@ -332,8 +331,7 @@ export default function BlogPage() {
             </p>
             <Link
               href="/contact"
-              data-magnetic
-              className="mt-9 inline-block rounded-full bg-pulse px-10 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="mt-9 inline-block rounded-full bg-pulse px-10 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
             >
               無料相談を申し込む (現状分析レポート付き)
             </Link>

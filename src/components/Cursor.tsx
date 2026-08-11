@@ -152,7 +152,6 @@ export default function Cursor() {
     const pos = { x, y };
     let roll = 0;
     let pitch = 0;
-    let magnet: HTMLElement | null = null;
 
     const onMove = (e: MouseEvent) => {
       x = e.clientX;
@@ -163,20 +162,6 @@ export default function Cursor() {
       drone.classList.toggle("is-hover", !!interactive);
       dot.classList.toggle("is-hover", !!interactive);
 
-      const m = t?.closest?.("[data-magnetic]") as HTMLElement | null;
-      if (m) {
-        const r = m.getBoundingClientRect();
-        const dx = e.clientX - (r.left + r.width / 2);
-        const dy = e.clientY - (r.top + r.height / 2);
-        m.style.transform = `translate3d(${dx * MAGNET}px, ${dy * MAGNET}px, 0)`;
-        magnet = m;
-      } else if (magnet) {
-        const el = magnet;
-        el.style.transition = "transform .5s cubic-bezier(.22,1,.36,1)";
-        el.style.transform = "translate3d(0,0,0)";
-        setTimeout(() => (el.style.transition = ""), 500);
-        magnet = null;
-      }
     };
     addEventListener("mousemove", onMove, { passive: true });
 

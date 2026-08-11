@@ -117,7 +117,7 @@ export default function Home() {
         />
 
         {/* HUD実績バー (右下固定) */}
-        <dl className="tilt absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
+        <dl className="absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
           <div className="border-r border-line pr-2">
             <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Total Clients</dt>
             <dd className="num mt-1 text-2xl font-bold">
@@ -208,7 +208,7 @@ export default function Home() {
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
                 <Link
                   href="/contact"
-                  data-magnetic className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                 >
                   無料相談を予約する
                 </Link>
@@ -370,11 +370,11 @@ export default function Home() {
             lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
           />
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.4fr_1fr]">
-            <Reveal className="tilt rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
+            <Reveal className="rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
               <GrowthChart />
             </Reveal>
             <div className="grid gap-6">
-              <Reveal delay={0.1} className="tilt rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
+              <Reveal delay={0.1} className="rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
                 <IndustryBars />
               </Reveal>
             </div>
@@ -451,7 +451,7 @@ export default function Home() {
             <Reveal delay={0.12}>
               <Link
                 href="/services/aio"
-                data-magnetic className="rounded-full bg-pulse px-8 py-3.5 text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-8 py-3.5 text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
               >
                 AIO運用代行を見る
               </Link>
@@ -459,7 +459,7 @@ export default function Home() {
             <Reveal delay={0.18}>
               <Link
                 href="/services/meo"
-                data-magnetic className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 MEO運用代行を見る
               </Link>
@@ -469,7 +469,7 @@ export default function Home() {
                 href={site.labUrl}
                 target="_blank"
                 rel="noopener"
-                data-magnetic className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 AI集客ラボ (運営メディア) ↗
               </a>
@@ -524,7 +524,7 @@ export default function Home() {
                   alt="セブンセンシズ代表によるGoogleビジネスプロフィール活用セミナーの登壇風景"
                   width={700}
                   height={525}
-                  className="tilt aspect-[16/10] w-full rounded-2xl object-cover shadow-lift"
+                  className="aspect-[16/10] w-full rounded-2xl object-cover shadow-lift"
                 />
               </Reveal>
               <Reveal delay={0.1}>
@@ -533,7 +533,7 @@ export default function Home() {
                   alt="経営者向け勉強会で店舗集客を解説する様子"
                   width={700}
                   height={525}
-                  className="tilt aspect-square w-full rounded-2xl object-cover"
+                  className="aspect-square w-full rounded-2xl object-cover"
                 />
               </Reveal>
               <Reveal delay={0.16}>
@@ -542,7 +542,7 @@ export default function Home() {
                   alt="セミナーで質疑応答に応える代表"
                   width={700}
                   height={525}
-                  className="tilt aspect-square w-full rounded-2xl object-cover"
+                  className="aspect-square w-full rounded-2xl object-cover"
                 />
               </Reveal>
             </div>
@@ -561,7 +561,7 @@ export default function Home() {
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {cases.map((cs, i) => (
               <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
-                <article className="tilt flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card md:p-8">
+                <article className="flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card md:p-8">
                   <div className="flex items-center justify-between gap-3">
                     <span className="rounded-full bg-ink px-3 py-1 text-[0.62rem] font-bold text-white">
                       {cs.industry}
@@ -633,7 +633,7 @@ export default function Home() {
       <section id="subsidy" className="scroll-mt-24 pb-24 md:pb-32" aria-labelledby="subsidy-heading">
         <div className="mx-auto max-w-7xl px-5">
           <Reveal>
-            <div className="tilt grid items-center gap-8 overflow-hidden rounded-3xl border border-line bg-raise p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
+            <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-line bg-raise p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
               <div>
                 <p className="eyebrow">Subsidy</p>
                 <h2 id="subsidy-heading" className="mt-3 text-2xl font-bold md:text-4xl">
@@ -648,7 +648,7 @@ export default function Home() {
               <div className="flex flex-col gap-3 md:items-end">
                 <Link
                   href="/services/ai-subsidy"
-                  data-magnetic className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
                 >
                   補助金支援の詳細を見る
                 </Link>
@@ -656,7 +656,7 @@ export default function Home() {
                   href={site.lpUrl}
                   target="_blank"
                   rel="noopener"
-                  data-magnetic className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
                 >
                   無料診断LPを見る (8問・3分)
                 </a>
@@ -675,7 +675,7 @@ export default function Home() {
               <Reveal key={n.slug} delay={i * 0.06}>
                 <Link
                   href={`/news/${n.slug}`}
-                  className="tilt group flex flex-wrap items-center gap-x-4 gap-y-1 rounded-2xl border border-line bg-raise px-6 py-5 shadow-card transition-colors hover:border-pulse/40"
+                  className="group flex flex-wrap items-center gap-x-4 gap-y-1 rounded-2xl border border-line bg-raise px-6 py-5 shadow-card transition-colors hover:border-pulse/40"
                 >
                   <time dateTime={n.dateISO} className="num text-xs text-slate">
                     {n.date}

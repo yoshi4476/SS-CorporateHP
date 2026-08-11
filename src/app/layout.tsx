@@ -1,11 +1,9 @@
-import type { Metadata } from "next";
-import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
+import type { Metadata } from "next";import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
-import TiltEffect from "@/components/TiltEffect";
 import PageTransition from "@/components/PageTransition";
 import IntroLoader from "@/components/IntroLoader";
 import JsonLd from "@/components/JsonLd";
@@ -92,7 +90,6 @@ export default function RootLayout({
         <JsonLd data={organizationSchema} />
         <Header />
         <Cursor />
-        <TiltEffect />
         <PageTransition />
         <IntroLoader />
         <SmoothScroll>

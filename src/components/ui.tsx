@@ -56,7 +56,7 @@ export function SectionHead({
 export function StatTile({ metric, delay = 0 }: { metric: Metric; delay?: number }) {
   const numeric = Number(metric.value.replaceAll(",", ""));
   return (
-    <Reveal delay={delay} className="tilt rounded-2xl border border-line bg-white p-6 shadow-card">
+    <Reveal delay={delay} className="rounded-2xl border border-line bg-white p-6 shadow-card">
       <p className="text-3xl font-bold text-ink md:text-4xl">
         {Number.isFinite(numeric) ? (
           <CountUp value={numeric} suffix="" />
@@ -76,7 +76,7 @@ export function FlowSteps({ steps }: { steps: { title: string; body: string }[] 
     <ol className="grid gap-4 md:grid-cols-4">
       {steps.map((s, i) => (
         <Reveal key={s.title} delay={i * 0.1}>
-          <li className="tilt relative h-full rounded-2xl border border-line bg-white p-6 shadow-card">
+          <li className="relative h-full rounded-2xl border border-line bg-white p-6 shadow-card">
             <span className="num text-sm font-bold text-pulse">STEP {i + 1}</span>
             <h3 className="mt-2 text-base font-bold">{s.title}</h3>
             <p className="mt-2 text-sm leading-7 text-slate">{s.body}</p>
@@ -101,7 +101,7 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
     <div className="grid gap-3">
       {items.map((f, i) => (
         <Reveal key={f.q} delay={i * 0.06}>
-          <details className="tilt group rounded-2xl border border-line bg-white px-6 py-1 shadow-card open:pb-5">
+          <details className="group rounded-2xl border border-line bg-white px-6 py-1 shadow-card open:pb-5">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-sm font-bold md:text-base [&::-webkit-details-marker]:hidden">
               <span className="flex items-start gap-3">
                 <span className="font-data text-pulse">Q.</span>
@@ -155,13 +155,13 @@ export function CtaBand({
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-              data-magnetic className="w-full rounded-full bg-aqua px-9 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="w-full rounded-full bg-aqua px-9 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:w-auto"
             >
               無料相談を予約する
             </Link>
             <Link
               href="/company"
-              data-magnetic className="w-full rounded-full border border-white/30 px-9 py-4 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
+                  className="w-full rounded-full border border-white/30 px-9 py-4 text-sm font-bold text-white transition-colors hover:bg-white/10 sm:w-auto"
             >
               会社概要を見る
             </Link>

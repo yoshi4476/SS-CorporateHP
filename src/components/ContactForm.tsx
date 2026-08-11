@@ -232,8 +232,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={busy}
-        data-magnetic
-        className="mt-2 rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
+                  className="mt-2 rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
       >
         {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>

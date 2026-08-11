@@ -106,7 +106,7 @@ export default function ServicesIndexPage() {
               <Reveal key={s.slug} delay={(i % 3) * 0.08}>
                 <Link
                   href={`/services/${s.slug}`}
-                  className="tilt group flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card transition-colors duration-500 hover:bg-pulse md:p-8"
+                  className="group flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card transition-colors duration-500 hover:bg-pulse md:p-8"
                 >
                   <div className="flex items-start justify-between">
                     <p className="num text-6xl font-bold text-pulse/30 transition-colors duration-500 group-hover:text-white/25 md:text-7xl" aria-hidden>
@@ -174,7 +174,7 @@ export default function ServicesIndexPage() {
 
           {/* 一気通貫の補足 */}
           <Reveal delay={0.1}>
-            <div className="tilt mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-ink p-8 text-white md:grid-cols-[1.5fr_1fr] md:p-10">
+            <div className="mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-ink p-8 text-white md:grid-cols-[1.5fr_1fr] md:p-10">
               <div className="relative">
                 <p className="eyebrow !text-aqua">One Team</p>
                 <h2 className="mt-3 text-xl font-bold md:text-3xl">
@@ -187,7 +187,7 @@ export default function ServicesIndexPage() {
               <div className="flex flex-col gap-3 md:items-end">
                 <Link
                   href="/contact"
-                  data-magnetic className="rounded-full bg-aqua px-8 py-4 text-center text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-aqua px-8 py-4 text-center text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
                 >
                   無料相談で入り口を決める
                 </Link>
@@ -218,7 +218,7 @@ export default function ServicesIndexPage() {
               <Reveal key={p.href} delay={i * 0.08}>
                 <Link
                   href={p.href}
-                  className="tilt group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-colors duration-500 hover:border-pulse/40 md:p-10"
+                  className="group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-colors duration-500 hover:border-pulse/40 md:p-10"
                 >
                   <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">{p.en}</p>
                   <h3 className="mt-3 text-xl font-black leading-snug group-hover:text-pulse md:text-2xl">

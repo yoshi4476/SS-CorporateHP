@@ -91,7 +91,7 @@ export default async function ServicePage({ params }: Props) {
                 <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                   <Link
                     href="/contact"
-                    data-magnetic className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     このサービスを相談する
                   </Link>
@@ -100,7 +100,7 @@ export default async function ServicePage({ params }: Props) {
                       href={site.labUrl}
                       target="_blank"
                       rel="noopener"
-                      data-magnetic className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
                     >
                       運営メディア「AI集客ラボ」を見る ↗
                     </a>
@@ -110,7 +110,7 @@ export default async function ServicePage({ params }: Props) {
                       href={site.lpUrl}
                       target="_blank"
                       rel="noopener"
-                      data-magnetic className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
                     >
                       無料診断LPを見る (8問・3分)
                     </a>
@@ -160,7 +160,7 @@ export default async function ServicePage({ params }: Props) {
 
             <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
               {service.useCase && (
-                <Reveal className="tilt rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
+                <Reveal className="rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
                   <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Purpose</p>
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
                   <p className="mt-5 text-sm leading-9 text-slate md:text-base">
@@ -170,7 +170,7 @@ export default async function ServicePage({ params }: Props) {
               )}
 
               {service.menu && (
-                <Reveal delay={0.1} className="tilt rounded-3xl border border-line bg-white p-8 shadow-card md:p-10">
+                <Reveal delay={0.1} className="rounded-3xl border border-line bg-white p-8 shadow-card md:p-10">
                   <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Menu</p>
                   <h3 className="mt-2 text-xl font-bold">代表的なご依頼内容</h3>
                   <ul className="mt-6 grid gap-3 border-t border-line pt-6">
@@ -207,7 +207,7 @@ export default async function ServicePage({ params }: Props) {
                 <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                   {service.industries.map((ind, i) => (
                     <Reveal key={ind.name} delay={(i % 4) * 0.08}>
-                      <article className="tilt h-full rounded-2xl border border-line bg-white p-6 shadow-card">
+                      <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-card">
                         <span className="num text-xs font-bold text-pulse">0{i + 1}</span>
                         <h3 className="mt-2 text-base font-bold leading-relaxed">{ind.name}</h3>
                         <p className="mt-3 text-xs leading-7 text-slate">{ind.body}</p>
@@ -231,7 +231,7 @@ export default async function ServicePage({ params }: Props) {
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {service.challenges.map((c, i) => (
               <Reveal key={c} delay={i * 0.07}>
-                <div className="tilt flex items-start gap-4 rounded-2xl border border-line bg-white p-6 shadow-card">
+                <div className="flex items-start gap-4 rounded-2xl border border-line bg-white p-6 shadow-card">
                   <span aria-hidden className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pulse/10">
                     <svg width="14" height="14" viewBox="0 0 14 14" className="text-pulse">
                       <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -259,7 +259,7 @@ export default async function ServicePage({ params }: Props) {
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {service.points.map((p, i) => (
               <Reveal key={p.title} delay={i * 0.1}>
-                <article className="tilt h-full rounded-2xl border border-line bg-white p-7 shadow-card">
+                <article className="h-full rounded-2xl border border-line bg-white p-7 shadow-card">
                   <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse/10">
                     <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
                   </span>
@@ -284,7 +284,7 @@ export default async function ServicePage({ params }: Props) {
             <div className="mt-12 grid gap-5 lg:grid-cols-3">
               {service.examples.map((ex, i) => (
                 <Reveal key={ex.situation} delay={i * 0.09}>
-                  <article className="tilt flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card md:p-8">
+                  <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card md:p-8">
                     <span className="num text-xs font-bold text-pulse">CASE 0{i + 1}</span>
                     <div className="mt-5 grid gap-5">
                       <div>
@@ -335,7 +335,7 @@ export default async function ServicePage({ params }: Props) {
                       {ins.title}
                     </h3>
                   </div>
-                  <p className="tilt rounded-2xl border border-line bg-white p-7 text-sm leading-9 text-slate shadow-card md:p-10 md:text-base md:leading-10 md:[direction:ltr]">
+                  <p className="rounded-2xl border border-line bg-white p-7 text-sm leading-9 text-slate shadow-card md:p-10 md:text-base md:leading-10 md:[direction:ltr]">
                     <Rich text={ins.body} />
                   </p>
                 </article>
@@ -361,7 +361,7 @@ export default async function ServicePage({ params }: Props) {
               lead="「地名×キーワード」で検索したとき、マップの==上位3位以内==に表示されること。それがMEOのゴールです。"
             />
             <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-[1.6fr_1fr]">
-              <Reveal className="tilt rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
+              <Reveal className="rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
                 <Image
                   src="/images/meo-diagram-1.png"
                   alt="スマートフォンで「大阪 レストラン」と検索すると、Googleマップの検索結果で上位3位以内にお店が表示される仕組みの図解"
@@ -373,7 +373,7 @@ export default async function ServicePage({ params }: Props) {
                   「地名×キーワード」検索で、あなたのお店をマップ上位3位以内に表示させる——検索したその場で来店先を決めるユーザーに、最初に見つけてもらえます。
                 </p>
               </Reveal>
-              <Reveal delay={0.1} className="tilt flex flex-col justify-between rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
+              <Reveal delay={0.1} className="flex flex-col justify-between rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
                 <Image
                   src="/images/meo-diagram-2.png"
                   alt="マップ検索結果で上位のお店が顧客の目に止まりやすいことを示す図解"
@@ -395,7 +395,7 @@ export default async function ServicePage({ params }: Props) {
               />
             </div>
             <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1fr_1.4fr]">
-              <Reveal className="tilt rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
+              <Reveal className="rounded-2xl border border-line bg-white p-6 shadow-card md:p-8">
                 <IndustryBars />
               </Reveal>
               <Reveal delay={0.1}>

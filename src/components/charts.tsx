@@ -102,7 +102,7 @@ const RANKS: { industry: string; area: string; keyword: string; before: number; 
 
 export function RankTable() {
   return (
-    <figure className="tilt overflow-x-auto rounded-2xl border border-line bg-white shadow-card">
+    <figure className="overflow-x-auto rounded-2xl border border-line bg-white shadow-card">
       <table className="w-full min-w-[560px] border-collapse text-sm">
         <caption className="sr-only">MEO運用によるGoogleマップ検索順位の改善例</caption>
         <thead>

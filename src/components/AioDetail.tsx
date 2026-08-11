@@ -33,7 +33,7 @@ export default function AioDetail() {
           />
 
           <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_1.4fr]">
-            <Reveal className="tilt flex flex-col justify-center rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
+            <Reveal className="flex flex-col justify-center rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
               <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Zero-Click Search</p>
               <p className="mega-num mt-4 text-6xl md:text-7xl">
                 <CountUp value={zeroClick.rate} suffix="%" />
@@ -46,7 +46,7 @@ export default function AioDetail() {
             </Reveal>
 
             {/* SEO vs AIO 比較表 */}
-            <Reveal delay={0.1} className="tilt overflow-x-auto rounded-3xl border border-line shadow-card">
+            <Reveal delay={0.1} className="overflow-x-auto rounded-3xl border border-line shadow-card">
               <table className="w-full min-w-[520px] border-collapse bg-raise text-sm">
                 <caption className="sr-only">SEOとAIOの違い</caption>
                 <thead>
@@ -101,7 +101,7 @@ export default function AioDetail() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {glossary.map((g, i) => (
               <Reveal key={g.term} delay={(i % 4) * 0.07}>
-                <article className="tilt h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
+                <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <p className="font-data text-2xl font-bold text-pulse">{g.term}</p>
                   <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
                   <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
@@ -123,7 +123,7 @@ export default function AioDetail() {
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {layers.map((l, i) => (
               <Reveal key={l.label} delay={i * 0.1}>
-                <article className="tilt h-full rounded-3xl border border-line bg-raise p-8 shadow-card">
+                <article className="h-full rounded-3xl border border-line bg-raise p-8 shadow-card">
                   <div className="flex items-baseline gap-3">
                     <span className="num text-3xl font-bold text-pulse/30" aria-hidden>0{i + 1}</span>
                     <div>
@@ -150,7 +150,7 @@ export default function AioDetail() {
 
           {/* 成果測定 */}
           <Reveal delay={0.15}>
-            <div className="tilt mt-6 rounded-3xl border border-line bg-raise p-8 shadow-card">
+            <div className="mt-6 rounded-3xl border border-line bg-raise p-8 shadow-card">
               <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
               <h3 className="mt-2 text-lg font-bold">成果は、4つの指標を併用して測る</h3>
               <p className="mt-3 max-w-3xl text-xs leading-7 text-slate">
@@ -182,7 +182,7 @@ export default function AioDetail() {
           <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-2">
             {approaches.map((a, i) => (
               <Reveal key={a.key} delay={i * 0.1}>
-                <article className="tilt flex h-full flex-col rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
+                <article className="flex h-full flex-col rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
                   <div className="flex items-baseline gap-3">
                     <span className="num text-3xl font-bold text-pulse/30" aria-hidden>0{i + 1}</span>
                     <div>
@@ -231,7 +231,7 @@ export default function AioDetail() {
 
           {/* オウンドメディアが機能する理由 */}
           <Reveal delay={0.1}>
-            <div className="tilt mt-6 rounded-3xl border border-line bg-mist p-8 shadow-card md:p-10">
+            <div className="mt-6 rounded-3xl border border-line bg-mist p-8 shadow-card md:p-10">
               <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
                 <div>
                   <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Why It Works</p>
@@ -277,7 +277,7 @@ export default function AioDetail() {
 
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
             {/* 計測に使うツール */}
-            <Reveal className="tilt overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
+            <Reveal className="overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
               <div className="border-b border-line p-7 md:p-8">
                 <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
                 <h3 className="mt-2 text-lg font-bold">計測・運用に使うツール</h3>
@@ -332,7 +332,7 @@ export default function AioDetail() {
                     href={d.href}
                     target="_blank"
                     rel="noopener"
-                    className="tilt group block rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse"
+                    className="group block rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse"
                   >
                     <div className="flex items-baseline justify-between gap-3">
                       <h4 className="text-base font-bold group-hover:text-pulse">{d.name}</h4>
@@ -359,7 +359,7 @@ export default function AioDetail() {
             <div className="mt-6 grid gap-5 md:grid-cols-2">
               {automation.map((a, i) => (
                 <Reveal key={a.name} delay={i * 0.09}>
-                  <article className="tilt h-full rounded-2xl border border-line bg-raise p-7 shadow-card">
+                  <article className="h-full rounded-2xl border border-line bg-raise p-7 shadow-card">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="font-data text-xl font-bold text-pulse">{a.name}</h3>
                       <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-[0.62rem] font-bold text-pulse">
@@ -442,8 +442,7 @@ export default function AioDetail() {
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
               >
                 無料のAIOサイト診断を申し込む
               </Link>
@@ -451,8 +450,7 @@ export default function AioDetail() {
                 href={site.labUrl}
                 target="_blank"
                 rel="noopener"
-                data-magnetic
-                className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 運営メディア「AI集客ラボ」で学ぶ ↗
               </a>

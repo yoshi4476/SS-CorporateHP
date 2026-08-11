@@ -22,7 +22,7 @@ export default function SubsidyDetail() {
           />
 
           <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1.5fr_1fr]">
-            <Reveal className="tilt rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
+            <Reveal className="rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
               <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Model Case</p>
 
               {/* 積み上げバー */}
@@ -78,7 +78,7 @@ export default function SubsidyDetail() {
             </Reveal>
 
             {/* 応募要項 4条件 */}
-            <Reveal delay={0.1} className="tilt rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
+            <Reveal delay={0.1} className="rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
               <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Eligibility</p>
               <h3 className="mt-3 text-lg font-bold md:text-xl">対象になる事業者 — 4つの条件</h3>
               <ul className="mt-6 grid gap-4">
@@ -140,7 +140,7 @@ export default function SubsidyDetail() {
           <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {scheme.map((s, i) => (
               <Reveal key={s.step} delay={(i % 4) * 0.08}>
-                <article className="tilt flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card">
+                <article className="flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between">
                     <span className="num text-3xl font-bold text-pulse/30" aria-hidden>{s.step}</span>
                     <span className="rounded-full bg-pulse/10 px-3 py-1 text-[0.6rem] font-bold text-pulse">
@@ -168,7 +168,7 @@ export default function SubsidyDetail() {
             title="お金は、いつ・どちらへ動くのか"
             lead="補助金は==精算払い (後払い)==です。お支払いから着金まで約2〜3ヶ月を見込んだ資金計画をおすすめします。"
           />
-          <Reveal delay={0.1} className="tilt mt-10 overflow-x-auto rounded-2xl border border-line shadow-card">
+          <Reveal delay={0.1} className="mt-10 overflow-x-auto rounded-2xl border border-line shadow-card">
             <table className="w-full min-w-[680px] border-collapse bg-raise text-sm">
               <caption className="sr-only">補助金申請におけるお金の流れ</caption>
               <thead>
@@ -195,15 +195,13 @@ export default function SubsidyDetail() {
                 href={site.lpUrl}
                 target="_blank"
                 rel="noopener"
-                data-magnetic
-                className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
               >
                 無料診断で対象か確かめる (8問・3分) ↗
               </a>
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 無料相談を予約する
               </Link>

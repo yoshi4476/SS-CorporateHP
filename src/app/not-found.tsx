@@ -24,15 +24,13 @@ export default function NotFound() {
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <Link
             href="/"
-            data-magnetic
-            className="rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
           >
             トップページへ戻る
           </Link>
           <Link
             href="/contact"
-            data-magnetic
-            className="rounded-full border border-ink/20 px-9 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-ink/20 px-9 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
           >
             お問い合わせ
           </Link>
@@ -46,7 +44,7 @@ export default function NotFound() {
                 <li key={s.slug}>
                   <Link
                     href={`/services/${s.slug}`}
-                    className="tilt group flex items-center justify-between gap-2 rounded-xl border border-line bg-raise px-4 py-3 text-sm font-medium shadow-card transition-colors hover:border-pulse/40 hover:text-pulse"
+                    className="group flex items-center justify-between gap-2 rounded-xl border border-line bg-raise px-4 py-3 text-sm font-medium shadow-card transition-colors hover:border-pulse/40 hover:text-pulse"
                   >
                     <span>
                       <span className="num mr-2 text-xs text-pulse">{String(i + 1).padStart(2, "0")}</span>

@@ -148,8 +148,7 @@ export default function RakushiftPage() {
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                   <Link
                     href="/contact"
-                    data-magnetic
-                    className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     無料でシフトを見てもらう
                   </Link>
@@ -369,7 +368,7 @@ export default function RakushiftPage() {
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {engine.map((e, i) => (
               <Reveal key={e.step} delay={i * 0.08}>
-                <div className="tilt h-full rounded-3xl border border-line bg-white p-8 shadow-card">
+                <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
                   <span aria-hidden className="num text-5xl font-bold text-pulse/30">{e.step}</span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{e.title}</h3>
                   <p className="mt-4 text-sm leading-8 text-slate">{e.body}</p>
@@ -625,8 +624,7 @@ export default function RakushiftPage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                data-magnetic
-                className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料でシフトを見てもらう
               </Link>
