@@ -13,6 +13,8 @@ import {
   assurance,
   compare,
   offer,
+  report,
+  reportNote,
   gate,
   aio,
   includes,
@@ -356,6 +358,29 @@ export default function MediaPipelinePage() {
               </Reveal>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* 月次コンサルレポート。出し続けるだけでなく、翌月の打ち手まで渡す */}
+      <section className="border-y border-line bg-mist py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Monthly report"
+            title="毎月1日、次の一手まで書いて渡します"
+            lead="記事を出して終わりにしません。どこで離脱しているか、どの記事があと一歩か、来月どのキーワードを書くか。判断できる形にして毎月お渡しします。"
+          />
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2 xl:grid-cols-4">
+            {report.map((r, i) => (
+              <Reveal key={r.no} delay={(i % 4) * 0.05}>
+                <li className="flex h-full flex-col bg-white p-7">
+                  <span aria-hidden className="num text-[0.7rem] font-bold text-pulse">{r.no}</span>
+                  <h3 className="mt-2.5 text-sm font-bold leading-snug md:text-base">{r.title}</h3>
+                  <p className="mt-3 flex-1 text-xs leading-7 text-slate">{r.body}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+          <p className="mt-6 text-xs leading-7 text-slate">{reportNote}</p>
         </div>
       </section>
 
