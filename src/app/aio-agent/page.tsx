@@ -4,11 +4,15 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, FaqList, FlowSteps } from "@/components/ui";
+import { StickyCta, MidCta } from "@/components/LpCta";
 import {
   pipeline,
   problems,
   flow,
   evidence,
+  assurance,
+  compare,
+  offer,
   gate,
   aio,
   includes,
@@ -98,7 +102,7 @@ export default function MediaPipelinePage() {
                     data-magnetic
                     className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
-                    無料相談を予約する
+                    無料で試算を出してもらう
                   </Link>
                   <Link
                     href="/blog"
@@ -107,6 +111,17 @@ export default function MediaPipelinePage() {
                     動いているメディアを見る
                   </Link>
                 </div>
+                {/* 申し込みの手前で引っかかる点を、ボタンのすぐ下で外す */}
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                  {assurance.map((a) => (
+                    <li key={a} className="flex items-center gap-1.5 text-xs font-bold text-slate">
+                      <svg width="13" height="13" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse">
+                        <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {a}
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
             </div>
 
@@ -220,6 +235,50 @@ export default function MediaPipelinePage() {
         </div>
       </section>
 
+      {/* 外注との比較。費用の考え方が変わることを1枚で示す */}
+      <section className="border-y border-line bg-mist py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Before / After"
+            title="記事を外注する場合と、何が変わるのか"
+            lead="1本あたりで払うか、仕組みごと持つか。本数を増やすほど差が開きます。"
+          />
+          <Reveal delay={0.08}>
+            <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+              <div className="grid grid-cols-[1fr_1fr] gap-px bg-line md:grid-cols-[minmax(0,0.8fr)_1fr_1fr]">
+                <div className="hidden bg-ink px-6 py-4 md:block" />
+                <div className="bg-ink px-6 py-4">
+                  <p className="text-xs font-bold text-paper/60">記事を外注する場合</p>
+                </div>
+                <div className="bg-pulse px-6 py-4">
+                  <p className="text-xs font-bold text-white">AIO（SEO）対策エージェント</p>
+                </div>
+                {compare.map((c) => (
+                  <div key={c.point} className="contents">
+                    <div className="col-span-2 bg-mist px-6 py-3 md:col-span-1 md:bg-white md:py-5">
+                      <p className="text-xs font-bold text-ink md:text-sm">{c.point}</p>
+                    </div>
+                    <div className="bg-white px-6 py-4 md:py-5">
+                      <p className="text-xs leading-6 text-slate md:text-sm md:leading-7">{c.outsource}</p>
+                    </div>
+                    <div className="bg-white px-6 py-4 md:py-5">
+                      <p className="text-xs font-medium leading-6 text-ink md:text-sm md:leading-7">{c.ours}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <MidCta
+        title="いま記事にいくら払っているか、教えてください。"
+        body="外注している本数と単価を伺えば、この仕組みに切り替えた場合の試算をお出しします。数字を見てから判断いただけます。"
+        label="無料で試算を出してもらう"
+        sub="所要30分・オンライン"
+      />
+
       {/* 毎日動く工程 */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
@@ -321,25 +380,35 @@ export default function MediaPipelinePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
+      {/* CTA。何をしてもらえるかを出してから申し込ませる */}
+      <section id="lp-end-cta" className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
         <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div className="relative mx-auto max-w-3xl px-5 text-center">
+        <div className="relative mx-auto max-w-3xl px-5">
           <Reveal>
-            <p className="eyebrow !text-aqua">Contact</p>
-            <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
+            <p className="eyebrow !text-aqua text-center">Contact</p>
+            <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               この記事も、この仕組みが書いています。
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-8 text-paper/70 md:text-base">
-              当社の経理BPOブログは、ここで説明した仕組みがそのまま動いています。実物を見てから判断してください。
+            <p className="mx-auto mt-6 max-w-xl text-center text-sm leading-8 text-paper/70 md:text-base">
+              30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
-            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
+            <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
+              {offer.map((o) => (
+                <li key={o} className="flex gap-3.5 rounded-2xl border border-white/12 bg-white/[0.04] px-6 py-4 text-sm leading-7 text-paper/85">
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="mt-1.5 shrink-0 text-aqua">
+                    <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {o}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
                 data-magnetic
-                className="rounded-full bg-aqua px-10 py-4 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+                className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
-                無料相談を予約する
+                無料で試算を出してもらう
               </Link>
               <Link
                 href="/blog"
@@ -348,9 +417,14 @@ export default function MediaPipelinePage() {
                 動いているメディアを見る
               </Link>
             </div>
+            <p className="mt-5 text-center text-[0.72rem] text-paper/50">
+              相談は無料 ／ 既存サイトへの追加も可能 ／ いただいた情報は相談対応の目的以外に使用しません
+            </p>
           </Reveal>
         </div>
       </section>
+
+      <StickyCta label="無料相談" note="相談は無料・売り込みはしません" />
     </>
   );
 }

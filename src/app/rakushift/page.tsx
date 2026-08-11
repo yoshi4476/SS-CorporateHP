@@ -4,10 +4,14 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead, FaqList, FlowSteps } from "@/components/ui";
+import { StickyCta, MidCta } from "@/components/LpCta";
 import {
   rakushift,
   problems,
   engine,
+  assurance,
+  compare,
+  offer,
   measured,
   measuredNote,
   useSteps,
@@ -147,10 +151,21 @@ export default function RakushiftPage() {
                     data-magnetic
                     className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
-                    導入について相談する
+                    無料でシフトを見てもらう
                   </Link>
                   <DeckButton />
                 </div>
+                {/* 申し込みの手前で引っかかる点を、ボタンのすぐ下で外す */}
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                  {assurance.map((a) => (
+                    <li key={a} className="flex items-center gap-1.5 text-xs font-bold text-slate">
+                      <svg width="13" height="13" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse">
+                        <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      {a}
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
             </div>
 
@@ -218,6 +233,50 @@ export default function RakushiftPage() {
           </Reveal>
         </div>
       </section>
+
+      {/* 手作業との比較。どこが変わるかを1枚で示す */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Before / After"
+            title="手作業と、何が変わるのか"
+            lead="速くなるだけではありません。見落としと偏りが、仕組みの側で起きなくなります。"
+          />
+          <Reveal delay={0.08}>
+            <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-card">
+              <div className="grid grid-cols-[1fr_1fr] gap-px bg-line md:grid-cols-[minmax(0,0.8fr)_1fr_1fr]">
+                <div className="hidden bg-ink px-6 py-4 md:block" />
+                <div className="bg-ink px-6 py-4">
+                  <p className="text-xs font-bold text-paper/60">これまで (手作業)</p>
+                </div>
+                <div className="bg-pulse px-6 py-4">
+                  <p className="text-xs font-bold text-white">ラクシフトAI</p>
+                </div>
+                {compare.map((c) => (
+                  <div key={c.point} className="contents">
+                    <div className="col-span-2 bg-mist px-6 py-3 md:col-span-1 md:bg-white md:py-5">
+                      <p className="text-xs font-bold text-ink md:text-sm">{c.point}</p>
+                    </div>
+                    <div className="bg-white px-6 py-4 md:py-5">
+                      <p className="text-xs leading-6 text-slate md:text-sm md:leading-7">{c.manual}</p>
+                    </div>
+                    <div className="bg-white px-6 py-4 md:py-5">
+                      <p className="text-xs font-medium leading-6 text-ink md:text-sm md:leading-7">{c.ours}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <MidCta
+        title="いまのシフト表を、そのまま見せてください。"
+        body="1か月分のシフトと店舗の条件を伺えば、そのまま使えるか、設定の作り込みが要るかをその場でお答えします。売り込みはしません。"
+        label="無料でシフトを見てもらう"
+        sub="所要30分・オンライン"
+      />
 
       {/* 使い方3ステップ */}
       <section className="py-16 md:py-24">
@@ -470,6 +529,13 @@ export default function RakushiftPage() {
         </div>
       </section>
 
+      <MidCta
+        title="どのプランが合うか、伺えばお答えします。"
+        body="店舗数とスタッフ数、シフトの組み方をお聞きすれば、Standard で足りるのか Pro が要るのかをその場でお伝えします。"
+        label="プランを相談する"
+        sub="初期費用0円・相談は無料"
+      />
+
       {/* 初期設定サポート */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
@@ -534,39 +600,56 @@ export default function RakushiftPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
+      {/* CTA。何をしてもらえるかを箇条書きで出してから申し込ませる */}
+      <section id="lp-end-cta" className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
         <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div className="relative mx-auto max-w-3xl px-5 text-center">
+        <div className="relative mx-auto max-w-3xl px-5">
           <Reveal>
-            <p className="eyebrow !text-aqua">Contact</p>
-            <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
+            <p className="eyebrow !text-aqua text-center">Contact</p>
+            <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               まず、今のシフトを見せてください。
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-8 text-paper/70 md:text-base">
-              店舗数・スタッフ数・シフトの組み方を伺えば、そのまま使えるか、設定の作り込みが要るかをその場でお伝えします。
+            <p className="mx-auto mt-6 max-w-xl text-center text-sm leading-8 text-paper/70 md:text-base">
+              30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
-            <div className="mt-9 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap">
+            <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
+              {offer.map((o) => (
+                <li key={o} className="flex gap-3.5 rounded-2xl border border-white/12 bg-white/[0.04] px-6 py-4 text-sm leading-7 text-paper/85">
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="mt-1.5 shrink-0 text-aqua">
+                    <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {o}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
                 data-magnetic
-                className="rounded-full bg-aqua px-10 py-4 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+                className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
-                導入について相談する
+                無料でシフトを見てもらう
               </Link>
               <DeckButton tone="dark" />
             </div>
-            <a
-              href={rakushift.url}
-              target="_blank"
-              rel="noopener"
-              className="mt-6 inline-block text-xs font-bold text-paper/60 underline-offset-4 hover:text-paper hover:underline"
-            >
-              サービスサイトを見る ↗
-            </a>
+            <p className="mt-5 text-center text-[0.72rem] text-paper/50">
+              初期費用0円 ／ 最短1営業日で運用開始 ／ いただいた情報は相談対応の目的以外に使用しません
+            </p>
+            <p className="mt-4 text-center">
+              <a
+                href={rakushift.url}
+                target="_blank"
+                rel="noopener"
+                className="text-xs font-bold text-paper/60 underline-offset-4 hover:text-paper hover:underline"
+              >
+                サービスサイトを見る ↗
+              </a>
+            </p>
           </Reveal>
         </div>
       </section>
+
+      <StickyCta label="無料相談" note="初期費用0円・相談は無料です" />
     </>
   );
 }
