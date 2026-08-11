@@ -31,9 +31,11 @@ export default function SubsidyDetail() {
                   <span>導入費用 (例)</span>
                   <span className="num text-base font-bold text-ink">{modelCase.total}万円</span>
                 </div>
+                {/* 補助分のバーには白文字を載せるため、グラデーションは濃紺の範囲だけで組む。
+                    glow まで伸ばすと明るい側で 3.25:1 まで落ちて基準を割る */}
                 <div className="mt-2 flex h-11 overflow-hidden rounded-xl border border-line">
                   <div
-                    className="flex items-center justify-center bg-gradient-to-r from-pulse to-glow text-[0.68rem] font-bold text-white"
+                    className="flex items-center justify-center bg-gradient-to-r from-pulse-deep to-pulse text-[0.68rem] font-bold text-white"
                     style={{ width: `${grantRatio}%` }}
                   >
                     補助金 {modelCase.grant}万円
