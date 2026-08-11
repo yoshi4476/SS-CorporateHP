@@ -125,7 +125,7 @@ export default function AioDetail() {
               <Reveal key={l.label} delay={i * 0.1}>
                 <article className="h-full rounded-3xl border border-line bg-raise p-8 shadow-card">
                   <div className="flex items-baseline gap-3">
-                    <span className="num text-3xl font-bold text-pulse/30" aria-hidden>0{i + 1}</span>
+                    <span className="num text-3xl font-bold text-gold/40" aria-hidden>0{i + 1}</span>
                     <div>
                       <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">{l.en}</p>
                       <h3 className="mt-1 text-lg font-bold">{l.label}</h3>
@@ -184,7 +184,7 @@ export default function AioDetail() {
               <Reveal key={a.key} delay={i * 0.1}>
                 <article className="flex h-full flex-col rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
                   <div className="flex items-baseline gap-3">
-                    <span className="num text-3xl font-bold text-pulse/30" aria-hidden>0{i + 1}</span>
+                    <span className="num text-3xl font-bold text-gold/40" aria-hidden>0{i + 1}</span>
                     <div>
                       <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">{a.en}</p>
                       <h3 className="mt-1 text-2xl font-bold">{a.name}</h3>
@@ -394,7 +394,7 @@ export default function AioDetail() {
             {plans.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <article
-                  className={`tilt flex h-full flex-col rounded-3xl border p-7 shadow-card md:p-8 ${
+                  className={`flex h-full flex-col rounded-3xl border p-7 shadow-card md:p-8 ${
                     p.featured ? "border-pulse bg-pulse text-white" : "border-line bg-raise"
                   }`}
                 >

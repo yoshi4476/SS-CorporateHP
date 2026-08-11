@@ -188,9 +188,10 @@ export default function RakushiftPage() {
             <dl className="mt-14 grid gap-8 border-t border-line pt-9 sm:grid-cols-3">
               {measured.map((m) => (
                 <div key={m.label}>
-                  <dd className="num text-4xl font-bold leading-none text-ink md:text-5xl">
+                  {/* 成果の数字は金。紺は「会社」、金は「出た結果」と役割を分けている */}
+                  <dd className="num text-4xl font-bold leading-none text-gold md:text-5xl">
                     <CountUp value={Number(m.value)} />
-                    <span className="ml-1 text-base text-pulse">{m.unit}</span>
+                    <span className="ml-1 text-base">{m.unit}</span>
                   </dd>
                   <dt className="mt-3 text-xs leading-6 text-slate">{m.label}</dt>
                 </div>
@@ -207,13 +208,13 @@ export default function RakushiftPage() {
           <SectionHead
             en="Problem"
             title="こんなお悩み、ありませんか?"
-            lead="シフト作成は、店長の大きな負担になっています。"
+            lead="シフト作成は、==店長の大きな負担==になっています。"
           />
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {problems.map((p, i) => (
               <Reveal key={p.no} delay={i * 0.07}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span aria-hidden className="num text-4xl font-bold text-pulse/30">{p.no}</span>
+                  <span aria-hidden className="num text-4xl font-bold text-gold/35">{p.no}</span>
                   <h3 className="mt-3 text-lg font-bold">{p.title}</h3>
                   <p className="mt-4 text-sm leading-8 text-slate">{p.body}</p>
                 </div>
@@ -239,7 +240,7 @@ export default function RakushiftPage() {
           <SectionHead
             en="Before / After"
             title="手作業と、何が変わるのか"
-            lead="速くなるだけではありません。見落としと偏りが、仕組みの側で起きなくなります。"
+            lead="速くなるだけではありません。==見落としと偏りが、仕組みの側で起きなくなります==。"
           />
           <Reveal delay={0.08}>
             <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-card">
@@ -283,7 +284,7 @@ export default function RakushiftPage() {
           <SectionHead
             en="How it works"
             title="使い方は、たった3ステップ"
-            lead="むずかしい操作はありません。順番に設定していくだけです。"
+            lead="==むずかしい操作はありません==。順番に設定していくだけです。"
           />
           <div className="mt-12 grid gap-14">
             {useSteps.map((s, i) => (
@@ -333,7 +334,7 @@ export default function RakushiftPage() {
           <SectionHead
             en="Output"
             title="完成したシフト表"
-            lead="見やすいカレンダー表示。手直しも印刷もPDF保存も自由にできます。"
+            lead="見やすいカレンダー表示。==手直しも印刷もPDF保存も自由に==できます。"
           />
           <Reveal delay={0.08}>
             <figure className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
@@ -363,13 +364,13 @@ export default function RakushiftPage() {
           <SectionHead
             en="Engine"
             title="なぜ、数十秒で組み上がるのか"
-            lead="担当者の勘ではなく、条件を数式に落として解いています。そのうえで別のAIが法令の観点から確認します。"
+            lead="担当者の勘ではなく、==条件を数式に落として解いています==。そのうえで別のAIが法令の観点から確認します。"
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {engine.map((e, i) => (
               <Reveal key={e.step} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span aria-hidden className="num text-5xl font-bold text-pulse/30">{e.step}</span>
+                  <span aria-hidden className="num text-5xl font-bold text-gold/35">{e.step}</span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{e.title}</h3>
                   <p className="mt-4 text-sm leading-8 text-slate">{e.body}</p>
                 </div>
@@ -410,7 +411,7 @@ export default function RakushiftPage() {
           <SectionHead
             en="Smart features"
             title="店長を助ける「かしこい機能」"
-            lead="現場のこまかい事情に合わせて、AIがきめ細かく配置します。"
+            lead="現場のこまかい事情に合わせて、==AIがきめ細かく配置します==。"
           />
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {smart.map((f, i) => (
@@ -473,19 +474,19 @@ export default function RakushiftPage() {
         </div>
       </section>
 
-      {/* 料金 */}
-      <section className="border-y border-line bg-mist py-16 md:py-24">
+      {/* 料金 — 白・薄灰・紺の繰り返しで単調になるので、ここだけ金の淡い面にして節目を作る */}
+      <section className="border-y border-gold/20 bg-gold-tint py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Pricing"
             title="料金プラン"
-            lead="店舗の規模に合わせて選べる3プラン。税込・初期費用0円です。"
+            lead="店舗の規模に合わせて選べる3プラン。==税込・初期費用0円==です。"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {plans.map((p, i) => (
               <Reveal key={p.name} delay={i * 0.08}>
                 <div
-                  className={`tilt relative flex h-full flex-col rounded-3xl p-8 shadow-card ${
+                  className={`relative flex h-full flex-col rounded-3xl p-8 shadow-card ${
                     p.recommended ? "border-2 border-pulse bg-white" : "border border-line bg-white"
                   }`}
                 >
@@ -541,14 +542,14 @@ export default function RakushiftPage() {
           <SectionHead
             en="Option"
             title="初期設定サポート"
-            lead="面倒な初期設定とスタッフ登録は、まるごと代行できます。"
+            lead="面倒な初期設定とスタッフ登録は、==まるごと代行できます==。"
           />
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
             <ol className="grid gap-3">
               {setupSupportItems.map((c, i) => (
                 <Reveal key={c.title} delay={i * 0.06}>
                   <li className="flex gap-5 rounded-2xl border border-line bg-white px-6 py-5 shadow-card">
-                    <span aria-hidden className="num shrink-0 text-xl font-bold text-pulse/40">{i + 1}</span>
+                    <span aria-hidden className="num shrink-0 text-xl font-bold text-gold/45">{i + 1}</span>
                     <div>
                       <h3 className="text-sm font-bold md:text-base">{c.title}</h3>
                       <p className="mt-2 text-sm leading-7 text-slate">{c.body}</p>
@@ -582,7 +583,7 @@ export default function RakushiftPage() {
       {/* 導入の流れ */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Steps" title="導入の流れ" lead="設定の作り込みは当社で代行できます。使い始めるところまで伴走します。" />
+          <SectionHead en="Steps" title="導入の流れ" lead="==設定の作り込みは当社で代行できます==。使い始めるところまで伴走します。" />
           <div className="mt-10">
             <FlowSteps steps={steps} />
           </div>
@@ -624,7 +625,7 @@ export default function RakushiftPage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                  className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-gold-bright px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料でシフトを見てもらう
               </Link>

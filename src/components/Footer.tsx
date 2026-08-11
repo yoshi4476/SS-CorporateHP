@@ -117,7 +117,7 @@ export default function Footer() {
           </nav>
           <Link
             href="/contact"
-            className="inline-block w-fit rounded-full border border-aqua/60 px-6 py-3 text-sm font-bold text-aqua transition-colors hover:bg-aqua hover:text-ink"
+            className="inline-block w-fit rounded-full border border-gold-bright/60 px-6 py-3 text-sm font-bold text-gold-bright transition-colors hover:bg-gold-bright hover:text-ink"
           >
             無料相談を予約する
           </Link>

@@ -312,7 +312,9 @@ export default async function ServicePage({ params }: Props) {
       )}
 
       {/* 深掘り解説 */}
-      <section className="bg-mist py-20 md:py-28" aria-labelledby="insight-heading">
+      {/* 白と薄灰が交互に続くだけだと最後まで同じ顔に見える。
+          読みどころであるこの節だけ金の淡い面にして、縦のリズムを作る */}
+      <section className="border-y border-gold/20 bg-gold-tint py-20 md:py-28" aria-labelledby="insight-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Insight"
@@ -328,7 +330,7 @@ export default async function ServicePage({ params }: Props) {
                   }`}
                 >
                   <div className="md:[direction:ltr]">
-                    <p className="num text-6xl font-bold text-pulse/30 md:text-8xl" aria-hidden>
+                    <p className="num text-6xl font-bold text-gold/40 md:text-8xl" aria-hidden>
                       {String(i + 1).padStart(2, "0")}
                     </p>
                     <h3 className="mt-2 border-l-4 border-pulse pl-5 text-xl font-bold leading-relaxed md:text-2xl">

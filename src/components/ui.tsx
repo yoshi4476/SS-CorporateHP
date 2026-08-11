@@ -57,13 +57,14 @@ export function StatTile({ metric, delay = 0 }: { metric: Metric; delay?: number
   const numeric = Number(metric.value.replaceAll(",", ""));
   return (
     <Reveal delay={delay} className="rounded-2xl border border-line bg-white p-6 shadow-card">
-      <p className="text-3xl font-bold text-ink md:text-4xl">
+      {/* 実績の数字は金で統一。紺の面の中で数字だけが浮き上がる */}
+      <p className="text-3xl font-bold text-gold md:text-4xl">
         {Number.isFinite(numeric) ? (
           <CountUp value={numeric} suffix="" />
         ) : (
           <span className="num">{metric.value}</span>
         )}
-        {metric.suffix && <span className="ml-1 text-lg text-pulse">{metric.suffix}</span>}
+        {metric.suffix && <span className="ml-1 text-lg">{metric.suffix}</span>}
       </p>
       <p className="mt-2 text-sm font-medium text-slate">{metric.label}</p>
       {metric.note && <p className="mt-1 text-xs text-slate/70">{metric.note}</p>}
@@ -155,7 +156,7 @@ export function CtaBand({
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"
-                  className="w-full rounded-full bg-aqua px-9 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  className="w-full rounded-full bg-gold-bright px-9 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 sm:w-auto"
             >
               無料相談を予約する
             </Link>

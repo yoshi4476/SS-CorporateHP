@@ -82,7 +82,7 @@ export function MidCta({
         <div className="shrink-0">
           <Link
             href="/contact"
-                  className="inline-block rounded-full bg-aqua px-9 py-4 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="inline-block rounded-full bg-gold-bright px-9 py-4 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
           >
             {label}
           </Link>

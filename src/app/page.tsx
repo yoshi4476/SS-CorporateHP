@@ -312,7 +312,7 @@ export default function Home() {
                   どの事業が合うか、無料で診断します。
                 </span>
               </span>
-              <span className="inline-flex shrink-0 items-center gap-3 rounded-full bg-aqua px-7 py-3.5 text-sm font-bold text-ink transition-transform group-hover:-translate-y-0.5">
+              <span className="inline-flex shrink-0 items-center gap-3 rounded-full bg-gold-bright px-7 py-3.5 text-sm font-bold text-ink transition-transform group-hover:-translate-y-0.5">
                 相談してみる
                 <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
                   <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
@@ -345,10 +345,11 @@ export default function Home() {
           <dl className="mt-16 grid grid-cols-1 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
             {MEGA_STATS.map((s, i) => (
               <Reveal key={s.label} delay={(i % 3) * 0.1}>
-                <div className="border-l-2 border-pulse pl-6">
+                {/* 縦罫と単位を金にして、紺一色の面に温度を足す */}
+                <div className="border-l-2 border-gold-bright/70 pl-6">
                   <dd className="mega-num text-6xl text-white md:text-7xl lg:text-8xl">
                     <CountUp value={s.value} duration={1.4 + (i % 3) * 0.3} />
-                    <span className="ml-1 text-3xl text-aqua md:text-4xl">{s.suffix}</span>
+                    <span className="ml-1 text-3xl text-gold-bright md:text-4xl">{s.suffix}</span>
                   </dd>
                   <dt className="mt-4 text-xs leading-5 text-white/60 md:text-sm">{s.label}</dt>
                 </div>
@@ -633,7 +634,9 @@ export default function Home() {
       <section id="subsidy" className="scroll-mt-24 pb-24 md:pb-32" aria-labelledby="subsidy-heading">
         <div className="mx-auto max-w-7xl px-5">
           <Reveal>
-            <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-line bg-raise p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
+            {/* 白の面が2つ続いて単調になるうえ、内容もお金の話なので、
+                この帯だけ金の淡い面にして視線を止める */}
+            <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
               <div>
                 <p className="eyebrow">Subsidy</p>
                 <h2 id="subsidy-heading" className="mt-3 text-2xl font-bold md:text-4xl">

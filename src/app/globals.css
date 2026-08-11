@@ -21,6 +21,12 @@
      用途の多い「暗い面の上」に合わせている。 */
   --color-aqua: #74c7d6;
   --color-glow: #7d90ad;
+  /* 紺だけで組むと画面が単調になるので、対になるアクセントを金1色だけ足す。
+     紺は「信頼」、金は「資産・成果」の役割。数字・強調語・セクションの起点にだけ使い、
+     面には広げない。gold は白の上で 4.7:1、gold-bright は紺の上で 8.4:1。 */
+  --color-gold: #a8641a;
+  --color-gold-bright: #e8a33d;
+  --color-gold-tint: #fdf6ec;
 
   --font-display: var(--font-zen), "Hiragino Kaku Gothic ProN", sans-serif;
   --font-body: var(--font-noto), "Hiragino Kaku Gothic ProN", sans-serif;
@@ -100,6 +106,24 @@ h4 {
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-pulse);
+  /* セクションの起点に金の短い罫を置く。全ページ共通で色のリズムが生まれる */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 1.7em;
+  height: 2px;
+  background: var(--color-gold);
+}
+
+/* 紺の面では !text-aqua を重ねて使うため、罫も明るい側の金にする */
+.eyebrow[class*="aqua"]::before,
+.eyebrow[class*="white"]::before {
+  background: var(--color-gold-bright);
 }
 
 @media (min-width: 640px) {
@@ -362,11 +386,12 @@ h4 {
 /* 蛍光マーカー強調 */
 /* 強調。蛍光ペンのような塗りは軽い印象になるため、
    文字色と細い下線で示す。文中に何度出ても紙面が荒れない。 */
+/* 本文中の強調。紺の細線だと文字色に埋もれて気づかれないため、
+   金の太めの下線にして拾い読みでも目に留まるようにする */
 mark.marker {
-  background: none;
+  background: linear-gradient(transparent 62%, rgb(232 163 61 / 0.32) 0);
   color: var(--color-ink);
   font-weight: 700;
-  box-shadow: inset 0 -1px 0 0 var(--color-pulse);
   padding-bottom: 0.06em;
 }
 

@@ -144,7 +144,7 @@ export default function SubsidyDetail() {
               <Reveal key={s.step} delay={(i % 4) * 0.08}>
                 <article className="flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between">
-                    <span className="num text-3xl font-bold text-pulse/30" aria-hidden>{s.step}</span>
+                    <span className="num text-3xl font-bold text-gold/40" aria-hidden>{s.step}</span>
                     <span className="rounded-full bg-pulse/10 px-3 py-1 text-[0.6rem] font-bold text-pulse">
                       {s.period}
                     </span>

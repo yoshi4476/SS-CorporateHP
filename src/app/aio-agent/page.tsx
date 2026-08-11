@@ -97,12 +97,13 @@ export default function MediaPipelinePage() {
                   {pipeline.summary}
                 </p>
                 {/* 本数は他社と最も差が出るところなので、要約の直後に置く */}
-                <p className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl border border-pulse/25 bg-pulse/5 px-6 py-4">
+                <p className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl border border-gold/25 bg-gold-tint px-6 py-4">
                   <span className="text-sm font-bold text-ink">1サイトあたり</span>
-                  <span className="num text-3xl font-black leading-none text-pulse md:text-4xl">
+                  <span className="num text-3xl font-black leading-none text-gold md:text-4xl">
                     月60
                   </span>
-                  <span className="text-sm font-bold text-pulse">本</span>
+                  {/* 金の淡い面に金の小さい文字は 4.35:1 で基準を割るため、単位は黒に置く */}
+                  <span className="text-sm font-bold text-ink">本</span>
                   <span className="text-xs text-slate">
                     毎日2本。外注なら月180〜300万円ぶんの本数です
                   </span>
@@ -178,13 +179,13 @@ export default function MediaPipelinePage() {
           <SectionHead
             en="Problem"
             title="広告は、止めた月から消える。記事は、残る。"
-            lead="広告費は毎月ゼロから買い直しますが、記事は一度書けば資産として残り続けます。1本ずつ積み上がるほど、問い合わせが広告予算に左右されなくなります。ただし、積み上がる前に更新が止まれば、資産にはなりません。"
+            lead="広告費は毎月ゼロから買い直しますが、記事は==一度書けば資産として残り続けます==。1本ずつ積み上がるほど、問い合わせが広告予算に左右されなくなります。ただし、積み上がる前に更新が止まれば、資産にはなりません。"
           />
           <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2">
             {problems.map((p, i) => (
               <Reveal key={p} delay={i * 0.05}>
                 <li className="flex h-full items-start gap-4 bg-white px-7 py-6 text-sm leading-8 text-ink-soft">
-                  <span aria-hidden className="num shrink-0 text-xs font-bold text-pulse/50">
+                  <span aria-hidden className="num shrink-0 text-xs font-bold text-gold/50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {p}
@@ -203,7 +204,7 @@ export default function MediaPipelinePage() {
           <SectionHead
             en="What you get"
             title="LP と AIエージェントを、セットで納品します"
-            lead="器だけ作っても記事が出ません。エージェントだけ渡しても置き場所がありません。両方そろって初めて回ります。"
+            lead="器だけ作っても記事が出ません。エージェントだけ渡しても置き場所がありません。==両方そろって初めて回ります==。"
           />
           {/* 実物を先に見せてから、含まれるものを列挙する */}
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
@@ -255,7 +256,7 @@ export default function MediaPipelinePage() {
           <SectionHead
             en="Before / After"
             title="記事を外注する場合と、何が変わるのか"
-            lead="1本あたりで払うか、仕組みごと持つか。本数を増やすほど差が開きます。"
+            lead="1本あたりで払うか、仕組みごと持つか。==本数を増やすほど差が開きます==。"
           />
           <Reveal delay={0.08}>
             <div className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-card">
@@ -299,7 +300,7 @@ export default function MediaPipelinePage() {
           <SectionHead
             en="Pipeline"
             title="毎日、この順番で動いています"
-            lead="当社の管制塔が実際に走らせている工程です。人が触るのは、テーマの追加と月次の確認だけです。"
+            lead="当社の管制塔が実際に走らせている工程です。人が触るのは、==テーマの追加と月次の確認だけ==です。"
           />
           {/* 工程が順に流れることが伝わるよう、縦線で繋いだ時系列にする */}
           <ol className="relative mt-10 grid gap-0 pl-10 md:pl-14">
@@ -326,18 +327,20 @@ export default function MediaPipelinePage() {
       </section>
 
       {/* 品質ゲート */}
-      <section className="py-16 md:py-24">
+      {/* 白・薄灰・紺の3面だけだと縦のリズムが単調になるため、
+          品質ゲートだけ金の淡い面にして節目だと分かるようにする */}
+      <section className="border-y border-gold/20 bg-gold-tint py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Quality gate"
             title="「AIで量産」と分けているのは、ここです"
-            lead="出す前に落とす仕組みがあるかどうかで、メディアの寿命が変わります。"
+            lead="==出す前に落とす仕組み==があるかどうかで、メディアの寿命が変わります。"
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {gate.map((g, i) => (
               <Reveal key={g.title} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span aria-hidden className="num text-5xl font-bold text-pulse/30">
+                  <span aria-hidden className="num text-5xl font-bold text-gold/35">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{g.title}</h3>
@@ -380,7 +383,7 @@ export default function MediaPipelinePage() {
           <SectionHead
             en="Monthly report"
             title="毎月1日、次の一手まで書いて渡します"
-            lead="記事を出して終わりにしません。どこで離脱しているか、どの記事があと一歩か、来月どのキーワードを書くか。判断できる形にして毎月お渡しします。"
+            lead="記事を出して終わりにしません。どこで離脱しているか、どの記事があと一歩か、来月どのキーワードを書くか。==判断できる形にして毎月お渡しします==。"
           />
           <ol className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2 xl:grid-cols-4">
             {report.map((r, i) => (
@@ -402,7 +405,7 @@ export default function MediaPipelinePage() {
       {/* 流れ */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Steps" title="導入の流れ" lead="最初に決めるのは「何を書かないか」です。ここが曖昧だと記事が散らかります。" />
+          <SectionHead en="Steps" title="導入の流れ" lead="最初に決めるのは==「何を書かないか」==です。ここが曖昧だと記事が散らかります。" />
           <div className="mt-10">
             <FlowSteps steps={steps} />
           </div>
@@ -444,7 +447,7 @@ export default function MediaPipelinePage() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                  className="rounded-full bg-aqua px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-gold-bright px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料で試算を出してもらう
               </Link>
