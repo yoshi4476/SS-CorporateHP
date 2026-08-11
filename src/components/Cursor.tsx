@@ -8,7 +8,6 @@
 
 import { useEffect } from "react";
 
-const MAGNET = 0.32;
 // ドローンが正確な位置を隠してしまうため、実際のカーソル位置には
 // 小さな照準を出し、ドローンは左上に離れた位置を遅れて追尾させる。
 const DRONE_OFF_X = -40;
@@ -141,7 +140,12 @@ export default function Cursor() {
     // 実際のクリック位置を示す照準 (ドローンとは別に、遅れなく追従する)
     const dot = document.createElement("div");
     dot.className = "cursor-dot";
-    dot.innerHTML = `<span class="cdot"></span><span class="cring"></span>`;
+    // 照準は、丸い輪と四隅のブラケット。押せるものの上ではブラケットが
+    // 締まって対象を囲む。「AIに選ばれる」を扱う会社なので、
+    // 単に大きくするのではなく、対象を捉える動きにしている
+    dot.innerHTML =
+      `<span class="cdot"></span><span class="cring"></span>` +
+      `<span class="clock"><i></i><i></i><i></i><i></i></span>`;
 
     document.body.append(drone, dot);
     document.documentElement.classList.add("has-cursor");
