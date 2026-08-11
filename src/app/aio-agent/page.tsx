@@ -96,6 +96,17 @@ export default function MediaPipelinePage() {
                 <p className="mt-7 text-sm leading-8 text-slate md:text-base md:leading-9">
                   {pipeline.summary}
                 </p>
+                {/* 本数は他社と最も差が出るところなので、要約の直後に置く */}
+                <p className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl border border-pulse/25 bg-pulse/5 px-6 py-4">
+                  <span className="text-sm font-bold text-ink">1サイトあたり</span>
+                  <span className="num text-3xl font-black leading-none text-pulse md:text-4xl">
+                    月60
+                  </span>
+                  <span className="text-sm font-bold text-pulse">本</span>
+                  <span className="text-xs text-slate">
+                    毎日2本。外注なら月180〜300万円ぶんの本数です
+                  </span>
+                </p>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
@@ -180,6 +191,8 @@ export default function MediaPipelinePage() {
                 </li>
               </Reveal>
             ))}
+            {/* 5件を2列に並べると1セル余り、下地のグレーが矩形で見える。白で埋める */}
+            <li aria-hidden className="hidden bg-white md:block" />
           </ul>
         </div>
       </section>
@@ -379,6 +392,8 @@ export default function MediaPipelinePage() {
                 </li>
               </Reveal>
             ))}
+            {/* 7件は2列でも4列でも1セル余る。下地のグレーが矩形で出ないよう白で埋める */}
+            <li aria-hidden className="hidden bg-white md:block" />
           </ol>
           <p className="mt-6 text-xs leading-7 text-slate">{reportNote}</p>
         </div>
