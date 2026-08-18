@@ -8,8 +8,11 @@ import { news } from "@/lib/news";
 import { breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "お知らせ",
-  description: "セブンセンシズ株式会社からのお知らせ一覧。制度・事業に関する最新情報をお届けします。",
+  // 旧www側にも同名ページがあり、Googleがそちらを正規版に選んでいた。
+  // 旧wwwは造園・害虫駆除の事業サイトなので、扱う事業の違いを明示して分ける。
+  title: "お知らせ・プレスリリース（経理BPO / AI集客支援）",
+  description:
+    "セブンセンシズ株式会社（大阪市東成区）のお知らせ・プレスリリース。経理BPO・AI集客支援・AI導入補助金の各事業に関する制度の新設、サービス開始、社内制度の取り組みを掲載しています。",
   alternates: { canonical: "/news" },
 };
 
@@ -29,7 +32,9 @@ export default function NewsPage() {
             <p className="eyebrow">News</p>
             <h1 className="mt-4 text-3xl font-black md:text-5xl">お知らせ</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
-              制度の新設・セミナー登壇・社内の取り組みなど、会社からのお知らせを掲載しています。
+              経理BPO・AI集客支援・AI導入補助金の各事業に関する制度の新設やサービス開始、
+              社内制度の取り組みなど、セブンセンシズ株式会社（大阪市東成区・法人番号3120001227825）
+              からのお知らせを掲載しています。
             </p>
           </Reveal>
           <Reveal delay={0.12} className="mt-10">

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "セブンセンシズ株式会社のプライバシーポリシー(個人情報保護方針)。個人情報の取得・利用目的・第三者提供・開示請求への対応について定めています。",
   alternates: { canonical: "/privacy" },
+  // 旧www側の同名ページをGoogleが正規版に選び、corp側が「重複」として
+  // 除外されていた。定型ページで検索流入もないため、こちらを外す。
+  robots: { index: false, follow: true },
 };
 
 const SECTIONS: { title: string; body: string[] }[] = [

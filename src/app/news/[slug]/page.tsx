@@ -20,7 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!item) return {};
   return {
     title: item.title,
-    description: item.body[0],
+    // 本文の1文目だけでは旧www側の同名ページと区別がつかないため、
+    // 発信元と日付を添えて、どの会社のいつの発表かを明示する。
+    description: `${item.body[0].slice(0, 110)}（${item.date} セブンセンシズ株式会社）`,
     alternates: { canonical: `/news/${item.slug}` },
   };
 }
