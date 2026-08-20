@@ -82,7 +82,7 @@ export const useSteps: { no: string; en: string; title: string; body: string; im
     en: "Staff",
     title: "スタッフ管理",
     body: "役職・評価・給与形態・勤務条件・休み希望を登録します。店長やリーダーは責任者として優先配置、評価Dの新人は先輩と必ず同じ時間帯に、といった扱いがそのままAIの配置に効きます。",
-    image: "/images/rakushift/staff.jpg",
+    image: "/images/rakushift/staff-2.jpg",
     alt: "スタッフ管理の画面。役職・評価・給与形態・勤務条件の一覧",
   },
   {
@@ -90,7 +90,7 @@ export const useSteps: { no: string; en: string; title: string; body: string; im
     en: "AI generate",
     title: "AIシフト作成",
     body: "期間を選んでボタンを押すだけ。数十秒で組み上がり、プレビューで中身を確認してから確定します。「確定して保存」を押すまで本番には反映されないので、何度でも作り直せます。",
-    image: "/images/rakushift/preview.jpg",
+    image: "/images/rakushift/preview-2.jpg",
     alt: "生成されたシフトのプレビュー画面。保存前に内容を確認できる",
   },
 ];

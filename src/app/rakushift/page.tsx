@@ -71,7 +71,7 @@ export default function RakushiftPage() {
     url: rakushift.url,
     description: rakushift.summary,
     publisher: { "@id": `${site.url}/#organization` },
-    screenshot: `${site.url}/images/rakushift/shift-table.jpg`,
+    screenshot: `${site.url}/images/rakushift/shift-table-2.jpg`,
     offers: plans.map((p) => ({
       "@type": "Offer",
       name: p.name,
@@ -339,7 +339,7 @@ export default function RakushiftPage() {
           <Reveal delay={0.08}>
             <figure className="mt-10 overflow-hidden rounded-3xl border border-line bg-white shadow-lift">
               <Image
-                src="/images/rakushift/shift-table.jpg"
+                src="/images/rakushift/shift-table-2.jpg"
                 alt="完成したシフト表。スタッフごとに勤務時間がカレンダー形式で並んでいる"
                 width={1600}
                 height={894}
