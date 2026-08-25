@@ -35,6 +35,9 @@ export default async function ServicePage({ params }: Props) {
   if (!service) notFound();
 
   const others = services.filter((s) => s.slug !== service.slug);
+  const sectionImages = service.sectionImage
+    ? [service.sectionImage].flat()
+    : [];
   const heroImage = service.image;
   const schemas = [
     serviceSchema(service.slug),
@@ -85,7 +88,11 @@ export default async function ServicePage({ params }: Props) {
                 <p className="mt-7 max-w-2xl text-xl font-bold leading-10 text-ink md:text-2xl md:leading-[1.9]">
                   <mark className="marker">{service.lead}</mark>
                 </p>
-                <p className="mt-5 max-w-2xl text-sm leading-8 text-slate md:text-base">{service.body}</p>
+                {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
+                    記号がそのまま出ていた */}
+                <p className="mt-5 max-w-2xl text-sm leading-8 text-slate md:text-base">
+                  <Rich text={service.body} />
+                </p>
               </Reveal>
               <Reveal delay={0.14}>
                 <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
@@ -189,16 +196,20 @@ export default async function ServicePage({ params }: Props) {
               )}
             </div>
 
-            {service.sectionImage && (
-              <Reveal delay={0.12} className="mt-6">
-                <Image
-                  src={service.sectionImage.src}
-                  alt={service.sectionImage.alt}
-                  width={1200}
-                  height={660}
-                  className="h-auto w-full rounded-3xl border border-line shadow-card"
-                />
-              </Reveal>
+            {sectionImages.length > 0 && (
+              <div className={`mt-6 grid gap-6 ${sectionImages.length > 1 ? "lg:grid-cols-2" : ""}`}>
+                {sectionImages.map((img, i) => (
+                  <Reveal key={img.src} delay={0.12 + i * 0.08}>
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={1200}
+                      height={660}
+                      className="h-auto w-full rounded-3xl border border-line shadow-card"
+                    />
+                  </Reveal>
+                ))}
+              </div>
             )}
 
             {service.industries && (

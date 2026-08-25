@@ -25,6 +25,7 @@ MAP = {
     "ChatGPT Image 2026年8月3日 19_52_17.png": "office-sign.jpg",
     "Generated Image August 03, 2026 - 6_27PM.png": "ceo-office.jpg",
     "Generated Image August 03, 2026 - 6_19PM.png": "strategy-board.jpg",
+    "写真素材.jpg": "biz-ad-operations.jpg",
 }
 
 DST.mkdir(parents=True, exist_ok=True)

@@ -21,8 +21,8 @@ export type Service = {
   useCase?: { title: string; body: string };
   /** 代表的な依頼内容 */
   menu?: string[];
-  /** 用途セクションに置く図版 (scripts/make-visuals.py で生成) */
-  sectionImage?: { src: string; alt: string };
+  /** 用途セクションに置く図版 (scripts/make-visuals.py で生成)。2枚渡すと横に並ぶ */
+  sectionImage?: { src: string; alt: string } | { src: string; alt: string }[];
   /** 詳細ページのヒーロー画像。枠内に収めるので切り抜きや図版でもよい */
   image?: { src: string; alt: string };
   /** 一覧カードの背景に全面で敷く写真。暗くかぶせるため実写のみ */
@@ -650,8 +650,12 @@ export const services: Service[] = [
   {
     slug: "ad-operations",
     image: {
-      src: "/images/ads-hero.png",
-      alt: "広告費の内訳と、クリックから問い合わせまでの落ち込みを1枚にまとめた図",
+      src: "/images/biz-ad-operations.jpg",
+      alt: "会議室の大画面に映した広告の実績データを見ながら、翌月の配分を検討するチーム",
+    },
+    cardImage: {
+      src: "/images/biz-ad-operations.jpg",
+      alt: "会議室の大画面に映した広告の実績データを見ながら、翌月の配分を検討するチーム",
     },
     name: "広告運用代行",
     en: "Paid Advertising",
@@ -662,10 +666,16 @@ export const services: Service[] = [
       title: "用途: 今すぐ問い合わせが要るとき",
       body: "広告運用代行が効くのは==出稿した月のうちに問い合わせが要る==ときです。記事やマップの整備は成果が出るまで数ヶ月かかりますが、広告は当日から配信できます。ただし**止めた月から問い合わせも止まります**。長く効かせたい場合は、広告で当面の件数を確保しながら、並行して**AIO運用代行**で記事を積むか、来店型なら**MEO運用代行**でマップを整える形をおすすめしています。",
     },
-    sectionImage: {
-      src: "/images/ads-funnel.png",
-      alt: "表示・クリック・LP到達・問い合わせと段階が下がるにつれて数が減る様子と、どこで落ちているかを示した図",
-    },
+    sectionImage: [
+      {
+        src: "/images/ads-hero.png",
+        alt: "Google・Meta・LINEの3媒体から受け皿のLPを経て問い合わせに至る流れと、広告アカウントだけでは届かない範囲を示した図",
+      },
+      {
+        src: "/images/ads-funnel.png",
+        alt: "表示・クリック・LP到達・問い合わせと段階が下がるにつれて数が減る様子と、どこで落ちているかを示した図",
+      },
+    ],
     menu: [
       "現状の広告アカウント診断 (無料・レポート形式でお渡し)",
       "Google広告の運用 (検索・P-MAX・YouTube)",
