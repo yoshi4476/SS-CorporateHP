@@ -11,7 +11,7 @@ import { pipeline } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-// 自社プロダクト。受託の6事業とは性質が違うので別枠で並べる
+// 自社プロダクト。受託の7事業とは性質が違うので別枠で並べる
 const PRODUCTS = [
   {
     href: "/rakushift",

@@ -4,10 +4,10 @@ import { Reveal } from "@/components/motion";
 import { services } from "@/lib/services";
 
 // 事業の一覧。写真をカードの背景として全面に敷き、暗くかぶせて白文字を載せる。
-// 大きさに強弱をつけ、1枚 → 2枚 → 3枚 の順に並べて視線を落とす。
+// 先頭だけ全幅で大きく置き、残りは3枚ずつ2段。7事業でも最終行に穴が空かない。
 
-const SPAN = ["lg:col-span-6", "lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
-const HEIGHT = ["h-[420px] md:h-[460px]", "h-[340px]", "h-[340px]", "h-[300px]", "h-[300px]", "h-[300px]"];
+const SPAN = ["lg:col-span-6", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];
+const HEIGHT = ["h-[420px] md:h-[460px]", "h-[320px]", "h-[320px]", "h-[320px]", "h-[320px]", "h-[320px]", "h-[320px]"];
 
 export default function BusinessShowcase() {
   return (

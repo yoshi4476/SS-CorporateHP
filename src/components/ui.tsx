@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
 import WaveText from "@/components/WaveText";
+import { services } from "@/lib/services";
 import type { Metric } from "@/lib/services";
 
 /** ==text== をマーカー、**text** を太字に変換して描画する */
@@ -20,6 +21,68 @@ export function Rich({ text }: { text: string }) {
           return (
             <strong key={i} className="font-bold text-ink">
               {p.slice(2, -2)}
+            </strong>
+          );
+        }
+        return p;
+      })}
+    </>
+  );
+}
+
+/**
+ * Rich と同じ記法だが、**太字** の中に事業名が含まれていればその部分をリンクにする。
+ * 用途ブロックは「その用途なら別の事業のほうが合う」と誘導する場所なのに、
+ * これまで名前を太字で示すだけで飛べなかった。
+ */
+const SERVICE_HREF: [string, string][] = services
+  .map((s) => [s.name, `/services/${s.slug}`] as [string, string])
+  // 短い名前が長い名前の一部を食わないよう、長いものから照合する
+  .sort((a, b) => b[0].length - a[0].length);
+
+function linkifyServices(text: string, key: string) {
+  const out: React.ReactNode[] = [];
+  let rest = text;
+  let i = 0;
+  while (rest) {
+    const hit = SERVICE_HREF.map(([name, href]) => ({ name, href, at: rest.indexOf(name) }))
+      .filter((h) => h.at >= 0)
+      .sort((a, b) => a.at - b.at)[0];
+    if (!hit) {
+      out.push(rest);
+      break;
+    }
+    if (hit.at > 0) out.push(rest.slice(0, hit.at));
+    out.push(
+      <Link
+        key={`${key}-${i++}`}
+        href={hit.href}
+        className="text-pulse underline decoration-gold decoration-2 underline-offset-4 transition-colors hover:text-gold"
+      >
+        {hit.name}
+      </Link>,
+    );
+    rest = rest.slice(hit.at + hit.name.length);
+  }
+  return out;
+}
+
+export function RichLinked({ text }: { text: string }) {
+  const parts = text.split(/(==[^=]+==|\*\*[^*]+\*\*)/g);
+  return (
+    <>
+      {parts.map((p, i) => {
+        if (p.startsWith("==") && p.endsWith("==")) {
+          return (
+            <mark key={i} className="marker">
+              {p.slice(2, -2)}
+            </mark>
+          );
+        }
+        if (p.startsWith("**") && p.endsWith("**")) {
+          return (
+            <strong key={i} className="font-bold text-ink">
+              {linkifyServices(p.slice(2, -2), String(i))}
             </strong>
           );
         }

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
-import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich } from "@/components/ui";
+import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
@@ -164,7 +164,7 @@ export default async function ServicePage({ params }: Props) {
                   <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Purpose</p>
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
                   <p className="mt-5 text-sm leading-9 text-slate md:text-base">
-                    <Rich text={service.useCase.body} />
+                    <RichLinked text={service.useCase.body} />
                   </p>
                 </Reveal>
               )}

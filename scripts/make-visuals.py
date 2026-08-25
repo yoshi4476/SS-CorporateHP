@@ -19,14 +19,20 @@ OUT = Path(__file__).resolve().parent.parent / "public" / "images"
 W, H = 1200, 660
 SS = 2  # 描画は2倍で行い、最後に縮小してエッジを滑らかにする
 
-PAPER = (250, 251, 253)
-INK = (11, 18, 32)
-SLATE = (85, 99, 122)
-FAINT = (154, 168, 188)
-LINE = (223, 230, 240)
-PULSE = (43, 75, 255)
-AQUA = (34, 211, 238)
-GLOW = (109, 140, 255)
+# globals.css の @theme と同じ値。サイトの配色を紺へ寄せた際に
+# ここが電光ブルーのまま取り残されていたので揃えた。
+PAPER = (251, 252, 253)
+INK = (13, 20, 32)
+SLATE = (90, 102, 120)
+FAINT = (100, 112, 130)
+LINE = (226, 230, 236)
+PULSE = (28, 63, 124)
+AQUA = (116, 199, 214)
+GLOW = (125, 144, 173)
+# 紺と対になるアクセント。成果・お金にあたるものだけに使う
+GOLD = (168, 100, 26)
+GOLD_BRIGHT = (232, 163, 61)
+GOLD_TINT = (253, 246, 236)
 WHITE = (255, 255, 255)
 
 JP_B = r"C:\Windows\Fonts\YuGothB.ttc"
@@ -50,8 +56,8 @@ def canvas():
 
     glow = Image.new("RGB", (W * SS, H * SS), PAPER)
     g = ImageDraw.Draw(glow)
-    g.ellipse([int(W * 0.52) * SS, int(-H * 0.25) * SS, int(W * 1.25) * SS, int(H * 0.85) * SS], fill=(226, 233, 255))
-    g.ellipse([int(W * 0.62) * SS, int(H * 0.45) * SS, int(W * 1.15) * SS, int(H * 1.3) * SS], fill=(224, 247, 252))
+    g.ellipse([int(W * 0.52) * SS, int(-H * 0.25) * SS, int(W * 1.25) * SS, int(H * 0.85) * SS], fill=(228, 234, 245))
+    g.ellipse([int(W * 0.62) * SS, int(H * 0.45) * SS, int(W * 1.15) * SS, int(H * 1.3) * SS], fill=(252, 244, 232))
     glow = glow.filter(ImageFilter.GaussianBlur(90 * SS))
     return Image.blend(im, glow, 0.55), None
 
@@ -62,7 +68,7 @@ def finish(im, eyebrow, title, sub, name):
     d.text((64 * SS, 84 * SS), title, font=font(JP_B, 34), fill=INK)
     if sub:
         d.text((64 * SS, 132 * SS), sub, font=font(JP_R, 16), fill=SLATE)
-    d.line([(64 * SS, (H - 56) * SS), (140 * SS, (H - 56) * SS)], fill=PULSE, width=3 * SS)
+    d.line([(64 * SS, (H - 56) * SS), (140 * SS, (H - 56) * SS)], fill=GOLD, width=3 * SS)
     im = im.resize((W, H), Image.LANCZOS)
     im.save(OUT / name, optimize=True)
     print(f"  {name}  {(OUT / name).stat().st_size // 1024} KB")
@@ -107,7 +113,7 @@ def v_services():
     im, _ = canvas()
     d = ImageDraw.Draw(im)
     cx, cy, r = 858, 358, 188
-    labels = ["AI", "DEV", "補助金", "AIO", "MEO", "HP/LP"]
+    labels = ["AI", "DEV", "補助金", "AIO", "MEO", "広告", "HP/LP"]
     pts = []
     for i, lb in enumerate(labels):
         a = math.radians(-90 + i * 360 / len(labels))
@@ -237,6 +243,70 @@ def v_news():
     finish(im, "NEWS", "会社からのお知らせ", "制度・登壇・取り組みの更新", "news-hero.png")
 
 
+def v_ads_hero():
+    """広告運用: 3媒体 → 受け皿のLP → 問い合わせ。手を入れる範囲の違いを見せる"""
+    im, _ = canvas()
+    d = ImageDraw.Draw(im)
+
+    media = [("Google広告", "検索・P-MAX・YouTube"), ("Meta広告", "Facebook・Instagram"), ("LINE広告", None)]
+    ys = [236, 324, 412]
+    for (lb, note), y in zip(media, ys):
+        card(d, 64, y, 252, 76, lb, small=note or "友だち追加・リーチ")
+        # 3本とも矢じりを付けると合流点で潰れるので、線で合流させて矢は1本だけにする
+        d.line([(322 * SS, (y + 38) * SS), (412 * SS, 362 * SS)], fill=FAINT, width=2 * SS)
+    d.ellipse([407 * SS, 357 * SS, 417 * SS, 367 * SS], fill=FAINT)
+    arrow(d, 417, 362, 450, 362, color=FAINT, w=2)
+
+    # 受け皿。ここを触れるかどうかが分かれ目なので、面で塗って主役にする
+    rrect(d, [456 * SS, 290 * SS, 756 * SS, 434 * SS], 18, fill=PULSE)
+    d.text((488 * SS, 322 * SS), "LP (受け皿)", font=font(JP_B, 24), fill=WHITE)
+    d.text((488 * SS, 366 * SS), "構成・文言・フォームまで", font=font(JP_R, 15), fill=(198, 212, 236))
+    d.text((488 * SS, 392 * SS), "自社で直す", font=font(JP_R, 15), fill=(198, 212, 236))
+
+    arrow(d, 762, 362, 842, 362, color=GOLD, w=3)
+
+    rrect(d, [858 * SS, 302 * SS, 1136 * SS, 422 * SS], 18, fill=GOLD_TINT, outline=GOLD, width=2 * SS)
+    d.text((890 * SS, 332 * SS), "問い合わせ", font=font(JP_B, 24), fill=GOLD)
+    d.text((890 * SS, 376 * SS), "件数と、1件あたりの単価を数える", font=font(JP_R, 13), fill=SLATE)
+
+    d.text((64 * SS, 524 * SS), "広告のアカウントだけを触る場合、手が届くのは左の3つまで。",
+           font=font(JP_B, 18), fill=INK)
+    d.text((64 * SS, 556 * SS), "クリックの先で落ちているなら、直すのは広告ではなく受け皿の側になる。",
+           font=font(JP_R, 15), fill=SLATE)
+
+    finish(im, "PAID ADVERTISING", "広告と、その受け皿をまとめて直す",
+           "Google・Meta・LINE の運用代行", "ads-hero.png")
+
+
+def v_ads_funnel():
+    """広告運用: 段ごとに数が減る構造と、落ちどころ"""
+    im, _ = canvas()
+    d = ImageDraw.Draw(im)
+
+    rows = [("表示", 1072, PULSE), ("クリック", 742, PULSE), ("LP到達", 690, PULSE), ("問い合わせ", 180, GOLD)]
+    y = 206
+    for lb, w, col in rows:
+        rrect(d, [64 * SS, y * SS, (64 + w) * SS, (y + 56) * SS], 10, fill=col)
+        d.text((88 * SS, (y + 16) * SS), lb, font=font(JP_B, 18), fill=WHITE)
+        y += 72
+
+    # 3段目と4段目の差が、最も大きく落ちるところ
+    bx1, bx2, by = 64 + 180 + 14, 64 + 690, 450
+    d.line([(bx1 * SS, by * SS), (bx2 * SS, by * SS)], fill=GOLD, width=2 * SS)
+    for bx in (bx1, bx2):
+        d.line([(bx * SS, (by - 7) * SS), (bx * SS, (by + 7) * SS)], fill=GOLD, width=2 * SS)
+    d.text((bx1 * SS, (by + 16) * SS), "クリックしたのに、問い合わせに至らなかった分",
+           font=font(JP_B, 16), fill=GOLD)
+
+    d.text((64 * SS, 528 * SS), "入札やキーワードを触る前に、どの段でこぼれているかを数える。",
+           font=font(JP_B, 18), fill=INK)
+    d.text((64 * SS, 560 * SS), "落ちているのが受け皿なら、いくら広告を調整しても件数は増えない。",
+           font=font(JP_R, 15), fill=SLATE)
+
+    finish(im, "WHERE IT LEAKS", "どこで落ちているかを、先に決める",
+           "段を分けて数えると、直す場所が決まる", "ads-funnel.png")
+
+
 TASKS = {
     "services": v_services,
     "consulting": v_consulting,
@@ -244,6 +314,8 @@ TASKS = {
     "subsidy": v_subsidy,
     "aio": v_aio,
     "news": v_news,
+    "ads": v_ads_hero,
+    "ads-funnel": v_ads_funnel,
 }
 
 if __name__ == "__main__":

@@ -23,7 +23,7 @@ const PAGES: { href: string; label: string; external?: boolean }[] = [
 
 const SECTIONS: { href: string; label: string }[] = [
   { href: "/#vision", label: "ビジョン" },
-  { href: "/#services", label: "6つの事業" },
+  { href: "/#services", label: "7つの事業" },
   { href: "/#numbers", label: "数字で見る" },
   { href: "/#data", label: "実践データ" },
   { href: "/#aio", label: "SEO×MEO×AIO" },
