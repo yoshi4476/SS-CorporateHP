@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
+import { track } from "@/components/Tracking";
 
 const inputCls =
   "w-full rounded-xl border border-line bg-mist/50 px-4 py-3 text-sm text-ink placeholder:text-slate/50 focus:border-pulse focus:bg-white focus:outline-none disabled:opacity-60";
@@ -94,13 +95,17 @@ export default function ContactForm() {
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setState("sent");
+        // fetch 送信でページが変わらないため、明示的に送らないと計測されない
+        track("generate_lead", { service: serviceName || "未選択" });
       } else {
         setState("error");
         setErrorMsg(data.error ?? "送信に失敗しました。");
+        track("form_error", { reason: data.error ?? "unknown" });
       }
     } catch {
       setState("error");
       setErrorMsg("通信エラーが発生しました。");
+      track("form_error", { reason: "network" });
     }
   };
 

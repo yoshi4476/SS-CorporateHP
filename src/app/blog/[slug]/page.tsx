@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
 import { sheet } from "@/lib/bpo";
+import { StickyCta } from "@/components/LpCta";
 import {
   posts,
   getPost,
@@ -205,13 +206,22 @@ export default async function BlogDetailPage({ params }: Props) {
 
             {/* 本文はスクロール連動アニメで包まない。
                 目次アンカーで途中に着地したときに本文が消えるのを避けるため */}
+            {/* 記事は長い。読み終える前に離脱する人のために、
+                スマホだけ追従バーを出す (末尾のオファーが見えたら引っ込む) */}
+            <StickyCta
+              label="資料を受け取る"
+              note="経理業務の棚卸しシート・登録不要"
+              href={sheet.href}
+              download
+              endId="article-end-cta"
+            />
             <div
               className="article-body mt-10 border-t border-line pt-10 lg:mt-0"
               dangerouslySetInnerHTML={{ __html: html }}
             />
 
             <Reveal>
-              <aside className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">
+              <aside id="article-end-cta" className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">
                 <p className="text-xs font-bold tracking-widest text-gold-bright">読み終えた方へ</p>
                 <h2 className="mt-3 text-lg font-black leading-snug md:text-xl">
                   {sheet.name}

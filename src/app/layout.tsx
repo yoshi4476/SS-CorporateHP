@@ -8,6 +8,7 @@ import Cursor from "@/components/Cursor";
 import PageTransition from "@/components/PageTransition";
 import IntroLoader from "@/components/IntroLoader";
 import JsonLd from "@/components/JsonLd";
+import Tracking from "@/components/Tracking";
 import { organizationSchema } from "@/lib/schema";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -89,6 +90,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full">
         <JsonLd data={organizationSchema} />
+        <Tracking />
         <Header />
         <Cursor />
         <PageTransition />

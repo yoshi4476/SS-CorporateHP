@@ -11,9 +11,17 @@ import { useEffect, useRef, useState } from "react";
 export function StickyCta({
   label = "無料相談を予約する",
   note,
+  href = "/contact",
+  download = false,
+  endId = "lp-end-cta",
 }: {
   label?: string;
   note?: string;
+  href?: string;
+  /** PDFなど、遷移せずに保存させたいとき */
+  download?: boolean;
+  /** これが見えたらバーを引っ込める */
+  endId?: string;
 }) {
   const [show, setShow] = useState(false);
   const sentinel = useRef<HTMLSpanElement>(null);
@@ -27,14 +35,14 @@ export function StickyCta({
     io.observe(el);
 
     // 末尾のCTAが見えたら重ねない
-    const end = document.getElementById("lp-end-cta");
+    const end = document.getElementById(endId);
     let io2: IntersectionObserver | undefined;
     if (end) {
       io2 = new IntersectionObserver(([e]) => { if (e.isIntersecting) setShow(false); }, { threshold: 0.15 });
       io2.observe(end);
     }
     return () => { io.disconnect(); io2?.disconnect(); };
-  }, []);
+  }, [endId]);
 
   return (
     <>
@@ -48,12 +56,22 @@ export function StickyCta({
           <div className="min-w-0 flex-1">
             <p className="truncate text-[0.7rem] font-bold text-ink">{note ?? "初期費用0円・相談は無料です"}</p>
           </div>
-          <Link
-            href="/contact"
-            className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
-          >
-            {label}
-          </Link>
+          {download ? (
+            <a
+              href={href}
+              download
+              className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
+            >
+              {label}
+            </a>
+          ) : (
+            <Link
+              href={href}
+              className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
+            >
+              {label}
+            </Link>
+          )}
         </div>
       </div>
     </>
