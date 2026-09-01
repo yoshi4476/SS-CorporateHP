@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, CtaBand } from "@/components/ui";
@@ -10,8 +11,11 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "会社概要｜大阪市東成区・2020年設立",
+  // 「セブンセンシズ株式会社」の指名検索はトップページ (corp.7senses.co.jp) で
+  // 受ける方針のため、この社名だけを先頭に置く書き出しは避け、
+  // ページの役割 (会社概要) を先に示してから社名に触れる語順にする。
   description:
-    `セブンセンシズ株式会社の会社概要。代表挨拶・ミッション・会社情報。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など${services.length}つの事業を展開しています。`,
+    `会社概要ページ。代表挨拶・ミッション・会社情報を掲載。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など${services.length}つの事業を展開するセブンセンシズ株式会社の詳細です。`,
   path: "/company",
 });
 
@@ -89,7 +93,20 @@ export default function CompanyPage() {
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 md:pb-20 md:pt-20">
           <Reveal>
-            <p className="eyebrow">Company</p>
+            <nav aria-label="パンくずリスト" className="text-xs text-slate">
+              <ol className="flex flex-wrap items-center gap-2">
+                <li>
+                  <Link href="/" className="tap hover:text-pulse">
+                    トップ
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li aria-current="page" className="text-ink">
+                  会社概要
+                </li>
+              </ol>
+            </nav>
+            <p className="eyebrow mt-8">Company</p>
             <h1 className="mt-4 text-3xl font-black md:text-5xl">会社概要</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               「{site.tagline}」。私たちは、テクノロジーの力で事業と暮らしをもっと快適にすることを使命に、大阪から全国の企業・店舗を支援しています。

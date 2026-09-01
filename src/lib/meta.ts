@@ -34,7 +34,11 @@ export function pageMeta({
     description,
     alternates: { canonical: path },
     openGraph: {
-      title: `${title}｜${site.name}`,
+      // 接尾辞は <title> の template (layout.tsx) と同じ「セブンセンシズ」に揃える。
+      // ここで正式社名 (site.name = セブンセンシズ株式会社) をフルで付けると、
+      // 「セブンセンシズ株式会社」の指名検索で全下層ページがトップページと
+      // 競合してしまうため。識別にはブランド名の短縮形で足りる。
+      title: `${title}｜セブンセンシズ`,
       description,
       url: `${site.url}${path}`,
       type,

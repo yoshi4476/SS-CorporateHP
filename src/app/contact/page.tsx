@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import ContactForm from "@/components/ContactForm";
@@ -9,8 +10,10 @@ import { pageMeta } from "@/lib/meta";
 
 export const metadata: Metadata = pageMeta({
   title: "無料相談・お問い合わせ｜1営業日以内に返信",
+  // company/page.tsx と同様、「セブンセンシズ株式会社」の指名検索の受け皿は
+  // トップページに寄せるため、社名を書き出しに置かず用件を先に示す。
   description:
-    "セブンセンシズ株式会社への無料相談・お問い合わせはこちら。AI導入、MEO/AIO運用、システム開発、HP/LP制作などお気軽にご相談ください。",
+    "AI導入、MEO/AIO運用、システム開発、HP/LP制作などの無料相談・お問い合わせはこちらから。セブンセンシズ株式会社が1営業日以内にご返信します。",
   path: "/contact",
 });
 
@@ -28,7 +31,20 @@ export default function ContactPage() {
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-12 md:pt-20">
           <Reveal>
-            <p className="eyebrow">Contact</p>
+            <nav aria-label="パンくずリスト" className="text-xs text-slate">
+              <ol className="flex flex-wrap items-center gap-2">
+                <li>
+                  <Link href="/" className="tap hover:text-pulse">
+                    トップ
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li aria-current="page" className="text-ink">
+                  お問い合わせ・無料相談
+                </li>
+              </ol>
+            </nav>
+            <p className="eyebrow mt-8">Contact</p>
             <h1 className="mt-4 text-3xl font-black md:text-5xl">無料相談・お問い合わせ</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               「何から始めればいいか分からない」という段階のご相談も歓迎です。通常1営業日以内にご返信します。お急ぎの場合はお電話ください。
