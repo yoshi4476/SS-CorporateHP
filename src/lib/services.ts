@@ -25,6 +25,14 @@ export type Service = {
   useCase?: { title: string; body: string };
   /** 代表的な依頼内容 */
   menu?: string[];
+  /**
+   * 検索結果に出す見出し。事業名だけでは選ぶ理由が出ないので、
+   * 数字か対応範囲を1つ足す。接尾辞「｜セブンセンシズ」は自動で付くため、
+   * ここは24字までに収める。省略時は name を使う。
+   */
+  seoTitle?: string;
+  /** 近い事業を先に見せるための分類。集客 / 業務 / 資金 */
+  group: "集客" | "業務" | "資金";
   /** 用途セクションに置く図版 (scripts/make-visuals.py で生成)。2枚渡すと横に並ぶ */
   sectionImage?: { src: string; alt: string } | { src: string; alt: string }[];
   /** 詳細ページのヒーロー画像。枠内に収めるので切り抜きや図版でもよい */
@@ -51,6 +59,8 @@ export type Service = {
 export const services: Service[] = [
   {
     slug: "keiri-bpo",
+    group: "業務",
+    seoTitle: "経理BPO・記帳代行｜記帳から給与まで外注",
     image: {
       src: "/images/biz-keiri-bpo.jpg",
       alt: "請求書と会計ソフトの画面を突き合わせながら、経理業務を進める担当者",
@@ -160,6 +170,8 @@ export const services: Service[] = [
   },
   {
     slug: "ai-subsidy",
+    group: "資金",
+    seoTitle: "AI導入補助金ベンダー｜最大350万円・相談無料",
     image: {
       src: "/images/biz-ai-subsidy.jpg",
       alt: "会議室で資料を示しながら導入計画を説明する様子",
@@ -282,6 +294,8 @@ export const services: Service[] = [
   },
   {
     slug: "meo",
+    group: "集客",
+    seoTitle: "MEO運用代行｜通算3,200店舗・月額3万円",
     image: {
       src: "/images/biz-meo.jpg",
       alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
@@ -372,6 +386,8 @@ export const services: Service[] = [
   },
   {
     slug: "ad-operations",
+    group: "集客",
+    seoTitle: "広告運用代行｜受け皿のLPまで直す",
     image: {
       src: "/images/biz-ad-operations.jpg",
       alt: "会議室の大画面に映した広告の実績データを見ながら、翌月の配分を検討するチーム",
@@ -490,6 +506,8 @@ export const services: Service[] = [
   },
   {
     slug: "aio",
+    group: "集客",
+    seoTitle: "AIO運用代行｜AIに引用されるサイトへ",
     image: {
       src: "/images/biz-aio.jpg",
       alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",
@@ -579,6 +597,8 @@ export const services: Service[] = [
   },
   {
     slug: "ai-consulting",
+    group: "業務",
+    seoTitle: "AIコンサルティング｜棚卸しから定着まで",
     image: {
       src: "/images/biz-ai-consulting.jpg",
       alt: "ホワイトボードに書かれたAI導入ロードマップを前に、進め方を検討する担当者",
@@ -731,6 +751,8 @@ export const services: Service[] = [
   },
   {
     slug: "web-production",
+    group: "集客",
+    seoTitle: "HP/LP制作｜公開後の集客から逆算して作る",
     image: {
       src: "/images/biz-web-production.jpg",
       alt: "眺望のよいオフィスでサイト制作を進めるデスク",
@@ -879,6 +901,8 @@ export const services: Service[] = [
   },
   {
     slug: "system-development",
+    group: "業務",
+    seoTitle: "システム開発｜業務システム・80万円〜",
     image: {
       src: "/images/biz-system-development.jpg",
       alt: "業務システムの管理画面を映した開発環境のデスク",

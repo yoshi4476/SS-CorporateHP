@@ -5,13 +5,14 @@ import { Reveal } from "@/components/motion";
 import ContactForm from "@/components/ContactForm";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { pageMeta } from "@/lib/meta";
 
-export const metadata: Metadata = {
-  title: "お問い合わせ・無料相談",
+export const metadata: Metadata = pageMeta({
+  title: "無料相談・お問い合わせ｜1営業日以内に返信",
   description:
     "セブンセンシズ株式会社への無料相談・お問い合わせはこちら。AI導入、MEO/AIO運用、システム開発、HP/LP制作などお気軽にご相談ください。",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

@@ -6,6 +6,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
 import { sheet } from "@/lib/bpo";
+import { services } from "@/lib/services";
 import { StickyCta } from "@/components/LpCta";
 import {
   posts,
@@ -14,6 +15,7 @@ import {
   adjacentPosts,
   displayDate,
   withToc,
+  splitBody,
 } from "@/lib/blog";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -69,6 +71,10 @@ export default async function BlogDetailPage({ params }: Props) {
   if (!post) notFound();
 
   const { html, headings } = withToc(post.html);
+  const [bodyHead, bodyTail] = splitBody(html);
+  // 記事のテーマに合う事業へ渡す。法対応の記事も、行き着く先は外注の判断
+  const pick = post.category === "backoffice" ? "ai-consulting" : "keiri-bpo";
+  const svc = services.find((s) => s.slug === pick);
   const url = `${site.url}/blog/${post.slug}`;
   const articleSchema = {
     "@context": "https://schema.org",
@@ -217,8 +223,39 @@ export default async function BlogDetailPage({ params }: Props) {
             />
             <div
               className="article-body mt-10 border-t border-line pt-10 lg:mt-0"
-              dangerouslySetInnerHTML={{ __html: html }}
+              dangerouslySetInnerHTML={{ __html: bodyHead }}
             />
+
+            {/* 読み進めている途中で、記事のテーマに合う事業へ渡す。
+                末尾のオファーだけでは読み切った人にしか届かない */}
+            {svc && bodyTail && (
+              <Link
+                href={`/services/${svc.slug}`}
+                className="group my-10 flex items-start gap-5 rounded-3xl border border-gold/30 bg-gold-tint p-7 transition-colors hover:border-gold/60"
+              >
+                <span className="min-w-0 flex-1">
+                  <span className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-gold-deep">
+                    Service
+                  </span>
+                  <span className="mt-2 block text-base font-bold text-ink md:text-lg">
+                    {svc.name}
+                  </span>
+                  <span className="mt-2 block text-sm leading-7 text-slate">{svc.short}</span>
+                </span>
+                <span
+                  aria-hidden
+                  className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors group-hover:bg-gold group-hover:text-white"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14">
+                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                </span>
+              </Link>
+            )}
+
+            {bodyTail && (
+              <div className="article-body" dangerouslySetInnerHTML={{ __html: bodyTail }} />
+            )}
 
             <Reveal>
               <aside id="article-end-cta" className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">

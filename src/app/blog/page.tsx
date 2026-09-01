@@ -8,14 +8,15 @@ import { SectionHead } from "@/components/ui";
 import { posts, displayDate } from "@/lib/blog";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMeta } from "@/lib/meta";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "経理BPOブログ",
+export const metadata: Metadata = pageMeta({
+  title: "経理BPOブログ｜外注の判断に使う実務メディア",
   description:
     "記帳・請求・支払・給与計算といった経理業務の外部化と自動化を、中小企業の実務目線で解説するメディアです。インボイスや電子帳簿保存法への対応、月次決算の早期化まで扱います。",
-  alternates: { canonical: "/blog" },
-};
+  path: "/blog",
+});
 
 export default function BlogPage() {
   const [lead, ...rest] = posts;

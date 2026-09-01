@@ -4,15 +4,16 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, CtaBand } from "@/components/ui";
 import { services } from "@/lib/services";
+import { pageMeta } from "@/lib/meta";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "会社概要",
+export const metadata: Metadata = pageMeta({
+  title: "会社概要｜大阪市東成区・2020年設立",
   description:
     `セブンセンシズ株式会社の会社概要。代表挨拶・ミッション・会社情報。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など${services.length}つの事業を展開しています。`,
-  alternates: { canonical: "/company" },
-};
+  path: "/company",
+});
 
 const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   { label: "会社名", value: `${site.name}(${site.nameEn})` },

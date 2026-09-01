@@ -67,6 +67,20 @@ export type Heading = { id: string; text: string; level: 2 | 3 };
  * 本文の見出しに id を振り、目次用の一覧を返す。
  * 管制塔のHTMLは id を持たないことがあるため、こちらで補う。
  */
+/**
+ * 本文を1か所で割る。読み進めている途中に差し込みを入れるため。
+ *
+ * 記事から事業ページへの本文リンクは1本も無く、集めた読者が
+ * ブログの中だけを回っていた。末尾のオファーは読み切った人にしか届かない。
+ * 3つ目の見出しの手前 (見出しが少なければ2つ目の手前) で割る。
+ */
+export function splitBody(html: string): [string, string] {
+  const at = [...html.matchAll(/<h2[\s>]/g)].map((m) => m.index ?? -1).filter((i) => i >= 0);
+  const cut = at[at.length >= 4 ? 2 : 1];
+  if (cut === undefined) return [html, ""];
+  return [html.slice(0, cut), html.slice(cut)];
+}
+
 export function withToc(html: string): { html: string; headings: Heading[] } {
   const headings: Heading[] = [];
   let seq = 0;

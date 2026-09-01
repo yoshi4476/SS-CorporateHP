@@ -6,15 +6,16 @@ import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
 import { news } from "@/lib/news";
 import { breadcrumbSchema } from "@/lib/schema";
+import { pageMeta } from "@/lib/meta";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   // 旧www側にも同名ページがあり、Googleがそちらを正規版に選んでいた。
   // 旧wwwは造園・害虫駆除の事業サイトなので、扱う事業の違いを明示して分ける。
-  title: "お知らせ・プレスリリース（経理BPO / AI集客支援）",
+  title: "お知らせ｜経理BPO・AI集客支援",
   description:
     "セブンセンシズ株式会社（大阪市東成区）のお知らせ・プレスリリース。経理BPO・AI集客支援・AI導入補助金の各事業に関する制度の新設、サービス開始、社内制度の取り組みを掲載しています。",
-  alternates: { canonical: "/news" },
-};
+  path: "/news",
+});
 
 export default function NewsPage() {
   return (

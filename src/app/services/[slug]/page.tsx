@@ -11,6 +11,7 @@ import AioDetail from "@/components/AioDetail";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { pageMeta } from "@/lib/meta";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,11 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return {
-    title: service.name,
+  return pageMeta({
+    title: service.seoTitle ?? service.name,
     description: `${service.lead} ${service.short}`,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+    path: `/services/${service.slug}`,
+    image: service.image?.src,
+  });
+}
+
+/** 近い順に並べるための重み。小さいほど先 */
+function rank(s: { group: string }, current: string) {
+  if (s.group === current) return 0;
+  if (s.group === "資金") return 1;
+  return 2;
 }
 
 export default async function ServicePage({ params }: Props) {
@@ -34,7 +43,10 @@ export default async function ServicePage({ params }: Props) {
   const service = getService(slug);
   if (!service) notFound();
 
-  const others = services.filter((s) => s.slug !== service.slug);
+  // 同じ用途の事業を先に出す。補助金はどの事業の費用も下げるので、その次。
+  const others = services
+    .filter((s) => s.slug !== service.slug)
+    .sort((a, b) => rank(a, service.group) - rank(b, service.group));
   const sectionImages = service.sectionImage
     ? [service.sectionImage].flat()
     : [];

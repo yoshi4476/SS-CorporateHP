@@ -39,8 +39,12 @@ const grotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name}|AIコンサルティング・MEO/AIO運用代行・システム開発`,
-    template: `%s|${site.name}`,
+    // 41字あり、検索結果では末尾が切れていた。会社名を先に置くのは
+    // 指名検索のためだが、後半が読まれないなら意味がない。
+    default: "AIコンサルティング・MEO運用代行なら大阪のセブンセンシズ",
+    // 接尾辞に「株式会社」まで入れると、約32字の表示幅のうち12字が
+    // 毎ページ社名で埋まる。社名の識別には「セブンセンシズ」で足りる。
+    template: "%s｜セブンセンシズ",
   },
   description:
     "大阪のAIコンサルティング・デジタルマーケティング会社。AI導入支援、システム開発、MEO運用代行(通算3,200店舗)、AIO運用代行、オウンドメディア運用、HP/LP制作まで一気通貫で支援します。",

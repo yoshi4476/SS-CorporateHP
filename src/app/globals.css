@@ -27,6 +27,8 @@
   --color-gold: #a8641a;
   --color-gold-bright: #e8a33d;
   --color-gold-tint: #fdf6ec;
+  /* 金の淡い面 (gold-tint) の上に小さい文字を置くとき用。gold では 4.35:1 で基準を割る */
+  --color-gold-deep: #8a5214;
 
   --font-display: var(--font-zen), "Hiragino Kaku Gothic ProN", sans-serif;
   --font-body: var(--font-noto), "Hiragino Kaku Gothic ProN", sans-serif;

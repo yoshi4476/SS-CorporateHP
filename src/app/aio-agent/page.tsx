@@ -23,13 +23,14 @@ import {
 } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { pageMeta } from "@/lib/meta";
 
-export const metadata: Metadata = {
-  title: `${pipeline.name}｜LP + AIエージェント`,
+export const metadata: Metadata = pageMeta({
+  title: `${pipeline.name}｜月60本`,
   description:
     "オウンドメディアの器と、記事を書いて出し続けるAIエージェントをセットで納品します。キーワード選定から執筆・品質審査・公開・インデックス登録・順位集計まで、人の手を介さずに毎日動きます。",
-  alternates: { canonical: "/aio-agent" },
-};
+  path: "/aio-agent",
+});
 
 export default function MediaPipelinePage() {
   const serviceLd = {
