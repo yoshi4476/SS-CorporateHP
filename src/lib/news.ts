@@ -10,6 +10,17 @@ export type NewsItem = {
 // 日付は旧サイト掲載時の実日付
 export const news: NewsItem[] = [
   {
+    slug: "axis-security-pack",
+    date: "2026.09.02",
+    dateISO: "2026-09-02",
+    category: "事業",
+    title: "AXIS セキュリティパック 端末監視コースを採用しました。",
+    body: [
+      "セブンセンシズ株式会社は、「AXIS セキュリティパック 端末監視コース」を採用いたしました。",
+      "あわせて当社は、AXISの代理店登録業者です。お客様へのお取り扱いについては、無料相談にてご案内しております。",
+    ],
+  },
+  {
     slug: "scholarship-support",
     date: "2024.01.29",
     dateISO: "2024-01-29",

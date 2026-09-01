@@ -12,6 +12,26 @@ export default function SubsidyDetail() {
 
   return (
     <>
+      {/* 取扱いと自社導入。補助金の相談相手を選ぶときに効く事実なので、
+          金額の話に入る前に置く */}
+      <section className="border-t border-line py-14 md:py-16" aria-labelledby="partner-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <Reveal className="rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:p-10">
+            <p className="eyebrow">Partner</p>
+            <h2 id="partner-heading" className="mt-3 text-xl font-bold leading-relaxed md:text-2xl">
+              当社は<mark className="marker">AXISの代理店登録業者</mark>です
+            </h2>
+            <p className="mt-5 max-w-3xl text-sm leading-8 text-slate md:text-base">
+              あわせて当社は「<strong className="font-bold text-ink">AXIS セキュリティパック 端末監視コース</strong>」を
+              自社で採用しています。お客様にご案内するものを、まず自社で使っています。
+            </p>
+            <p className="mt-4 text-xs leading-6 text-faint">
+              お取り扱いの範囲と、補助金と組み合わせられるかは、無料相談でご案内します。
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* 費用シミュレーション */}
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="sim-heading">
         <div className="mx-auto max-w-7xl px-5">
