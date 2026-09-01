@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { CtaBand } from "@/components/ui";
-import { diagnostics } from "@/lib/aio";
+import { sheet } from "@/lib/bpo";
 import {
   posts,
   getPost,
@@ -105,7 +105,6 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const related = relatedPosts(post.slug);
   const { prev, next } = adjacentPosts(post.slug);
-  const audit = diagnostics.find((d) => d.name === "サイト無料採点") ?? diagnostics[0];
 
   return (
     <>
@@ -213,30 +212,31 @@ export default async function BlogDetailPage({ params }: Props) {
 
             <Reveal>
               <aside className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">
-                <p className="text-xs font-bold tracking-widest text-aqua">無料セルフチェック</p>
+                <p className="text-xs font-bold tracking-widest text-gold-bright">読み終えた方へ</p>
                 <h2 className="mt-3 text-lg font-black leading-snug md:text-xl">
-                  この記事のテーマで、自社の現在地を測る
+                  {sheet.name}
+                  <span className="num ml-3 align-middle text-xs font-bold text-paper/50">{sheet.spec}</span>
                 </h2>
-                <p className="mt-3 text-sm leading-loose text-paper/70">
-                  {audit.body}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <p className="mt-3 text-sm leading-loose text-paper/70">{sheet.body}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
                   <a
-                    href={audit.href}
-                    target="_blank"
-                    rel="noopener"
-                    className="tap inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 text-sm font-bold text-ink transition-opacity hover:opacity-80"
+                    href={sheet.href}
+                    download
+                    className="tap inline-flex items-center gap-2 rounded-full bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
                   >
-                    {audit.name}を受ける
-                    <span className="num text-xs text-slate">{audit.spec}</span>
+                    <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+                      <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    無料でダウンロードする
                   </a>
                   <Link
-                    href="/contact"
+                    href="/contact?s=keiri-bpo"
                     className="tap inline-flex items-center rounded-full border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
                   >
-                    無料相談を申し込む
+                    先に相談する
                   </Link>
                 </div>
+                <p className="mt-4 text-xs text-paper/60">{sheet.note}</p>
               </aside>
             </Reveal>
 

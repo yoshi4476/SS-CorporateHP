@@ -6,8 +6,7 @@ import BlogList from "@/components/BlogList";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
 import { posts, displayDate } from "@/lib/blog";
-import { keywords, facts, problems, glossary, steps } from "@/lib/bpo";
-import { diagnostics } from "@/lib/aio";
+import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
@@ -86,12 +85,17 @@ export default function BlogPage() {
           </Reveal>
           <Reveal delay={0.14}>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link
-                href="/contact"
-                  className="rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+              {/* 相談はまだ重い。持ち帰れるものを先に置く */}
+              <a
+                href={sheet.href}
+                download
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
               >
-                無料相談を申し込む
-              </Link>
+                <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+                  <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                棚卸しシートを無料で受け取る
+              </a>
               <Link
                 href="#latest"
                 className="group inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-ink transition-colors hover:text-pulse"
@@ -299,19 +303,23 @@ export default function BlogPage() {
                   </li>
                 ))}
               </ol>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {diagnostics.map((d) => (
-                  <a
-                    key={d.name}
-                    href={d.href}
-                    target="_blank"
-                    rel="noopener"
-                    className="rounded-full border border-white/25 px-5 py-2.5 text-xs font-bold text-white transition-colors hover:border-aqua hover:text-aqua"
-                  >
-                    {d.name} ↗
-                  </a>
-                ))}
-              </div>
+              {/* 02 で使う実物。ここに置いていた診断3つは
+                  Webマーケの道具で、経理の読者には関係がなかった */}
+              <a
+                href={sheet.href}
+                download
+                className="mt-6 flex items-center gap-4 rounded-2xl border border-gold-bright/40 bg-gold-bright/10 p-5 transition-colors hover:bg-gold-bright/15"
+              >
+                <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold-bright text-ink">
+                  <svg width="17" height="17" viewBox="0 0 16 16">
+                    <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-bold text-white">{sheet.name}</span>
+                  <span className="num mt-1 block text-[0.7rem] text-white/55">{sheet.spec} ・ {sheet.note}</span>
+                </span>
+              </a>
             </Reveal>
           </div>
         </div>
@@ -328,9 +336,11 @@ export default function BlogPage() {
             <p className="mx-auto mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               どこまで任せられて、どこからは残すべきか。現在の業務量と体制をうかがったうえで、
               線引きの案と現状分析レポートをお持ちします。
+              <mark className="marker">棚卸しシートを書いた状態でお持ちいただくと、初回で話が具体的に進みます</mark>
+              。まだ書けていなくても構いません。
             </p>
             <Link
-              href="/contact"
+              href="/contact?s=keiri-bpo"
                   className="mt-9 inline-block rounded-full bg-pulse px-10 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
             >
               無料相談を申し込む (現状分析レポート付き)

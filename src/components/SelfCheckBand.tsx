@@ -8,7 +8,7 @@ import { diagnostics } from "@/lib/aio";
 
 export default function SelfCheckBand() {
   return (
-    <section className="relative overflow-hidden border-y border-line bg-ink" aria-labelledby="selfcheck-heading">
+    <section id="selfcheck" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-ink" aria-labelledby="selfcheck-heading">
       <div
         aria-hidden
         className="absolute inset-0 opacity-50"

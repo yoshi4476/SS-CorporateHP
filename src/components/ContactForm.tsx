@@ -5,7 +5,7 @@
 // レスポンス ({"ok":true}) を読んで成功/失敗を判定できる。
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
@@ -30,6 +30,18 @@ type State = "idle" | "sending" | "sent" | "error";
 export default function ContactForm() {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
+  // 選び直させると1手増えるので、初期値を入れておく。
+  useEffect(() => {
+    const want = new URLSearchParams(window.location.search).get("s");
+    if (!want) return;
+    const sel = formRef.current?.elements.namedItem("service");
+    if (sel instanceof HTMLSelectElement && [...sel.options].some((o) => o.value === want)) {
+      sel.value = want;
+    }
+  }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,7 +129,7 @@ export default function ContactForm() {
   const busy = state === "sending";
 
   return (
-    <form onSubmit={onSubmit} className="grid gap-5">
+    <form ref={formRef} onSubmit={onSubmit} className="grid gap-5">
       {/* ボット除け (視覚・支援技術ともに非表示) */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
@@ -179,6 +191,9 @@ export default function ContactForm() {
               {s.name}
             </option>
           ))}
+          {/* 経理BPOは受託の7事業には入れていないが、
+              ブログ経由の相談がいちばん多く入る見込みなので選べるようにする */}
+          <option value="keiri-bpo">経理BPO・記帳代行</option>
           {/* 自社プロダクト。どちらの問い合わせか受信側で分かるようにする */}
           <option value="rakushift">ラクシフトAI (シフト自動作成)</option>
           <option value="aio-agent">AIO（SEO）対策エージェント</option>

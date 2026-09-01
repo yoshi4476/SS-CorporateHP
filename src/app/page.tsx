@@ -137,7 +137,7 @@ export default function Home() {
           <div>
             <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Domains</dt>
             <dd className="num mt-1 text-2xl font-bold">
-              <CountUp value={6} duration={2} />
+              <CountUp value={services.length} duration={2} />
               <span className="ml-0.5 text-sm text-pulse">事業</span>
             </dd>
             <dd className="text-[0.6rem] text-slate">一気通貫で支援</dd>
@@ -163,9 +163,9 @@ export default function Home() {
             </h1>
             <Reveal delay={0.16}>
               <p className="mt-6 max-w-lg text-sm leading-8 text-slate md:mt-9 md:leading-9 md:text-[0.95rem]">
-                MEO運用<mark className="marker">通算3,200店舗</mark>の現場実績と、最新のAI技術。
+                <strong className="font-bold text-ink">人を増やさずに、集客と経理を回す。</strong>
                 <br className="hidden md:block" />
-                集客と業務を数字で変える、大阪のAIコンサルティング会社です。
+                MEO運用<mark className="marker">通算3,200店舗</mark>で積んだ現場データと、AIによる自動化で。大阪のAIコンサルティング会社です。
               </p>
             </Reveal>
             {/* スマホ用の写真ブロック。薄い背景として敷くのをやめ、
@@ -212,13 +212,16 @@ export default function Home() {
                 >
                   無料相談を予約する
                 </Link>
+                {/* 相談はまだ重い人のための、費用も登録も要らない一歩。
+                    「事業内容を見る」は下に一覧が続くので置いていた意味が薄かった */}
                 <Link
-                  href="/services"
+                  href="/#selfcheck"
                   className="group inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-ink transition-colors hover:text-pulse"
                 >
-                  事業内容を見る
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="text-pulse transition-transform group-hover:translate-x-1">
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                  まず無料で現在地を測る
+                  <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-slate">30秒</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="text-pulse transition-transform group-hover:translate-y-1">
+                    <path d="M7 2v9M3.5 7.5L7 11l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
                   </svg>
                 </Link>
               </div>
