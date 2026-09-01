@@ -97,6 +97,12 @@ export default function BlogPage() {
                 棚卸しシートを無料で受け取る
               </a>
               <Link
+                href="/services/keiri-bpo"
+                className="rounded-full border border-line-strong px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+              >
+                経理BPOのサービスを見る
+              </Link>
+              <Link
                 href="#latest"
                 className="group inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-ink transition-colors hover:text-pulse"
               >

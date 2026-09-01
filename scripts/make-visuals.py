@@ -307,6 +307,45 @@ def v_ads_funnel():
            "段を分けて数えると、直す場所が決まる", "ads-funnel.png")
 
 
+def v_keiri():
+    """経理BPO: 外に出せる業務と、社内に残す業務の切り分け"""
+    im, _ = canvas()
+    d = ImageDraw.Draw(im)
+
+    d.text((64 * SS, 200 * SS), "切り分ける軸は一つ ―― 社内にしか無い情報が要るか",
+           font=font(JP_B, 19), fill=INK)
+
+    left = [("記帳・仕訳入力", "手順が決まっている"), ("請求書の発行・入金消込", "様式が固定できる"),
+            ("支払データの作成", "承認は社内に残す"), ("給与計算の実務", "規程どおりに処理する")]
+    right = [("与信・取引の可否", "相手との経緯を知る必要がある"), ("値引きの判断", "現場の事情に左右される"),
+             ("資金繰りの決定", "経営の意思そのもの"), ("経営数値の解釈", "次に何をするかを決める")]
+
+    for i, (items, title, note, col) in enumerate([
+        (left, "外に出せる", "要らない", PULSE),
+        (right, "社内に残す", "要る", GOLD),
+    ]):
+        x = 64 + i * 556
+        rrect(d, [x * SS, 244 * SS, (x + 516) * SS, 552 * SS], 18,
+              fill=WHITE, outline=col, width=2 * SS)
+        d.rounded_rectangle([x * SS, 244 * SS, (x + 516) * SS, 306 * SS], radius=18 * SS, fill=col)
+        d.rectangle([x * SS, 286 * SS, (x + 516) * SS, 306 * SS], fill=col)
+        d.text(((x + 26) * SS, 262 * SS), title, font=font(JP_B, 21), fill=WHITE)
+        tw = d.textlength("社内にしか無い情報が " + note, font=font(JP_R, 14))
+        d.text(((x + 516 - 26) * SS - tw, 268 * SS), "社内にしか無い情報が " + note,
+               font=font(JP_R, 14), fill=WHITE)
+        for j, (lb, sub) in enumerate(items):
+            y = 326 + j * 56
+            d.ellipse([(x + 26) * SS, (y + 9) * SS, (x + 36) * SS, (y + 19) * SS], fill=col)
+            d.text(((x + 50) * SS, y * SS), lb, font=font(JP_B, 16), fill=INK)
+            d.text(((x + 50) * SS, (y + 24) * SS), sub, font=font(JP_R, 12), fill=SLATE)
+
+    d.text((64 * SS, 578 * SS), "はじめから「全部」で渡すと、判断のたびに社内へ問い合わせが返ってきて、かえって手間が増える。",
+           font=font(JP_R, 14), fill=SLATE)
+
+    finish(im, "ACCOUNTING BPO", "外に出す範囲を、先に決める",
+           "対応範囲は会社ごとに違う。まず線を引くところから", "keiri-scope.png")
+
+
 TASKS = {
     "services": v_services,
     "consulting": v_consulting,
@@ -316,6 +355,7 @@ TASKS = {
     "news": v_news,
     "ads": v_ads_hero,
     "ads-funnel": v_ads_funnel,
+    "keiri": v_keiri,
 }
 
 if __name__ == "__main__":

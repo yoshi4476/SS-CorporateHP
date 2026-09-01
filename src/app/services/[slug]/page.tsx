@@ -112,6 +112,18 @@ export default async function ServicePage({ params }: Props) {
                       運営メディア「AI集客ラボ」を見る ↗
                     </a>
                   )}
+                  {service.slug === "keiri-bpo" && (
+                    <a
+                      href="/docs/keiri-tanaoroshi-sheet.pdf"
+                      download
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                    >
+                      <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+                        <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                      棚卸しシートを受け取る (無料)
+                    </a>
+                  )}
                   {service.slug === "ai-subsidy" && (
                     <a
                       href={site.lpUrl}

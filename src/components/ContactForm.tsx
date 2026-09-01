@@ -196,9 +196,6 @@ export default function ContactForm() {
               {s.name}
             </option>
           ))}
-          {/* 経理BPOは受託の7事業には入れていないが、
-              ブログ経由の相談がいちばん多く入る見込みなので選べるようにする */}
-          <option value="keiri-bpo">経理BPO・記帳代行</option>
           {/* 自社プロダクト。どちらの問い合わせか受信側で分かるようにする */}
           <option value="rakushift">ラクシフトAI (シフト自動作成)</option>
           <option value="aio-agent">AIO（SEO）対策エージェント</option>

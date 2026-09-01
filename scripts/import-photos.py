@@ -26,6 +26,8 @@ MAP = {
     "Generated Image August 03, 2026 - 6_27PM.png": "ceo-office.jpg",
     "Generated Image August 03, 2026 - 6_19PM.png": "strategy-board.jpg",
     "写真素材.jpg": "biz-ad-operations.jpg",
+    # 経理BPOだけ合う素材がなく、生成したもの (nano_banana_pro / 2752x1536)
+    "keiri-bpo-generated.png": "biz-keiri-bpo.jpg",
 }
 
 DST.mkdir(parents=True, exist_ok=True)
