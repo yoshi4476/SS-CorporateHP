@@ -154,18 +154,22 @@ export default function Home() {
               <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
               <p className="eyebrow">Osaka / AI Consulting &amp; Digital Marketing</p>
             </Reveal>
-            {/* スマホは「AIの『答え』にする。」が最長で折り返せない。
+            {/* 「AIの『答え』にする。」は8事業のうちAIOだけの主張で、
+                初見では何をしてくれる会社か分からなかった。
+                集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、
+                そこを見出しに出す。
+                スマホは「集客も経理も回す。」が最長で折り返せない。
                 320px でも1行に収まる値を画面幅から逆算している */}
             <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
-              <SplitText text="あなたの会社を、" />
+              <SplitText text="人を増やさずに、" />
               <br />
-              <SplitText text="AIの『答え』にする。" className="text-pulse" startIndex={8} />
+              <SplitText text="集客も経理も回す。" className="text-pulse" startIndex={8} />
             </h1>
             <Reveal delay={0.16}>
               <p className="mt-6 max-w-lg text-sm leading-8 text-slate md:mt-9 md:leading-9 md:text-[0.95rem]">
-                <strong className="font-bold text-ink">人を増やさずに、集客と経理を回す。</strong>
+                MEO運用<mark className="marker">通算3,200店舗</mark>で積んだ現場データと、AIによる自動化。
                 <br className="hidden md:block" />
-                MEO運用<mark className="marker">通算3,200店舗</mark>で積んだ現場データと、AIによる自動化で。大阪のAIコンサルティング会社です。
+                集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
               </p>
             </Reveal>
             {/* スマホ用の写真ブロック。薄い背景として敷くのをやめ、

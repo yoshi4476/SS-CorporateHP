@@ -1,4 +1,5 @@
-import type { Metadata } from "next";import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
+import type { Metadata } from "next";
+import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name}|AIコンサルティング・MEO/AIO運用代行・システム開発`,
     description: `MEO通算3,200店舗の実績。AIコンサルティングからAIO・システム開発まで、${services.length}つの事業で中小企業の成長を仕組み化します。`,
-    images: [{ url: "/ogp.png", width: 1200, height: 630, alt: "セブンセンシズ株式会社 — あなたの会社を、AIの『答え』にする。" }],
+    images: [{ url: "/ogp.png", width: 1200, height: 630, alt: "セブンセンシズ株式会社 — 人を増やさずに、集客も経理も回す。" }],
   },
   twitter: {
     card: "summary_large_image",
