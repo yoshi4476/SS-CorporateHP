@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { CountUp } from "@/components/motion";
 
@@ -53,6 +54,9 @@ export function GaugeDonut({
   sub?: string;
 }) {
   const reduce = useReducedMotion();
+  // 同じページに2つ並ぶとidが衝突する。SVGのdefsは文書全体で一意でないと、
+  // 2つ目が1つ目の定義を参照してしまう
+  const gradId = `gauge-${useId().replace(/:/g, "")}`;
   const R = 62;
   const C = 2 * Math.PI * R;
   return (
@@ -65,7 +69,7 @@ export function GaugeDonut({
             cy="80"
             r={R}
             fill="none"
-            stroke="url(#gaugeGrad)"
+            stroke={`url(#${gradId})`}
             strokeWidth="14"
             strokeLinecap="round"
             strokeDasharray={C}
@@ -75,9 +79,9 @@ export function GaugeDonut({
             transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
           />
           <defs>
-            <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+            <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="#1c3f7c" />
-              <stop offset="100%" stopColor="#7a8cff" />
+              <stop offset="100%" stopColor="#74c7d6" />
             </linearGradient>
           </defs>
         </svg>

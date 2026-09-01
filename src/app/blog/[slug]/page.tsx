@@ -222,7 +222,7 @@ export default async function BlogDetailPage({ params }: Props) {
               endId="article-end-cta"
             />
             <div
-              className="article-body mt-10 border-t border-line pt-10 lg:mt-0"
+              className="article-body article-body-lead mt-10 border-t border-line pt-10 lg:mt-0"
               dangerouslySetInnerHTML={{ __html: bodyHead }}
             />
 

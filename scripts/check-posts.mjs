@@ -22,9 +22,34 @@ const RAW_MARKDOWN = [
   { re: /\[[^\]\n]+\]\(https?:/, what: "リンク ([…](…))" },
 ];
 
+// HTMLとして成り立っていない箇所。閉じ忘れとは逆に、
+// 開いていないタグを閉じているものが混ざることがある (2026-09-01 に2本 </content>)。
+// ブラウザは黙って無視するので、検査しないと気づけない。
+// タグ名の一覧で判定すると <details> のような正しい要素まで拾うので、
+// 「閉じた回数が開いた回数を上回るもの」だけを見る。
+const VOID = new Set(["br", "img", "hr", "input", "meta", "link", "source", "col", "wbr"]);
+function strayTags(html) {
+  const open = new Map();
+  const over = new Set();
+  for (const m of html.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*)>/g)) {
+    const [, close, name, attrs] = m;
+    const tag = name.toLowerCase();
+    if (VOID.has(tag) || attrs.trimEnd().endsWith("/")) continue;
+    const n = open.get(tag) ?? 0;
+    if (close) {
+      if (n <= 0) over.add(tag);
+      else open.set(tag, n - 1);
+    } else {
+      open.set(tag, n + 1);
+    }
+  }
+  return [...over];
+}
+
 let ok = 0;
 const broken = [];
 const suspect = [];
+const stray = [];
 
 for (const name of readdirSync(DIR)) {
   if (!name.endsWith(".json")) continue;
@@ -37,6 +62,8 @@ for (const name of readdirSync(DIR)) {
     // 読めはするので公開は止めない。ただし見つけたら必ず知らせる
     const found = RAW_MARKDOWN.filter((r) => r.re.test(post.html)).map((r) => r.what);
     if (found.length) suspect.push({ name, found });
+    const odd = strayTags(post.html);
+    if (odd.length) stray.push({ name, odd });
     ok++;
   } catch (e) {
     broken.push({ name, reason: e.message });
@@ -55,4 +82,9 @@ if (suspect.length) {
   console.log("以下はMarkdownが変換されずに残っています (管制塔のHTML書き出しを確認):");
   for (const s of suspect) console.log(`  ${s.name} — ${s.found.join(" / ")}`);
   console.log("::warning::Markdownが変換されていない記事があります");
+}
+if (stray.length) {
+  console.log("以下にHTMLではないタグが混ざっています (管制塔の書き出しを確認):");
+  for (const s of stray) console.log(`  ${s.name} — <${s.odd.join("> <")}>`);
+  console.log("::warning::HTMLではないタグが混ざった記事があります");
 }

@@ -48,6 +48,37 @@ function fixImagePaths(p: BlogPost): BlogPost {
 }
 
 /**
+ * 記事本文の自サイトリンクを整える。
+ *
+ * 管制塔は絶対URL + 末尾スラッシュで書き出すため、
+ * 228本すべてが 308 リダイレクトを1回挟んでいた。
+ * さらに8本は target="_blank" が付き、自サイトが新しいタブで開いていた。
+ * 他ドメイン (ai. / lp.) のリンクは別サイトなので触らない。
+ */
+function fixInternalLinks(p: BlogPost): BlogPost {
+  const origin = "https://corp.7senses.co.jp";
+  // 変換されずに残ったMarkdownのリンク記法が、そのまま文字として
+  // 画面に出ていた (2026-09-01 に2本)。まずリンクに直してから正規化する。
+  const html = p.html
+    .replace(/(^|[^!])\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/g, '$1<a href="$3">$2</a>')
+    .replace(/<a\s[^>]*>/g, (tag) => {
+      const m = /href="([^"]*)"/.exec(tag);
+      if (!m) return tag;
+      const raw = m[1];
+      const isSelf = raw.startsWith(origin) || raw.startsWith("/");
+      if (!isSelf) return tag;
+      // 絶対URLは相対に、末尾スラッシュは落とす。
+      // どちらも 308 リダイレクトを1回挟む原因になっていた。
+      const path = (raw.startsWith(origin) ? raw.slice(origin.length) : raw).replace(/\/+$/, "") || "/";
+      return tag
+        .replace(m[0], `href="${path}"`)
+        .replace(/\starget="_blank"/g, "")
+        .replace(/\srel="[^"]*"/g, "");
+    });
+  return html === p.html ? p : { ...p, html };
+}
+
+/**
  * アイキャッチの補完。
  *
  * 管制塔は画像を書き出しているのに、JSONの eyecatch を空のまま
@@ -84,15 +115,26 @@ export function splitBody(html: string): [string, string] {
 export function withToc(html: string): { html: string; headings: Heading[] } {
   const headings: Heading[] = [];
   let seq = 0;
+  // 記事HTML側のidが重複していることがある。そのままだと目次の2つ目が
+  // 1つ目へ飛ぶので、後から来たほうに別のidを振り直す。
+  const used = new Set<string>();
   const out = html.replace(
     /<h([23])([^>]*)>([\s\S]*?)<\/h\1>/g,
     (whole, lv: string, attrs: string, inner: string) => {
       const text = inner.replace(/<[^>]+>/g, "").trim();
       if (!text) return whole;
       const found = /id="([^"]+)"/.exec(attrs);
-      const id = found ? found[1] : `sec-${++seq}`;
+      let id = found ? found[1] : `sec-${++seq}`;
+      const keep = Boolean(found) && !used.has(id);
+      if (!keep) {
+        while (used.has(id)) id = `sec-${++seq}`;
+        if (!found) id = `sec-${seq || ++seq}`;
+      }
+      used.add(id);
       headings.push({ id, text, level: Number(lv) as 2 | 3 });
-      return found ? whole : `<h${lv}${attrs} id="${id}">${inner}</h${lv}>`;
+      if (keep) return whole;
+      const rest = attrs.replace(/\sid="[^"]*"/, "");
+      return `<h${lv}${rest} id="${id}">${inner}</h${lv}>`;
     },
   );
   return { html: out, headings };
@@ -106,7 +148,7 @@ function readAll(): BlogPost[] {
     try {
       const raw = fs.readFileSync(path.join(CONTENT_DIR, name), "utf8");
       const p = JSON.parse(raw) as BlogPost;
-      if (p.slug && p.title && p.html) posts.push(fillEyecatch(fixImagePaths(p)));
+      if (p.slug && p.title && p.html) posts.push(fillEyecatch(fixInternalLinks(fixImagePaths(p))));
     } catch {
       // 壊れた記事ファイルはサイト全体を落とさず読み飛ばす
     }

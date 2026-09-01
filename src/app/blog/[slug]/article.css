@@ -12,15 +12,17 @@
   .article-body { font-size: 1rem; }
 }
 
-/* 冒頭の断言回答は少し大きく見せる（AI検索に抜き出される最重要部分） */
-.article-body > p:first-child {
+/* 冒頭の断言回答は少し大きく見せる（AI検索に抜き出される最重要部分）。
+   本文は途中で差し込みを入れるため2ブロックに分かれる。
+   「冒頭」の指定が後半ブロックの先頭にも効かないよう、先頭ブロックに限定する */
+.article-body-lead > p:first-child {
   font-size: 1.06em;
   font-weight: 500;
   color: var(--color-ink);
 }
 
 .article-body p { margin: 1.4em 0; }
-.article-body > *:first-child { margin-top: 0; }
+.article-body-lead > *:first-child { margin-top: 0; }
 
 /* 目次から飛んだとき、固定ヘッダーの下に見出しが潜らないようにする */
 .article-body h2,
