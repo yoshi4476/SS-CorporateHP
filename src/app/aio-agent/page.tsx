@@ -241,6 +241,18 @@ export default function MediaPipelinePage() {
             title="サービス資料"
             lead="ご提案時にお渡ししている資料です。サービスの全体像から==品質を守る仕組み==まで、この場でご覧いただけます。横にスクロールしてページをめくれます。"
           />
+          <div className="mt-10">
+            <p className="mb-3 text-center text-sm font-bold">資料の説明動画（6分19秒）</p>
+            <video
+              controls
+              preload="none"
+              poster="https://ai.7senses.co.jp/videos/doc-guide-poster.jpg"
+              className="w-full rounded-2xl border border-line shadow-lg"
+            >
+              <source src="https://ai.7senses.co.jp/videos/doc-guide.mp4" type="video/mp4" />
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </div>
           <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
             {Array.from({ length: 16 }, (_, i) => {
               const n = String(i + 1).padStart(2, "0");
