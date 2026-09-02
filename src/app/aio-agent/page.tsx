@@ -231,6 +231,44 @@ export default function MediaPipelinePage() {
         </div>
       </section>
 
+
+      {/* サービス資料。料金スライドは掲載しない約束（画像側で除外・塗り消し済み）。
+          画像はAI集客ラボ側で配信しているものを参照する */}
+      <section className="border-y border-line bg-mist py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHead
+            en="Document"
+            title="サービス資料"
+            lead="ご提案時にお渡ししている資料です。サービスの全体像から==品質を守る仕組み==まで、この場でご覧いただけます。横にスクロールしてページをめくれます。"
+          />
+          <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+            {Array.from({ length: 16 }, (_, i) => {
+              const n = String(i + 1).padStart(2, "0");
+              return (
+                <img
+                  key={n}
+                  src={`https://ai.7senses.co.jp/images/proposal/p${n}.jpg`}
+                  alt={`サービス資料 ${i + 1}ページ目`}
+                  width={1600}
+                  height={1131}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  className="w-[86%] max-w-[720px] shrink-0 snap-center rounded-2xl border border-line shadow-lg"
+                />
+              );
+            })}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-navy px-8 py-4 text-sm font-bold text-white transition hover:opacity-90"
+            >
+              この内容で相談してみる →
+            </Link>
+            <p className="mt-3 text-xs text-ink-soft">料金は御社の状況に合わせてお見積りします。</p>
+          </div>
+        </div>
+      </section>
+
       {/* 納品物 */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
