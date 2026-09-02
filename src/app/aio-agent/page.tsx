@@ -254,7 +254,7 @@ export default function MediaPipelinePage() {
             </video>
           </div>
           <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-            {Array.from({ length: 16 }, (_, i) => {
+            {Array.from({ length: 15 }, (_, i) => {
               const n = String(i + 1).padStart(2, "0");
               return (
                 <img

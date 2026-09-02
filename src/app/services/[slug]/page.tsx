@@ -443,6 +443,73 @@ export default async function ServicePage({ params }: Props) {
         </section>
       )}
 
+
+      {/* AIO運用代行のみ: 紹介動画とサービス資料。課題を理解した読者を相談へ運ぶ。
+          動画・資料画像はAI集客ラボ側で配信（CSPで許可済み）。料金スライドは資料に含まれない */}
+      {service.slug === "aio" && (
+        <section className="border-y border-line bg-mist py-20 md:py-24">
+          <div className="mx-auto max-w-5xl px-5">
+            <SectionHead
+              en="Movie & Document"
+              title="10分で分かる、AIで集客する仕組み"
+              lead="実際の画面で、記事ができて公開されるまでをご覧いただけます。==人が決めることと、機械に任せることの分担==まで説明しています。"
+            />
+            <video
+              controls
+              preload="none"
+              poster="https://ai.7senses.co.jp/videos/aio-pr-poster.jpg"
+              className="mt-10 w-full rounded-3xl border border-line shadow-xl"
+            >
+              <source src="https://ai.7senses.co.jp/videos/aio-pr.mp4" type="video/mp4" />
+              お使いのブラウザでは動画を再生できません。
+            </video>
+            <div className="mt-14">
+              <h3 className="text-center text-lg font-black md:text-xl">サービス資料（説明動画つき）</h3>
+              <p className="mx-auto mt-2 max-w-2xl text-center text-sm leading-7 text-ink-soft">
+                ご提案時にお渡ししている資料です。横にスクロールしてページをめくれます。
+              </p>
+              <div className="mt-6">
+                <video
+                  controls
+                  preload="none"
+                  poster="https://ai.7senses.co.jp/videos/doc-guide-poster.jpg"
+                  className="mx-auto w-full max-w-3xl rounded-2xl border border-line shadow-lg"
+                >
+                  <source src="https://ai.7senses.co.jp/videos/doc-guide.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div className="mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+                {Array.from({ length: 15 }, (_, i) => {
+                  const n = String(i + 1).padStart(2, "0");
+                  return (
+                    <img
+                      key={n}
+                      src={`https://ai.7senses.co.jp/images/proposal/p${n}.jpg`}
+                      alt={`サービス資料 ${i + 1}ページ目`}
+                      width={1600}
+                      height={1131}
+                      loading={i < 2 ? "eager" : "lazy"}
+                      className="w-[86%] max-w-[640px] shrink-0 snap-center rounded-2xl border border-line bg-white shadow-lg"
+                    />
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-8 text-center">
+              <Link
+                href="/contact"
+                className="inline-block rounded-full bg-navy px-8 py-4 text-sm font-bold text-white transition hover:opacity-90"
+              >
+                この内容で相談してみる →
+              </Link>
+              <p className="mt-3 text-xs text-ink-soft">
+                料金は御社の状況に合わせてお見積りします。営業のお電話はいたしません。
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* 進め方 */}
       <section className={`py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading">
         <div className="mx-auto max-w-7xl px-5">
