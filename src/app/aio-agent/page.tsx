@@ -199,6 +199,38 @@ export default function MediaPipelinePage() {
         </div>
       </section>
 
+      {/* 紹介動画。課題に共感した直後が、10分の説明を見てもらえる位置。
+          動画本体はAI集客ラボ側で配信している（このリポジトリに大きなファイルを持たない） */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-5xl px-5">
+          <SectionHead
+            en="Movie"
+            title="10分で分かる、AIで集客する仕組み"
+            lead="なぜ今AI検索なのか。実際の画面で、記事ができて公開されるまでをご覧いただけます。==人が決めることと、機械に任せることの分担==まで説明しています。"
+          />
+          <Reveal>
+            <video
+              controls
+              preload="none"
+              poster="https://ai.7senses.co.jp/videos/aio-pr-poster.jpg"
+              className="mt-10 w-full rounded-3xl border border-line shadow-xl"
+            >
+              <source src="https://ai.7senses.co.jp/videos/aio-pr.mp4" type="video/mp4" />
+              お使いのブラウザでは動画を再生できません。
+            </video>
+          </Reveal>
+          <div className="mt-8 text-center">
+            <Link
+              href="/contact"
+              className="inline-block rounded-full bg-navy px-8 py-4 text-sm font-bold text-white transition hover:opacity-90"
+            >
+              動画の内容で相談してみる →
+            </Link>
+            <p className="mt-3 text-xs text-ink-soft">営業のお電話はいたしません。</p>
+          </div>
+        </div>
+      </section>
+
       {/* 納品物 */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
