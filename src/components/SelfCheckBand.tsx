@@ -44,13 +44,13 @@ export default function SelfCheckBand() {
                   href={d.href}
                   target="_blank"
                   rel="noopener"
-                  className="group flex items-start gap-5 rounded-2xl border border-white/15 bg-white/[0.06] p-6 transition-colors hover:border-aqua/70 hover:bg-white/[0.1] md:p-7"
+                  className="group flex items-start gap-5 rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 transition-colors hover:border-aqua hover:bg-white/[0.1] md:p-7"
                 >
                   <span className="num shrink-0 pt-0.5 text-sm font-bold text-aqua">0{i + 1}</span>
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="text-lg font-bold text-white group-hover:text-aqua">{d.name}</span>
-                      <span className="font-data rounded-full border border-white/20 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">
+                      <span className="font-data rounded-full border border-white/30 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">
                         {d.spec}
                       </span>
                     </span>
@@ -58,7 +58,7 @@ export default function SelfCheckBand() {
                   </span>
                   <span
                     aria-hidden
-                    className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-all group-hover:border-aqua group-hover:bg-aqua group-hover:text-ink"
+                    className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-aqua/45 text-white transition-all group-hover:border-aqua group-hover:bg-aqua group-hover:text-ink"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" className="transition-transform group-hover:translate-x-0.5">
                       <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
