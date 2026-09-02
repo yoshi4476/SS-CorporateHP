@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import MediaShowcase from "@/components/MediaShowcase";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, FaqList, FlowSteps } from "@/components/ui";
@@ -199,87 +200,8 @@ export default function MediaPipelinePage() {
         </div>
       </section>
 
-      {/* 紹介動画。課題に共感した直後が、10分の説明を見てもらえる位置。
-          動画本体はAI集客ラボ側で配信している（このリポジトリに大きなファイルを持たない） */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-5xl px-5">
-          <SectionHead
-            en="Movie"
-            title="10分で分かる、AIで集客する仕組み"
-            lead="なぜ今AI検索なのか。実際の画面で、記事ができて公開されるまでをご覧いただけます。==人が決めることと、機械に任せることの分担==まで説明しています。"
-          />
-          <Reveal>
-            <video
-              controls
-              preload="none"
-              poster="https://ai.7senses.co.jp/videos/aio-pr-poster.jpg"
-              className="mt-10 w-full rounded-3xl border border-line shadow-xl"
-            >
-              <source src="https://ai.7senses.co.jp/videos/aio-pr.mp4" type="video/mp4" />
-              お使いのブラウザでは動画を再生できません。
-            </video>
-          </Reveal>
-          <div className="mt-8 text-center">
-            <Link
-              href="/contact"
-              className="inline-block rounded-full bg-navy px-8 py-4 text-sm font-bold text-white transition hover:opacity-90"
-            >
-              動画の内容で相談してみる →
-            </Link>
-            <p className="mt-3 text-xs text-ink-soft">営業のお電話はいたしません。</p>
-          </div>
-        </div>
-      </section>
-
-
-      {/* サービス資料。料金スライドは掲載しない約束（画像側で除外・塗り消し済み）。
-          画像はAI集客ラボ側で配信しているものを参照する */}
-      <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-5xl px-5">
-          <SectionHead
-            en="Document"
-            title="サービス資料"
-            lead="ご提案時にお渡ししている資料です。サービスの全体像から==品質を守る仕組み==まで、この場でご覧いただけます。横にスクロールしてページをめくれます。"
-          />
-          <div className="mt-10">
-            <p className="mb-3 text-center text-sm font-bold">資料の説明動画（6分19秒）</p>
-            <video
-              controls
-              preload="none"
-              poster="https://ai.7senses.co.jp/videos/doc-guide-poster.jpg"
-              className="w-full rounded-2xl border border-line shadow-lg"
-            >
-              <source src="https://ai.7senses.co.jp/videos/doc-guide.mp4" type="video/mp4" />
-              お使いのブラウザでは動画を再生できません。
-            </video>
-          </div>
-          <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-            {Array.from({ length: 15 }, (_, i) => {
-              const n = String(i + 1).padStart(2, "0");
-              return (
-                <img
-                  key={n}
-                  src={`https://ai.7senses.co.jp/images/proposal/p${n}.jpg`}
-                  alt={`サービス資料 ${i + 1}ページ目`}
-                  width={1600}
-                  height={1131}
-                  loading={i < 2 ? "eager" : "lazy"}
-                  className="w-[86%] max-w-[720px] shrink-0 snap-center rounded-2xl border border-line shadow-lg"
-                />
-              );
-            })}
-          </div>
-          <div className="mt-8 text-center">
-            <Link
-              href="/contact"
-              className="inline-block rounded-full bg-navy px-8 py-4 text-sm font-bold text-white transition hover:opacity-90"
-            >
-              この内容で相談してみる →
-            </Link>
-            <p className="mt-3 text-xs text-ink-soft">料金は御社の状況に合わせてお見積りします。</p>
-          </div>
-        </div>
-      </section>
+      {/* 動画2本と資料をまとめた区画。課題に共感した直後に置く */}
+      <MediaShowcase />
 
       {/* 納品物 */}
       <section className="py-16 md:py-24">
