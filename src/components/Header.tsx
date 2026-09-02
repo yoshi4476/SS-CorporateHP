@@ -19,8 +19,8 @@ const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や�
 const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
   { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
-  { href: "/services/keiri-bpo", label: "経理BPO基盤 (経理BPOに付帯)" },
-  { href: "/services/ad-operations", label: "広告運用の管理システム (広告運用に付帯)" },
+  { href: "/services/keiri-bpo", label: "経理BPO基盤" },
+  { href: "/services/ad-operations", label: "広告運用の管理システム" },
 ];
 
 // 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く
@@ -112,43 +112,47 @@ export default function Header() {
                     <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
                 </Link>
-                <div className="invisible absolute left-1/2 top-full w-72 -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <ul className="rounded-2xl border border-line bg-raise p-2 shadow-lift">
-                    <li>
-                      <Link
-                        href="/services"
-                        className="block rounded-xl px-4 py-2.5 text-sm font-bold text-pulse transition-colors hover:bg-mist"
-                      >
-                        事業内容一覧 →
-                      </Link>
-                    </li>
-                    {services.map((s) => (
-                      <li key={s.slug}>
-                        <Link
-                          href={`/services/${s.slug}`}
-                          className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
-                        >
-                          {s.name}
-                        </Link>
-                      </li>
-                    ))}
-                    {/* 自社プロダクト。受託の事業とは性質が違うので線で区切る */}
-                    <li className="mt-1 border-t border-line pt-1">
-                      <p className="px-4 pb-1 pt-2 font-data text-[0.6rem] uppercase tracking-[0.2em] text-faint">
-                        Products
-                      </p>
-                    </li>
-                    {PRODUCTS.map((p) => (
-                      <li key={p.href}>
-                        <Link
-                          href={p.href}
-                          className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
-                        >
-                          {p.label}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="invisible absolute left-1/2 top-full w-[34rem] -translate-x-1/2 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="max-h-[calc(100vh-6rem)] overflow-y-auto rounded-2xl border border-line bg-raise p-3 shadow-lift">
+                    <Link
+                      href="/services"
+                      className="block rounded-xl px-4 py-2.5 text-sm font-bold text-pulse transition-colors hover:bg-mist"
+                    >
+                      事業内容一覧 →
+                    </Link>
+                    <div className="mt-1 grid grid-cols-2 gap-x-3">
+                      <ul>
+                        {services.map((s) => (
+                          <li key={s.slug}>
+                            <Link
+                              href={`/services/${s.slug}`}
+                              className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
+                            >
+                              {s.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      {/* 自社プロダクト。受託の事業とは性質が違うので列を分ける */}
+                      <ul className="border-l border-line pl-3">
+                        <li>
+                          <p className="px-4 pb-1 pt-2 font-data text-[0.6rem] uppercase tracking-[0.2em] text-faint">
+                            Products
+                          </p>
+                        </li>
+                        {PRODUCTS.map((p) => (
+                          <li key={p.href}>
+                            <Link
+                              href={p.href}
+                              className="block rounded-xl px-4 py-2.5 text-sm text-ink transition-colors hover:bg-mist hover:text-pulse"
+                            >
+                              {p.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               <Link href="/blog" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
