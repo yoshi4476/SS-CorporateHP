@@ -63,6 +63,16 @@ export default function Footer() {
                 AIO（SEO）対策エージェント
               </Link>
             </li>
+            <li>
+              <Link href="/services/keiri-bpo" className="tap transition-colors hover:text-white">
+                経理BPO基盤
+              </Link>
+            </li>
+            <li>
+              <Link href="/services/ad-operations" className="tap transition-colors hover:text-white">
+                広告運用の管理システム
+              </Link>
+            </li>
           </ul>
         </nav>
 

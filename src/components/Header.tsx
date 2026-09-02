@@ -19,6 +19,8 @@ const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や�
 const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
   { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
+  { href: "/services/keiri-bpo", label: "経理BPO基盤 (経理BPOに付帯)" },
+  { href: "/services/ad-operations", label: "広告運用の管理システム (広告運用に付帯)" },
 ];
 
 // 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く
