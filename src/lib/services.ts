@@ -303,7 +303,7 @@ export const services: Service[] = [
   {
     slug: "meo",
     group: "集客",
-    seoTitle: "MEO運用代行｜通算3,200店舗・月額3万円",
+    seoTitle: "MEO運用代行｜通算3,200店舗の運用実績",
     image: {
       src: "/images/biz-meo.jpg",
       alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
@@ -918,7 +918,7 @@ export const services: Service[] = [
   {
     slug: "system-development",
     group: "業務",
-    seoTitle: "システム開発｜業務システム・80万円〜",
+    seoTitle: "システム開発｜業務システムを個別設計",
     image: {
       src: "/images/biz-system-development.jpg",
       alt: "業務システムの管理画面を映した開発環境のデスク",
