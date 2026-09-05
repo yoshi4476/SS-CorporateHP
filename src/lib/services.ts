@@ -62,11 +62,11 @@ export const services: Service[] = [
     group: "業務",
     seoTitle: "経理BPO・記帳代行｜記帳から給与まで外注",
     image: {
-      src: "/images/biz-keiri-bpo.jpg",
+      src: "/images/biz-keiri-bpo.webp",
       alt: "請求書と会計ソフトの画面を突き合わせながら、経理業務を進める担当者",
     },
     cardImage: {
-      src: "/images/biz-keiri-bpo.jpg",
+      src: "/images/biz-keiri-bpo.webp",
       alt: "請求書と会計ソフトの画面を突き合わせながら、経理業務を進める担当者",
     },
     name: "経理BPO・記帳代行",
@@ -181,11 +181,11 @@ export const services: Service[] = [
     group: "資金",
     seoTitle: "AI導入補助金ベンダー｜最大350万円・相談無料",
     image: {
-      src: "/images/biz-ai-subsidy.jpg",
+      src: "/images/biz-ai-subsidy.webp",
       alt: "会議室で資料を示しながら導入計画を説明する様子",
     },
     cardImage: {
-      src: "/images/biz-ai-subsidy.jpg",
+      src: "/images/biz-ai-subsidy.webp",
       alt: "会議室で資料を示しながら導入計画を説明する様子",
     },
     name: "AI導入補助金ベンダー",
@@ -305,11 +305,11 @@ export const services: Service[] = [
     group: "集客",
     seoTitle: "MEO運用代行｜通算3,200店舗の運用実績",
     image: {
-      src: "/images/biz-meo.jpg",
+      src: "/images/biz-meo.webp",
       alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
     },
     cardImage: {
-      src: "/images/biz-meo.jpg",
+      src: "/images/biz-meo.webp",
       alt: "Googleマップ上の店舗表示と順位データを確認する担当者",
     },
     name: "MEO運用代行",
@@ -397,11 +397,11 @@ export const services: Service[] = [
     group: "集客",
     seoTitle: "広告運用代行｜受け皿のLPまで直す",
     image: {
-      src: "/images/biz-ad-operations.jpg",
+      src: "/images/biz-ad-operations.webp",
       alt: "会議室の大画面に映した広告の実績データを見ながら、翌月の配分を検討するチーム",
     },
     cardImage: {
-      src: "/images/biz-ad-operations.jpg",
+      src: "/images/biz-ad-operations.webp",
       alt: "会議室の大画面に映した広告の実績データを見ながら、翌月の配分を検討するチーム",
     },
     name: "広告運用代行",
@@ -525,11 +525,11 @@ export const services: Service[] = [
     group: "集客",
     seoTitle: "AIO運用代行｜AIに引用されるサイトへ",
     image: {
-      src: "/images/biz-aio.jpg",
+      src: "/images/biz-aio.webp",
       alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",
     },
     cardImage: {
-      src: "/images/biz-aio.jpg",
+      src: "/images/biz-aio.webp",
       alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",
     },
     name: "AIO運用代行",
@@ -616,11 +616,11 @@ export const services: Service[] = [
     group: "業務",
     seoTitle: "AIコンサルティング｜棚卸しから定着まで",
     image: {
-      src: "/images/biz-ai-consulting.jpg",
+      src: "/images/biz-ai-consulting.webp",
       alt: "ホワイトボードに書かれたAI導入ロードマップを前に、進め方を検討する担当者",
     },
     cardImage: {
-      src: "/images/biz-ai-consulting.jpg",
+      src: "/images/biz-ai-consulting.webp",
       alt: "ホワイトボードに書かれたAI導入ロードマップを前に、進め方を検討する担当者",
     },
     name: "AIコンサルティング",
@@ -770,11 +770,11 @@ export const services: Service[] = [
     group: "集客",
     seoTitle: "HP/LP制作｜公開後の集客から逆算して作る",
     image: {
-      src: "/images/biz-web-production.jpg",
+      src: "/images/biz-web-production.webp",
       alt: "眺望のよいオフィスでサイト制作を進めるデスク",
     },
     cardImage: {
-      src: "/images/biz-web-production.jpg",
+      src: "/images/biz-web-production.webp",
       alt: "眺望のよいオフィスでサイト制作を進めるデスク",
     },
     name: "HP/LP制作",
@@ -920,11 +920,11 @@ export const services: Service[] = [
     group: "業務",
     seoTitle: "システム開発｜業務システムを個別設計",
     image: {
-      src: "/images/biz-system-development.jpg",
+      src: "/images/biz-system-development.webp",
       alt: "業務システムの管理画面を映した開発環境のデスク",
     },
     cardImage: {
-      src: "/images/biz-system-development.jpg",
+      src: "/images/biz-system-development.webp",
       alt: "業務システムの管理画面を映した開発環境のデスク",
     },
     name: "システム開発",

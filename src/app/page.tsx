@@ -86,7 +86,7 @@ export default function Home() {
             ぼんやりした影にしかならないため、下でひとつの写真ブロックとして出す */}
         <div aria-hidden className="absolute inset-0 hidden overflow-hidden lg:block">
           <Image
-            src="/images/hero-office.jpg"
+            src="/images/hero-office.webp"
             alt=""
             fill
             priority
@@ -179,7 +179,7 @@ export default function Home() {
               {/* 幅が広がるほど縦も伸びてCTAが画面外へ出るため、横長に切り替える */}
               <figure className="relative mt-7 aspect-[5/4] overflow-hidden rounded-3xl sm:aspect-[16/9] lg:hidden">
                 <Image
-                  src="/images/hero-office.jpg"
+                  src="/images/hero-office.webp"
                   alt="打ち合わせに向かう代表"
                   fill
                   priority

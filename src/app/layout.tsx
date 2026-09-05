@@ -15,11 +15,17 @@ import { site } from "@/lib/site";
 
 // 日本語フォントは1ウェイトあたり数百KBある。実際に描画されているウェイトだけ読む。
 // (計測: 見出しは 700 と 900 のみ。500 はどこにも当たっていなかった)
+//
+// preload を切っている理由: 日本語フォントは文字の範囲ごとに細かく分割されて
+// 配信される。既定では全断片に先読み指定が付き、トップページだけで122本・
+// 2.3MB を最初に取りに行っていた。先読みを外すと、ブラウザは画面に出ている
+// 文字に必要な断片だけを取る。書体も見た目も変わらない。
 const zen = Zen_Kaku_Gothic_New({
   variable: "--font-zen",
   weight: ["700", "900"],
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const noto = Noto_Sans_JP({
@@ -27,6 +33,7 @@ const noto = Noto_Sans_JP({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const grotesk = Space_Grotesk({
