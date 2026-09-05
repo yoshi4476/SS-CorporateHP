@@ -11,6 +11,12 @@ import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+
+/** 掲載内容の見直し時点。生成エンジンは古い情報を引用しない */
+function reviewedLabel() {
+  const d = new Date();
+  return `${d.getFullYear()}年${d.getMonth() + 1}月`;
+}
 import { site } from "@/lib/site";
 import { pageMeta } from "@/lib/meta";
 
@@ -483,6 +489,15 @@ export default async function ServicePage({ params }: Props) {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="pb-4">
+        <div className="mx-auto max-w-7xl px-5">
+          <p className="text-xs text-faint">
+            このページの内容は{reviewedLabel()}時点のものです。料金・対応範囲は
+            ご相談時に最新の内容をご案内します。
+          </p>
         </div>
       </section>
 

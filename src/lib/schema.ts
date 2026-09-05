@@ -64,7 +64,20 @@ export function serviceSchema(slug: string) {
     provider: { "@id": `${site.url}/#organization` },
     areaServed: "JP",
     url: `${site.url}/services/${s.slug}`,
+    // 生成エンジンは古い情報を避ける。いつ時点の内容かを示さないと、
+    // 内容が新しくても引用の候補から外れる
+    isPartOf: {
+      "@type": "WebPage",
+      "@id": `${site.url}/services/${s.slug}`,
+      dateModified: reviewedOn(),
+    },
   };
+}
+
+/** 掲載内容の見直し日。月initialで十分なので、月初を返す */
+export function reviewedOn() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`;
 }
 
 export function faqSchema(items: { q: string; a: string }[]) {
