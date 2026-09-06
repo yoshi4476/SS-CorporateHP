@@ -191,6 +191,8 @@ export default function ContactForm() {
           <option value="" disabled>
             選択してください
           </option>
+          <option value="keiri-self">経理システム（セルフ版）</option>
+          <option value="keiri-shindan">経理の現状分析（無料）</option>
           {services.map((s) => (
             <option key={s.slug} value={s.slug}>
               {s.name}

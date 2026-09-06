@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import MediaShowcase from "@/components/MediaShowcase";
+import KeiriTwoTracks from "@/components/KeiriTwoTracks";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
@@ -293,6 +294,9 @@ export default async function ServicePage({ params }: Props) {
           </Reveal>
         </div>
       </section>
+
+      {/* 経理BPOだけ: 任せるか自社で使うかを、悩みの直後に選ばせる */}
+      {service.slug === "keiri-bpo" && <KeiriTwoTracks />}
 
       {/* 特長 */}
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">
