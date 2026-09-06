@@ -65,7 +65,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/services/keiri-bpo" className="tap transition-colors hover:text-white">
-                経理BPO基盤
+                経理システム（セルフ版）
               </Link>
             </li>
             <li>
