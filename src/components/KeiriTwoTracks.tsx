@@ -26,6 +26,8 @@ const TRACKS = [
            "経費精算のチェック", "月次決算の早期化"],
     cta: { label: "無料の現状分析を申し込む", href: "/contact?s=keiri-bpo" },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
+    video: "keiri-bpo",
+    videoNote: "任せた場合に何がどう変わるかを、10分でご説明します",
   },
   {
     key: "self",
@@ -43,6 +45,8 @@ const TRACKS = [
            "電子帳簿保存法に沿った保存", "導入時の初期設定と操作説明"],
     cta: { label: "デモを見てみる", href: "/contact?s=keiri-self" },
     note: "実際の画面をお見せします。ご契約前提のご案内ではありません。",
+    video: "keiri-self",
+    videoNote: "実際の画面で、どう使うかを10分でご説明します",
   },
 ];
 
@@ -99,6 +103,22 @@ export default function KeiriTwoTracks() {
                       ))}
                     </ul>
                   </div>
+                </div>
+
+                <div className="mt-7">
+                  <p className="mb-2 text-[0.72rem] font-bold text-pulse">
+                    動画で見る（約10分）
+                  </p>
+                  <video
+                    controls
+                    preload="none"
+                    poster={`https://ai.7senses.co.jp/videos/${t.video}-poster.jpg`}
+                    className="w-full rounded-2xl border border-line"
+                  >
+                    <source src={`https://ai.7senses.co.jp/videos/${t.video}.mp4`} type="video/mp4" />
+                    お使いのブラウザでは動画を再生できません。
+                  </video>
+                  <p className="mt-2 text-xs text-ink-soft">{t.videoNote}</p>
                 </div>
 
                 <div className="mt-auto pt-7">
