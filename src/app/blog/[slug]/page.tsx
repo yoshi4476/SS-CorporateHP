@@ -92,7 +92,9 @@ export default async function BlogDetailPage({ params }: Props) {
       url: "https://ai.7senses.co.jp/author/haraguchi/",
       worksFor: { "@id": `${site.url}/#organization` },
     },
-    publisher: { "@id": `${site.url}/#organization` },
+    // @id の参照だけだと、参照を解決しない読み手には発行者が空に見える。名前とURLも書く
+    publisher: { "@type": "Organization", "@id": `${site.url}/#organization`,
+                 name: "セブンセンシズ株式会社", url: site.url },
     mainEntityOfPage: url,
     ...(post.eyecatch ? { image: `${site.url}${post.eyecatch}` } : {}),
   };
