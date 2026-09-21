@@ -24,7 +24,7 @@ export const organizationSchema = {
     name: site.ceo,
     url: "https://ai.7senses.co.jp/author/haraguchi/",
     // 外部の実在プロフィール。サイトの外でも同じ人物だと機械が結び付けられる
-    sameAs: ["https://www.linkedin.com/in/%E5%84%AA-%E5%8E%9F%E5%8F%A3-b89362439"],
+    sameAs: ["https://www.linkedin.com/in/yu-haraguchi"],
   },
   telephone: `+81-6-4305-7547`,
   email: site.contactEmail,
