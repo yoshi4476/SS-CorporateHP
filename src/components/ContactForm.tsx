@@ -90,6 +90,8 @@ export default function ContactForm() {
           tel: get("tel"),
           service: serviceName,
           message: get("message"),
+          // どのページから問い合わせたかを管制塔に残す（記事→問い合わせの対比に使う）
+          referer: typeof window !== "undefined" ? window.location.href : "",
         }),
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
