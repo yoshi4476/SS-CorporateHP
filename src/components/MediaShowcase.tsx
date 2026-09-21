@@ -76,7 +76,8 @@ export default function MediaShowcase() {
                     alt={`サービス資料 ${i + 1}ページ目`}
                     width={1600}
                     height={1131}
-                    loading={i < 2 ? "eager" : "lazy"}
+                    loading="lazy"
+                    decoding="async"
                     className="w-[78%] max-w-[520px] shrink-0 snap-center rounded-xl border border-line"
                   />
                 );

@@ -30,9 +30,9 @@
   /* 金の淡い面 (gold-tint) の上に小さい文字を置くとき用。gold では 4.35:1 で基準を割る */
   --color-gold-deep: #8a5214;
 
-  --font-display: var(--font-zen), "Hiragino Kaku Gothic ProN", sans-serif;
-  --font-body: var(--font-noto), "Hiragino Kaku Gothic ProN", sans-serif;
-  --font-data: var(--font-grotesk), var(--font-noto), sans-serif;
+  --font-display: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --font-data: var(--font-grotesk), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
 
   /* 影は浮かせるためではなく、紙が重なっている程度に留める。
      区切りは影ではなく罫線 (--color-line) で作る。 */

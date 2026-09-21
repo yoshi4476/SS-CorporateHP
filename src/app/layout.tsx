@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Space_Grotesk, Zen_Kaku_Gothic_New } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -13,29 +13,8 @@ import { organizationSchema } from "@/lib/schema";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
 
-// 日本語フォントは1ウェイトあたり数百KBある。実際に描画されているウェイトだけ読む。
-// (計測: 見出しは 700 と 900 のみ。500 はどこにも当たっていなかった)
-//
-// preload を切っている理由: 日本語フォントは文字の範囲ごとに細かく分割されて
-// 配信される。既定では全断片に先読み指定が付き、トップページだけで122本・
-// 2.3MB を最初に取りに行っていた。先読みを外すと、ブラウザは画面に出ている
-// 文字に必要な断片だけを取る。書体も見た目も変わらない。
-const zen = Zen_Kaku_Gothic_New({
-  variable: "--font-zen",
-  weight: ["700", "900"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const noto = Noto_Sans_JP({
-  variable: "--font-noto",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
+// 日本語のWebフォントは使わない。文字範囲ごとに60本以上・1MB超を読み、
+// モバイルの表示が13秒かかっていた。端末のフォント（globals.css）で描く
 const grotesk = Space_Grotesk({
   variable: "--font-grotesk",
   weight: ["400", "700"],
@@ -80,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${zen.variable} ${noto.variable} ${grotesk.variable} h-full antialiased`}
+      className={`${grotesk.variable} h-full antialiased`}
     >
       {/*
         Google Analytics 4。
@@ -90,10 +69,10 @@ export default function RootLayout({
       <head>
         {site.ga4Id && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}`} />
+            {/* 計測タグ(172KB)は描画の後に読む。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */}
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4Id}');`,
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${site.ga4Id}');window.addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${site.ga4Id}';document.head.appendChild(s);},1200);});`,
               }}
             />
           </>
