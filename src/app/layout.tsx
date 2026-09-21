@@ -64,6 +64,17 @@ export default function RootLayout({
         条件にしているため、body ではなく head に直接出力する。
       */}
       <head>
+        {/* イントロを出す回だけ、描画の前に画面を覆う。
+            IntroLoader は JS が動いてから現れるため、それまでの一瞬だけ本編が見えていた。
+            3秒で必ず外す保険つき（JSが落ちても黒いままにならない） */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(location.pathname==='/'&&!sessionStorage.getItem('ss-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){" +
+              "document.documentElement.classList.add('ss-intro-pending');" +
+              "setTimeout(function(){document.documentElement.classList.remove('ss-intro-pending')},3000);}}catch(e){}",
+          }}
+        />
         {site.ga4Id && (
           <>
             {/* 計測タグ(172KB)は描画の後に読む。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */}

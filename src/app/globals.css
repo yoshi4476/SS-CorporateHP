@@ -848,3 +848,12 @@ mark.marker-aqua {
   transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
+
+/* イントロ前の目隠し。layout.tsx のインラインスクリプトが付け、IntroLoader が外す */
+html.ss-intro-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #0a0f1c;
+  z-index: 2147483646;
+}

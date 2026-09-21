@@ -7,7 +7,7 @@
 // 裏で動く3Dの初期化と重なって画面が固まる。DOMを直接書き換えて再描画を避ける。
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const DURATION = 1500; // カウント時間 (ms)
 
@@ -17,11 +17,18 @@ export default function IntroLoader() {
   const barRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem("ss-intro")) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const off = () => document.documentElement.classList.remove("ss-intro-pending");
+    if (sessionStorage.getItem("ss-intro")) return off();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return off();
     sessionStorage.setItem("ss-intro", "1");
     setState("count");
   }, []);
+
+  // 自分の覆いが描かれた時点で、head のスクリプトが付けた目隠しを外す。
+  // 先に外すと本編が一瞬見え、後に外すと最後のワイプが隠れる
+  useLayoutEffect(() => {
+    if (state !== "hidden") document.documentElement.classList.remove("ss-intro-pending");
+  }, [state]);
 
   useEffect(() => {
     if (state !== "count") return;

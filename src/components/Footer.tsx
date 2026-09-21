@@ -134,9 +134,39 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-7xl px-5 py-6 text-xs text-white/60">
-          © {new Date().getFullYear()} {site.nameEn} All rights reserved.
-        </p>
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-6">
+          <p className="text-xs text-white/60">
+            © {new Date().getFullYear()} {site.nameEn} All rights reserved.
+          </p>
+          {/* 外部プロフィール。構造化データの sameAs だけでは読者には見えないため、
+              フッターから実際にたどれるようにする */}
+          <ul className="flex list-none gap-2" aria-label="外部プロフィール">
+            <li>
+              <a
+                href="https://www.linkedin.com/in/yu-haraguchi"
+                target="_blank"
+                rel="noopener me"
+                aria-label="LinkedIn（原口 優）"
+                className="tap inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/80 transition-colors hover:border-transparent hover:bg-[#0a66c2] hover:text-white"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="currentColor">
+                  <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://note.com/yu_haraguchi"
+                target="_blank"
+                rel="noopener me"
+                aria-label="note（原口 優）"
+                className="tap inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-[.66rem] font-bold tracking-wide text-white/80 transition-colors hover:border-transparent hover:bg-[#41c9b4] hover:text-white"
+              >
+                note
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );
