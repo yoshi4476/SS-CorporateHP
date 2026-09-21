@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import entities from "@/lib/entities.json";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -80,9 +81,23 @@ export default async function BlogDetailPage({ params }: Props) {
   const pick = post.category === "backoffice" ? "ai-consulting" : "keiri-bpo";
   const svc = services.find((s) => s.slug === pick);
   const url = `${site.url}/blog/${post.slug}`;
+  // 記事が扱う実体（IT導入補助金など）を公式の場所へ結ぶ。AI検索が同じ実体として束ねる。
+  // 表は管制塔側の scripts/entities.py と同じ（entities.json に書き出したもの）
+  const plain = post.html.replace(/<[^>]+>/g, " ");
+  const hit = (alias: string, text: string) =>
+    /^[A-Za-z ]+$/.test(alias) ? new RegExp(`(?<![A-Za-z])${alias}(?![A-Za-z])`, "i").test(text) : text.includes(alias);
+  const found = (text: string) => entities.entities.filter((e) => e.aliases.some((a) => hit(a, text)));
+  const about = found(`${post.title}`).slice(0, 3).map((e) => ({ "@type": "Thing", name: e.name, sameAs: e.sameAs }));
+  const aboutNames = new Set(about.map((a) => a.name));
+  const mentions = found(plain)
+    .filter((e) => !aboutNames.has(e.name))
+    .slice(0, 6)
+    .map((e) => ({ "@type": "Thing", name: e.name, sameAs: e.sameAs }));
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    ...(about.length ? { about } : {}),
+    ...(mentions.length ? { mentions } : {}),
     headline: post.title,
     description: post.description,
     datePublished: post.date,
@@ -94,6 +109,7 @@ export default async function BlogDetailPage({ params }: Props) {
       name: site.ceo,
       jobTitle: "セブンセンシズ株式会社 代表取締役",
       url: "https://ai.7senses.co.jp/author/haraguchi/",
+      knowsAbout: entities.knowsAbout,
       worksFor: { "@id": `${site.url}/#organization` },
     },
     // @id の参照だけだと、参照を解決しない読み手には発行者が空に見える。名前とURLも書く

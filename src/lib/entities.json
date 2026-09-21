@@ -1,0 +1,139 @@
+{
+  "entities": [
+    {
+      "name": "IT導入補助金",
+      "sameAs": "https://it-shien.smrj.go.jp/",
+      "aliases": [
+        "IT導入補助金"
+      ]
+    },
+    {
+      "name": "ものづくり補助金",
+      "sameAs": "https://portal.monodukuri-hojo.jp/",
+      "aliases": [
+        "ものづくり補助金"
+      ]
+    },
+    {
+      "name": "小規模事業者持続化補助金",
+      "sameAs": "https://s23.jizokukahojokin.info/",
+      "aliases": [
+        "持続化補助金"
+      ]
+    },
+    {
+      "name": "事業再構築補助金",
+      "sameAs": "https://jigyou-saikouchiku.go.jp/",
+      "aliases": [
+        "事業再構築補助金"
+      ]
+    },
+    {
+      "name": "中小企業庁",
+      "sameAs": "https://www.chusho.meti.go.jp/",
+      "aliases": [
+        "中小企業庁"
+      ]
+    },
+    {
+      "name": "gBizID",
+      "sameAs": "https://gbiz-id.go.jp/",
+      "aliases": [
+        "gBizID",
+        "GビズID"
+      ]
+    },
+    {
+      "name": "Googleビジネスプロフィール",
+      "sameAs": "https://www.google.com/business/",
+      "aliases": [
+        "Googleビジネスプロフィール",
+        "Google Business Profile",
+        "ビジネスプロフィール"
+      ]
+    },
+    {
+      "name": "Google AI Overview",
+      "sameAs": "https://support.google.com/websearch/answer/14901683",
+      "aliases": [
+        "AI Overview",
+        "AIオーバービュー",
+        "AIによる概要"
+      ]
+    },
+    {
+      "name": "ChatGPT",
+      "sameAs": "https://ja.wikipedia.org/wiki/ChatGPT",
+      "aliases": [
+        "ChatGPT"
+      ]
+    },
+    {
+      "name": "Perplexity",
+      "sameAs": "https://www.perplexity.ai/",
+      "aliases": [
+        "Perplexity"
+      ]
+    },
+    {
+      "name": "Gemini",
+      "sameAs": "https://gemini.google.com/",
+      "aliases": [
+        "Gemini"
+      ]
+    },
+    {
+      "name": "検索エンジン最適化（SEO）",
+      "sameAs": "https://ja.wikipedia.org/wiki/%E6%A4%9C%E7%B4%A2%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3%E6%9C%80%E9%81%A9%E5%8C%96",
+      "aliases": [
+        "SEO",
+        "検索エンジン最適化"
+      ]
+    },
+    {
+      "name": "ビジネス・プロセス・アウトソーシング（BPO）",
+      "sameAs": "https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%82%A2%E3%82%A6%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%B3%E3%82%B0",
+      "aliases": [
+        "BPO",
+        "経理代行",
+        "経理アウトソーシング"
+      ]
+    },
+    {
+      "name": "インボイス制度",
+      "sameAs": "https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm",
+      "aliases": [
+        "インボイス制度",
+        "適格請求書"
+      ]
+    },
+    {
+      "name": "電子帳簿保存法",
+      "sameAs": "https://www.nta.go.jp/law/joho-zeikaishaku/sonota/jirei/",
+      "aliases": [
+        "電子帳簿保存法",
+        "電帳法"
+      ]
+    },
+    {
+      "name": "freee",
+      "sameAs": "https://www.freee.co.jp/",
+      "aliases": [
+        "freee"
+      ]
+    }
+  ],
+  "knowsAbout": [
+    "MEO（マップ検索最適化）",
+    "AIO（AI検索最適化）",
+    "LLMO（大規模言語モデル最適化）",
+    "SEO",
+    "Googleビジネスプロフィール運用",
+    "店舗集客",
+    "AI導入支援",
+    "IT導入補助金",
+    "ものづくり補助金",
+    "小規模事業者持続化補助金",
+    "経理BPO"
+  ]
+}
