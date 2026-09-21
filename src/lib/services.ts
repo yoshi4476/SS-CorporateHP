@@ -523,7 +523,9 @@ export const services: Service[] = [
   {
     slug: "aio",
     group: "集客",
-    seoTitle: "AIO運用代行｜AIに引用されるサイトへ",
+    // 実際に当たっている検索語は「aio対策 代行」（28日で24表示・24.4位）。
+    // タイトルに「対策」が無く、語と題名が噛み合っていなかった
+    seoTitle: "AIO対策の運用代行｜AIに引用されるサイトへ",
     image: {
       src: "/images/biz-aio.webp",
       alt: "AI検索の順位と流入を可視化したダッシュボードを確認するチーム",

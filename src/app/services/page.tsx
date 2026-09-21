@@ -52,7 +52,9 @@ const PRODUCTS = [
 ];
 
 export const metadata: Metadata = pageMeta({
-  title: `事業内容｜集客・社内業務・補助金の${services.length}事業`,
+  // 「事業内容」は誰も検索しない語。検索される事業名を先頭に置く
+  // （28日で6.4位・表示34・クリック0。順位相応なら1〜2クリック）
+  title: `AI集客・システム開発・補助金支援の${services.length}事業`,
   description:
     `セブンセンシズ株式会社の事業内容一覧。AIコンサルティング、システム開発、AI導入補助金支援、AIO運用代行(オウンドメディア×LP)、MEO運用代行(通算3,200店舗)、HP/LP制作の${services.length}事業を一気通貫で提供します。`,
   path: "/services",
