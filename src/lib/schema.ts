@@ -35,6 +35,7 @@ export const organizationSchema = {
   sameAs: [
     site.lpUrl,
     site.labUrl,
+    site.mainUrl,
     `https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=${site.corporateNumber}`,
     `https://alarmbox.jp/companyinfo/entities/${site.corporateNumber}`,
   ],
