@@ -3,7 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
-import { Reveal } from "@/components/motion";
+// 記事は検索から着地する。motion の Reveal は opacity:0 で始めるため、JSが動くまで
+// 見出しと本文が見えず、LCP が3秒を超えていた。記事では演出なしで即描画する
+function Reveal({ children, className }: { children: React.ReactNode; delay?: number; className?: string }) {
+  return className ? <div className={className}>{children}</div> : <>{children}</>;
+}
 import { CtaBand } from "@/components/ui";
 import { sheet } from "@/lib/bpo";
 import { services } from "@/lib/services";
@@ -169,19 +173,18 @@ export default async function BlogDetailPage({ params }: Props) {
           </Reveal>
 
           {post.eyecatch && (
-            <Reveal delay={0.08}>
-              <figure className="mt-8 overflow-hidden rounded-3xl border border-line bg-mist md:mt-10">
+            <figure className="mt-8 overflow-hidden rounded-3xl border border-line bg-mist md:mt-10">
                 <Image
-                  src={post.eyecatch}
+                  src={post.eyecatchWebp ?? post.eyecatch}
                   alt={post.title}
                   width={1200}
                   height={630}
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 1024px) 100vw, 1024px"
                   className="h-auto w-full"
                 />
               </figure>
-            </Reveal>
           )}
         </div>
       </section>

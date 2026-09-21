@@ -21,6 +21,7 @@ export type BlogPost = {
   category: string; // カテゴリのスラッグ
   categoryName: string; // 表示名
   eyecatch?: string;
+  eyecatchWebp?: string; // 表示用（軽い）。OG画像は eyecatch（PNG）のまま
   html: string; // 本文HTML（エンジンが生成）
   faq?: BlogFaq[];
   readingMinutes: number;

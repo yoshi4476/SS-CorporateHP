@@ -3,10 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
-import Cursor from "@/components/Cursor";
-import PageTransition from "@/components/PageTransition";
-import IntroLoader from "@/components/IntroLoader";
+import Effects from "@/components/Effects";
 import JsonLd from "@/components/JsonLd";
 import Tracking from "@/components/Tracking";
 import { organizationSchema } from "@/lib/schema";
@@ -82,13 +79,10 @@ export default function RootLayout({
         <JsonLd data={organizationSchema} />
         <Tracking />
         <Header />
-        <Cursor />
-        <PageTransition />
-        <IntroLoader />
-        <SmoothScroll>
+        <Effects>
           <main>{children}</main>
           <Footer />
-        </SmoothScroll>
+        </Effects>
       </body>
     </html>
   );
