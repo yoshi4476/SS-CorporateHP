@@ -163,8 +163,8 @@ export default function ContactForm() {
           <input required name="name" autoComplete="name" placeholder="山田 太郎" className={inputCls} disabled={busy} />
         </label>
         <label className="grid gap-2 text-xs font-bold text-ink">
-          <LabelText text="会社名・店舗名" required />
-          <input required name="company" autoComplete="organization" placeholder="株式会社◯◯" className={inputCls} disabled={busy} />
+          <LabelText text="会社名・店舗名（任意）" />
+          <input name="company" autoComplete="organization" placeholder="株式会社◯◯（個人の方は空欄で構いません）" className={inputCls} disabled={busy} />
         </label>
       </div>
 
