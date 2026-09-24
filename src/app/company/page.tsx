@@ -7,7 +7,8 @@ import { SectionHead, CtaBand } from "@/components/ui";
 import { services } from "@/lib/services";
 import { pageMeta } from "@/lib/meta";
 import { breadcrumbSchema } from "@/lib/schema";
-import { site } from "@/lib/site";
+import MapFacade from "@/components/MapFacade";
+import { mapInfo, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   title: "会社概要｜大阪市東成区・2020年設立",
@@ -240,11 +241,70 @@ export default function CompanyPage() {
               </tbody>
             </table>
           </Reveal>
-          <Reveal delay={0.15}>
-            <p className="mt-6 text-xs leading-6 text-slate">
-              ご来社の際は、お手数ですが事前にお電話にてご連絡ください。
-            </p>
+        </div>
+      </section>
+
+      {/* アクセス（地図は押したときだけ読む） */}
+      <section id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
+        <div className="mx-auto max-w-5xl px-5">
+          <Reveal>
+            <p className="eyebrow">Access</p>
+            <h2 id="access-heading" className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
+              アクセス
+            </h2>
           </Reveal>
+          <div className="mt-10 grid items-stretch gap-8 md:grid-cols-[5fr_7fr]">
+            <Reveal delay={0.08}>
+              <p
+                className="num text-2xl font-semibold leading-tight text-ink md:text-3xl"
+                aria-label="北緯34.6791度、東経135.5552度"
+              >
+                34.6791<span className="ml-0.5 text-sm tracking-widest text-pulse">°N</span>
+                <span className="mx-2 font-light text-line-strong">/</span>
+                135.5552<span className="ml-0.5 text-sm tracking-widest text-pulse">°E</span>
+              </p>
+              <dl className="mt-5 grid gap-3 text-sm">
+                {[
+                  ["所在地", <>〒{site.postal}<br />大阪府大阪市東成区神路1丁目7-4<br />コンフォートビル901・902</>],
+                  ["最寄り", mapInfo.station],
+                  ["受付", site.hours],
+                  [
+                    "電話",
+                    <a key="tel" href={`tel:${site.tel.replaceAll("-", "")}`} className="num font-semibold text-pulse underline-offset-4 hover:underline">
+                      {site.tel}
+                    </a>,
+                  ],
+                ].map(([label, value]) => (
+                  <div key={String(label)} className="grid grid-cols-[4.5em_1fr] gap-3 border-b border-line pb-3">
+                    <dt className="pt-0.5 text-xs font-bold tracking-widest text-slate">{label}</dt>
+                    <dd className="leading-7 text-ink">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-5 text-xs leading-6 text-slate">
+                ご来社の際は、お手数ですが事前にお電話にてご連絡ください。オンラインでのご相談も承っています。
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2.5">
+                <a
+                  href={mapInfo.share}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex min-h-11 items-center rounded-full bg-pulse px-5 text-sm font-bold text-white transition-colors hover:bg-pulse-deep"
+                >
+                  Googleマップで開く
+                </a>
+                <a
+                  href={mapInfo.route}
+                  target="_blank"
+                  rel="noopener"
+                  className="inline-flex min-h-11 items-center rounded-full border border-line-strong bg-white px-5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                >
+                  経路を調べる
+                </a>
+              </div>
+            </Reveal>
+            <MapFacade />
+          </div>
         </div>
       </section>
 

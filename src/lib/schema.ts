@@ -1,4 +1,4 @@
-import { site } from "@/lib/site";
+import { mapInfo, site } from "@/lib/site";
 import { services } from "@/lib/services";
 
 export const organizationSchema = {
@@ -44,7 +44,14 @@ export const organizationSchema = {
     site.mainUrl,
     `https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=${site.corporateNumber}`,
     `https://alarmbox.jp/companyinfo/entities/${site.corporateNumber}`,
+    // Googleマップの店舗情報（サイトと地図の店舗が同じ会社だと機械に伝える）
+    mapInfo.cid,
   ],
+  location: {
+    "@type": "Place",
+    geo: { "@type": "GeoCoordinates", latitude: mapInfo.lat, longitude: mapInfo.lng },
+    hasMap: mapInfo.cid,
+  },
   areaServed: "JP",
   description:
     "大阪のAIコンサルティング・デジタルマーケティング会社。AI導入支援、システム開発、MEO運用代行(通算3,200店舗)、AIO運用代行、オウンドメディア運用、HP/LP制作を提供。",

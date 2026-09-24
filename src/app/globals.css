@@ -857,3 +857,20 @@ html.ss-intro-pending::before {
   background: #0a0f1c;
   z-index: 2147483646;
 }
+
+/* 会社概要のアクセス: 押す前の地図の面（夜の街区図）。地図は押したときだけ読む */
+.map-facade .map-grid {
+  background:
+    linear-gradient(rgb(116 199 214 / 0.22) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(90deg, rgb(116 199 214 / 0.22) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px 24px;
+}
+.map-facade .map-pin { box-shadow: 0 0 0 5px rgb(13 20 32), 0 0 0 6px rgb(116 199 214 / 0.6), 0 0 24px rgb(116 199 214 / 0.55); }
+.map-facade .map-pin::before {
+  content: ""; position: absolute; inset: -14px; border-radius: 9999px;
+  border: 2px solid rgb(116 199 214 / 0.8); opacity: 0;
+  animation: map-ping 2.4s cubic-bezier(.19, 1, .22, 1) infinite;
+}
+@keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .map-facade .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); } }
