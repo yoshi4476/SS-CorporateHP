@@ -46,6 +46,8 @@ export const organizationSchema = {
     `https://alarmbox.jp/companyinfo/entities/${site.corporateNumber}`,
     // Googleマップの店舗情報（サイトと地図の店舗が同じ会社だと機械に伝える）
     mapInfo.cid,
+    // 公式 YouTube チャンネル（YouTube での言及を会社の評価に結びつける）
+    "https://www.youtube.com/channel/UCOwGCk8A1xgUXMsFwQ5QaMw",
   ],
   location: {
     "@type": "Place",
