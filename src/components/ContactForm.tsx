@@ -99,6 +99,10 @@ export default function ContactForm() {
         setState("sent");
         // fetch 送信でページが変わらないため、明示的に送らないと計測されない
         track("generate_lead", { service: serviceName || "未選択" });
+        // 日次KPIとファネルは3サイト共通で form_submit（送信数）と lead_capture（CV）を数える。
+        // 同じ送信で両方飛ぶので、集計側では足さない
+        track("form_submit", { form_type: "contact" });
+        track("lead_capture", { lead_route: "form", form_type: "contact" });
       } else {
         setState("error");
         setErrorMsg(data.error ?? "送信に失敗しました。");
