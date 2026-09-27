@@ -104,7 +104,6 @@ export const approaches: {
       "レポートにもとづくサイト改善の実装まで",
     ],
     price: "個別お見積り",
-    bonus: "MEOスタンダードが無料で付帯",
   },
   {
     key: "seo-aio",
@@ -252,7 +251,6 @@ export const plans: {
     price: "個別",
     unit: "お見積り",
     body: "オウンドメディア+LPの構築・運用一式、記事60本/月、月次コンサルレポート、レポートにもとづくサイト改善の実装まで。",
-    bonus: "MEOスタンダードが無料で付帯",
     featured: true,
   },
 ];
