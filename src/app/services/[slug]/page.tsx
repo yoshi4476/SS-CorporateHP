@@ -10,6 +10,7 @@ import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } 
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
+import AioScan from "@/components/AioScan";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -115,6 +116,24 @@ export default async function ServicePage({ params }: Props) {
                 </p>
               </Reveal>
               <Reveal delay={0.14}>
+                {service.slug === "aio" ? (
+                  <div className="mt-9 max-w-xl rounded-3xl border border-line bg-raise p-6 shadow-card md:p-7">
+                    <p className="text-sm font-bold">まず、御社のサイトがAIと検索に読まれているかを測ってください。</p>
+                    <div className="mt-4">
+                      <AioScan src="corp_aio_hero" />
+                    </div>
+                    <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">
+                      話を聞いてから決めたい方は
+                      <Link href="/contact" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
+                        無料相談
+                      </Link>
+                      ／ まず学びたい方は
+                      <a href={site.labUrl} target="_blank" rel="noopener" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
+                        運営メディア「AI集客ラボ」↗
+                      </a>
+                    </p>
+                  </div>
+                ) : (
                 <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                   <Link
                     href="/contact"
@@ -122,16 +141,6 @@ export default async function ServicePage({ params }: Props) {
                   >
                     このサービスを相談する
                   </Link>
-                  {service.slug === "aio" && (
-                    <a
-                      href={site.labUrl}
-                      target="_blank"
-                      rel="noopener"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-                    >
-                      運営メディア「AI集客ラボ」を見る ↗
-                    </a>
-                  )}
                   {service.slug === "keiri-bpo" && (
                     <a
                       href="/docs/keiri-tanaoroshi-sheet.pdf"
@@ -155,6 +164,7 @@ export default async function ServicePage({ params }: Props) {
                     </a>
                   )}
                 </div>
+                )}
                 {service.price && (
                   <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-raise px-4 py-2 text-xs font-bold shadow-card">
                     <span className="text-slate">料金目安</span>

@@ -16,6 +16,12 @@ import { site } from "@/lib/site";
 const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
 // 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
+// URLを入れる診断を先頭に。LPの入力欄へ直接飛び、どこから来たかを src で残す
+const CHECKS = [
+  { name: "サイトのAIO診断", spec: "URL入力・14項目", href: "https://ai.7senses.co.jp/lp/?src=corp_header#scan-start" },
+  ...diagnostics,
+];
+
 const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
   { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
@@ -187,7 +193,7 @@ export default function Header() {
                 <div className="invisible absolute right-0 top-full w-80 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
                   <div className="rounded-2xl border border-line bg-raise p-2 shadow-lift">
                     <ul>
-                      {diagnostics.map((d) => (
+                      {CHECKS.map((d) => (
                         <li key={d.name}>
                           <a
                             href={d.href}
@@ -337,7 +343,7 @@ export default function Header() {
               <div className="border-t border-white/10 pt-6">
                 <p className="eyebrow !text-aqua">Free Self-Check — 無料セルフチェック</p>
                 <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
-                  {diagnostics.map((d) => (
+                  {CHECKS.map((d) => (
                     <li key={d.name}>
                       <a
                         href={d.href}

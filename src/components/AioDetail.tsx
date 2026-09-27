@@ -17,6 +17,7 @@ import {
   diagnostics,
 } from "@/lib/aio";
 import { site } from "@/lib/site";
+import AioScan from "@/components/AioScan";
 
 // AIOページ専用の詳細セクション群 (背景データ・用語・実装層・比較・測定・料金)。
 
@@ -326,6 +327,20 @@ export default function AioDetail() {
                   。無料の現状分析レポートをお渡しします。
                 </p>
               </Reveal>
+              <Reveal delay={0.1}>
+                <div className="rounded-2xl border-2 border-pulse bg-raise p-6 shadow-card">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h4 className="text-base font-bold">サイトのAIO診断</h4>
+                    <span className="font-data shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-pulse">
+                      URL入力だけ・14項目
+                    </span>
+                  </div>
+                  <p className="mt-3 mb-5 text-xs leading-7 text-slate">
+                    AIのクローラーを拒否していないか、検索に出さない設定になっていないか、会社情報や構造化データがあるか。100点満点で採点し、直す順番まで出します。
+                  </p>
+                  <AioScan src="corp_aio_tools" />
+                </div>
+              </Reveal>
               {diagnostics.map((d, i) => (
                 <Reveal key={d.name} delay={0.12 + i * 0.07}>
                   <a
@@ -439,12 +454,18 @@ export default function AioDetail() {
           </div>
 
           <Reveal delay={0.15}>
-            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <div className="mx-auto mt-10 max-w-2xl rounded-3xl border border-line bg-raise p-6 shadow-card md:p-8">
+              <p className="text-center text-sm font-bold">まず無料の診断で、御社のサイトの現在地を確かめてください。</p>
+              <div className="mt-5">
+                <AioScan src="corp_aio_plans" />
+              </div>
+            </div>
+            <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/contact"
-                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
-                無料のAIOサイト診断を申し込む
+                話を聞いてから決めたい（無料相談）
               </Link>
               <a
                 href={site.labUrl}

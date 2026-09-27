@@ -48,8 +48,19 @@ export default function Tracking() {
       }
     };
 
+    // URLを入れる診断はリンクではなくフォームなので、送信を別に拾う（どの場所から試したか）
+    const onSubmit = (e: SubmitEvent) => {
+      const f = e.target as HTMLFormElement | null;
+      const src = f?.dataset?.scan;
+      if (src) track("diagnosis_click", { link_url: f.action, link_text: "AIO診断(URL)", scan_src: src });
+    };
+
     document.addEventListener("click", onClick, { capture: true });
-    return () => document.removeEventListener("click", onClick, { capture: true });
+    document.addEventListener("submit", onSubmit, { capture: true });
+    return () => {
+      document.removeEventListener("click", onClick, { capture: true });
+      document.removeEventListener("submit", onSubmit, { capture: true });
+    };
   }, []);
 
   return null;

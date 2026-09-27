@@ -193,7 +193,7 @@ export const automation: { name: string; role: string; detail: string }[] = [
 /** 引用状況を定点観測する対象 */
 export const monitored: string[] = ["AI Overview", "ChatGPT", "Perplexity", "Gemini"];
 
-/** 自社で開発・公開している無料診断ツール */
+/** 自社で開発・公開している無料診断ツール（質問に答える形）。URLを入れる診断は AioScan が受け持つ */
 export const diagnostics: {
   name: string;
   spec: string;
@@ -211,12 +211,6 @@ export const diagnostics: {
     spec: "30秒・8問",
     body: "AI検索 (AI Overview・ChatGPT) への対応度を100点満点で採点。AIに引用されるために足りないものがわかります。",
     href: "https://ai.7senses.co.jp/diagnosis/aio/",
-  },
-  {
-    name: "サイト無料採点",
-    spec: "URL入力だけ",
-    body: "サイトの技術対応を12項目・100点満点で自動採点。AIクローラー許可や構造化データまでチェックします。",
-    href: "https://ai.7senses.co.jp/site-audit/",
   },
 ];
 
