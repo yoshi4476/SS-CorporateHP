@@ -144,23 +144,6 @@ export default function ContactForm() {
       {/* ボット除け (視覚・支援技術ともに非表示) */}
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
-      {/* 特典の案内。記入欄のすぐ上に置き、書き忘れを防ぐ */}
-      <div className="rounded-2xl border border-pulse/30 bg-pulse/5 p-5">
-        <p className="text-sm font-bold text-ink">🎁 特典 (MEOスタンダード無料付帯) をご希望の方</p>
-        <p className="mt-2 inline-block rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
-          オウンドメディア運営をご契約いただいたお客様専用
-        </p>
-        <p className="mt-3 flex flex-wrap items-center gap-3 text-sm leading-7 text-slate">
-          特典コード
-          <span className="num rounded-lg bg-pulse px-4 py-1.5 text-lg font-bold tracking-[0.2em] text-white">
-            3010
-          </span>
-        </p>
-        <p className="mt-3 text-xs leading-6 text-slate">
-          を、下の「詳細 (任意)」欄に、ご相談内容とあわせてご記入ください。
-        </p>
-      </div>
-
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="grid gap-2 text-xs font-bold text-ink">
           <LabelText text="お名前" required />
