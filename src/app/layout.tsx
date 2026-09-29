@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -12,10 +12,15 @@ import { site } from "@/lib/site";
 
 // 日本語のWebフォントは使わない。文字範囲ごとに60本以上・1MB超を読み、
 // モバイルの表示が13秒かかっていた。端末のフォント（globals.css）で描く
-const grotesk = Space_Grotesk({
+// 数字・英字用の Space Grotesk はリポジトリに置いたファイルを使う（OFL）。
+// next/font/google はビルドのたびに Google から取りに行き、取得に失敗すると
+// デプロイごと落ちた（2026-09-29 の Actions）。外に取りに行かなければ落ちない
+const grotesk = localFont({
+  src: [
+    { path: "./fonts/SpaceGrotesk-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/SpaceGrotesk-700.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-grotesk",
-  weight: ["400", "700"],
-  subsets: ["latin"],
   display: "swap",
 });
 
