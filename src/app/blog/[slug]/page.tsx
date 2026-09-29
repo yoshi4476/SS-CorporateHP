@@ -63,9 +63,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.description,
       type: "article",
+      // og:url が無かった（Ahrefs 2026-09-29: 記事ほぼ全部でOGP不完全）
+      url: `${site.url}/blog/${post.slug}`,
       publishedTime: post.date,
       modifiedTime: post.dateModified,
-      ...(post.eyecatch ? { images: [{ url: post.eyecatch }] } : {}),
+      // 浅いマージで layout の画像が消えるため、アイキャッチが無い記事も共通画像を必ず入れる
+      images: [{ url: post.eyecatch || "/ogp.png" }],
     },
   };
 }
@@ -440,7 +443,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     {r.eyecatch ? (
                       <Image
                         src={r.eyecatch}
-                        alt=""
+                        alt={`${r.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 640px) 100vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"

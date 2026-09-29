@@ -33,7 +33,7 @@ export default function BusinessShowcase() {
                 <>
                   <Image
                     src={s.cardImage.src}
-                    alt=""
+                    alt={s.cardImage.alt}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"

@@ -20,6 +20,15 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  // og:url が無く、共有・監査でトップのURLが分からなかった（Ahrefs 2026-09-29: OGP不完全）。
+  // openGraph は浅くマージされるので、layout.tsx の値を持ち越したうえで url だけ足す
+  openGraph: {
+    type: "website",
+    locale: "ja_JP",
+    siteName: site.name,
+    url: site.url,
+    images: [{ url: "/ogp.png", width: 1200, height: 630 }],
+  },
 };
 
 const TOP_FAQ = [
@@ -87,7 +96,7 @@ export default function Home() {
         <div aria-hidden className="absolute inset-0 hidden overflow-hidden lg:block">
           <Image
             src="/images/hero-office.webp"
-            alt=""
+            alt="セブンセンシズのオフィスで集客と経理の仕組みを設計する様子"
             fill
             priority
             sizes="100vw"

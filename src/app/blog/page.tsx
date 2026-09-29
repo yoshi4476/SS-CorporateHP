@@ -220,7 +220,7 @@ export default function BlogPage() {
                     {lead.eyecatch ? (
                       <Image
                         src={lead.eyecatch}
-                        alt=""
+                        alt={`${lead.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 55vw"
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"

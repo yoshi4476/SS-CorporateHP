@@ -87,7 +87,7 @@ export default function BlogList({ items }: { items: ListItem[] }) {
                 {p.eyecatch ? (
                   <Image
                     src={p.eyecatch}
-                    alt=""
+                    alt={`${p.title}のアイキャッチ画像`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"

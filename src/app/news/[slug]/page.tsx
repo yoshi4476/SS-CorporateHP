@@ -24,6 +24,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // 発信元と日付を添えて、どの会社のいつの発表かを明示する。
     description: `${item.body[0].slice(0, 110)}（${item.date} セブンセンシズ株式会社）`,
     alternates: { canonical: `/news/${item.slug}` },
+    // お知らせにも OGP を持たせる（Ahrefs 2026-09-29: og:url が無い）
+    openGraph: {
+      title: `${item.title}｜セブンセンシズ`,
+      description: `${item.body[0].slice(0, 110)}（${item.date} セブンセンシズ株式会社）`,
+      url: `${site.url}/news/${item.slug}`,
+      type: "article",
+      images: [{ url: "/ogp.png" }],
+    },
   };
 }
 
