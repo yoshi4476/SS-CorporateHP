@@ -211,13 +211,13 @@ export const diagnostics: {
     name: "MEO診断",
     spec: "30秒・8問",
     body: "Googleマップ集客の整備度を100点満点で採点。マップの3枠に入るために足りないものがわかります。",
-    href: "https://ai.7senses.co.jp/diagnosis/meo/",
+    href: "https://ai.7senses.co.jp/tools/meo-check/",
   },
   {
     name: "AIO診断",
     spec: "30秒・8問",
     body: "AI検索 (AI Overview・ChatGPT) への対応度を100点満点で採点。AIに引用されるために足りないものがわかります。",
-    href: "https://ai.7senses.co.jp/diagnosis/aio/",
+    href: "https://ai.7senses.co.jp/tools/aio-check/",
   },
 ];
 
