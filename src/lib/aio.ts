@@ -200,6 +200,13 @@ export const diagnostics: {
   body: string;
   href: string;
 }[] = [
+  // AI集客ラボの無料ツール。コーポレートの訪問者を入口へ回す（2026-10-02）
+  {
+    name: "AIにどう紹介されているか無料チェック",
+    spec: "地域と業種で3問",
+    body: "AIに「地域名＋業種 おすすめ」などを聞き、答えの出典に御社のサイトや社名が出ているかをその場で確かめます。",
+    href: "https://ai.7senses.co.jp/tools/ai-check/?src=corp",
+  },
   {
     name: "MEO診断",
     spec: "30秒・8問",
