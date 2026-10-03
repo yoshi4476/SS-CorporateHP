@@ -10,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 import MapFacade from "@/components/MapFacade";
 import { mapInfo, site } from "@/lib/site";
 
-export const metadata: Metadata = pageMeta({
+const meta = pageMeta({
   title: "会社概要｜大阪市東成区・2020年設立",
   // 「セブンセンシズ株式会社」の指名検索はトップページ (corp.7senses.co.jp) で
   // 受ける方針のため、この社名だけを先頭に置く書き出しは避け、
@@ -19,6 +19,8 @@ export const metadata: Metadata = pageMeta({
     `会社概要ページ。代表挨拶・ミッション・会社情報を掲載。大阪市東成区を拠点にAIコンサルティング・MEO/AIO運用代行など${services.length}つの事業を展開するセブンセンシズ株式会社の詳細です。`,
   path: "/company",
 });
+// 役割（会社概要）を先に、正式名をその後に置く。末尾の「｜セブンセンシズ」は付けない（社名が2回並ぶ）
+export const metadata: Metadata = { ...meta, title: { absolute: "会社概要｜セブンセンシズ株式会社（大阪市東成区・2020年設立）" } };
 
 const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   { label: "会社名", value: `${site.name}(${site.nameEn})` },
