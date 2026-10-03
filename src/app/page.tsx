@@ -146,7 +146,7 @@ export default function Home() {
               <div className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
                 {[
                   { n: 3200, unit: "社", label: "MEO通算支援" },
-                  { n: 90, unit: "%+", label: "補助金 採択率" },
+                  { n: 350, unit: "万円", label: "補助上限(インボイス枠)" },
                   { n: services.length, unit: "事業", label: "一気通貫で支援" },
                 ].map((s) => (
                   <div key={s.label}>

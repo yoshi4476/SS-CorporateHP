@@ -68,34 +68,21 @@ export default function HeroVisual({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* 採択率ゲージ */}
+        {/* 補助金（制度の補助上限。当社の採択の実績は載せない） */}
         <div
           className="animate-float w-56 rotate-2 rounded-2xl border border-line bg-raise/95 p-5 shadow-lift backdrop-blur"
           style={{ animationDelay: "-4s" }}
         >
           <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-slate">Subsidy</p>
           <div className="mt-2 flex items-center gap-4">
-            <svg viewBox="0 0 60 60" className="h-14 w-14 -rotate-90" aria-hidden>
-              <circle cx="30" cy="30" r="24" fill="none" stroke="#dfe6f0" strokeWidth="7" />
-              <circle
-                cx="30"
-                cy="30"
-                r="24"
-                fill="none"
-                stroke="#1c3f7c"
-                strokeWidth="7"
-                strokeLinecap="round"
-                strokeDasharray={`${2 * Math.PI * 24 * 0.9} ${2 * Math.PI * 24}`}
-              />
-            </svg>
             <div>
               <p className="num text-2xl font-bold leading-none">
-                90<span className="text-sm text-pulse">%+</span>
+                350<span className="text-sm text-pulse">万円</span>
               </p>
               <p className="mt-1 text-[0.62rem] leading-4 text-slate">
-                補助金 採択通過率
+                AI導入補助金の補助上限
                 <br />
-                受発注・会計<span className="num font-bold text-ink">350万円</span>
+                受発注・会計（インボイス枠）
               </p>
             </div>
           </div>

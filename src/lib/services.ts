@@ -248,8 +248,8 @@ export const services: Service[] = [
     ],
     metrics: [
       { value: "350", suffix: "万円", label: "受発注・会計ソフトの補助上限" },
-      { value: "90", suffix: "%以上", label: "当社支援の採択通過率" },
-      { value: "50", suffix: "社以上", label: "補助金支援事業者数" },
+      { value: "3/4", suffix: "", label: "補助率（50万円以下の部分・インボイス枠）" },
+      { value: "8", suffix: "ステップ", label: "申請から実績報告までの伴走" },
     ],
     flow: [
       {
