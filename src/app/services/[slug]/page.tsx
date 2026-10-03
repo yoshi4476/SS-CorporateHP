@@ -497,9 +497,12 @@ export default async function ServicePage({ params }: Props) {
 
       {/* FAQ */}
       <section className={`py-20 md:py-24 ${service.slug === "meo" ? "" : "bg-mist"}`} aria-labelledby="faq-heading">
-        <div className="mx-auto max-w-4xl px-5">
-          <SectionHead en="FAQ" title="よくあるご質問" align="center" />
-          <div className="mt-12">
+        {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHead en="FAQ" title="よくあるご質問" />
+          </div>
+          <div>
             <FaqList items={service.faq} />
           </div>
         </div>
