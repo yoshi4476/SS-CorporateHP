@@ -3,6 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
 import HeroVideo from "@/components/HeroVideo";
+
+// 導入事例の写真（業種の場面のイメージ）
+const CASE_PHOTO: Record<string, string> = {
+  士業事務所: "/images/case-shigyou.webp",
+  リフォーム業: "/images/case-reform.webp",
+  製造業: "/images/case-seizou.webp",
+};
 import Logo3D from "@/components/Logo3D";
 import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
@@ -576,10 +583,15 @@ export default function Home() {
             title="数字が動いた、3つの現場"
             lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
           />
+          <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです（支援先の写真ではありません）。</p>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {cases.map((cs, i) => (
               <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
-                <article className="flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card md:p-8">
+                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
+                  <figure className="relative aspect-[16/9] w-full">
+                    <Image src={CASE_PHOTO[cs.industry] ?? "/images/case-seizou.webp"} alt="" fill sizes="(min-width: 1024px) 400px, 100vw" className="object-cover" />
+                  </figure>
+                  <div className="flex flex-1 flex-col p-7 md:p-8">
                   <div className="flex items-center justify-between gap-3">
                     <span className="rounded-full bg-ink px-3 py-1 text-[0.62rem] font-bold text-white">
                       {cs.industry}
@@ -619,6 +631,7 @@ export default function Home() {
                     </blockquote>
                     <figcaption className="mt-2.5 text-[0.62rem] text-slate">— {cs.industry} ご担当者様</figcaption>
                   </figure>
+                  </div>
                 </article>
               </Reveal>
             ))}
@@ -678,7 +691,7 @@ export default function Home() {
                 </figure>
                 <Link
                   href="/services/ai-subsidy"
-                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-full bg-pulse px-10 py-5 text-center text-base font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
                 >
                   補助金支援の詳細を見る
                 </Link>
@@ -686,9 +699,9 @@ export default function Home() {
                   href={site.lpUrl}
                   target="_blank"
                   rel="noopener"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="text-center text-xs font-bold text-pulse underline-offset-4 hover:underline"
                 >
-                  無料診断LPを見る (8問・3分)
+                  まず無料診断で確かめる（8問・3分） ↗
                 </a>
               </div>
             </div>
@@ -697,7 +710,7 @@ export default function Home() {
       </section>
 
       {/* お知らせ */}
-      <section id="news" className="scroll-mt-24 border-t border-line bg-mist py-24 md:py-28" aria-labelledby="news-heading">
+      <section id="news" className="scroll-mt-24 border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-heading">
         <div className="mx-auto max-w-5xl px-5">
           <SectionHead en="News" title="お知らせ" />
           <div className="mt-10 grid gap-3">
@@ -732,7 +745,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-24 py-24 md:py-32" aria-labelledby="faq-heading">
+      <section id="faq" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="faq-heading">
         <div className="mx-auto max-w-4xl px-5">
           <SectionHead en="FAQ" title="よくあるご質問" align="center" />
           <div className="mt-12">
