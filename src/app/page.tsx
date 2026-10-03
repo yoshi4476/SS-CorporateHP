@@ -105,7 +105,7 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-52 pt-24 md:pb-24 md:pt-28">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-80 pt-24 md:pb-24 md:pt-28">
           <div className="w-full min-w-0 max-w-3xl">
             <Reveal>
               <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
