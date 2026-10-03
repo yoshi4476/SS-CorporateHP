@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import SenseNetwork from "@/components/SenseNetwork";
-import WaveText from "@/components/WaveText";
 import { Reveal } from "@/components/motion";
 import { CtaBand, SectionHead } from "@/components/ui";
 import { services } from "@/lib/services";
@@ -11,6 +10,7 @@ import { rakushift } from "@/lib/rakushift";
 import { pipeline } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
+import { svcPhoto } from "@/lib/photos";
 
 // 自社プロダクト。受託の7事業とは性質が違うので別枠で並べる
 const PRODUCTS = [
@@ -39,15 +39,6 @@ const PRODUCTS = [
     catch: "記帳から給与・年末調整まで、1か所で完結する経理システム",
     body: "経理BPOをお引き受けするために自社で開発している業務システムです。受け取った書類から仕訳の案を作り、担当者が確認して確定するまでを1か所にまとめています。給与・賞与・年末調整、請求と入金の消込まで同じ場所で扱えます。",
     price: "経理BPOに付帯",
-  },
-  // 広告運用を引き受けるための自社システム。こちらも売り物ではなく基盤
-  {
-    href: "/services/ad-operations",
-    en: "Ad Operations System",
-    name: "広告運用の管理システム",
-    catch: "複数媒体の数字を1画面にまとめ、悪化を毎日拾う",
-    body: "広告運用をお引き受けするために自社で開発している管理システムです。媒体ごとに管理画面を開かずに数字を見比べられ、1件あたりの費用の悪化や計測の欠落を毎日拾い上げます。週次のご報告資料もここから作ります。",
-    price: "広告運用に付帯",
   },
 ];
 
@@ -85,37 +76,45 @@ export default function ServicesIndexPage() {
         ]}
       />
 
-      {/* ヒーロー */}
-      <section className="relative overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
-        <WaveText text="SERVICES" className="pointer-events-none absolute -top-2 right-0 select-none text-[13vw] leading-none tracking-tighter opacity-25" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-12 pt-12 md:grid-cols-[1.4fr_1fr] md:pb-16 md:pt-16">
-          <div>
-            <Reveal>
-              <nav aria-label="パンくずリスト" className="text-xs text-slate">
-                <ol className="flex flex-wrap items-center gap-2">
-                  <li>
-                    <Link href="/" className="tap hover:text-pulse">
-                      トップ
-                    </Link>
-                  </li>
-                  <li aria-hidden>/</li>
-                  <li aria-current="page" className="text-ink">
-                    事業内容
-                  </li>
-                </ol>
-              </nav>
-              <p className="eyebrow mt-8">Services</p>
-              <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
-              <p className="mt-7 max-w-2xl text-sm leading-9 text-slate md:text-base">
-                戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)。
-                <mark className="marker">{services.length}つの事業をひとつのチームで一気通貫</mark>
-                に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.15} className="mx-auto hidden w-full max-w-sm md:block">
-            <SenseNetwork className="animate-float h-auto w-full" />
+      {/* ヒーロー: オフィスの写真を全幅に（イメージ写真） */}
+      <section className="relative overflow-hidden bg-ink text-white">
+        <Image src="/images/svc/index.webp" alt="" fill priority sizes="100vw" className="object-cover" />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(90deg, rgb(8 14 26 / 0.9) 0%, rgb(8 14 26 / 0.7) 45%, rgb(8 14 26 / 0.25) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 30%)" }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pb-24 md:pt-40">
+          <Reveal>
+            <nav aria-label="パンくずリスト" className="text-xs text-white/60">
+              <ol className="flex flex-wrap items-center gap-2">
+                <li>
+                  <Link href="/" className="tap hover:text-aqua">
+                    トップ
+                  </Link>
+                </li>
+                <li aria-hidden>/</li>
+                <li aria-current="page" className="text-white">
+                  事業内容
+                </li>
+              </ol>
+            </nav>
+            <p className="eyebrow mt-8 !text-aqua">Services</p>
+            <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
+            <p className="mt-7 max-w-2xl text-sm leading-9 text-white/75 md:text-base">
+              戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
+              <strong className="text-white">{services.length}つの事業をひとつのチームで一気通貫</strong>
+              に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
+            </p>
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {services.map((sv) => (
+                <li key={sv.slug}>
+                  <a href={`#${sv.slug}`} className="block rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua">
+                    {sv.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>
@@ -123,76 +122,59 @@ export default function ServicesIndexPage() {
       {/* 各事業の横展開グリッド */}
       <section className="border-t border-line bg-mist py-16 md:py-24" aria-label="事業一覧">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {/* 事業ごとに、写真と文章を左右交互に。写真はその事業の現場のイメージ */}
+          <div className="grid gap-8 md:gap-12">
             {services.map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 3) * 0.08}>
-                <Link
-                  href={`/services/${s.slug}`}
-                  className="group flex h-full flex-col rounded-3xl border border-line bg-raise p-7 shadow-card transition-colors duration-500 hover:bg-pulse md:p-8"
-                >
-                  <div className="flex items-start justify-between">
-                    <p className="num text-6xl font-bold text-gold/40 transition-colors duration-500 group-hover:text-white/25 md:text-7xl" aria-hidden>
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <span className="mt-1 flex h-11 w-11 items-center justify-center rounded-full border border-line transition-all duration-500 group-hover:border-white/40 group-hover:bg-white group-hover:text-pulse">
-                      <svg width="16" height="16" viewBox="0 0 14 14" aria-hidden className="transition-transform duration-500 group-hover:-rotate-45">
-                        <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                      </svg>
-                    </span>
-                  </div>
-                  <p className="font-data mt-3 text-[0.65rem] uppercase tracking-[0.26em] text-pulse transition-colors duration-500 group-hover:text-aqua">
-                    {s.en}
-                  </p>
-                  <h2 className="mt-2 text-xl font-black leading-snug transition-colors duration-500 group-hover:text-white md:text-2xl">
-                    {s.name}
-                  </h2>
-                  <p className="mt-3 text-sm font-bold leading-7 transition-colors duration-500 group-hover:text-white">
-                    {s.lead}
-                  </p>
-                  <p className="mt-2 text-[0.8rem] leading-7 text-slate transition-colors duration-500 group-hover:text-white/75">
-                    {s.short}
-                  </p>
-
-                  <ul className="mt-4 grid gap-1.5 border-t border-line pt-4 transition-colors duration-500 group-hover:border-white/20">
-                    {s.points.slice(0, 3).map((p) => (
-                      <li
-                        key={p.title}
-                        className="flex items-center gap-2 text-[0.78rem] font-medium text-ink transition-colors duration-500 group-hover:text-white/90"
-                      >
-                        <svg width="11" height="11" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse transition-colors duration-500 group-hover:text-aqua">
-                          <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+              <Reveal key={s.slug}>
+                <article id={s.slug} className="group scroll-mt-28 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card lg:grid-cols-2">
+                  <Link href={`/services/${s.slug}`} className={`relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[26rem] ${i % 2 ? "lg:order-2" : ""}`} tabIndex={-1} aria-hidden>
+                    <Image src={svcPhoto(s.slug, 1)} alt="" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-[0.65rem] font-bold text-white backdrop-blur-sm">{s.group}</span>
+                  </Link>
+                  <div className="flex flex-col p-7 md:p-10">
+                    <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">{s.en}</p>
+                    <h2 className="mt-2 text-2xl font-black leading-snug md:text-3xl">
+                      <Link href={`/services/${s.slug}`} className="transition-colors hover:text-pulse">
+                        {s.name}
+                      </Link>
+                    </h2>
+                    <p className="mt-4 text-base font-bold leading-8">{s.lead}</p>
+                    <p className="mt-2 text-sm leading-8 text-slate">{s.short}</p>
+                    <ul className="mt-5 grid gap-2 border-t border-line pt-5">
+                      {s.points.slice(0, 3).map((pt) => (
+                        <li key={pt.title} className="flex items-center gap-2 text-sm font-medium">
+                          <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse">
+                            <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {pt.title}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-7">
+                      {s.metrics?.[0] ? (
+                        <p className="leading-none">
+                          <span className="num text-3xl font-bold">{s.metrics[0].value}</span>
+                          <span className="ml-0.5 text-sm font-bold text-pulse">{s.metrics[0].suffix}</span>
+                          <span className="mt-1.5 block text-[0.65rem] text-slate">{s.metrics[0].label}</span>
+                        </p>
+                      ) : s.price ? (
+                        <p className="rounded-full border border-line px-3 py-1.5 text-[0.65rem] font-bold text-slate">{s.price.split(" /")[0]}</p>
+                      ) : (
+                        <span />
+                      )}
+                      <Link href={`/services/${s.slug}`} className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-pulse">
+                        詳しく見る
+                        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
+                          <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
                         </svg>
-                        {p.title}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-auto flex items-end justify-between gap-3 pt-5">
-                    {s.metrics?.[0] ? (
-                      <p className="leading-none">
-                        <span className="num text-2xl font-bold transition-colors duration-500 group-hover:text-white md:text-3xl">
-                          {s.metrics[0].value}
-                        </span>
-                        <span className="ml-0.5 text-sm font-bold text-pulse transition-colors duration-500 group-hover:text-aqua">
-                          {s.metrics[0].suffix}
-                        </span>
-                        <span className="mt-1.5 block text-[0.6rem] text-slate transition-colors duration-500 group-hover:text-white/60">
-                          {s.metrics[0].label}
-                        </span>
-                      </p>
-                    ) : (
-                      <span />
-                    )}
-                    {s.price && (
-                      <p className="shrink-0 rounded-full border border-line px-3 py-1.5 text-[0.62rem] font-bold text-slate transition-colors duration-500 group-hover:border-white/30 group-hover:text-white/80">
-                        {s.price.split(" /")[0]}
-                      </p>
-                    )}
+                      </Link>
+                    </div>
                   </div>
-                </Link>
+                </article>
               </Reveal>
             ))}
           </div>
+          <p className="mt-4 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
 
           {/* 一気通貫の補足 */}
           <Reveal delay={0.1}>

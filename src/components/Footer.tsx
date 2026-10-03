@@ -68,11 +68,6 @@ export default function Footer() {
                 経理システム（セルフ版）
               </Link>
             </li>
-            <li>
-              <Link href="/services/ad-operations" className="tap transition-colors hover:text-white">
-                広告運用の管理システム
-              </Link>
-            </li>
           </ul>
         </nav>
 

@@ -10,7 +10,6 @@ const CASE_PHOTO: Record<string, string> = {
   リフォーム業: "/images/case-reform.webp",
   製造業: "/images/case-seizou.webp",
 };
-import Logo3D from "@/components/Logo3D";
 import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
 import GrowthChart from "@/components/GrowthChart";
@@ -80,7 +79,12 @@ const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
 ];
 
 // 帯は事業データから作る。事業を増やせばここも自動で増える。
-const MARQUEE = services.map((s) => ({ ja: s.name, en: s.en }));
+// ヒーロー下の帯。支援している業種を並べ、最後に「その他」を添える
+const INDUSTRY_MARQUEE = [
+  "歯科医院", "クリニック", "整骨院・接骨院", "介護", "不動産", "工務店・注文住宅", "リフォーム", "建設",
+  "士業", "コンサル", "BtoB・SaaS", "IT企業", "製造業", "卸売業", "物流", "飲食店", "美容室", "小売",
+  "ホテル・旅館", "フィットネス", "教室・スクール", "EC", "その他の業種も全国対応",
+];
 
 export default function Home() {
   const latestNews = news[0];
@@ -88,119 +92,38 @@ export default function Home() {
     <>
       <JsonLd data={faqSchema(TOP_FAQ)} />
 
-      {/* ヒーロー */}
-      <section className="relative flex min-h-svh flex-col overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
+      {/* ヒーロー: 全画面の実写動画（ある街の一日）。どの業種の、どの時間にも仕組みが働いている、という筋 */}
+      <section className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
+        <HeroVideo objectPosition="60% center" />
+        {/* 読みやすさの覆い: 左（見出し）・上（ヘッダー）・下（業種の帯）だけを暗くし、中央の街は見せる */}
         <div
           aria-hidden
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 42% 52% at 80% 28%, rgb(28 63 124 / 0.06), transparent 62%), radial-gradient(ellipse 30% 40% at 92% 72%, rgb(116 199 214 / 0.08), transparent 60%)",
+              "linear-gradient(90deg, rgb(8 14 26 / 0.82) 0%, rgb(8 14 26 / 0.55) 38%, rgb(8 14 26 / 0.12) 70%, rgb(8 14 26 / 0.25) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 22%, transparent 62%, rgb(8 14 26 / 0.75) 100%)",
           }}
         />
-        {/* 背景写真は lg 以上だけ。狭い画面で薄く敷くと、写真でも背景でもない
-            ぼんやりした影にしかならないため、下でひとつの写真ブロックとして出す */}
-        {/* AI が業種ごとの現場を支える様子の動画。右側に「画面」として置く（白い面に暗い動画を溶かすと濁るため、枠で区切る） */}
-        <div className="absolute bottom-40 right-8 top-28 hidden w-[44%] overflow-hidden rounded-[2rem] bg-ink shadow-lift ring-1 ring-ink/10 lg:block xl:right-12">
-          <HeroVideo objectPosition="78% center" caption="light" />
-          <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
-        </div>
 
-        {/* 3Dロゴ (1文字ずつ波打つ)。可読性ガードより上に置く。
-            .logo3d 自身が display:flex を持つため hidden が効かない。
-            表示の切り替えは素の div でくるんで行う。
-            狭い画面は写真ブロックが下端まで埋まるので透かしは出さない。 */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 hidden lg:block">
-          <Logo3D className="absolute bottom-14 left-6 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22]" />
-        </div>
-
-        {/* HUD実績バー (右下固定) */}
-        <dl className="absolute bottom-24 right-16 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
-          <div className="border-r border-line pr-2">
-            <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Total Clients</dt>
-            <dd className="num mt-1 text-2xl font-bold">
-              <CountUp value={3200} duration={1.6} />
-              <span className="ml-0.5 text-sm text-pulse">社</span>
-            </dd>
-            <dd className="text-[0.6rem] text-slate">MEO通算支援</dd>
-          </div>
-          <div className="border-r border-line pr-2">
-            <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Subsidy</dt>
-            <dd className="num mt-1 text-2xl font-bold">
-              <CountUp value={90} duration={1.8} />
-              <span className="ml-0.5 text-sm text-pulse">%+</span>
-            </dd>
-            <dd className="text-[0.6rem] text-slate">採択率・受発注/会計350万円</dd>
-          </div>
-          <div>
-            <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Domains</dt>
-            <dd className="num mt-1 text-2xl font-bold">
-              <CountUp value={services.length} duration={2} />
-              <span className="ml-0.5 text-sm text-pulse">事業</span>
-            </dd>
-            <dd className="text-[0.6rem] text-slate">一気通貫で支援</dd>
-          </div>
-        </dl>
-
-        {/* 文言を上寄りに置き、下に空けた余白でウォーターマークを見せる */}
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-14 pt-8 lg:pb-56 lg:pt-16">
-          {/* 左: コピー。
-              min-w-0 が無いと、折り返せない見出しがflexの幅を押し広げて画面外にはみ出す。
-              w-full が無いとflexアイテムが内容幅に縮み、下の写真ブロックが右に余白を残す */}
-          <div className="w-full min-w-0 max-w-3xl lg:w-auto">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-52 pt-24 md:pb-24 md:pt-28">
+          <div className="w-full min-w-0 max-w-3xl">
             <Reveal>
               <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
-              <p className="eyebrow">Osaka / AI Consulting &amp; Digital Marketing</p>
+              <p className="eyebrow !text-aqua">Osaka / AI Consulting &amp; Digital Marketing</p>
             </Reveal>
-            {/* 「AIの『答え』にする。」は8事業のうちAIOだけの主張で、
-                初見では何をしてくれる会社か分からなかった。
-                集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、
-                そこを見出しに出す。
-                スマホは「集客も経理も回す。」が最長で折り返せない。
-                320px でも1行に収まる値を画面幅から逆算している */}
-            <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
+            {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
+                スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
+            <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
               <SplitText text="人を増やさずに、" />
               <br />
-              <SplitText text="集客も経理も回す。" className="text-pulse" startIndex={8} />
+              <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
             </h1>
             <Reveal delay={0.16}>
-              <p className="mt-6 max-w-lg text-sm leading-8 text-slate md:mt-9 md:leading-9 md:text-[0.95rem]">
-                MEO運用<mark className="marker">通算3,200店舗</mark>で積んだ現場データと、AIによる自動化。
+              <p className="mt-6 max-w-lg text-sm leading-8 text-white/80 md:mt-8 md:leading-9 md:text-[0.95rem]">
+                MEO運用通算3,200店舗で積んだ現場データと、AIによる自動化。
                 <br className="hidden md:block" />
                 集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
               </p>
-            </Reveal>
-            {/* スマホ用の写真ブロック。薄い背景として敷くのをやめ、
-                実績の数字と組んだ1枚にした。数字はPCのHUDと同じもので、
-                これまでスマホでは非表示になっていた */}
-            <Reveal delay={0.2}>
-              {/* 幅が広がるほど縦も伸びてCTAが画面外へ出るため、横長に切り替える */}
-              <figure className="relative mt-7 aspect-[5/4] overflow-hidden rounded-3xl sm:aspect-[16/9] lg:hidden">
-                <div className="absolute inset-0">
-                  <HeroVideo objectPosition="66% center" caption="light" />
-                </div>
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(to top, rgb(13 20 32 / 0.92) 0%, rgb(13 20 32 / 0.35) 42%, transparent 70%)" }}
-                />
-                <dl className="absolute inset-x-0 bottom-0 grid grid-cols-3 gap-1 px-4 pb-4 text-white">
-                  {[
-                    { n: 3200, unit: "社", label: "MEO通算支援" },
-                    { n: 90, unit: "%+", label: "補助金 採択率" },
-                    { n: services.length, unit: "事業", label: "一気通貫で支援" },
-                  ].map((s, i) => (
-                    <div key={s.label} className={i < 2 ? "border-r border-white/20 pr-1" : ""}>
-                      <dd className="num text-xl font-bold leading-none">
-                        <CountUp value={s.n} duration={1.6} />
-                        <span className="ml-0.5 text-xs text-aqua">{s.unit}</span>
-                      </dd>
-                      <dd className="mt-1.5 text-[0.6rem] leading-tight text-white/70">{s.label}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </figure>
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
@@ -210,51 +133,54 @@ export default function Home() {
                 >
                   無料相談を予約する
                 </Link>
-                {/* 相談はまだ重い人のための、費用も登録も要らない一歩。
-                    「事業内容を見る」は下に一覧が続くので置いていた意味が薄かった */}
                 <Link
                   href="/#selfcheck"
-                  className="group inline-flex items-center justify-center gap-2 px-2 py-3 text-sm font-bold text-ink transition-colors hover:text-pulse"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
                 >
                   まず無料で現在地を測る
-                  <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-slate">30秒</span>
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="text-pulse transition-transform group-hover:translate-y-1">
-                    <path d="M7 2v9M3.5 7.5L7 11l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
+                  <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
                 </Link>
               </div>
             </Reveal>
             <Reveal delay={0.3}>
+              <dl className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
+                {[
+                  { n: 3200, unit: "社", label: "MEO通算支援" },
+                  { n: 90, unit: "%+", label: "補助金 採択率" },
+                  { n: services.length, unit: "事業", label: "一気通貫で支援" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <dd className="num text-2xl font-bold leading-none md:text-3xl">
+                      <CountUp value={s.n} duration={1.6} />
+                      <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
+                    </dd>
+                    <dt className="mt-2 text-[0.68rem] text-white/65">{s.label}</dt>
+                  </div>
+                ))}
+              </dl>
               <Link
                 href={`/news/${latestNews.slug}`}
-                className="group mt-8 flex max-w-full items-center gap-3 border-t border-line pt-5 text-xs text-slate transition-colors hover:text-pulse md:mt-12"
+                className="group mt-6 flex max-w-full items-center gap-3 text-xs text-white/70 transition-colors hover:text-aqua"
               >
-                <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-pulse">News</span>
+                <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-aqua">News</span>
                 <span className="num shrink-0">{latestNews.date}</span>
-                <span className="min-w-0 flex-1 truncate font-medium text-ink group-hover:text-pulse sm:flex-none sm:max-w-72">
+                <span className="min-w-0 flex-1 truncate font-medium text-white group-hover:text-aqua sm:max-w-72 sm:flex-none">
                   {latestNews.title}
                 </span>
-                <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse transition-transform group-hover:translate-x-1">
-                  <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                </svg>
               </Link>
             </Reveal>
           </div>
-
         </div>
 
-        {/* 事業名の帯: 傾けず、日本語と英語を対で並べる */}
-        <div className="relative z-10" aria-hidden>
-          <div className="overflow-hidden border-y border-line bg-raise/80 py-4 backdrop-blur-sm">
+        {/* 支援している業種の帯。ここに無い業種も全国対応 */}
+        <div className="relative z-10" aria-label="対応している業種">
+          <div className="overflow-hidden border-t border-white/15 bg-ink/40 py-4 backdrop-blur-md">
             <div className="flex">
               <div className="animate-marquee flex shrink-0 items-center">
-                {[...MARQUEE, ...MARQUEE].map((m, i) => (
-                  <span key={i} className="flex shrink-0 items-baseline whitespace-nowrap">
-                    <span className="text-[0.82rem] font-bold tracking-wide text-ink">{m.ja}</span>
-                    <span className="font-data ml-3 text-[0.6rem] uppercase tracking-[0.22em] text-slate">
-                      {m.en}
-                    </span>
-                    <span aria-hidden className="mx-8 h-3 w-px bg-line-strong" />
+                {[...INDUSTRY_MARQUEE, ...INDUSTRY_MARQUEE].map((m, i) => (
+                  <span key={i} aria-hidden={i >= INDUSTRY_MARQUEE.length} className="flex shrink-0 items-center whitespace-nowrap">
+                    <span className="text-[0.86rem] font-bold tracking-wide text-white">{m}</span>
+                    <span aria-hidden className="mx-7 h-1 w-1 rounded-full bg-aqua/70" />
                   </span>
                 ))}
               </div>

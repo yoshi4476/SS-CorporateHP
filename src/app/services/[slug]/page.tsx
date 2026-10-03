@@ -20,6 +20,7 @@ function reviewedLabel() {
   return `${d.getFullYear()}年${d.getMonth() + 1}月`;
 }
 import { site } from "@/lib/site";
+import { industryPhoto, svcPhoto } from "@/lib/photos";
 import { pageMeta } from "@/lib/meta";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -59,7 +60,6 @@ export default async function ServicePage({ params }: Props) {
   const sectionImages = service.sectionImage
     ? [service.sectionImage].flat()
     : [];
-  const heroImage = service.image;
   const schemas = [
     serviceSchema(service.slug),
     faqSchema(service.faq),
@@ -75,49 +75,55 @@ export default async function ServicePage({ params }: Props) {
       <JsonLd data={schemas} />
 
       {/* ヒーロー */}
-      <section className="relative overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-10 md:pb-20 md:pt-16">
+      {/* その事業の現場の写真を全幅に敷く（イメージ写真）。文字は左に寄せ、左側だけを暗くする */}
+      <section className="relative overflow-hidden bg-ink text-white">
+        <Image src={svcPhoto(service.slug, 1)} alt="" fill priority sizes="100vw" className="object-cover object-[65%_center]" />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(90deg, rgb(8 14 26 / 0.9) 0%, rgb(8 14 26 / 0.72) 45%, rgb(8 14 26 / 0.2) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 30%)" }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pb-24 md:pt-36">
           <Reveal>
-            <nav aria-label="パンくずリスト" className="text-xs text-slate">
+            <nav aria-label="パンくずリスト" className="text-xs text-white/60">
               <ol className="flex flex-wrap items-center gap-2">
                 <li>
-                  <Link href="/" className="tap hover:text-pulse">
+                  <Link href="/" className="tap hover:text-aqua">
                     トップ
                   </Link>
                 </li>
                 <li aria-hidden>/</li>
                 <li>
-                  <Link href="/services" className="tap hover:text-pulse">
+                  <Link href="/services" className="tap hover:text-aqua">
                     事業内容
                   </Link>
                 </li>
                 <li aria-hidden>/</li>
-                <li aria-current="page" className="text-ink">
+                <li aria-current="page" className="text-white">
                   {service.name}
                 </li>
               </ol>
             </nav>
           </Reveal>
-          <div className={`mt-10 grid items-center gap-10 ${heroImage ? "lg:grid-cols-[1.2fr_1fr]" : ""}`}>
+          <div className="mt-10">
             <div>
               <Reveal delay={0.06}>
-                <p className="eyebrow">{service.en}</p>
+                <p className="eyebrow !text-aqua">{service.en}</p>
                 <h1 className="mt-4 max-w-3xl text-3xl font-black leading-normal md:text-6xl md:leading-snug">
                   {service.name}
                 </h1>
-                <p className="mt-7 max-w-2xl text-xl font-bold leading-10 text-ink md:text-2xl md:leading-[1.9]">
-                  <mark className="marker">{service.lead}</mark>
+                <p className="mt-7 max-w-2xl text-xl font-bold leading-10 text-white md:text-2xl md:leading-[1.9]">
+                  {service.lead}
                 </p>
                 {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
                     記号がそのまま出ていた */}
-                <p className="mt-5 max-w-2xl text-sm leading-8 text-slate md:text-base">
+                <p className="hero-rich mt-5 max-w-2xl text-sm leading-8 text-white/75 md:text-base">
                   <Rich text={service.body} />
                 </p>
               </Reveal>
               <Reveal delay={0.14}>
                 {service.slug === "aio" ? (
-                  <div className="mt-9 max-w-xl rounded-3xl border border-line bg-raise p-6 shadow-card md:p-7">
+                  <div className="mt-9 max-w-xl rounded-3xl border border-line bg-raise p-6 text-ink shadow-card md:p-7">
                     <p className="text-sm font-bold">まず、御社のサイトがAIと検索に読まれているかを測ってください。</p>
                     <div className="mt-4">
                       <AioScan src="corp_aio_hero" />
@@ -145,7 +151,7 @@ export default async function ServicePage({ params }: Props) {
                     <a
                       href="/docs/keiri-tanaoroshi-sheet.pdf"
                       download
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-8 py-4 text-center text-sm font-bold text-white transition-colors hover:border-aqua hover:text-aqua"
                     >
                       <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
                         <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -158,7 +164,7 @@ export default async function ServicePage({ params }: Props) {
                       href={site.lpUrl}
                       target="_blank"
                       rel="noopener"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-full border border-white/35 px-8 py-4 text-center text-sm font-bold text-white transition-colors hover:border-aqua hover:text-aqua"
                     >
                       無料診断LPを見る (8問・3分)
                     </a>
@@ -166,36 +172,29 @@ export default async function ServicePage({ params }: Props) {
                 </div>
                 )}
                 {service.price && (
-                  <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-line bg-raise px-4 py-2 text-xs font-bold shadow-card">
-                    <span className="text-slate">料金目安</span>
-                    <span className="text-pulse">{service.price}</span>
+                  <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur-sm">
+                    <span className="text-white/60">料金目安</span>
+                    <span className="text-aqua">{service.price}</span>
                   </p>
                 )}
               </Reveal>
             </div>
-            {heroImage && (
-              <Reveal delay={0.18} className="mx-auto w-full max-w-md">
-                <Image
-                  src={heroImage.src}
-                  alt={heroImage.alt}
-                  width={905}
-                  height={640}
-                  className="h-auto w-full rounded-3xl shadow-lift"
-                  priority
-                />
-              </Reveal>
-            )}
           </div>
 
-          {service.metrics && (
-            <div className="mt-14 grid gap-5 sm:grid-cols-3">
+        </div>
+      </section>
+
+      {service.metrics && (
+        <section className="border-b border-line bg-raise py-10 md:py-14" aria-label="実績の数字">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="grid gap-5 sm:grid-cols-3">
               {service.metrics.map((m, i) => (
                 <StatTile key={m.label} metric={m} delay={i * 0.08} />
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* 用途・依頼内容・適した業種 */}
       {(service.useCase || service.menu || service.industries) && (
@@ -260,16 +259,19 @@ export default async function ServicePage({ params }: Props) {
                 <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                   {service.industries.map((ind, i) => (
                     <Reveal key={ind.name} delay={(i % 4) * 0.08}>
-                      <article className="h-full rounded-2xl border border-line bg-white p-6 shadow-card">
-                        <span className="num text-xs font-bold text-pulse">0{i + 1}</span>
-                        <h3 className="mt-2 text-base font-bold leading-relaxed">{ind.name}</h3>
-                        <p className="mt-3 text-xs leading-7 text-slate">{ind.body}</p>
+                      <article className="group h-full overflow-hidden rounded-2xl border border-line bg-white shadow-card">
+                        <figure className="relative aspect-[16/10] overflow-hidden">
+                          <Image src={industryPhoto(ind.name)} alt="" fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                          <h3 className="absolute inset-x-4 bottom-3 text-base font-bold leading-snug text-white">{ind.name}</h3>
+                        </figure>
+                        <p className="p-5 text-xs leading-7 text-slate">{ind.body}</p>
                       </article>
                     </Reveal>
                   ))}
                 </div>
                 <p className="mt-6 text-xs leading-7 text-slate">
-                  ※ 上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
+                  ※ 写真はイメージです。上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
                 </p>
               </div>
             )}
@@ -312,18 +314,28 @@ export default async function ServicePage({ params }: Props) {
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead en="Strength" title={`${service.name}の特長`} />
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {service.points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.1}>
-                <article className="h-full rounded-2xl border border-line bg-white p-7 shadow-card">
-                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse/10">
-                    <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
-                  </span>
-                  <h3 className="mt-5 text-lg font-bold leading-relaxed">{p.title}</h3>
-                  <p className="mt-3 text-sm leading-8 text-slate">{p.body}</p>
-                </article>
-              </Reveal>
-            ))}
+          <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+            <Reveal className="lg:sticky lg:top-28">
+              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
+                <Image src={svcPhoto(service.slug, 2)} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+              </figure>
+              <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+            </Reveal>
+            <ol className="grid gap-4">
+              {service.points.map((p, i) => (
+                <Reveal key={p.title} delay={i * 0.08}>
+                  <li className="flex gap-5 rounded-2xl border border-line bg-white p-6 shadow-card md:p-7">
+                    <span aria-hidden className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-pulse/10">
+                      <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-pulse to-aqua" />
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-bold leading-relaxed">{p.title}</h3>
+                      <p className="mt-2 text-sm leading-8 text-slate">{p.body}</p>
+                    </div>
+                  </li>
+                </Reveal>
+              ))}
+            </ol>
           </div>
         </div>
       </section>

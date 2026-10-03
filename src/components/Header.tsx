@@ -27,7 +27,6 @@ const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
   { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
   { href: "/services/keiri-bpo", label: "経理システム（セルフ版）" },
-  { href: "/services/ad-operations", label: "広告運用の管理システム" },
 ];
 
 // 自社運営の別サイト。会社概要のとなりに置き、どちらも別タブで開く
@@ -49,6 +48,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  // トップと事業ページは写真・動画を全幅に敷くので、上端にいる間だけ白い文字にする
+  const onDark = (pathname === "/" || pathname === "/services" || pathname.startsWith("/services/")) && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -72,7 +73,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${onDark ? "header-on-dark " : ""}${
           open
             ? "bg-transparent"
             : scrolled
@@ -88,11 +89,11 @@ export default function Header() {
               width={148}
               height={56}
               priority
-              className={`h-9 w-auto transition-all duration-300 md:h-11 ${open ? "logo-invert" : ""}`}
+              className={`h-9 w-auto transition-all duration-300 md:h-11 ${open || onDark ? "logo-invert" : ""}`}
             />
             <span
               className={`hidden text-[0.65rem] leading-4 tracking-widest transition-colors duration-300 sm:block ${
-                open ? "text-white/70" : "text-slate"
+                open || onDark ? "text-white/70" : "text-slate"
               }`}
             >
               セブンセンシズ

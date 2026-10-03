@@ -45,3 +45,7 @@
 
 # 自社プロダクトのLP。公開直後に名称変更したため旧スラッグを転送する
 /media-pipeline  /aio-agent  301
+
+# 広告運用代行は終了（2026-10）。事業一覧へ
+/services/ad-operations   /services   301
+/services/ad-operations/* /services   301
