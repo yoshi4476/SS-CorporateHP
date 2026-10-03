@@ -7,8 +7,9 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// 動画の場面と同じ順番・同じ長さ（make_hero_video.py: 1場面5秒・切り替え1秒 → 4秒ごと）
-const SCENE_SEC = 4;
+// 動画の場面と同じ順番・同じ長さ（make_hero_video2.py: 3.8秒ごとに次の場面へ1.2秒かけて切り替わる）
+const SCENE_SEC = 3.8;
+const FADE_MID = 0.6;
 const SCENES = [
   { en: "AI Search", ja: "AI検索で、選ばれる会社へ" },
   { en: "Accounting BPO", ja: "経理を、仕組みごと手放す" },
@@ -46,7 +47,8 @@ export default function HeroVideo({
     const v = ref.current;
     if (!v || caption === "none") return;
     // 場面が半分ほど入れ替わったところ（切り替えの真ん中）で名前を変える
-    const tick = () => setI(Math.floor((v.currentTime + 0.5) / SCENE_SEC) % SCENES.length);
+    const n = SCENES.length;
+    const tick = () => setI(((Math.floor((v.currentTime - FADE_MID) / SCENE_SEC) % n) + n) % n);
     v.addEventListener("timeupdate", tick);
     return () => v.removeEventListener("timeupdate", tick);
   }, [caption, still]);

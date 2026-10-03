@@ -94,16 +94,10 @@ export default function Home() {
         />
         {/* 背景写真は lg 以上だけ。狭い画面で薄く敷くと、写真でも背景でもない
             ぼんやりした影にしかならないため、下でひとつの写真ブロックとして出す */}
-        {/* 動画は右6割だけに置き、左端をぼかして紙色へ溶かす。文字と人物が重ならない */}
-        <div
-          aria-hidden
-          className="absolute inset-y-0 left-[36%] right-0 hidden overflow-hidden lg:block"
-          style={{ maskImage: "linear-gradient(to right, transparent 0%, black 28%)", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 28%)" }}
-        >
-          {/* 事業ごとの現場（AI検索・経理・店舗集客・住宅・シフト管理・AI導入）を切り替える動画 */}
-          <HeroVideo objectPosition="72% center" caption="dark" />
-          {/* ヘッダーは背景が透明なので、写真の上端を紙色に落としてナビを読めるようにする */}
-          <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper via-paper/75 to-transparent" />
+        {/* AI が業種ごとの現場を支える様子の動画。右側に「画面」として置く（白い面に暗い動画を溶かすと濁るため、枠で区切る） */}
+        <div className="absolute bottom-40 right-8 top-28 hidden w-[44%] overflow-hidden rounded-[2rem] bg-ink shadow-lift ring-1 ring-ink/10 lg:block xl:right-12">
+          <HeroVideo objectPosition="78% center" caption="light" />
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
         </div>
 
         {/* 3Dロゴ (1文字ずつ波打つ)。可読性ガードより上に置く。
@@ -114,19 +108,8 @@ export default function Home() {
           <Logo3D className="absolute bottom-14 left-6 z-[5] whitespace-nowrap text-[9vw] opacity-[0.22]" />
         </div>
 
-        {/* 左半分の可読性ガード。背景写真を紙色に落としてコピーを読ませる。
-            写真を敷くのは lg 以上だけなので、ガードも lg 以上だけでよい */}
-        <div
-          aria-hidden
-          className="absolute inset-0 hidden lg:block"
-          style={{
-            background:
-              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.9) 36%, transparent 50%)",
-          }}
-        />
-
         {/* HUD実績バー (右下固定) */}
-        <dl className="absolute bottom-32 right-8 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
+        <dl className="absolute bottom-24 right-16 z-10 hidden w-[420px] grid-cols-3 gap-2 rounded-2xl border border-line bg-raise/75 p-4 shadow-card backdrop-blur-md lg:right-14 lg:grid">
           <div className="border-r border-line pr-2">
             <dt className="font-data text-[0.55rem] uppercase tracking-[0.2em] text-slate">Total Clients</dt>
             <dd className="num mt-1 text-2xl font-bold">
