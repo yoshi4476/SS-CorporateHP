@@ -874,3 +874,11 @@ html.ss-intro-pending::before {
 }
 @keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .map-facade .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); } }
+
+/* ヒーロー動画の場面名（HeroVideo）。場面が変わるたびに下から静かに出る */
+.hero-scene-caption { animation: hero-caption-in 0.9s cubic-bezier(0.19, 1, 0.22, 1) both; }
+@keyframes hero-caption-in {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-scene-caption { animation: none; } }

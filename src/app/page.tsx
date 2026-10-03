@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
+import HeroVideo from "@/components/HeroVideo";
 import Logo3D from "@/components/Logo3D";
 import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
@@ -93,15 +94,14 @@ export default function Home() {
         />
         {/* 背景写真は lg 以上だけ。狭い画面で薄く敷くと、写真でも背景でもない
             ぼんやりした影にしかならないため、下でひとつの写真ブロックとして出す */}
-        <div aria-hidden className="absolute inset-0 hidden overflow-hidden lg:block">
-          <Image
-            src="/images/hero-office.webp"
-            alt="セブンセンシズのオフィスで集客と経理の仕組みを設計する様子"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[72%_center]"
-          />
+        {/* 動画は右6割だけに置き、左端をぼかして紙色へ溶かす。文字と人物が重ならない */}
+        <div
+          aria-hidden
+          className="absolute inset-y-0 left-[36%] right-0 hidden overflow-hidden lg:block"
+          style={{ maskImage: "linear-gradient(to right, transparent 0%, black 28%)", WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 28%)" }}
+        >
+          {/* 事業ごとの現場（AI検索・経理・店舗集客・住宅・シフト管理・AI導入）を切り替える動画 */}
+          <HeroVideo objectPosition="72% center" caption="dark" />
           {/* ヘッダーは背景が透明なので、写真の上端を紙色に落としてナビを読めるようにする */}
           <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-paper via-paper/75 to-transparent" />
         </div>
@@ -121,7 +121,7 @@ export default function Home() {
           className="absolute inset-0 hidden lg:block"
           style={{
             background:
-              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.94) 38%, rgb(251 252 253 / 0.5) 56%, transparent 72%)",
+              "linear-gradient(to right, rgb(251 252 253) 0%, rgb(251 252 253 / 0.9) 36%, transparent 50%)",
           }}
         />
 
@@ -187,14 +187,9 @@ export default function Home() {
             <Reveal delay={0.2}>
               {/* 幅が広がるほど縦も伸びてCTAが画面外へ出るため、横長に切り替える */}
               <figure className="relative mt-7 aspect-[5/4] overflow-hidden rounded-3xl sm:aspect-[16/9] lg:hidden">
-                <Image
-                  src="/images/hero-office.webp"
-                  alt="打ち合わせに向かう代表"
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="object-cover object-[66%_center]"
-                />
+                <div className="absolute inset-0">
+                  <HeroVideo objectPosition="66% center" caption="light" />
+                </div>
                 <div
                   aria-hidden
                   className="absolute inset-0"
@@ -295,6 +290,22 @@ export default function Home() {
               <mark className="marker">数字で設計し、数字で報告</mark>
               します。現場で積み上げた実践データを、誰でも再現できる仕組みへ。それがセブンセンシズの仕事です。
             </p>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <figure className="group relative mx-auto mt-14 aspect-[16/9] max-w-6xl overflow-hidden rounded-[2rem] shadow-lift md:mt-20 md:aspect-[21/9]">
+              <Image
+                src="/images/scene-vision.webp"
+                alt="明るいオフィスで、施策を数字で話し合うチーム"
+                fill
+                sizes="(min-width: 1280px) 1152px, 100vw"
+                className="object-cover object-[50%_40%] transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
+              />
+              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
+              <figcaption className="absolute bottom-5 left-6 text-left text-white md:bottom-8 md:left-10">
+                <span className="font-data block text-[0.62rem] uppercase tracking-[0.3em] text-aqua">Data × Field</span>
+                <span className="mt-2 block text-base font-bold md:text-2xl">現場のデータを、仕組みに。</span>
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -423,11 +434,18 @@ export default function Home() {
       <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
         <WaveText text="SEO×MEO×AIO" className="pointer-events-none absolute right-0 top-4 select-none text-[8vw] leading-none tracking-tighter opacity-20" />
         <div className="relative mx-auto max-w-7xl px-5">
-          <SectionHead
-            en="SEO × MEO × AIO"
-            title="検索対策の「第三の時代」を、先導する"
-            lead="ユーザーはGoogleで調べる前に、ChatGPTに聞き始めています。SEO・MEOに続く第三の検索対策「AIO(AI最適化)」に、==いま着手する企業が次の集客を制します==。"
-          />
+          <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
+            <SectionHead
+              en="SEO × MEO × AIO"
+              title="検索対策の「第三の時代」を、先導する"
+              lead="ユーザーはGoogleで調べる前に、ChatGPTに聞き始めています。SEO・MEOに続く第三の検索対策「AIO(AI最適化)」に、==いま着手する企業が次の集客を制します==。"
+            />
+            <Reveal delay={0.1}>
+              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
+                <Image src="/images/scene-aio.webp" alt="スマートフォンでAIに質問する手元" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-[45%_center]" />
+              </figure>
+            </Reveal>
+          </div>
           <Reveal delay={0.1} className="mt-12 overflow-x-auto rounded-2xl border border-line shadow-card">
             <table className="w-full min-w-[680px] border-collapse bg-raise text-sm">
               <caption className="sr-only">SEO・MEO・AIOの比較表</caption>
@@ -628,11 +646,18 @@ export default function Home() {
       {/* 進め方 */}
       <section id="process" className="scroll-mt-24 py-24 md:py-32" aria-labelledby="process-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            en="Process"
-            title="ご相談から成果まで、4つのステップ"
-            lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。"
-          />
+          <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
+            <SectionHead
+              en="Process"
+              title="ご相談から成果まで、4つのステップ"
+              lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。"
+            />
+            <Reveal delay={0.1}>
+              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
+                <Image src="/images/scene-process.webp" alt="店舗の経営者と、施策の進め方を話し合う担当者" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
+              </figure>
+            </Reveal>
+          </div>
           <div className="mt-12">
             <FlowSteps
               steps={[
@@ -665,6 +690,9 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 md:items-end">
+                <figure className="relative mb-2 aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-card md:max-w-sm">
+                  <Image src="/images/scene-subsidy.webp" alt="経営者と担当者が、申請書類を一緒に確かめる様子" fill sizes="(min-width: 768px) 24rem, 100vw" className="object-cover" />
+                </figure>
                 <Link
                   href="/services/ai-subsidy"
                   className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
