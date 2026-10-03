@@ -9,7 +9,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { services } from "@/lib/services";
-import { diagnostics } from "@/lib/aio";
+import { diagnostics, toolsIndex } from "@/lib/aio";
 import { site } from "@/lib/site";
 
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
@@ -18,8 +18,9 @@ const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や�
 // 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
 // URLを入れる診断を先頭に。LPの入力欄へ直接飛び、どこから来たかを src で残す
 const CHECKS = [
-  { name: "サイトのAIO診断", spec: "URL入力・14項目", href: "https://ai.7senses.co.jp/lp/?src=corp_header#scan-start" },
+  { name: "URL診断（サイトの14項目を採点）", spec: "URLだけ・約30秒", href: "https://ai.7senses.co.jp/tools/url-check/?src=corp_header" },
   ...diagnostics,
+  { name: "無料ツールの一覧", spec: "AI集客ラボ", href: toolsIndex },
 ];
 
 const PRODUCTS: { href: string; label: string }[] = [

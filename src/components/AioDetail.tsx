@@ -15,6 +15,8 @@ import {
   automation,
   monitored,
   diagnostics,
+  industries,
+  toolsIndex,
 } from "@/lib/aio";
 import { site } from "@/lib/site";
 import AioScan from "@/components/AioScan";
@@ -330,7 +332,7 @@ export default function AioDetail() {
               <Reveal delay={0.1}>
                 <div className="rounded-2xl border-2 border-pulse bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h4 className="text-base font-bold">サイトのAIO診断</h4>
+                    <h4 className="text-base font-bold">URL診断（サイトの14項目を採点）</h4>
                     <span className="font-data shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-pulse">
                       URL入力だけ・14項目
                     </span>
@@ -360,6 +362,9 @@ export default function AioDetail() {
                   </a>
                 </Reveal>
               ))}
+              <a href={toolsIndex} target="_blank" rel="noopener" className="text-xs font-bold text-pulse underline-offset-4 hover:underline">
+                無料ツールの一覧を見る（AI集客ラボ） ↗
+              </a>
             </div>
           </div>
 
@@ -393,6 +398,36 @@ export default function AioDetail() {
               </Link>
               の記事は Python の自動化エンジンが生成・審査して公開しています。
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* 業種別のAIO対策（AI集客ラボの業種別ページ・調査・チェックリスト） */}
+      <section className="border-t border-line py-20 md:py-28" aria-labelledby="industries-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            en="Industries"
+            title="業種ごとに、AIが答えに使う情報は違う"
+            lead="医療・不動産・工務店・士業は、業種ごとに==AIが出典にするサイトの種類==を調べ、その結果にもとづいて対策しています。そのほかの業種にも幅広く対応しています。"
+          />
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {industries.map((x, i) => (
+              <Reveal key={x.name} delay={i * 0.07}>
+                <article className="h-full overflow-hidden rounded-2xl border border-line bg-raise shadow-card">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={x.image} alt={`${x.name}のAIO対策`} width={1280} height={720} loading="lazy" className="aspect-video w-full object-cover" />
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold">{x.name}のAIO対策</h3>
+                    <p className="mt-3 text-xs leading-7 text-slate">{x.lead}</p>
+                    <ul className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
+                      <li><a href={x.lp} target="_blank" rel="noopener" className="inline-block rounded-full bg-pulse px-4 py-2 text-white hover:opacity-90">業種別のご案内 ↗</a></li>
+                      <li><a href={x.research} target="_blank" rel="noopener" className="inline-block rounded-full border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">AIは何を出典にするか（調査） ↗</a></li>
+                      <li><a href={x.checklist} target="_blank" rel="noopener" className="inline-block rounded-full border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">チェックリスト（PDF） ↗</a></li>
+                    </ul>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

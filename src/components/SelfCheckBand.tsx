@@ -41,7 +41,7 @@ export default function SelfCheckBand() {
           <div className="grid gap-4">
             <Reveal delay={0.04}>
               <div className="rounded-2xl border-2 border-aqua/60 bg-white/[0.08] p-6 md:p-7">
-                <p className="text-lg font-bold text-white">サイトのAIO診断<span className="ml-3 align-middle font-data rounded-full border border-white/30 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">URL入力だけ・14項目</span></p>
+                <p className="text-lg font-bold text-white">URL診断（サイトの14項目を採点）<span className="ml-3 align-middle font-data rounded-full border border-white/30 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">URL入力だけ・14項目</span></p>
                 <p className="mt-2 mb-5 text-xs leading-7 text-white/65">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
                 <AioScan src="corp_top_selfcheck" dark />
               </div>

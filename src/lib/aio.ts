@@ -193,31 +193,95 @@ export const automation: { name: string; role: string; detail: string }[] = [
 /** 引用状況を定点観測する対象 */
 export const monitored: string[] = ["AI Overview", "ChatGPT", "Perplexity", "Gemini"];
 
-/** 自社で開発・公開している無料診断ツール（質問に答える形）。URLを入れる診断は AioScan が受け持つ */
+/**
+ * 自社で開発・公開している無料ツール（AI集客ラボ ai.7senses.co.jp/tools/ と同じ名前・同じ並び）。
+ * URLを入れる「URL診断」は AioScan とヘッダーが先頭に置く。名前は AI集客ラボの tools_catalog.py に合わせる
+ */
+const LAB = "https://ai.7senses.co.jp";
 export const diagnostics: {
   name: string;
   spec: string;
   body: string;
   href: string;
 }[] = [
-  // AI集客ラボの無料ツール。コーポレートの訪問者を入口へ回す（2026-10-02）
   {
-    name: "AIにどう紹介されているか無料チェック",
+    name: "AI診断（AIにどう紹介されているか）",
     spec: "地域と業種で3問",
-    body: "AIに「地域名＋業種 おすすめ」などを聞き、答えの出典に御社のサイトや社名が出ているかをその場で確かめます。",
-    href: "https://ai.7senses.co.jp/tools/ai-check/?src=corp",
+    body: "AIに「地域名＋業種 おすすめ」などを聞き、答えの出典に御社のサイトが入っているか、回答に社名が出るかをその場で確かめます。",
+    href: `${LAB}/tools/ai-check/?src=corp`,
   },
   {
-    name: "MEO診断",
-    spec: "30秒・8問",
-    body: "Googleマップ集客の整備度を100点満点で採点。マップの3枠に入るために足りないものがわかります。",
-    href: "https://ai.7senses.co.jp/tools/meo-check/",
+    name: "AI検索の対応度チェック",
+    spec: "8問・約30秒",
+    body: "8つの質問に答えると、AI検索に引用されるために足りないものを100点満点で表示します。",
+    href: `${LAB}/tools/aio-check/?src=corp`,
   },
   {
-    name: "AIO診断",
-    spec: "30秒・8問",
-    body: "AI検索 (AI Overview・ChatGPT) への対応度を100点満点で採点。AIに引用されるために足りないものがわかります。",
-    href: "https://ai.7senses.co.jp/tools/aio-check/",
+    name: "AI検索対策チェックリスト",
+    spec: "業種別PDF・5業種",
+    body: "歯科医院・クリニック・不動産会社・工務店・士業事務所の5業種。印をつけながら、自社で直すところを確かめられます。",
+    href: `${LAB}/download/?src=corp`,
+  },
+  {
+    name: "口コミ返信文の作成ツール",
+    spec: "返信案を3つ",
+    body: "業種と口コミの種類を選ぶと、そのまま使える返信案を3つ作ります。医療は医療広告ガイドラインにふれない書き方にそろえます。",
+    href: `${LAB}/tools/kuchikomi-henshin/?src=corp`,
+  },
+  {
+    name: "マップ集客の整備度チェック",
+    spec: "8問・約30秒",
+    body: "Googleビジネスプロフィールの整備度を100点満点で採点します。",
+    href: `${LAB}/tools/meo-check/?src=corp`,
+  },
+];
+
+/** 無料ツールの一覧（AI集客ラボ） */
+export const toolsIndex = `${LAB}/tools/?src=corp`;
+
+/**
+ * 業種別の AIO 対策（AI集客ラボの業種別ページ・調査・チェックリスト）。
+ * 画像は AI集客ラボの業種サムネイル（site/images/thumbs/aio-<鍵>.jpg）を名前で参照する
+ */
+export const industries: {
+  name: string;
+  lead: string;
+  lp: string;
+  research: string;
+  checklist: string;
+  image: string;
+}[] = [
+  {
+    name: "クリニック・歯科医院",
+    lead: "症状・費用・診療内容を調べる人と、地域で医院を探す人の両方に届くサイトへ。医療広告ガイドラインにそった書き方で整えます。",
+    lp: `${LAB}/lp/medical/?src=corp`,
+    research: `${LAB}/research/clinic-ai-sources/`,
+    checklist: `${LAB}/download/?ind=clinic&src=corp`,
+    image: `${LAB}/images/thumbs/aio-clinic.jpg`,
+  },
+  {
+    name: "不動産会社",
+    lead: "ポータルに埋もれず、売却・購入・住み替えの検索とAIの答えに選ばれるサイトへ。",
+    lp: `${LAB}/lp/fudosan/?src=corp`,
+    research: `${LAB}/research/fudosan-ai-sources/`,
+    checklist: `${LAB}/download/?ind=fudosan&src=corp`,
+    image: `${LAB}/images/thumbs/aio-fudosan.jpg`,
+  },
+  {
+    name: "工務店・リフォーム会社",
+    lead: "費用・工法・施工事例を調べる人に、自社の実例が答えとして届くサイトへ。",
+    lp: `${LAB}/lp/koumuten/?src=corp`,
+    research: `${LAB}/research/koumuten-ai-sources/`,
+    checklist: `${LAB}/download/?ind=koumuten&src=corp`,
+    image: `${LAB}/images/thumbs/aio-koumuten.jpg`,
+  },
+  {
+    name: "士業事務所",
+    lead: "相続・設立・労務などを調べる人に、専門性が伝わり相談先として選ばれるサイトへ。",
+    lp: `${LAB}/lp/shigyou/?src=corp`,
+    research: `${LAB}/research/shigyou-ai-sources/`,
+    checklist: `${LAB}/download/?ind=shigyou&src=corp`,
+    image: `${LAB}/images/thumbs/aio-shigyou.jpg`,
   },
 ];
 
