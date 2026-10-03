@@ -14,6 +14,7 @@ const TERM_PHOTO: Record<string, string> = {
   インボイス制度: "/images/shelf/invoice-1.webp",
 };
 import { posts, displayDate, thumbOf } from "@/lib/blog";
+import { themes } from "@/lib/themes";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
@@ -232,6 +233,17 @@ export default function BlogPage() {
       {/* 記事 */}
       <section id="latest" className="scroll-mt-24 py-20 md:py-28" aria-labelledby="latest-heading">
         <div className="mx-auto max-w-7xl px-5">
+          {/* 新着順だけでは、同じ困りごとの記事を続けて読めない */}
+          <SectionHead en="Themes" title="テーマから探す" />
+          <ul className="mb-16 mt-8 flex flex-wrap gap-3">
+            {themes.map((t) => (
+              <li key={t.slug}>
+                <Link href={`/blog/theme/${t.slug}`} className="tap inline-block rounded-full border border-line-strong bg-raise px-5 py-2.5 text-sm font-bold hover:border-pulse hover:text-pulse">
+                  {t.name}<span className="num ml-1.5 text-xs text-slate">{t.count}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
           <SectionHead en="Latest" title="新着記事" />
 
 

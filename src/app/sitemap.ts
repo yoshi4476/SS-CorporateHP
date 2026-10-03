@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { posts } from "@/lib/blog";
+import { themes } from "@/lib/themes";
 import { site } from "@/lib/site";
 
 // 静的書き出し (output: export) でファイルとして生成させる
@@ -30,6 +31,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     })),
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${site.url}/blog/theme`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    ...themes.map((t) => ({
+      url: `${site.url}/blog/theme/${t.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
     ...posts.map((p) => ({
       url: `${site.url}/blog/${p.slug}`,
       lastModified: new Date(p.dateModified),
