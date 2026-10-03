@@ -49,9 +49,9 @@ export default function SplitText({
     <span
       ref={ref}
       className={`split ${className}`}
-      aria-label={text}
       style={{ "--d": `${delay}s` } as React.CSSProperties}
     >
+      <span className="sr-only">{text}</span>
       {words.map((word, wi) => {
         if (/^\s+$/.test(word)) return " ";
         return (

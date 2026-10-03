@@ -139,8 +139,9 @@ export function FlowSteps({ steps }: { steps: { title: string; body: string }[] 
   return (
     <ol className="grid gap-4 md:grid-cols-4">
       {steps.map((s, i) => (
-        <Reveal key={s.title} delay={i * 0.1}>
-          <li className="relative h-full rounded-2xl border border-line bg-white p-6 shadow-card">
+        <li key={s.title} className="h-full">
+          <Reveal delay={i * 0.1} className="h-full">
+          <div className="relative h-full rounded-2xl border border-line bg-white p-6 shadow-card">
             <span className="num text-sm font-bold text-pulse">STEP {i + 1}</span>
             <h3 className="mt-2 text-base font-bold">{s.title}</h3>
             <p className="mt-2 text-sm leading-7 text-slate">{s.body}</p>
@@ -153,8 +154,9 @@ export function FlowSteps({ steps }: { steps: { title: string; body: string }[] 
                 <path d="M5 2l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2" />
               </svg>
             )}
-          </li>
-        </Reveal>
+          </div>
+          </Reveal>
+        </li>
       ))}
     </ol>
   );

@@ -143,21 +143,21 @@ export default function Home() {
               </div>
             </Reveal>
             <Reveal delay={0.3}>
-              <dl className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
+              <div className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
                 {[
                   { n: 3200, unit: "社", label: "MEO通算支援" },
                   { n: 90, unit: "%+", label: "補助金 採択率" },
                   { n: services.length, unit: "事業", label: "一気通貫で支援" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <dd className="num text-2xl font-bold leading-none md:text-3xl">
+                    <p className="num text-2xl font-bold leading-none md:text-3xl">
                       <CountUp value={s.n} duration={1.6} />
                       <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
-                    </dd>
-                    <dt className="mt-2 text-[0.68rem] text-white/65">{s.label}</dt>
+                    </p>
+                    <p className="mt-2 text-[0.68rem] text-white/65">{s.label}</p>
                   </div>
                 ))}
-              </dl>
+              </div>
               <Link
                 href={`/news/${latestNews.slug}`}
                 className="group mt-6 flex min-h-10 max-w-full items-center gap-3 text-xs text-white/70 transition-colors hover:text-aqua"
@@ -285,20 +285,20 @@ export default function Home() {
               成果は、数字で語る。
             </h2>
           </Reveal>
-          <dl className="mt-16 grid grid-cols-1 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
+          <div className="mt-16 grid grid-cols-1 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
             {MEGA_STATS.map((s, i) => (
               <Reveal key={s.label} delay={(i % 3) * 0.1}>
                 {/* 縦罫と単位を金にして、紺一色の面に温度を足す */}
                 <div className="border-l-2 border-gold-bright/70 pl-6">
-                  <dd className="mega-num text-6xl text-white md:text-7xl lg:text-8xl">
+                  <p className="mega-num text-6xl text-white md:text-7xl lg:text-8xl">
                     <CountUp value={s.value} duration={1.4 + (i % 3) * 0.3} />
                     <span className="ml-1 text-3xl text-gold-bright md:text-4xl">{s.suffix}</span>
-                  </dd>
-                  <dt className="mt-4 text-xs leading-5 text-white/60 md:text-sm">{s.label}</dt>
+                  </p>
+                  <p className="mt-4 text-xs leading-5 text-white/60 md:text-sm">{s.label}</p>
                 </div>
               </Reveal>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
