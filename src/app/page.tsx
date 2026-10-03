@@ -107,10 +107,10 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-80 pt-24 md:pb-24 md:pt-28">
           <div className="w-full min-w-0 max-w-3xl">
-            <Reveal>
+            <div>
               <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
               <p className="eyebrow !text-aqua">Osaka / AI Consulting &amp; Digital Marketing</p>
-            </Reveal>
+            </div>
             {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
                 スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
             <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
@@ -118,14 +118,14 @@ export default function Home() {
               <br />
               <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
             </h1>
-            <Reveal delay={0.16}>
+            <div>
               <p className="mt-6 max-w-lg text-sm leading-8 text-white/80 md:mt-8 md:leading-9 md:text-[0.95rem]">
                 MEO運用通算3,200店舗で積んだ現場データと、AIによる自動化。
                 <br className="hidden md:block" />
                 集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
               </p>
-            </Reveal>
-            <Reveal delay={0.24}>
+            </div>
+            <div>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
                 <Link
                   href="/contact"
@@ -141,8 +141,8 @@ export default function Home() {
                   <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
                 </Link>
               </div>
-            </Reveal>
-            <Reveal delay={0.3}>
+            </div>
+            <div>
               <div className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
                 {[
                   { n: 3200, unit: "社", label: "MEO通算支援" },
@@ -168,7 +168,7 @@ export default function Home() {
                   {latestNews.title}
                 </span>
               </Link>
-            </Reveal>
+            </div>
           </div>
         </div>
 

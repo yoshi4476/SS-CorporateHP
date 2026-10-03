@@ -331,15 +331,17 @@ export default async function ServicePage({ params }: Props) {
           {/* 4つなら2×2（3列だと1枚だけ次の段に残り、右が空く） */}
           <ol className={`mt-6 grid gap-5 md:grid-cols-2 ${service.points.length === 4 ? "" : "lg:grid-cols-3"}`}>
             {service.points.map((p, i) => (
-              <Reveal key={p.title} delay={i * 0.08}>
-                <li className="h-full rounded-2xl border border-line bg-white p-7 shadow-card">
+              <li key={p.title} className="h-full">
+                <Reveal delay={i * 0.08} className="h-full">
+                <div className="h-full rounded-2xl border border-line bg-white p-7 shadow-card">
                   <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse/10">
                     <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
                   </span>
                   <h3 className="mt-5 text-lg font-bold leading-relaxed">{p.title}</h3>
                   <p className="mt-3 text-sm leading-8 text-slate">{p.body}</p>
-                </li>
-              </Reveal>
+                </div>
+                </Reveal>
+              </li>
             ))}
           </ol>
         </div>
