@@ -160,7 +160,7 @@ export default function Home() {
               </dl>
               <Link
                 href={`/news/${latestNews.slug}`}
-                className="group mt-6 flex max-w-full items-center gap-3 text-xs text-white/70 transition-colors hover:text-aqua"
+                className="group mt-6 flex min-h-10 max-w-full items-center gap-3 text-xs text-white/70 transition-colors hover:text-aqua"
               >
                 <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-aqua">News</span>
                 <span className="num shrink-0">{latestNews.date}</span>
@@ -522,7 +522,7 @@ export default function Home() {
                     <span className="rounded-full bg-ink px-3 py-1 text-[0.62rem] font-bold text-white">
                       {cs.industry}
                     </span>
-                    <Link href={`/services/${cs.slug}`} className="text-[0.66rem] font-bold text-pulse hover:underline">
+                    <Link href={`/services/${cs.slug}`} className="inline-flex min-h-9 items-center text-[0.66rem] font-bold text-pulse hover:underline">
                       {cs.service} →
                     </Link>
                   </div>

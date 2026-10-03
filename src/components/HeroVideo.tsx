@@ -112,7 +112,7 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
             </p>
             <p className="mt-3 border-t border-white/15 pt-3 text-[0.62rem] font-bold tracking-[0.18em] text-white/55">この現場で、当社が引き受けていること</p>
             <p className="mt-1.5 text-lg font-black leading-snug md:text-xl">{s.job}</p>
-            <a href={s.href} className="mt-1 inline-flex items-center gap-1.5 text-xs font-bold text-aqua hover:underline">
+            <a href={s.href} className="mt-1 inline-flex min-h-9 items-center gap-1.5 text-xs font-bold text-aqua hover:underline">
               {s.service}
               <span aria-hidden>→</span>
             </a>

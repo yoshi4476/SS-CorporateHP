@@ -7,6 +7,7 @@ import { CtaBand } from "@/components/ui";
 import { news } from "@/lib/news";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
   // 旧www側にも同名ページがあり、Googleがそちらを正規版に選んでいた。
@@ -71,6 +72,34 @@ export default function NewsPage() {
               </Link>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* 一覧だけでは中身が薄く、読み終えた人の行き先も無かった。解説記事と事業の入口を置く */}
+      <section className="border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-more-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <p className="eyebrow">More</p>
+          <h2 id="news-more-heading" className="mt-3 text-xl font-black md:text-2xl">解説記事と、事業のご案内</h2>
+          <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
+            お知らせでは、セブンセンシズ株式会社のサービスや取り組みの動きを掲載しています。経理の進め方やAI検索の対策など、実務の解説は下の2つのメディアで公開しています。
+          </p>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {[
+              { href: "/blog", label: "経理BPOブログ", body: "記帳・請求・給与・月次決算など、経理の進め方と外注の判断を解説しています。", ext: false },
+              { href: site.labUrl, label: "AI集客ラボ", body: "SEO・AIO・LLMOの実践と、業種ごとの集客を解説している運営メディアです。", ext: true },
+              { href: "/services", label: "事業内容", body: "集客・社内業務・補助金まで、ひとつのチームで引き受けている事業の一覧です。", ext: false },
+            ].map((x) => (
+              <a
+                key={x.label}
+                href={x.href}
+                {...(x.ext ? { target: "_blank", rel: "noopener" } : {})}
+                className="group rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse/40"
+              >
+                <p className="font-bold group-hover:text-pulse">{x.label}{x.ext ? " ↗" : " →"}</p>
+                <p className="mt-2 text-xs leading-7 text-slate">{x.body}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
