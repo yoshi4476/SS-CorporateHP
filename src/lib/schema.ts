@@ -39,6 +39,7 @@ export const organizationSchema = {
   // 自社サイトだけでなく、法人番号で当社だと確定できる外部ページも並べる。
   // 同名の別法人と混ざらないよう、法人番号がURLに入っているものだけを載せること。
   sameAs: [
+    "https://x.com/sevensensece",
     site.lpUrl,
     site.labUrl,
     site.mainUrl,

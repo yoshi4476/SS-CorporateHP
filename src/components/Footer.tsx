@@ -138,6 +138,19 @@ export default function Footer() {
           <ul className="flex list-none gap-2" aria-label="外部プロフィール">
             <li>
               <a
+                href="https://x.com/sevensensece"
+                target="_blank"
+                rel="noopener me"
+                aria-label="X（セブンセンシズ株式会社）"
+                className="tap inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/25 text-white/80 transition-colors hover:border-transparent hover:bg-black hover:text-white"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://www.linkedin.com/in/yu-haraguchi"
                 target="_blank"
                 rel="noopener me"
