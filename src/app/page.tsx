@@ -515,7 +515,7 @@ export default function Home() {
               <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
                 <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
                   <figure className="relative aspect-[16/9] w-full">
-                    <Image src={CASE_PHOTO[cs.industry] ?? "/images/case-seizou.webp"} alt="" fill sizes="(min-width: 1024px) 400px, 100vw" className="object-cover" />
+                    <Image src={CASE_PHOTO[cs.industry] ?? "/images/case-seizou.webp"} alt={`${cs.industry}の現場のイメージ`} fill sizes="(min-width: 1024px) 400px, 100vw" className="object-cover" />
                   </figure>
                   <div className="flex flex-1 flex-col p-7 md:p-8">
                   <div className="flex items-center justify-between gap-3">

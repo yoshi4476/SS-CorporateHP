@@ -5,6 +5,14 @@ import JsonLd from "@/components/JsonLd";
 import BlogList from "@/components/BlogList";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
+
+// 用語カードの写真（写真の棚から。生成したイメージ写真）
+const TERM_PHOTO: Record<string, string> = {
+  経理BPO: "/images/shelf/outsource-1.webp",
+  記帳代行: "/images/shelf/bookkeeping-1.webp",
+  電子帳簿保存法: "/images/shelf/efiling-1.webp",
+  インボイス制度: "/images/shelf/invoice-1.webp",
+};
 import { posts, displayDate, thumbOf } from "@/lib/blog";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -69,6 +77,13 @@ export default function BlogPage() {
               "radial-gradient(ellipse 45% 55% at 85% 25%, rgb(28 63 124 / 0.07), transparent 62%)",
           }}
         />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
+          style={{ maskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)" }}
+        >
+          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書と請求書を読み取って仕分ける経理の手元のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
+        </div>
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-14 md:pb-20 md:pt-20">
           <Reveal>
             <span aria-hidden className="mb-6 block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
@@ -162,7 +177,14 @@ export default function BlogPage() {
             title="こんな状態になっていませんか"
             lead="経理は、動いているうちは問題として表に出ません。==止まってから気づく==のがこの領域です。"
           />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
+          <div className="mt-10 grid items-start gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+            <Reveal className="lg:sticky lg:top-28">
+              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
+                <Image src="/images/shelf/staffing-1.webp" alt="書類に追われる経理担当者のイメージ" fill sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
+              </figure>
+              <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+            </Reveal>
+          <div className="grid gap-4">
             {problems.map((p, i) => (
               <Reveal key={p} delay={(i % 2) * 0.07}>
                 <div className="flex items-start gap-4 rounded-2xl border border-line bg-raise p-6 shadow-card">
@@ -173,6 +195,7 @@ export default function BlogPage() {
                 </div>
               </Reveal>
             ))}
+          </div>
           </div>
         </div>
       </section>
@@ -188,10 +211,17 @@ export default function BlogPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {glossary.map((g, i) => (
               <Reveal key={g.term} delay={(i % 4) * 0.07}>
-                <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
+                <article className="h-full overflow-hidden rounded-2xl border border-line bg-raise shadow-card">
+                  {TERM_PHOTO[g.term] && (
+                    <figure className="relative aspect-[16/10]">
+                      <Image src={TERM_PHOTO[g.term]} alt={`${g.term}のイメージ`} fill sizes="(min-width: 1280px) 300px, 50vw" className="object-cover" />
+                    </figure>
+                  )}
+                  <div className="p-6">
                   <p className="text-lg font-bold text-pulse">{g.term}</p>
                   <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
                   <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
+                  </div>
                 </article>
               </Reveal>
             ))}

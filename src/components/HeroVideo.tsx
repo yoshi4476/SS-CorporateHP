@@ -51,7 +51,7 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
     <>
       {still ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src="/videos/hero-poster.webp" alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition }} />
+        <img src="/videos/hero-poster.webp" alt="朝の大阪の街並み" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition }} />
       ) : (
         <video
           ref={ref}

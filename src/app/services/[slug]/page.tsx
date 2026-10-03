@@ -77,7 +77,7 @@ export default async function ServicePage({ params }: Props) {
       {/* ヒーロー */}
       {/* その事業の現場の写真を全幅に敷く（イメージ写真）。文字は左に寄せ、左側だけを暗くする */}
       <section className="relative overflow-hidden bg-ink text-white">
-        <Image src={svcPhoto(service.slug, 1)} alt="" fill priority sizes="100vw" className="object-cover object-[65%_center]" />
+        <Image src={svcPhoto(service.slug, 1)} alt={`${service.name}の現場のイメージ`} fill priority sizes="100vw" className="object-cover object-[65%_center]" />
         <div
           aria-hidden
           className="absolute inset-0"
@@ -239,7 +239,7 @@ export default async function ServicePage({ params }: Props) {
               {/* 依頼内容の一覧が無い事業は、右が空かないよう現場の写真（イメージ）を置く */}
               {!service.menu && (
                 <Reveal delay={0.1} className="relative min-h-[18rem] overflow-hidden rounded-3xl shadow-card">
-                  <Image src={svcPhoto(service.slug, 3)} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+                  <Image src={svcPhoto(service.slug, 3)} alt={`${service.name}を使う場面のイメージ`} fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
                 </Reveal>
               )}
             </div>
@@ -268,7 +268,7 @@ export default async function ServicePage({ params }: Props) {
                     <Reveal key={ind.name} delay={(i % 4) * 0.08}>
                       <article className="group h-full overflow-hidden rounded-2xl border border-line bg-white shadow-card">
                         <figure className="relative aspect-[16/10] overflow-hidden">
-                          <Image src={industryPhoto(ind.name)} alt="" fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                          <Image src={industryPhoto(ind.name)} alt={`${ind.name}の現場のイメージ`} fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                           <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
                           <h3 className="absolute inset-x-4 bottom-3 text-base font-bold leading-snug text-white">{ind.name}</h3>
                         </figure>
@@ -324,7 +324,7 @@ export default async function ServicePage({ params }: Props) {
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
           <Reveal>
             <figure className="relative mt-12 aspect-[16/9] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
-              <Image src={svcPhoto(service.slug, 2)} alt="" fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
+              <Image src={svcPhoto(service.slug, 2)} alt={`${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
               <figcaption className="absolute bottom-3 right-4 text-[0.65rem] text-white/80">※ 写真はイメージです</figcaption>
             </figure>
           </Reveal>

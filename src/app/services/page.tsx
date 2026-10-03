@@ -78,7 +78,7 @@ export default function ServicesIndexPage() {
 
       {/* ヒーロー: オフィスの写真を全幅に（イメージ写真） */}
       <section className="relative overflow-hidden bg-ink text-white">
-        <Image src="/images/svc/index.webp" alt="" fill priority sizes="100vw" className="object-cover" />
+        <Image src="/images/svc/index.webp" alt="窓の大きな明るいオフィスで働く社員のイメージ" fill priority sizes="100vw" className="object-cover" />
         <div
           aria-hidden
           className="absolute inset-0"
@@ -128,7 +128,7 @@ export default function ServicesIndexPage() {
               <Reveal key={s.slug}>
                 <article id={s.slug} className="group scroll-mt-28 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card lg:grid-cols-2">
                   <Link href={`/services/${s.slug}`} className={`relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[26rem] ${i % 2 ? "lg:order-2" : ""}`} tabIndex={-1} aria-hidden>
-                    <Image src={svcPhoto(s.slug, 1)} alt="" fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image src={svcPhoto(s.slug, 1)} alt={`${s.name}の現場のイメージ`} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-[0.65rem] font-bold text-white backdrop-blur-sm">{s.group}</span>
                   </Link>
                   <div className="flex flex-col p-7 md:p-10">
