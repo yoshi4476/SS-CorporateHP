@@ -111,7 +111,7 @@ export default async function ThemePage({ params }: Props) {
                 <Link href={`/blog/${x.slug}`} className="group flex h-full gap-4 rounded-2xl border border-line bg-raise p-4 shadow-card transition-colors hover:border-pulse/40">
                   {thumbOf(x) && (
                     <span className="relative block h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-mist">
-                      <Image src={thumbOf(x)!} alt="" fill sizes="112px" className="object-cover" />
+                      <Image src={thumbOf(x)!} alt={`${x.title}のアイキャッチ画像`} fill sizes="112px" className="object-cover" />
                     </span>
                   )}
                   <span className="min-w-0">
