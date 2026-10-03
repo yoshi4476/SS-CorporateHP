@@ -235,6 +235,13 @@ export default async function ServicePage({ params }: Props) {
                   </ul>
                 </Reveal>
               )}
+
+              {/* 依頼内容の一覧が無い事業は、右が空かないよう現場の写真（イメージ）を置く */}
+              {!service.menu && (
+                <Reveal delay={0.1} className="relative min-h-[18rem] overflow-hidden rounded-3xl shadow-card">
+                  <Image src={svcPhoto(service.slug, 3)} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
+                </Reveal>
+              )}
             </div>
 
             {sectionImages.length > 0 && (
@@ -314,29 +321,27 @@ export default async function ServicePage({ params }: Props) {
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead en="Strength" title={`${service.name}の特長`} />
-          <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-            <Reveal className="lg:sticky lg:top-28">
-              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
-                <Image src={svcPhoto(service.slug, 2)} alt="" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
-              </figure>
-              <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
-            </Reveal>
-            <ol className="grid gap-4">
-              {service.points.map((p, i) => (
-                <Reveal key={p.title} delay={i * 0.08}>
-                  <li className="flex gap-5 rounded-2xl border border-line bg-white p-6 shadow-card md:p-7">
-                    <span aria-hidden className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-pulse/10">
-                      <span className="h-2.5 w-2.5 rounded-full bg-gradient-to-br from-pulse to-aqua" />
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-bold leading-relaxed">{p.title}</h3>
-                      <p className="mt-2 text-sm leading-8 text-slate">{p.body}</p>
-                    </div>
-                  </li>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
+          {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
+          <Reveal>
+            <figure className="relative mt-12 aspect-[16/9] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
+              <Image src={svcPhoto(service.slug, 2)} alt="" fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
+              <figcaption className="absolute bottom-3 right-4 text-[0.65rem] text-white/80">※ 写真はイメージです</figcaption>
+            </figure>
+          </Reveal>
+          {/* 4つなら2×2（3列だと1枚だけ次の段に残り、右が空く） */}
+          <ol className={`mt-6 grid gap-5 md:grid-cols-2 ${service.points.length === 4 ? "" : "lg:grid-cols-3"}`}>
+            {service.points.map((p, i) => (
+              <Reveal key={p.title} delay={i * 0.08}>
+                <li className="h-full rounded-2xl border border-line bg-white p-7 shadow-card">
+                  <span aria-hidden className="flex h-10 w-10 items-center justify-center rounded-full bg-pulse/10">
+                    <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
+                  </span>
+                  <h3 className="mt-5 text-lg font-bold leading-relaxed">{p.title}</h3>
+                  <p className="mt-3 text-sm leading-8 text-slate">{p.body}</p>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 

@@ -5,7 +5,7 @@ import JsonLd from "@/components/JsonLd";
 import BlogList from "@/components/BlogList";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
-import { posts, displayDate } from "@/lib/blog";
+import { posts, displayDate, thumbOf } from "@/lib/blog";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
@@ -29,7 +29,7 @@ export default function BlogPage() {
     date: p.date,
     dateLabel: displayDate(p.date),
     readingMinutes: p.readingMinutes,
-    ...(p.eyecatch ? { eyecatch: p.eyecatch } : {}),
+    ...(thumbOf(p) ? { eyecatch: thumbOf(p) } : {}),
   }));
 
   return (
@@ -217,9 +217,9 @@ export default function BlogPage() {
                   className="group mt-8 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card transition-colors hover:border-pulse/40 lg:grid-cols-[1.1fr_1fr]"
                 >
                   <span className="relative block aspect-[16/10] overflow-hidden bg-mist lg:aspect-auto lg:min-h-[320px]">
-                    {lead.eyecatch ? (
+                    {thumbOf(lead) ? (
                       <Image
-                        src={lead.eyecatch}
+                        src={thumbOf(lead)!}
                         alt={`${lead.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 55vw"

@@ -21,6 +21,7 @@ import {
   displayDate,
   withToc,
   splitBody,
+  thumbOf,
 } from "@/lib/blog";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -191,10 +192,10 @@ export default async function BlogDetailPage({ params }: Props) {
             </p>
           </Reveal>
 
-          {post.eyecatch && (
+          {thumbOf(post) && (
             <figure className="mt-8 overflow-hidden rounded-3xl border border-line bg-mist md:mt-10">
                 <Image
-                  src={post.eyecatchWebp ?? post.eyecatch}
+                  src={thumbOf(post)!}
                   alt={post.title}
                   width={1200}
                   height={630}
@@ -440,9 +441,9 @@ export default async function BlogDetailPage({ params }: Props) {
                   className="group overflow-hidden rounded-3xl border border-line bg-raise transition-colors hover:border-pulse/40"
                 >
                   <div className="relative aspect-[16/9] overflow-hidden bg-mist">
-                    {r.eyecatch ? (
+                    {thumbOf(r) ? (
                       <Image
-                        src={r.eyecatch}
+                        src={thumbOf(r)!}
                         alt={`${r.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 640px) 100vw, 33vw"

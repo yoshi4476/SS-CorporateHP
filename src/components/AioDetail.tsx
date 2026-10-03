@@ -279,7 +279,8 @@ export default function AioDetail() {
           />
 
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
-            {/* 計測に使うツール */}
+            {/* 計測に使うツール。右の診断の列より短く左下が空くので、月次の報告の場面の写真（イメージ）を添える */}
+            <div className="grid gap-6">
             <Reveal className="overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
               <div className="border-b border-line p-7 md:p-8">
                 <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
@@ -312,6 +313,13 @@ export default function AioDetail() {
                 </ul>
               </div>
             </Reveal>
+            <Reveal delay={0.06}>
+              <figure className="relative aspect-[16/10] overflow-hidden rounded-3xl shadow-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/images/aio-report.webp" alt="月次の報告書を見ながら、次に直す所を決める打ち合わせのイメージ" loading="lazy" className="h-full w-full object-cover" />
+              </figure>
+            </Reveal>
+            </div>
 
             {/* 自社の無料診断ツール */}
             <div className="grid gap-4">

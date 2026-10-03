@@ -222,9 +222,11 @@ export default function CompanyPage() {
 
       {/* 概要表 */}
       <section className="py-20 md:py-28" aria-labelledby="profile-heading">
-        <div className="mx-auto max-w-5xl px-5">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead en="Profile" title="基本情報" />
-          <Reveal delay={0.1} className="mt-10 overflow-hidden rounded-2xl border border-line shadow-card">
+          {/* 表の右が空くので、オフィスとチームの写真（イメージ）を並べる */}
+          <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.35fr_1fr]">
+          <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line shadow-card">
             <table className="w-full border-collapse bg-white text-sm">
               <tbody>
                 {OVERVIEW.map((row) => (
@@ -241,6 +243,20 @@ export default function CompanyPage() {
               </tbody>
             </table>
           </Reveal>
+          <div className="grid gap-5 sm:grid-cols-2 lg:sticky lg:top-28 lg:grid-cols-1">
+            {[
+              { src: "/images/corp-office.webp", alt: "明るい受付と打ち合わせスペースのあるオフィスのイメージ" },
+              { src: "/images/corp-team.webp", alt: "立ち話で進め方を決めるチームのイメージ" },
+            ].map((im, i) => (
+              <Reveal key={im.src} delay={0.15 + i * 0.08}>
+                <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card">
+                  <Image src={im.src} alt={im.alt} fill sizes="(min-width: 1024px) 480px, 50vw" className="object-cover" />
+                </figure>
+              </Reveal>
+            ))}
+            <p className="text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+          </div>
+          </div>
         </div>
       </section>
 

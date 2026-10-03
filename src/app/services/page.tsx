@@ -217,7 +217,7 @@ export default function ServicesIndexPage() {
             title="自社で作って、自社で使っているもの"
             lead="受託だけでなく、当社が開発し、自社の現場で毎日動かしているプロダクトがあります。実物を見てからご判断ください。"
           />
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {PRODUCTS.map((p, i) => (
               <Reveal key={p.href} delay={i * 0.08}>
                 <Link

@@ -22,6 +22,7 @@ export type BlogPost = {
   categoryName: string; // 表示名
   eyecatch?: string;
   eyecatchWebp?: string; // 表示用（軽い）。OG画像は eyecatch（PNG）のまま
+  photo?: string; // 一覧・記事の頭に出す写真（管制塔の写真の棚から）。無ければ eyecatch を出す
   html: string; // 本文HTML（エンジンが生成）
   faq?: BlogFaq[];
   readingMinutes: number;
@@ -204,4 +205,9 @@ export function adjacentPosts(slug: string) {
 /** 2026.07.30 形式の表示用日付 */
 export function displayDate(iso: string) {
   return iso.replaceAll("-", ".");
+}
+
+/** 一覧・記事の頭に出す画像。写真があれば写真、無ければ文字のアイキャッチ */
+export function thumbOf(p: { photo?: string; eyecatchWebp?: string; eyecatch?: string }) {
+  return p.photo ?? p.eyecatchWebp ?? p.eyecatch;
 }
