@@ -46,27 +46,54 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
     return () => v.removeEventListener("timeupdate", tick);
   }, [still]);
 
+  // 動画はページの読み込みが終わってから読む（最初の画面は軽い静止画で出す）。
+  // 全画面の動画を先に読むと、スマホで主要部分が出るまで5秒かかっていた。スマホには小さい動画を渡す
+  const [src, setSrc] = useState<{ webm: string; mp4: string } | null>(null);
+  const [playing, setPlaying] = useState(false);
+  useEffect(() => {
+    if (still) return;
+    const small = window.matchMedia("(max-width: 900px)").matches;
+    const pick = () => setSrc(small ? { webm: "/videos/hero-m.webm", mp4: "/videos/hero-m.mp4" } : { webm: "/videos/hero.webm", mp4: "/videos/hero.mp4" });
+    const later = () => window.setTimeout(pick, 600);
+    if (document.readyState === "complete") later();
+    else window.addEventListener("load", later, { once: true });
+    return () => window.removeEventListener("load", later);
+  }, [still]);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || !src) return;
+    v.load();
+    v.play().catch(() => {});
+  }, [src]);
+
   const s = STORY[i];
   return (
     <>
-      {still ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src="/videos/hero-poster.webp" alt="朝の大阪の街並み" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition }} />
-      ) : (
+      {/* 最初に出す静止画（主要部分）。スマホは小さい版を読む */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/videos/hero-poster.webp"
+        srcSet="/videos/hero-poster-960.webp 960w, /videos/hero-poster.webp 1600w"
+        sizes="100vw"
+        alt="朝の大阪の街並み"
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition }}
+      />
+      {!still && (
         <video
           ref={ref}
-          className="absolute inset-0 h-full w-full object-cover"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
           style={{ objectPosition }}
-          poster="/videos/hero-poster.webp"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-hidden
+          onPlaying={() => setPlaying(true)}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
-          <source src="/videos/hero.mp4" type="video/mp4" />
+          {src && <source src={src.webm} type="video/webm" />}
+          {src && <source src={src.mp4} type="video/mp4" />}
         </video>
       )}
 

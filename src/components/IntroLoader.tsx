@@ -20,6 +20,8 @@ export default function IntroLoader() {
     const off = () => document.documentElement.classList.remove("ss-intro-pending");
     if (sessionStorage.getItem("ss-intro")) return off();
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return off();
+    // スマホでは出さない（初回の1.5秒、主要部分が隠れて表示が5秒かかっていた）
+    if (window.matchMedia("(max-width: 900px)").matches) return off();
     sessionStorage.setItem("ss-intro", "1");
     setState("count");
   }, []);

@@ -75,7 +75,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{if(location.pathname==='/'&&!sessionStorage.getItem('ss-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){" +
+              "try{if(location.pathname==='/'&&!sessionStorage.getItem('ss-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!matchMedia('(max-width: 900px)').matches){" +
               "document.documentElement.classList.add('ss-intro-pending');" +
               "setTimeout(function(){document.documentElement.classList.remove('ss-intro-pending')},3000);}}catch(e){}",
           }}
