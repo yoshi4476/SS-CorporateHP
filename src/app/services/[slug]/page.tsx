@@ -128,6 +128,19 @@ export default async function ServicePage({ params }: Props) {
                     <div className="mt-4">
                       <AioScan src="corp_aio_hero" />
                     </div>
+                    {/* AIからこのページに来る人が最も多い（直近28日で11件）が、問い合わせは0件だった。
+                        URLを入れる診断より軽い「AIに自社が出るか」の入口を並べる（2026-10-04） */}
+                    <p className="mt-4 text-xs leading-6 text-slate">
+                      ChatGPT などに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら
+                      <a
+                        href={`${site.labUrl}tools/ai-check/?utm_source=corp&utm_medium=referral&utm_campaign=corp_aio_hero`}
+                        target="_blank"
+                        rel="noopener"
+                        className="mx-1 font-bold text-pulse underline-offset-4 hover:underline"
+                      >
+                        AI診断（地域と業種を選ぶだけ・無料）↗
+                      </a>
+                    </p>
                     <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">
                       話を聞いてから決めたい方は
                       <Link href="/contact" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">

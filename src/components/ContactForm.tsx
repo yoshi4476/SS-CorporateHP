@@ -44,8 +44,34 @@ export default function ContactForm() {
     }
   }, []);
 
+  // 送らずに離れた人が、どの欄で止まったか（form_abandon・最後に触った欄つき）。
+  // 開いた8人のうち送ったのは1人だったが、どこで止まったかが分からず直しようがなかった（2026-10-04）
+  const lastField = useRef("");
+  const submitted = useRef(false);
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const onFocus = (e: FocusEvent) => {
+      const t = e.target as HTMLInputElement | null;
+      if (t && t.name && t.name !== "website") lastField.current = t.name;
+    };
+    const onLeave = () => {
+      if (document.visibilityState === "hidden" && lastField.current && !submitted.current) {
+        track("form_abandon", { form_type: "contact", last_field: lastField.current });
+        lastField.current = "";             // 同じ人の離脱を2回数えない
+      }
+    };
+    form.addEventListener("focusin", onFocus);
+    document.addEventListener("visibilitychange", onLeave);
+    return () => {
+      form.removeEventListener("focusin", onFocus);
+      document.removeEventListener("visibilitychange", onLeave);
+    };
+  }, []);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    submitted.current = true;
     const fd = new FormData(e.currentTarget);
     const get = (k: string) => String(fd.get(k) ?? "").trim();
 
