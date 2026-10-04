@@ -31,6 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     })),
     { url: `${site.url}/blog`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${site.url}/research/ai-answers`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${site.url}/blog/theme`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
     ...themes.map((t) => ({
       url: `${site.url}/blog/theme/${t.slug}`,
