@@ -116,6 +116,8 @@ export default function ContactForm() {
           tel: get("tel"),
           service: serviceName,
           message: get("message"),
+          contact_way: get("contact_way"),
+          contact_when: get("contact_when"),
           // どのページから問い合わせたかを管制塔に残す（記事→問い合わせの対比に使う）
           referer: typeof window !== "undefined" ? window.location.href : "",
         }),
@@ -231,6 +233,28 @@ export default function ContactForm() {
           disabled={busy}
         />
       </label>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="grid gap-2 text-xs font-bold text-ink">
+          <LabelText text="希望の連絡方法 (任意)" />
+          <select name="contact_way" defaultValue="" className={inputCls} disabled={busy}>
+            <option value="">指定なし</option>
+            <option>メール</option>
+            <option>電話</option>
+            <option>オンライン面談</option>
+          </select>
+        </label>
+        <label className="grid gap-2 text-xs font-bold text-ink">
+          <LabelText text="相談したい時期 (任意)" />
+          <select name="contact_when" defaultValue="" className={inputCls} disabled={busy}>
+            <option value="">指定なし</option>
+            <option>すぐに</option>
+            <option>1か月以内</option>
+            <option>3か月以内</option>
+            <option>情報収集中</option>
+          </select>
+        </label>
+      </div>
 
       <label className="flex items-start gap-3 text-xs leading-6 text-slate">
         <input
