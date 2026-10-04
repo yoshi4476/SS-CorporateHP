@@ -10,6 +10,7 @@ import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } 
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
+import AioResearchData from "@/components/AioResearchData";
 import AioScan from "@/components/AioScan";
 import { services, getService } from "@/lib/services";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
@@ -437,6 +438,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* AIOページのみ: 背景・用語・実装層・測定・料金 */}
       {service.slug === "aio" && <AioDetail />}
+      {service.slug === "aio" && <AioResearchData />}
 
       {/* 補助金ページのみ: 要項・シミュレーション・スキーム・お金の流れ */}
       {service.slug === "ai-subsidy" && <SubsidyDetail />}
