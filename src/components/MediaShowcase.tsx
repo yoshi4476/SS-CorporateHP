@@ -76,7 +76,9 @@ export default function MediaShowcase() {
                     alt={`サービス資料 ${i + 1}ページ目`}
                     width={1600}
                     height={1131}
-                    loading={i < 3 ? "eager" : "lazy"}
+                    // この並びはページの下のほうにある。最初の3枚（計約400KB）を先に読むと、
+                    // 最初の画面の文章の表示が遅れていた（スマホで3.7〜4.3秒・2026-10-04）
+                    loading="lazy"
                     decoding="async"
                     className="w-[78%] max-w-[520px] shrink-0 snap-center rounded-xl border border-line"
                   />
