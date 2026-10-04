@@ -141,6 +141,26 @@ export default function Home() {
                   <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
                 </Link>
               </div>
+              {/* 目的から選ぶ入口。主力は AI検索・集客（AIO）なので先頭に大きく置く（2026-10-04）。
+                  AIから来る人の着地もAIOのページが最多だった */}
+              <div className="mt-7 grid max-w-lg gap-2 text-left">
+                <Link
+                  href="/services/aio"
+                  className="group block rounded-2xl border border-aqua/60 bg-white/10 px-5 py-4 backdrop-blur-sm transition-colors hover:border-aqua hover:bg-white/15"
+                >
+                  <span className="font-data text-[0.62rem] font-bold uppercase tracking-[0.16em] text-aqua">Main</span>
+                  <span className="mt-1 block text-base font-black">AI検索・集客（AIO・SEO）</span>
+                  <span className="mt-1 block text-xs leading-6 text-white/75">ChatGPT や Google のAIの答えに、御社が選ばれる状態をつくる →</span>
+                </Link>
+                <div className="grid grid-cols-2 gap-2">
+                  <Link href="/services/keiri-bpo" className="rounded-xl border border-white/25 px-4 py-3 text-xs font-bold text-white/90 transition-colors hover:border-aqua hover:text-aqua">
+                    経理BPO（経理の外注）→
+                  </Link>
+                  <Link href="/services/ai-subsidy" className="rounded-xl border border-white/25 px-4 py-3 text-xs font-bold text-white/90 transition-colors hover:border-aqua hover:text-aqua">
+                    AI導入補助金の申請 →
+                  </Link>
+                </div>
+              </div>
             </div>
             <div>
               <div className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
