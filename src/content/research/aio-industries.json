@@ -72,9 +72,9 @@
   {
    "name": "フィットネス・ジム",
    "questions": 50,
-   "lp": 23.4,
-   "lc": 53.1,
-   "oa": 98.2,
+   "lp": 20.5,
+   "lc": 57.7,
+   "oa": 80.0,
    "url": "https://ai.7senses.co.jp/research/fitness-ai-sources/"
   },
   {
@@ -88,9 +88,9 @@
   {
    "name": "ホテル・旅館",
    "questions": 50,
-   "lp": 47.0,
-   "lc": 20.0,
-   "oa": 57.5,
+   "lp": 41.8,
+   "lc": 22.1,
+   "oa": 57.9,
    "url": "https://ai.7senses.co.jp/research/hotel-ai-sources/"
   },
   {
@@ -104,9 +104,9 @@
   {
    "name": "介護事業所",
    "questions": 50,
-   "lp": 31.1,
-   "lc": 25.4,
-   "oa": 50.0,
+   "lp": 27.8,
+   "lc": 24.6,
+   "oa": 58.9,
    "url": "https://ai.7senses.co.jp/research/kaigo-ai-sources/"
   },
   {
@@ -138,15 +138,15 @@
    "questions": 50,
    "lp": 47.1,
    "lc": 40.7,
-   "oa": 100.0,
+   "oa": 98.4,
    "url": "https://ai.7senses.co.jp/research/gaiheki-ai-sources/"
   },
   {
    "name": "学習塾・スクール",
    "questions": 50,
-   "lp": 47.4,
-   "lc": 26.3,
-   "oa": 73.8,
+   "lp": 43.9,
+   "lc": 30.4,
+   "oa": 78.6,
    "url": "https://ai.7senses.co.jp/research/juku-ai-sources/"
   },
   {
@@ -184,16 +184,16 @@
   {
    "name": "美容室・サロン",
    "questions": 50,
-   "lp": 54.5,
-   "lc": 33.7,
-   "oa": 82.7,
+   "lp": 53.3,
+   "lc": 33.6,
+   "oa": 87.5,
    "url": "https://ai.7senses.co.jp/research/biyou-ai-sources/"
   },
   {
    "name": "自動車整備・販売",
    "questions": 50,
-   "lp": 38.4,
-   "lc": 40.8,
+   "lp": 34.4,
+   "lc": 45.0,
    "oa": 96.8,
    "url": "https://ai.7senses.co.jp/research/jidousha-ai-sources/"
   },
@@ -232,9 +232,9 @@
   {
    "name": "飲食店",
    "questions": 50,
-   "lp": 28.8,
-   "lc": 35.6,
-   "oa": 58.8,
+   "lp": 33.1,
+   "lc": 29.0,
+   "oa": 60.0,
    "url": "https://ai.7senses.co.jp/research/inshoku-ai-sources/"
   }
  ]

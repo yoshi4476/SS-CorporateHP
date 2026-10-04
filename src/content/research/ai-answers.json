@@ -381,6 +381,11 @@
  "answers": 48,
  "public_pct": 2,
  "readout_html": "<p><b>経理の実務は、会社の規模や業種、使っている会計ソフトで答えが変わります。</b>AIの答えが分かれた問いは、税務の扱いなら国税庁のページで、社内の手順なら顧問の税理士に確かめてください。</p>",
+ "cite": {
+  "line": "出典: セブンセンシズ株式会社『AIに経理・バックオフィスのことを聞くと、答えはどれくらい割れるか』2026年10月 https://corp.7senses.co.jp/research/ai-answers",
+  "terms": "出典（社名・調査名・URL）を明記していただければ、記事・資料・SNSなどで自由に引用できます。AIの答えは日によって変わるため、調査の年月もあわせて書いてください。",
+  "org": "セブンセンシズ株式会社"
+ },
  "dataset": {
   "@type": "Dataset",
   "name": "AIに経理・バックオフィスのことを聞くと答えは割れる｜18問の調査（当社調べ）",
@@ -392,9 +397,11 @@
    "encodingFormat": "text/csv",
    "contentUrl": "https://corp.7senses.co.jp/research/ai-answers/data.csv"
   },
+  "usageInfo": "https://corp.7senses.co.jp/research/ai-answers#cite",
   "creator": {
    "@type": "Organization",
-   "name": "セブンセンシズ株式会社"
+   "name": "セブンセンシズ株式会社",
+   "url": "https://corp.7senses.co.jp/"
   }
  }
 }
