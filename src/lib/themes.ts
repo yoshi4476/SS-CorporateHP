@@ -89,6 +89,19 @@ export function themeView(t: Theme): ThemeView | undefined {
 
 export const themes: ThemeView[] = THEMES.map(themeView).filter((t): t is ThemeView => Boolean(t));
 
+/**
+ * 検索結果に出す説明文。lead だけでは56〜79字で、Bing Webmaster Tools が100字未満を「短すぎる」と指摘した
+ * （2026-10-05）。このページに出ている事実（本数・まず読む1本）を、150字に収まる分だけ足す
+ */
+export function themeDescription(t: ThemeView): string {
+  let out = t.lead;
+  for (const s of [`記事${t.count}本を載せています。`, `まず読む1本は「${t.pillarPost.title}」です。`]) {
+    if (out.length >= 100) break;
+    if (out.length + s.length <= 150) out += s;
+  }
+  return out;
+}
+
 export function getTheme(slug: string) {
   return themes.find((t) => t.slug === slug);
 }

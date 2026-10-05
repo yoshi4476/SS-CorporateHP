@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { displayDate, thumbOf } from "@/lib/blog";
-import { themes, getTheme, themeFaq } from "@/lib/themes";
+import { themes, getTheme, themeFaq, themeDescription } from "@/lib/themes";
 import { breadcrumbSchema, faqSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
 import { site } from "@/lib/site";
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!t) return {};
   return pageMeta({
     title: `${t.name}の記事${t.count}本`,
-    description: t.lead,
+    description: themeDescription(t),
     path: `/blog/theme/${t.slug}`,
   });
 }
@@ -46,7 +46,7 @@ export default async function ThemePage({ params }: Props) {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
             name: `${t.name}の記事`,
-            description: t.lead,
+            description: themeDescription(t),
             url: `${site.url}/blog/theme/${t.slug}`,
             mainEntity: {
               "@type": "ItemList",

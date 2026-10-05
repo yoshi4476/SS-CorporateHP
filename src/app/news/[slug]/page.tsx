@@ -14,6 +14,19 @@ export function generateStaticParams() {
   return news.map((n) => ({ slug: n.slug }));
 }
 
+/**
+ * 本文の1文目だけでは71〜90字で、Bing Webmaster Tools が100字未満を「短すぎる」と指摘した（2026-10-05）。
+ * 本文を文の切れ目で125字まで使い、発信元と日付を添える
+ */
+function newsDescription(item: NonNullable<ReturnType<typeof getNews>>) {
+  let text = "";
+  for (const sentence of item.body.join("").split(/(?<=。)/)) {
+    if (text && (text + sentence).length > 125) break;
+    text += sentence;
+  }
+  return `${text.slice(0, 125)}（${item.date} セブンセンシズ株式会社）`;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const item = getNews(slug);
@@ -22,12 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: item.title,
     // 本文の1文目だけでは旧www側の同名ページと区別がつかないため、
     // 発信元と日付を添えて、どの会社のいつの発表かを明示する。
-    description: `${item.body[0].slice(0, 110)}（${item.date} セブンセンシズ株式会社）`,
+    description: newsDescription(item),
     alternates: { canonical: `/news/${item.slug}` },
     // お知らせにも OGP を持たせる（Ahrefs 2026-09-29: og:url が無い）
     openGraph: {
       title: `${item.title}｜セブンセンシズ`,
-      description: `${item.body[0].slice(0, 110)}（${item.date} セブンセンシズ株式会社）`,
+      description: newsDescription(item),
       url: `${site.url}/news/${item.slug}`,
       type: "article",
       images: [{ url: "/ogp.png" }],

@@ -36,7 +36,7 @@ import { pageMeta } from "@/lib/meta";
 export const metadata: Metadata = pageMeta({
   title: `${rakushift.name}｜月3,380円・初期費用0円`,
   description:
-    "ボタン1つでシフト作成がおわる、AIシフト管理クラウド。数理最適化AIが労働基準法を守ったシフトを数十秒で自動作成します。飲食店・小売店・医療介護施設向け。月額3,380円 (税込)・初期費用0円。",
+    "ボタン1つでシフト作成がおわる、AIシフト管理クラウド。数理最適化AIが労働基準法を守ったシフトを数十秒で自動作成します。飲食店・小売店・医療介護施設向け。月額3,380円 (税込)・初期費用0円。シフト表づくりに毎月時間を取られている管理者の方へ。",
   path: "/rakushift",
   image: "/images/rakushift/dashboard.jpg",
 });
