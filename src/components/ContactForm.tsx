@@ -46,26 +46,39 @@ export default function ContactForm() {
 
   // 送らずに離れた人が、どの欄で止まったか（form_abandon・最後に触った欄つき）。
   // 開いた8人のうち送ったのは1人だったが、どこで止まったかが分からず直しようがなかった（2026-10-04）
+  // 名前と params は管制塔の site.js（form_start / form_abandon）に揃え、3サイトを同じ集計で読む
   const lastField = useRef("");
   const submitted = useRef(false);
   useEffect(() => {
     const form = formRef.current;
     if (!form) return;
+    let abandoned = false;
     const onFocus = (e: FocusEvent) => {
       const t = e.target as HTMLInputElement | null;
-      if (t && t.name && t.name !== "website") lastField.current = t.name;
+      if (!t || !t.name || t.name === "website" || t.type === "hidden") return;
+      // 開いた数（page_view）と、書き始めた数を分けて見るため
+      if (!lastField.current) track("form_start", { form_type: "contact" });
+      lastField.current = t.name;
     };
-    const onLeave = () => {
-      if (document.visibilityState === "hidden" && lastField.current && !submitted.current) {
-        track("form_abandon", { form_type: "contact", last_field: lastField.current });
-        lastField.current = "";             // 同じ人の離脱を2回数えない
-      }
+    // スマホではタブを閉じても pagehide が来ないことがあるため visibilitychange でも拾い、1回だけ送る
+    const abandon = () => {
+      if (abandoned || !lastField.current || submitted.current) return;
+      abandoned = true;
+      track("form_abandon", { form_type: "contact", last_field: lastField.current });
+    };
+    const onLeave = (e: Event) => {
+      if (e.type === "visibilitychange" && document.visibilityState !== "hidden") return;
+      abandon();
     };
     form.addEventListener("focusin", onFocus);
     document.addEventListener("visibilitychange", onLeave);
+    window.addEventListener("pagehide", onLeave);
     return () => {
       form.removeEventListener("focusin", onFocus);
       document.removeEventListener("visibilitychange", onLeave);
+      window.removeEventListener("pagehide", onLeave);
+      // ヘッダーのリンクなどサイト内の移動はページを読み直さず、pagehide が来ない
+      abandon();
     };
   }, []);
 
