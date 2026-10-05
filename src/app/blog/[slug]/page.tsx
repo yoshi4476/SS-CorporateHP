@@ -13,6 +13,7 @@ import { CtaBand } from "@/components/ui";
 import { sheet } from "@/lib/bpo";
 import { services } from "@/lib/services";
 import { StickyCta } from "@/components/LpCta";
+import InlineToolBox from "@/components/InlineToolBox";
 import {
   posts,
   getPost,
@@ -21,6 +22,8 @@ import {
   displayDate,
   withToc,
   splitBody,
+  splitAfterLead,
+  wantsKeiriCheck,
   thumbOf,
 } from "@/lib/blog";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -81,6 +84,8 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const { html, headings } = withToc(post.html);
   const [bodyHead, bodyTail] = splitBody(html);
+  // 最初の節の1文結論の直後に、セルフチェックの入口を1つだけ置く
+  const leadSplit = wantsKeiriCheck(post) ? splitAfterLead(bodyHead) : null;
   // 記事のテーマに合う事業へ渡す。法対応の記事も、行き着く先は外注の判断
   const pick = post.category === "backoffice" ? "ai-consulting" : "keiri-bpo";
   const svc = services.find((s) => s.slug === pick);
@@ -248,8 +253,14 @@ export default async function BlogDetailPage({ params }: Props) {
             />
             <div
               className="article-body article-body-lead mt-10 border-t border-line pt-10 lg:mt-0"
-              dangerouslySetInnerHTML={{ __html: bodyHead }}
+              dangerouslySetInnerHTML={{ __html: leadSplit ? leadSplit[0] : bodyHead }}
             />
+            {leadSplit && (
+              <>
+                <InlineToolBox from={`/blog/${post.slug}`} />
+                <div className="article-body" dangerouslySetInnerHTML={{ __html: leadSplit[1] }} />
+              </>
+            )}
 
             {/* 読み進めている途中で、記事のテーマに合う事業へ渡す。
                 末尾のオファーだけでは読み切った人にしか届かない */}

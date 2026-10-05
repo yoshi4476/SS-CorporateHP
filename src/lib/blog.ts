@@ -114,6 +114,30 @@ export function splitBody(html: string): [string, string] {
   return [html.slice(0, cut), html.slice(cut)];
 }
 
+/**
+ * 最初のH2の節で、1文結論の段落の直後で割る。セルフチェックの入口を置くため。
+ * 見出しの直後が段落でない記事は、結論の位置が決まらないので割らない（null）。
+ * 見出しを越えて次の </h2> まで伸びないよう、最初のH2の中だけを見る。
+ */
+export function splitAfterLead(html: string): [string, string] | null {
+  const start = html.search(/<h2[\s>]/);
+  if (start < 0) return null;
+  const m = /^<h2[^>]*>(?:(?!<\/h2>)[\s\S])*<\/h2>\s*<p[\s>](?:(?!<\/p>)[\s\S])*<\/p>/.exec(html.slice(start));
+  if (!m) return null;
+  const end = start + m[0].length;
+  return [html.slice(0, end), html.slice(end)];
+}
+
+// 経理のセルフチェックを置く記事。カテゴリが経理の記事は全部、
+// それ以外（バックオフィス効率化など）は題名が経理の作業を扱うものだけ。
+// 店舗の事務をAIで減らす記事のような、経理の外注判断と関係の薄い記事には出さない
+const KEIRI_CATEGORIES = new Set(["keiri-bpo", "keiri-jitsumu"]);
+const KEIRI_TOPIC = /経理|記帳|仕訳|帳簿|請求書|支払|経費|決算|BPO|管理部門|バックオフィス/;
+
+export function wantsKeiriCheck(p: Pick<BlogPost, "category" | "title">): boolean {
+  return KEIRI_CATEGORIES.has(p.category) || KEIRI_TOPIC.test(p.title);
+}
+
 export function withToc(html: string): { html: string; headings: Heading[] } {
   const headings: Heading[] = [];
   let seq = 0;
