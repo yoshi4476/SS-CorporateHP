@@ -275,7 +275,7 @@ export default function AioDetail() {
           <SectionHead
             en="Tools"
             title="使用するツール"
-            lead="推測ではなく==実測==で運用します。計測はGoogle公式ツールで行い、現在地の把握には自社開発の無料セルフチェックを使います。"
+            lead="推測ではなく==実測==で運用します。計測はGoogle公式ツールで行い、現在地の把握には当社が公開している無料セルフチェック（開発：YW／CONFLUX PARTNERS）を使います。"
           />
 
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.15fr_1fr]">
@@ -325,7 +325,7 @@ export default function AioDetail() {
             <div className="grid gap-4">
               <Reveal delay={0.08}>
                 <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Free Diagnostics</p>
-                <h3 className="mt-2 text-lg font-bold">自社開発の無料セルフチェック</h3>
+                <h3 className="mt-2 text-lg font-bold">当社の無料セルフチェック</h3>
                 <p className="mt-3 text-xs leading-7 text-slate">
                   運営メディア「AI集客ラボ」で公開しています。登録不要・その場で結果が出ます。
                 </p>

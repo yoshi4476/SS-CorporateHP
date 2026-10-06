@@ -194,7 +194,7 @@ export const automation: { name: string; role: string; detail: string }[] = [
 export const monitored: string[] = ["AI Overview", "ChatGPT", "Perplexity", "Gemini"];
 
 /**
- * 自社で開発・公開している無料ツール（AI集客ラボ ai.7senses.co.jp/tools/ と同じ名前・同じ並び）。
+ * 当社が公開している無料ツール（開発は YW／CONFLUX PARTNERS。AI集客ラボ ai.7senses.co.jp/tools/ と同じ名前・同じ並び）。
  * URLを入れる「URL診断」は AioScan とヘッダーが先頭に置く。名前は AI集客ラボの tools_catalog.py に合わせる
  */
 const LAB = "https://ai.7senses.co.jp";
