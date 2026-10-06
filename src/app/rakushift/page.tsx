@@ -30,6 +30,8 @@ import {
   faq,
 } from "@/lib/rakushift";
 import { breadcrumbSchema } from "@/lib/schema";
+import DeveloperCredit from "@/components/DeveloperCredit";
+import { creatorLd } from "@/lib/developer";
 import { site } from "@/lib/site";
 import { pageMeta } from "@/lib/meta";
 
@@ -73,6 +75,7 @@ export default function RakushiftPage() {
     url: rakushift.url,
     description: rakushift.summary,
     publisher: { "@id": `${site.url}/#organization` },
+    creator: creatorLd("rakushift"),
     screenshot: `${site.url}/images/rakushift/shift-table-2.jpg`,
     offers: plans.map((p) => ({
       "@type": "Offer",
@@ -649,6 +652,8 @@ export default function RakushiftPage() {
           </Reveal>
         </div>
       </section>
+
+      <DeveloperCredit product="rakushift" />
 
       <StickyCta label="無料相談" note="初期費用0円・相談は無料です" />
     </>

@@ -117,6 +117,13 @@ export default async function NewsDetailPage({ params }: Props) {
                   {p}
                 </p>
               ))}
+              {item.link && (
+                <p className="text-sm leading-9 md:text-base">
+                  <a href={item.link.url} target="_blank" rel="noopener" className="font-bold text-pulse underline underline-offset-4">
+                    {item.link.label} ↗
+                  </a>
+                </p>
+              )}
             </div>
             <Link
               href="/news"

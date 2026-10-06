@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
+import DeveloperCredit from "@/components/DeveloperCredit";
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
@@ -330,6 +331,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 経理BPOだけ: 任せるか自社で使うかを、悩みの直後に選ばせる */}
       {service.slug === "keiri-bpo" && <KeiriTwoTracks />}
+      {service.slug === "keiri-bpo" && <DeveloperCredit product="keiri" label="経理システム（セルフ版）" />}
 
       {/* 特長 */}
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">

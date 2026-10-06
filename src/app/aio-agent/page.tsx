@@ -6,6 +6,8 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, FaqList, FlowSteps } from "@/components/ui";
 import { StickyCta, MidCta } from "@/components/LpCta";
+import DeveloperCredit from "@/components/DeveloperCredit";
+import { creatorLd } from "@/lib/developer";
 import {
   pipeline,
   problems,
@@ -41,6 +43,7 @@ export default function MediaPipelinePage() {
     alternateName: pipeline.nameEn,
     serviceType: "オウンドメディア構築・SEO/AIO運用自動化",
     provider: { "@id": `${site.url}/#organization` },
+    creator: creatorLd("aio-agent"),
     areaServed: "JP",
     description: pipeline.summary,
     url: `${site.url}/aio-agent`,
@@ -469,6 +472,8 @@ export default function MediaPipelinePage() {
           </Reveal>
         </div>
       </section>
+
+      <DeveloperCredit product="aio-agent" />
 
       <StickyCta label="無料相談" note="相談は無料・売り込みはしません" />
     </>

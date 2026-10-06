@@ -5,10 +5,24 @@ export type NewsItem = {
   category: "お知らせ" | "制度" | "事業";
   title: string;
   body: string[];
+  /** 本文の後に出す外部の参照（開発元のプレスリリースなど） */
+  link?: { label: string; url: string };
 };
 
 // 日付は旧サイト掲載時の実日付
 export const news: NewsItem[] = [
+  {
+    slug: "rakushift-ai-development",
+    date: "2026.10.06",
+    dateISO: "2026-10-06",
+    category: "事業",
+    title: "「ラクシフトAI」の開発について",
+    body: [
+      "当社が提供しているシフト自動作成システム「ラクシフトAI」は、YW（CONFLUX PARTNERS）が株式会社モチクロと共同で開発しました。",
+      "開発の経緯は、開発元のプレスリリースをご覧ください。",
+    ],
+    link: { label: "開発元のプレスリリース（CONFLUX PARTNERS）", url: "https://conflux-partners.jp/press/rakushift-ai" },
+  },
   {
     slug: "axis-security-pack",
     date: "2026.09.02",
