@@ -8,6 +8,7 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
 import DeveloperCredit from "@/components/DeveloperCredit";
+import { creatorLd } from "@/lib/developer";
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
 import AioDetail from "@/components/AioDetail";
@@ -64,6 +65,18 @@ export default async function ServicePage({ params }: Props) {
     : [];
   const schemas = [
     serviceSchema(service.slug),
+    service.slug === "keiri-bpo" && {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: "経理システム（セルフ版）",
+      applicationCategory: "BusinessApplication",
+      applicationSubCategory: "会計・経理",
+      operatingSystem: "Web",
+      url: `${site.url}/services/keiri-bpo`,
+      description: "受け取った書類から仕訳の案を作り、担当者が確認して確定するまでを1か所にまとめた経理システム。給与・賞与・年末調整、請求と入金の消込まで同じ場所で扱える。",
+      publisher: { "@id": `${site.url}/#organization` },
+      creator: creatorLd("keiri"),
+    },
     faqSchema(service.faq),
     breadcrumbSchema([
       { name: "トップ", path: "/" },

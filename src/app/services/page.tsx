@@ -37,7 +37,7 @@ const PRODUCTS = [
     en: "Accounting System — セルフ版",
     name: "経理システム（セルフ版）",
     catch: "記帳から給与・年末調整まで、1か所で完結する経理システム",
-    body: "経理BPOをお引き受けするために自社で開発している業務システムです。受け取った書類から仕訳の案を作り、担当者が確認して確定するまでを1か所にまとめています。給与・賞与・年末調整、請求と入金の消込まで同じ場所で扱えます。",
+    body: "経理BPOをお引き受けするために使っている業務システムです（開発：YW／CONFLUX PARTNERS）。受け取った書類から仕訳の案を作り、担当者が確認して確定するまでを1か所にまとめています。給与・賞与・年末調整、請求と入金の消込まで同じ場所で扱えます。",
     price: "経理BPOに付帯",
   },
 ];
@@ -214,8 +214,8 @@ export default function ServicesIndexPage() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             en="Products"
-            title="自社で作って、自社で使っているもの"
-            lead="受託だけでなく、当社が開発し、自社の現場で毎日動かしているプロダクトがあります。実物を見てからご判断ください。"
+            title="自社の現場で、毎日使っているもの"
+            lead="受託だけでなく、当社が提供し、自社の現場で毎日動かしているプロダクトがあります（開発：YW／CONFLUX PARTNERS）。実物を見てからご判断ください。"
           />
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {PRODUCTS.map((p, i) => (
