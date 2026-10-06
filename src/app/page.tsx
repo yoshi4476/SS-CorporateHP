@@ -570,6 +570,7 @@ export default function Home() {
 
                   <p className="mt-5 text-xs leading-7 text-slate">{cs.body}</p>
 
+                  {cs.voice && (
                   <figure className="mt-auto border-t border-line pt-5">
                     <blockquote className="text-xs leading-7 text-ink">
                       <span className="font-data mr-1.5 text-base font-bold text-pulse">&ldquo;</span>
@@ -577,6 +578,7 @@ export default function Home() {
                     </blockquote>
                     <figcaption className="mt-2.5 text-[0.62rem] text-slate">— {cs.industry} ご担当者様</figcaption>
                   </figure>
+                  )}
                   </div>
                 </article>
               </Reveal>
