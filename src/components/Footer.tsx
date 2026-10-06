@@ -4,6 +4,12 @@ import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { site } from "@/lib/site";
 
+// 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、nofollow も付けない
+const credits = [
+  { label: "サイト制作：YW（CONFLUX PARTNERS）", href: "https://conflux-partners.jp/works/7senses-corp" },
+  { label: "顧問：YW（AI × 経営コンサルタント）", href: "https://conflux-partners.jp/about" },
+];
+
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-ink text-white">
@@ -175,6 +181,20 @@ export default function Footer() {
             </li>
           </ul>
         </div>
+        <ul className="mx-auto grid max-w-7xl list-none gap-0 px-5 pb-6 text-xs text-white/60 md:gap-1" aria-label="制作・顧問">
+          {credits.map((c) => (
+            <li key={c.href}>
+              <a
+                href={c.href}
+                target="_blank"
+                rel="noopener"
+                className="tap underline underline-offset-4 transition-colors hover:text-white"
+              >
+                {c.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </footer>
   );
