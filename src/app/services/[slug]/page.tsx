@@ -9,6 +9,8 @@ import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, StatTile, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
 import { StageDiagram, ScopeTable } from "@/components/ServiceFigures";
+import KeiriMonthFlow from "@/components/KeiriMonthFlow";
+import KeiriCompare from "@/components/KeiriCompare";
 import DeveloperCredit from "@/components/DeveloperCredit";
 import { creatorLd } from "@/lib/developer";
 import { IndustryBars, RankTable } from "@/components/charts";
@@ -328,6 +330,28 @@ export default async function ServicePage({ params }: Props) {
         </section>
       )}
 
+      {/* 経理BPOだけ: どこまで任せられるか（FAQの1問目）に、1か月の流れの図と「できること・できないこと」で先に答える。
+          記事から来る人がいちばん知りたいのはここ */}
+      {service.slug === "keiri-bpo" && (
+        <section id="scope" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="scope-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              id="scope-heading"
+              title="どこまで任せられるか"
+              lead="1か月の経理の流れに沿って、当社が引き受ける作業と、御社・専門家に残る作業を分けました。切り分ける軸は==社内にしか無い情報が要るかどうか==です。"
+            />
+            <Reveal className="mt-12">
+              <KeiriMonthFlow />
+            </Reveal>
+            {scope && (
+              <div className="mt-12">
+                <ScopeTable name={service.name} scope={scope} />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* こんなお悩みありませんか */}
       <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading">
         <div className="mx-auto max-w-7xl px-5">
@@ -362,7 +386,23 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
-      {/* 経理BPOだけ: 任せるか自社で使うかを、悩みの直後に選ばせる */}
+      {/* 経理BPOだけ: 採用・派遣・外注を同じ軸で比べてから、任せるか自社で使うかを選ばせる */}
+      {service.slug === "keiri-bpo" && (
+        <section id="compare" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="compare-heading">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              id="compare-heading"
+              title="採用・派遣・外注を比べる"
+              lead="経理の手を確保する方法は、採用だけではありません。自社で担当・派遣やパート・外注の3つを、指示・属人化・繁忙期・確認の体制で比べました。"
+            />
+            <Reveal className="mt-12">
+              <KeiriCompare />
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* 経理BPOだけ: 任せるか自社で使うかを、比較の直後に選ばせる */}
       {service.slug === "keiri-bpo" && <KeiriTwoTracks />}
       {service.slug === "keiri-bpo" && <DeveloperCredit product="keiri" label="経理システム（セルフ版）" />}
 
@@ -536,8 +576,9 @@ export default async function ServicePage({ params }: Props) {
       {/* AIO運用代行のみ: 動画2本と資料をまとめた区画 */}
       {service.slug === "aio" && <MediaShowcase />}
 
-      {/* できること・できないこと。進め方と同じ面にして、範囲 → 進め方 の順で読ませる */}
-      {scope && (
+      {/* できること・できないこと（経理BPOは上の「どこまで任せられるか」に置いている）。
+          進め方と同じ面にして、範囲 → 進め方 の順で読ませる */}
+      {service.slug !== "keiri-bpo" && scope && (
         <section
           id="scope"
           className={`scroll-mt-24 border-t border-line pt-20 md:pt-24 ${service.slug === "meo" ? "bg-mist" : ""}`}
