@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* Windows の游ゴシックは名前で呼ぶと細い Regular になり、本文が薄く読みにくかった。
+   Medium を通常の太さ、Bold を太字として同じ名前に束ねる。端末のフォントを呼ぶだけでファイルは読まない（local() のみ） */
+@font-face {
+  font-family: "YuGothicM";
+  src: local("Yu Gothic Medium"), local("YuGothic-Medium");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "YuGothicM";
+  src: local("Yu Gothic Bold"), local("YuGothic-Bold");
+  font-weight: 700;
+}
+
 /* 配色 — 白 × 紺。
    清潔感は白と余白で、厳格さは彩度を落とした紺と細い罫線で作る。
    以前の電光ブルーとシアンは彩度が高く軽い印象になるため、
@@ -30,9 +44,9 @@
   /* 金の淡い面 (gold-tint) の上に小さい文字を置くとき用。gold では 4.35:1 で基準を割る */
   --color-gold-deep: #8a5214;
 
-  --font-display: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
-  --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
-  --font-data: var(--font-grotesk), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --font-display: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
+  --font-data: var(--font-grotesk), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
 
   /* 影は浮かせるためではなく、紙が重なっている程度に留める。
      区切りは影ではなく罫線 (--color-line) で作る。 */
