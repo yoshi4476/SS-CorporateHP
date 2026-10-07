@@ -109,6 +109,38 @@ function LabelText({ text, required = false }: { text: string; required?: boolea
 
 type State = "idle" | "sending" | "sent" | "error";
 
+// 選択肢と、受信側へ送る表示名を1つの表で持つ。以前は選択肢と表示名の対応表が別々で、
+// 経理の2つ（keiri-self・keiri-shindan）が対応表に無く、選んで送ると「ご相談内容」が空欄で届いていた
+const OPTIONS: { value: string; label: string }[] = [
+  { value: "keiri-self", label: "経理システム（セルフ版）" },
+  { value: "keiri-shindan", label: "経理の現状分析（無料）" },
+  ...services.map((s) => ({ value: s.slug, label: s.name })),
+  // 自社プロダクト。どちらの問い合わせか受信側で分かるようにする
+  { value: "rakushift", label: "ラクシフトAI (シフト自動作成)" },
+  { value: "aio-agent", label: "AIO（SEO）対策エージェント" },
+  { value: "all", label: "まとめて相談したい" },
+  { value: "other", label: "その他・まだ決まっていない" },
+];
+
+// ?s= の値が選択肢に無いとき（古い記事・外部からのリンク）に寄せる先。選ばれないまま開くと、
+// 必須の選択なので送る前にもう一度選ばされていた。どれにも当たらなければ「その他」を選んでおく
+const NEAR: [RegExp, string][] = [
+  [/^(keiri|bpo|kicho|accounting)/, "keiri-bpo"],
+  [/(subsidy|hojokin)/, "ai-subsidy"],
+  [/^(aio|seo|llmo|geo|owned)/, "aio"],
+  [/^(meo|map)/, "meo"],
+  [/^(web|hp|lp)/, "web-production"],
+  [/^(system|dev)/, "system-development"],
+  [/consult/, "ai-consulting"],
+  [/shift/, "rakushift"],
+];
+
+function pickOption(want: string): string {
+  if (!want) return "";
+  if (OPTIONS.some((o) => o.value === want)) return want;
+  return NEAR.find(([re]) => re.test(want))?.[1] ?? "other";
+}
+
 export default function ContactForm() {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -118,12 +150,10 @@ export default function ContactForm() {
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
   // 選び直させると1手増えるので、初期値を入れておく。
   useEffect(() => {
-    const want = new URLSearchParams(window.location.search).get("s");
-    if (!want) return;
+    const pick = pickOption((new URLSearchParams(window.location.search).get("s") ?? "").trim().toLowerCase());
+    if (!pick) return;
     const sel = formRef.current?.elements.namedItem("service");
-    if (sel instanceof HTMLSelectElement && [...sel.options].some((o) => o.value === want)) {
-      sel.value = want;
-    }
+    if (sel instanceof HTMLSelectElement) sel.value = pick;
   }, []);
 
   // 送らずに離れた人が、どの欄で止まったか（form_abandon・最後に触った欄つき）。
@@ -186,15 +216,9 @@ export default function ContactForm() {
     setState("sending");
     setErrorMsg("");
 
-    // 受信側には表示名で届ける。選択肢を足したらここも足すこと (漏れると空欄で届く)
-    const EXTRA: Record<string, string> = {
-      rakushift: "ラクシフトAI (シフト自動作成)",
-      "aio-agent": "AIO（SEO）対策エージェント",
-      all: "まとめて相談したい",
-      other: "その他・まだ決まっていない",
-    };
+    // 受信側には表示名で届ける（選択肢と同じ表から引くので、選べるものは必ず名前が付く）
     const slug = get("service");
-    const serviceName = services.find((s) => s.slug === slug)?.name ?? EXTRA[slug] ?? "";
+    const serviceName = OPTIONS.find((o) => o.value === slug)?.label ?? slug;
 
     try {
       const res = await fetch(site.gasEndpoint, {
@@ -305,18 +329,11 @@ export default function ContactForm() {
           <option value="" disabled>
             選択してください
           </option>
-          <option value="keiri-self">経理システム（セルフ版）</option>
-          <option value="keiri-shindan">経理の現状分析（無料）</option>
-          {services.map((s) => (
-            <option key={s.slug} value={s.slug}>
-              {s.name}
+          {OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
             </option>
           ))}
-          {/* 自社プロダクト。どちらの問い合わせか受信側で分かるようにする */}
-          <option value="rakushift">ラクシフトAI (シフト自動作成)</option>
-          <option value="aio-agent">AIO（SEO）対策エージェント</option>
-          <option value="all">まとめて相談したい</option>
-          <option value="other">その他・まだ決まっていない</option>
         </select>
       </label>
 
