@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import BlogList from "@/components/BlogList";
+import ResearchBand from "@/components/ResearchBand";
 import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
 
@@ -310,6 +311,9 @@ export default function BlogPage() {
           )}
         </div>
       </section>
+
+      {/* 調査の要点（記事から作った問いを、AIに聞いた結果）。一覧を見終えた人に、記事とは別の入口として出す */}
+      <ResearchBand />
 
       {/* このメディアについて + 活用ステップ */}
       <section className="relative overflow-hidden border-t border-line bg-ink py-20 text-white md:py-28" aria-labelledby="about-heading">

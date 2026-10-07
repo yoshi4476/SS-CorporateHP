@@ -11,6 +11,7 @@ import { SectionHead, StatTile, FaqList, CtaBand, Rich, RichLinked } from "@/com
 import { StageDiagram, ScopeTable } from "@/components/ServiceFigures";
 import KeiriMonthFlow from "@/components/KeiriMonthFlow";
 import KeiriCompare from "@/components/KeiriCompare";
+import ResearchBand from "@/components/ResearchBand";
 import DeveloperCredit from "@/components/DeveloperCredit";
 import { creatorLd } from "@/lib/developer";
 import { IndustryBars, RankTable } from "@/components/charts";
@@ -575,6 +576,14 @@ export default async function ServicePage({ params }: Props) {
 
       {/* AIO運用代行のみ: 動画2本と資料をまとめた区画 */}
       {service.slug === "aio" && <MediaShowcase />}
+
+      {/* 経理BPOだけ: 調査の要点（AIに聞いても答えが条件で割れる）から、まず現状を伺う流れへつなぐ */}
+      {service.slug === "keiri-bpo" && (
+        <ResearchBand
+          tone="dark"
+          note="どこまでを外に出せるかも、会社の条件で変わります。当社が範囲を決める前に現状を伺うのは、そのためです。"
+        />
+      )}
 
       {/* できること・できないこと（経理BPOは上の「どこまで任せられるか」に置いている）。
           進め方と同じ面にして、範囲 → 進め方 の順で読ませる */}
