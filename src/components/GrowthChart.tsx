@@ -31,7 +31,8 @@ export default function GrowthChart() {
     <figure className="w-full">
       <figcaption className="mb-1 text-sm font-bold text-ink">
         MEO運用 累計支援店舗数の推移
-        <span className="ml-2 text-xs font-normal text-slate">(社)</span>
+        {/* 終点の「3,200店舗」と単位をそろえる（以前は (社)・「累計 ◯社」と書いていた） */}
+        <span className="ml-2 text-xs font-normal text-slate">(店舗)</span>
       </figcaption>
       <svg
         viewBox={`0 0 ${W} ${H}`}
@@ -110,7 +111,7 @@ export default function GrowthChart() {
                 {DATA[hover].year}年
               </text>
               <text x="12" y="35" fontSize="14" fontWeight="700" fill="#fff" className="num">
-                累計 {DATA[hover].total.toLocaleString()}社
+                累計 {DATA[hover].total.toLocaleString()}店舗
               </text>
             </g>
           </g>
