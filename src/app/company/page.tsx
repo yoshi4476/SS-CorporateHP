@@ -4,7 +4,7 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
 import { SectionHead, CtaBand } from "@/components/ui";
-import { services } from "@/lib/services";
+import { services, areas } from "@/lib/services";
 import { pageMeta } from "@/lib/meta";
 import { breadcrumbSchema } from "@/lib/schema";
 import MapFacade from "@/components/MapFacade";
@@ -71,13 +71,32 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   { label: "営業時間", value: site.hours },
   { label: "取引銀行", value: site.banks },
   {
+    // 7つを1列に並べるだけだと、何の事業がいくつあるのか見えなかった。トップの全体像の図と同じ3つの領域で束ね、各事業へリンクする
     label: "事業内容",
     value: (
-      <ul className="grid gap-1.5">
-        {services.map((s) => (
-          <li key={s.slug}>{s.name}</li>
+      <dl className="grid gap-3">
+        {areas.map((a) => (
+          <div key={a.group}>
+            <dt className="text-xs font-bold text-gold-deep">
+              {a.name}
+              <span className="ml-2 font-medium text-slate">{a.purpose}</span>
+            </dt>
+            <dd>
+              <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+                {services
+                  .filter((s) => s.group === a.group)
+                  .map((s) => (
+                    <li key={s.slug}>
+                      <Link href={`/services/${s.slug}`} className="text-pulse underline-offset-4 hover:underline">
+                        {s.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </dd>
+          </div>
         ))}
-      </ul>
+      </dl>
     ),
   },
 ];
