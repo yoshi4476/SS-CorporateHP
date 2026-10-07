@@ -397,7 +397,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 取り組み例 */}
       {service.examples && (
-        <section className="border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
+        <section id="examples" className="scroll-mt-24 border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               en="Examples"

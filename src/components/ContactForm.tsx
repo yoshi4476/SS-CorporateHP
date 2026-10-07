@@ -7,8 +7,89 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { services } from "@/lib/services";
+import { sheet } from "@/lib/bpo";
 import { site } from "@/lib/site";
 import { track } from "@/components/Tracking";
+
+/**
+ * 送信後に出す「ご返信までの間に」。以前の完了表示は電話番号だけで、送った人の次の一歩が無かった。
+ * 選んだ相談内容に近いもの（ツール・資料・事例）を出す。どれも無料で、相談の準備に使えるものに限る。
+ */
+type Step = { kind: "ツール" | "資料" | "事例"; title: string; body: string; href: string; download?: boolean; external?: boolean };
+
+const LAB = "https://ai.7senses.co.jp";
+const WEB_SLUGS = new Set(["meo", "aio", "web-production", "aio-agent"]);
+
+function caseStep(slug: string): Step {
+  // 事業ページに取り組み例があればそこへ。無い事業は会社全体の事例（トップ）へ
+  const svc = services.find((s) => s.slug === slug && s.examples?.length);
+  return svc
+    ? { kind: "事例", title: `${svc.name}の取り組み例`, body: "どんな状況で、何をして、どう変わったかをまとめています。", href: `/services/${svc.slug}#examples` }
+    : { kind: "事例", title: "支援の事例（3つの現場）", body: "規模も業種も違う3社で、何をして数字がどう動いたかをまとめています。", href: "/#cases" };
+}
+
+function nextSteps(slug: string): Step[] {
+  if (WEB_SLUGS.has(slug)) {
+    return [
+      { kind: "ツール", title: "URL診断（サイトの14項目を採点）", body: "AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。", href: `${LAB}/tools/url-check/?src=corp_contact_done`, external: true },
+      { kind: "資料", title: "AI検索対策チェックリスト（業種別PDF）", body: "歯科医院・クリニック・不動産会社・工務店・士業事務所の5業種。メールアドレスの入力だけで届きます。", href: `${LAB}/download/?src=corp_contact_done`, external: true },
+      caseStep(slug),
+    ];
+  }
+  if (slug === "ai-subsidy") {
+    return [
+      { kind: "ツール", title: "補助金の無料診断（8問・3分）", body: "活用できる制度があるかを、8つの質問で確かめられます。", href: site.lpUrl, external: true },
+      caseStep(slug),
+    ];
+  }
+  if (slug === "rakushift") {
+    return [
+      { kind: "資料", title: "ラクシフトAIのサービス紹介資料（PDF）", body: "打ち合わせの前に、サービスの内容をご確認いただけます。", href: "/docs/rakushift-ai-service.pdf", download: true },
+      caseStep(slug),
+    ];
+  }
+  return [
+    { kind: "ツール", title: "経理、外に出すべき？5問のセルフチェック", body: "経理のうち外に出せる範囲の目安が、その場で出ます。答えはどこにも送信しません。", href: "/tools/keiri-check" },
+    { kind: "資料", title: `${sheet.name}（${sheet.spec}）`, body: "誰が何にどれだけ時間を使っているかを書き出すシートです。書いた状態でお持ちいただくと、初回で話が具体的に進みます。", href: sheet.href, download: true },
+    caseStep(slug),
+  ];
+}
+
+function DoneSteps({ slug }: { slug: string }) {
+  return (
+    <div className="mt-10 border-t border-line pt-8 text-left" data-cta-pos="contact-done">
+      <p className="text-[15px] font-bold text-ink">ご返信までの間に（いずれも無料です）</p>
+      <ul className="mt-4 grid gap-3">
+        {nextSteps(slug).map((s) => {
+          const inner = (
+            <>
+              <span className="shrink-0 rounded-full bg-gold-tint px-3 py-1 text-[13px] font-bold text-gold-deep">{s.kind}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[15px] font-bold leading-7 text-ink group-hover:text-pulse">
+                  {s.title}
+                  {s.external && " ↗"}
+                </span>
+                <span className="mt-1 block text-sm leading-7 text-slate">{s.body}</span>
+              </span>
+            </>
+          );
+          const cls = "group flex items-start gap-4 rounded-2xl border border-line bg-raise px-5 py-4 transition-colors hover:border-pulse";
+          return (
+            <li key={s.href}>
+              {s.external ? (
+                <a href={s.href} target="_blank" rel="noopener" className={cls}>{inner}</a>
+              ) : s.download ? (
+                <a href={s.href} download className={cls}>{inner}</a>
+              ) : (
+                <Link href={s.href} className={cls}>{inner}</Link>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 
 const inputCls =
   "w-full rounded-xl border border-line bg-mist/50 px-4 py-3 text-sm text-ink placeholder:text-slate/50 focus:border-pulse focus:bg-white focus:outline-none disabled:opacity-60";
@@ -31,6 +112,7 @@ type State = "idle" | "sending" | "sent" | "error";
 export default function ContactForm() {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const [sentSlug, setSentSlug] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
@@ -137,6 +219,7 @@ export default function ContactForm() {
       });
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
+        setSentSlug(slug);
         setState("sent");
         // fetch 送信でページが変わらないため、明示的に送らないと計測されない
         track("generate_lead", { service: serviceName || "未選択" });
@@ -158,14 +241,14 @@ export default function ContactForm() {
 
   if (state === "sent") {
     return (
-      <div className="py-10 text-center">
+      <div className="py-6 text-center" role="status">
         <span aria-hidden className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-pulse/10">
           <svg width="26" height="26" viewBox="0 0 24 24" className="text-pulse">
             <path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
         <p className="mt-5 text-lg font-bold">お申し込みを受け付けました</p>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-8 text-slate">
+        <p className="mx-auto mt-4 max-w-md text-[15px] leading-[1.9] text-slate">
           担当者より通常1営業日以内にご返信します。
           <br />
           お急ぎの場合はお電話(
@@ -174,6 +257,7 @@ export default function ContactForm() {
           </a>
           )にてご連絡ください。
         </p>
+        <DoneSteps slug={sentSlug} />
       </div>
     );
   }
