@@ -398,6 +398,7 @@
    "contentUrl": "https://corp.7senses.co.jp/research/ai-answers/data.csv"
   },
   "usageInfo": "https://corp.7senses.co.jp/research/ai-answers#cite",
+  "license": "https://corp.7senses.co.jp/research/ai-answers#cite",
   "creator": {
    "@type": "Organization",
    "name": "セブンセンシズ株式会社",
