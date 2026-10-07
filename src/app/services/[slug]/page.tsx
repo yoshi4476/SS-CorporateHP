@@ -428,7 +428,10 @@ export default async function ServicePage({ params }: Props) {
                     <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
                   </span>
                   <h3 className="mt-5 text-lg font-bold leading-relaxed">{p.title}</h3>
-                  <p className="mt-3 text-[15px] leading-[1.9] text-slate">{p.body}</p>
+                  {/* 本文に **太字** がある（経理BPOの4つ目）。素通しだと記号のまま画面に出ていた */}
+                  <p className="mt-3 text-[15px] leading-[1.9] text-slate">
+                    <Rich text={p.body} />
+                  </p>
                 </div>
                 </Reveal>
               </li>
