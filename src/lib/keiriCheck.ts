@@ -99,8 +99,14 @@ export const LAW_READ = "invoice-keiri-futan-keigen";
 
 export type ReadLink = { href: string; title: string };
 
-/** 来た記事のパス。自サイトの記事以外の値は計測に混ぜない */
+/** 来たページのパス（トップ・事業ページ・記事）。それ以外の値は計測に混ぜない */
 export function fromPath(search: string): string {
   const v = new URLSearchParams(search).get("from") ?? "";
-  return /^\/blog\/[a-z0-9-]+$/.test(v) ? v : "";
+  return /^\/(?:(?:blog|services)\/[a-z0-9-]+)?$/.test(v) ? v : "";
+}
+
+/** 入口（InlineToolBox）で先に答えた1問目。?q1=1 / ?q1=0 */
+export function firstAnswer(search: string): boolean | undefined {
+  const v = new URLSearchParams(search).get("q1");
+  return v === "1" ? true : v === "0" ? false : undefined;
 }

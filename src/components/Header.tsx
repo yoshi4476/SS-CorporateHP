@@ -15,14 +15,19 @@ import { site } from "@/lib/site";
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
 const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
 
-// 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
+// 検索での表示の約8割は経理ブログの記事（GSC の page 次元で84%・2026-10）なのに、無料ツールは
+// AIO・MEO の診断だけだった。自社の経理チェックを先頭に置き、AI集客ラボの診断はその後ろにまとめる
+const KEIRI_CHECK = { name: "経理、外に出すべき？5問のセルフチェック", spec: "無料・登録不要", href: "/tools/keiri-check" };
+
 // URLを入れる診断を先頭に。LPの入力欄へ直接飛び、どこから来たかを src で残す
-const CHECKS = [
+const WEB_CHECKS = [
   { name: "URL診断（サイトの14項目を採点）", spec: "URLだけ・約30秒", href: "https://ai.7senses.co.jp/tools/url-check/?src=corp_header" },
   ...diagnostics,
   { name: "無料ツールの一覧", spec: "AI集客ラボ", href: toolsIndex },
 ];
+const WEB_CHECKS_LABEL = "Web集客・AI検索（AI集客ラボ）";
 
+// 自社プロダクト。契約の入口なので、事業内容のメニューから直接たどれるようにする
 const PRODUCTS: { href: string; label: string }[] = [
   { href: "/rakushift", label: "ラクシフトAI (シフト自動作成)" },
   { href: "/aio-agent", label: "AIO（SEO）対策エージェント" },
@@ -192,10 +197,19 @@ export default function Header() {
                     <path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.5" />
                   </svg>
                 </span>
-                <div className="invisible absolute right-0 top-full w-80 pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
-                  <div className="rounded-2xl border border-line bg-raise p-2 shadow-lift">
+                <div className="invisible absolute right-0 top-full w-[22rem] pt-1 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+                  <div className="max-h-[calc(100vh-6rem)] overflow-y-auto rounded-2xl border border-line bg-raise p-2 shadow-lift">
+                    <p className="px-4 pb-1 pt-2 text-xs font-bold text-gold-deep">経理</p>
+                    <Link
+                      href={KEIRI_CHECK.href}
+                      className="flex items-baseline justify-between gap-3 rounded-xl bg-gold-tint px-4 py-3 transition-colors hover:bg-mist"
+                    >
+                      <span className="text-sm font-bold text-ink">{KEIRI_CHECK.name}</span>
+                      <span className="shrink-0 text-xs text-slate">{KEIRI_CHECK.spec}</span>
+                    </Link>
+                    <p className="mt-2 border-t border-line px-4 pb-1 pt-3 text-xs font-bold text-slate">{WEB_CHECKS_LABEL}</p>
                     <ul>
-                      {CHECKS.map((d) => (
+                      {WEB_CHECKS.map((d) => (
                         <li key={d.name}>
                           <a
                             href={d.href}
@@ -204,14 +218,12 @@ export default function Header() {
                             className="flex items-baseline justify-between gap-3 rounded-xl px-4 py-2.5 transition-colors hover:bg-mist"
                           >
                             <span className="text-sm text-ink">{d.name} ↗</span>
-                            <span className="font-data shrink-0 text-[0.6rem] uppercase tracking-[0.12em] text-slate">
-                              {d.spec}
-                            </span>
+                            <span className="shrink-0 text-xs text-slate">{d.spec}</span>
                           </a>
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-1 border-t border-line px-4 py-3 text-[0.65rem] leading-5 text-slate">
+                    <p className="mt-1 border-t border-line px-4 py-3 text-xs leading-6 text-slate">
                       {DIAGNOSIS_NOTE}
                       <Link href="/contact" className="ml-1 font-bold text-pulse hover:underline">
                         無料相談へ
@@ -343,9 +355,16 @@ export default function Header() {
                 </ul>
               </div>
               <div className="border-t border-white/10 pt-6">
-                <p className="eyebrow !text-aqua">Free Self-Check — 無料セルフチェック</p>
-                <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
-                  {CHECKS.map((d) => (
+                <p className="eyebrow !text-aqua">無料セルフチェック</p>
+                <Link
+                  href={KEIRI_CHECK.href}
+                  className="tap mt-3 font-bold text-gold-bright transition-colors hover:text-white"
+                >
+                  {KEIRI_CHECK.name}（{KEIRI_CHECK.spec}）
+                </Link>
+                <p className="mt-3 text-xs font-bold text-white/60">{WEB_CHECKS_LABEL}</p>
+                <ul className="mt-1 grid gap-0 md:mt-2 md:gap-2.5">
+                  {WEB_CHECKS.map((d) => (
                     <li key={d.name}>
                       <a
                         href={d.href}
@@ -358,7 +377,7 @@ export default function Header() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-3 text-[0.65rem] leading-5 text-white/60">{DIAGNOSIS_NOTE}</p>
+                <p className="mt-3 text-xs leading-6 text-white/60">{DIAGNOSIS_NOTE}</p>
               </div>
 
               <div className="border-t border-white/10 pt-6">

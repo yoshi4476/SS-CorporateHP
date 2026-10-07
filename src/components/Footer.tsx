@@ -3,6 +3,7 @@ import Link from "next/link";
 import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { site } from "@/lib/site";
+import { toolsIndex } from "@/lib/aio";
 
 // 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、nofollow も付けない
 const credits = [
@@ -13,7 +14,7 @@ const credits = [
 export default function Footer() {
   return (
     <footer className="border-t border-line bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-[1.3fr_1fr_1fr] md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
           <Image
             src="/images/logo-jp.png"
@@ -73,6 +74,23 @@ export default function Footer() {
               <Link href="/services/keiri-bpo" className="tap transition-colors hover:text-white">
                 経理システム（セルフ版）
               </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* 無料のセルフチェック。経理の記事の読者が多いので、自社の経理チェックを先頭に置く */}
+        <nav aria-label="無料セルフチェック">
+          <p className="eyebrow mb-4 !text-aqua">無料セルフチェック</p>
+          <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
+            <li>
+              <Link href="/tools/keiri-check" className="tap font-bold text-gold-bright transition-colors hover:text-white">
+                経理、外に出すべき？5問のセルフチェック
+              </Link>
+            </li>
+            <li>
+              <a href={toolsIndex} target="_blank" rel="noopener" className="tap transition-colors hover:text-white">
+                Web集客・AI検索の無料診断（AI集客ラボ） ↗
+              </a>
             </li>
           </ul>
         </nav>

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MediaShowcase from "@/components/MediaShowcase";
 import KeiriTwoTracks from "@/components/KeiriTwoTracks";
+import InlineToolBox from "@/components/InlineToolBox";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
@@ -199,6 +200,18 @@ export default async function ServicePage({ params }: Props) {
                   )}
                 </div>
                 )}
+                {/* 相談・資料の手前の入口。経理の記事から来た人が、まず自分で範囲の目安をつけられるようにする */}
+                {service.slug === "keiri-bpo" && (
+                  <Link
+                    href="/tools/keiri-check?from=/services/keiri-bpo"
+                    className="mt-6 block w-fit text-[15px] font-bold leading-8 text-white underline decoration-gold-bright decoration-2 underline-offset-[6px] transition-colors hover:text-gold-bright"
+                  >
+                    まず5問のセルフチェックで、外に出せる範囲を確かめる
+                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="ml-1.5 inline-block align-[-1px]">
+                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                  </Link>
+                )}
                 {service.price && (
                   <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur-sm">
                     <span className="text-white/60">料金目安</span>
@@ -339,6 +352,12 @@ export default async function ServicePage({ params }: Props) {
               です。
             </p>
           </Reveal>
+          {/* どこまで外に出せるかは、悩みを読んだ直後がいちばん知りたい */}
+          {service.slug === "keiri-bpo" && (
+            <div className="mx-auto max-w-3xl">
+              <InlineToolBox from="/services/keiri-bpo" place="service" />
+            </div>
+          )}
         </div>
       </section>
 

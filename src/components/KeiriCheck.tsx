@@ -10,6 +10,7 @@ import {
   QUESTIONS,
   RESULTS,
   TOOL_ID,
+  firstAnswer,
   fromPath,
   resultOf,
   type ReadLink,
@@ -32,6 +33,16 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
   // 静的書き出しでは useSearchParams に Suspense 境界が要るため、ContactForm と同じく直接読む
   useEffect(() => {
     from.current = fromPath(window.location.search);
+    // 入口で1問目に答えてきた人は、その答えを入れた状態で2問目から始める（同じ問いを2度聞かない）
+    const a1 = firstAnswer(window.location.search);
+    if (a1 === undefined) return;
+    started.current = true;
+    track("tool_start", { tool: TOOL_ID, from_path: from.current, via: "entry" });
+    const raf = requestAnimationFrame(() => {
+      setAnswers({ [QUESTIONS[0].id]: a1 });
+      document.getElementById(`q-${QUESTIONS[1].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   const params = () => ({ tool: TOOL_ID, from_path: from.current });
@@ -69,7 +80,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
         {QUESTIONS.map((q, i) => {
           const v = answers[q.id];
           return (
-            <li key={q.id} className="rounded-3xl border border-line bg-raise p-6 md:p-7">
+            <li key={q.id} id={`q-${q.id}`} className="scroll-mt-28 rounded-3xl border border-line bg-raise p-6 md:p-7">
               <fieldset>
                 <legend className="flex gap-4 text-base font-bold leading-relaxed text-ink">
                   <span className="num shrink-0 text-sm text-pulse">Q{i + 1}</span>

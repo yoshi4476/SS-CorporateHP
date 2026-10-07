@@ -128,6 +128,17 @@ export function splitAfterLead(html: string): [string, string] | null {
   return [html.slice(0, end), html.slice(end)];
 }
 
+/**
+ * 最初の節の終わり（2つ目のH2の手前）で割る。セルフチェックの入口を置くため。
+ * 1文結論の直後に置くと、答えを読み始めたところへ割り込んでいた。
+ * 2つ目のH2が無い（節が1つ）ときは割らない（null）。
+ */
+export function splitAfterFirstSection(html: string): [string, string] | null {
+  const second = [...html.matchAll(/<h2[\s>]/g)][1]?.index;
+  if (second === undefined) return null;
+  return [html.slice(0, second), html.slice(second)];
+}
+
 // 経理のセルフチェックを置く記事。カテゴリが経理の記事は全部、
 // それ以外（バックオフィス効率化など）は題名が経理の作業を扱うものだけ。
 // 店舗の事務をAIで減らす記事のような、経理の外注判断と関係の薄い記事には出さない

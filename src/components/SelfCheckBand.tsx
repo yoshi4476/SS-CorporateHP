@@ -2,10 +2,13 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { diagnostics } from "@/lib/aio";
 import AioScan from "@/components/AioScan";
+import InlineToolBox from "@/components/InlineToolBox";
 
 // 無料セルフチェックへの誘導。
 // 「無料相談」はハードルが高いが、その場で終わる自己診断なら踏み出せる。
 // 相談前の入口として、目立つ位置に置くための独立セクション。
+// 検索での表示の約8割は経理ブログの記事（GSC の page 次元で84%・2026-10）なので、経理のチェックを先頭に置く。
+// AI集客ラボの診断（Web集客・AI検索）はその後ろにまとめる。
 
 export default function SelfCheckBand() {
   return (
@@ -21,21 +24,21 @@ export default function SelfCheckBand() {
       <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-start lg:gap-14">
           <Reveal>
-            <p className="font-data text-[0.72rem] uppercase tracking-[0.32em] text-aqua">Free Self-Check</p>
+            <p className="eyebrow !text-aqua">無料セルフチェック</p>
             <h2 id="selfcheck-heading" className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">
               相談の前に、
               <br />
               現在地を確かめる。
             </h2>
-            <p className="mt-6 max-w-md text-sm leading-8 text-white/70">
-              いきなり相談するのは気が重いものです。まずはご自身で、いまの状態を数字で確認してください。
+            <p className="mt-6 max-w-md text-[15px] leading-[1.9] text-white/75 md:text-base">
+              いきなり相談するのは気が重いものです。まずはご自身で、いまの状態を確認してください。
               <strong className="font-bold text-white">登録は不要、その場で結果が出ます。</strong>
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/15 pt-6">
-              <span className="font-data text-[0.68rem] uppercase tracking-[0.2em] text-white/50">登録不要</span>
-              <span className="font-data text-[0.68rem] uppercase tracking-[0.2em] text-white/50">その場で結果</span>
-              <span className="font-data text-[0.68rem] uppercase tracking-[0.2em] text-white/50">費用なし</span>
-            </div>
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-[13px] font-bold text-white/70">
+              <li>登録不要</li>
+              <li>その場で結果</li>
+              <li>費用なし</li>
+            </ul>
             <figure className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/selfcheck.webp" alt="夜のオフィスで、サイトの採点結果を確かめる経営者" loading="lazy" className="h-full w-full object-cover" />
@@ -44,14 +47,25 @@ export default function SelfCheckBand() {
 
           <div className="grid gap-4">
             <Reveal delay={0.04}>
-              <div className="rounded-2xl border-2 border-aqua/60 bg-white/[0.08] p-6 md:p-7">
-                <p className="text-lg font-bold text-white">URL診断（サイトの14項目を採点）<span className="ml-3 align-middle font-data rounded-full border border-white/30 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">URL入力だけ・14項目</span></p>
-                <p className="mt-2 mb-5 text-xs leading-7 text-white/65">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
+              <p className="mb-3 text-[13px] font-bold tracking-wide text-gold-bright">経理</p>
+              <InlineToolBox from="/" place="top" tone="dark" />
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <p className="mb-1 mt-6 text-[13px] font-bold tracking-wide text-aqua">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 md:p-7">
+                <p className="text-lg font-bold text-white">
+                  URL診断（サイトの14項目を採点）
+                  <span className="ml-3 inline-block rounded-full border border-white/30 px-2.5 py-0.5 align-middle text-xs font-medium text-white/70">URL入力だけ・14項目</span>
+                </p>
+                <p className="mb-5 mt-2 text-sm leading-7 text-white/70">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
                 <AioScan src="corp_top_selfcheck" dark />
               </div>
             </Reveal>
             {diagnostics.map((d, i) => (
-              <Reveal key={d.name} delay={0.08 + i * 0.07}>
+              <Reveal key={d.name} delay={0.12 + i * 0.06}>
                 <a
                   href={d.href}
                   target="_blank"
@@ -62,11 +76,11 @@ export default function SelfCheckBand() {
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="text-lg font-bold text-white group-hover:text-aqua">{d.name}</span>
-                      <span className="font-data rounded-full border border-white/30 px-2.5 py-0.5 text-[0.6rem] uppercase tracking-[0.14em] text-white/60">
+                      <span className="rounded-full border border-white/30 px-2.5 py-0.5 text-xs font-medium text-white/70">
                         {d.spec}
                       </span>
                     </span>
-                    <span className="mt-2 block text-xs leading-7 text-white/65">{d.body}</span>
+                    <span className="mt-2 block text-sm leading-7 text-white/70">{d.body}</span>
                   </span>
                   <span
                     aria-hidden
@@ -81,7 +95,7 @@ export default function SelfCheckBand() {
             ))}
 
             <Reveal delay={0.3}>
-              <p className="mt-2 text-xs leading-7 text-white/50">
+              <p className="mt-2 text-sm leading-7 text-white/60">
                 簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方は
                 <Link href="/contact" className="mx-1 font-bold text-aqua underline-offset-4 hover:underline">
                   無料相談

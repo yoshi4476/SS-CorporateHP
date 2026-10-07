@@ -23,6 +23,7 @@ import {
   withToc,
   splitBody,
   splitAfterLead,
+  splitAfterFirstSection,
   wantsKeiriCheck,
   thumbOf,
 } from "@/lib/blog";
@@ -84,8 +85,11 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const { html, headings } = withToc(post.html);
   const [bodyHead, bodyTail] = splitBody(html);
-  // 最初の節の1文結論の直後に、セルフチェックの入口を1つだけ置く
-  const leadSplit = wantsKeiriCheck(post) ? splitAfterLead(bodyHead) : null;
+  // セルフチェックの入口は最初の節の終わりに1つだけ置く。
+  // 節が1つしか無い（直後に事業の案内が来る）記事は、従来どおり1文結論の直後に置く
+  const leadSplit = wantsKeiriCheck(post)
+    ? (splitAfterFirstSection(bodyHead) ?? splitAfterLead(bodyHead))
+    : null;
   // 記事のテーマに合う事業へ渡す。法対応の記事も、行き着く先は外注の判断
   const pick = post.category === "backoffice" ? "ai-consulting" : "keiri-bpo";
   const svc = services.find((s) => s.slug === pick);
@@ -257,7 +261,7 @@ export default async function BlogDetailPage({ params }: Props) {
             />
             {leadSplit && (
               <>
-                <InlineToolBox from={`/blog/${post.slug}`} />
+                <InlineToolBox from={`/blog/${post.slug}`} place="article" />
                 <div className="article-body" dangerouslySetInnerHTML={{ __html: leadSplit[1] }} />
               </>
             )}

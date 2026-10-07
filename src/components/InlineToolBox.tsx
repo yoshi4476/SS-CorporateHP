@@ -1,20 +1,32 @@
 "use client";
 
-// 記事の最初の節に置く、セルフチェックへの入口。
-// 記事上のCTAは2期間とも0件で、問い合わせしか次の一歩が無かった（2026-10-05）。
-// 見えた数と押された数を両方取り、置き場所が読まれているのか・文言が弱いのかを分ける。
+// 経理のセルフチェック（/tools/keiri-check）の入口。記事・トップ・経理BPOのページで同じ形を使う。
+// 記事に置いていた「経理、外に出すべき？ → チェックする」は、28日で見えた22回・押された0回だった（GA4・2026-10）。
+// 押す前に何を聞かれるか分からず、スマホでは見出しが「出すべ/き？」と割れ、記事の要点を読んでいる途中に割り込んでいた。
+// 1問目をその場で見せ、「はい・いいえ」を押すとその答えを持ったまま続きの4問へ進む。
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { track } from "@/components/Tracking";
-import { TOOL_ID } from "@/lib/keiriCheck";
+import { QUESTIONS, TOOL_ID } from "@/lib/keiriCheck";
 
-export default function InlineToolBox({ from }: { from: string }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+type Props = {
+  /** 来たページのパス。結果の計測（from_path）に残る */
+  from: string;
+  /** 記事のときだけ inline_tool_* を送る（管制塔の funnel.py が記事の入口として数えている名前のため） */
+  place?: "article" | "top" | "service";
+  tone?: "light" | "dark";
+};
+
+const Q1 = QUESTIONS[0];
+
+export default function InlineToolBox({ from, place = "article", tone = "light" }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
+  const dark = tone === "dark";
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || place !== "article") return;
     const io = new IntersectionObserver(
       (entries) => {
         if (entries.some((e) => e.isIntersecting)) {
@@ -26,25 +38,48 @@ export default function InlineToolBox({ from }: { from: string }) {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [place]);
+
+  const href = (yes: boolean) => `/tools/keiri-check?from=${encodeURIComponent(from)}&q1=${yes ? 1 : 0}`;
+  const onPick = (yes: boolean) => {
+    if (place === "article") track("inline_tool_click", { tool: TOOL_ID, answer: yes ? "yes" : "no" });
+  };
 
   return (
-    <Link
+    <div
       ref={ref}
-      href={`/tools/keiri-check?from=${from}`}
-      onClick={() => track("inline_tool_click", { tool: TOOL_ID })}
-      className="group my-8 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-3xl border border-pulse/20 bg-mist px-6 py-5 transition-colors hover:border-pulse/50 md:px-7"
+      data-cta-pos={place === "article" ? "inline-tool" : "keiri-check"}
+      className={`rounded-3xl border border-l-4 px-6 py-6 md:px-8 md:py-7 ${
+        dark ? "border-white/15 border-l-gold-bright bg-white/[0.06]" : "my-10 border-line border-l-gold bg-raise shadow-card"
+      }`}
     >
-      <span className="min-w-0 flex-1">
-        <span className="block text-base font-black text-ink md:text-lg">経理、外に出すべき？</span>
-        <span className="mt-1 block text-sm leading-7 text-slate">5問でわかるセルフチェック（無料・登録不要）</span>
-      </span>
-      <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-pulse px-5 py-2.5 text-sm font-bold text-white transition-transform group-hover:-translate-y-0.5">
-        チェックする
-        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-          <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-        </svg>
-      </span>
-    </Link>
+      <p className={`text-[13px] font-bold tracking-wide ${dark ? "text-gold-bright" : "text-gold-deep"}`}>
+        経理のセルフチェック（全5問・無料・登録不要）
+      </p>
+      <p className={`mt-2 text-[17px] font-black leading-relaxed md:text-lg ${dark ? "text-white" : "text-ink"}`}>
+        <span className={`num mr-2 ${dark ? "text-aqua" : "text-pulse"}`}>Q1</span>
+        {Q1.q}
+      </p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        {[true, false].map((yes) => (
+          <Link
+            key={String(yes)}
+            href={href(yes)}
+            onClick={() => onPick(yes)}
+            data-cta={`${place}_keiri-check_q1-${yes ? "yes" : "no"}`}
+            className={`inline-flex min-h-11 min-w-28 items-center justify-center rounded-full border px-7 py-2.5 text-[15px] font-bold transition-colors ${
+              dark
+                ? "border-white/40 text-white hover:border-gold-bright hover:bg-gold-bright hover:text-ink"
+                : "border-pulse text-pulse hover:bg-pulse hover:text-white"
+            }`}
+          >
+            {yes ? "はい" : "いいえ"}
+          </Link>
+        ))}
+      </div>
+      <p className={`mt-4 text-sm leading-7 ${dark ? "text-white/70" : "text-slate"}`}>
+        答えると残りの4問へ進み、経理のうち外に出せる範囲の目安が出ます。答えはどこにも送信しません。
+      </p>
+    </div>
   );
 }
