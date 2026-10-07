@@ -31,7 +31,7 @@ export default function NewsPage() {
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-5xl px-5 pb-10 pt-12 md:pt-20">
           <Reveal>
-            <p className="eyebrow">News</p>
+            <p aria-hidden className="eyebrow" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">お知らせ</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               経理BPO・AI集客支援・AI導入補助金の各事業に関する制度の新設やサービス開始、
@@ -78,7 +78,7 @@ export default function NewsPage() {
       {/* 一覧だけでは中身が薄く、読み終えた人の行き先も無かった。解説記事と事業の入口を置く */}
       <section className="border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-more-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <p className="eyebrow">More</p>
+          <p aria-hidden className="eyebrow" />
           <h2 id="news-more-heading" className="mt-3 text-xl font-black md:text-2xl">解説記事と、事業のご案内</h2>
           <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
             お知らせでは、セブンセンシズ株式会社のサービスや取り組みの動きを掲載しています。経理の進め方やAI検索の対策など、実務の解説は下の2つのメディアで公開しています。

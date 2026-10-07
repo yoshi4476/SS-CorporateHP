@@ -89,7 +89,7 @@ export default function BlogPage() {
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-14 md:pb-20 md:pt-20">
           <Reveal>
             <span aria-hidden className="mb-6 block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
-            <p className="eyebrow">Accounting BPO Media</p>
+            <p className="eyebrow">経理BPOブログ</p>
             <h1 className="mt-5 max-w-3xl text-3xl font-black leading-[1.3] md:text-5xl">
               経理は、止められない。
               <br />
@@ -175,7 +175,6 @@ export default function BlogPage() {
       <section className="py-20 md:py-28" aria-labelledby="problem-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Problem"
             title="こんな状態になっていませんか"
             lead="経理は、動いているうちは問題として表に出ません。==止まってから気づく==のがこの領域です。"
           />
@@ -206,7 +205,6 @@ export default function BlogPage() {
       <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="glossary-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Glossary"
             title="30秒でわかる、4つの用語"
             lead="このメディアで繰り返し出てくる言葉です。ここだけ押さえれば記事が読めます。"
           />
@@ -221,7 +219,7 @@ export default function BlogPage() {
                   )}
                   <div className="p-6">
                   <p className="text-lg font-bold text-pulse">{g.term}</p>
-                  <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
+                  <p className="font-data mt-1 text-xs text-slate">{g.en}</p>
                   <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
                   </div>
                 </article>
@@ -235,7 +233,7 @@ export default function BlogPage() {
       <section id="latest" className="scroll-mt-24 py-20 md:py-28" aria-labelledby="latest-heading">
         <div className="mx-auto max-w-7xl px-5">
           {/* 新着順だけでは、同じ困りごとの記事を続けて読めない */}
-          <SectionHead en="Themes" title="テーマから探す" />
+          <SectionHead title="テーマから探す" />
           <ul className="mt-8 flex flex-wrap gap-3">
             {themes.map((t) => (
               <li key={t.slug}>
@@ -256,7 +254,7 @@ export default function BlogPage() {
                 </Link>
               ))}
           </p>
-          <SectionHead en="Latest" title="新着記事" />
+          <SectionHead title="新着記事" />
 
 
           {posts.length === 0 ? (
@@ -327,7 +325,7 @@ export default function BlogPage() {
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
             <Reveal>
-              <p className="font-data text-[0.72rem] uppercase tracking-[0.32em] text-aqua">About</p>
+              <p aria-hidden className="eyebrow !text-aqua" />
               <h2 id="about-heading" className="mt-4 text-2xl font-black leading-snug md:text-4xl">
                 このメディアについて
               </h2>
@@ -348,7 +346,7 @@ export default function BlogPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <p className="font-data text-[0.72rem] uppercase tracking-[0.32em] text-aqua">How to Use</p>
+              <p aria-hidden className="eyebrow !text-aqua" />
               <h2 className="mt-4 text-2xl font-black leading-snug md:text-3xl">読んで終わりにしないための3段階</h2>
               <ol className="mt-8 grid gap-4">
                 {steps.map((s, i) => (
@@ -390,7 +388,7 @@ export default function BlogPage() {
       <section className="py-20 md:py-28" data-cta-pos="closing">
         <div className="mx-auto max-w-5xl px-5 text-center">
           <Reveal>
-            <p className="eyebrow">Contact</p>
+            <p aria-hidden className="eyebrow" />
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               経理を、外に出すか。社内に残すか。
             </h2>

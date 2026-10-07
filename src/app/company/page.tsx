@@ -109,7 +109,7 @@ export default function CompanyPage() {
                 </li>
               </ol>
             </nav>
-            <p className="eyebrow mt-8">Company</p>
+            <p aria-hidden className="eyebrow mt-8" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">会社概要</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               「{site.tagline}」。私たちは、テクノロジーの力で事業と暮らしをもっと快適にすることを使命に、大阪から全国の企業・店舗を支援しています。
@@ -132,7 +132,7 @@ export default function CompanyPage() {
         <div className="relative mx-auto grid max-w-7xl items-end gap-10 px-5 md:grid-cols-[1.3fr_1fr]">
           <div className="pb-4">
             <Reveal>
-              <p className="eyebrow !text-aqua">Message</p>
+              <p className="eyebrow !text-aqua">代表メッセージ</p>
               <h2 id="message-heading" className="mt-3 text-2xl font-bold leading-relaxed md:text-4xl">
                 「運」までも、
                 <br />
@@ -175,7 +175,6 @@ export default function CompanyPage() {
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2">
           <div>
             <SectionHead
-              en="Mission"
               title="現場の実績を、再現できる仕組みに。"
               lead="私たちの出発点は、店舗集客の現場です。通算3,200店舗のGoogleビジネスプロフィール運用で積み上げてきたのは、==業種×商圏ごとに「何をすれば数字が動くか」という実践データ==。この蓄積をAIと仕組みの力で磨き上げ、どんな企業でも再現できるサービスとして届けることが、セブンセンシズのミッションです。"
             />
@@ -225,7 +224,7 @@ export default function CompanyPage() {
       {/* 概要表 */}
       <section className="py-20 md:py-28" aria-labelledby="profile-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Profile" title="基本情報" />
+          <SectionHead title="基本情報" />
           {/* 表の右が空くので、オフィスとチームの写真（イメージ）を並べる */}
           <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.35fr_1fr]">
           <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line shadow-card">
@@ -266,7 +265,7 @@ export default function CompanyPage() {
       <section id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
         <div className="mx-auto max-w-5xl px-5">
           <Reveal>
-            <p className="eyebrow">Access</p>
+            <p aria-hidden className="eyebrow" />
             <h2 id="access-heading" className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
               アクセス
             </h2>

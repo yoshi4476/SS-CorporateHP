@@ -103,24 +103,14 @@ h4 {
   letter-spacing: 0.03em;
 }
 
-/* 縦書きセクションラベル (デスクトップのみ) */
-.eyebrow-v {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-family: var(--font-data);
-  font-size: 0.6875rem;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: var(--color-slate);
-}
-
+/* 区画の起点の小見出し。以前は英字の大文字（スマホで 9.92px・字間 0.16〜0.32em）で、
+   AIO運用代行のページだけで60個以上並び、読めない飾りになっていた。日本語の短い見出し（12〜13px）か、
+   文字なしの罫だけにする */
 .eyebrow {
-  font-family: var(--font-data);
-  /* 字間が広いラベルなので、スマホでは折り返さない大きさまで落とす。
-     ヒーローの "Osaka / AI Consulting & Digital Marketing" が最長 */
-  font-size: 0.62rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
   color: var(--color-pulse);
   /* セクションの起点に金の短い罫を置く。全ページ共通で色のリズムが生まれる */
   display: inline-flex;
@@ -144,8 +134,7 @@ h4 {
 
 @media (min-width: 640px) {
   .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.32em;
+    font-size: 0.8125rem;
   }
 }
 

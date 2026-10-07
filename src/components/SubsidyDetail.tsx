@@ -17,7 +17,7 @@ export default function SubsidyDetail() {
       <section className="border-t border-line py-14 md:py-16" aria-labelledby="partner-heading">
         <div className="mx-auto max-w-7xl px-5">
           <Reveal className="rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:p-10">
-            <p className="eyebrow">Partner</p>
+            <p aria-hidden className="eyebrow" />
             <h2 id="partner-heading" className="mt-3 text-xl font-bold leading-relaxed md:text-2xl">
               当社は<mark className="marker">AXISの代理店登録業者</mark>です
             </h2>
@@ -36,14 +36,13 @@ export default function SubsidyDetail() {
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="sim-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Simulation"
             title="いくら圧縮できるのか、図で見る"
             lead={`受発注ソフト・会計ソフトを${modelCase.total}万円で導入した場合のモデルケースです (${subsidy.fiscalYear}・${subsidy.asOf})。`}
           />
 
           <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1.5fr_1fr]">
             <Reveal className="rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
-              <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Model Case</p>
+              <p className="text-[13px] font-bold text-slate">モデルケース</p>
 
               {/* 積み上げバー */}
               <div className="mt-6">
@@ -101,8 +100,7 @@ export default function SubsidyDetail() {
 
             {/* 応募要項 4条件 */}
             <Reveal delay={0.1} className="rounded-3xl border border-line bg-raise p-7 shadow-card md:p-9">
-              <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Eligibility</p>
-              <h3 className="mt-3 text-lg font-bold md:text-xl">対象になる事業者 — 4つの条件</h3>
+              <h3 className="text-lg font-bold md:text-xl">対象になる事業者 — 4つの条件</h3>
               <ul className="mt-6 grid gap-4">
                 {eligibility.map((e, i) => (
                   <li key={e.label} className="flex gap-4 border-b border-line pb-4 last:border-0 last:pb-0">
@@ -126,7 +124,6 @@ export default function SubsidyDetail() {
       <section className="py-20 md:py-28" aria-labelledby="scheme-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Scheme &amp; Schedule"
             title="申請から着金まで、4フェーズ"
             lead="お客様の事前準備は==合計1.5〜3時間==。申請から着金までは==約2〜3ヶ月==が目安です。"
           />
@@ -186,7 +183,6 @@ export default function SubsidyDetail() {
       <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="cashflow-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Cash Flow"
             title="お金は、いつ・どちらへ動くのか"
             lead="補助金は==精算払い (後払い)==です。お支払いから着金まで約2〜3ヶ月を見込んだ資金計画をおすすめします。"
           />

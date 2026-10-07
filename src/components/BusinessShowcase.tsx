@@ -78,7 +78,6 @@ export default function BusinessShowcase() {
               </span>
 
               <div className="relative p-6 md:p-8">
-                <p className="font-data text-[0.6rem] uppercase tracking-[0.28em] text-aqua">{s.en}</p>
                 <h3
                   className={`mt-2 font-black leading-snug text-white ${
                     featured ? "text-2xl md:text-4xl" : "text-xl md:text-2xl"

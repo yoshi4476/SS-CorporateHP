@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         <nav aria-label="事業内容">
-          <p className="eyebrow mb-4 !text-aqua">Services</p>
+          <p className="eyebrow mb-4 !text-aqua">事業内容</p>
           <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
             <li>
               <Link href="/services" className="tap font-bold transition-colors hover:text-white">
@@ -59,7 +59,7 @@ export default function Footer() {
             ))}
           </ul>
           {/* 自社プロダクト。受託の事業と混ぜず、線で区切って並べる */}
-          <p className="eyebrow mb-4 mt-8 !text-aqua">Products</p>
+          <p className="eyebrow mb-4 mt-8 !text-aqua">自社プロダクト</p>
           <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
             <li>
               <Link href="/rakushift" className="tap transition-colors hover:text-white">
@@ -117,7 +117,7 @@ export default function Footer() {
 
         <div className="grid content-start gap-8">
           <nav aria-label="会社情報">
-            <p className="eyebrow mb-4 !text-aqua">Company</p>
+            <p className="eyebrow mb-4 !text-aqua">会社情報</p>
             <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
               <li>
                 <Link href="/company" className="tap transition-colors hover:text-white">
@@ -152,7 +152,7 @@ export default function Footer() {
             </ul>
           </nav>
           <nav aria-label="最新のお知らせ">
-            <p className="eyebrow mb-4 !text-aqua">News</p>
+            <p className="eyebrow mb-4 !text-aqua">お知らせ</p>
             <ul className="grid gap-1 text-xs text-white/60 md:gap-2.5">
               {news.slice(0, 2).map((n) => (
                 <li key={n.slug}>

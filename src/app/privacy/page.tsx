@@ -88,7 +88,7 @@ export default function PrivacyPage() {
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-4xl px-5 pb-10 pt-12 md:pt-20">
           <Reveal>
-            <p className="eyebrow">Privacy Policy</p>
+            <p aria-hidden className="eyebrow" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">プライバシーポリシー</h1>
             <p className="mt-6 text-sm leading-8 text-slate">
               {site.name}の個人情報保護方針です。

@@ -10,7 +10,6 @@ const CASE_PHOTO: Record<string, string> = {
   リフォーム業: "/images/case-reform.webp",
   製造業: "/images/case-seizou.webp",
 };
-import WaveText from "@/components/WaveText";
 import SenseNetwork from "@/components/SenseNetwork";
 import GrowthChart from "@/components/GrowthChart";
 import BusinessShowcase from "@/components/BusinessShowcase";
@@ -107,10 +106,7 @@ export default function Home() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-80 pt-24 md:pb-24 md:pt-28">
           <div className="w-full min-w-0 max-w-3xl">
-            <div>
-              <span aria-hidden className="mb-5 block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:mb-6 md:w-20" />
-              <p className="eyebrow !text-aqua">Osaka / AI Consulting &amp; Digital Marketing</p>
-            </div>
+            <span aria-hidden className="block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:w-20" />
             {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
                 スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
             <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
@@ -211,7 +207,6 @@ export default function Home() {
 
       {/* ステートメント */}
       <section id="vision" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
-        <WaveText text="VISION" className="pointer-events-none absolute left-0 top-8 select-none text-[11vw] leading-none tracking-tighter opacity-20" />
         <div className="relative mx-auto max-w-7xl px-5 text-center">
           <Reveal>
             <p className="mx-auto max-w-4xl text-2xl font-black leading-[1.8] md:text-5xl md:leading-[1.7]">
@@ -238,7 +233,6 @@ export default function Home() {
               />
               <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
               <figcaption className="absolute bottom-5 left-6 text-left text-white md:bottom-8 md:left-10">
-                <span className="font-data block text-[0.62rem] uppercase tracking-[0.3em] text-aqua">Data × Field</span>
                 <span className="mt-2 block text-base font-bold md:text-2xl">現場のデータを、仕組みに。</span>
               </figcaption>
             </figure>
@@ -251,7 +245,6 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5 pt-20 md:pt-28">
           <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
             <SectionHead
-              en="Services"
               title={`${services.length}つの事業が、ひとつにつながる`}
               lead={`戦略(AIコンサル)・実装(開発・制作)・集客(MEO・AIO×オウンドメディア)・資金(補助金)——==${services.length}つの事業をひとつのチームで一気通貫==に支援します。`}
             />
@@ -268,9 +261,6 @@ export default function Home() {
               className="group mt-4 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl bg-ink p-8 text-white md:flex-row md:items-center md:p-10"
             >
               <span>
-                <span className="font-data block text-[0.62rem] uppercase tracking-[0.28em] text-aqua">
-                  Free Consulting
-                </span>
                 <span className="mt-3 block text-2xl font-black leading-snug md:text-3xl">
                   どの事業が合うか、無料で診断します。
                 </span>
@@ -297,10 +287,9 @@ export default function Home() {
               "radial-gradient(ellipse 55% 70% at 85% 15%, rgb(28 63 124 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(116 199 214 / 0.12), transparent 60%)",
           }}
         />
-        <WaveText text="NUMBERS" tone="light" className="pointer-events-none absolute -top-1 right-0 select-none text-[11vw] leading-none tracking-tighter" />
         <div className="relative mx-auto max-w-7xl px-5">
           <Reveal>
-            <p className="eyebrow !text-aqua">Numbers</p>
+            <p aria-hidden className="eyebrow !text-aqua" />
             <h2 id="numbers-heading" className="mt-3 text-3xl font-bold md:text-5xl">
               成果は、数字で語る。
             </h2>
@@ -324,12 +313,8 @@ export default function Home() {
 
       {/* データセクション */}
       <section id="data" className="relative scroll-mt-24 bg-paper py-24 md:py-32" aria-labelledby="data-heading">
-        <span aria-hidden className="eyebrow-v absolute left-5 top-24 hidden xl:block">
-          Data Driven
-        </span>
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Data"
             title="通算3,200店舗が生んだ、実践データ"
             lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
           />
@@ -368,11 +353,9 @@ export default function Home() {
 
       {/* AIO / 検索対策の権威セクション */}
       <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
-        <WaveText text="SEO×MEO×AIO" className="pointer-events-none absolute right-0 top-4 select-none text-[8vw] leading-none tracking-tighter opacity-20" />
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
             <SectionHead
-              en="SEO × MEO × AIO"
               title="検索対策の「第三の時代」を、先導する"
               lead="ユーザーはGoogleで調べる前に、ChatGPTに聞き始めています。SEO・MEOに続く第三の検索対策「AIO(AI最適化)」に、==いま着手する企業が次の集客を制します==。"
             />
@@ -456,7 +439,7 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
             <div>
               <Reveal>
-                <p className="eyebrow !text-aqua">Field Work</p>
+                <p aria-hidden className="eyebrow !text-aqua" />
                 <h2 id="field-heading" className="mt-3 text-3xl font-bold md:text-5xl">
                   机上ではなく、現場から。
                 </h2>
@@ -525,7 +508,6 @@ export default function Home() {
       <section id="cases" className="scroll-mt-24 border-t border-line bg-mist py-24 md:py-32" aria-labelledby="cases-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Case Studies"
             title="数字が動いた、3つの現場"
             lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
           />
@@ -550,14 +532,14 @@ export default function Home() {
 
                   <div className="mt-6 flex items-center gap-3 rounded-2xl border border-line bg-mist/70 p-4">
                     <div className="min-w-0 flex-1">
-                      <p className="text-[0.6rem] text-slate">Before</p>
+                      <p className="text-xs font-bold text-slate">導入前</p>
                       <p className="mt-1 text-xs font-medium leading-5 text-slate">{cs.before}</p>
                     </div>
                     <svg width="22" height="14" viewBox="0 0 34 20" aria-hidden className="shrink-0 text-pulse">
                       <path d="M2 10h24M20 4l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[0.6rem] text-pulse">After</p>
+                      <p className="text-xs font-bold text-pulse">導入後</p>
                       <p className="mt-1 text-xs font-bold leading-5 text-ink">{cs.after}</p>
                     </div>
                   </div>
@@ -592,7 +574,6 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
             <SectionHead
-              en="Process"
               title="ご相談から成果まで、4つのステップ"
               lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。"
             />
@@ -623,7 +604,7 @@ export default function Home() {
                 この帯だけ金の淡い面にして視線を止める */}
             <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
               <div>
-                <p className="eyebrow">Subsidy</p>
+                <p className="eyebrow">AI導入補助金</p>
                 <h2 id="subsidy-heading" className="mt-3 text-2xl font-bold md:text-4xl">
                   受発注・会計ソフトなら、
                   <br className="sm:hidden" />
@@ -660,7 +641,7 @@ export default function Home() {
       {/* お知らせ */}
       <section id="news" className="scroll-mt-24 border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-heading">
         <div className="mx-auto max-w-5xl px-5">
-          <SectionHead en="News" title="お知らせ" />
+          <SectionHead title="お知らせ" />
           <div className="mt-10 grid gap-3">
             {news.map((n, i) => (
               <Reveal key={n.slug} delay={i * 0.06}>
@@ -697,7 +678,7 @@ export default function Home() {
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead en="FAQ" title="よくあるご質問" />
+            <SectionHead title="よくあるご質問" />
           </div>
           <div>
             <FaqList items={TOP_FAQ} />

@@ -15,14 +15,13 @@ export default function MediaShowcase() {
     <section className="border-y border-line bg-mist py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead
-          en="Movie & Document"
           title="動画と資料で、仕組みを先にご確認ください"
           lead="実際の画面で、記事ができて公開されるまでをご覧いただけます。==人が決めることと、機械に任せることの分担==まで説明しています。ご相談の前に、この場で中身を確かめられます。"
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-5 shadow-card md:p-6">
-              <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">Movie 01</p>
+              <p className="text-[13px] font-bold text-pulse">動画 1</p>
               <h3 className="mt-2 text-lg font-black leading-snug">10分で分かる、AIで集客する仕組み</h3>
               <p className="mb-4 mt-1 text-xs leading-6 text-ink-soft">
                 なぜ今AI検索なのか、市場の変化から。実際の制作画面つき
@@ -40,7 +39,7 @@ export default function MediaShowcase() {
           </Reveal>
           <Reveal delay={0.08}>
             <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-5 shadow-card md:p-6">
-              <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">Movie 02</p>
+              <p className="text-[13px] font-bold text-pulse">動画 2</p>
               <h3 className="mt-2 text-lg font-black leading-snug">サービス資料を6分でご説明</h3>
               <p className="mb-4 mt-1 text-xs leading-6 text-ink-soft">
                 下の資料をスライドに沿って解説。お急ぎの方はこちらから
@@ -61,7 +60,7 @@ export default function MediaShowcase() {
           <div className="mt-6 rounded-3xl border border-line bg-white p-5 shadow-card md:p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <div>
-                <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">Document</p>
+                <p className="text-[13px] font-bold text-pulse">資料</p>
                 <h3 className="mt-2 text-lg font-black leading-snug">サービス資料（全15枚）</h3>
               </div>
               <p className="text-xs text-ink-soft">横にスクロールしてページをめくれます →</p>

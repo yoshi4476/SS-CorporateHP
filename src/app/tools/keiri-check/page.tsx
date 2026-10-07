@@ -63,7 +63,7 @@ export default function KeiriCheckPage() {
               </li>
             </ol>
           </nav>
-          <p className="eyebrow mt-8">Free Self-Check</p>
+          <p className="eyebrow mt-8">無料セルフチェック</p>
           <h1 className="mt-4 text-3xl font-black leading-snug md:text-5xl md:leading-tight">
             経理、外に出すべき？
             <br />

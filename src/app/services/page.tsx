@@ -99,7 +99,7 @@ export default function ServicesIndexPage() {
                 </li>
               </ol>
             </nav>
-            <p className="eyebrow mt-8 !text-aqua">Services</p>
+            <p aria-hidden className="eyebrow mt-8 !text-aqua" />
             <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
             <p className="mt-7 max-w-2xl text-sm leading-9 text-white/75 md:text-base">
               戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
@@ -132,7 +132,6 @@ export default function ServicesIndexPage() {
                     <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-[0.65rem] font-bold text-white backdrop-blur-sm">{s.group}</span>
                   </Link>
                   <div className="flex flex-col p-7 md:p-10">
-                    <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">{s.en}</p>
                     <h2 className="mt-2 text-2xl font-black leading-snug md:text-3xl">
                       <Link href={`/services/${s.slug}`} className="transition-colors hover:text-pulse">
                         {s.name}
@@ -180,7 +179,7 @@ export default function ServicesIndexPage() {
           <Reveal delay={0.1}>
             <div className="mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-ink p-8 text-white md:grid-cols-[1.5fr_1fr] md:p-10">
               <div className="relative">
-                <p className="eyebrow !text-aqua">One Team</p>
+                <p aria-hidden className="eyebrow !text-aqua" />
                 <h2 className="mt-3 text-xl font-bold md:text-3xl">
                   {services.length}つの事業は、単品でも。組み合わせれば、もっと。
                 </h2>
@@ -213,7 +212,6 @@ export default function ServicesIndexPage() {
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Products"
             title="自社の現場で、毎日使っているもの"
             lead="受託だけでなく、当社が提供し、自社の現場で毎日動かしているプロダクトがあります（開発：YW／CONFLUX PARTNERS）。実物を見てからご判断ください。"
           />
@@ -224,7 +222,6 @@ export default function ServicesIndexPage() {
                   href={p.href}
                   className="group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-colors duration-500 hover:border-pulse/40 md:p-10"
                 >
-                  <p className="font-data text-[0.65rem] uppercase tracking-[0.26em] text-pulse">{p.en}</p>
                   <h3 className="mt-3 text-xl font-black leading-snug group-hover:text-pulse md:text-2xl">
                     {p.name}
                   </h3>

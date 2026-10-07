@@ -92,20 +92,23 @@ export function RichLinked({ text }: { text: string }) {
   );
 }
 
+// 見出しの上の英字（Problem・FAQ など）は 9.92px の大文字で読めず、見出しと同じことを言っていた。
+// 区画の起点を示す金の罫だけを残す。
+// en は受け取るが出さない。管制塔が配る部品（AioResearchData・templates/corporate_aio_data.tsx）が今も渡してくるため、
+// 型から外すと次の配信でビルドが落ちる
 export function SectionHead({
-  en,
   title,
   lead,
   align = "left",
 }: {
-  en: string;
+  en?: string;
   title: string;
   lead?: string;
   align?: "left" | "center";
 }) {
   return (
     <Reveal className={align === "center" ? "text-center" : ""}>
-      <p className="eyebrow">{en}</p>
+      <p aria-hidden className="eyebrow" />
       <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">{title}</h2>
       {lead && (
         <p className={`mt-5 max-w-2xl text-sm leading-8 text-slate md:text-base ${align === "center" ? "mx-auto" : ""}`}>
@@ -215,7 +218,7 @@ export function CtaBand({
       <WaveText text="CONTACT" tone="light" className="pointer-events-none absolute -bottom-4 left-0 select-none text-[15vw] leading-none tracking-tighter" />
       <div className="relative mx-auto max-w-7xl px-5 py-24 text-center md:py-36">
         <Reveal>
-          <p className="eyebrow !text-aqua">Contact</p>
+          <p aria-hidden className="eyebrow !text-aqua" />
           <h2 className="mt-4 text-3xl font-black tracking-tight text-white md:text-6xl">{title}</h2>
           <p className="mx-auto mt-5 max-w-xl text-sm leading-8 text-white/70 md:text-base">{body}</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">

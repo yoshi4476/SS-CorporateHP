@@ -92,7 +92,7 @@ export default function MediaPipelinePage() {
           <div className="mt-8 grid items-center gap-10 lg:grid-cols-[1.02fr_1fr] lg:gap-14">
             <div className="min-w-0">
               <Reveal>
-                <p className="eyebrow">AIO / SEO Agent — {pipeline.deliverable}</p>
+                <p className="eyebrow">{pipeline.deliverable}</p>
                 <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.2rem]">
                   広告費ではなく、
                   <br />
@@ -149,9 +149,7 @@ export default function MediaPipelinePage() {
               <div className="overflow-hidden rounded-3xl bg-ink shadow-lift">
                 <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4">
                   <span aria-hidden className="h-2 w-2 rounded-full bg-aqua" />
-                  <p className="font-data text-[0.62rem] uppercase tracking-[0.22em] text-aqua">
-                    Agent — 毎日 自動実行
-                  </p>
+                  <p className="text-[13px] font-bold text-aqua">毎日 自動実行</p>
                 </div>
                 <ol className="divide-y divide-white/8 px-6 py-2">
                   {flow.map((f) => (
@@ -182,7 +180,6 @@ export default function MediaPipelinePage() {
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Problem"
             title="広告は、止めた月から消える。記事は、残る。"
             lead="広告費は毎月ゼロから買い直しますが、記事は==一度書けば資産として残り続けます==。1本ずつ積み上がるほど、問い合わせが広告予算に左右されなくなります。ただし、積み上がる前に更新が止まれば、資産にはなりません。"
           />
@@ -210,7 +207,6 @@ export default function MediaPipelinePage() {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="What you get"
             title="LP と AIエージェントを、セットで納品します"
             lead="器だけ作っても記事が出ません。エージェントだけ渡しても置き場所がありません。==両方そろって初めて回ります==。"
           />
@@ -262,7 +258,6 @@ export default function MediaPipelinePage() {
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Before / After"
             title="記事を外注する場合と、何が変わるのか"
             lead="1本あたりで払うか、仕組みごと持つか。==本数を増やすほど差が開きます==。"
           />
@@ -306,7 +301,6 @@ export default function MediaPipelinePage() {
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Pipeline"
             title="毎日、この順番で動いています"
             lead="当社の管制塔が実際に走らせている工程です。人が触るのは、==テーマの追加と月次の確認だけ==です。"
           />
@@ -340,7 +334,6 @@ export default function MediaPipelinePage() {
       <section className="border-y border-gold/20 bg-gold-tint py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Quality gate"
             title="「AIで量産」と分けているのは、ここです"
             lead="==出す前に落とす仕組み==があるかどうかで、メディアの寿命が変わります。"
           />
@@ -364,7 +357,7 @@ export default function MediaPipelinePage() {
       <section className="border-y border-line bg-ink py-16 text-paper md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <Reveal>
-            <p className="eyebrow !text-aqua">AI Optimization</p>
+            <p className="eyebrow !text-aqua">AI検索への対応</p>
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               検索結果だけでなく、AIの回答に載るために
             </h2>
@@ -389,7 +382,6 @@ export default function MediaPipelinePage() {
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Monthly report"
             title="毎月1日、次の一手まで書いて渡します"
             lead="記事を出して終わりにしません。どこで離脱しているか、どの記事があと一歩か、来月どのキーワードを書くか。==判断できる形にして毎月お渡しします==。"
           />
@@ -413,7 +405,7 @@ export default function MediaPipelinePage() {
       {/* 流れ */}
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Steps" title="導入の流れ" lead="最初に決めるのは==「何を書かないか」==です。ここが曖昧だと記事が散らかります。" />
+          <SectionHead title="導入の流れ" lead="最初に決めるのは==「何を書かないか」==です。ここが曖昧だと記事が散らかります。" />
           <div className="mt-10">
             <FlowSteps steps={steps} />
           </div>
@@ -423,7 +415,7 @@ export default function MediaPipelinePage() {
       {/* FAQ */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-5">
-          <SectionHead en="FAQ" title="よくある質問" />
+          <SectionHead title="よくある質問" />
           <div className="mt-10">
             <FaqList items={faq} />
           </div>
@@ -435,7 +427,7 @@ export default function MediaPipelinePage() {
         <div aria-hidden className="grid-field-dark absolute inset-0" />
         <div className="relative mx-auto max-w-3xl px-5">
           <Reveal>
-            <p className="eyebrow !text-aqua text-center">Contact</p>
+            <p aria-hidden className="eyebrow !text-aqua text-center" />
             <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               この記事も、この仕組みが書いています。
             </h2>

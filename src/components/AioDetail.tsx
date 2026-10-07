@@ -30,14 +30,13 @@ export default function AioDetail() {
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="why-aio-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Why Now"
             title="検索は「探す」から「AIに聞く」へ"
             lead="検索結果の最上部をAIの回答が占め、クリックせずに答えを得る行動が広がっています。これからの集客は検索順位に加えて、==AIの回答に引用されるか==で決まります。"
           />
 
           <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-[1fr_1.4fr]">
             <Reveal className="flex flex-col justify-center rounded-3xl border border-line bg-raise p-8 shadow-card md:p-10">
-              <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-slate">Zero-Click Search</p>
+              <p className="text-[13px] font-bold text-slate">ゼロクリック検索</p>
               <p className="mega-num mt-4 text-6xl md:text-7xl">
                 <CountUp value={zeroClick.rate} suffix="%" />
               </p>
@@ -97,7 +96,6 @@ export default function AioDetail() {
       <section className="py-20 md:py-28" aria-labelledby="glossary-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Glossary"
             title="30秒でわかる、4つの用語"
             lead="AIO・LLMO・SEO・MEO。似ているようで、狙う場所がそれぞれ違います。"
           />
@@ -106,7 +104,7 @@ export default function AioDetail() {
               <Reveal key={g.term} delay={(i % 4) * 0.07}>
                 <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <p className="font-data text-2xl font-bold text-pulse">{g.term}</p>
-                  <p className="font-data mt-1 text-[0.6rem] uppercase tracking-[0.16em] text-slate">{g.en}</p>
+                  <p className="font-data mt-1 text-xs text-slate">{g.en}</p>
                   <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
                 </article>
               </Reveal>
@@ -119,7 +117,6 @@ export default function AioDetail() {
       <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="layers-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Implementation"
             title="AIOは「技術」と「コンテンツ」の両輪"
             lead="どちらか一方では引用されません。==サイトの構造をAIが読める形に整え==、==引用したくなる中身を用意する==。両方を同時に進めます。"
           />
@@ -130,7 +127,6 @@ export default function AioDetail() {
                   <div className="flex items-baseline gap-3">
                     <span className="num text-3xl font-bold text-gold/40" aria-hidden>0{i + 1}</span>
                     <div>
-                      <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">{l.en}</p>
                       <h3 className="mt-1 text-lg font-bold">{l.label}</h3>
                     </div>
                   </div>
@@ -154,7 +150,6 @@ export default function AioDetail() {
           {/* 成果測定 */}
           <Reveal delay={0.15}>
             <div className="mt-6 rounded-3xl border border-line bg-raise p-8 shadow-card">
-              <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
               <h3 className="mt-2 text-lg font-bold">成果は、4つの指標を併用して測る</h3>
               <p className="mt-3 max-w-3xl text-xs leading-7 text-slate">
                 AIOには検索順位のような明確な単一指標がありません。そこで複数の指標を組み合わせ、
@@ -177,7 +172,6 @@ export default function AioDetail() {
       <section className="py-20 md:py-28" aria-labelledby="owned-media-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Two Approaches"
             title="今あるサイトを直すか、記事で流入をつくるか"
             lead="AIO運用代行には2つの入り口があります。==どちらが上ということはありません==。すでにサイトがあるなら「SEO+AIO運用」、記事で流入そのものをつくるなら「オウンドメディア+LP運用」。両方まとめてお任せいただくこともできます。"
           />
@@ -189,7 +183,6 @@ export default function AioDetail() {
                   <div className="flex items-baseline gap-3">
                     <span className="num text-3xl font-bold text-gold/40" aria-hidden>0{i + 1}</span>
                     <div>
-                      <p className="font-data text-[0.6rem] uppercase tracking-[0.24em] text-pulse">{a.en}</p>
                       <h3 className="mt-1 text-2xl font-bold">{a.name}</h3>
                     </div>
                   </div>
@@ -201,9 +194,7 @@ export default function AioDetail() {
                     こんな状態なら: {a.forWhom}
                   </p>
 
-                  <p className="font-data mt-8 text-[0.6rem] uppercase tracking-[0.24em] text-pulse">
-                    Scope — 支援内容
-                  </p>
+                  <p className="mt-8 text-[13px] font-bold text-pulse">支援内容</p>
                   <ul className="mt-4 grid gap-3 border-t border-line pt-5">
                     {a.scope.map((s) => (
                       <li key={s} className="flex items-start gap-3 text-sm leading-7">
@@ -237,7 +228,6 @@ export default function AioDetail() {
             <div className="mt-6 rounded-3xl border border-line bg-mist p-8 shadow-card md:p-10">
               <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
                 <div>
-                  <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Why It Works</p>
                   <h3 className="mt-2 text-xl font-bold">{ownedMedia.why.title}</h3>
                   <p className="mt-5 text-sm leading-8 text-slate">
                     <Rich text={ownedMedia.why.body} />
@@ -261,7 +251,7 @@ export default function AioDetail() {
 
           {/* リード獲得までの4段階 */}
           <div className="mt-10">
-            <p className="eyebrow">Flow — 記事が問い合わせに変わるまで</p>
+            <p className="eyebrow">記事が問い合わせに変わるまで</p>
             <div className="mt-5">
               <FlowSteps steps={[...ownedMedia.steps]} />
             </div>
@@ -273,7 +263,6 @@ export default function AioDetail() {
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="tools-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Tools"
             title="使用するツール"
             lead="推測ではなく==実測==で運用します。計測はGoogle公式ツールで行い、現在地の把握には当社が公開している無料セルフチェック（開発：YW／CONFLUX PARTNERS）を使います。"
           />
@@ -283,7 +272,6 @@ export default function AioDetail() {
             <div className="grid gap-6">
             <Reveal className="overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
               <div className="border-b border-line p-7 md:p-8">
-                <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Measurement</p>
                 <h3 className="mt-2 text-lg font-bold">計測・運用に使うツール</h3>
               </div>
               <ul>
@@ -324,7 +312,6 @@ export default function AioDetail() {
             {/* 自社の無料診断ツール */}
             <div className="grid gap-4">
               <Reveal delay={0.08}>
-                <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Free Diagnostics</p>
                 <h3 className="mt-2 text-lg font-bold">当社の無料セルフチェック</h3>
                 <p className="mt-3 text-xs leading-7 text-slate">
                   運営メディア「AI集客ラボ」で公開しています。登録不要・その場で結果が出ます。
@@ -341,7 +328,7 @@ export default function AioDetail() {
                 <div className="rounded-2xl border-2 border-pulse bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between gap-3">
                     <h4 className="text-base font-bold">URL診断（サイトの14項目を採点）</h4>
-                    <span className="font-data shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-pulse">
+                    <span className="shrink-0 text-xs font-bold text-pulse">
                       URL入力だけ・14項目
                     </span>
                   </div>
@@ -361,7 +348,7 @@ export default function AioDetail() {
                   >
                     <div className="flex items-baseline justify-between gap-3">
                       <h4 className="text-base font-bold group-hover:text-pulse">{d.name}</h4>
-                      <span className="font-data shrink-0 text-[0.62rem] font-bold uppercase tracking-[0.14em] text-slate">
+                      <span className="shrink-0 text-xs font-bold text-slate">
                         {d.spec}
                       </span>
                     </div>
@@ -378,7 +365,7 @@ export default function AioDetail() {
 
           {/* 運用を支える自動化 */}
           <div className="mt-10">
-            <p className="eyebrow">Automation — 運用を支える自社の仕組み</p>
+            <p className="eyebrow">運用を支える自社の仕組み</p>
             <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
               月60本の記事を、品質を落とさずに出し続けることは手作業では成立しません。
               <mark className="marker">記事の生成から公開まで、問い合わせの受信から記録まで</mark>
@@ -414,7 +401,6 @@ export default function AioDetail() {
       <section className="border-t border-line py-20 md:py-28" aria-labelledby="industries-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Industries"
             title="業種ごとに、AIが答えに使う情報は違う"
             lead="医療・不動産・工務店・士業は、業種ごとに==AIが出典にするサイトの種類==を調べ、その結果にもとづいて対策しています。そのほかの業種にも幅広く対応しています。"
           />
@@ -444,7 +430,6 @@ export default function AioDetail() {
       <section className="py-20 md:py-28" aria-labelledby="plans-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Plans"
             title="診断は無料。まず現在地を知ってから。"
             lead="いきなり運用契約は必要ありません。==サイト診断を無料==で受けて、改善リストだけ持ち帰ることもできます。"
           />

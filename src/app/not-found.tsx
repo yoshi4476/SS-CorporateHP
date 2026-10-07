@@ -10,7 +10,7 @@ export default function NotFound() {
       <WaveText text="404" className="pointer-events-none absolute -top-4 right-0 select-none text-[22vw] leading-none tracking-tighter opacity-20" />
       <div className="relative mx-auto max-w-5xl px-5 py-20 md:py-28">
         <span aria-hidden className="block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
-        <p className="eyebrow mt-6">404 — Page Not Found</p>
+        <p className="eyebrow mt-6">404 ページが見つかりません</p>
         <h1 className="mt-4 text-3xl font-black leading-snug md:text-5xl">
           お探しのページが
           <br />
@@ -38,7 +38,7 @@ export default function NotFound() {
 
         <div className="mt-16 grid gap-10 border-t border-line pt-10 md:grid-cols-[1.2fr_1fr]">
           <div>
-            <p className="eyebrow">Services</p>
+            <p className="eyebrow">事業内容</p>
             <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
               {services.map((s, i) => (
                 <li key={s.slug}>
@@ -59,7 +59,7 @@ export default function NotFound() {
             </ul>
           </div>
           <div>
-            <p className="eyebrow">Company</p>
+            <p className="eyebrow">会社情報</p>
             <ul className="mt-5 grid gap-2.5 text-sm">
               <li>
                 <Link href="/services" className="text-slate transition-colors hover:text-pulse">

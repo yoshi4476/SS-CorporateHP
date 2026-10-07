@@ -124,7 +124,7 @@ export default async function ServicePage({ params }: Props) {
           <div className="mt-10">
             <div>
               <Reveal delay={0.06}>
-                <p className="eyebrow !text-aqua">{service.en}</p>
+                <p aria-hidden className="eyebrow !text-aqua" />
                 <h1 className="mt-4 max-w-3xl text-3xl font-black leading-normal md:text-6xl md:leading-snug">
                   {service.name}
                 </h1>
@@ -242,7 +242,6 @@ export default async function ServicePage({ params }: Props) {
         <section className="border-y border-line py-20 md:py-24" aria-labelledby="usecase-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
-              en="Use Case"
               title="どんなときに使うサービスか"
               lead={`事業によって用途が違います。${service.name}が向いている場面と業種を整理しました。`}
             />
@@ -250,7 +249,6 @@ export default async function ServicePage({ params }: Props) {
             <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
               {service.useCase && (
                 <Reveal className="rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
-                  <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Purpose</p>
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
                   <p className="mt-5 text-sm leading-9 text-slate md:text-base">
                     <RichLinked text={service.useCase.body} />
@@ -260,7 +258,6 @@ export default async function ServicePage({ params }: Props) {
 
               {service.menu && (
                 <Reveal delay={0.1} className="rounded-3xl border border-line bg-white p-8 shadow-card md:p-10">
-                  <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">Menu</p>
                   <h3 className="mt-2 text-xl font-bold">代表的なご依頼内容</h3>
                   <ul className="mt-6 grid gap-3 border-t border-line pt-6">
                     {service.menu.map((m) => (
@@ -303,7 +300,7 @@ export default async function ServicePage({ params }: Props) {
 
             {service.industries && (
               <div className="mt-10">
-                <p className="eyebrow">Industries — 適している業種</p>
+                <p className="eyebrow">適している業種</p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                   {service.industries.map((ind, i) => (
                     <Reveal key={ind.name} delay={(i % 4) * 0.08}>
@@ -330,7 +327,7 @@ export default async function ServicePage({ params }: Props) {
       {/* こんなお悩みありませんか */}
       <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Problem" title="こんなお悩みはありませんか?" />
+          <SectionHead title="こんなお悩みはありませんか?" />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {service.challenges.map((c, i) => (
               <Reveal key={c} delay={i * 0.07}>
@@ -368,7 +365,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 特長 */}
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Strength" title={`${service.name}の特長`} />
+          <SectionHead title={`${service.name}の特長`} />
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
           <Reveal>
             <figure className="relative mt-12 aspect-[16/9] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
@@ -400,7 +397,6 @@ export default async function ServicePage({ params }: Props) {
         <section id="examples" className="scroll-mt-24 border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
-              en="Examples"
               title="実際の取り組み例"
               lead="どんな状況で、何をして、どう変わったか。代表的なケースをご紹介します。"
             />
@@ -411,15 +407,15 @@ export default async function ServicePage({ params }: Props) {
                     <span className="num text-xs font-bold text-pulse">CASE 0{i + 1}</span>
                     <div className="mt-5 grid gap-5">
                       <div>
-                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-faint">Before</p>
+                        <p className="text-[13px] font-bold text-faint">以前の状況</p>
                         <p className="mt-2 text-sm font-bold leading-7">{ex.situation}</p>
                       </div>
                       <div className="border-t border-line pt-5">
-                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-pulse">Action</p>
+                        <p className="text-[13px] font-bold text-pulse">行ったこと</p>
                         <p className="mt-2 text-xs leading-7 text-slate">{ex.action}</p>
                       </div>
                       <div className="rounded-2xl bg-pulse/5 p-5">
-                        <p className="font-data text-[0.58rem] uppercase tracking-[0.2em] text-pulse">After</p>
+                        <p className="text-[13px] font-bold text-pulse">変わったこと</p>
                         <p className="mt-2 text-xs font-medium leading-7 text-ink">{ex.result}</p>
                       </div>
                     </div>
@@ -440,7 +436,6 @@ export default async function ServicePage({ params }: Props) {
       <section className="border-y border-gold/20 bg-gold-tint py-20 md:py-28" aria-labelledby="insight-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
-            en="Insight"
             title="プロの視点で、深掘りする"
             lead={`${service.name}で成果を出すために、知っておいてほしいことがあります。`}
           />
@@ -482,7 +477,6 @@ export default async function ServicePage({ params }: Props) {
         <section className="py-20 md:py-24" aria-labelledby="meo-data-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
-              en="How MEO Works"
               title="MEOの仕組みを、図で理解する"
               lead="「地名×キーワード」で検索したとき、マップの==上位3位以内==に表示されること。それがMEOのゴールです。"
             />
@@ -515,7 +509,6 @@ export default async function ServicePage({ params }: Props) {
 
             <div className="mt-20">
               <SectionHead
-                en="Results"
                 title="データで見るMEO運用の成果"
                 lead="通算3,200店舗の運用から得た実践データ。業種を問わず、90日を目安に順位とアクション数の変化を可視化します。"
               />
@@ -539,7 +532,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 進め方 */}
       <section className={`py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Process" title="ご支援の流れ" />
+          <SectionHead title="ご支援の流れ" />
           <div className="mt-12">
             <FlowSteps steps={service.flow} />
           </div>
@@ -551,7 +544,7 @@ export default async function ServicePage({ params }: Props) {
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead en="FAQ" title="よくあるご質問" />
+            <SectionHead title="よくあるご質問" />
           </div>
           <div>
             <FaqList items={service.faq} />
@@ -562,7 +555,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 他のサービス */}
       <section className="py-20 md:py-24" aria-labelledby="others-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead en="Other Services" title="他の事業を見る" />
+          <SectionHead title="他の事業を見る" />
           <div className="mt-10 flex flex-wrap gap-3">
             {others.map((s) => (
               <Link

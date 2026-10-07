@@ -30,7 +30,7 @@ export default function ThemeIndex() {
           <nav aria-label="パンくず" className="text-xs text-slate">
             <Link href="/blog" className="hover:text-pulse">経理BPOブログ</Link>
           </nav>
-          <p className="eyebrow mt-6">Themes</p>
+          <p className="eyebrow mt-6">経理BPOブログ</p>
           <h1 className="mt-4 text-3xl font-black md:text-5xl">テーマから探す</h1>
           <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
             記事を困りごとの単位で束ねています。各テーマの最初に全体像をつかむ1本を置き、そこから個別の記事へ進める作りです。

@@ -55,7 +55,6 @@ export default function KeiriTwoTracks() {
     <section className="border-y border-line bg-mist py-16 md:py-24" id="two-tracks">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead
-          en="Two Ways"
           title="任せるか、自社で使うか。2つから選べます"
           lead="経理の悩みは会社によって違います。==実務ごと引き受ける形==と、==同じシステムを自社で使う形==の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
         />
@@ -64,9 +63,6 @@ export default function KeiriTwoTracks() {
           {TRACKS.map((t, i) => (
             <Reveal key={t.key} delay={i * 0.08}>
               <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card md:p-9">
-                <p className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-pulse">
-                  {t.en}
-                </p>
                 <div className="mt-3 flex flex-wrap items-baseline gap-3">
                   <span className="rounded-full bg-pulse px-3 py-1 text-[0.7rem] font-bold text-white">
                     {t.tag}

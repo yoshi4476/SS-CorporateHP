@@ -274,9 +274,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 className="group my-10 flex items-start gap-5 rounded-3xl border border-gold/30 bg-gold-tint p-7 transition-colors hover:border-gold/60"
               >
                 <span className="min-w-0 flex-1">
-                  <span className="font-data text-[0.62rem] uppercase tracking-[0.24em] text-gold-deep">
-                    Service
-                  </span>
+<span className="text-[13px] font-bold text-gold-deep">事業のご案内</span>
                   <span className="mt-2 block text-base font-bold text-ink md:text-lg">
                     {svc.name}
                   </span>
@@ -425,7 +423,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   {PRODUCT_LINKS.map((p) => (
                     <li key={p.href}>
                       <Link href={p.href} className="group block">
-                        <span className="font-data text-[0.6rem] uppercase tracking-[0.18em] text-pulse">
+                        <span className="text-xs font-bold text-pulse">
                           {p.kind}
                         </span>
                         <span className="mt-1 block text-sm font-bold leading-snug group-hover:text-pulse">

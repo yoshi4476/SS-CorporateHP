@@ -44,7 +44,7 @@ export default function ContactPage() {
                 </li>
               </ol>
             </nav>
-            <p className="eyebrow mt-8">Contact</p>
+            <p aria-hidden className="eyebrow mt-8" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">無料相談・お問い合わせ</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
               「何から始めればいいか分からない」という段階のご相談も歓迎です。通常1営業日以内にご返信します。お急ぎの場合はお電話ください。
@@ -62,7 +62,7 @@ export default function ContactPage() {
           <div className="grid gap-5">
             <Reveal delay={0.14}>
               <div className="rounded-2xl bg-ink p-7 text-white" data-cta-pos="contact-tel">
-                <p className="eyebrow !text-aqua">Tel</p>
+                <p className="eyebrow !text-aqua">お電話でのご相談</p>
                 <a
                   href={`tel:${site.tel.replaceAll("-", "")}`}
                   className="num mt-3 block text-3xl font-bold tracking-wide hover:text-aqua"

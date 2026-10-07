@@ -71,7 +71,7 @@ export default async function ThemePage({ params }: Props) {
               <span className="mx-2">/</span>
               <Link href="/blog/theme" className="hover:text-pulse">テーマから探す</Link>
             </nav>
-            <p className="eyebrow mt-6">Theme</p>
+            <p className="eyebrow mt-6">テーマ</p>
             <h1 className="mt-4 text-3xl font-black leading-[1.35] md:text-5xl">{t.name}</h1>
             <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">{t.lead}</p>
             <p className="num mt-6 text-sm font-bold text-pulse">{t.count}本の記事</p>

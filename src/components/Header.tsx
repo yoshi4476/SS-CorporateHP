@@ -40,13 +40,13 @@ const RELATED_SITES: { href: string; label: string; note: string }[] = [
   { href: site.labUrl, label: "AI集客ラボ", note: "AI検索・MEO・SEOの運営メディア" },
 ];
 
-const MAIN_LINKS: { href: string; label: string; en: string }[] = [
-  { href: "/", label: "トップ", en: "Top" },
-  { href: "/services", label: "事業内容", en: "Services" },
-  { href: "/company", label: "会社概要", en: "Company" },
-  { href: "/blog", label: "経理BPOブログ", en: "Blog" },
-  { href: "/news", label: "お知らせ", en: "News" },
-  { href: "/contact", label: "無料相談", en: "Contact" },
+const MAIN_LINKS: { href: string; label: string }[] = [
+  { href: "/", label: "トップ" },
+  { href: "/services", label: "事業内容" },
+  { href: "/company", label: "会社概要" },
+  { href: "/blog", label: "経理BPOブログ" },
+  { href: "/news", label: "お知らせ" },
+  { href: "/contact", label: "無料相談" },
 ];
 
 export default function Header() {
@@ -149,9 +149,7 @@ export default function Header() {
                       {/* 自社プロダクト。受託の事業とは性質が違うので列を分ける */}
                       <ul className="border-l border-line pl-3">
                         <li>
-                          <p className="px-4 pb-1 pt-2 font-data text-[0.6rem] uppercase tracking-[0.2em] text-faint">
-                            Products
-                          </p>
+                          <p className="px-4 pb-1 pt-2 text-xs font-bold text-slate">自社プロダクト</p>
                         </li>
                         {PRODUCTS.map((p) => (
                           <li key={p.href}>
@@ -313,9 +311,6 @@ export default function Header() {
                     <span className="text-3xl font-black tracking-tight transition-colors group-hover:text-aqua md:text-5xl">
                       {l.label}
                     </span>
-                    <span className="font-data hidden text-[0.65rem] uppercase tracking-[0.28em] text-white/60 md:inline">
-                      {l.en}
-                    </span>
                   </Link>
                 </li>
               ))}
@@ -329,7 +324,7 @@ export default function Header() {
               }`}
             >
               <div>
-                <p className="eyebrow !text-aqua">Services</p>
+                <p className="eyebrow !text-aqua">事業内容</p>
                 <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {services.map((s) => (
                     <li key={s.slug}>
@@ -344,7 +339,7 @@ export default function Header() {
                 </ul>
               </div>
               <div className="border-t border-white/10 pt-6">
-                <p className="eyebrow !text-aqua">Products — 自社プロダクト</p>
+                <p className="eyebrow !text-aqua">自社プロダクト</p>
                 <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {PRODUCTS.map((p) => (
                     <li key={p.href}>
@@ -382,7 +377,7 @@ export default function Header() {
               </div>
 
               <div className="border-t border-white/10 pt-6">
-                <p className="eyebrow !text-aqua">Related Sites — 運営サイト</p>
+                <p className="eyebrow !text-aqua">運営サイト</p>
                 <ul className="mt-2 grid gap-0 md:mt-4 md:gap-2.5">
                   {RELATED_SITES.map((r) => (
                     <li key={r.href}>
