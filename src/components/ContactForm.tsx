@@ -63,7 +63,7 @@ function DoneSteps({ slug }: { slug: string }) {
         {nextSteps(slug).map((s) => {
           const inner = (
             <>
-              <span className="shrink-0 rounded-full bg-gold-tint px-3 py-1 text-[13px] font-bold text-gold-deep">{s.kind}</span>
+              <span className="w-16 shrink-0 rounded-full bg-gold-tint py-1 text-center text-[13px] font-bold text-gold-deep">{s.kind}</span>
               <span className="min-w-0 flex-1">
                 <span className="block text-[15px] font-bold leading-7 text-ink group-hover:text-pulse">
                   {s.title}
