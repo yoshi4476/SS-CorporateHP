@@ -994,3 +994,13 @@ export const services: Service[] = [
 export function getService(slug: string) {
   return services.find((s) => s.slug === slug);
 }
+
+/**
+ * 事業の3つの領域（group の表示名と目的）。全体像の図（トップ・事業一覧）・数字の区画・会社概要で同じ名前を使う。
+ * 補助金は単独で使うものではなく、業務の仕組みの導入費用を下げるために使う（ai-subsidy の useCase）
+ */
+export const areas: { group: Service["group"]; name: string; purpose: string }[] = [
+  { group: "集客", name: "集客", purpose: "問い合わせと来店を増やす" },
+  { group: "業務", name: "経理・社内業務", purpose: "人を増やさずに回す" },
+  { group: "資金", name: "補助金", purpose: "導入の費用を抑える" },
+];

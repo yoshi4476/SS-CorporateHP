@@ -862,12 +862,16 @@ mark.marker-aqua {
 }
 @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
 
-/* 図の伸び（ResearchBand）。Reveal が画面外の図に .rv を付け、入ってきたら .is-in を足すので、
-   そのときだけ棒が伸びる。最初から見えている図と、動きを減らす設定では
+/* 図の伸び（NumberWall・ResearchBand）。Reveal が画面外の図に .rv を付け、入ってきたら .is-in を足すので、
+   そのときだけ棒が伸び・線が引かれ・輪が満ちる。最初から見えている図と、動きを減らす設定では
    .rv が付かないので、動かずに完成した形で描かれる（JSが無くても同じ） */
 .vz-grow { transform-origin: left center; transform-box: fill-box; }
 .rv .vz-grow { transform: scaleX(0); }
+.rv .vz-draw { stroke-dashoffset: 1; }
+.rv .vz-ring { stroke-dashoffset: var(--vz-c); }
 .rv.is-in .vz-grow { transform: none; transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
+.rv.is-in .vz-draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
+.rv.is-in .vz-ring { stroke-dashoffset: var(--vz-off); transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
 
 /* イントロ前の目隠し。layout.tsx のインラインスクリプトが付け、IntroLoader が外す */
 html.ss-intro-pending::before {

@@ -2,18 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
-
-// MEO運用 累計支援店舗数の推移 (実績値)
-const DATA: { year: string; total: number }[] = [
-  { year: "2019", total: 150 },
-  { year: "2020", total: 420 },
-  { year: "2021", total: 850 },
-  { year: "2022", total: 1350 },
-  { year: "2023", total: 1950 },
-  { year: "2024", total: 2500 },
-  { year: "2025", total: 2950 },
-  { year: "2026", total: 3200 },
-];
+import { meoGrowth as DATA } from "@/lib/meo";
 
 const W = 680;
 const H = 320;

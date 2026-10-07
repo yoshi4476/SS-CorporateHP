@@ -10,7 +10,8 @@ const CASE_PHOTO: Record<string, string> = {
   リフォーム業: "/images/case-reform.webp",
   製造業: "/images/case-seizou.webp",
 };
-import SenseNetwork from "@/components/SenseNetwork";
+import BusinessMap from "@/components/BusinessMap";
+import NumberWall from "@/components/NumberWall";
 import GrowthChart from "@/components/GrowthChart";
 import BusinessShowcase from "@/components/BusinessShowcase";
 import SelfCheckBand from "@/components/SelfCheckBand";
@@ -66,15 +67,6 @@ const COMPARE_ROWS: { label: string; seo: string; meo: string; aio: string }[] =
   { label: "目指す状態", seo: "検索上位に表示", meo: "地図上位で来店獲得", aio: "AIに引用・推薦される" },
   { label: "評価の軸", seo: "被リンク・コンテンツ品質", meo: "口コミ・情報の充実度", aio: "一次情報・構造化・実在性" },
   { label: "当社の対応", seo: "HP制作・メディア運用", meo: "運用代行(通算3,200店舗)", aio: "AIO運用代行" },
-];
-
-const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
-  { value: 3200, suffix: "店舗", label: "MEO運用 通算支援実績" },
-  { value: 94, suffix: "%", label: "運用サービス契約継続率" },
-  { value: 1.8, suffix: "倍", label: "マップ経由アクション平均改善" },
-  { value: services.length, suffix: "事業", label: "AI×マーケの事業領域" },
-  { value: 30, suffix: "%〜", label: "AI導入による工数削減目安" },
-  { value: 350, suffix: "万円", label: "受発注・会計ソフトの補助上限" },
 ];
 
 // 帯は事業データから作る。事業を増やせばここも自動で増える。
@@ -206,20 +198,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 事業: 横スクロールレール */}
+      {/* 事業: 全体像の図（困りごと → 効く事業）と、事業ごとの入口 */}
+      {/* 以前は右に飾りのネットワーク図を置いていたが、経理BPOが入っておらず、どれが何に効くかも読み取れなかった */}
       <section id="services" className="scroll-mt-24 border-y border-line bg-mist" aria-labelledby="services-heading">
         <div className="mx-auto max-w-7xl px-5 pt-20 md:pt-28">
-          <div className="grid items-center gap-10 md:grid-cols-[1.2fr_1fr]">
-            <SectionHead
-              title={`${services.length}つの事業が、ひとつにつながる`}
-              lead={`戦略(AIコンサル)・実装(開発・制作)・集客(MEO・AIO×オウンドメディア)・資金(補助金)——==${services.length}つの事業をひとつのチームで一気通貫==に支援します。`}
-            />
-            <Reveal delay={0.1} className="mx-auto w-full max-w-xs md:max-w-md lg:max-w-lg">
-              <SenseNetwork className="animate-float h-auto w-full" />
-            </Reveal>
+          <SectionHead
+            id="services-heading"
+            title={`${services.length}つの事業が、ひとつにつながる`}
+            lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。==困りごとから、効く事業を選べます==。どれを選んでも、窓口はひとつのチームです。`}
+          />
+          <div className="mt-12">
+            <BusinessMap />
           </div>
         </div>
-        <div className="mx-auto max-w-7xl px-5 pb-20 pt-12 md:pb-28 md:pt-14">
+        <div className="mx-auto max-w-7xl px-5 pb-20 pt-14 md:pb-28 md:pt-16">
           <BusinessShowcase />
           <Reveal delay={0.2}>
             <Link
@@ -260,20 +252,8 @@ export default function Home() {
               成果は、数字で語る。
             </h2>
           </Reveal>
-          <div className="mt-16 grid grid-cols-1 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10">
-            {MEGA_STATS.map((s, i) => (
-              <Reveal key={s.label} delay={(i % 3) * 0.1}>
-                {/* 縦罫と単位を金にして、紺一色の面に温度を足す */}
-                <div className="border-l-2 border-gold-bright/70 pl-6">
-                  <p className="mega-num text-6xl text-white md:text-7xl lg:text-8xl">
-                    <CountUp value={s.value} duration={1.4 + (i % 3) * 0.3} />
-                    <span className="ml-1 text-3xl text-gold-bright md:text-4xl">{s.suffix}</span>
-                  </p>
-                  <p className="mt-4 text-sm leading-7 text-white/60">{s.label}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          {/* 数字ごとに、中身が一目で分かる小さな図を添える（推移・割合・前後・内訳・削減の目安・対象） */}
+          <NumberWall />
         </div>
       </section>
 

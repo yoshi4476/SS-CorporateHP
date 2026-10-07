@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import BusinessMap from "@/components/BusinessMap";
 import { Reveal } from "@/components/motion";
 import { CtaBand, SectionHead } from "@/components/ui";
 import { services } from "@/lib/services";
@@ -116,6 +117,20 @@ export default function ServicesIndexPage() {
               ))}
             </ul>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 困りごとから選ぶ（トップと同じ全体像の図）。一覧の前に、どれが自社に効くかの見当をつけてもらう */}
+      <section id="map" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="map-heading">
+        <div className="mx-auto max-w-7xl px-5">
+          <SectionHead
+            id="map-heading"
+            title="困りごとから選ぶ"
+            lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。よくある困りごとから、効く事業へ線を引きました。`}
+          />
+          <div className="mt-12">
+            <BusinessMap />
+          </div>
         </div>
       </section>
 
