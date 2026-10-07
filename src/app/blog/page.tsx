@@ -18,6 +18,7 @@ import { themes } from "@/lib/themes";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { pageMeta } from "@/lib/meta";
+import { readingLinks } from "@/lib/reading";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
@@ -235,7 +236,7 @@ export default function BlogPage() {
         <div className="mx-auto max-w-7xl px-5">
           {/* 新着順だけでは、同じ困りごとの記事を続けて読めない */}
           <SectionHead en="Themes" title="テーマから探す" />
-          <ul className="mb-16 mt-8 flex flex-wrap gap-3">
+          <ul className="mt-8 flex flex-wrap gap-3">
             {themes.map((t) => (
               <li key={t.slug}>
                 <Link href={`/blog/theme/${t.slug}`} className="tap inline-block rounded-full border border-line-strong bg-raise px-5 py-2.5 text-sm font-bold hover:border-pulse hover:text-pulse">
@@ -244,6 +245,17 @@ export default function BlogPage() {
               </li>
             ))}
           </ul>
+          {/* 比較表・用語集・調査は記事から作ったまとめ。どこからもリンクが無く孤立していた */}
+          <p className="mb-16 mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+            <span className="font-bold text-slate">ほかの探し方</span>
+            {readingLinks()
+              .filter((r) => r.href !== "/blog/theme")
+              .map((r) => (
+                <Link key={r.href} href={r.href} className="tap font-bold text-pulse underline-offset-4 hover:underline">
+                  {r.label}
+                </Link>
+              ))}
+          </p>
           <SectionHead en="Latest" title="新着記事" />
 
 

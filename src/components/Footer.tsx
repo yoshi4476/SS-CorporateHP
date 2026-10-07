@@ -4,6 +4,7 @@ import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { site } from "@/lib/site";
 import { toolsIndex } from "@/lib/aio";
+import { readingLinks } from "@/lib/reading";
 
 // 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、nofollow も付けない
 const credits = [
@@ -78,22 +79,41 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* 無料のセルフチェック。経理の記事の読者が多いので、自社の経理チェックを先頭に置く */}
-        <nav aria-label="無料セルフチェック">
-          <p className="eyebrow mb-4 !text-aqua">無料セルフチェック</p>
-          <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
-            <li>
-              <Link href="/tools/keiri-check" className="tap font-bold text-gold-bright transition-colors hover:text-white">
-                経理、外に出すべき？5問のセルフチェック
-              </Link>
-            </li>
-            <li>
-              <a href={toolsIndex} target="_blank" rel="noopener" className="tap transition-colors hover:text-white">
-                Web集客・AI検索の無料診断（AI集客ラボ） ↗
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <div className="grid content-start gap-8">
+          {/* 無料のセルフチェック。経理の記事の読者が多いので、自社の経理チェックを先頭に置く */}
+          <nav aria-label="無料セルフチェック">
+            <p className="eyebrow mb-4 !text-aqua">無料セルフチェック</p>
+            <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
+              <li>
+                <Link href="/tools/keiri-check" className="tap font-bold text-gold-bright transition-colors hover:text-white">
+                  経理、外に出すべき？5問のセルフチェック
+                </Link>
+              </li>
+              <li>
+                <a href={toolsIndex} target="_blank" rel="noopener" className="tap transition-colors hover:text-white">
+                  Web集客・AI検索の無料診断（AI集客ラボ） ↗
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <nav aria-label="経理BPOブログ">
+            <p className="eyebrow mb-4 !text-aqua">経理BPOブログ</p>
+            <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
+              <li>
+                <Link href="/blog" className="tap font-bold transition-colors hover:text-white">
+                  記事の一覧
+                </Link>
+              </li>
+              {readingLinks().map((r) => (
+                <li key={r.href}>
+                  <Link href={r.href} className="tap transition-colors hover:text-white">
+                    {r.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
         <div className="grid content-start gap-8">
           <nav aria-label="会社情報">
