@@ -99,7 +99,7 @@ function LabelText({ text, required = false }: { text: string; required?: boolea
     <span className="flex items-center gap-2">
       {text}
       {required && (
-        <span className="rounded bg-pulse px-1.5 py-0.5 text-[0.625rem] font-bold leading-none text-white">
+        <span className="rounded bg-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-white">
           必須
         </span>
       )}
@@ -353,7 +353,7 @@ export default function ContactForm() {
         </label>
       </div>
 
-      <label className="flex items-start gap-3 text-xs leading-6 text-slate">
+      <label className="flex items-start gap-3 text-sm leading-7 text-slate">
         <input
           required
           type="checkbox"
@@ -366,14 +366,14 @@ export default function ContactForm() {
             プライバシーポリシー
           </Link>
           に同意する
-          <span className="ml-2 rounded bg-pulse px-1.5 py-0.5 text-[0.625rem] font-bold leading-none text-white">
+          <span className="ml-2 rounded bg-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-white">
             必須
           </span>
         </span>
       </label>
 
       {state === "error" && (
-        <p role="alert" className="rounded-xl border border-pulse/30 bg-pulse/5 px-4 py-3 text-xs leading-6 text-ink">
+        <p role="alert" className="rounded-xl border border-pulse/30 bg-pulse/5 px-4 py-3 text-sm leading-7 text-ink">
           {errorMsg}
           <br />
           お急ぎの場合はお電話(
@@ -391,7 +391,7 @@ export default function ContactForm() {
       >
         {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>
-      <p className="text-xs leading-6 text-slate">
+      <p className="text-sm leading-7 text-slate">
         いただいた情報は、相談対応の目的以外には使用しません。
       </p>
     </form>

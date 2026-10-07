@@ -32,7 +32,7 @@ export default function ThemeIndex() {
           </nav>
           <p className="eyebrow mt-6">経理BPOブログ</p>
           <h1 className="mt-4 text-3xl font-black md:text-5xl">テーマから探す</h1>
-          <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+          <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
             記事を困りごとの単位で束ねています。各テーマの最初に全体像をつかむ1本を置き、そこから個別の記事へ進める作りです。
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function ThemeIndex() {
                     <span className="text-lg font-black group-hover:text-pulse">{t.name}</span>
                     <span className="num shrink-0 text-xs font-bold text-pulse">{t.count}本</span>
                   </span>
-                  <span className="mt-3 block text-xs leading-7 text-slate">{t.lead}</span>
+                  <span className="mt-3 block text-sm leading-7 text-slate">{t.lead}</span>
                   <span className="mt-4 block text-xs font-bold text-ink">まず読む: {t.pillarPost.title}</span>
                 </span>
               </Link>

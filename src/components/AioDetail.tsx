@@ -43,8 +43,8 @@ export default function AioDetail() {
               <p className="mt-3 text-sm font-bold leading-7">
                 の検索が、<mark className="marker">クリックされずに終わる</mark>
               </p>
-              <p className="mt-4 text-xs leading-6 text-slate">{zeroClick.note}</p>
-              <p className="mt-4 border-t border-line pt-3 text-[0.62rem] text-slate">出典: {zeroClick.source}</p>
+              <p className="mt-4 text-sm leading-7 text-slate">{zeroClick.note}</p>
+              <p className="mt-4 border-t border-line pt-3 text-xs text-slate">出典: {zeroClick.source}</p>
             </Reveal>
 
             {/* SEO vs AIO 比較表 */}
@@ -66,8 +66,8 @@ export default function AioDetail() {
                   {seoVsAio.map((r) => (
                     <tr key={r.axis} className="border-b border-line last:border-0">
                       <th scope="row" className="p-5 text-left text-xs font-medium text-slate">{r.axis}</th>
-                      <td className="p-5 text-xs leading-6 text-slate md:text-sm">{r.seo}</td>
-                      <td className="bg-pulse/5 p-5 text-xs font-medium leading-6 text-ink md:text-sm">{r.aio}</td>
+                      <td className="p-5 text-sm leading-7 text-slate">{r.seo}</td>
+                      <td className="bg-pulse/5 p-5 text-sm font-medium leading-7 text-ink">{r.aio}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -105,7 +105,7 @@ export default function AioDetail() {
                 <article className="h-full rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <p className="font-data text-2xl font-bold text-pulse">{g.term}</p>
                   <p className="font-data mt-1 text-xs text-slate">{g.en}</p>
-                  <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
+                  <p className="mt-4 text-sm leading-7 text-slate">{g.body}</p>
                 </article>
               </Reveal>
             ))}
@@ -151,7 +151,7 @@ export default function AioDetail() {
           <Reveal delay={0.15}>
             <div className="mt-6 rounded-3xl border border-line bg-raise p-8 shadow-card">
               <h3 className="mt-2 text-lg font-bold">成果は、4つの指標を併用して測る</h3>
-              <p className="mt-3 max-w-3xl text-xs leading-7 text-slate">
+              <p className="mt-3 max-w-3xl text-sm leading-7 text-slate">
                 AIOには検索順位のような明確な単一指標がありません。そこで複数の指標を組み合わせ、
                 <strong className="font-bold text-ink">単月の数字ではなく傾向で判断</strong>します。
               </p>
@@ -159,7 +159,7 @@ export default function AioDetail() {
                 {metrics.map((m, i) => (
                   <div key={m} className="rounded-xl border border-line bg-mist/60 p-4">
                     <span className="num text-xs font-bold text-pulse">0{i + 1}</span>
-                    <p className="mt-1.5 text-xs leading-6">{m}</p>
+                    <p className="mt-1.5 text-sm leading-7">{m}</p>
                   </div>
                 ))}
               </div>
@@ -188,9 +188,9 @@ export default function AioDetail() {
                   </div>
 
                   <p className="mt-6 text-lg font-bold leading-8">{a.catch}</p>
-                  <p className="mt-3 text-sm leading-8 text-slate">{a.lead}</p>
+                  <p className="mt-3 text-[15px] leading-[1.9] text-slate">{a.lead}</p>
 
-                  <p className="mt-6 rounded-xl bg-mist px-4 py-3 text-xs font-bold leading-6 text-ink">
+                  <p className="mt-6 rounded-xl bg-mist px-4 py-3 text-sm font-bold leading-7 text-ink">
                     こんな状態なら: {a.forWhom}
                   </p>
 
@@ -209,7 +209,7 @@ export default function AioDetail() {
                   </ul>
 
                   {a.bonus && (
-                    <p className="mt-6 rounded-xl bg-pulse/5 px-4 py-3 text-xs font-bold leading-6 text-pulse">
+                    <p className="mt-6 rounded-xl bg-pulse/5 px-4 py-3 text-sm font-bold leading-7 text-pulse">
                       特典: {a.bonus}
                     </p>
                   )}
@@ -229,7 +229,7 @@ export default function AioDetail() {
               <div className="grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
                 <div>
                   <h3 className="mt-2 text-xl font-bold">{ownedMedia.why.title}</h3>
-                  <p className="mt-5 text-sm leading-8 text-slate">
+                  <p className="mt-5 text-[15px] leading-[1.9] text-slate">
                     <Rich text={ownedMedia.why.body} />
                   </p>
                 </div>
@@ -241,7 +241,7 @@ export default function AioDetail() {
                         <span className="ml-1 text-sm font-bold text-pulse">{f.suffix}</span>
                       </p>
                       <p className="mt-2 text-xs font-bold">{f.label}</p>
-                      <p className="mt-1 text-[0.65rem] leading-5 text-slate">{f.note}</p>
+                      <p className="mt-1 text-sm leading-7 text-slate">{f.note}</p>
                     </div>
                   ))}
                 </div>
@@ -279,11 +279,11 @@ export default function AioDetail() {
                   <li key={t.name} className="border-b border-line p-7 last:border-0 md:p-8">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h4 className="text-base font-bold">{t.name}</h4>
-                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-[0.62rem] font-bold text-pulse">
+                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
                         {t.role}
                       </span>
                     </div>
-                    <p className="mt-3 text-xs leading-7 text-slate">{t.detail}</p>
+                    <p className="mt-3 text-sm leading-7 text-slate">{t.detail}</p>
                   </li>
                 ))}
               </ul>
@@ -293,7 +293,7 @@ export default function AioDetail() {
                   {monitored.map((m) => (
                     <li
                       key={m}
-                      className="font-data rounded-full border border-line-strong bg-raise px-3 py-1.5 text-[0.68rem] font-bold text-ink"
+                      className="font-data rounded-full border border-line-strong bg-raise px-3 py-1.5 text-xs font-bold text-ink"
                     >
                       {m}
                     </li>
@@ -313,10 +313,10 @@ export default function AioDetail() {
             <div className="grid gap-4">
               <Reveal delay={0.08}>
                 <h3 className="mt-2 text-lg font-bold">当社の無料セルフチェック</h3>
-                <p className="mt-3 text-xs leading-7 text-slate">
+                <p className="mt-3 text-sm leading-7 text-slate">
                   運営メディア「AI集客ラボ」で公開しています。登録不要・その場で結果が出ます。
                 </p>
-                <p className="mt-3 rounded-xl border border-line bg-raise px-4 py-3 text-xs leading-6 text-slate">
+                <p className="mt-3 rounded-xl border border-line bg-raise px-4 py-3 text-sm leading-7 text-slate">
                   簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方は
                   <Link href="/contact" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
                     ご連絡ください
@@ -332,7 +332,7 @@ export default function AioDetail() {
                       URL入力だけ・14項目
                     </span>
                   </div>
-                  <p className="mt-3 mb-5 text-xs leading-7 text-slate">
+                  <p className="mt-3 mb-5 text-sm leading-7 text-slate">
                     AIのクローラーを拒否していないか、検索に出さない設定になっていないか、会社情報や構造化データがあるか。100点満点で採点し、直す順番まで出します。
                   </p>
                   <AioScan src="corp_aio_tools" />
@@ -352,8 +352,8 @@ export default function AioDetail() {
                         {d.spec}
                       </span>
                     </div>
-                    <p className="mt-3 text-xs leading-7 text-slate">{d.body}</p>
-                    <p className="mt-4 text-[0.68rem] font-bold text-pulse">診断する ↗</p>
+                    <p className="mt-3 text-sm leading-7 text-slate">{d.body}</p>
+                    <p className="mt-4 text-xs font-bold text-pulse">診断する ↗</p>
                   </a>
                 </Reveal>
               ))}
@@ -366,7 +366,7 @@ export default function AioDetail() {
           {/* 運用を支える自動化 */}
           <div className="mt-10">
             <p className="eyebrow">運用を支える自社の仕組み</p>
-            <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
+            <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-slate">
               月60本の記事を、品質を落とさずに出し続けることは手作業では成立しません。
               <mark className="marker">記事の生成から公開まで、問い合わせの受信から記録まで</mark>
               を自社で組んだ仕組みで自動化しているから、この運用量が可能になっています。
@@ -377,16 +377,16 @@ export default function AioDetail() {
                   <article className="h-full rounded-2xl border border-line bg-raise p-7 shadow-card">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="font-data text-xl font-bold text-pulse">{a.name}</h3>
-                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-[0.62rem] font-bold text-pulse">
+                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
                         {a.role}
                       </span>
                     </div>
-                    <p className="mt-4 text-xs leading-7 text-slate">{a.detail}</p>
+                    <p className="mt-4 text-sm leading-7 text-slate">{a.detail}</p>
                   </article>
                 </Reveal>
               ))}
             </div>
-            <p className="mt-5 text-xs leading-7 text-slate">
+            <p className="mt-5 text-sm leading-7 text-slate">
               ※ このサイト自体が同じ仕組みで動いています。お問い合わせフォームは Google Apps Script で受信し、
               <Link href="/blog" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
                 経理BPOブログ
@@ -412,7 +412,7 @@ export default function AioDetail() {
                   <img src={x.image} alt={`${x.name}のAIO対策`} width={1280} height={720} loading="lazy" className="aspect-video w-full object-cover" />
                   <div className="p-6">
                     <h3 className="text-lg font-bold">{x.name}のAIO対策</h3>
-                    <p className="mt-3 text-xs leading-7 text-slate">{x.lead}</p>
+                    <p className="mt-3 text-sm leading-7 text-slate">{x.lead}</p>
                     <ul className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
                       <li><a href={x.lp} target="_blank" rel="noopener" className="inline-block rounded-full bg-pulse px-4 py-2 text-white hover:opacity-90">業種別のご案内 ↗</a></li>
                       <li><a href={x.research} target="_blank" rel="noopener" className="inline-block rounded-full border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">AIは何を出典にするか（調査） ↗</a></li>
@@ -442,7 +442,7 @@ export default function AioDetail() {
                   }`}
                 >
                   {p.featured && (
-                    <span className="mb-4 w-fit rounded-full bg-white/20 px-3 py-1 text-[0.6rem] font-bold">
+                    <span className="mb-4 w-fit rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
                       おすすめ
                     </span>
                   )}
@@ -455,7 +455,7 @@ export default function AioDetail() {
                       {p.unit}
                     </span>
                   </p>
-                  <p className={`mt-5 flex-1 text-xs leading-7 ${p.featured ? "text-white/80" : "text-slate"}`}>
+                  <p className={`mt-5 flex-1 text-sm leading-7 ${p.featured ? "text-white/80" : "text-slate"}`}>
                     {p.body}
                   </p>
                   {p.bonus && (
@@ -504,7 +504,7 @@ export default function AioDetail() {
                 運営メディア「AI集客ラボ」で学ぶ ↗
               </a>
             </div>
-            <p className="mt-5 text-center text-[0.68rem] leading-6 text-slate">
+            <p className="mt-5 text-center text-sm leading-7 text-slate">
               ※ 料金は2026年7月時点のもので、運営メディア「AI集客ラボ」の集客支援サービスの掲載内容に準じます。
               <br />
               課題も商圏も違うため一律料金にしていません。無料の現状分析の結果をもとに、必要な施策だけを組み合わせてお見積りします。

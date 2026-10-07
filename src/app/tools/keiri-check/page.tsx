@@ -69,7 +69,7 @@ export default function KeiriCheckPage() {
             <br />
             <span className="text-2xl md:text-4xl">5問でわかるセルフチェック</span>
           </h1>
-          <p className="mt-6 text-sm leading-8 text-slate md:text-base">
+          <p className="mt-6 text-[15px] leading-[1.9] text-slate md:text-base">
             5つの問いに「はい」か「いいえ」で答えると、経理のうち外に出せる範囲の目安と、次に読む記事が出ます。
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
@@ -85,7 +85,7 @@ export default function KeiriCheckPage() {
       <section className="pb-20 pt-4 md:pb-28">
         <div className="mx-auto max-w-3xl px-5">
           <KeiriCheck reads={reads} lawRead={postLink(LAW_READ)} />
-          <p className="mt-10 text-xs leading-6 text-slate">
+          <p className="mt-10 text-sm leading-7 text-slate">
             答えはこの画面の中だけで使い、どこにも送信しません。個人情報の入力もありません。
           </p>
         </div>

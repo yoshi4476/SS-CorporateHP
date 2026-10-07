@@ -95,7 +95,7 @@ export default function BlogPage() {
               <br />
               でも、抱え込む必要はない。
             </h1>
-            <p className="mt-8 max-w-2xl text-sm leading-9 text-slate md:text-base">
+            <p className="mt-8 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               記帳・請求・支払・給与計算。人が採れないのに、締切だけは毎月来ます。
               <mark className="marker">外に出す範囲と、社内に残す線引き</mark>
               を、中小企業の実務目線でまとめているメディアです。
@@ -164,7 +164,7 @@ export default function BlogPage() {
                   </span>
                   {f.suffix && <span className="ml-1 text-base font-bold text-pulse">{f.suffix}</span>}
                 </p>
-                <p className="mt-3 text-xs leading-6 text-slate">{f.label}</p>
+                <p className="mt-3 text-sm leading-7 text-slate">{f.label}</p>
               </div>
             </Reveal>
           ))}
@@ -183,7 +183,7 @@ export default function BlogPage() {
               <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
                 <Image src="/images/shelf/staffing-1.webp" alt="書類に追われる経理担当者のイメージ" fill sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
               </figure>
-              <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+              <p className="mt-3 text-xs text-slate">※ 写真はイメージです。</p>
             </Reveal>
           <div className="grid gap-4">
             {problems.map((p, i) => (
@@ -220,7 +220,7 @@ export default function BlogPage() {
                   <div className="p-6">
                   <p className="text-lg font-bold text-pulse">{g.term}</p>
                   <p className="font-data mt-1 text-xs text-slate">{g.en}</p>
-                  <p className="mt-4 text-xs leading-7 text-slate">{g.body}</p>
+                  <p className="mt-4 text-sm leading-7 text-slate">{g.body}</p>
                   </div>
                 </article>
               </Reveal>
@@ -283,18 +283,18 @@ export default function BlogPage() {
                   </span>
                   <span className="flex flex-col justify-center p-7 md:p-10">
                     <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span className="rounded-full bg-pulse/10 px-3 py-1 text-[0.65rem] font-bold text-pulse">
+                      <span className="rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                         {lead.categoryName}
                       </span>
                       <time dateTime={lead.date} className="num text-xs text-slate">
                         {displayDate(lead.date)}
                       </time>
-                      <span className="num text-[0.65rem] text-slate">約{lead.readingMinutes}分</span>
+                      <span className="num text-xs text-slate">約{lead.readingMinutes}分</span>
                     </span>
                     <span className="mt-4 block text-xl font-black leading-relaxed group-hover:text-pulse md:text-3xl">
                       {lead.title}
                     </span>
-                    <span className="mt-4 block text-sm leading-8 text-slate">{lead.description}</span>
+                    <span className="mt-4 block text-[15px] leading-[1.9] text-slate">{lead.description}</span>
                     <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-pulse">
                       続きを読む
                       <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
@@ -329,7 +329,7 @@ export default function BlogPage() {
               <h2 id="about-heading" className="mt-4 text-2xl font-black leading-snug md:text-4xl">
                 このメディアについて
               </h2>
-              <p className="mt-6 text-sm leading-9 text-white/70">
+              <p className="mt-6 text-[15px] leading-[1.9] text-white/70">
                 経理BPOブログは、{site.name}が運営しています。
                 自社でバックオフィスの仕組み化を実践し、その過程で分かったことを書いています。
                 机上の整理ではなく、実際に動かして残った手順だけを扱います。
@@ -357,7 +357,7 @@ export default function BlogPage() {
                     <span className="num shrink-0 pt-0.5 text-sm font-bold text-aqua">0{i + 1}</span>
                     <span>
                       <span className="block text-base font-bold text-white">{s.title}</span>
-                      <span className="mt-2 block text-xs leading-7 text-white/65">{s.body}</span>
+                      <span className="mt-2 block text-sm leading-7 text-white/65">{s.body}</span>
                     </span>
                   </li>
                 ))}
@@ -392,7 +392,7 @@ export default function BlogPage() {
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               経理を、外に出すか。社内に残すか。
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+            <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               どこまで任せられて、どこからは残すべきか。現在の業務量と体制をうかがったうえで、
               線引きの案と現状分析レポートをお持ちします。
               <mark className="marker">棚卸しシートを書いた状態でお持ちいただくと、初回で話が具体的に進みます</mark>

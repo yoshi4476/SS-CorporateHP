@@ -196,7 +196,7 @@ export default async function BlogDetailPage({ params }: Props) {
             <h1 className="mt-4 text-2xl font-black leading-normal md:text-4xl md:leading-snug">
               {post.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-sm leading-loose text-slate md:text-base">
+            <p className="mt-5 max-w-3xl text-[15px] leading-[1.9] text-slate md:text-base">
               {post.description}
             </p>
           </Reveal>
@@ -302,7 +302,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   {sheet.name}
                   <span className="num ml-3 align-middle text-xs font-bold text-paper/50">{sheet.spec}</span>
                 </h2>
-                <p className="mt-3 text-sm leading-loose text-paper/70">{sheet.body}</p>
+                <p className="mt-3 text-[15px] leading-[1.9] text-paper/70">{sheet.body}</p>
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <a
                     href={sheet.href}
@@ -321,7 +321,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     先に相談する
                   </Link>
                 </div>
-                <p className="mt-4 text-xs text-paper/60">{sheet.note}</p>
+                <p className="mt-4 text-sm text-paper/60">{sheet.note}</p>
               </aside>
             </Reveal>
 
@@ -469,7 +469,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     )}
                   </div>
                   <div className="px-6 py-5">
-                    <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-[0.65rem] font-bold text-pulse">
+                    <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                       {r.categoryName}
                     </span>
                     <span className="mt-2.5 block text-sm font-bold leading-relaxed group-hover:text-pulse">

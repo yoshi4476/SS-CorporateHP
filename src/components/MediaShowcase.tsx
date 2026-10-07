@@ -23,7 +23,7 @@ export default function MediaShowcase() {
             <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-5 shadow-card md:p-6">
               <p className="text-[13px] font-bold text-pulse">動画 1</p>
               <h3 className="mt-2 text-lg font-black leading-snug">10分で分かる、AIで集客する仕組み</h3>
-              <p className="mb-4 mt-1 text-xs leading-6 text-ink-soft">
+              <p className="mb-4 mt-1 text-sm leading-7 text-ink-soft">
                 なぜ今AI検索なのか、市場の変化から。実際の制作画面つき
               </p>
               <video
@@ -41,7 +41,7 @@ export default function MediaShowcase() {
             <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-5 shadow-card md:p-6">
               <p className="text-[13px] font-bold text-pulse">動画 2</p>
               <h3 className="mt-2 text-lg font-black leading-snug">サービス資料を6分でご説明</h3>
-              <p className="mb-4 mt-1 text-xs leading-6 text-ink-soft">
+              <p className="mb-4 mt-1 text-sm leading-7 text-ink-soft">
                 下の資料をスライドに沿って解説。お急ぎの方はこちらから
               </p>
               <video
@@ -63,7 +63,7 @@ export default function MediaShowcase() {
                 <p className="text-[13px] font-bold text-pulse">資料</p>
                 <h3 className="mt-2 text-lg font-black leading-snug">サービス資料（全15枚）</h3>
               </div>
-              <p className="text-xs text-ink-soft">横にスクロールしてページをめくれます →</p>
+              <p className="text-sm text-ink-soft">横にスクロールしてページをめくれます →</p>
             </div>
             <div className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
               {Array.from({ length: 15 }, (_, i) => {
@@ -93,7 +93,7 @@ export default function MediaShowcase() {
           >
             この内容で相談してみる →
           </Link>
-          <p className="mt-3 text-xs text-ink-soft">
+          <p className="mt-3 text-sm leading-7 text-ink-soft">
             料金は御社の状況に合わせてお見積りします。営業のお電話はいたしません。
           </p>
         </div>

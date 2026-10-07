@@ -101,7 +101,7 @@ export default function ServicesIndexPage() {
             </nav>
             <p aria-hidden className="eyebrow mt-8 !text-aqua" />
             <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
-            <p className="mt-7 max-w-2xl text-sm leading-9 text-white/75 md:text-base">
+            <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
               戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
               <strong className="text-white">{services.length}つの事業をひとつのチームで一気通貫</strong>
               に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
@@ -129,7 +129,7 @@ export default function ServicesIndexPage() {
                 <article id={s.slug} className="group scroll-mt-28 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card lg:grid-cols-2">
                   <Link href={`/services/${s.slug}`} className={`relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[26rem] ${i % 2 ? "lg:order-2" : ""}`} tabIndex={-1} aria-hidden>
                     <Image src={svcPhoto(s.slug, 1)} alt={`${s.name}の現場のイメージ`} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-[0.65rem] font-bold text-white backdrop-blur-sm">{s.group}</span>
+                    <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">{s.group}</span>
                   </Link>
                   <div className="flex flex-col p-7 md:p-10">
                     <h2 className="mt-2 text-2xl font-black leading-snug md:text-3xl">
@@ -138,7 +138,7 @@ export default function ServicesIndexPage() {
                       </Link>
                     </h2>
                     <p className="mt-4 text-base font-bold leading-8">{s.lead}</p>
-                    <p className="mt-2 text-sm leading-8 text-slate">{s.short}</p>
+                    <p className="mt-2 text-[15px] leading-[1.9] text-slate">{s.short}</p>
                     <ul className="mt-5 grid gap-2 border-t border-line pt-5">
                       {s.points.slice(0, 3).map((pt) => (
                         <li key={pt.title} className="flex items-center gap-2 text-sm font-medium">
@@ -154,10 +154,10 @@ export default function ServicesIndexPage() {
                         <p className="leading-none">
                           <span className="num text-3xl font-bold">{s.metrics[0].value}</span>
                           <span className="ml-0.5 text-sm font-bold text-pulse">{s.metrics[0].suffix}</span>
-                          <span className="mt-1.5 block text-[0.65rem] text-slate">{s.metrics[0].label}</span>
+                          <span className="mt-1.5 block text-xs text-slate">{s.metrics[0].label}</span>
                         </p>
                       ) : s.price ? (
-                        <p className="rounded-full border border-line px-3 py-1.5 text-[0.65rem] font-bold text-slate">{s.price.split(" /")[0]}</p>
+                        <p className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-slate">{s.price.split(" /")[0]}</p>
                       ) : (
                         <span />
                       )}
@@ -173,7 +173,7 @@ export default function ServicesIndexPage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-4 text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+          <p className="mt-4 text-xs text-slate">※ 写真はイメージです。</p>
 
           {/* 一気通貫の補足 */}
           <Reveal delay={0.1}>
@@ -183,7 +183,7 @@ export default function ServicesIndexPage() {
                 <h2 className="mt-3 text-xl font-bold md:text-3xl">
                   {services.length}つの事業は、単品でも。組み合わせれば、もっと。
                 </h2>
-                <p className="mt-4 max-w-xl text-sm leading-8 text-white/65">
+                <p className="mt-4 max-w-xl text-[15px] leading-[1.9] text-white/65">
                   「MEOだけ」「補助金だけ」のご依頼も歓迎です。ただ、戦略・実装・集客・資金をひとつのチームで設計すると、施策同士が噛み合い、成果の出る速度が変わります。まずは現状に合う入り口を無料相談でご提案します。
                 </p>
               </div>
@@ -226,9 +226,9 @@ export default function ServicesIndexPage() {
                     {p.name}
                   </h3>
                   <p className="mt-2 text-sm font-bold leading-7 text-ink">{p.catch}</p>
-                  <p className="mt-3 flex-1 text-sm leading-8 text-slate">{p.body}</p>
+                  <p className="mt-3 flex-1 text-[15px] leading-[1.9] text-slate">{p.body}</p>
                   <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-5">
-                    <span className="rounded-full border border-line px-3 py-1.5 text-[0.62rem] font-bold text-slate">
+                    <span className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-slate">
                       {p.price}
                     </span>
                     <span className="inline-flex items-center gap-2 text-sm font-bold text-pulse">

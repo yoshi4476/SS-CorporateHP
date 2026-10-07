@@ -31,7 +31,7 @@ export default function AioScan({ src, dark = false }: { src: string; dark?: boo
           </button>
         </span>
       </label>
-      <p className={`mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.68rem] ${dark ? "text-white/55" : "text-slate"}`}>
+      <p className={`mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs ${dark ? "text-white/55" : "text-slate"}`}>
         <span>✓ 入力はURLだけ</span>
         <span>✓ 登録不要・その場で14項目を採点</span>
         <span>✓ 営業電話なし</span>

@@ -90,7 +90,7 @@ export default function PrivacyPage() {
           <Reveal>
             <p aria-hidden className="eyebrow" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">プライバシーポリシー</h1>
-            <p className="mt-6 text-sm leading-8 text-slate">
+            <p className="mt-6 text-[15px] leading-[1.9] text-slate">
               {site.name}の個人情報保護方針です。
             </p>
           </Reveal>
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
               <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
                 <h2 className="text-base font-bold md:text-lg">{s.title}</h2>
                 {s.body.map((p, j) => (
-                  <p key={j} className="mt-3 text-sm leading-8 text-slate">
+                  <p key={j} className="mt-3 text-[15px] leading-[1.9] text-slate">
                     {p}
                   </p>
                 ))}
@@ -114,7 +114,7 @@ export default function PrivacyPage() {
           <Reveal delay={0.2}>
             <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
               <h2 className="text-base font-bold md:text-lg">10. お問い合わせ窓口</h2>
-              <p className="mt-3 text-sm leading-8 text-slate">
+              <p className="mt-3 text-[15px] leading-[1.9] text-slate">
                 {site.name}
                 <br />
                 〒{site.postal} {site.address}

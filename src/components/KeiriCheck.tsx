@@ -86,7 +86,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
                   <span className="num shrink-0 text-sm text-pulse">Q{i + 1}</span>
                   <span>{q.q}</span>
                 </legend>
-                {q.note && <p className="mt-2 pl-9 text-xs leading-6 text-slate">{q.note}</p>}
+                {q.note && <p className="mt-2 pl-9 text-sm leading-7 text-slate">{q.note}</p>}
                 <div className="mt-5 flex gap-3 pl-9">
                   {([true, false] as const).map((opt) => {
                     const on = v === opt;
@@ -132,7 +132,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
           <div className="rounded-3xl bg-ink px-7 py-8 text-paper md:px-10 md:py-10">
             <p className="text-xs font-bold tracking-widest text-gold-bright">チェックの結果</p>
             <h2 className="mt-3 text-2xl font-black leading-snug md:text-3xl">{result.title}</h2>
-            <p className="mt-4 text-sm leading-8 text-paper/75">{result.body}</p>
+            <p className="mt-4 text-[15px] leading-[1.9] text-paper/75">{result.body}</p>
 
             {yesIds.length > 0 && (
               <div className="mt-7 border-t border-paper/15 pt-6">
@@ -164,7 +164,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
                 もう一度チェックする
               </button>
             </div>
-            <p className="mt-4 text-xs leading-6 text-paper/55">
+            <p className="mt-4 text-sm leading-7 text-paper/55">
               簡易的なチェックです。どこまで任せられるかは、業務の中身を伺ってから決まります。
             </p>
           </div>

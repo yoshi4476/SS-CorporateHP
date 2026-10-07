@@ -113,12 +113,12 @@ export default async function NewsDetailPage({ params }: Props) {
           <Reveal delay={0.08}>
             <div className="grid gap-6 border-t border-line pt-10">
               {item.body.map((p, i) => (
-                <p key={i} className="text-sm leading-9 text-slate md:text-base">
+                <p key={i} className="text-[15px] leading-[1.9] text-slate md:text-base">
                   {p}
                 </p>
               ))}
               {item.link && (
-                <p className="text-sm leading-9 md:text-base">
+                <p className="text-[15px] leading-[1.9] md:text-base">
                   <a href={item.link.url} target="_blank" rel="noopener" className="font-bold text-pulse underline underline-offset-4">
                     {item.link.label} ↗
                   </a>

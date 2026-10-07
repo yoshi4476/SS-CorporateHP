@@ -111,7 +111,7 @@ export function SectionHead({
       <p aria-hidden className="eyebrow" />
       <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">{title}</h2>
       {lead && (
-        <p className={`mt-5 max-w-2xl text-sm leading-8 text-slate md:text-base ${align === "center" ? "mx-auto" : ""}`}>
+        <p className={`mt-5 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base ${align === "center" ? "mx-auto" : ""}`}>
           <Rich text={lead} />
         </p>
       )}
@@ -133,7 +133,7 @@ export function StatTile({ metric, delay = 0 }: { metric: Metric; delay?: number
         {metric.suffix && <span className="ml-1 text-lg">{metric.suffix}</span>}
       </p>
       <p className="mt-2 text-sm font-medium text-slate">{metric.label}</p>
-      {metric.note && <p className="mt-1 text-xs text-slate/70">{metric.note}</p>}
+      {metric.note && <p className="mt-1 text-sm text-slate">{metric.note}</p>}
     </Reveal>
   );
 }
@@ -186,7 +186,7 @@ export function FaqList({ items }: { items: { q: string; a: string }[] }) {
                 <path d="M2 4.5l5 5 5-5" fill="none" stroke="currentColor" strokeWidth="2" />
               </svg>
             </summary>
-            <p className="flex items-start gap-3 border-t border-line pt-4 text-sm leading-8 text-slate">
+            <p className="flex items-start gap-3 border-t border-line pt-4 text-[15px] leading-[1.9] text-slate">
               {/* 明るい面なので、暗い面用の aqua ではなく紺を使う */}
               <span className="font-data font-bold text-pulse">A.</span>
               {f.a}
@@ -220,7 +220,7 @@ export function CtaBand({
         <Reveal>
           <p aria-hidden className="eyebrow !text-aqua" />
           <h2 className="mt-4 text-3xl font-black tracking-tight text-white md:text-6xl">{title}</h2>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-8 text-white/70 md:text-base">{body}</p>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.9] text-white/70 md:text-base">{body}</p>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact"

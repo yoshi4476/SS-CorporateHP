@@ -133,7 +133,7 @@ export default async function ServicePage({ params }: Props) {
                 </p>
                 {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
                     記号がそのまま出ていた */}
-                <p className="hero-rich mt-5 max-w-2xl text-sm leading-8 text-white/75 md:text-base">
+                <p className="hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
                   <Rich text={service.body} />
                 </p>
               </Reveal>
@@ -146,7 +146,7 @@ export default async function ServicePage({ params }: Props) {
                     </div>
                     {/* AIからこのページに来る人が最も多い（直近28日で11件）が、問い合わせは0件だった。
                         URLを入れる診断より軽い「AIに自社が出るか」の入口を並べる（2026-10-04） */}
-                    <p className="mt-4 text-xs leading-6 text-slate">
+                    <p className="mt-4 text-sm leading-7 text-slate">
                       ChatGPT などに「おすすめは？」と聞いたとき、御社が出てくるかを確かめるなら
                       <a
                         href={`${site.labUrl}tools/ai-check/?utm_source=corp&utm_medium=referral&utm_campaign=corp_aio_hero`}
@@ -157,7 +157,7 @@ export default async function ServicePage({ params }: Props) {
                         AI診断（地域と業種を選ぶだけ・無料）↗
                       </a>
                     </p>
-                    <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">
+                    <p className="mt-4 border-t border-line pt-4 text-sm leading-7 text-slate">
                       話を聞いてから決めたい方は
                       <Link href="/contact" className="mx-1 font-bold text-pulse underline-offset-4 hover:underline">
                         無料相談
@@ -250,7 +250,7 @@ export default async function ServicePage({ params }: Props) {
               {service.useCase && (
                 <Reveal className="rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
-                  <p className="mt-5 text-sm leading-9 text-slate md:text-base">
+                  <p className="mt-5 text-[15px] leading-[1.9] text-slate md:text-base">
                     <RichLinked text={service.useCase.body} />
                   </p>
                 </Reveal>
@@ -310,12 +310,12 @@ export default async function ServicePage({ params }: Props) {
                           <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
                           <h3 className="absolute inset-x-4 bottom-3 text-base font-bold leading-snug text-white">{ind.name}</h3>
                         </figure>
-                        <p className="p-5 text-xs leading-7 text-slate">{ind.body}</p>
+                        <p className="p-5 text-sm leading-7 text-slate">{ind.body}</p>
                       </article>
                     </Reveal>
                   ))}
                 </div>
-                <p className="mt-6 text-xs leading-7 text-slate">
+                <p className="mt-6 text-sm leading-7 text-slate">
                   ※ 写真はイメージです。上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
                 </p>
               </div>
@@ -370,7 +370,7 @@ export default async function ServicePage({ params }: Props) {
           <Reveal>
             <figure className="relative mt-12 aspect-[16/9] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
               <Image src={svcPhoto(service.slug, 2)} alt={`${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
-              <figcaption className="absolute bottom-3 right-4 text-[0.65rem] text-white/80">※ 写真はイメージです</figcaption>
+              <figcaption className="absolute bottom-3 right-4 text-xs text-white/80">※ 写真はイメージです</figcaption>
             </figure>
           </Reveal>
           {/* 4つなら2×2（3列だと1枚だけ次の段に残り、右が空く） */}
@@ -383,7 +383,7 @@ export default async function ServicePage({ params }: Props) {
                     <span className="h-3 w-3 rounded-full bg-gradient-to-br from-pulse to-aqua" />
                   </span>
                   <h3 className="mt-5 text-lg font-bold leading-relaxed">{p.title}</h3>
-                  <p className="mt-3 text-sm leading-8 text-slate">{p.body}</p>
+                  <p className="mt-3 text-[15px] leading-[1.9] text-slate">{p.body}</p>
                 </div>
                 </Reveal>
               </li>
@@ -412,18 +412,18 @@ export default async function ServicePage({ params }: Props) {
                       </div>
                       <div className="border-t border-line pt-5">
                         <p className="text-[13px] font-bold text-pulse">行ったこと</p>
-                        <p className="mt-2 text-xs leading-7 text-slate">{ex.action}</p>
+                        <p className="mt-2 text-sm leading-7 text-slate">{ex.action}</p>
                       </div>
                       <div className="rounded-2xl bg-pulse/5 p-5">
                         <p className="text-[13px] font-bold text-pulse">変わったこと</p>
-                        <p className="mt-2 text-xs font-medium leading-7 text-ink">{ex.result}</p>
+                        <p className="mt-2 text-sm font-medium leading-7 text-ink">{ex.result}</p>
                       </div>
                     </div>
                   </article>
                 </Reveal>
               ))}
             </div>
-            <p className="mt-6 text-xs leading-7 text-slate">
+            <p className="mt-6 text-sm leading-7 text-slate">
               ※ 守秘義務のため、お客様が特定される情報は伏せています。数値での実績は、無料相談の際に該当する事例をご案内します。
             </p>
           </div>
@@ -455,7 +455,7 @@ export default async function ServicePage({ params }: Props) {
                       {ins.title}
                     </h3>
                   </div>
-                  <p className="rounded-2xl border border-line bg-white p-7 text-sm leading-9 text-slate shadow-card md:p-10 md:text-base md:leading-10 md:[direction:ltr]">
+                  <p className="rounded-2xl border border-line bg-white p-7 text-[15px] leading-[1.9] text-slate shadow-card md:p-10 md:text-base md:leading-10 md:[direction:ltr]">
                     <Rich text={ins.body} />
                   </p>
                 </article>
@@ -489,7 +489,7 @@ export default async function ServicePage({ params }: Props) {
                   height={343}
                   className="h-auto w-full"
                 />
-                <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">
+                <p className="mt-4 border-t border-line pt-4 text-sm leading-7 text-slate">
                   「地名×キーワード」検索で、あなたのお店をマップ上位3位以内に表示させる——検索したその場で来店先を決めるユーザーに、最初に見つけてもらえます。
                 </p>
               </Reveal>
@@ -501,7 +501,7 @@ export default async function ServicePage({ params }: Props) {
                   height={287}
                   className="h-auto w-full"
                 />
-                <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">
+                <p className="mt-4 border-t border-line pt-4 text-sm leading-7 text-slate">
                   マップ枠は検索結果の最上部。<mark className="marker">SEOより先に、顧客の目に入ります。</mark>
                 </p>
               </Reveal>
@@ -572,7 +572,7 @@ export default async function ServicePage({ params }: Props) {
 
       <section className="pb-4">
         <div className="mx-auto max-w-7xl px-5">
-          <p className="text-xs text-faint">
+          <p className="text-sm leading-7 text-faint">
             このページの内容は{reviewedLabel()}時点のものです。料金・対応範囲は
             ご相談時に最新の内容をご案内します。
           </p>

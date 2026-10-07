@@ -93,7 +93,7 @@ export default function BusinessShowcase() {
                   {featured ? s.lead : s.short}
                 </p>
                 {s.price && (
-                  <p className="mt-4 inline-block rounded-full border border-white/25 px-3 py-1 text-[0.62rem] font-bold text-white/80">
+                  <p className="mt-4 inline-block rounded-full border border-white/25 px-3 py-1 text-xs font-bold text-white/80">
                     {s.price.split(" /")[0]}
                   </p>
                 )}

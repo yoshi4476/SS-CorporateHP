@@ -221,7 +221,7 @@ export default function Header() {
                         </li>
                       ))}
                     </ul>
-                    <p className="mt-1 border-t border-line px-4 py-3 text-xs leading-6 text-slate">
+                    <p className="mt-1 border-t border-line px-4 py-3 text-sm leading-7 text-slate">
                       {DIAGNOSIS_NOTE}
                       <Link href="/contact" className="ml-1 font-bold text-pulse hover:underline">
                         無料相談へ
@@ -373,7 +373,7 @@ export default function Header() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-3 text-xs leading-6 text-white/60">{DIAGNOSIS_NOTE}</p>
+                <p className="mt-3 text-sm leading-7 text-white/60">{DIAGNOSIS_NOTE}</p>
               </div>
 
               <div className="border-t border-white/10 pt-6">
@@ -395,7 +395,7 @@ export default function Header() {
               </div>
 
               <div className="border-t border-white/10 pt-6">
-                <p className="text-xs leading-6 text-white/50">
+                <p className="text-sm leading-7 text-white/50">
                   TEL:{" "}
                   <a href={`tel:${site.tel.replaceAll("-", "")}`} className="tap num text-white hover:text-aqua">
                     {site.tel}
@@ -403,7 +403,7 @@ export default function Header() {
                   <br />
                   受付時間: {site.hours}
                 </p>
-                <Link href="/privacy" className="tap mt-3 text-[0.65rem] text-white/60 hover:text-white/70">
+                <Link href="/privacy" className="tap mt-3 text-xs text-white/60 hover:text-white/70">
                   プライバシーポリシー
                 </Link>
               </div>

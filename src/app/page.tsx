@@ -115,7 +115,7 @@ export default function Home() {
               <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
             </h1>
             <div>
-              <p className="mt-6 max-w-lg text-sm leading-8 text-white/80 md:mt-8 md:leading-9 md:text-[0.95rem]">
+              <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/80 md:mt-8 md:leading-9 md:text-[0.95rem]">
                 MEO運用通算3,200店舗で積んだ現場データと、AIによる自動化。
                 <br className="hidden md:block" />
                 集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
@@ -134,7 +134,7 @@ export default function Home() {
                   className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
                 >
                   まず無料で現在地を測る
-                  <span className="font-data text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
+                  <span className="font-data text-xs font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
                 </Link>
               </div>
               {/* 目的から選ぶ入口。主力は AI検索・集客（AIO）なので先頭に大きく置く（2026-10-04）。
@@ -144,9 +144,9 @@ export default function Home() {
                   href="/services/aio"
                   className="group block rounded-2xl border border-aqua/60 bg-white/10 px-5 py-4 backdrop-blur-sm transition-colors hover:border-aqua hover:bg-white/15"
                 >
-                  <span className="font-data text-[0.62rem] font-bold uppercase tracking-[0.16em] text-aqua">Main</span>
+                  <span className="font-data text-xs font-bold uppercase tracking-[0.16em] text-aqua">Main</span>
                   <span className="mt-1 block text-base font-black">AI検索・集客（AIO・SEO）</span>
-                  <span className="mt-1 block text-xs leading-6 text-white/75">ChatGPT や Google のAIの答えに、御社が選ばれる状態をつくる →</span>
+                  <span className="mt-1 block text-sm leading-7 text-white/75">ChatGPT や Google のAIの答えに、御社が選ばれる状態をつくる →</span>
                 </Link>
                 <div className="grid grid-cols-2 gap-2">
                   <Link href="/services/keiri-bpo" className="rounded-xl border border-white/25 px-4 py-3 text-xs font-bold text-white/90 transition-colors hover:border-aqua hover:text-aqua">
@@ -170,7 +170,7 @@ export default function Home() {
                       <CountUp value={s.n} duration={1.6} />
                       <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
                     </p>
-                    <p className="mt-2 text-[0.68rem] text-white/65">{s.label}</p>
+                    <p className="mt-2 text-xs text-white/65">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -216,7 +216,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={0.15}>
-            <p className="mx-auto mt-10 max-w-2xl text-sm leading-9 text-slate md:text-base">
+            <p className="mx-auto mt-10 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               私たちは「頑張ります」とは言いません。支援実績・継続率・改善率——すべての仕事を
               <mark className="marker">数字で設計し、数字で報告</mark>
               します。現場で積み上げた実践データを、誰でも再現できる仕組みへ。それがセブンセンシズの仕事です。
@@ -303,7 +303,7 @@ export default function Home() {
                     <CountUp value={s.value} duration={1.4 + (i % 3) * 0.3} />
                     <span className="ml-1 text-3xl text-gold-bright md:text-4xl">{s.suffix}</span>
                   </p>
-                  <p className="mt-4 text-xs leading-5 text-white/60 md:text-sm">{s.label}</p>
+                  <p className="mt-4 text-sm leading-7 text-white/60">{s.label}</p>
                 </div>
               </Reveal>
             ))}
@@ -443,7 +443,7 @@ export default function Home() {
                 <h2 id="field-heading" className="mt-3 text-3xl font-bold md:text-5xl">
                   机上ではなく、現場から。
                 </h2>
-                <p className="mt-5 max-w-xl text-sm leading-8 text-white/65 md:text-base">
+                <p className="mt-5 max-w-xl text-[15px] leading-[1.9] text-white/65 md:text-base">
                   全国でのセミナー登壇や店舗支援の現場——通算3,200店舗と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
                 </p>
               </Reveal>
@@ -511,7 +511,7 @@ export default function Home() {
             title="数字が動いた、3つの現場"
             lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
           />
-          <p className="mt-3 text-[0.68rem] text-slate">※ 写真はイメージです（支援先の写真ではありません）。</p>
+          <p className="mt-3 text-xs text-slate">※ 写真はイメージです（支援先の写真ではありません）。</p>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {cases.map((cs, i) => (
               <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
@@ -521,10 +521,10 @@ export default function Home() {
                   </figure>
                   <div className="flex flex-1 flex-col p-7 md:p-8">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-ink px-3 py-1 text-[0.62rem] font-bold text-white">
+                    <span className="rounded-full bg-ink px-3 py-1 text-xs font-bold text-white">
                       {cs.industry}
                     </span>
-                    <Link href={`/services/${cs.slug}`} className="inline-flex min-h-9 items-center text-[0.66rem] font-bold text-pulse hover:underline">
+                    <Link href={`/services/${cs.slug}`} className="inline-flex min-h-9 items-center text-xs font-bold text-pulse hover:underline">
                       {cs.service} →
                     </Link>
                   </div>
@@ -533,32 +533,32 @@ export default function Home() {
                   <div className="mt-6 flex items-center gap-3 rounded-2xl border border-line bg-mist/70 p-4">
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-bold text-slate">導入前</p>
-                      <p className="mt-1 text-xs font-medium leading-5 text-slate">{cs.before}</p>
+                      <p className="mt-1 text-sm font-medium leading-7 text-slate">{cs.before}</p>
                     </div>
                     <svg width="22" height="14" viewBox="0 0 34 20" aria-hidden className="shrink-0 text-pulse">
                       <path d="M2 10h24M20 4l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <div className="min-w-0 flex-1">
                       <p className="text-xs font-bold text-pulse">導入後</p>
-                      <p className="mt-1 text-xs font-bold leading-5 text-ink">{cs.after}</p>
+                      <p className="mt-1 text-sm font-bold leading-7 text-ink">{cs.after}</p>
                     </div>
                   </div>
 
                   <p className="mt-5 leading-none">
                     <span className="num text-4xl font-bold md:text-5xl">{cs.metric.value}</span>
                     <span className="ml-1 text-base font-bold text-pulse">{cs.metric.suffix}</span>
-                    <span className="mt-2 block text-[0.65rem] text-slate">{cs.metric.label}</span>
+                    <span className="mt-2 block text-xs text-slate">{cs.metric.label}</span>
                   </p>
 
-                  <p className="mt-5 text-xs leading-7 text-slate">{cs.body}</p>
+                  <p className="mt-5 text-sm leading-7 text-slate">{cs.body}</p>
 
                   {cs.voice && (
                   <figure className="mt-auto border-t border-line pt-5">
-                    <blockquote className="text-xs leading-7 text-ink">
+                    <blockquote className="text-sm leading-7 text-ink">
                       <span className="font-data mr-1.5 text-base font-bold text-pulse">&ldquo;</span>
                       {cs.voice}
                     </blockquote>
-                    <figcaption className="mt-2.5 text-[0.62rem] text-slate">— {cs.industry} ご担当者様</figcaption>
+                    <figcaption className="mt-2.5 text-xs text-slate">— {cs.industry} ご担当者様</figcaption>
                   </figure>
                   )}
                   </div>
@@ -610,7 +610,7 @@ export default function Home() {
                   <br className="sm:hidden" />
                   <mark className="marker">最大350万円の枠</mark>が使えます
                 </h2>
-                <p className="mt-4 max-w-xl text-sm leading-8 text-slate">
+                <p className="mt-4 max-w-xl text-[15px] leading-[1.9] text-slate">
                   当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。受発注ソフト・会計ソフトを対象とする枠なら補助上限は350万円です。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
                 </p>
               </div>
@@ -652,7 +652,7 @@ export default function Home() {
                   <time dateTime={n.dateISO} className="num text-xs text-slate">
                     {n.date}
                   </time>
-                  <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-[0.65rem] font-bold text-pulse">
+                  <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                     {n.category}
                   </span>
                   <span className="flex-1 basis-full text-sm font-medium group-hover:text-pulse sm:basis-auto">

@@ -70,7 +70,7 @@ export default function KeiriTwoTracks() {
                   <h3 className="text-xl font-black md:text-2xl">{t.name}</h3>
                 </div>
                 <p className="mt-4 text-base font-bold leading-8 text-ink">{t.lead}</p>
-                <p className="mt-2 text-sm leading-8 text-slate">{t.body}</p>
+                <p className="mt-2 text-[15px] leading-[1.9] text-slate">{t.body}</p>
 
                 <p className="mt-7 text-sm font-bold">向いている会社</p>
                 <ul className="mt-2 grid gap-2">
@@ -84,7 +84,7 @@ export default function KeiriTwoTracks() {
 
                 <div className="mt-7 grid gap-5 rounded-2xl bg-mist p-5 sm:grid-cols-2">
                   <div>
-                    <p className="text-[0.72rem] font-bold text-gold-deep">御社がすること</p>
+                    <p className="text-xs font-bold text-gold-deep">御社がすること</p>
                     <ul className="mt-2 grid gap-1.5">
                       {t.doing.map((d) => (
                         <li key={d} className="text-[0.82rem] leading-6 text-ink">{d}</li>
@@ -92,7 +92,7 @@ export default function KeiriTwoTracks() {
                     </ul>
                   </div>
                   <div>
-                    <p className="text-[0.72rem] font-bold text-pulse">含まれるもの</p>
+                    <p className="text-xs font-bold text-pulse">含まれるもの</p>
                     <ul className="mt-2 grid gap-1.5">
                       {t.ours.map((o) => (
                         <li key={o} className="text-[0.82rem] leading-6 text-slate">{o}</li>
@@ -102,7 +102,7 @@ export default function KeiriTwoTracks() {
                 </div>
 
                 <div className="mt-7">
-                  <p className="mb-2 text-[0.72rem] font-bold text-pulse">
+                  <p className="mb-2 text-xs font-bold text-pulse">
                     動画で見る（約10分）
                   </p>
                   <video
@@ -114,7 +114,7 @@ export default function KeiriTwoTracks() {
                     <source src={`https://ai.7senses.co.jp/videos/${t.video}.mp4`} type="video/mp4" />
                     お使いのブラウザでは動画を再生できません。
                   </video>
-                  <p className="mt-2 text-xs text-ink-soft">{t.videoNote}</p>
+                  <p className="mt-2 text-sm text-ink-soft">{t.videoNote}</p>
                 </div>
 
                 <div className="mt-auto pt-7">
@@ -124,7 +124,7 @@ export default function KeiriTwoTracks() {
                   >
                     {t.cta.label} →
                   </Link>
-                  <p className="mt-3 text-xs text-ink-soft">{t.note}</p>
+                  <p className="mt-3 text-sm leading-7 text-ink-soft">{t.note}</p>
                 </div>
               </div>
             </Reveal>
@@ -134,7 +134,7 @@ export default function KeiriTwoTracks() {
         <Reveal>
           <div className="mt-8 rounded-3xl border border-line bg-white p-7 md:p-8">
             <h3 className="text-base font-bold md:text-lg">どちらか決められないとき</h3>
-            <p className="mt-3 text-sm leading-8 text-slate">
+            <p className="mt-3 text-[15px] leading-[1.9] text-slate">
               <strong>まず現状分析だけをお受けください。</strong>
               いまの経理業務のどこに時間がかかっているかを整理し、
               外に出したほうがよい範囲と、社内に残したほうがよい範囲をご提案します。

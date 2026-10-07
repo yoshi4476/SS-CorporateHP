@@ -98,7 +98,7 @@ export default function MediaPipelinePage() {
                   <br />
                   <span className="text-pulse">資産を積む。</span>
                 </h1>
-                <p className="mt-7 text-sm leading-8 text-slate md:text-base md:leading-9">
+                <p className="mt-7 text-[15px] leading-[1.9] text-slate md:text-base md:leading-9">
                   {pipeline.summary}
                 </p>
                 {/* 本数は他社と最も差が出るところなので、要約の直後に置く */}
@@ -186,7 +186,7 @@ export default function MediaPipelinePage() {
           <ul className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2">
             {problems.map((p, i) => (
               <Reveal key={p} delay={i * 0.05}>
-                <li className="flex h-full items-start gap-4 bg-white px-7 py-6 text-sm leading-8 text-ink-soft">
+                <li className="flex h-full items-start gap-4 bg-white px-7 py-6 text-[15px] leading-[1.9] text-ink-soft">
                   <span aria-hidden className="num shrink-0 text-xs font-bold text-gold/50">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -228,7 +228,7 @@ export default function MediaPipelinePage() {
                   />
                   <div className="p-7 md:p-8">
                     <h3 className="text-lg font-bold leading-snug group-hover:text-pulse">{e.title}</h3>
-                    <p className="mt-3 text-sm leading-8 text-slate">{e.body}</p>
+                    <p className="mt-3 text-[15px] leading-[1.9] text-slate">{e.body}</p>
                     <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-pulse">
                       実物を見る
                       <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
@@ -277,10 +277,10 @@ export default function MediaPipelinePage() {
                       <p className="text-xs font-bold text-ink md:text-sm">{c.point}</p>
                     </div>
                     <div className="bg-white px-6 py-4 md:py-5">
-                      <p className="text-xs leading-6 text-slate md:text-sm md:leading-7">{c.outsource}</p>
+                      <p className="text-sm leading-7 text-slate">{c.outsource}</p>
                     </div>
                     <div className="bg-white px-6 py-4 md:py-5">
-                      <p className="text-xs font-medium leading-6 text-ink md:text-sm md:leading-7">{c.ours}</p>
+                      <p className="text-sm font-medium leading-7 text-ink">{c.ours}</p>
                     </div>
                   </div>
                 ))}
@@ -317,10 +317,10 @@ export default function MediaPipelinePage() {
                     aria-hidden
                     className="absolute -left-10 top-1 grid h-[1.8rem] w-[1.8rem] place-items-center rounded-full border border-line bg-white md:-left-14"
                   >
-                    <span className="num text-[0.62rem] font-bold text-pulse">{f.step}</span>
+                    <span className="num text-xs font-bold text-pulse">{f.step}</span>
                   </span>
                   <h3 className="text-base font-bold md:text-lg">{f.title}</h3>
-                  <p className="mt-2.5 max-w-3xl text-sm leading-8 text-slate">{f.body}</p>
+                  <p className="mt-2.5 max-w-3xl text-[15px] leading-[1.9] text-slate">{f.body}</p>
                 </li>
               </Reveal>
             ))}
@@ -345,7 +345,7 @@ export default function MediaPipelinePage() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{g.title}</h3>
-                  <p className="mt-4 text-sm leading-8 text-slate">{g.body}</p>
+                  <p className="mt-4 text-[15px] leading-[1.9] text-slate">{g.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -361,7 +361,7 @@ export default function MediaPipelinePage() {
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               検索結果だけでなく、AIの回答に載るために
             </h2>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-paper/70 md:text-base">
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-paper/70 md:text-base">
               当社はAIO運用代行を事業として提供しています。そこで使っている実装が、そのまま記事に入ります。
             </p>
           </Reveal>
@@ -391,14 +391,14 @@ export default function MediaPipelinePage() {
                 <li className="flex h-full flex-col bg-white p-7">
                   <span aria-hidden className="num text-[0.7rem] font-bold text-pulse">{r.no}</span>
                   <h3 className="mt-2.5 text-sm font-bold leading-snug md:text-base">{r.title}</h3>
-                  <p className="mt-3 flex-1 text-xs leading-7 text-slate">{r.body}</p>
+                  <p className="mt-3 flex-1 text-sm leading-7 text-slate">{r.body}</p>
                 </li>
               </Reveal>
             ))}
             {/* 7件は2列でも4列でも1セル余る。下地のグレーが矩形で出ないよう白で埋める */}
             <li aria-hidden className="hidden bg-white md:block" />
           </ol>
-          <p className="mt-6 text-xs leading-7 text-slate">{reportNote}</p>
+          <p className="mt-6 text-sm leading-7 text-slate">{reportNote}</p>
         </div>
       </section>
 
@@ -431,7 +431,7 @@ export default function MediaPipelinePage() {
             <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               この記事も、この仕組みが書いています。
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-center text-sm leading-8 text-paper/70 md:text-base">
+            <p className="mx-auto mt-6 max-w-xl text-center text-[15px] leading-[1.9] text-paper/70 md:text-base">
               30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
             <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
@@ -458,7 +458,7 @@ export default function MediaPipelinePage() {
                 動いているメディアを見る
               </Link>
             </div>
-            <p className="mt-5 text-center text-[0.72rem] text-paper/50">
+            <p className="mt-5 text-center text-sm leading-7 text-paper/60">
               相談は無料 ／ 既存サイトへの追加も可能 ／ いただいた情報は相談対応の目的以外に使用しません
             </p>
           </Reveal>

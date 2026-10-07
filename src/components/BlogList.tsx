@@ -98,17 +98,17 @@ export default function BlogList({ items }: { items: ListItem[] }) {
               </span>
               <span className="flex flex-1 flex-col p-6">
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-[0.62rem] font-bold text-pulse">
+                  <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-xs font-bold text-pulse">
                     {p.categoryName}
                   </span>
-                  <time dateTime={p.date} className="num text-[0.68rem] text-slate">
+                  <time dateTime={p.date} className="num text-xs text-slate">
                     {p.dateLabel}
                   </time>
                 </span>
                 <span className="mt-3 block flex-1 text-base font-bold leading-relaxed group-hover:text-pulse">
                   {p.title}
                 </span>
-                <span className="mt-3 block text-xs leading-7 text-slate">
+                <span className="mt-3 block text-sm leading-7 text-slate">
                   約{p.readingMinutes}分で読めます
                 </span>
               </span>

@@ -111,7 +111,7 @@ export default function CompanyPage() {
             </nav>
             <p aria-hidden className="eyebrow mt-8" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">会社概要</h1>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               「{site.tagline}」。私たちは、テクノロジーの力で事業と暮らしをもっと快適にすることを使命に、大阪から全国の企業・店舗を支援しています。
             </p>
           </Reveal>
@@ -140,7 +140,7 @@ export default function CompanyPage() {
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <div className="mt-8 grid max-w-xl gap-5 text-sm leading-9 text-white/70 md:text-base">
+              <div className="mt-8 grid max-w-xl gap-5 text-[15px] leading-[1.9] text-white/70 md:text-base">
                 <p>
                   社名の「セブンセンシズ」は、五感を超えた第六感——そのさらに先にある「第七感」に由来します。現場で磨かれた事業者の感覚を超えて、お客様の「運」となり得るご提案をしたい。その想いから、セブンセンシズ株式会社を設立しました。
                 </p>
@@ -179,7 +179,7 @@ export default function CompanyPage() {
               lead="私たちの出発点は、店舗集客の現場です。通算3,200店舗のGoogleビジネスプロフィール運用で積み上げてきたのは、==業種×商圏ごとに「何をすれば数字が動くか」という実践データ==。この蓄積をAIと仕組みの力で磨き上げ、どんな企業でも再現できるサービスとして届けることが、セブンセンシズのミッションです。"
             />
             <Reveal delay={0.1}>
-              <div className="mt-8 grid max-w-2xl gap-5 text-sm leading-9 text-slate md:text-base">
+              <div className="mt-8 grid max-w-2xl gap-5 text-[15px] leading-[1.9] text-slate md:text-base">
                 <p>
                   MEOで培った「検索に選ばれる技術」は、AI検索時代の<mark className="marker">AIO運用代行</mark>へ。現場で目にしてきた業務の非効率は、AIコンサルティングとシステム開発へ。導入コストの壁は、AI導入補助金支援へ——{services.length}つの事業はすべて、現場の課題から逆算して生まれました。だからこそ私たちの提案は机上の空論にならず、<strong className="font-bold text-ink">明日から動く施策</strong>としてお渡しできます。
                 </p>
@@ -255,7 +255,7 @@ export default function CompanyPage() {
                 </figure>
               </Reveal>
             ))}
-            <p className="text-[0.68rem] text-slate">※ 写真はイメージです。</p>
+            <p className="text-xs text-slate">※ 写真はイメージです。</p>
           </div>
           </div>
         </div>
@@ -298,7 +298,7 @@ export default function CompanyPage() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-5 text-xs leading-6 text-slate">
+              <p className="mt-5 text-sm leading-7 text-slate">
                 ご来社の際は、お手数ですが事前にお電話にてご連絡ください。オンラインでのご相談も承っています。
               </p>
               <div className="mt-5 flex flex-wrap gap-2.5">

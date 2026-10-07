@@ -33,7 +33,7 @@ export default function NewsPage() {
           <Reveal>
             <p aria-hidden className="eyebrow" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">お知らせ</h1>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               経理BPO・AI集客支援・AI導入補助金の各事業に関する制度の新設やサービス開始、
               社内制度の取り組みなど、セブンセンシズ株式会社（大阪市東成区・法人番号3120001227825）
               からのお知らせを掲載しています。
@@ -63,7 +63,7 @@ export default function NewsPage() {
                 <time dateTime={n.dateISO} className="num text-xs text-slate">
                   {n.date}
                 </time>
-                <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-[0.65rem] font-bold text-pulse">
+                <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                   {n.category}
                 </span>
                 <span className="flex-1 basis-full text-sm font-medium group-hover:text-pulse sm:basis-auto">
@@ -80,7 +80,7 @@ export default function NewsPage() {
         <div className="mx-auto max-w-7xl px-5">
           <p aria-hidden className="eyebrow" />
           <h2 id="news-more-heading" className="mt-3 text-xl font-black md:text-2xl">解説記事と、事業のご案内</h2>
-          <p className="mt-4 max-w-3xl text-sm leading-8 text-slate">
+          <p className="mt-4 max-w-3xl text-[15px] leading-[1.9] text-slate">
             お知らせでは、セブンセンシズ株式会社のサービスや取り組みの動きを掲載しています。経理の進め方やAI検索の対策など、実務の解説は下の2つのメディアで公開しています。
           </p>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
@@ -96,7 +96,7 @@ export default function NewsPage() {
                 className="group rounded-2xl border border-line bg-raise p-6 shadow-card transition-colors hover:border-pulse/40"
               >
                 <p className="font-bold group-hover:text-pulse">{x.label}{x.ext ? " ↗" : " →"}</p>
-                <p className="mt-2 text-xs leading-7 text-slate">{x.body}</p>
+                <p className="mt-2 text-sm leading-7 text-slate">{x.body}</p>
               </a>
             ))}
           </div>

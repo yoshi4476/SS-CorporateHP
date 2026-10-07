@@ -46,7 +46,7 @@ export default function ContactPage() {
             </nav>
             <p aria-hidden className="eyebrow mt-8" />
             <h1 className="mt-4 text-3xl font-black md:text-5xl">無料相談・お問い合わせ</h1>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               「何から始めればいいか分からない」という段階のご相談も歓迎です。通常1営業日以内にご返信します。お急ぎの場合はお電話ください。
             </p>
           </Reveal>
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 >
                   {site.tel}
                 </a>
-                <p className="mt-3 text-xs leading-6 text-white/60">受付時間: {site.hours}</p>
+                <p className="mt-3 text-sm leading-7 text-white/60">受付時間: {site.hours}</p>
               </div>
             </Reveal>
             <Reveal delay={0.2}>
@@ -84,7 +84,7 @@ export default function ContactPage() {
                     className="-mt-2 h-20 w-20 shrink-0"
                   />
                 </div>
-                <ol className="mt-2 grid gap-3 text-xs leading-6 text-slate">
+                <ol className="mt-2 grid gap-3 text-sm leading-7 text-slate">
                   <li className="flex gap-3">
                     <span className="num font-bold text-pulse">1.</span>
                     フォームまたはお電話でご連絡

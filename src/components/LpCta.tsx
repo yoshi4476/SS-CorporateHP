@@ -96,7 +96,7 @@ export function MidCta({
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-7 px-5 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <h2 className="text-xl font-black leading-snug md:text-2xl">{title}</h2>
-          <p className="mt-3 text-sm leading-8 text-paper/70">{body}</p>
+          <p className="mt-3 text-[15px] leading-[1.9] text-paper/70">{body}</p>
         </div>
         <div className="shrink-0">
           <Link

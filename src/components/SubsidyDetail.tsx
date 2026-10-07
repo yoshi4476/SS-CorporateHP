@@ -21,11 +21,11 @@ export default function SubsidyDetail() {
             <h2 id="partner-heading" className="mt-3 text-xl font-bold leading-relaxed md:text-2xl">
               当社は<mark className="marker">AXISの代理店登録業者</mark>です
             </h2>
-            <p className="mt-5 max-w-3xl text-sm leading-8 text-slate md:text-base">
+            <p className="mt-5 max-w-3xl text-[15px] leading-[1.9] text-slate md:text-base">
               あわせて当社は「<strong className="font-bold text-ink">AXIS セキュリティパック 端末監視コース</strong>」を
               自社で採用しています。お客様にご案内するものを、まず自社で使っています。
             </p>
-            <p className="mt-4 text-xs leading-6 text-faint">
+            <p className="mt-4 text-sm leading-7 text-faint">
               お取り扱いの範囲と、補助金と組み合わせられるかは、無料相談でご案内します。
             </p>
           </Reveal>
@@ -54,16 +54,16 @@ export default function SubsidyDetail() {
                     glow まで伸ばすと明るい側で 3.25:1 まで落ちて基準を割る */}
                 <div className="mt-2 flex h-11 overflow-hidden rounded-xl border border-line">
                   <div
-                    className="flex items-center justify-center bg-gradient-to-r from-pulse-deep to-pulse text-[0.68rem] font-bold text-white"
+                    className="flex items-center justify-center bg-gradient-to-r from-pulse-deep to-pulse text-xs font-bold text-white"
                     style={{ width: `${grantRatio}%` }}
                   >
                     補助金 {modelCase.grant}万円
                   </div>
-                  <div className="flex flex-1 items-center justify-center bg-mist text-[0.68rem] font-bold text-ink">
+                  <div className="flex flex-1 items-center justify-center bg-mist text-xs font-bold text-ink">
                     自己負担 {modelCase.burden}万円
                   </div>
                 </div>
-                <div className="mt-2 flex justify-between text-[0.62rem] text-slate">
+                <div className="mt-2 flex justify-between text-xs text-slate">
                   <span className="num">{grantRatio}% が補助</span>
                   <span className="num">残り {100 - grantRatio}%</span>
                 </div>
@@ -71,28 +71,28 @@ export default function SubsidyDetail() {
 
               <dl className="mt-8 grid gap-4 border-t border-line pt-6 sm:grid-cols-3">
                 <div>
-                  <dt className="text-[0.65rem] text-slate">導入費用 (例)</dt>
+                  <dt className="text-xs text-slate">導入費用 (例)</dt>
                   <dd className="num mt-1 text-2xl font-bold md:text-3xl">
                     <CountUp value={modelCase.total} />
                     <span className="ml-0.5 text-sm text-slate">万円</span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.65rem] text-slate">補助金 (上限)</dt>
+                  <dt className="text-xs text-slate">補助金 (上限)</dt>
                   <dd className="num mt-1 text-2xl font-bold text-pulse md:text-3xl">
                     −<CountUp value={modelCase.grant} />
                     <span className="ml-0.5 text-sm">万円</span>
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-[0.65rem] text-slate">自己負担 (例)</dt>
+                  <dt className="text-xs text-slate">自己負担 (例)</dt>
                   <dd className="num mt-1 text-2xl font-bold md:text-3xl">
                     <CountUp value={modelCase.burden} />
                     <span className="ml-0.5 text-sm text-slate">万円</span>
                   </dd>
                 </div>
               </dl>
-              <p className="mt-5 text-[0.68rem] leading-6 text-slate">
+              <p className="mt-5 text-sm leading-7 text-slate">
                 ※ 導入費{modelCase.total}万円の場合のモデルケースです。補助額は導入内容と審査結果により変動します
                 (補助金は<strong className="font-bold text-ink">精算払い・後払い</strong>です)。
               </p>
@@ -107,12 +107,12 @@ export default function SubsidyDetail() {
                     <span className="num shrink-0 text-sm font-bold text-pulse">0{i + 1}</span>
                     <div>
                       <p className="text-sm font-bold">{e.label}</p>
-                      <p className="mt-1 text-xs leading-6 text-slate">{e.detail}</p>
+                      <p className="mt-1 text-sm leading-7 text-slate">{e.detail}</p>
                     </div>
                   </li>
                 ))}
               </ul>
-              <p className="mt-6 rounded-xl bg-mist p-4 text-[0.68rem] leading-6 text-slate">
+              <p className="mt-6 rounded-xl bg-mist p-4 text-sm leading-7 text-slate">
                 売上が基準に満たない場合も、下位プランでご案内できることがあります。まずはご相談ください。
               </p>
             </Reveal>
@@ -142,13 +142,13 @@ export default function SubsidyDetail() {
                   <div
                     key={b.l}
                     style={{ width: `${b.w}%` }}
-                    className={`flex items-center justify-center rounded-lg py-3 text-[0.68rem] font-bold ${b.tone}`}
+                    className={`flex items-center justify-center rounded-lg py-3 text-xs font-bold ${b.tone}`}
                   >
                     {b.l}
                   </div>
                 ))}
               </div>
-              <div className="mt-2 flex min-w-[720px] justify-between text-[0.62rem] text-slate">
+              <div className="mt-2 flex min-w-[720px] justify-between text-xs text-slate">
                 <span className="num">Day 0</span>
                 <span className="num">約1ヶ月 — 合格発表</span>
                 <span className="num">約2〜3ヶ月 — 着金</span>
@@ -162,13 +162,13 @@ export default function SubsidyDetail() {
                 <article className="flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between">
                     <span className="num text-3xl font-bold text-gold/40" aria-hidden>{s.step}</span>
-                    <span className="rounded-full bg-pulse/10 px-3 py-1 text-[0.6rem] font-bold text-pulse">
+                    <span className="rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                       {s.period}
                     </span>
                   </div>
                   <h3 className="mt-3 text-base font-bold">{s.title}</h3>
-                  <p className="mt-2 flex-1 text-xs leading-7 text-slate">{s.body}</p>
-                  <p className="mt-4 border-t border-line pt-3 text-[0.65rem] text-slate">
+                  <p className="mt-2 flex-1 text-sm leading-7 text-slate">{s.body}</p>
+                  <p className="mt-4 border-t border-line pt-3 text-xs text-slate">
                     お客様の作業:{" "}
                     <strong className="font-bold text-ink">{s.client}</strong>
                   </p>
@@ -200,7 +200,7 @@ export default function SubsidyDetail() {
                 {cashflow.map((c, i) => (
                   <tr key={c.phase} className="border-b border-line last:border-0">
                     <th scope="row" className="p-5 text-left text-xs font-bold">{c.phase}</th>
-                    <td className="p-5 text-xs leading-6 text-slate md:text-sm">{c.flow}</td>
+                    <td className="p-5 text-sm leading-7 text-slate">{c.flow}</td>
                     <td className={`num p-5 text-right font-bold ${i === 3 ? "text-pulse" : ""}`}>{c.amount}</td>
                   </tr>
                 ))}

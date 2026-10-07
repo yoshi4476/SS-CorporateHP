@@ -110,14 +110,14 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
                 ))}
               </span>
             </p>
-            <p className="mt-3 border-t border-white/15 pt-3 text-[0.62rem] font-bold tracking-[0.18em] text-white/55">この現場で、当社が引き受けていること</p>
+            <p className="mt-3 border-t border-white/15 pt-3 text-xs font-bold tracking-[0.18em] text-white/55">この現場で、当社が引き受けていること</p>
             <p className="mt-1.5 text-lg font-black leading-snug md:text-xl">{s.job}</p>
             <a href={s.href} className="mt-1 inline-flex min-h-9 items-center gap-1.5 text-xs font-bold text-aqua hover:underline">
               {s.service}
               <span aria-hidden>→</span>
             </a>
             <p className="mt-3 flex flex-wrap items-center gap-1.5">
-              <span className="mr-1 text-[0.62rem] font-bold text-white/55">対応業種</span>
+              <span className="mr-1 text-xs font-bold text-white/55">対応業種</span>
               {s.industries.map((w) => (
                 <span key={w} className="rounded-full bg-white/12 px-2.5 py-1 text-[0.7rem] font-bold">{w}</span>
               ))}

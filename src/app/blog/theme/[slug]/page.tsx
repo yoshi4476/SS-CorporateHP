@@ -73,7 +73,7 @@ export default async function ThemePage({ params }: Props) {
             </nav>
             <p className="eyebrow mt-6">テーマ</p>
             <h1 className="mt-4 text-3xl font-black leading-[1.35] md:text-5xl">{t.name}</h1>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-slate md:text-base">{t.lead}</p>
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">{t.lead}</p>
             <p className="num mt-6 text-sm font-bold text-pulse">{t.count}本の記事</p>
           </div>
           <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
@@ -96,7 +96,7 @@ export default async function ThemePage({ params }: Props) {
             <span className="flex flex-col justify-center p-7 md:p-10">
               <time dateTime={p.date} className="num text-xs text-slate">{displayDate(p.date)}</time>
               <span className="mt-3 block text-xl font-black leading-relaxed group-hover:text-pulse md:text-2xl">{p.title}</span>
-              <span className="mt-4 block text-sm leading-8 text-slate">{p.description}</span>
+              <span className="mt-4 block text-[15px] leading-[1.9] text-slate">{p.description}</span>
             </span>
           </Link>
         </div>

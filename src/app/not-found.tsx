@@ -16,7 +16,7 @@ export default function NotFound() {
           <br />
           見つかりませんでした。
         </h1>
-        <p className="mt-6 max-w-xl text-sm leading-8 text-slate md:text-base">
+        <p className="mt-6 max-w-xl text-[15px] leading-[1.9] text-slate md:text-base">
           URLが変更されたか、削除された可能性があります。お探しの内容は以下のいずれかかもしれません。
           見つからない場合は、お気軽にお問い合わせください。
         </p>
@@ -82,7 +82,7 @@ export default function NotFound() {
                 </Link>
               </li>
             </ul>
-            <p className="mt-8 border-t border-line pt-6 text-xs leading-7 text-slate">
+            <p className="mt-8 border-t border-line pt-6 text-sm leading-7 text-slate">
               お急ぎの場合はお電話ください。
               <br />
               TEL:{" "}

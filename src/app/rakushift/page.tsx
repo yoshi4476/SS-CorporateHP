@@ -135,7 +135,7 @@ export default function RakushiftPage() {
                   <br />
                   <span className="text-pulse">シフト作成がおわる。</span>
                 </h1>
-                <p className="mt-7 text-sm leading-8 text-slate md:text-base md:leading-9">
+                <p className="mt-7 text-[15px] leading-[1.9] text-slate md:text-base md:leading-9">
                   {rakushift.summary}
                 </p>
                 <ul className="mt-7 flex flex-wrap gap-2.5">
@@ -198,7 +198,7 @@ export default function RakushiftPage() {
                     <CountUp value={Number(m.value)} />
                     <span className="ml-1 text-base">{m.unit}</span>
                   </dd>
-                  <dt className="mt-3 text-xs leading-6 text-slate">{m.label}</dt>
+                  <dt className="mt-3 text-sm leading-7 text-slate">{m.label}</dt>
                 </div>
               ))}
             </dl>
@@ -220,7 +220,7 @@ export default function RakushiftPage() {
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
                   <span aria-hidden className="num text-4xl font-bold text-gold/35">{p.no}</span>
                   <h3 className="mt-3 text-lg font-bold">{p.title}</h3>
-                  <p className="mt-4 text-sm leading-8 text-slate">{p.body}</p>
+                  <p className="mt-4 text-[15px] leading-[1.9] text-slate">{p.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -261,10 +261,10 @@ export default function RakushiftPage() {
                       <p className="text-xs font-bold text-ink md:text-sm">{c.point}</p>
                     </div>
                     <div className="bg-white px-6 py-4 md:py-5">
-                      <p className="text-xs leading-6 text-slate md:text-sm md:leading-7">{c.manual}</p>
+                      <p className="text-sm leading-7 text-slate">{c.manual}</p>
                     </div>
                     <div className="bg-white px-6 py-4 md:py-5">
-                      <p className="text-xs font-medium leading-6 text-ink md:text-sm md:leading-7">{c.ours}</p>
+                      <p className="text-sm font-medium leading-7 text-ink">{c.ours}</p>
                     </div>
                   </div>
                 ))}
@@ -299,7 +299,7 @@ export default function RakushiftPage() {
                   <div className="lg:[direction:ltr]">
                     <p className="text-[13px] font-bold text-pulse">ステップ {s.no}</p>
                     <h3 className="mt-3 text-xl font-black md:text-2xl">{s.title}</h3>
-                    <p className="mt-5 text-sm leading-8 text-slate md:text-base md:leading-9">{s.body}</p>
+                    <p className="mt-5 text-[15px] leading-[1.9] text-slate md:text-base md:leading-9">{s.body}</p>
                     {s.no === "2" && (
                       <dl className="mt-6 grid gap-2">
                         {staffRules.map((r) => (
@@ -370,7 +370,7 @@ export default function RakushiftPage() {
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
                   <span aria-hidden className="num text-5xl font-bold text-gold/35">{e.step}</span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{e.title}</h3>
-                  <p className="mt-4 text-sm leading-8 text-slate">{e.body}</p>
+                  <p className="mt-4 text-[15px] leading-[1.9] text-slate">{e.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -386,7 +386,7 @@ export default function RakushiftPage() {
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               破れない条件として、法律を組み込んでいます
             </h2>
-            <p className="mt-6 max-w-2xl text-sm leading-8 text-paper/70 md:text-base">
+            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-paper/70 md:text-base">
               あとからチェックするのではなく、そもそも違反する配置が解として出てこないように計算しています。
             </p>
           </Reveal>
@@ -487,12 +487,12 @@ export default function RakushiftPage() {
                   }`}
                 >
                   {p.recommended && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-pulse px-4 py-1 text-[0.65rem] font-bold text-white">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-pulse px-4 py-1 text-xs font-bold text-white">
                       ★ 一番人気・おすすめ
                     </span>
                   )}
                   <p className="font-data text-sm font-bold uppercase tracking-[0.2em] text-pulse">{p.name}</p>
-                  <p className="mt-1.5 text-xs text-slate">{p.body}</p>
+                  <p className="mt-1.5 text-sm leading-7 text-slate">{p.body}</p>
                   <p className="mt-5">
                     <span className="num text-4xl font-bold">{p.price}</span>
                     <span className="ml-1 text-sm text-slate">円 / 月</span>
@@ -514,7 +514,7 @@ export default function RakushiftPage() {
               </Reveal>
             ))}
           </div>
-          <p className="mt-7 text-xs leading-7 text-slate">{planNote}</p>
+          <p className="mt-7 text-sm leading-7 text-slate">{planNote}</p>
           <p className="mt-2 text-[0.7rem] leading-6 text-faint">
             契約・解約の条件は
             <a href={rakushift.tokushoho} target="_blank" rel="noopener" className="mx-1 text-pulse underline-offset-4 hover:underline">
@@ -571,7 +571,7 @@ export default function RakushiftPage() {
               </div>
             </Reveal>
           </div>
-          <p className="mt-6 text-xs leading-7 text-slate">{setupSupportNote}</p>
+          <p className="mt-6 text-sm leading-7 text-slate">{setupSupportNote}</p>
         </div>
       </section>
 
@@ -604,7 +604,7 @@ export default function RakushiftPage() {
             <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               まず、今のシフトを見せてください。
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-center text-sm leading-8 text-paper/70 md:text-base">
+            <p className="mx-auto mt-6 max-w-xl text-center text-[15px] leading-[1.9] text-paper/70 md:text-base">
               30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
             <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
@@ -626,7 +626,7 @@ export default function RakushiftPage() {
               </Link>
               <DeckButton tone="dark" />
             </div>
-            <p className="mt-5 text-center text-[0.72rem] text-paper/50">
+            <p className="mt-5 text-center text-sm leading-7 text-paper/60">
               初期費用0円 ／ 最短1営業日で運用開始 ／ いただいた情報は相談対応の目的以外に使用しません
             </p>
             <p className="mt-4 text-center">
