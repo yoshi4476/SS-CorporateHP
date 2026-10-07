@@ -48,7 +48,7 @@ export default function InlineToolBox({ from, place = "article", tone = "light" 
   return (
     <div
       ref={ref}
-      data-cta-pos={place === "article" ? "inline-tool" : "keiri-check"}
+      data-cta-pos={place === "article" ? "inline-tool" : undefined}
       className={`rounded-3xl border border-l-4 px-6 py-6 md:px-8 md:py-7 ${
         dark ? "border-white/15 border-l-gold-bright bg-white/[0.06]" : "my-10 border-line border-l-gold bg-raise shadow-card"
       }`}
@@ -66,7 +66,6 @@ export default function InlineToolBox({ from, place = "article", tone = "light" 
             key={String(yes)}
             href={href(yes)}
             onClick={() => onPick(yes)}
-            data-cta={`${place}_keiri-check_q1-${yes ? "yes" : "no"}`}
             className={`inline-flex min-h-11 min-w-28 items-center justify-center rounded-full border px-7 py-2.5 text-[15px] font-bold transition-colors ${
               dark
                 ? "border-white/40 text-white hover:border-gold-bright hover:bg-gold-bright hover:text-ink"

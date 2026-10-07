@@ -362,7 +362,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
           {/* 慣性スクロール (#smooth-content が position:fixed) の下では position:sticky が
               効かないため、追従はさせずに本文の横へ素直に並べる */}
-          <aside className="hidden lg:block">
+          <aside className="hidden lg:block" data-cta-pos="sidebar">
             <div className="space-y-6">
               {headings.length >= 3 && (
                 <nav aria-label="目次" className="rounded-3xl border border-line bg-raise p-6">

@@ -375,7 +375,7 @@ export default function BlogPage() {
       </section>
 
       {/* 締めのCTA */}
-      <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28" data-cta-pos="closing">
         <div className="mx-auto max-w-5xl px-5 text-center">
           <Reveal>
             <p className="eyebrow">Contact</p>

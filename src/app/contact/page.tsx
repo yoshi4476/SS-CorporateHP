@@ -61,7 +61,7 @@ export default function ContactPage() {
 
           <div className="grid gap-5">
             <Reveal delay={0.14}>
-              <div className="rounded-2xl bg-ink p-7 text-white">
+              <div className="rounded-2xl bg-ink p-7 text-white" data-cta-pos="contact-tel">
                 <p className="eyebrow !text-aqua">Tel</p>
                 <a
                   href={`tel:${site.tel.replaceAll("-", "")}`}

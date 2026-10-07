@@ -48,6 +48,7 @@ export function StickyCta({
     <>
       <span ref={sentinel} aria-hidden className="block h-px w-full" />
       <div
+        data-cta-pos="sticky-bar"
         className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 py-3 shadow-[0_-6px_24px_-18px_rgb(13_20_32/0.4)] backdrop-blur-md transition-transform duration-300 lg:hidden ${
           show ? "translate-y-0" : "translate-y-full"
         }`}
@@ -91,7 +92,7 @@ export function MidCta({
   sub?: string;
 }) {
   return (
-    <section className="border-y border-line bg-ink py-14 text-paper md:py-16">
+    <section data-cta-pos="mid-cta" className="border-y border-line bg-ink py-14 text-paper md:py-16">
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-7 px-5 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <h2 className="text-xl font-black leading-snug md:text-2xl">{title}</h2>

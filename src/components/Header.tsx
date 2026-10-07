@@ -292,6 +292,7 @@ export default function Header() {
 
         <nav
           aria-label="メインナビゲーション"
+          data-cta-pos="menu"
           className="relative flex h-full flex-col justify-center overflow-y-auto px-6 pt-20 md:px-16"
         >
           <div className="grid gap-10 md:grid-cols-[1.3fr_1fr] md:gap-16">

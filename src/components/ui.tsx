@@ -203,7 +203,7 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink">
+    <section data-cta-pos="cta-band" className="relative overflow-hidden bg-ink">
       <div
         aria-hidden
         className="absolute inset-0 opacity-40"

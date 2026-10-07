@@ -128,7 +128,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
       </div>
 
       {shown && done && (
-        <div ref={resultRef} className="mt-12 scroll-mt-24" aria-live="polite">
+        <div ref={resultRef} className="mt-12 scroll-mt-24" aria-live="polite" data-cta-pos="tool-result">
           <div className="rounded-3xl bg-ink px-7 py-8 text-paper md:px-10 md:py-10">
             <p className="text-xs font-bold tracking-widest text-gold-bright">チェックの結果</p>
             <h2 className="mt-3 text-2xl font-black leading-snug md:text-3xl">{result.title}</h2>
