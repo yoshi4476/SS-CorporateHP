@@ -63,6 +63,13 @@
   background: linear-gradient(transparent 62%, color-mix(in oklab, var(--color-aqua) 40%, #fff) 0);
 }
 
+/* 本文の ==強調== は <mark> で届く。ブラウザ既定の真っ黄色の背景のまま出ていた（132本中110本）。
+   文字の下半分だけに薄く引く */
+.article-body mark {
+  background: linear-gradient(transparent 60%, #fde68a 60%);
+  color: inherit;
+}
+
 .article-body em {
   font-style: normal;
   font-weight: 700;
