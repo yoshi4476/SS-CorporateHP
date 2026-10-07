@@ -157,15 +157,31 @@ export default function Cursor() {
     let roll = 0;
     let pitch = 0;
 
+    // ドローンはヒーロー（data-drone-zone）の中だけで飛ばす。本文の上では 72px の機体が
+    // 番号や見出しを隠していた（トップの自己診断の「01」など）。照準はどこでも出す
+    let away = true;
+    drone.classList.add("is-away");
+    const setAway = (v: boolean) => {
+      if (v === away) return;
+      away = v;
+      drone.classList.toggle("is-away", v);
+      // 入ったところから出す（離れた位置から画面を横切って飛んでこないように）
+      if (!v) {
+        pos.x = x + DRONE_OFF_X;
+        pos.y = y + DRONE_OFF_Y;
+      }
+    };
+    const inZone = (el: Element | null) => !!el?.closest?.("[data-drone-zone]");
+
     const onMove = (e: MouseEvent) => {
       x = e.clientX;
       y = e.clientY;
 
       const t = e.target as HTMLElement | null;
+      setAway(!inZone(t));
       const interactive = t?.closest?.("a, button, [data-cursor-grow]");
       drone.classList.toggle("is-hover", !!interactive);
       dot.classList.toggle("is-hover", !!interactive);
-
     };
     addEventListener("mousemove", onMove, { passive: true });
 
@@ -196,9 +212,12 @@ export default function Cursor() {
     addEventListener("blur", onUp);
 
     let raf = 0;
+    let frame = 0;
     const loop = () => {
       // 照準は遅れなく実際のカーソル位置へ
       dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      // マウスを動かさずにスクロールしてヒーローを出たときも消す（慣性スクロールで中身は遅れて動く）
+      if (++frame % 10 === 0) setAway(!inZone(document.elementFromPoint(x, y)));
 
       // ドローンは離れた位置を追いかける
       const tx = x + DRONE_OFF_X;

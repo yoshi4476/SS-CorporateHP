@@ -376,7 +376,7 @@ export const services: Service[] = [
       },
     ],
     metrics: [
-      { value: "3,200", suffix: "社", label: "通算支援実績" },
+      { value: "3,200", suffix: "店舗", label: "通算支援実績" },
       { value: "1.8", suffix: "倍", label: "マップ経由アクション平均改善" },
       { value: "94", suffix: "%", label: "契約継続率" },
     ],

@@ -14,7 +14,7 @@ const credits = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line bg-ink text-white">
+    <footer id="site-footer" className="border-t border-line bg-ink text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
           <Image

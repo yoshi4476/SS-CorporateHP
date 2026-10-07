@@ -49,7 +49,7 @@ export function StickyCta({
       <span ref={sentinel} aria-hidden className="block h-px w-full" />
       <div
         data-cta-pos="sticky-bar"
-        className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 py-3 shadow-[0_-6px_24px_-18px_rgb(13_20_32/0.4)] backdrop-blur-md transition-transform duration-300 lg:hidden ${
+        className={`sticky-cta fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 px-4 py-3 shadow-[0_-6px_24px_-18px_rgb(13_20_32/0.4)] backdrop-blur-md transition-transform duration-300 lg:hidden ${
           show ? "translate-y-0" : "translate-y-full"
         }`}
       >

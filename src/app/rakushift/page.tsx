@@ -111,7 +111,7 @@ export default function RakushiftPage() {
       />
 
       {/* 看板 */}
-      <section className="relative overflow-hidden pt-16 md:pt-20">
+      <section data-drone-zone className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-10 md:pb-20 md:pt-16">
           <Reveal>

@@ -97,9 +97,10 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
         </video>
       )}
 
-      {/* 場面の字幕: 時刻と場面 → その現場で当社が引き受けていること（事業名つき） → 対応業種 */}
+      {/* 場面の字幕: 時刻と場面 → その現場で当社が引き受けていること（事業名つき） → 対応業種。
+          スマホでは見出し・ボタン・数字の下に重なり、最初の画面を詰まらせていたので出さない */}
       {!still && (
-        <div className="absolute bottom-20 right-4 z-[6] w-[min(22rem,calc(100%-2rem))] md:bottom-24 md:right-10 md:w-[25rem] lg:right-14">
+        <div className="absolute bottom-24 right-10 z-[6] hidden w-[25rem] md:block lg:right-14">
           <div key={i} className="hero-scene-caption rounded-2xl border border-white/15 bg-ink/55 p-4 text-white shadow-lift backdrop-blur-md md:p-5">
             <p className="flex items-center gap-3 text-xs">
               <span className="num font-bold tracking-[0.18em] text-aqua">{s.time}</span>

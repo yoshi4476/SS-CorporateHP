@@ -69,7 +69,7 @@ const COMPARE_ROWS: { label: string; seo: string; meo: string; aio: string }[] =
 ];
 
 const MEGA_STATS: { value: number; suffix: string; label: string }[] = [
-  { value: 3200, suffix: "社", label: "MEO運用 通算支援実績" },
+  { value: 3200, suffix: "店舗", label: "MEO運用 通算支援実績" },
   { value: 94, suffix: "%", label: "運用サービス契約継続率" },
   { value: 1.8, suffix: "倍", label: "マップ経由アクション平均改善" },
   { value: services.length, suffix: "事業", label: "AI×マーケの事業領域" },
@@ -86,13 +86,12 @@ const INDUSTRY_MARQUEE = [
 ];
 
 export default function Home() {
-  const latestNews = news[0];
   return (
     <>
       <JsonLd data={faqSchema(TOP_FAQ)} />
 
       {/* ヒーロー: 全画面の実写動画（ある街の一日）。どの業種の、どの時間にも仕組みが働いている、という筋 */}
-      <section className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
+      <section data-drone-zone className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
         <HeroVideo objectPosition="60% center" />
         {/* 読みやすさの覆い: 左（見出し）・上（ヘッダー）・下（業種の帯）だけを暗くし、中央の街は見せる */}
         <div
@@ -104,87 +103,54 @@ export default function Home() {
           }}
         />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-80 pt-24 md:pb-24 md:pt-28">
+        {/* 最初の画面は見出し・ボタン・数字だけにする。以前は英字のラベル・3つの事業カード・お知らせまで並び、
+            スマホでは最初の画面がそれだけで埋まっていた。事業の入口とお知らせは、すぐ下の区画にある */}
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-24 md:pb-24 md:pt-28">
           <div className="w-full min-w-0 max-w-3xl">
-            <span aria-hidden className="block h-1.5 w-16 rounded-full bg-gradient-to-r from-pulse to-aqua md:w-20" />
             {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
                 スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
-            <h1 className="mt-6 text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:mt-8 md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
+            <h1 className="text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
               <SplitText text="人を増やさずに、" />
               <br />
               <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
             </h1>
-            <div>
-              <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/80 md:mt-8 md:leading-9 md:text-[0.95rem]">
-                MEO運用通算3,200店舗で積んだ現場データと、AIによる自動化。
-                <br className="hidden md:block" />
-                集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
-              </p>
-            </div>
-            <div>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
-                <Link
-                  href="/contact"
-                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
-                >
-                  無料相談を予約する
-                </Link>
-                <Link
-                  href="/#selfcheck"
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-7 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
-                >
-                  まず無料で現在地を測る
-                  <span className="font-data text-xs font-bold uppercase tracking-[0.14em] text-white/60">30秒</span>
-                </Link>
-              </div>
-              {/* 目的から選ぶ入口。主力は AI検索・集客（AIO）なので先頭に大きく置く（2026-10-04）。
-                  AIから来る人の着地もAIOのページが最多だった */}
-              <div className="mt-7 grid max-w-lg gap-2 text-left">
-                <Link
-                  href="/services/aio"
-                  className="group block rounded-2xl border border-aqua/60 bg-white/10 px-5 py-4 backdrop-blur-sm transition-colors hover:border-aqua hover:bg-white/15"
-                >
-                  <span className="font-data text-xs font-bold uppercase tracking-[0.16em] text-aqua">Main</span>
-                  <span className="mt-1 block text-base font-black">AI検索・集客（AIO・SEO）</span>
-                  <span className="mt-1 block text-sm leading-7 text-white/75">ChatGPT や Google のAIの答えに、御社が選ばれる状態をつくる →</span>
-                </Link>
-                <div className="grid grid-cols-2 gap-2">
-                  <Link href="/services/keiri-bpo" className="rounded-xl border border-white/25 px-4 py-3 text-xs font-bold text-white/90 transition-colors hover:border-aqua hover:text-aqua">
-                    経理BPO（経理の外注）→
-                  </Link>
-                  <Link href="/services/ai-subsidy" className="rounded-xl border border-white/25 px-4 py-3 text-xs font-bold text-white/90 transition-colors hover:border-aqua hover:text-aqua">
-                    AI導入補助金の申請 →
-                  </Link>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="mt-9 hidden max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 sm:grid">
-                {[
-                  { n: 3200, unit: "社", label: "MEO通算支援" },
-                  { n: 350, unit: "万円", label: "補助上限(インボイス枠)" },
-                  { n: services.length, unit: "事業", label: "一気通貫で支援" },
-                ].map((s) => (
-                  <div key={s.label}>
-                    <p className="num text-2xl font-bold leading-none md:text-3xl">
-                      <CountUp value={s.n} duration={1.6} />
-                      <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
-                    </p>
-                    <p className="mt-2 text-xs text-white/65">{s.label}</p>
-                  </div>
-                ))}
-              </div>
+            <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/85 md:mt-7 md:text-base">
+              集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
+            </p>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
               <Link
-                href={`/news/${latestNews.slug}`}
-                className="group mt-6 flex min-h-10 max-w-full items-center gap-3 text-xs text-white/70 transition-colors hover:text-aqua"
+                href="/contact"
+                className="rounded-full bg-gold-bright px-10 py-4 text-center text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5"
               >
-                <span className="font-data shrink-0 font-bold uppercase tracking-[0.2em] text-aqua">News</span>
-                <span className="num shrink-0">{latestNews.date}</span>
-                <span className="min-w-0 flex-1 truncate font-medium text-white group-hover:text-aqua sm:max-w-72 sm:flex-none">
-                  {latestNews.title}
-                </span>
+                無料相談を予約する
+              </Link>
+              <Link
+                href="/#selfcheck"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
+              >
+                まず無料のセルフチェック
               </Link>
             </div>
+            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
+              {[
+                { n: 3200, unit: "店舗", label: ["MEO運用の", "通算支援"] },
+                { n: 350, unit: "万円", label: ["補助上限", "（インボイス枠）"] },
+                { n: services.length, unit: "事業", label: ["一気通貫で", "支援"] },
+              ].map((s) => (
+                <div key={s.unit} className="flex flex-col">
+                  {/* スマホの3列では語の途中で折れていた（「通算支/援」）。折れる位置を決めておく */}
+                  <dt className="order-last mt-2 text-xs leading-5 text-white/75">
+                    {s.label.map((l) => (
+                      <span key={l} className="inline-block">{l}</span>
+                    ))}
+                  </dt>
+                  <dd className="num text-2xl font-bold leading-none md:text-3xl">
+                    <CountUp value={s.n} duration={1.6} />
+                    <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 

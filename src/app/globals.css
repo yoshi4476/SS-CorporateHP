@@ -636,6 +636,16 @@ mark.marker-aqua {
   scale: 1.25;
 }
 
+/* ヒーロー（data-drone-zone）の外では出さない。本文の上に 72px の機体が乗り、
+   番号や見出し（トップの自己診断の「01」など）を隠していた */
+.cursor-drone {
+  transition: opacity 0.25s ease-out;
+}
+
+.cursor-drone.is-away {
+  opacity: 0;
+}
+
 /* クリック中: プロペラ停止 → 揚力を失って沈む */
 /* 押した瞬間は一気に沈ませる。ゆっくりだとクリックが終わるまでに動ききらない */
 .cursor-drone.is-click .drone-bob {
@@ -893,6 +903,14 @@ html.ss-intro-pending::before {
 .header-on-dark nav > .group > a:hover { color: var(--color-aqua); }
 .header-on-dark nav > .group > span { color: #fff; border-color: rgb(255 255 255 / 0.45); background: rgb(255 255 255 / 0.08); }
 .header-on-dark nav > a[href="/contact"] { background: #fff; color: var(--color-ink); }
+
+/* 画面下の追従バー（LpCta の StickyCta・lg 未満）があるページは、足元の最後の行がバーの下に隠れないよう
+   足元の下を空ける（/aio-agent・/rakushift・記事で、制作・顧問の行が隠れていた） */
+@media (max-width: 1023.98px) {
+  body:has(.sticky-cta) #site-footer {
+    padding-bottom: 80px;
+  }
+}
 
 /* 暗い写真の上の本文。黄色のマーカーは白の太字に置き換える */
 .hero-rich mark { background: none; color: #fff; font-weight: 700; }
