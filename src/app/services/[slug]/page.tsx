@@ -7,7 +7,8 @@ import InlineToolBox from "@/components/InlineToolBox";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
-import { SectionHead, StatTile, FlowSteps, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
+import { SectionHead, StatTile, FaqList, CtaBand, Rich, RichLinked } from "@/components/ui";
+import { StageDiagram, ScopeTable } from "@/components/ServiceFigures";
 import DeveloperCredit from "@/components/DeveloperCredit";
 import { creatorLd } from "@/lib/developer";
 import { IndustryBars, RankTable } from "@/components/charts";
@@ -16,6 +17,7 @@ import AioDetail from "@/components/AioDetail";
 import AioResearchData from "@/components/AioResearchData";
 import AioScan from "@/components/AioScan";
 import { services, getService } from "@/lib/services";
+import { scopes } from "@/lib/serviceScope";
 import { serviceSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 /** 掲載内容の見直し時点。生成エンジンは古い情報を引用しない */
@@ -64,6 +66,7 @@ export default async function ServicePage({ params }: Props) {
   const sectionImages = service.sectionImage
     ? [service.sectionImage].flat()
     : [];
+  const scope = scopes[service.slug];
   const schemas = [
     serviceSchema(service.slug),
     service.slug === "keiri-bpo" && {
@@ -242,6 +245,7 @@ export default async function ServicePage({ params }: Props) {
         <section className="border-y border-line py-20 md:py-24" aria-labelledby="usecase-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
+              id="usecase-heading"
               title="どんなときに使うサービスか"
               lead={`事業によって用途が違います。${service.name}が向いている場面と業種を整理しました。`}
             />
@@ -327,7 +331,7 @@ export default async function ServicePage({ params }: Props) {
       {/* こんなお悩みありませんか */}
       <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead title="こんなお悩みはありませんか?" />
+          <SectionHead id="challenges-heading" title="こんなお悩みはありませんか?" />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {service.challenges.map((c, i) => (
               <Reveal key={c} delay={i * 0.07}>
@@ -365,7 +369,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 特長 */}
       <section className="py-20 md:py-24" aria-labelledby="strength-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead title={`${service.name}の特長`} />
+          <SectionHead id="strength-heading" title={`${service.name}の特長`} />
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
           <Reveal>
             <figure className="relative mt-12 aspect-[16/9] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
@@ -397,6 +401,7 @@ export default async function ServicePage({ params }: Props) {
         <section id="examples" className="scroll-mt-24 border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
+              id="examples-heading"
               title="実際の取り組み例"
               lead="どんな状況で、何をして、どう変わったか。代表的なケースをご紹介します。"
             />
@@ -436,6 +441,7 @@ export default async function ServicePage({ params }: Props) {
       <section className="border-y border-gold/20 bg-gold-tint py-20 md:py-28" aria-labelledby="insight-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
+            id="insight-heading"
             title="プロの視点で、深掘りする"
             lead={`${service.name}で成果を出すために、知っておいてほしいことがあります。`}
           />
@@ -477,6 +483,7 @@ export default async function ServicePage({ params }: Props) {
         <section className="py-20 md:py-24" aria-labelledby="meo-data-heading">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
+              id="meo-data-heading"
               title="MEOの仕組みを、図で理解する"
               lead="「地名×キーワード」で検索したとき、マップの==上位3位以内==に表示されること。それがMEOのゴールです。"
             />
@@ -529,12 +536,35 @@ export default async function ServicePage({ params }: Props) {
       {/* AIO運用代行のみ: 動画2本と資料をまとめた区画 */}
       {service.slug === "aio" && <MediaShowcase />}
 
-      {/* 進め方 */}
-      <section className={`py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading">
+      {/* できること・できないこと。進め方と同じ面にして、範囲 → 進め方 の順で読ませる */}
+      {scope && (
+        <section
+          id="scope"
+          className={`scroll-mt-24 border-t border-line pt-20 md:pt-24 ${service.slug === "meo" ? "bg-mist" : ""}`}
+          aria-labelledby="scope-heading"
+        >
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              id="scope-heading"
+              title="できること・できないこと"
+              lead={`${service.name}でお引き受けすることと、お引き受けしないことです。頼んでから「それは対象外」と分かる食い違いを、先になくしておきます。`}
+            />
+            <div className="mt-12">
+              <ScopeTable name={service.name} scope={scope} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 進め方（段階図） */}
+      <section id="flow" className={`scroll-mt-24 py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead title="ご支援の流れ" />
+          <SectionHead id="flow-heading" title={service.slug === "keiri-bpo" ? "ご依頼から開始までの流れ" : "ご支援の流れ"} />
           <div className="mt-12">
-            <FlowSteps steps={service.flow} />
+            <StageDiagram
+              steps={service.flow}
+              caption={`${service.name}の進め方。${service.flow.map((s) => s.title).join("→")}の${service.flow.length}段階で進めます。`}
+            />
           </div>
         </div>
       </section>
@@ -544,7 +574,7 @@ export default async function ServicePage({ params }: Props) {
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead title="よくあるご質問" />
+            <SectionHead id="faq-heading" title="よくあるご質問" />
           </div>
           <div>
             <FaqList items={service.faq} />
@@ -555,7 +585,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 他のサービス */}
       <section className="py-20 md:py-24" aria-labelledby="others-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead title="他の事業を見る" />
+          <SectionHead id="others-heading" title="他の事業を見る" />
           <div className="mt-10 flex flex-wrap gap-3">
             {others.map((s) => (
               <Link

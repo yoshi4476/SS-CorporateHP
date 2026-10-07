@@ -100,16 +100,19 @@ export function SectionHead({
   title,
   lead,
   align = "left",
+  id,
 }: {
   en?: string;
   title: string;
   lead?: string;
   align?: "left" | "center";
+  /** 見出しの id。区画の aria-labelledby から指す */
+  id?: string;
 }) {
   return (
     <Reveal className={align === "center" ? "text-center" : ""}>
       <p aria-hidden className="eyebrow" />
-      <h2 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">{title}</h2>
+      <h2 id={id} className="mt-3 text-3xl font-black tracking-tight md:text-5xl">{title}</h2>
       {lead && (
         <p className={`mt-5 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base ${align === "center" ? "mx-auto" : ""}`}>
           <Rich text={lead} />
