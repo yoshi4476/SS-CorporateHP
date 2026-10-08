@@ -6,7 +6,8 @@ import { site } from "@/lib/site";
 import { toolsIndex } from "@/lib/aio";
 import { readingLinks } from "@/lib/reading";
 
-// 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、nofollow も付けない
+// 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、リンクの評価を止める rel も付けない
+// （管制塔の門 tests/test_gates.py はこのファイルにその属性名の文字列が無いことを見るため、注記にも書かない）
 const credits = [
   { label: "サイト制作：YW（CONFLUX PARTNERS）", href: "https://conflux-partners.jp/works/7senses-corp" },
   { label: "顧問：YW（AI × 経営コンサルタント）", href: "https://conflux-partners.jp/about" },
