@@ -26,6 +26,7 @@ export type BlogPost = {
   html: string; // 本文HTML（エンジンが生成）
   faq?: BlogFaq[];
   readingMinutes: number;
+  noindex?: boolean; // 検索から外した記事（管制塔の scripts/noindex.py）。ページは作り、一覧・関連・サイトマップには出さない
 };
 
 const CONTENT_DIR = path.join(process.cwd(), "src", "content", "blog");
@@ -193,10 +194,18 @@ function readAll(): BlogPost[] {
   return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export const posts: BlogPost[] = readAll();
+// 検索から外した記事（noindex）も記事ページは作る（URL を 404 にしない）。一覧・関連・前後・サイトマップは
+// posts（外した記事を除く）を使う。管制塔の scripts/noindex.py が足した行
+export const allPosts: BlogPost[] = readAll();
+export const posts: BlogPost[] = allPosts.filter((p) => !p.noindex);
 
 export function getPost(slug: string) {
   return posts.find((p) => p.slug === slug);
+}
+
+/** 検索から外した記事も含めて探す（記事ページだけが使う。管制塔の scripts/noindex.py） */
+export function getAnyPost(slug: string) {
+  return allPosts.find((p) => p.slug === slug);
 }
 
 export function postsByCategory(category: string) {
@@ -223,7 +232,7 @@ export function usedCategories(): { slug: string; name: string; count: number }[
 
 /** 同カテゴリを優先した関連記事 */
 export function relatedPosts(slug: string, limit = 3) {
-  const base = getPost(slug);
+  const base = getAnyPost(slug);
   if (!base) return [];
   const same = posts.filter((p) => p.slug !== slug && p.category === base.category);
   const others = posts.filter((p) => p.slug !== slug && p.category !== base.category);

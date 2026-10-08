@@ -15,8 +15,8 @@ import { services } from "@/lib/services";
 import { StickyCta } from "@/components/LpCta";
 import InlineToolBox from "@/components/InlineToolBox";
 import {
-  posts,
-  getPost,
+  allPosts,
+  getAnyPost,
   relatedPosts,
   adjacentPosts,
   displayDate,
@@ -53,14 +53,15 @@ const PRODUCT_LINKS = [
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return posts.map((p) => ({ slug: p.slug }));
+  return allPosts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getAnyPost(slug);
   if (!post) return {};
   return {
+    ...(post.noindex ? { robots: { index: false, follow: true } } : {}),
     title: post.title,
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
@@ -80,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = getAnyPost(slug);
   if (!post) notFound();
 
   const { html, headings } = withToc(post.html);
