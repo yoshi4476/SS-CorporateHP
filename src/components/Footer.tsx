@@ -125,6 +125,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/press/kit" className="tap transition-colors hover:text-white">
+                  プレスキット
+                </Link>
+              </li>
+              <li>
                 <Link href="/news" className="tap transition-colors hover:text-white">
                   お知らせ
                 </Link>
