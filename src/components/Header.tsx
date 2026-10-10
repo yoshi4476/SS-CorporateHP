@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { services } from "@/lib/services";
 import { diagnostics, toolsIndex } from "@/lib/aio";
 import { site } from "@/lib/site";
+import { developer, developerOrg } from "@/lib/developer";
 
 // 診断はあくまで簡易的なもの。過信されないよう、導線のそばに必ず添える。
 const DIAGNOSIS_NOTE = "簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方はご連絡ください。";
@@ -392,6 +393,19 @@ export default function Header() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* 当社の顧問 YW のサイト。運営サイトではないので別に置く */}
+              <div className="border-t border-white/10 pt-6">
+                <p className="eyebrow !text-aqua">開発・事業づくりの相談</p>
+                <a
+                  href={developerOrg.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="tap mt-2 text-sm text-white/70 transition-colors hover:text-white md:mt-4"
+                >
+                  {developerOrg.name}（当社顧問 {developer.name}）↗
+                </a>
               </div>
 
               <div className="border-t border-white/10 pt-6">

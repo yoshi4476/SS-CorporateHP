@@ -15,6 +15,7 @@ import NumberWall from "@/components/NumberWall";
 import GrowthChart from "@/components/GrowthChart";
 import BusinessShowcase from "@/components/BusinessShowcase";
 import SelfCheckBand from "@/components/SelfCheckBand";
+import DevPartnerBand from "@/components/DevPartnerBand";
 import JsonLd from "@/components/JsonLd";
 import { IndustryBars, GaugeDonut, RankTable } from "@/components/charts";
 import { Reveal, CountUp } from "@/components/motion";
@@ -233,6 +234,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* 開発・事業づくりの相談は、当社の顧問 YW のサイト（CONFLUX PARTNERS）へ */}
+      <DevPartnerBand />
 
       {/* 数字の壁 */}
       <section id="numbers" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-36" aria-labelledby="numbers-heading">

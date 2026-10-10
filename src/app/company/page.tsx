@@ -9,6 +9,7 @@ import { pageMeta } from "@/lib/meta";
 import { breadcrumbSchema } from "@/lib/schema";
 import MapFacade from "@/components/MapFacade";
 import { mapInfo, site } from "@/lib/site";
+import { developer, developerOrg } from "@/lib/developer";
 
 const meta = pageMeta({
   title: "会社概要｜大阪市東成区・2020年設立",
@@ -38,6 +39,23 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
           className="ml-3 text-xs text-pulse underline-offset-4 hover:underline"
         >
           経歴・執筆記事を見る
+        </a>
+      </>
+    ),
+  },
+  {
+    // 当社の顧問。プレスキットと同じ書き方にし、本人のサイト（開発・事業づくりの相談の窓口）へつなぐ
+    label: "顧問",
+    value: (
+      <>
+        {developer.name}（{developer.jobTitle}）。AIO 事業とシステム開発事業の責任者
+        <a
+          href={developerOrg.url}
+          target="_blank"
+          rel="noopener"
+          className="ml-3 inline-block py-1.5 text-xs text-pulse underline-offset-4 hover:underline"
+        >
+          {developerOrg.name} ↗
         </a>
       </>
     ),
