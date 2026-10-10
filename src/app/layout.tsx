@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Effects from "@/components/Effects";
 import JsonLd from "@/components/JsonLd";
 import Tracking from "@/components/Tracking";
+import FirstTouch from "@/components/FirstTouch";
 import { organizationSchema } from "@/lib/schema";
 import { services } from "@/lib/services";
 import { site } from "@/lib/site";
@@ -97,6 +98,7 @@ export default function RootLayout({
       <body className="min-h-full">
         <JsonLd data={organizationSchema} />
         <Tracking />
+        <FirstTouch />
         <Header />
         <Effects>
           <main>{children}</main>

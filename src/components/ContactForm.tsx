@@ -11,6 +11,7 @@ import { sheet } from "@/lib/bpo";
 import { site } from "@/lib/site";
 import { track } from "@/components/Tracking";
 import { useTurnstile } from "@/lib/turnstile";
+import { firstTouch } from "@/lib/firstTouch";
 
 /**
  * 送信後に出す「ご返信までの間に」。以前の完了表示は電話番号だけで、送った人の次の一歩が無かった。
@@ -246,6 +247,8 @@ export default function ContactForm() {
           contact_when: get("contact_when"),
           // どのページから問い合わせたかを管制塔に残す（記事→問い合わせの対比に使う）
           referer: typeof window !== "undefined" ? window.location.href : "",
+          // 最初に来たときの流入元と入口（台帳の送信元ページに「流入: …｜入口: …｜送信: …」と入る）
+          ...firstTouch(),
           // ロボットよけの答え。管制塔が Cloudflare に確かめる（台帳には残らない）
           ...(tsToken ? { "cf-turnstile-response": tsToken } : {}),
         }),
