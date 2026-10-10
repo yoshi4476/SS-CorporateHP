@@ -32,6 +32,9 @@ export const site = {
   gasEndpoint:
     "https://script.google.com/macros/s/AKfycbw9RRmWMJnR6lc9n4OmqOGECx4ZHKjdOpfPHFU88-2tQKxkoejbPvCLjr9Edc0Na1nu2w/exec",
   formKey: "7senses-corporate-2026",
+  // ロボットよけ（Cloudflare Turnstile）のサイトキー。公開してよい値（秘密鍵は管制塔の Apps Script だけが持つ）。
+  // 空にすると部品を出さない。部品は ai / lp / corp の3つのドメインを許可している
+  turnstileSiteKey: "0x4AAAAAAFNDzhowC4hFfwIZ",
 };
 
 // Googleマップの店舗情報。会社概要の地図・構造化データ（sameAs / hasMap）が見る

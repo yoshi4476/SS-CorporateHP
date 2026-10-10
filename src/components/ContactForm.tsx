@@ -10,6 +10,7 @@ import { services } from "@/lib/services";
 import { sheet } from "@/lib/bpo";
 import { site } from "@/lib/site";
 import { track } from "@/components/Tracking";
+import { useTurnstile } from "@/lib/turnstile";
 
 /**
  * 送信後に出す「ご返信までの間に」。以前の完了表示は電話番号だけで、送った人の次の一歩が無かった。
@@ -146,6 +147,9 @@ export default function ContactForm() {
   const [errorMsg, setErrorMsg] = useState("");
   const [sentSlug, setSentSlug] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  // ロボットよけ（src/lib/turnstile.ts）。フォームに触れた時点で読み、送る直前に答えを添える
+  const tsBox = useRef<HTMLDivElement>(null);
+  const turnstile = useTurnstile(formRef, tsBox);
 
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
   // 選び直させると1手増えるので、初期値を入れておく。
@@ -220,6 +224,9 @@ export default function ContactForm() {
     const slug = get("service");
     const serviceName = OPTIONS.find((o) => o.value === slug)?.label ?? slug;
 
+    // 答えが出るまで最大6秒待つ。出なくても送る（断るかは管制塔が決める）
+    const tsToken = await turnstile.token();
+
     try {
       const res = await fetch(site.gasEndpoint, {
         method: "POST",
@@ -239,8 +246,11 @@ export default function ContactForm() {
           contact_when: get("contact_when"),
           // どのページから問い合わせたかを管制塔に残す（記事→問い合わせの対比に使う）
           referer: typeof window !== "undefined" ? window.location.href : "",
+          // ロボットよけの答え。管制塔が Cloudflare に確かめる（台帳には残らない）
+          ...(tsToken ? { "cf-turnstile-response": tsToken } : {}),
         }),
       });
+      turnstile.renew();
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (res.ok && data.ok) {
         setSentSlug(slug);
@@ -257,6 +267,7 @@ export default function ContactForm() {
         track("form_error", { reason: data.error ?? "unknown" });
       }
     } catch {
+      turnstile.renew();
       setState("error");
       setErrorMsg("通信エラーが発生しました。");
       track("form_error", { reason: "network" });
@@ -388,6 +399,9 @@ export default function ContactForm() {
           </span>
         </span>
       </label>
+
+      {/* ロボットよけの部品の置き場（ふだんは高さ0。人の操作を求められたときだけ見える） */}
+      <div ref={tsBox} />
 
       {state === "error" && (
         <p role="alert" className="rounded-xl border border-pulse/30 bg-pulse/5 px-4 py-3 text-sm leading-7 text-ink">
