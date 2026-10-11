@@ -290,7 +290,7 @@ tenpo-jimu-sagyou-ai-koritsuka/): 店舗の事務作業をAIで効率化する�
 - [経理代行の記事](https://corp.7senses.co.jp/topics/9f798325): テーマ「経理代行」の記事5本。まず読む1本は「経理代行は個人事業主でも使える？費用相場と選び方3つの軸」です。
 - [バックオフィスの記事](https://corp.7senses.co.jp/topics/ff108de1): テーマ「バックオフィス」の記事3本。まず読む1本は「バックオフィス業務改善の4ステップ｜進まない原因と対策」です。
 - [テーマから探す](https://corp.7senses.co.jp/topics): 同じ主題の記事を束ね、まず読む1本と掘り下げる記事に分けたテーマの一覧です。
-- [士業（税理士・社労士ほか）の記事](https://corp.7senses.co.jp/industry/shigyou): 士業（税理士・社労士ほか）に関する記事5本を、カテゴリごとにまとめています。
-- [士業（税理士・社労士ほか）のよくある質問](https://corp.7senses.co.jp/industry/shigyou/faq): 士業（税理士・社労士ほか）の記事5本から、よくある質問28問と答えをまとめています。
+- [士業（税理士・社労士ほか）の記事](https://corp.7senses.co.jp/industry/shigyou): 士業（税理士・社労士ほか）に関する記事6本を、カテゴリごとにまとめています。
+- [士業（税理士・社労士ほか）のよくある質問](https://corp.7senses.co.jp/industry/shigyou/faq): 士業（税理士・社労士ほか）の記事6本から、よくある質問33問と答えをまとめています。
 - [業種から探す](https://corp.7senses.co.jp/industry): 業種ごとに、カテゴリをまたいで記事をまとめています。
-- [用語集](https://corp.7senses.co.jp/glossary): 記事で定義した用語124語の意味を、1ページにまとめた用語集です。
+- [用語集](https://corp.7senses.co.jp/glossary): 記事で定義した用語125語の意味を、1ページにまとめた用語集です。
