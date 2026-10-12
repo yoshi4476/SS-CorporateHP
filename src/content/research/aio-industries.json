@@ -26,7 +26,7 @@
    "questions": 100,
    "lp": 63.1,
    "lc": 27.8,
-   "oa": 89.4,
+   "oa": 72.1,
    "url": "https://ai.7senses.co.jp/research/shigyou-ai-sources/"
   },
   {
@@ -34,7 +34,7 @@
    "questions": 100,
    "lp": 54.5,
    "lc": 22.2,
-   "oa": 88.5,
+   "oa": 73.9,
    "url": "https://ai.7senses.co.jp/research/koumuten-ai-sources/"
   },
   {
@@ -48,9 +48,9 @@
   {
    "name": "IT・SaaS",
    "questions": 50,
-   "lp": 23.2,
-   "lc": 37.4,
-   "oa": 39.1,
+   "lp": 19.3,
+   "lc": 36.6,
+   "oa": 25.0,
    "url": "https://ai.7senses.co.jp/research/saas-ai-sources/"
   },
   {
@@ -80,9 +80,9 @@
   {
    "name": "ペットサロン・ペットホテル",
    "questions": 50,
-   "lp": 38.3,
-   "lc": 46.3,
-   "oa": 98.5,
+   "lp": 33.7,
+   "lc": 52.7,
+   "oa": 91.5,
    "url": "https://ai.7senses.co.jp/research/pet-ai-sources/"
   },
   {
@@ -96,9 +96,9 @@
   {
    "name": "不用品回収・遺品整理",
    "questions": 50,
-   "lp": 35.7,
-   "lc": 48.4,
-   "oa": 96.8,
+   "lp": 33.2,
+   "lc": 48.1,
+   "oa": 75.7,
    "url": "https://ai.7senses.co.jp/research/fuyouhin-ai-sources/"
   },
   {
@@ -120,25 +120,25 @@
   {
    "name": "写真館・フォトスタジオ",
    "questions": 50,
-   "lp": 25.2,
-   "lc": 65.6,
+   "lp": 22.0,
+   "lc": 70.0,
    "oa": 100.0,
    "url": "https://ai.7senses.co.jp/research/shashin-ai-sources/"
   },
   {
    "name": "動物病院",
    "questions": 50,
-   "lp": 20.5,
-   "lc": 58.5,
-   "oa": 89.7,
+   "lp": 18.2,
+   "lc": 62.2,
+   "oa": 75.9,
    "url": "https://ai.7senses.co.jp/research/vet-ai-sources/"
   },
   {
    "name": "外壁塗装・屋根工事",
    "questions": 50,
-   "lp": 47.1,
-   "lc": 40.7,
-   "oa": 98.4,
+   "lp": 43.5,
+   "lc": 44.5,
+   "oa": 78.6,
    "url": "https://ai.7senses.co.jp/research/gaiheki-ai-sources/"
   },
   {
@@ -152,17 +152,17 @@
   {
    "name": "家事代行・ハウスクリーニング",
    "questions": 50,
-   "lp": 47.5,
-   "lc": 30.9,
-   "oa": 93.0,
+   "lp": 44.5,
+   "lc": 36.1,
+   "oa": 77.5,
    "url": "https://ai.7senses.co.jp/research/kaji-ai-sources/"
   },
   {
    "name": "建設・設備工事",
    "questions": 50,
-   "lp": 32.9,
-   "lc": 51.8,
-   "oa": 98.6,
+   "lp": 28.8,
+   "lc": 55.3,
+   "oa": 84.2,
    "url": "https://ai.7senses.co.jp/research/kensetsu-ai-sources/"
   },
   {
@@ -192,9 +192,9 @@
   {
    "name": "自動車整備・販売",
    "questions": 50,
-   "lp": 34.4,
-   "lc": 45.0,
-   "oa": 96.8,
+   "lp": 32.9,
+   "lc": 46.8,
+   "oa": 86.8,
    "url": "https://ai.7senses.co.jp/research/jidousha-ai-sources/"
   },
   {
@@ -208,25 +208,25 @@
   {
    "name": "薬局",
    "questions": 50,
-   "lp": 16.4,
-   "lc": 35.8,
-   "oa": 73.1,
+   "lp": 14.5,
+   "lc": 42.2,
+   "oa": 58.9,
    "url": "https://ai.7senses.co.jp/research/yakkyoku-ai-sources/"
   },
   {
    "name": "製造業（受託加工）",
    "questions": 50,
-   "lp": 16.8,
-   "lc": 0.0,
-   "oa": 6.6,
+   "lp": 14.8,
+   "lc": 9.5,
+   "oa": 31.7,
    "url": "https://ai.7senses.co.jp/research/seizou-ai-sources/"
   },
   {
    "name": "運送・物流",
    "questions": 50,
-   "lp": 26.2,
-   "lc": 55.2,
-   "oa": 98.5,
+   "lp": 22.5,
+   "lc": 47.4,
+   "oa": 81.9,
    "url": "https://ai.7senses.co.jp/research/unso-ai-sources/"
   },
   {
