@@ -403,7 +403,8 @@ export default function BlogPage() {
               。まだ書けていなくても構いません。
             </p>
             <Link
-              href="/contact?s=keiri-bpo"
+              href="/contact"
+              data-entry-s="keiri-bpo"
                   className="mt-9 inline-block rounded-full bg-pulse px-10 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
             >
               無料相談を申し込む (現状分析レポート付き)

@@ -209,7 +209,8 @@ export default async function ServicePage({ params }: Props) {
                 {/* 相談・資料の手前の入口。経理の記事から来た人が、まず自分で範囲の目安をつけられるようにする */}
                 {service.slug === "keiri-bpo" && (
                   <Link
-                    href="/tools/keiri-check?from=/services/keiri-bpo"
+                    href="/tools/keiri-check"
+                    data-entry-from="/services/keiri-bpo"
                     className="mt-6 block w-fit text-[15px] font-bold leading-8 text-white underline decoration-gold-bright decoration-2 underline-offset-[6px] transition-colors hover:text-gold-bright"
                   >
                     まず5問のセルフチェックで、外に出せる範囲を確かめる

@@ -13,6 +13,7 @@
 // diagnosis_click は cta_click と同時に飛ぶので、足し合わせない（管制塔の data_sanity.CO_FIRED と同じ扱い）。
 
 import { useEffect } from "react";
+import { entryOf, saveEntry, withEntry } from "@/lib/entry";
 
 declare global {
   interface Window {
@@ -97,8 +98,12 @@ export default function Tracking() {
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest?.("a");
       if (!(a instanceof HTMLAnchorElement)) return;
-      const href = a.getAttribute("href") ?? "";
       const label = (a.textContent ?? "").trim().slice(0, 60);
+      // 入口の印（data-entry-*）があれば、行き先のページへ渡し、計測は前と同じ名前（contact-keiri-bpo・keiri-check-q1-yes など）
+      const entry = entryOf(a);
+      const raw = a.getAttribute("href") ?? "";
+      if (entry) saveEntry(entry, raw.split("?")[0]);
+      const href = withEntry(raw, entry);
 
       const hit = classify(href, label);
       if (hit) {

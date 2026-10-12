@@ -24,7 +24,7 @@ const TRACKS = [
     doing: ["書類を送る", "月次の報告を確認する"],
     ours: ["記帳・仕訳", "請求発行と入金消込", "支払データ作成", "給与・賞与・年末調整",
            "経費精算のチェック", "月次決算の早期化"],
-    cta: { label: "無料の現状分析を申し込む", href: "/contact?s=keiri-bpo" },
+    cta: { label: "無料の現状分析を申し込む", href: "/contact", s: "keiri-bpo" },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
     video: "keiri-bpo",
     videoNote: "任せた場合に何がどう変わるかを、10分でご説明します",
@@ -43,7 +43,7 @@ const TRACKS = [
     doing: ["システムで確認して確定する", "月次を締める"],
     ours: ["仕訳の案を自動で作成", "請求と入金の消込", "支払管理", "給与・賞与・年末調整",
            "電子帳簿保存法に沿った保存", "導入時の初期設定と操作説明"],
-    cta: { label: "デモを見てみる", href: "/contact?s=keiri-self" },
+    cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self" },
     note: "実際の画面をお見せします。ご契約前提のご案内ではありません。",
     video: "keiri-self",
     videoNote: "実際の画面で、どう使うかを10分でご説明します",
@@ -120,6 +120,7 @@ export default function KeiriTwoTracks() {
                 <div className="mt-auto pt-7">
                   <Link
                     href={t.cta.href}
+                    data-entry-s={t.cta.s}
                     className="inline-block rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     {t.cta.label} →
@@ -142,7 +143,8 @@ export default function KeiriTwoTracks() {
               その結果を見てから、任せるか自社で使うかをお決めいただけます。
             </p>
             <Link
-              href="/contact?s=keiri-shindan"
+              href="/contact"
+              data-entry-s="keiri-shindan"
               className="mt-5 inline-block rounded-full border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
             >
               無料の現状分析を申し込む →

@@ -12,6 +12,7 @@ import { site } from "@/lib/site";
 import { track } from "@/components/Tracking";
 import { useTurnstile } from "@/lib/turnstile";
 import { firstTouch } from "@/lib/firstTouch";
+import { entrySearch } from "@/lib/entry";
 
 /**
  * 送信後に出す「ご返信までの間に」。以前の完了表示は電話番号だけで、送った人の次の一歩が無かった。
@@ -155,7 +156,7 @@ export default function ContactForm() {
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
   // 選び直させると1手増えるので、初期値を入れておく。
   useEffect(() => {
-    const pick = pickOption((new URLSearchParams(window.location.search).get("s") ?? "").trim().toLowerCase());
+    const pick = pickOption((new URLSearchParams(entrySearch("/contact")).get("s") ?? "").trim().toLowerCase());
     if (!pick) return;
     const sel = formRef.current?.elements.namedItem("service");
     if (sel instanceof HTMLSelectElement) sel.value = pick;

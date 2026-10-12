@@ -316,7 +316,8 @@ export default async function BlogDetailPage({ params }: Props) {
                     無料でダウンロードする
                   </a>
                   <Link
-                    href="/contact?s=keiri-bpo"
+                    href="/contact"
+                    data-entry-s="keiri-bpo"
                     className="tap inline-flex items-center rounded-full border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
                   >
                     先に相談する

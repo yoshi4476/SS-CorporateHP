@@ -156,7 +156,7 @@ export default async function ThemePage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <Link href="/contact?s=keiri-bpo" className="mt-10 inline-block rounded-full bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow">
+          <Link href="/contact" data-entry-s="keiri-bpo" className="mt-10 inline-block rounded-full bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow">
             経理の外注を無料で相談する
           </Link>
         </div>

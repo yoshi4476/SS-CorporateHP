@@ -6,6 +6,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { track } from "@/components/Tracking";
+import { entrySearch } from "@/lib/entry";
 import {
   QUESTIONS,
   RESULTS,
@@ -32,9 +33,10 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
 
   // 静的書き出しでは useSearchParams に Suspense 境界が要るため、ContactForm と同じく直接読む
   useEffect(() => {
-    from.current = fromPath(window.location.search);
+    const search = entrySearch("/tools/keiri-check");
+    from.current = fromPath(search);
     // 入口で1問目に答えてきた人は、その答えを入れた状態で2問目から始める（同じ問いを2度聞かない）
-    const a1 = firstAnswer(window.location.search);
+    const a1 = firstAnswer(search);
     if (a1 === undefined) return;
     started.current = true;
     track("tool_start", { tool: TOOL_ID, from_path: from.current, via: "entry" });
@@ -150,7 +152,8 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                href="/contact?s=keiri-shindan"
+                href="/contact"
+                data-entry-s="keiri-shindan"
                 onClick={() => track("tool_to_contact", { ...params(), result: key })}
                 className="tap inline-flex items-center rounded-full bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
               >

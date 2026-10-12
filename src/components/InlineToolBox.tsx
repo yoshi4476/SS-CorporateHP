@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { track } from "@/components/Tracking";
 import { QUESTIONS, TOOL_ID } from "@/lib/keiriCheck";
+// 行き先はクエリの無い1つの URL。出どころと1問目は data-entry-* に書き、押したときに Tracking が渡す（src/lib/entry.ts）
 
 type Props = {
   /** 来たページのパス。結果の計測（from_path）に残る */
@@ -40,7 +41,6 @@ export default function InlineToolBox({ from, place = "article", tone = "light" 
     return () => io.disconnect();
   }, [place]);
 
-  const href = (yes: boolean) => `/tools/keiri-check?from=${encodeURIComponent(from)}&q1=${yes ? 1 : 0}`;
   const onPick = (yes: boolean) => {
     if (place === "article") track("inline_tool_click", { tool: TOOL_ID, answer: yes ? "yes" : "no" });
   };
@@ -64,7 +64,9 @@ export default function InlineToolBox({ from, place = "article", tone = "light" 
         {[true, false].map((yes) => (
           <Link
             key={String(yes)}
-            href={href(yes)}
+            href="/tools/keiri-check"
+            data-entry-from={from}
+            data-entry-q1={yes ? "1" : "0"}
             onClick={() => onPick(yes)}
             className={`inline-flex min-h-11 min-w-28 items-center justify-center rounded-full border px-7 py-2.5 text-[15px] font-bold transition-colors ${
               dark
