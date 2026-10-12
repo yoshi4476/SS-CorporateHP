@@ -1,7 +1,7 @@
 {
   "slug": "middle-office-backoffice-chigai",
-  "title": "ミドルオフィスとバックオフィスの違いは？外に出せる業務の線引き",
-  "description": "ミドルオフィスとバックオフィスの違いは、判断と管理を担うか、決まった処理を回すかです。金融機関の用語を中小企業の経理に当てはめ、外部委託できる業務と社内に残す判断の線引きを、経理BPO導入10社の実例と失敗例で整理しました。",
+  "title": "ミドルオフィスとバックオフィスの違い｜外注10社の月次決算15日→7日",
+  "description": "判断まで外に出すと承認待ちで止まります。ミドルは判断と管理、バックは決まった処理の担当です。中小企業の経理に当てはめ、外部委託できる業務と社内に残す判断の線引きを、取り違えた失敗例つきで整理しました。",
   "date": "2026-10-06",
   "dateModified": "2026-10-06",
   "category": "backoffice",
@@ -43,6 +43,6 @@
       "sameAs": "https://ja.wikipedia.org/wiki/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%82%A2%E3%82%A6%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%B3%E3%82%B0"
     }
   ],
-  "photo": "/images/shelf/office-2.webp",
+  "photo": "/images/shelf/closing-2.webp",
   "eyecatchWebp": "/images/blog/middle-office-backoffice-chigai/eyecatch.webp"
 }
