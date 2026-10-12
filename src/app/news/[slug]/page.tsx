@@ -19,6 +19,7 @@ export function generateStaticParams() {
  * 本文を文の切れ目で125字まで使い、発信元と日付を添える
  */
 function newsDescription(item: NonNullable<ReturnType<typeof getNews>>) {
+  if (item.description) return item.description;
   let text = "";
   for (const sentence of item.body.join("").split(/(?<=。)/)) {
     if (text && (text + sentence).length > 125) break;

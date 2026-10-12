@@ -15,9 +15,9 @@ import { site } from "@/lib/site";
 // 載せるのは会社概要・AI集客ラボの監修者ページですでに公開している事実だけにする。
 // 料金・実績の数字（店舗数・継続率など）・お客様の声は持ち込まない（転載先で条件が落ちると誤認を招くため）
 export const metadata: Metadata = pageMeta({
-  title: "プレスキット",
+  title: "プレスキット（表記・紹介文・略歴・ロゴ）",
   description:
-    "セブンセンシズ株式会社のプレスキットです。正式な表記、会社紹介文（短・長）、代表取締役 原口 優の略歴（短・中・長）、ロゴ（PNG）を、記事や紹介にそのままお使いいただけます。",
+    "セブンセンシズ株式会社のプレスキットです。正式な表記、会社紹介文（短・長）、代表取締役 原口 優の略歴（短・中・長）、ロゴ（PNG）を、記事や紹介にそのままお使いいただけます。使用上のお願いもあわせてご確認ください。",
   path: "/press/kit",
 });
 
@@ -208,7 +208,7 @@ export default function PressKitPage() {
             {LOGOS.map((l) => (
               <li key={l.file} className="grid gap-3">
                 <div className={`grid aspect-[4/3] place-items-center rounded-2xl border border-line p-8 ${l.dark ? "bg-ink" : "bg-white"}`}>
-                  <Image src={l.src} alt="" width={l.w} height={l.h} className="h-auto max-h-full w-auto max-w-full" />
+                  <Image src={l.src} alt={`セブンセンシズのロゴ（${l.label}）`} width={l.w} height={l.h} className="h-auto max-h-full w-auto max-w-full" />
                 </div>
                 <p className="font-bold">{l.label}</p>
                 <p className="num text-xs text-slate">
