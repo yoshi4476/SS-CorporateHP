@@ -72,7 +72,7 @@
   },
   "compare": {
    "title": "比較表から探す（経理BPO・経理代行）",
-   "description": "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。掲載している記事の例: 月次決算はいつまでに終えるか｜法律の期限と社内の目安を整理／記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ／個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方。",
+   "description": "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。掲載している記事の例: 記帳代行を札幌で頼むなら、地元とオンラインのどちらが合う？／月次決算はいつまでに終えるか｜法律の期限と社内の目安を整理／記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ。",
    "html": "<div class=\"latest-block\" data-cat=\"new\"><div class=\"cat-head\"><h2>比較表から探す</h2></div><p class=\"hub-lead\">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。表は各記事にあるものと同じで、数字の根拠と前提は表の下の出典の記事に書いています。</p><ul class=\"hub-list\"><li><a href=\"https://corp.7senses.co.jp/compare/keiri-bpo\"><strong>経理BPO・経理代行の比較表</strong><span class=\"cnt\">3表</span></a></li><li><a href=\"https://corp.7senses.co.jp/compare/keiri-jitsumu\"><strong>経理実務・法対応の比較表</strong><span class=\"cnt\">3表</span></a></li></ul></div>",
    "jsonld": [],
    "lang": "ja",
