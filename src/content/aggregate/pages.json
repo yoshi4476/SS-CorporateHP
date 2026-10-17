@@ -1,43 +1,8 @@
 {
  "pages": {
-  "compare/keiri-bpo": {
-   "title": "経理BPO・経理代行の比較表",
-   "description": "経理BPO・経理代行の記事にある比較表3表を1か所に集めました。表は記事のものと同じです。記事1本をまとめています。掲載している記事の例: 記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ。",
-   "html": "<div class=\"latest-block\" data-cat=\"new\"><div class=\"cat-head\"><span class=\"cnt\">3表</span></div><p class=\"hub-lead\">経理BPO・経理代行の記事にある比較表を1か所に集めました。表は各記事のものと同じで、数字の根拠と前提は出典の記事に書いています。</p></div><div class=\"latest-block\"><div class=\"cat-head\"><h2>記帳代行で頼めることと、頼めないこと</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">作業</th>\n<th style=\"text-align: left;\">記帳代行で頼めるか</th>\n<th style=\"text-align: left;\">補足</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">領収書・通帳の入力</td>\n<td style=\"text-align: left;\">頼める</td>\n<td style=\"text-align: left;\">会計ソフトに入力して帳簿を作る</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">月次の試算表の確認</td>\n<td style=\"text-align: left;\">契約による</td>\n<td style=\"text-align: left;\">出品ごと・会社ごとに範囲が違う</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">税務相談・申告書の作成</td>\n<td style=\"text-align: left;\">別の業務</td>\n<td style=\"text-align: left;\">税理士の業務として扱われる範囲がある</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">請求書の発行・入金管理</td>\n<td style=\"text-align: left;\">契約による</td>\n<td style=\"text-align: left;\">記帳とは別に範囲を決める</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/kicho-daiko-coconala\">記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ</a>（2026-10-15時点）</p></div>\n<div class=\"latest-block\"><div class=\"cat-head\"><h2>ココナラの個人出品と法人BPOの5つの違い</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">観点</th>\n<th style=\"text-align: left;\">ココナラの個人出品</th>\n<th style=\"text-align: left;\">法人の経理BPO</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">継続性</td>\n<td style=\"text-align: left;\">出品者の都合で変わりうる</td>\n<td style=\"text-align: left;\">担当が替わっても体制で引き継ぐ</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">守秘</td>\n<td style=\"text-align: left;\">取り決めは出品者ごとに違う</td>\n<td style=\"text-align: left;\">契約書で守秘を取り決める</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">対応範囲</td>\n<td style=\"text-align: left;\">出品ごとに限定される</td>\n<td style=\"text-align: left;\">月次の運用まで含められる</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">責任の所在</td>\n<td style=\"text-align: left;\">出品者個人</td>\n<td style=\"text-align: left;\">法人と契約する</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">費用</td>\n<td style=\"text-align: left;\">少量なら低く始めやすい</td>\n<td style=\"text-align: left;\">運用費が加わる</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/kicho-daiko-coconala\">記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ</a>（2026-10-15時点）</p></div>\n<div class=\"latest-block\"><div class=\"cat-head\"><h2>費用は「入力の単価」ではなく総額で比べる</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">比べる項目</th>\n<th style=\"text-align: left;\">個人出品A</th>\n<th style=\"text-align: left;\">法人B</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">月額（税込）</td>\n<td style=\"text-align: left;\">見積もりで確認</td>\n<td style=\"text-align: left;\">見積もりで確認</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">含まれる作業</td>\n<td style=\"text-align: left;\">入力のみ・試算表まで など</td>\n<td style=\"text-align: left;\">入力・試算表・締めの調整 など</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">自社の確認時間（月）</td>\n<td style=\"text-align: left;\">自社で見積もる</td>\n<td style=\"text-align: left;\">自社で見積もる</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">担当不在時の対応</td>\n<td style=\"text-align: left;\">確認する</td>\n<td style=\"text-align: left;\">確認する</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/kicho-daiko-coconala\">記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ</a>（2026-10-15時点）</p></div>",
-   "jsonld": [
-    {
-     "@context": "https://schema.org",
-     "@type": "ItemList",
-     "name": "経理BPO・経理代行の比較表",
-     "numberOfItems": 3,
-     "itemListElement": [
-      {
-       "@type": "ListItem",
-       "position": 1,
-       "name": "記帳代行で頼めることと、頼めないこと",
-       "url": "https://corp.7senses.co.jp/blog/kicho-daiko-coconala"
-      },
-      {
-       "@type": "ListItem",
-       "position": 2,
-       "name": "ココナラの個人出品と法人BPOの5つの違い",
-       "url": "https://corp.7senses.co.jp/blog/kicho-daiko-coconala"
-      },
-      {
-       "@type": "ListItem",
-       "position": 3,
-       "name": "費用は「入力の単価」ではなく総額で比べる",
-       "url": "https://corp.7senses.co.jp/blog/kicho-daiko-coconala"
-      }
-     ]
-    }
-   ],
-   "lang": "ja",
-   "url": "https://corp.7senses.co.jp/compare/keiri-bpo"
-  },
   "compare/keiri-jitsumu": {
    "title": "経理実務・法対応の比較表",
-   "description": "経理実務・法対応の記事にある比較表3表を1か所に集めました。表は記事のものと同じです。記事2本をまとめています。掲載している記事の例: 売掛金管理の方法とは？基本4ステップと未回収を防ぐコツ／個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方。",
+   "description": "経理実務・法対応の記事にある比較表3表を1か所に集めました。表は記事のものと同じです。記事2本をまとめています。掲載している記事の例: 個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方／売掛金管理の方法とは？基本4ステップと未回収を防ぐコツ。",
    "html": "<div class=\"latest-block\" data-cat=\"new\"><div class=\"cat-head\"><span class=\"cnt\">3表</span></div><p class=\"hub-lead\">経理実務・法対応の記事にある比較表を1か所に集めました。表は各記事のものと同じで、数字の根拠と前提は出典の記事に書いています。</p></div><div class=\"latest-block\"><div class=\"cat-head\"><h2>青色申告特別控除65万円・55万円・10万円の条件の違い</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">控除額</th>\n<th style=\"text-align: left;\">記帳方式</th>\n<th style=\"text-align: left;\">追加の要件</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">65万円</td>\n<td style=\"text-align: left;\">複式簿記</td>\n<td style=\"text-align: left;\">期限内申告＋e-Tax申告 または 優良な電子帳簿の保存</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">55万円</td>\n<td style=\"text-align: left;\">複式簿記</td>\n<td style=\"text-align: left;\">貸借対照表・損益計算書を添付し期限内に申告</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">10万円</td>\n<td style=\"text-align: left;\">簡易簿記（単式簿記）でも可</td>\n<td style=\"text-align: left;\">青色申告承認申請書の提出のみ</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata\">個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方</a>（2026-09-01時点）</p></div>\n<div class=\"latest-block\"><div class=\"cat-head\"><h2>複式簿記と簡易簿記（単式簿記）の違いと選び方</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">項目</th>\n<th style=\"text-align: left;\">複式簿記</th>\n<th style=\"text-align: left;\">簡易簿記（単式簿記）</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">記録の方法</td>\n<td style=\"text-align: left;\">借方・貸方の両面で記録</td>\n<td style=\"text-align: left;\">収入・支出のみ記録</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">入力の手間</td>\n<td style=\"text-align: left;\">やや多い</td>\n<td style=\"text-align: left;\">少ない</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">ミスの発見</td>\n<td style=\"text-align: left;\">貸借の不一致で気づきやすい</td>\n<td style=\"text-align: left;\">気づきにくい</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">青色申告特別控除</td>\n<td style=\"text-align: left;\">55万円または65万円</td>\n<td style=\"text-align: left;\">10万円</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/kojin-jigyonushi-choubo-tsukekata\">個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方</a>（2026-09-01時点）</p></div>\n<div class=\"latest-block\"><div class=\"cat-head\"><h2>売掛金管理の方法を比較｜エクセル・会計ソフト・外部委託</h2></div><div class=\"table-wrap\"><table>\n<thead>\n<tr>\n<th style=\"text-align: left;\">方法</th>\n<th style=\"text-align: left;\">向いている規模</th>\n<th style=\"text-align: left;\">始めやすさ</th>\n<th style=\"text-align: left;\">注意点</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td style=\"text-align: left;\">エクセル</td>\n<td style=\"text-align: left;\">取引先・請求件数が少ない</td>\n<td style=\"text-align: left;\">高い</td>\n<td style=\"text-align: left;\">属人化しやすく更新漏れが起きやすい</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">会計ソフト</td>\n<td style=\"text-align: left;\">取引件数が中〜多い</td>\n<td style=\"text-align: left;\">中程度</td>\n<td style=\"text-align: left;\">入力ルールの統一が必要</td>\n</tr>\n<tr>\n<td style=\"text-align: left;\">外部委託（経理BPO）</td>\n<td style=\"text-align: left;\">社内に管理担当者を割けない</td>\n<td style=\"text-align: left;\">中程度</td>\n<td style=\"text-align: left;\">委託範囲の切り分けが必要</td>\n</tr>\n</tbody>\n</table></div><p class=\"hub-note\">出典: <a href=\"https://corp.7senses.co.jp/blog/urikakekin-kanri-houhou\">売掛金管理の方法とは？基本4ステップと未回収を防ぐコツ</a>（2026-08-16時点）</p></div>",
    "jsonld": [
     {
@@ -72,8 +37,8 @@
   },
   "compare": {
    "title": "比較表から探す（経理BPO・経理代行）",
-   "description": "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。掲載している記事の例: 記帳代行を札幌で頼むなら、地元とオンラインのどちらが合う？／月次決算はいつまでに終えるか｜法律の期限と社内の目安を整理／記帳代行をココナラで頼む前に｜個人出品と法人BPOの違い5つ。",
-   "html": "<div class=\"latest-block\" data-cat=\"new\"><div class=\"cat-head\"><h2>比較表から探す</h2></div><p class=\"hub-lead\">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。表は各記事にあるものと同じで、数字の根拠と前提は表の下の出典の記事に書いています。</p><ul class=\"hub-list\"><li><a href=\"https://corp.7senses.co.jp/compare/keiri-bpo\"><strong>経理BPO・経理代行の比較表</strong><span class=\"cnt\">3表</span></a></li><li><a href=\"https://corp.7senses.co.jp/compare/keiri-jitsumu\"><strong>経理実務・法対応の比較表</strong><span class=\"cnt\">3表</span></a></li></ul></div>",
+   "description": "記事の比較表をカテゴリごとに集め、違いと費用を見比べられる入口です。掲載している記事の例: 不動産の記帳代行はどこまで頼める？大家が外注を決める判断基準／個人事業主の帳簿の付け方｜青色申告65万円控除の条件とやり方／管理部門の人手不足解決｜5つの選択肢と選び方／売掛金管理の方法とは？基本4ステップと未回収を防ぐコツ。",
+   "html": "<div class=\"latest-block\" data-cat=\"new\"><div class=\"cat-head\"><h2>比較表から探す</h2></div><p class=\"hub-lead\">「何と何がどう違うか」「いくらかかるか」を、記事の表だけを集めて見比べられる入口です。表は各記事にあるものと同じで、数字の根拠と前提は表の下の出典の記事に書いています。</p><ul class=\"hub-list\"><li><a href=\"https://corp.7senses.co.jp/compare/keiri-jitsumu\"><strong>経理実務・法対応の比較表</strong><span class=\"cnt\">3表</span></a></li></ul></div>",
    "jsonld": [],
    "lang": "ja",
    "url": "https://corp.7senses.co.jp/compare"
