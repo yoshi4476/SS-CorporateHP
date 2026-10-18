@@ -49,7 +49,7 @@ function DeckButton({ tone = "light" }: { tone?: "light" | "dark" }) {
     <a
       href={rakushift.deck}
       download
-      className={`inline-flex items-center justify-center gap-2 rounded-sm px-8 py-4 text-sm font-bold transition-colors ${
+      className={`inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-bold transition-colors ${
         tone === "dark"
           ? "border border-paper/30 text-paper hover:border-paper"
           : "border border-line-strong text-ink hover:border-pulse hover:text-pulse"
@@ -113,7 +113,7 @@ export default function RakushiftPage() {
       {/* 看板 */}
       <section data-drone-zone className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5 md:px-8 pb-14 pt-10 md:pb-20 md:pt-16">
+        <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-10 md:pb-20 md:pt-16">
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
@@ -133,7 +133,7 @@ export default function RakushiftPage() {
                 <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.2rem]">
                   ボタン1つで、
                   <br />
-                  <span>シフト作成がおわる。</span>
+                  <span className="text-pulse">シフト作成がおわる。</span>
                 </h1>
                 <p className="mt-7 text-[15px] leading-[1.9] text-slate md:text-base md:leading-9">
                   {rakushift.summary}
@@ -142,7 +142,7 @@ export default function RakushiftPage() {
                   {["数十秒で自動生成", "労基法を自動遵守", "スマホ完全対応"].map((t) => (
                     <li
                       key={t}
-                      className="rounded-sm border border-pulse/30 bg-pulse/5 px-4 py-2 text-xs font-bold text-pulse"
+                      className="rounded-full border border-pulse/30 bg-pulse/5 px-4 py-2 text-xs font-bold text-pulse"
                     >
                       ✓ {t}
                     </li>
@@ -153,7 +153,7 @@ export default function RakushiftPage() {
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                   <Link
                     href="/contact"
-                  className="btn btn-primary px-8"
+                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     無料でシフトを見てもらう
                   </Link>
@@ -194,7 +194,7 @@ export default function RakushiftPage() {
               {measured.map((m) => (
                 <div key={m.label}>
                   {/* 成果の数字は金。紺は「会社」、金は「出た結果」と役割を分けている */}
-                  <dd className="num text-4xl font-bold leading-none text-ink md:text-5xl">
+                  <dd className="num text-4xl font-bold leading-none text-gold md:text-5xl">
                     <CountUp value={Number(m.value)} />
                     <span className="ml-1 text-base">{m.unit}</span>
                   </dd>
@@ -209,7 +209,7 @@ export default function RakushiftPage() {
 
       {/* 課題 */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="こんなお悩み、ありませんか?"
             lead="シフト作成は、==店長の大きな負担==になっています。"
@@ -218,7 +218,8 @@ export default function RakushiftPage() {
             {problems.map((p, i) => (
               <Reveal key={p.no} delay={i * 0.07}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <h3 className="text-lg font-bold">{p.title}</h3>
+                  <span aria-hidden className="num text-4xl font-bold text-gold/35">{p.no}</span>
+                  <h3 className="mt-3 text-lg font-bold">{p.title}</h3>
                   <p className="mt-4 text-[15px] leading-[1.9] text-slate">{p.body}</p>
                 </div>
               </Reveal>
@@ -227,7 +228,7 @@ export default function RakushiftPage() {
           <Reveal delay={0.2}>
             <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-3xl bg-ink px-8 py-7 text-paper md:flex-row md:items-center md:px-10">
               <p className="text-base font-bold md:text-lg">
-                その悩み、{rakushift.name} がまとめて引き受けます。
+                その悩み、<span className="text-aqua">{rakushift.name}</span> がまとめて引き受けます。
               </p>
               <p className="num shrink-0 text-sm text-paper/70">
                 シフト作成 月240分 <span className="text-aqua">→ 3分</span>
@@ -239,7 +240,7 @@ export default function RakushiftPage() {
 
       {/* 手作業との比較。どこが変わるかを1枚で示す */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="手作業と、何が変わるのか"
             lead="速くなるだけではありません。==見落としと偏りが、仕組みの側で起きなくなります==。"
@@ -282,7 +283,7 @@ export default function RakushiftPage() {
 
       {/* 使い方3ステップ */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="使い方は、たった3ステップ"
             lead="==むずかしい操作はありません==。順番に設定していくだけです。"
@@ -329,7 +330,7 @@ export default function RakushiftPage() {
 
       {/* 完成したシフト表 */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="完成したシフト表"
             lead="見やすいカレンダー表示。==手直しも印刷もPDF保存も自由に==できます。"
@@ -358,7 +359,7 @@ export default function RakushiftPage() {
 
       {/* 仕組み */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="なぜ、数十秒で組み上がるのか"
             lead="担当者の勘ではなく、==条件を数式に落として解いています==。そのうえで別のAIが法令の観点から確認します。"
@@ -367,7 +368,7 @@ export default function RakushiftPage() {
             {engine.map((e, i) => (
               <Reveal key={e.step} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span aria-hidden className="num text-sm font-bold text-pulse">{e.step}</span>
+                  <span aria-hidden className="num text-5xl font-bold text-gold/35">{e.step}</span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{e.title}</h3>
                   <p className="mt-4 text-[15px] leading-[1.9] text-slate">{e.body}</p>
                 </div>
@@ -379,7 +380,7 @@ export default function RakushiftPage() {
 
       {/* 労基法 */}
       <section className="border-y border-line bg-ink py-16 text-paper md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <Reveal>
             <p className="eyebrow !text-aqua">労働基準法への対応</p>
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
@@ -404,7 +405,7 @@ export default function RakushiftPage() {
 
       {/* かしこい機能 */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="店長を助ける「かしこい機能」"
             lead="現場のこまかい事情に合わせて、==AIがきめ細かく配置します==。"
@@ -424,7 +425,7 @@ export default function RakushiftPage() {
 
       {/* 分析レポート */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead title="分析レポートで見える化" lead={analyticsNote} />
           <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <ol className="grid gap-3">
@@ -455,7 +456,7 @@ export default function RakushiftPage() {
 
       {/* 業種 */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead title="こういう現場で使われています" />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {industries.map((s, i) => (
@@ -472,7 +473,7 @@ export default function RakushiftPage() {
 
       {/* 料金 — 白・薄灰・紺の繰り返しで単調になるので、ここだけ金の淡い面にして節目を作る */}
       <section className="border-y border-gold/20 bg-gold-tint py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="料金プラン"
             lead="店舗の規模に合わせて選べる3プラン。==税込・初期費用0円==です。"
@@ -486,7 +487,7 @@ export default function RakushiftPage() {
                   }`}
                 >
                   {p.recommended && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-sm bg-pulse px-4 py-1 text-xs font-bold text-white">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-pulse px-4 py-1 text-xs font-bold text-white">
                       ★ 一番人気・おすすめ
                     </span>
                   )}
@@ -496,7 +497,7 @@ export default function RakushiftPage() {
                     <span className="num text-4xl font-bold">{p.price}</span>
                     <span className="ml-1 text-sm text-slate">円 / 月</span>
                   </p>
-                  <p className="mt-3 inline-flex self-start rounded-sm bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
+                  <p className="mt-3 inline-flex self-start rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                     {p.limit}
                   </p>
                   <ul className="mt-6 grid flex-1 gap-2.5 border-t border-line pt-5">
@@ -533,7 +534,7 @@ export default function RakushiftPage() {
 
       {/* 初期設定サポート */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="初期設定サポート"
             lead="面倒な初期設定とスタッフ登録は、==まるごと代行できます==。"
@@ -543,7 +544,7 @@ export default function RakushiftPage() {
               {setupSupportItems.map((c, i) => (
                 <Reveal key={c.title} delay={i * 0.06}>
                   <li className="flex gap-5 rounded-2xl border border-line bg-white px-6 py-5 shadow-card">
-                    <span aria-hidden className="num shrink-0 text-sm font-bold text-pulse">{i + 1}</span>
+                    <span aria-hidden className="num shrink-0 text-xl font-bold text-gold/45">{i + 1}</span>
                     <div>
                       <h3 className="text-sm font-bold md:text-base">{c.title}</h3>
                       <p className="mt-2 text-sm leading-7 text-slate">{c.body}</p>
@@ -576,7 +577,7 @@ export default function RakushiftPage() {
 
       {/* 導入の流れ */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead title="導入の流れ" lead="==設定の作り込みは当社で代行できます==。使い始めるところまで伴走します。" />
           <div className="mt-10">
             <FlowSteps steps={steps} />
@@ -595,18 +596,20 @@ export default function RakushiftPage() {
       </section>
 
       {/* CTA。何をしてもらえるかを箇条書きで出してから申し込ませる */}
-      <section id="lp-end-cta" className="bg-ink py-20 text-paper md:py-32">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <section id="lp-end-cta" className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
+        <div aria-hidden className="grid-field-dark absolute inset-0" />
+        <div className="relative mx-auto max-w-3xl px-5">
           <Reveal>
-            <h2 className="max-w-[24em] border-t border-white/40 pt-8 text-[1.875rem] font-bold leading-[1.35] md:text-[3rem]">
+            <p aria-hidden className="eyebrow !text-aqua text-center" />
+            <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               まず、今のシフトを見せてください。
             </h2>
-            <p className="mt-6 max-w-[36em] text-base leading-[1.9] text-paper/75">
+            <p className="mx-auto mt-6 max-w-xl text-center text-[15px] leading-[1.9] text-paper/70 md:text-base">
               30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
-            <ul className="mt-9 grid max-w-3xl border-b border-white/20">
+            <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
               {offer.map((o) => (
-                <li key={o} className="flex gap-3.5 border-t border-white/20 py-4 text-[15px] leading-7 text-paper/85">
+                <li key={o} className="flex gap-3.5 rounded-2xl border border-white/12 bg-white/[0.04] px-6 py-4 text-sm leading-7 text-paper/85">
                   <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="mt-1.5 shrink-0 text-aqua">
                     <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -614,24 +617,24 @@ export default function RakushiftPage() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                  className="btn btn-primary min-h-14 px-8 text-base"
+                  className="rounded-full bg-gold-bright px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料でシフトを見てもらう
               </Link>
               <DeckButton tone="dark" />
             </div>
-            <p className="mt-5 text-sm leading-7 text-paper/70">
+            <p className="mt-5 text-center text-sm leading-7 text-paper/60">
               初期費用0円 ／ 最短1営業日で運用開始 ／ いただいた情報は相談対応の目的以外に使用しません
             </p>
-            <p className="mt-4">
+            <p className="mt-4 text-center">
               <a
                 href={rakushift.url}
                 target="_blank"
                 rel="noopener"
-                className="text-sm font-bold text-paper/80 underline underline-offset-4 hover:text-paper"
+                className="text-xs font-bold text-paper/60 underline-offset-4 hover:text-paper hover:underline"
               >
                 サービスサイトを見る ↗
               </a>

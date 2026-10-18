@@ -61,14 +61,14 @@ export function StickyCta({
             <a
               href={href}
               download
-              className="shrink-0 rounded-sm bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
+              className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
             >
               {label}
             </a>
           ) : (
             <Link
               href={href}
-              className="shrink-0 rounded-sm bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
+              className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
             >
               {label}
             </Link>
@@ -93,7 +93,7 @@ export function MidCta({
 }) {
   return (
     <section data-cta-pos="mid-cta" className="border-y border-line bg-ink py-14 text-paper md:py-16">
-      <div className="mx-auto flex max-w-7xl flex-col items-start gap-7 px-5 md:px-8 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col items-start gap-7 px-5 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <h2 className="text-xl font-black leading-snug md:text-2xl">{title}</h2>
           <p className="mt-3 text-[15px] leading-[1.9] text-paper/70">{body}</p>
@@ -101,7 +101,7 @@ export function MidCta({
         <div className="shrink-0">
           <Link
             href="/contact"
-                  className="inline-block rounded-sm bg-gold-bright px-9 py-4 text-sm font-bold text-ink transition-transform"
+                  className="inline-block rounded-full bg-gold-bright px-9 py-4 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
           >
             {label}
           </Link>

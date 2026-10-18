@@ -4,9 +4,16 @@ import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import BlogList from "@/components/BlogList";
 import ResearchBand from "@/components/ResearchBand";
-import { Reveal } from "@/components/motion";
+import { Reveal, CountUp } from "@/components/motion";
 import { SectionHead } from "@/components/ui";
 
+// 用語カードの写真（写真の棚から。生成したイメージ写真）
+const TERM_PHOTO: Record<string, string> = {
+  経理BPO: "/images/shelf/outsource-1.webp",
+  記帳代行: "/images/shelf/bookkeeping-1.webp",
+  電子帳簿保存法: "/images/shelf/efiling-1.webp",
+  インボイス制度: "/images/shelf/invoice-1.webp",
+};
 import { posts, displayDate, thumbOf } from "@/lib/blog";
 import { themes } from "@/lib/themes";
 import { keywords, facts, problems, glossary, steps, sheet } from "@/lib/bpo";
@@ -63,16 +70,33 @@ export default function BlogPage() {
       />
 
       {/* 看板 */}
-      <section className="pt-16 md:pt-[72px]">
-        <div className="mx-auto max-w-7xl px-5 pb-14 pt-12 md:px-8 md:pb-20 md:pt-20">
+      <section className="relative overflow-hidden pt-16 md:pt-20">
+        <div aria-hidden className="grid-field absolute inset-0" />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 45% 55% at 85% 25%, rgb(28 63 124 / 0.07), transparent 62%)",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
+          style={{ maskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)" }}
+        >
+          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書と請求書を読み取って仕分ける経理の手元のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-14 md:pb-20 md:pt-20">
           <Reveal>
-            <p className="text-sm font-bold text-slate">経理BPOブログ</p>
-            <h1 className="mt-5 max-w-3xl text-[2rem] font-bold leading-[1.3] tracking-[-0.005em] md:text-[3.5rem] md:leading-[1.22]">
+            <span aria-hidden className="mb-6 block h-1.5 w-20 rounded-full bg-gradient-to-r from-pulse to-aqua" />
+            <p className="eyebrow">経理BPOブログ</p>
+            <h1 className="mt-5 max-w-3xl text-3xl font-black leading-[1.3] md:text-5xl">
               経理は、止められない。
               <br />
               でも、抱え込む必要はない。
             </h1>
-            <p className="mt-8 max-w-[40em] text-base leading-[1.95] text-slate">
+            <p className="mt-8 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               記帳・請求・支払・給与計算。人が採れないのに、締切だけは毎月来ます。
               <mark className="marker">外に出す範囲と、社内に残す線引き</mark>
               を、中小企業の実務目線でまとめているメディアです。
@@ -84,7 +108,7 @@ export default function BlogPage() {
               <a
                 href={sheet.href}
                 download
-                className="btn btn-primary"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-pulse px-9 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
               >
                 <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
                   <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -93,7 +117,7 @@ export default function BlogPage() {
               </a>
               <Link
                 href="/services/keiri-bpo"
-                className="btn btn-secondary"
+                className="rounded-full border border-line-strong px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 経理BPOのサービスを見る
               </Link>
@@ -110,25 +134,36 @@ export default function BlogPage() {
           </Reveal>
         </div>
 
-        {/* よく扱う言葉。以前は横に流れ続ける帯だった。止めて読める一覧にする */}
-        <div className="border-y border-line bg-mist">
-          <p className="mx-auto max-w-7xl px-5 py-4 text-[13px] leading-7 text-slate md:px-8">
-            <span className="mr-3 font-bold text-ink">よく扱う言葉</span>
-            {keywords.join("・")}
-          </p>
+        {/* キーワード帯 */}
+        <div aria-hidden className="overflow-hidden border-y border-line bg-raise/80 py-3.5">
+          <div className="flex">
+            <div className="animate-marquee flex shrink-0 items-center">
+              {[...keywords, ...keywords].map((k, i) => (
+                <span key={i} className="flex shrink-0 items-center whitespace-nowrap">
+                  <span className="text-[0.78rem] font-bold text-ink">{k}</span>
+                  <span className="mx-7 h-3 w-px bg-line-strong" />
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* 実績タイル */}
       <section className="border-b border-line py-12 md:py-16">
-        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 md:px-8 xl:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 xl:grid-cols-3">
           {facts.map((f, i) => (
             <Reveal key={f.label} delay={i * 0.07}>
               <div className="border-l-2 border-pulse pl-5">
                 <p className="leading-none">
-                  {/* 書いてあるとおりに出す（数え上げの部品に通すと「2026年」が「2,026」になっていた） */}
-                  <span className="num text-3xl font-bold text-ink md:text-4xl">{f.value}</span>
-                  {f.suffix && <span className="ml-1 text-base font-bold">{f.suffix}</span>}
+                  <span className="num text-3xl font-bold text-ink md:text-4xl">
+                    {/^[\d,]+$/.test(f.value) ? (
+                      <CountUp value={Number(f.value.replaceAll(",", ""))} />
+                    ) : (
+                      f.value
+                    )}
+                  </span>
+                  {f.suffix && <span className="ml-1 text-base font-bold text-pulse">{f.suffix}</span>}
                 </p>
                 <p className="mt-3 text-sm leading-7 text-slate">{f.label}</p>
               </div>
@@ -139,52 +174,71 @@ export default function BlogPage() {
 
       {/* 読者の状態 */}
       <section className="py-20 md:py-28" aria-labelledby="problem-heading">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="こんな状態になっていませんか"
             lead="経理は、動いているうちは問題として表に出ません。==止まってから気づく==のがこの領域です。"
           />
-          <ul className="mt-10 grid border-b border-line md:grid-cols-2 md:gap-x-10">
-            {problems.map((p) => (
-              <li key={p} className="flex items-start gap-4 border-t border-line py-4">
-                <span aria-hidden className="mt-[0.75em] h-px w-4 shrink-0 bg-ink" />
-                <p className="text-[15px] font-bold leading-7">{p}</p>
-              </li>
+          <div className="mt-10 grid items-start gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+            <Reveal className="lg:sticky lg:top-28">
+              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
+                <Image src="/images/shelf/staffing-1.webp" alt="書類に追われる経理担当者のイメージ" fill sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
+              </figure>
+              <p className="mt-3 text-xs text-slate">※ 写真はイメージです。</p>
+            </Reveal>
+          <div className="grid gap-4">
+            {problems.map((p, i) => (
+              <Reveal key={p} delay={(i % 2) * 0.07}>
+                <div className="flex items-start gap-4 rounded-2xl border border-line bg-raise p-6 shadow-card">
+                  <span aria-hidden className="num mt-0.5 shrink-0 text-xs font-bold text-pulse">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm leading-7">{p}</p>
+                </div>
+              </Reveal>
             ))}
-          </ul>
+          </div>
+          </div>
         </div>
       </section>
 
       {/* 用語集 */}
-      <section className="bg-mist py-20 md:py-28" aria-labelledby="glossary-heading">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="glossary-heading">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="30秒でわかる、4つの用語"
             lead="このメディアで繰り返し出てくる言葉です。ここだけ押さえれば記事が読めます。"
           />
-          <dl className="mt-10 grid gap-x-8 sm:grid-cols-2 xl:grid-cols-4">
-            {glossary.map((g) => (
-              <div key={g.term} className="border-t-2 border-ink py-5">
-                <dt>
-                  <span className="block text-lg font-bold">{g.term}</span>
-                  <span className="font-data mt-0.5 block text-[13px] text-slate">{g.en}</span>
-                </dt>
-                <dd className="mt-3 text-[15px] leading-7 text-slate">{g.body}</dd>
-              </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {glossary.map((g, i) => (
+              <Reveal key={g.term} delay={(i % 4) * 0.07}>
+                <article className="h-full overflow-hidden rounded-2xl border border-line bg-raise shadow-card">
+                  {TERM_PHOTO[g.term] && (
+                    <figure className="relative aspect-[16/10]">
+                      <Image src={TERM_PHOTO[g.term]} alt={`${g.term}のイメージ`} fill sizes="(min-width: 1280px) 300px, 50vw" className="object-cover" />
+                    </figure>
+                  )}
+                  <div className="p-6">
+                  <p className="text-lg font-bold text-pulse">{g.term}</p>
+                  <p className="font-data mt-1 text-xs text-slate">{g.en}</p>
+                  <p className="mt-4 text-sm leading-7 text-slate">{g.body}</p>
+                  </div>
+                </article>
+              </Reveal>
             ))}
-          </dl>
+          </div>
         </div>
       </section>
 
       {/* 記事 */}
       <section id="latest" className="scroll-mt-24 py-20 md:py-28" aria-labelledby="latest-heading">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           {/* 新着順だけでは、同じ困りごとの記事を続けて読めない */}
           <SectionHead title="テーマから探す" />
           <ul className="mt-8 flex flex-wrap gap-3">
             {themes.map((t) => (
               <li key={t.slug}>
-                <Link href={`/blog/theme/${t.slug}`} className="tap inline-block rounded-sm border border-line-strong bg-raise px-5 py-2.5 text-sm font-bold hover:border-pulse hover:text-pulse">
+                <Link href={`/blog/theme/${t.slug}`} className="tap inline-block rounded-full border border-line-strong bg-raise px-5 py-2.5 text-sm font-bold hover:border-pulse hover:text-pulse">
                   {t.name}<span className="num ml-1.5 text-xs text-slate">{t.count}</span>
                 </Link>
               </li>
@@ -222,7 +276,7 @@ export default function BlogPage() {
                         alt={`${lead.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 55vw"
-                        className="object-cover transition-transform duration-700"
+                        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     ) : (
                       <span aria-hidden className="grid-field absolute inset-0" />
@@ -230,7 +284,7 @@ export default function BlogPage() {
                   </span>
                   <span className="flex flex-col justify-center p-7 md:p-10">
                     <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                      <span className="rounded-sm bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
+                      <span className="rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                         {lead.categoryName}
                       </span>
                       <time dateTime={lead.date} className="num text-xs text-slate">
@@ -262,8 +316,17 @@ export default function BlogPage() {
       <ResearchBand />
 
       {/* このメディアについて + 活用ステップ */}
-      <section className="bg-ink py-20 text-white md:py-28" aria-labelledby="about-heading">
-        <div className="relative mx-auto max-w-7xl px-5 md:px-8">
+      <section className="relative overflow-hidden border-t border-line bg-ink py-20 text-white md:py-28" aria-labelledby="about-heading">
+        <div aria-hidden className="grid-field-dark absolute inset-0" />
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-50"
+          style={{
+            background:
+              "radial-gradient(ellipse 55% 70% at 80% 18%, rgb(28 63 124 / 0.55), transparent 62%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-16">
             <Reveal>
               <p aria-hidden className="eyebrow !text-aqua" />
@@ -289,11 +352,11 @@ export default function BlogPage() {
             <Reveal delay={0.1}>
               <p aria-hidden className="eyebrow !text-aqua" />
               <h2 className="mt-4 text-2xl font-black leading-snug md:text-3xl">読んで終わりにしないための3段階</h2>
-              <ol className="mt-6 border-b border-white/20">
+              <ol className="mt-8 grid gap-4">
                 {steps.map((s, i) => (
                   <li
                     key={s.title}
-                    className="flex items-start gap-5 border-t border-white/20 py-5"
+                    className="flex items-start gap-5 rounded-2xl border border-white/15 bg-white/[0.06] p-6"
                   >
                     <span className="num shrink-0 pt-0.5 text-sm font-bold text-aqua">0{i + 1}</span>
                     <span>
@@ -308,16 +371,16 @@ export default function BlogPage() {
               <a
                 href={sheet.href}
                 download
-                className="mt-6 flex items-center gap-4 rounded-sm border border-gold-bright/60 p-5 transition-colors hover:bg-white/[0.06]"
+                className="mt-6 flex items-center gap-4 rounded-2xl border border-gold-bright/40 bg-gold-bright/10 p-5 transition-colors hover:bg-gold-bright/15"
               >
-                <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-gold-bright text-ink">
+                <span aria-hidden className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gold-bright text-ink">
                   <svg width="17" height="17" viewBox="0 0 16 16">
                     <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
                 <span className="min-w-0">
                   <span className="block text-sm font-bold text-white">{sheet.name}</span>
-                  <span className="num mt-1 block text-[13px] text-white/70">{sheet.spec} ・ {sheet.note}</span>
+                  <span className="num mt-1 block text-[0.7rem] text-white/55">{sheet.spec} ・ {sheet.note}</span>
                 </span>
               </a>
             </Reveal>
@@ -327,12 +390,13 @@ export default function BlogPage() {
 
       {/* 締めのCTA */}
       <section className="py-20 md:py-28" data-cta-pos="closing">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <Reveal className="border-t border-ink pt-8">
-            <h2 className="text-[1.625rem] font-bold leading-snug md:text-[2.25rem]">
+        <div className="mx-auto max-w-5xl px-5 text-center">
+          <Reveal>
+            <p aria-hidden className="eyebrow" />
+            <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
               経理を、外に出すか。社内に残すか。
             </h2>
-            <p className="mt-6 max-w-[40em] text-base leading-[1.95] text-slate">
+            <p className="mx-auto mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
               どこまで任せられて、どこからは残すべきか。現在の業務量と体制をうかがったうえで、
               線引きの案と現状分析レポートをお持ちします。
               <mark className="marker">棚卸しシートを書いた状態でお持ちいただくと、初回で話が具体的に進みます</mark>
@@ -341,7 +405,7 @@ export default function BlogPage() {
             <Link
               href="/contact"
               data-entry-s="keiri-bpo"
-              className="btn btn-primary mt-9"
+                  className="mt-9 inline-block rounded-full bg-pulse px-10 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
             >
               無料相談を申し込む (現状分析レポート付き)
             </Link>

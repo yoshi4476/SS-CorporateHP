@@ -72,13 +72,13 @@ export function StageDiagram({ steps, caption }: { steps: FlowStep[]; caption: s
                   <dl className="mt-4 grid gap-2 border-t border-line pt-4 text-sm leading-6">
                     {s.you && (
                       <div className="flex items-start gap-2.5">
-                        <dt className="mt-0.5 shrink-0 rounded-sm border border-gold/35 bg-gold-tint px-2.5 py-0.5 text-xs font-bold text-gold-deep">御社</dt>
+                        <dt className="mt-0.5 shrink-0 rounded-full border border-gold/35 bg-gold-tint px-2.5 py-0.5 text-xs font-bold text-gold-deep">御社</dt>
                         <dd className="text-ink">{s.you}</dd>
                       </div>
                     )}
                     {s.out && (
                       <div className="flex items-start gap-2.5">
-                        <dt className="mt-0.5 shrink-0 rounded-sm border border-pulse/25 bg-pulse/[0.06] px-2.5 py-0.5 text-xs font-bold text-pulse">受け取るもの</dt>
+                        <dt className="mt-0.5 shrink-0 rounded-full border border-pulse/25 bg-pulse/[0.06] px-2.5 py-0.5 text-xs font-bold text-pulse">受け取るもの</dt>
                         <dd className="text-ink">{s.out}</dd>
                       </div>
                     )}

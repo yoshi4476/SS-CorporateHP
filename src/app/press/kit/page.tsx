@@ -119,7 +119,7 @@ export default function PressKitPage() {
 
       <section className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-5xl px-5 md:px-8 pb-12 pt-12 md:pb-16 md:pt-20">
+        <div className="relative mx-auto max-w-5xl px-5 pb-12 pt-12 md:pb-16 md:pt-20">
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
@@ -150,7 +150,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="facts" className="py-14 md:py-20" aria-labelledby="facts-heading">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="mx-auto max-w-5xl px-5">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHead id="facts-heading" title="正式な表記" />
             <CopyButton text={factsText} name="正式な表記" />
@@ -173,7 +173,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="about" className="bg-mist/50 py-14 md:py-20" aria-labelledby="about-heading">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="mx-auto max-w-5xl px-5">
           <SectionHead id="about-heading" title="会社紹介文" />
           <div className="mt-6 border-t-2 border-ink">
             {INTROS.map((t) => (
@@ -184,7 +184,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="bio" className="py-14 md:py-20" aria-labelledby="bio-heading">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="mx-auto max-w-5xl px-5">
           <SectionHead id="bio-heading" title="代表の略歴" />
           <div className="mt-6 border-t-2 border-ink">
             {BIOS.map((t) => (
@@ -202,7 +202,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="logo" className="bg-mist/50 py-14 md:py-20" aria-labelledby="logo-heading">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="mx-auto max-w-5xl px-5">
           <SectionHead id="logo-heading" title="ロゴ" lead="背景が透明の PNG です。" />
           <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {LOGOS.map((l) => (
@@ -224,7 +224,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="usage" className="py-14 md:py-20" aria-labelledby="usage-heading">
-        <div className="mx-auto max-w-5xl px-5 md:px-8">
+        <div className="mx-auto max-w-5xl px-5">
           <SectionHead id="usage-heading" title="使用上のお願い" />
           <ul className="mt-8 divide-y divide-line border-y border-line">
             {USAGE.map((u) => (
@@ -238,7 +238,7 @@ export default function PressKitPage() {
       </section>
 
       <section id="related" className="bg-mist/50 py-14 md:py-20" aria-labelledby="related-heading">
-        <div className="mx-auto grid max-w-5xl gap-10 px-5 md:px-8 md:grid-cols-2">
+        <div className="mx-auto grid max-w-5xl gap-10 px-5 md:grid-cols-2">
           <div>
             <h2 id="related-heading" className="text-xl font-black md:text-2xl">
               関連するプレスキット

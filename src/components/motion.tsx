@@ -1,24 +1,23 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-// 区画ごとのフェードインと数字のカウントアップはやめた（DESIGN.md 7）。
-// どのページでも同じ入り方が繰り返され、読む前に待たされるだけだった。
-// 動かすのは図（棒・線・輪）だけで、画面の外にある図が入ってきたときに1回伸ばす。
-// Reveal と CountUp の名前と引数は、管制塔が配る部品（AioResearchData など）が使うので残す。
+// framer-motion をやめた理由: この2部品が ui.tsx 経由で全ページに入り、
+// 記事ページでも約120KB（圧縮後41KB）のライブラリを読み、実行に300ms前後かかっていた。
+// さらに opacity:0 から始める描画は、JSが動くまで見出しを隠し LCP を遅らせる。
+// ここでは「最初の描画では何も隠さず、JSが動いた時点で画面の外にあるものだけを
+// 隠して、入ってきたら出す」。見た目の動きは同じで、初回の表示は遅れない。
 
 function reducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-const CHART = ".vz-grow, .vz-draw, .vz-ring";
-
 export function Reveal({
   children,
+  delay = 0,
   className,
 }: {
   children: React.ReactNode;
-  /** 以前の段差の秒数。受け取るが使わない */
   delay?: number;
   className?: string;
 }) {
@@ -26,9 +25,9 @@ export function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el || reducedMotion() || !el.querySelector(CHART)) return;
+    if (!el || reducedMotion()) return;
     const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) return; // 既に見えている図は完成した形のまま
+    if (r.top < window.innerHeight + 80 && r.bottom > -80) return; // 既に見えている＝隠さない
     el.classList.add("rv");
     const io = new IntersectionObserver(
       (entries) => {
@@ -44,16 +43,16 @@ export function Reveal({
   }, []);
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={delay ? { transitionDelay: `${delay}s` } : undefined}>
       {children}
     </div>
   );
 }
 
-/** 数字をそのまま出す。数え上げる動きは、読みたい数字を読ませないだけだった */
 export function CountUp({
   value,
   suffix = "",
+  duration = 1.6,
   className,
 }: {
   value: number;
@@ -61,10 +60,43 @@ export function CountUp({
   duration?: number;
   className?: string;
 }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState(value);
   const decimals = value % 1 === 0 ? 0 : 1;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reducedMotion()) return;
+    let raf = 0;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - start) / (duration * 1000), 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          setDisplay(value * eased);
+          if (p < 1) raf = requestAnimationFrame(tick);
+        };
+        setDisplay(0);
+        raf = requestAnimationFrame(tick);
+      },
+      { rootMargin: "-40px 0px" },
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [value, duration]);
+
   return (
-    <span className={`num ${className ?? ""}`}>
-      {value.toLocaleString("ja-JP", { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+    <span ref={ref} className={`num ${className ?? ""}`}>
+      {display.toLocaleString("ja-JP", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      })}
       {suffix}
     </span>
   );

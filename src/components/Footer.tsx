@@ -15,8 +15,8 @@ const credits = [
 
 export default function Footer() {
   return (
-    <footer id="site-footer" className="border-t border-white/15 bg-ink text-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:px-8 md:grid-cols-2 md:py-20 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
+    <footer id="site-footer" className="border-t border-line bg-ink text-white">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 py-16 md:grid-cols-2 md:py-20 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
         <div>
           <Image
             src="/images/logo-jp.png"
@@ -44,36 +44,36 @@ export default function Footer() {
         </div>
 
         <nav aria-label="事業内容">
-          <p className="mb-3 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">事業内容</p>
+          <p className="eyebrow mb-4 !text-aqua">事業内容</p>
           <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
             <li>
-              <Link prefetch={false} href="/services" className="tap font-bold transition-colors hover:text-white">
+              <Link href="/services" className="tap font-bold transition-colors hover:text-white">
                 事業内容一覧
               </Link>
             </li>
             {services.map((s) => (
               <li key={s.slug}>
-                <Link prefetch={false} href={`/services/${s.slug}`} className="tap transition-colors hover:text-white">
+                <Link href={`/services/${s.slug}`} className="tap transition-colors hover:text-white">
                   {s.name}
                 </Link>
               </li>
             ))}
           </ul>
           {/* 自社プロダクト。受託の事業と混ぜず、線で区切って並べる */}
-          <p className="mb-3 mt-8 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">自社プロダクト</p>
+          <p className="eyebrow mb-4 mt-8 !text-aqua">自社プロダクト</p>
           <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
             <li>
-              <Link prefetch={false} href="/rakushift" className="tap transition-colors hover:text-white">
+              <Link href="/rakushift" className="tap transition-colors hover:text-white">
                 ラクシフトAI
               </Link>
             </li>
             <li>
-              <Link prefetch={false} href="/aio-agent" className="tap transition-colors hover:text-white">
+              <Link href="/aio-agent" className="tap transition-colors hover:text-white">
                 AIO（SEO）対策エージェント
               </Link>
             </li>
             <li>
-              <Link prefetch={false} href="/services/keiri-bpo" className="tap transition-colors hover:text-white">
+              <Link href="/services/keiri-bpo" className="tap transition-colors hover:text-white">
                 経理システム（セルフ版）
               </Link>
             </li>
@@ -83,10 +83,10 @@ export default function Footer() {
         <div className="grid content-start gap-8">
           {/* 無料のセルフチェック。経理の記事の読者が多いので、自社の経理チェックを先頭に置く */}
           <nav aria-label="無料セルフチェック">
-            <p className="mb-3 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">無料セルフチェック</p>
+            <p className="eyebrow mb-4 !text-aqua">無料セルフチェック</p>
             <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
               <li>
-                <Link prefetch={false} href="/tools/keiri-check" className="tap font-bold text-gold-bright transition-colors hover:text-white">
+                <Link href="/tools/keiri-check" className="tap font-bold text-gold-bright transition-colors hover:text-white">
                   経理、外に出すべき？5問のセルフチェック
                 </Link>
               </li>
@@ -98,16 +98,16 @@ export default function Footer() {
             </ul>
           </nav>
           <nav aria-label="経理BPOブログ">
-            <p className="mb-3 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">経理BPOブログ</p>
+            <p className="eyebrow mb-4 !text-aqua">経理BPOブログ</p>
             <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
               <li>
-                <Link prefetch={false} href="/blog" className="tap font-bold transition-colors hover:text-white">
+                <Link href="/blog" className="tap font-bold transition-colors hover:text-white">
                   記事の一覧
                 </Link>
               </li>
               {readingLinks().map((r) => (
                 <li key={r.href}>
-                  <Link prefetch={false} href={r.href} className="tap transition-colors hover:text-white">
+                  <Link href={r.href} className="tap transition-colors hover:text-white">
                     {r.label}
                   </Link>
                 </li>
@@ -118,25 +118,25 @@ export default function Footer() {
 
         <div className="grid content-start gap-8">
           <nav aria-label="会社情報">
-            <p className="mb-3 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">会社情報</p>
+            <p className="eyebrow mb-4 !text-aqua">会社情報</p>
             <ul className="grid gap-0 text-sm text-white/75 md:gap-2.5">
               <li>
-                <Link prefetch={false} href="/company" className="tap transition-colors hover:text-white">
+                <Link href="/company" className="tap transition-colors hover:text-white">
                   会社概要
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href="/press/kit" className="tap transition-colors hover:text-white">
+                <Link href="/press/kit" className="tap transition-colors hover:text-white">
                   プレスキット
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href="/news" className="tap transition-colors hover:text-white">
+                <Link href="/news" className="tap transition-colors hover:text-white">
                   お知らせ
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href="/contact" className="tap transition-colors hover:text-white">
+                <Link href="/contact" className="tap transition-colors hover:text-white">
                   お問い合わせ
                 </Link>
               </li>
@@ -151,18 +151,18 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link prefetch={false} href="/privacy" className="tap transition-colors hover:text-white">
+                <Link href="/privacy" className="tap transition-colors hover:text-white">
                   プライバシーポリシー
                 </Link>
               </li>
             </ul>
           </nav>
           <nav aria-label="最新のお知らせ">
-            <p className="mb-3 border-b border-white/15 pb-2 text-[13px] font-bold text-white/60">お知らせ</p>
+            <p className="eyebrow mb-4 !text-aqua">お知らせ</p>
             <ul className="grid gap-1 text-xs text-white/60 md:gap-2.5">
               {news.slice(0, 2).map((n) => (
                 <li key={n.slug}>
-                  <Link prefetch={false} href={`/news/${n.slug}`} className="tap transition-colors hover:text-white">
+                  <Link href={`/news/${n.slug}`} className="tap transition-colors hover:text-white">
                     <span className="num mr-2 text-white/60">{n.date}</span>
                     {n.title}
                   </Link>
@@ -172,14 +172,14 @@ export default function Footer() {
           </nav>
           <Link
             href="/contact"
-            className="btn btn-primary w-fit"
+            className="inline-block w-fit rounded-full border border-gold-bright/60 px-6 py-3 text-sm font-bold text-gold-bright transition-colors hover:bg-gold-bright hover:text-ink"
           >
             無料相談を予約する
           </Link>
         </div>
       </div>
-      <div className="border-t border-white/15">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-6 md:px-8">
+      <div className="border-t border-line">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-5 py-6">
           <p className="text-xs text-white/60">
             © {new Date().getFullYear()} {site.nameEn} All rights reserved.
           </p>
@@ -225,7 +225,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <ul className="mx-auto grid max-w-7xl list-none gap-0 px-5 pb-6 md:px-8 text-xs text-white/60 md:gap-1" aria-label="制作・顧問">
+        <ul className="mx-auto grid max-w-7xl list-none gap-0 px-5 pb-6 text-xs text-white/60 md:gap-1" aria-label="制作・顧問">
           {credits.map((c) => (
             <li key={c.href}>
               <a

@@ -1,70 +1,109 @@
 import Link from "next/link";
+import { Reveal } from "@/components/motion";
 import { diagnostics } from "@/lib/aio";
 import AioScan from "@/components/AioScan";
 import InlineToolBox from "@/components/InlineToolBox";
-import { SectionHead } from "@/components/ui";
 
-// 無料セルフチェックへの誘導（トップの「相談」の段の最初）。
+// 無料セルフチェックへの誘導。
 // 「無料相談」はハードルが高いが、その場で終わる自己診断なら踏み出せる。
+// 相談前の入口として、目立つ位置に置くための独立セクション。
 // 検索での表示の約8割は経理ブログの記事（GSC の page 次元で84%・2026-10）なので、経理のチェックを先頭に置く。
 // AI集客ラボの診断（Web集客・AI検索）はその後ろにまとめる。
-// 以前は紺の面に光のぼかし・夜のオフィスの生成写真・番号つきのカードを並べていた。罫で区切った行にする。
 
 export default function SelfCheckBand() {
   return (
-    <section id="selfcheck" className="scroll-mt-32 py-20 md:py-32 xl:py-36" aria-labelledby="selfcheck-heading">
-      <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-4">
-          <div className="lg:sticky lg:top-28">
-            <SectionHead
-              id="selfcheck-heading"
-              title="相談の前に、現在地を確かめる"
-              lead="いきなり相談するのは気が重いものです。まずはご自身で、いまの状態を確認してください。**登録は不要、その場で結果が出ます。**"
-            />
-            <p className="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[13px] font-bold text-slate">
-              <span>登録不要</span>
-              <span>その場で結果</span>
-              <span>費用なし</span>
+    <section id="selfcheck" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-ink" aria-labelledby="selfcheck-heading">
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-50"
+        style={{
+          background:
+            "radial-gradient(ellipse 55% 75% at 82% 15%, rgb(28 63 124 / 0.55), transparent 62%), radial-gradient(ellipse 45% 60% at 10% 92%, rgb(116 199 214 / 0.12), transparent 62%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-start lg:gap-14">
+          <Reveal>
+            <p className="eyebrow !text-aqua">無料セルフチェック</p>
+            <h2 id="selfcheck-heading" className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">
+              相談の前に、
+              <br />
+              現在地を確かめる。
+            </h2>
+            <p className="mt-6 max-w-md text-[15px] leading-[1.9] text-white/75 md:text-base">
+              いきなり相談するのは気が重いものです。まずはご自身で、いまの状態を確認してください。
+              <strong className="font-bold text-white">登録は不要、その場で結果が出ます。</strong>
             </p>
-          </div>
-        </div>
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-[13px] font-bold text-white/70">
+              <li>登録不要</li>
+              <li>その場で結果</li>
+              <li>費用なし</li>
+            </ul>
+            <figure className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/selfcheck.webp" alt="夜のオフィスで、サイトの採点結果を確かめる経営者" loading="lazy" className="h-full w-full object-cover" />
+            </figure>
+          </Reveal>
 
-        <div className="min-w-0 lg:col-span-8 lg:pt-8">
-          <h3 className="text-sm font-bold text-gold-deep">経理</h3>
-          <InlineToolBox from="/" place="top" flush />
+          <div className="grid gap-4">
+            <Reveal delay={0.04}>
+              <p className="mb-3 text-[13px] font-bold tracking-wide text-gold-bright">経理</p>
+              <InlineToolBox from="/" place="top" tone="dark" />
+            </Reveal>
 
-          <h3 className="mt-12 text-sm font-bold text-slate">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</h3>
-          <div className="mt-3 border-t border-ink py-6">
-            <p className="text-lg font-bold">
-              URL診断（サイトの14項目を採点）
-              <span className="ml-3 inline-block align-middle text-[13px] font-normal text-slate">URL入力だけ・14項目</span>
-            </p>
-            <p className="mb-5 mt-2 text-[15px] leading-7 text-slate">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
-            <AioScan src="corp_top_selfcheck" />
-          </div>
-          <ul className="border-b border-line">
-            {diagnostics.map((d) => (
-              <li key={d.name} className="border-t border-line">
-                <a href={d.href} target="_blank" rel="noopener" className="group block py-5">
-                  <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <span className="text-[17px] font-bold text-pulse underline decoration-1 underline-offset-[0.35em] group-hover:decoration-2">
-                      {d.name} ↗
+            <Reveal delay={0.08}>
+              <p className="mb-1 mt-6 text-[13px] font-bold tracking-wide text-aqua">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 md:p-7">
+                <p className="text-lg font-bold text-white">
+                  URL診断（サイトの14項目を採点）
+                  <span className="ml-3 inline-block rounded-full border border-white/30 px-2.5 py-0.5 align-middle text-xs font-medium text-white/70">URL入力だけ・14項目</span>
+                </p>
+                <p className="mb-5 mt-2 text-sm leading-7 text-white/70">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
+                <AioScan src="corp_top_selfcheck" dark />
+              </div>
+            </Reveal>
+            {diagnostics.map((d, i) => (
+              <Reveal key={d.name} delay={0.12 + i * 0.06}>
+                <a
+                  href={d.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="group flex items-start gap-5 rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 transition-colors hover:border-aqua hover:bg-white/[0.1] md:p-7"
+                >
+                  <span className="num shrink-0 pt-0.5 text-sm font-bold text-aqua">0{i + 1}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="text-lg font-bold text-white group-hover:text-aqua">{d.name}</span>
+                      <span className="rounded-full border border-white/30 px-2.5 py-0.5 text-xs font-medium text-white/70">
+                        {d.spec}
+                      </span>
                     </span>
-                    <span className="text-[13px] text-slate">{d.spec}</span>
+                    <span className="mt-2 block text-sm leading-7 text-white/70">{d.body}</span>
                   </span>
-                  <span className="mt-1.5 block max-w-[40em] text-[15px] leading-7 text-slate">{d.body}</span>
+                  <span
+                    aria-hidden
+                    className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-aqua/45 text-white transition-all group-hover:border-aqua group-hover:bg-aqua group-hover:text-ink"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" className="transition-transform group-hover:translate-x-0.5">
+                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                  </span>
                 </a>
-              </li>
+              </Reveal>
             ))}
-          </ul>
 
-          <p className="mt-6 text-sm leading-7 text-slate">
-            簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方は
-            <Link href="/contact" className="link-u mx-1">
-              無料相談
-            </Link>
-            をご利用ください。現状分析レポートをお渡しします。
-          </p>
+            <Reveal delay={0.3}>
+              <p className="mt-2 text-sm leading-7 text-white/60">
+                簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方は
+                <Link href="/contact" className="mx-1 font-bold text-aqua underline-offset-4 hover:underline">
+                  無料相談
+                </Link>
+                をご利用ください。現状分析レポートをお渡しします。
+              </p>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

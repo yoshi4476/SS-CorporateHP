@@ -74,7 +74,7 @@ export default function KeiriCheckPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {["無料", "登録不要", "その場で結果", "答えは送信しません"].map((t) => (
-              <span key={t} className="rounded-sm bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
+              <span key={t} className="rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                 {t}
               </span>
             ))}

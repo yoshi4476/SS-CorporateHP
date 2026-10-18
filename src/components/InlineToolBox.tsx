@@ -17,13 +17,11 @@ type Props = {
   /** 記事のときだけ inline_tool_* を送る（管制塔の funnel.py が記事の入口として数えている名前のため） */
   place?: "article" | "top" | "service";
   tone?: "light" | "dark";
-  /** 上下の余白を付けない（見出しの直下に置くとき） */
-  flush?: boolean;
 };
 
 const Q1 = QUESTIONS[0];
 
-export default function InlineToolBox({ from, place = "article", tone = "light", flush = false }: Props) {
+export default function InlineToolBox({ from, place = "article", tone = "light" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const dark = tone === "dark";
 
@@ -51,8 +49,8 @@ export default function InlineToolBox({ from, place = "article", tone = "light",
     <div
       ref={ref}
       data-cta-pos={place === "article" ? "inline-tool" : undefined}
-      className={`rounded-md border border-l-4 px-6 py-6 md:px-8 md:py-7 ${
-        dark ? "border-white/15 border-l-gold-bright bg-white/[0.06]" : `${flush ? "mt-3" : "my-10"} border-line border-l-gold-bright bg-paper`
+      className={`rounded-3xl border border-l-4 px-6 py-6 md:px-8 md:py-7 ${
+        dark ? "border-white/15 border-l-gold-bright bg-white/[0.06]" : "my-10 border-line border-l-gold bg-raise shadow-card"
       }`}
     >
       <p className={`text-[13px] font-bold tracking-wide ${dark ? "text-gold-bright" : "text-gold-deep"}`}>
@@ -70,7 +68,7 @@ export default function InlineToolBox({ from, place = "article", tone = "light",
             data-entry-from={from}
             data-entry-q1={yes ? "1" : "0"}
             onClick={() => onPick(yes)}
-            className={`inline-flex min-h-11 min-w-28 items-center justify-center rounded-sm border px-7 py-2.5 text-[15px] font-bold transition-colors duration-150 active:scale-[0.98] ${
+            className={`inline-flex min-h-11 min-w-28 items-center justify-center rounded-full border px-7 py-2.5 text-[15px] font-bold transition-colors ${
               dark
                 ? "border-white/40 text-white hover:border-gold-bright hover:bg-gold-bright hover:text-ink"
                 : "border-pulse text-pulse hover:bg-pulse hover:text-white"

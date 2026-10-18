@@ -53,7 +53,7 @@ const TRACKS = [
 export default function KeiriTwoTracks() {
   return (
     <section className="border-y border-line bg-mist py-16 md:py-24" id="two-tracks">
-      <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <div className="mx-auto max-w-7xl px-5">
         <SectionHead
           title="任せるか、自社で使うか。2つから選べます"
           lead="経理の悩みは会社によって違います。==実務ごと引き受ける形==と、==同じシステムを自社で使う形==の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
@@ -64,7 +64,7 @@ export default function KeiriTwoTracks() {
             <Reveal key={t.key} delay={i * 0.08}>
               <div className="flex h-full flex-col rounded-3xl border border-line bg-white p-7 shadow-card md:p-9">
                 <div className="mt-3 flex flex-wrap items-baseline gap-3">
-                  <span className="rounded-sm bg-pulse px-3 py-1 text-[0.7rem] font-bold text-white">
+                  <span className="rounded-full bg-pulse px-3 py-1 text-[0.7rem] font-bold text-white">
                     {t.tag}
                   </span>
                   <h3 className="text-xl font-black md:text-2xl">{t.name}</h3>
@@ -121,9 +121,9 @@ export default function KeiriTwoTracks() {
                   <Link
                     href={t.cta.href}
                     data-entry-s={t.cta.s}
-                    className="inline-block rounded-sm bg-pulse px-8 py-4 text-sm font-bold text-white shadow-glow transition-transform"
+                    className="inline-block rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
-                    {t.cta.label}
+                    {t.cta.label} →
                   </Link>
                   <p className="mt-3 text-sm leading-7 text-ink-soft">{t.note}</p>
                 </div>
@@ -145,9 +145,9 @@ export default function KeiriTwoTracks() {
             <Link
               href="/contact"
               data-entry-s="keiri-shindan"
-              className="mt-5 inline-block rounded-sm border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
+              className="mt-5 inline-block rounded-full border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
             >
-              無料の現状分析を申し込む
+              無料の現状分析を申し込む →
             </Link>
           </div>
         </Reveal>

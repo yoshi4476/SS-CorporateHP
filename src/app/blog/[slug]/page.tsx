@@ -165,7 +165,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
       <section className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-5xl px-5 md:px-8 pb-8 pt-10 md:pt-16">
+        <div className="relative mx-auto max-w-5xl px-5 pb-8 pt-10 md:pt-16">
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
@@ -184,7 +184,7 @@ export default async function BlogDetailPage({ params }: Props) {
               <time dateTime={post.date} className="num text-sm text-slate">
                 {displayDate(post.date)}
               </time>
-              <span className="rounded-sm bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
+              <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                 {post.categoryName}
               </span>
               <span className="num text-xs text-slate">約{post.readingMinutes}分</span>
@@ -220,7 +220,7 @@ export default async function BlogDetailPage({ params }: Props) {
       </section>
 
       <section className="pb-16 pt-2 md:pb-20">
-        <div className="mx-auto grid max-w-5xl gap-10 px-5 md:px-8 lg:grid-cols-[1fr_16rem] lg:gap-12">
+        <div className="mx-auto grid max-w-5xl gap-10 px-5 lg:grid-cols-[1fr_16rem] lg:gap-12">
           <article className="min-w-0">
             {headings.length >= 3 && (
               <Reveal>
@@ -308,7 +308,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   <a
                     href={sheet.href}
                     download
-                    className="tap inline-flex items-center gap-2 rounded-sm bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform"
+                    className="tap inline-flex items-center gap-2 rounded-full bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
                   >
                     <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
                       <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
@@ -318,7 +318,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   <Link
                     href="/contact"
                     data-entry-s="keiri-bpo"
-                    className="tap inline-flex items-center rounded-sm border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
+                    className="tap inline-flex items-center rounded-full border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
                   >
                     先に相談する
                   </Link>
@@ -446,7 +446,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
       {related.length > 0 && (
         <section className="border-t border-line bg-mist py-16 md:py-20">
-          <div className="mx-auto max-w-5xl px-5 md:px-8">
+          <div className="mx-auto max-w-5xl px-5">
             <h2 className="text-lg font-black md:text-xl">あわせて読みたい</h2>
             <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => (
@@ -462,7 +462,7 @@ export default async function BlogDetailPage({ params }: Props) {
                         alt={`${r.title}のアイキャッチ画像`}
                         fill
                         sizes="(max-width: 640px) 100vw, 33vw"
-                        className="object-cover transition-transform duration-500"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <span className="absolute inset-0 grid place-items-center text-xs font-bold tracking-widest text-faint">
@@ -471,7 +471,7 @@ export default async function BlogDetailPage({ params }: Props) {
                     )}
                   </div>
                   <div className="px-6 py-5">
-                    <span className="rounded-sm bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
+                    <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                       {r.categoryName}
                     </span>
                     <span className="mt-2.5 block text-sm font-bold leading-relaxed group-hover:text-pulse">

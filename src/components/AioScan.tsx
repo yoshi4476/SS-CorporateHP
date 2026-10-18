@@ -19,13 +19,13 @@ export default function AioScan({ src, dark = false }: { src: string; dark?: boo
             inputMode="url"
             autoComplete="url"
             placeholder="https://example.co.jp"
-            className={`min-w-0 flex-1 rounded-sm border px-4 py-3.5 text-sm font-medium outline-none transition-colors focus:border-pulse ${
+            className={`min-w-0 flex-1 rounded-full border px-5 py-4 text-sm font-medium outline-none transition-colors focus:border-pulse ${
               dark ? "border-white/25 bg-white text-ink" : "border-line-strong bg-white text-ink"
             }`}
           />
           <button
             type="submit"
-            className="shrink-0 rounded-sm bg-pulse px-7 py-3.5 text-sm font-bold text-white transition-colors duration-150 hover:bg-pulse-deep active:scale-[0.98]"
+            className="shrink-0 rounded-full bg-pulse px-7 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
           >
             30秒で無料診断する
           </button>

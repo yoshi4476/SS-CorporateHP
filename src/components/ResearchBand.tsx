@@ -36,7 +36,7 @@ export default function ResearchBand({ tone = "light", note }: { tone?: "light" 
       className={`[word-break:auto-phrase] ${dark ? "relative overflow-hidden bg-ink text-white" : "border-y border-line bg-mist"}`}
     >
       {dark && <div aria-hidden className="grid-field-dark absolute inset-0 opacity-60" />}
-      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 md:px-8 py-16 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 md:py-20 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14">
         <Reveal>
           <p className={`eyebrow ${dark ? "!text-aqua" : ""}`}>当社の調査</p>
           <h2 id="research-heading" className="mt-3 text-2xl font-black leading-snug md:text-3xl">
@@ -53,7 +53,7 @@ export default function ResearchBand({ tone = "light", note }: { tone?: "light" 
           {note && <p className={`mt-4 text-[15px] font-bold leading-[1.9] ${dark ? "text-white" : "text-ink"}`}>{note}</p>}
           <Link
             href={r.href}
-            className={`mt-7 inline-flex items-center gap-2 rounded-sm border px-7 py-3.5 text-sm font-bold transition-colors ${
+            className={`mt-7 inline-flex items-center gap-2 rounded-full border px-7 py-3.5 text-sm font-bold transition-colors ${
               dark ? "border-white/40 text-white hover:border-aqua hover:text-aqua" : "border-pulse text-pulse hover:bg-pulse hover:text-white"
             }`}
           >

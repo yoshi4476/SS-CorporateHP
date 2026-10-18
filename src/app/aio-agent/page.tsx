@@ -76,7 +76,7 @@ export default function MediaPipelinePage() {
       {/* 看板 */}
       <section data-drone-zone className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5 md:px-8 pb-14 pt-10 md:pb-20 md:pt-16">
+        <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-10 md:pb-20 md:pt-16">
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-slate">
               <ol className="flex flex-wrap items-center gap-2">
@@ -96,7 +96,7 @@ export default function MediaPipelinePage() {
                 <h1 className="mt-4 text-[8vw] font-black leading-[1.24] tracking-tight sm:text-5xl md:text-[3.2rem]">
                   広告費ではなく、
                   <br />
-                  <span>資産を積む。</span>
+                  <span className="text-pulse">資産を積む。</span>
                 </h1>
                 <p className="mt-7 text-[15px] leading-[1.9] text-slate md:text-base md:leading-9">
                   {pipeline.summary}
@@ -104,7 +104,7 @@ export default function MediaPipelinePage() {
                 {/* 本数は他社と最も差が出るところなので、要約の直後に置く */}
                 <p className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl border border-gold/25 bg-gold-tint px-6 py-4">
                   <span className="text-sm font-bold text-ink">1サイトあたり</span>
-                  <span className="num text-3xl font-bold leading-none text-ink md:text-4xl">
+                  <span className="num text-3xl font-black leading-none text-gold md:text-4xl">
                     月60
                   </span>
                   {/* 金の淡い面に金の小さい文字は 4.35:1 で基準を割るため、単位は黒に置く */}
@@ -118,13 +118,13 @@ export default function MediaPipelinePage() {
                 <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                   <Link
                     href="/contact"
-                  className="btn btn-primary px-8"
+                  className="rounded-full bg-pulse px-10 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     無料で試算を出してもらう
                   </Link>
                   <Link
                     href="/blog"
-                    className="inline-flex items-center justify-center gap-2 rounded-sm border border-line-strong px-8 py-4 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-line-strong px-8 py-4 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
                   >
                     動いているメディアを見る
                   </Link>
@@ -178,7 +178,7 @@ export default function MediaPipelinePage() {
 
       {/* 課題 */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="広告は、止めた月から消える。記事は、残る。"
             lead="広告費は毎月ゼロから買い直しますが、記事は==一度書けば資産として残り続けます==。1本ずつ積み上がるほど、問い合わせが広告予算に左右されなくなります。ただし、積み上がる前に更新が止まれば、資産にはなりません。"
@@ -187,7 +187,9 @@ export default function MediaPipelinePage() {
             {problems.map((p, i) => (
               <Reveal key={p} delay={i * 0.05}>
                 <li className="flex h-full items-start gap-4 bg-white px-7 py-6 text-[15px] leading-[1.9] text-ink-soft">
-                  <span aria-hidden className="mt-[0.85em] h-px w-4 shrink-0 bg-ink" />
+                  <span aria-hidden className="num shrink-0 text-xs font-bold text-gold/50">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   {p}
                 </li>
               </Reveal>
@@ -203,7 +205,7 @@ export default function MediaPipelinePage() {
 
       {/* 納品物 */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="LP と AIエージェントを、セットで納品します"
             lead="器だけ作っても記事が出ません。エージェントだけ渡しても置き場所がありません。==両方そろって初めて回ります==。"
@@ -254,7 +256,7 @@ export default function MediaPipelinePage() {
 
       {/* 外注との比較。費用の考え方が変わることを1枚で示す */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="記事を外注する場合と、何が変わるのか"
             lead="1本あたりで払うか、仕組みごと持つか。==本数を増やすほど差が開きます==。"
@@ -297,7 +299,7 @@ export default function MediaPipelinePage() {
 
       {/* 毎日動く工程 */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="毎日、この順番で動いています"
             lead="当社の管制塔が実際に走らせている工程です。人が触るのは、==テーマの追加と月次の確認だけ==です。"
@@ -330,7 +332,7 @@ export default function MediaPipelinePage() {
       {/* 白・薄灰・紺の3面だけだと縦のリズムが単調になるため、
           品質ゲートだけ金の淡い面にして節目だと分かるようにする */}
       <section className="border-y border-gold/20 bg-gold-tint py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="「AIで量産」と分けているのは、ここです"
             lead="==出す前に落とす仕組み==があるかどうかで、メディアの寿命が変わります。"
@@ -339,7 +341,7 @@ export default function MediaPipelinePage() {
             {gate.map((g, i) => (
               <Reveal key={g.title} delay={i * 0.08}>
                 <div className="h-full rounded-3xl border border-line bg-white p-8 shadow-card">
-                  <span aria-hidden className="num text-sm font-bold text-pulse">
+                  <span aria-hidden className="num text-5xl font-bold text-gold/35">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 text-lg font-bold leading-snug">{g.title}</h3>
@@ -353,7 +355,7 @@ export default function MediaPipelinePage() {
 
       {/* AIO */}
       <section className="border-y border-line bg-ink py-16 text-paper md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <Reveal>
             <p className="eyebrow !text-aqua">AI検索への対応</p>
             <h2 className="mt-4 text-2xl font-black leading-snug md:text-4xl">
@@ -378,7 +380,7 @@ export default function MediaPipelinePage() {
 
       {/* 月次コンサルレポート。出し続けるだけでなく、翌月の打ち手まで渡す */}
       <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="毎月1日、次の一手まで書いて渡します"
             lead="記事を出して終わりにしません。どこで離脱しているか、どの記事があと一歩か、来月どのキーワードを書くか。==判断できる形にして毎月お渡しします==。"
@@ -402,7 +404,7 @@ export default function MediaPipelinePage() {
 
       {/* 流れ */}
       <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <SectionHead title="導入の流れ" lead="最初に決めるのは==「何を書かないか」==です。ここが曖昧だと記事が散らかります。" />
           <div className="mt-10">
             <FlowSteps steps={steps} />
@@ -421,18 +423,20 @@ export default function MediaPipelinePage() {
       </section>
 
       {/* CTA。何をしてもらえるかを出してから申し込ませる */}
-      <section id="lp-end-cta" className="bg-ink py-20 text-paper md:py-32">
-        <div className="mx-auto max-w-7xl px-5 md:px-8">
+      <section id="lp-end-cta" className="relative overflow-hidden bg-ink py-20 text-paper md:py-28">
+        <div aria-hidden className="grid-field-dark absolute inset-0" />
+        <div className="relative mx-auto max-w-3xl px-5">
           <Reveal>
-            <h2 className="max-w-[24em] border-t border-white/40 pt-8 text-[1.875rem] font-bold leading-[1.35] md:text-[3rem]">
+            <p aria-hidden className="eyebrow !text-aqua text-center" />
+            <h2 className="mt-4 text-center text-2xl font-black leading-snug md:text-4xl">
               この記事も、この仕組みが書いています。
             </h2>
-            <p className="mt-6 max-w-[36em] text-base leading-[1.9] text-paper/75">
+            <p className="mx-auto mt-6 max-w-xl text-center text-[15px] leading-[1.9] text-paper/70 md:text-base">
               30分のオンライン相談で、次のことをその場でお答えします。売り込みはしません。
             </p>
-            <ul className="mt-9 grid max-w-3xl border-b border-white/20">
+            <ul className="mx-auto mt-9 grid max-w-2xl gap-3">
               {offer.map((o) => (
-                <li key={o} className="flex gap-3.5 border-t border-white/20 py-4 text-[15px] leading-7 text-paper/85">
+                <li key={o} className="flex gap-3.5 rounded-2xl border border-white/12 bg-white/[0.04] px-6 py-4 text-sm leading-7 text-paper/85">
                   <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="mt-1.5 shrink-0 text-aqua">
                     <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
@@ -440,21 +444,21 @@ export default function MediaPipelinePage() {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-wrap">
               <Link
                 href="/contact"
-                  className="btn btn-primary min-h-14 px-8 text-base"
+                  className="rounded-full bg-gold-bright px-12 py-4 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
               >
                 無料で試算を出してもらう
               </Link>
               <Link
                 href="/blog"
-                className="btn btn-ondark"
+                className="rounded-full border border-paper/30 px-10 py-4 text-sm font-bold text-paper transition-colors hover:border-paper"
               >
                 動いているメディアを見る
               </Link>
             </div>
-            <p className="mt-5 text-sm leading-7 text-paper/70">
+            <p className="mt-5 text-center text-sm leading-7 text-paper/60">
               相談は無料 ／ 既存サイトへの追加も可能 ／ いただいた情報は相談対応の目的以外に使用しません
             </p>
           </Reveal>

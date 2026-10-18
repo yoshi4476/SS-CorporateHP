@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* 値の決まりは DESIGN.md。ここが唯一の置き場で、部品は Tailwind の色名（bg-pulse など）で参照する。
-   色名は管制塔が配る部品（AioResearchData・調査ページ）も使っているので、名前は変えずに値だけを決める。 */
-
 /* Windows の游ゴシックは名前で呼ぶと細い Regular になり、本文が薄く読みにくかった。
    Medium を通常の太さ、Bold を太字として同じ名前に束ねる。端末のフォントを呼ぶだけでファイルは読まない（local() のみ） */
 @font-face {
@@ -17,61 +14,45 @@
   font-weight: 700;
 }
 
+/* 配色 — 白 × 紺。
+   清潔感は白と余白で、厳格さは彩度を落とした紺と細い罫線で作る。
+   以前の電光ブルーとシアンは彩度が高く軽い印象になるため、
+   同じ役割のまま深い紺へ寄せている。変数名は変えずに値だけ差し替えた。 */
 @theme {
-  /* 地と罫。帳簿の紙のように白と罫線で組み、面の色は帳面（mist）だけにする */
-  --color-paper: #ffffff;
+  --color-paper: #fbfcfd;
   --color-raise: #ffffff;
-  --color-mist: #f4f5f2;
-  --color-line: #dcdfdb;
-  --color-line-strong: #b9beb8;
-
-  /* 墨。純黒より少し柔らかい */
-  --color-ink: #161a20;
-  --color-ink-soft: #232a33;
-  --color-slate: #4f5a66;
-  --color-faint: #66707a;
-
-  /* 藍（信頼）。リンク・見出しの罫・副ボタン */
-  --color-pulse: #1e3a64;
-  --color-pulse-deep: #142a4a;
-  /* 暗い面の上で使う明るい藍。以前のシアンはネオンに寄って軽く見えた */
-  --color-aqua: #b7c8e2;
-  --color-glow: #8a97ab;
-
-  /* 山吹（行動）。主ボタンの面にだけ使う。金の文字は白地で読める濃さにする */
-  --color-gold: #8c5410;
-  --color-gold-bright: #e0a234;
-  --color-gold-tint: #fbf4e6;
-  --color-gold-deep: #7a4a10;
+  --color-mist: #f1f4f8;
+  --color-ink: #0d1420;
+  --color-ink-soft: #18243a;
+  --color-slate: #5a6678;
+  --color-faint: #647082;
+  --color-line: #e2e6ec;
+  --color-line-strong: #c8cfda;
+  --color-pulse: #1c3f7c;
+  --color-pulse-deep: #122b57;
+  /* aqua は紺の面と塗りボタンの上で使うため、明るい側に置く。
+     1色で明暗どちらの背景でもコントラスト基準は満たせないので、
+     用途の多い「暗い面の上」に合わせている。 */
+  --color-aqua: #74c7d6;
+  --color-glow: #7d90ad;
+  /* 紺だけで組むと画面が単調になるので、対になるアクセントを金1色だけ足す。
+     紺は「信頼」、金は「資産・成果」の役割。数字・強調語・セクションの起点にだけ使い、
+     面には広げない。gold は白の上で 4.7:1、gold-bright は紺の上で 8.4:1。 */
+  --color-gold: #a8641a;
+  --color-gold-bright: #e8a33d;
+  --color-gold-tint: #fdf6ec;
+  /* 金の淡い面 (gold-tint) の上に小さい文字を置くとき用。gold では 4.35:1 で基準を割る */
+  --color-gold-deep: #8a5214;
 
   --font-display: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
   --font-body: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
   --font-data: var(--font-grotesk), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "YuGothicM", "Yu Gothic", "Noto Sans JP", "Noto Sans CJK JP", "BIZ UDPGothic", Meiryo, sans-serif;
 
-  /* 太さは 400 と 700 の2つだけ。ヒラギノの W8・W9 で描くと見出しが黒く潰れて威圧的になる */
-  --font-weight-extrabold: 700;
-  --font-weight-black: 700;
-
-  /* 角丸は小さく。丸いカードを並べると、どの会社のサイトか分からなくなる */
-  --radius-lg: 0.375rem;
-  --radius-xl: 0.5rem;
-  --radius-2xl: 0.5rem;
-  --radius-3xl: 0.625rem;
-
-  /* 影は重なり（開いたメニュー）を示すときだけ。カードは罫線で囲む */
-  --shadow-card: 0 0 0 0 transparent;
-  --shadow-lift: 0 16px 36px -20px rgb(22 26 32 / 0.28);
-  --shadow-glow: 0 0 0 0 transparent;
-
-  --ease-out-strong: cubic-bezier(0.2, 0, 0, 1);
-  /* Tailwind の transition-* の既定。ease-in-out ではなく、押した・触れたにすぐ応える強い ease-out */
-  --default-transition-duration: 180ms;
-  --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-}
-
-:root {
-  /* details の開閉で高さを補間する（対応ブラウザだけ。未対応はそのまま開く） */
-  interpolate-size: allow-keywords;
+  /* 影は浮かせるためではなく、紙が重なっている程度に留める。
+     区切りは影ではなく罫線 (--color-line) で作る。 */
+  --shadow-lift: 0 18px 40px -28px rgb(13 20 32 / 0.18);
+  --shadow-card: 0 1px 3px -1px rgb(13 20 32 / 0.06);
+  --shadow-glow: 0 12px 28px -18px rgb(28 63 124 / 0.45);
 }
 
 html {
@@ -79,30 +60,27 @@ html {
   /* body だけに指定すると値がviewportへ伝播してbody自身が clip しない。
      要素が数十px はみ出すことがあるため、html 側でも止める。 */
   overflow-x: clip;
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 1rem;
   font-feature-settings: "palt";
   line-height: 1.9;
   letter-spacing: 0.02em;
   overflow-x: clip;
-  /* 日本語を文節で折り返す（「確かめ/る」「必要は/ない。」のような1字だけの行を作らない）。
-     対応していないブラウザは今までどおり。長すぎる語は overflow-wrap で折る */
-  word-break: auto-phrase;
-  overflow-wrap: break-word;
 }
 
-p,
-li,
-dd,
-figcaption,
-blockquote {
-  text-wrap: pretty;
+#smooth-content {
+  overflow-x: clip;
+}
+
+/* 慣性スクロールレイヤー (SmoothScroll.tsx) */
+.has-smooth #smooth-content {
+  position: fixed;
+  inset: 0 0 auto 0;
+  will-change: transform;
 }
 
 ::selection {
@@ -122,24 +100,42 @@ h3,
 h4 {
   font-family: var(--font-display);
   line-height: 1.4;
-  letter-spacing: 0.01em;
-  text-wrap: pretty;
-  word-break: auto-phrase;
+  letter-spacing: 0.03em;
 }
 
-/* 見出しの上の小さなラベル。以前は金の短い罫を全区画の頭に置いていたが、
-   情報を持たない飾りの繰り返しだった。文字のあるものだけを、本文と同じ書き方の小見出しとして残す */
+/* 区画の起点の小見出し。以前は英字の大文字（スマホで 9.92px・字間 0.16〜0.32em）で、
+   AIO運用代行のページだけで60個以上並び、読めない飾りになっていた。日本語の短い見出し（12〜13px）か、
+   文字なしの罫だけにする */
 .eyebrow {
-  display: block;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.6;
-  letter-spacing: 0.04em;
-  color: var(--color-slate);
+  letter-spacing: 0.08em;
+  color: var(--color-pulse);
+  /* セクションの起点に金の短い罫を置く。全ページ共通で色のリズムが生まれる */
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
 }
 
-.eyebrow:empty {
-  display: none;
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 1.7em;
+  height: 2px;
+  background: var(--color-gold);
+}
+
+/* 紺の面では !text-aqua を重ねて使うため、罫も明るい側の金にする */
+.eyebrow[class*="aqua"]::before,
+.eyebrow[class*="white"]::before {
+  background: var(--color-gold-bright);
+}
+
+@media (min-width: 640px) {
+  .eyebrow {
+    font-size: 0.8125rem;
+  }
 }
 
 .num {
@@ -148,13 +144,233 @@ h4 {
   letter-spacing: 0;
 }
 
-.mega-num {
+/* 3Dロゴタイプ (Logo3D.tsx): 1文字ずつ波打つ押し出し立体文字 */
+.logo3d {
+  display: flex;
+  align-items: baseline;
   font-family: var(--font-data);
-  font-variant-numeric: tabular-nums;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1;
+  perspective: 700px;
+  pointer-events: none;
+  user-select: none;
 }
+
+.logo3d-word {
+  display: inline-flex;
+  transform-style: preserve-3d;
+}
+
+.logo3d-gap {
+  width: 0.35em;
+}
+
+.logo3d-ch {
+  display: inline-block;
+  transform-style: preserve-3d;
+  animation: logo3d-wave 3.8s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  will-change: transform;
+}
+
+.logo3d-ink {
+  color: var(--color-ink);
+  text-shadow:
+    1px 1px 0 #3a4a66, 2px 2px 0 #35435c, 3px 3px 0 #2f3c52,
+    4px 4px 0 #293548, 5px 5px 0 #232d3e, 6px 6px 12px rgb(11 18 32 / 0.35);
+}
+
+.logo3d-pulse {
+  color: var(--color-pulse);
+  text-shadow:
+    1px 1px 0 #1a3b73, 2px 2px 0 #17366a, 3px 3px 0 #143060,
+    4px 4px 0 #112a55, 5px 5px 0 #0e2449, 6px 6px 14px rgb(13 20 32 / 0.35);
+}
+
+/* 回転が深いと文字が横を向いて読めなくなる。
+   ウォーターマークとして常に読める範囲に留める。 */
+@keyframes logo3d-wave {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(0deg) translateZ(0);
+  }
+  28% {
+    transform: translateY(-0.08em) rotateY(8deg) translateZ(8px);
+  }
+  55% {
+    transform: translateY(0.03em) rotateY(-5deg) translateZ(2px);
+  }
+  78% {
+    transform: translateY(-0.01em) rotateY(2deg) translateZ(0);
+  }
+}
+
+/* 波打つウォーターマーク文字 (WaveText.tsx)
+   --p (0→1) で先頭のブルーから末尾のシアンへ色を補間する */
+.wave-stroke {
+  -webkit-text-stroke: 1.5px
+    color-mix(in oklab, var(--color-pulse) calc((1 - var(--p, 0)) * 100%), var(--color-aqua));
+  color: transparent;
+}
+
+.wave-stroke-light {
+  -webkit-text-stroke: 1.5px
+    color-mix(
+      in oklab,
+      color-mix(in oklab, var(--color-glow) 70%, transparent)
+        calc((1 - var(--p, 0)) * 100%),
+      color-mix(in oklab, var(--color-aqua) 70%, transparent)
+    );
+  color: transparent;
+}
+
+/* ページ遷移ワイプ (PageTransition.tsx) */
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(120deg, var(--color-ink) 0%, #16213a 55%, var(--color-pulse-deep) 100%);
+  transform: translateY(100%);
+}
+
+.page-wipe.is-active {
+  animation: wipe-through 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.page-wipe .wipe-mark {
+  opacity: 0;
+  font-family: var(--font-data);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 0.28em;
+  color: #fff;
+}
+
+.page-wipe.is-active .wipe-mark {
+  animation: wipe-mark 0.9s ease forwards;
+}
+
+@keyframes wipe-through {
+  0% {
+    transform: translateY(100%);
+  }
+  38%,
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes wipe-mark {
+  0%,
+  30% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  45%,
+  58% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+/* 初回イントロ (IntroLoader.tsx) */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: grid;
+  place-items: center;
+  background: var(--color-ink);
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.intro.is-done {
+  transform: translateY(-100%);
+}
+
+/* 中央のロゴ。黒からゆっくり浮かび上がらせる */
+.intro-mark {
+  display: grid;
+  justify-items: center;
+  gap: 1.4rem;
+  animation: intro-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-tag {
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  /* 黒地なので白の不透明度で読みやすさが決まる。0.55 未満だと4.5:1を割る */
+  color: rgb(255 255 255 / 0.58);
+}
+
+@keyframes intro-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* 進捗オーバーレイ */
+.intro-progress {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.6rem clamp(1.5rem, 5vw, 4.5rem);
+}
+
+.intro-bar {
+  flex: 1;
+  height: 3px;
+  background: rgb(255 255 255 / 0.16);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.intro-bar i {
+  display: block;
+  height: 100%;
+  /* 黒地なので、紺から始めると左半分が見えない。明るい側だけで組む */
+  background: linear-gradient(to right, var(--color-glow), var(--color-aqua));
+  transform-origin: left;
+}
+
+.intro-num {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.intro-num span {
+  color: var(--color-aqua);
+  font-size: 0.7em;
+  margin-left: 1px;
+}
+
 
 /* ナビゲーションのリンク: 指で押す端末では44pxの高さを確保する。
    画面幅ではなくポインタ種別で判定しないと、タブレットで無効になる。 */
@@ -170,22 +386,50 @@ h4 {
   }
 }
 
-/* 本文中の強調（==テキスト==）。蛍光ペンの塗りは紙面が荒れるので、太字と山吹の細い下線にする */
+
+
+/* 蛍光マーカー強調 */
+/* 強調。蛍光ペンのような塗りは軽い印象になるため、
+   文字色と細い下線で示す。文中に何度出ても紙面が荒れない。 */
+/* 本文中の強調。紺の細線だと文字色に埋もれて気づかれないため、
+   金の太めの下線にして拾い読みでも目に留まるようにする */
 mark.marker {
-  background: none;
+  background: linear-gradient(transparent 62%, rgb(232 163 61 / 0.32) 0);
   color: var(--color-ink);
   font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: var(--color-gold-bright);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 0.3em;
-  text-decoration-skip-ink: none;
+  padding-bottom: 0.06em;
 }
 
 mark.marker-aqua {
   background: none;
   color: var(--color-ink);
   font-weight: 700;
+  box-shadow: inset 0 -1px 0 0 var(--color-line-strong);
+  padding-bottom: 0.06em;
+}
+
+/* アウトライン文字 (超大型タイポ用) */
+.outline-text {
+  -webkit-text-stroke: 1.5px var(--color-ink);
+  color: transparent;
+}
+
+.outline-text-light {
+  -webkit-text-stroke: 1.5px rgb(250 251 253 / 0.35);
+  color: transparent;
+}
+
+.outline-text-pulse {
+  -webkit-text-stroke: 1.5px var(--color-pulse);
+  color: transparent;
+}
+
+.mega-num {
+  font-family: var(--font-data);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
 }
 
 /* 白黒ロゴを白に反転 (ダーク面用) */
@@ -193,305 +437,413 @@ mark.marker-aqua {
   filter: invert(1) brightness(1.6);
 }
 
-/* 以前の方眼の背景。飾りなので描かない（呼んでいるページが多いので、名前だけ残して消す） */
-.grid-field,
+/* ヒーローの背景グリッド */
+.grid-field {
+  background-image:
+    linear-gradient(to right, rgb(11 18 32 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 18 32 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, black 30%, transparent 75%);
+}
+
 .grid-field-dark {
-  display: none;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
 
-/* ── ボタン（DESIGN.md 8） ───────────────────────────── */
-@layer components {
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 3rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-size: 0.9375rem;
-    font-weight: 700;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    text-align: center;
-    transition:
-      background-color 160ms var(--ease-out-strong),
-      border-color 160ms var(--ease-out-strong),
-      color 160ms var(--ease-out-strong),
-      transform 120ms var(--ease-out-strong);
-  }
-
-  .btn:active {
-    transform: scale(0.98);
-  }
-
-  /* 主: 山吹の面＋墨の文字。1画面に1つ */
-  .btn-primary {
-    background: var(--color-gold-bright);
-    color: var(--color-ink);
-    border: 1px solid var(--color-gold-bright);
-  }
-
-  .btn-primary:hover {
-    background: #cf9126;
-    border-color: #cf9126;
-  }
-
-  /* 副: 藍の枠 */
-  .btn-secondary {
-    background: #fff;
-    color: var(--color-pulse);
-    border: 1px solid var(--color-pulse);
-  }
-
-  .btn-secondary:hover {
-    background: var(--color-pulse);
-    color: #fff;
-  }
-
-  /* 暗い面の上の副ボタン */
-  .btn-ondark {
-    background: transparent;
-    color: #fff;
-    border: 1px solid rgb(255 255 255 / 0.5);
-  }
-
-  .btn-ondark:hover {
-    background: #fff;
-    color: var(--color-ink);
-    border-color: #fff;
-  }
-
-  /* 文字だけのリンク。藍の下線 */
-  .link-u {
-    color: var(--color-pulse);
-    font-weight: 700;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.35em;
-    transition: color 160ms var(--ease-out-strong), text-decoration-color 160ms var(--ease-out-strong);
-  }
-
-  .link-u:hover {
-    color: var(--color-pulse-deep);
-    text-decoration-thickness: 2px;
-  }
-
-  /* 区画の頭の罫。区画は面の色ではなく、この罫で区切る */
-  .rule-top {
-    border-top: 1px solid var(--color-ink);
-  }
+/* 文字分割 (SplitText.tsx) */
+.split .w {
+  display: inline-block;
+  white-space: nowrap;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn:active {
-    transform: none;
-  }
-}
-
-/* ── 動き（DESIGN.md 7）────────────────────────────── */
-
-/* トップの最初の画面だけ。見出し→説明→ボタン→表を1回だけ順に出す */
-@keyframes enter-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.enter {
-  animation: enter-up 420ms var(--ease-out-strong) both;
-  animation-delay: var(--d, 0ms);
-}
-
-/* Reveal（motion.tsx）。区画ごとのフェードインはやめ、図（棒・線・輪）だけを画面に入ったときに伸ばす。
-   最初から見えている図と、動きを減らす設定では .rv が付かないので、完成した形で描かれる */
-.vz-grow { transform-origin: left center; transform-box: fill-box; }
-.rv .vz-grow { transform: scaleX(0); }
-.rv .vz-draw { stroke-dashoffset: 1; }
-.rv .vz-ring { stroke-dashoffset: var(--vz-c); }
-.rv.is-in .vz-grow { transform: none; transition: transform 900ms var(--ease-out-strong) 150ms; }
-.rv.is-in .vz-draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1200ms var(--ease-out-strong) 150ms; }
-.rv.is-in .vz-ring { stroke-dashoffset: var(--vz-off); transition: stroke-dashoffset 1000ms var(--ease-out-strong) 150ms; }
-
-/* 最初の画面の見出し。行ごとに下から現れる（文字の箱で隠し、箱の中を上げる）。1回だけ */
-@keyframes line-up {
-  from {
-    transform: translateY(105%);
-  }
-  to {
-    transform: none;
-  }
-}
-
-.line-mask {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.06em;
-  margin-bottom: -0.06em;
-}
-
-.line-mask > span {
-  display: block;
-  animation: line-up 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: var(--d, 0ms);
-}
-
-/* 帳簿に罫を引くように、表の罫線を左から引き、行を順に置く */
-@keyframes rule-draw {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: none;
-  }
-}
-
-.ledger-rule {
-  display: block;
-  height: 1px;
-  background: currentColor;
-  transform-origin: left center;
-  animation: rule-draw 700ms var(--ease-out-strong) both;
-  animation-delay: var(--d, 0ms);
-}
-
-.ledger-row {
-  animation: enter-up 480ms var(--ease-out-strong) both;
-  animation-delay: var(--d, 0ms);
-}
-
-/* 締め線。帳簿で合計の下に引く二重線を、一覧の終わりの印にする */
-.rule-close {
-  border-bottom: 3px double var(--color-ink);
-}
-
-/* ヘッダーの項目。触れると下線が左から伸びる */
-.nav-u {
-  position: relative;
-}
-
-.nav-u::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-  height: 2px;
-  background: var(--color-pulse);
-  transform: scaleX(0);
-  transform-origin: right center;
-  transition: transform 260ms var(--ease-out-strong);
-}
-
-.nav-u:hover::after,
-.nav-u[aria-current="page"]::after {
-  transform: scaleX(1);
-  transform-origin: left center;
-}
-
-/* ボタンの中の矢印の箱。触れると矢印だけが少し進む */
-.btn-arrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  margin-right: -0.5rem;
-  border-radius: 3px;
-  background: rgb(22 26 32 / 0.1);
-}
-
-.btn-arrow svg {
-  transition: transform 220ms var(--ease-out-strong);
-}
-
-.btn:hover .btn-arrow svg {
-  transform: translateX(2px);
-}
-
-.btn-ondark .btn-arrow,
-.btn-secondary:hover .btn-arrow {
-  background: rgb(255 255 255 / 0.16);
-}
-
-/* 暗い面の上のフォーカスは白で示す（藍の輪は墨の上で見えない） */
-.bg-ink :focus-visible,
-footer :focus-visible {
-  outline-color: #fff;
-}
-
-/* スマホのメニューの項目。開いたときに上から順に置く */
-.menu-item {
+.split .ch {
+  display: inline-block;
   opacity: 0;
-  transform: translateY(8px);
+  transform: translate3d(0, 1.1em, 0) rotate(4deg);
+  transform-origin: 0 100%;
   transition:
-    opacity 260ms var(--ease-out-strong),
-    transform 320ms var(--ease-out-strong);
-  transition-delay: var(--d, 0ms);
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 14ms + var(--d, 0s));
+  will-change: transform, opacity;
 }
 
-[data-open="true"] .menu-item {
+.split.is-inview .ch {
   opacity: 1;
-  transform: none;
+  transform: translate3d(0, 0, 0) rotate(0deg);
 }
 
-/* FAQ の開閉。高さを補間できるブラウザでは滑らかに開く */
-details.faq::details-content {
-  block-size: 0;
-  overflow: hidden;
-  transition:
-    block-size 280ms var(--ease-out-strong),
-    content-visibility 280ms allow-discrete;
+/* 照準: 実際のクリック位置。ドローンが被って位置が分からなくなるのを防ぐ */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 320;
+  pointer-events: none;
+  will-change: transform;
 }
 
-details.faq[open]::details-content {
-  block-size: auto;
-}
-
-/* FAQ の開閉記号（＋ → −） */
-.faq-sign {
-  position: relative;
-  width: 14px;
-  height: 14px;
-  flex: none;
-}
-
-.faq-sign::before,
-.faq-sign::after {
-  content: "";
+.cursor-dot .cdot,
+.cursor-dot .cring {
   position: absolute;
-  inset: 6px 0 auto 0;
-  height: 2px;
-  background: currentColor;
-  transition: transform 200ms var(--ease-out-strong);
+  border-radius: 9999px;
+  translate: -50% -50%;
 }
 
-.faq-sign::after {
-  transform: rotate(90deg);
+.cursor-dot .cdot {
+  width: 7px;
+  height: 7px;
+  background: var(--color-pulse);
+  box-shadow:
+    0 0 0 2px rgb(255 255 255 / 0.9),
+    0 2px 6px rgb(11 18 32 / 0.35);
+  transition: scale 0.18s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-details[open] > summary .faq-sign::after {
-  transform: rotate(0deg);
+.cursor-dot .cring {
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid color-mix(in oklab, var(--color-pulse) 55%, transparent);
+  opacity: 0.55;
+  transition:
+    scale 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease-out,
+    border-color 0.25s ease-out;
+}
+
+.cursor-dot.is-hover .cring {
+  scale: 1.5;
+  opacity: 0.35;
+  border-color: var(--color-aqua);
+}
+
+/* 四隅のブラケット。押せるものの上で締まり、対象を囲む */
+.clock {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  translate: -50% -50%;
+  opacity: 0;
+  scale: 1.35;
+  transition:
+    opacity 0.18s ease-out,
+    scale 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.clock i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--color-aqua);
+}
+
+.clock i:nth-child(1) { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.clock i:nth-child(2) { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.clock i:nth-child(3) { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.clock i:nth-child(4) { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+.cursor-dot.is-hover .clock {
+  opacity: 1;
+  scale: 1;
+}
+
+.cursor-dot.is-click .clock {
+  scale: 0.82;
+  transition-duration: 0.09s;
+}
+
+.cursor-dot.is-click .cring {
+  scale: 0.62;
+  opacity: 1;
+  transition-duration: 0.09s;
+}
+
+.cursor-dot.is-click .cdot {
+  scale: 1.5;
+  transition-duration: 0.09s;
+}
+
+/* カスタムカーソル: 立体3Dドローン (Cursor.tsx) */
+.cursor-drone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  pointer-events: none;
+  will-change: transform;
+  perspective: 520px;
+}
+
+/* 姿勢 (rotateX/rotateY) はJSが毎フレーム更新 */
+.cursor-drone .drone-rig {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cursor-drone .drone-bob {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: drone-bob 3s ease-in-out infinite;
+  /* 離したときは、揚力を取り戻すようにゆっくり浮き上がる */
+  transition:
+    scale 0.34s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* レイヤーごとの奥行き (視差の源) */
+.cursor-drone .dlayer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.cursor-drone .dlayer svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cursor-drone .d-legs {
+  transform: translateZ(-9px);
+}
+
+.cursor-drone .d-hull {
+  transform: translateZ(0);
+  filter: drop-shadow(0 4px 5px rgb(11 18 32 / 0.35));
+}
+
+.cursor-drone .d-top {
+  transform: translateZ(8px);
+}
+
+.cursor-drone .d-pods {
+  transform: translateZ(12px);
+}
+
+.cursor-drone .d-props {
+  transform: translateZ(18px);
+}
+
+.cursor-drone.is-hover .drone-bob {
+  scale: 1.25;
+}
+
+/* ヒーロー（data-drone-zone）の外では出さない。本文の上に 72px の機体が乗り、
+   番号や見出し（トップの自己診断の「01」など）を隠していた */
+.cursor-drone {
+  transition: opacity 0.25s ease-out;
+}
+
+.cursor-drone.is-away {
+  opacity: 0;
+}
+
+/* クリック中: プロペラ停止 → 揚力を失って沈む */
+/* 押した瞬間は一気に沈ませる。ゆっくりだとクリックが終わるまでに動ききらない */
+.cursor-drone.is-click .drone-bob {
+  animation-play-state: paused;
+  translate: 0 10px;
+  scale: 0.85;
+  transition-duration: 0.09s;
+  transition-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+}
+
+.cursor-drone.is-click .prop {
+  animation-play-state: paused;
+}
+
+/* 停止中はブラーディスクを消し、ブレードを静止状態でくっきり見せる */
+.cursor-drone .prop > circle,
+.cursor-drone .prop > g {
+  transition: opacity 0.18s ease-out;
+}
+
+.cursor-drone.is-click .prop > circle {
+  opacity: 0;
+  transition-duration: 0.07s;
+}
+
+.cursor-drone.is-click .prop > g:first-of-type {
+  opacity: 0.95;
+}
+
+.cursor-drone.is-click .prop > g:last-of-type {
+  opacity: 0;
+}
+
+/* 沈んだぶん接地影は大きく濃く */
+.cursor-drone.is-click .drone-shadow {
+  animation-play-state: paused;
+  scale: 1.35;
+  opacity: 1;
+  filter: blur(3px);
+  transition-duration: 0.09s;
+}
+
+/* 接地影: 浮遊と同期して伸縮 */
+.cursor-drone .drone-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -14px;
+  width: 34px;
+  height: 9px;
+  margin-left: -17px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgb(11 18 32 / 0.3), transparent 70%);
+  filter: blur(2px);
+  animation: shadow-bob 3s ease-in-out infinite;
+  transition:
+    scale 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease-out;
+}
+
+.cursor-drone.is-hover .drone-shadow {
+  opacity: 0.6;
+}
+
+/* プロペラ回転 */
+.cursor-drone .prop {
+  animation: prop-spin 0.28s linear infinite;
+  transform-origin: var(--cx) var(--cy);
+}
+
+@keyframes prop-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ホバリングの上下動 */
+@keyframes drone-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shadow-bob {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.82);
+    opacity: 0.7;
+  }
+}
+
+.has-cursor,
+.has-cursor a,
+.has-cursor button {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot {
+    display: none;
+  }
+  .cursor-drone {
+    display: none;
+  }
+}
+
+/* マーキー */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 落ち着いて読める速度にする (速いと落ち着きがなくなる) */
+.animate-marquee {
+  animation: marquee 56s linear infinite;
+}
+
+/* SenseNetwork のパルス */
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes dash-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes orbit-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit-slow 90s linear infinite;
+  transform-origin: center;
+}
+
+.animate-flow {
+  stroke-dasharray: 4 8;
+  animation: dash-flow 1.6s linear infinite;
+}
+
+.animate-node {
+  animation: node-pulse 3.2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.animate-float {
+  animation: float-soft 6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .enter,
-  .line-mask > span,
-  .ledger-rule,
-  .ledger-row {
+  .animate-orbit,
+  .animate-flow,
+  .animate-node,
+  .animate-marquee,
+  .animate-float {
     animation: none;
   }
-  .menu-item {
-    opacity: 1;
-    transform: none;
+  .split .ch {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .cursor-drone,
+  .cursor-dot {
+    display: none !important;
   }
   *,
   *::before,
@@ -501,15 +853,67 @@ details[open] > summary .faq-sign::after {
   }
 }
 
-/* 会社概要のアクセス: 押す前の地図の面（紙の街区図）。地図は押したときだけ読む */
+/* Reveal（motion.tsx）。最初の描画では隠さず、JSが動いてから画面外の要素にだけ .rv を付ける */
+.rv { opacity: 0; transform: perspective(900px) translateY(32px) rotateX(9deg); }
+.rv.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; } }
+
+/* 図の伸び（NumberWall・ResearchBand）。Reveal が画面外の図に .rv を付け、入ってきたら .is-in を足すので、
+   そのときだけ棒が伸び・線が引かれ・輪が満ちる。最初から見えている図と、動きを減らす設定では
+   .rv が付かないので、動かずに完成した形で描かれる（JSが無くても同じ） */
+.vz-grow { transform-origin: left center; transform-box: fill-box; }
+.rv .vz-grow { transform: scaleX(0); }
+.rv .vz-draw { stroke-dashoffset: 1; }
+.rv .vz-ring { stroke-dashoffset: var(--vz-c); }
+.rv.is-in .vz-grow { transform: none; transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
+.rv.is-in .vz-draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
+.rv.is-in .vz-ring { stroke-dashoffset: var(--vz-off); transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.25s; }
+
+/* イントロ前の目隠し。layout.tsx のインラインスクリプトが付け、IntroLoader が外す */
+html.ss-intro-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #0a0f1c;
+  z-index: 2147483646;
+}
+
+/* 会社概要のアクセス: 押す前の地図の面（夜の街区図）。地図は押したときだけ読む */
 .map-facade .map-grid {
   background:
-    linear-gradient(rgb(185 190 184 / 0.7) 6px, transparent 6px) 0 0 / 132px 132px,
-    linear-gradient(90deg, rgb(185 190 184 / 0.7) 6px, transparent 6px) 0 0 / 132px 132px,
-    linear-gradient(rgb(185 190 184 / 0.35) 1px, transparent 1px) 0 0 / 22px 22px,
-    linear-gradient(90deg, rgb(185 190 184 / 0.35) 1px, transparent 1px) 0 0 / 22px 22px;
+    linear-gradient(rgb(116 199 214 / 0.22) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(90deg, rgb(116 199 214 / 0.22) 2px, transparent 2px) 0 0 / 120px 120px,
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px) 0 0 / 24px 24px;
 }
-.map-facade .map-pin { box-shadow: 0 0 0 5px var(--color-mist), 0 0 0 6px rgb(30 58 100 / 0.5); }
+.map-facade .map-pin { box-shadow: 0 0 0 5px rgb(13 20 32), 0 0 0 6px rgb(116 199 214 / 0.6), 0 0 24px rgb(116 199 214 / 0.55); }
+.map-facade .map-pin::before {
+  content: ""; position: absolute; inset: -14px; border-radius: 9999px;
+  border: 2px solid rgb(116 199 214 / 0.8); opacity: 0;
+  animation: map-ping 2.4s cubic-bezier(.19, 1, .22, 1) infinite;
+}
+@keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .map-facade .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); } }
+
+/* ヒーロー動画の場面名（HeroVideo）。場面が変わるたびに下から静かに出る */
+.hero-scene-caption { animation: hero-caption-in 0.9s cubic-bezier(0.19, 1, 0.22, 1) both; }
+@keyframes hero-caption-in {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-scene-caption { animation: none; } }
+
+/* トップの全画面動画の上にいる間のヘッダー（白い文字） */
+.header-on-dark nav > a,
+.header-on-dark nav > .group > a { color: #fff; }
+.header-on-dark nav > a:hover,
+.header-on-dark nav > .group > a:hover { color: var(--color-aqua); }
+.header-on-dark nav > .group > span { color: #fff; border-color: rgb(255 255 255 / 0.45); background: rgb(255 255 255 / 0.08); }
+.header-on-dark nav > a[href="/contact"] { background: #fff; color: var(--color-ink); }
 
 /* 画面下の追従バー（LpCta の StickyCta・lg 未満）があるページは、足元の最後の行がバーの下に隠れないよう
    足元の下を空ける（/aio-agent・/rakushift・記事で、制作・顧問の行が隠れていた） */
@@ -519,48 +923,6 @@ details[open] > summary .faq-sign::after {
   }
 }
 
-/* まとめのページ（管制塔が置く SsAggregatePage）。部品のファイルは直接直さず、ここで左端と見出しをサイトにそろえる。
-   部品の中の <style> より後に読まれても勝つよう、main を前に付けて詳しさを上げる */
-main .ss-aggregate {
-  max-width: 80rem;
-  padding: 112px 1.25rem 96px;
-}
-@media (min-width: 768px) {
-  main .ss-aggregate {
-    padding: 136px 2rem 128px;
-  }
-}
-main .ss-aggregate > div {
-  max-width: 56rem;
-}
-main .ss-aggregate h1 {
-  max-width: 24em;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 1.6rem;
-}
-main .ss-aggregate a {
-  color: var(--color-pulse);
-  text-underline-offset: 0.3em;
-}
-main .ss-aggregate .cat-head {
-  border-bottom: 1px solid var(--color-ink);
-}
-main .ss-aggregate .cat-head h2 {
-  border-left: 0;
-  padding-left: 0;
-}
-main .ss-aggregate .hub-list li,
-main .ss-aggregate .enrich-steps li,
-main .ss-aggregate details,
-main .ss-aggregate .gl-toc {
-  border-radius: 6px;
-}
-main .ss-aggregate .gl-toc a {
-  border-radius: 4px;
-}
-
-/* 暗い面の上の本文。強調は白の太字に置き換える */
-.hero-rich mark { background: none; color: #fff; font-weight: 700; text-decoration: none; }
+/* 暗い写真の上の本文。黄色のマーカーは白の太字に置き換える */
+.hero-rich mark { background: none; color: #fff; font-weight: 700; }
 .hero-rich strong { color: #fff; }
