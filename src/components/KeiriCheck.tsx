@@ -98,7 +98,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
                         type="button"
                         aria-pressed={on}
                         onClick={() => answer(q.id, opt)}
-                        className={`tap min-w-24 rounded-full border px-6 py-2.5 text-sm font-bold transition-colors ${
+                        className={`tap min-w-24 rounded-sm border px-6 py-2.5 text-sm font-bold transition-colors ${
                           on
                             ? "border-pulse bg-pulse text-white"
                             : "border-line-strong bg-white text-ink hover:border-pulse hover:text-pulse"
@@ -120,7 +120,7 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
           type="button"
           onClick={showResult}
           disabled={!done}
-          className="rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+          className="rounded-sm bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
         >
           結果を見る
         </button>
@@ -155,14 +155,14 @@ export default function KeiriCheck({ reads, lawRead }: Props) {
                 href="/contact"
                 data-entry-s="keiri-shindan"
                 onClick={() => track("tool_to_contact", { ...params(), result: key })}
-                className="tap inline-flex items-center rounded-full bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
+                className="tap inline-flex items-center rounded-sm bg-gold-bright px-6 py-3 text-sm font-bold text-ink transition-transform"
               >
                 経理の現状を相談する（無料）
               </Link>
               <button
                 type="button"
                 onClick={reset}
-                className="tap inline-flex items-center rounded-full border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
+                className="tap inline-flex items-center rounded-sm border border-paper/30 px-6 py-3 text-sm font-bold text-paper transition-colors hover:border-paper"
               >
                 もう一度チェックする
               </button>

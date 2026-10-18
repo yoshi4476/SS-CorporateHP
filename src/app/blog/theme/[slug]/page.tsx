@@ -64,7 +64,7 @@ export default async function ThemePage({ params }: Props) {
 
       <section className="relative overflow-hidden border-b border-line">
         <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 md:py-20 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 pb-14 pt-24 md:px-8 md:pb-20 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <nav aria-label="パンくず" className="text-xs text-slate">
               <Link href="/blog" className="hover:text-pulse">経理BPOブログ</Link>
@@ -83,7 +83,7 @@ export default async function ThemePage({ params }: Props) {
       </section>
 
       <section className="py-16 md:py-20" aria-labelledby="pillar-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <h2 id="pillar-heading" className="text-2xl font-black md:text-3xl">まず読む1本</h2>
           <p className="mt-3 text-sm text-slate">このテーマの全体像をつかめる記事です。ここから下の記事へ掘り下げてください。</p>
           <Link
@@ -103,7 +103,7 @@ export default async function ThemePage({ params }: Props) {
       </section>
 
       <section className="border-t border-line bg-mist py-16 md:py-20" aria-labelledby="deep-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <h2 id="deep-heading" className="text-2xl font-black md:text-3xl">掘り下げる記事</h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {t.rest.map((x) => (
@@ -145,18 +145,18 @@ export default async function ThemePage({ params }: Props) {
       )}
 
       <section className="border-t border-line py-14" aria-labelledby="other-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <h2 id="other-heading" className="text-lg font-black">ほかのテーマ</h2>
           <ul className="mt-5 flex flex-wrap gap-3">
             {others.map((o) => (
               <li key={o.slug}>
-                <Link href={`/blog/theme/${o.slug}`} className="tap inline-block rounded-full border border-line-strong px-5 py-2 text-sm font-bold hover:border-pulse hover:text-pulse">
+                <Link href={`/blog/theme/${o.slug}`} className="tap inline-block rounded-sm border border-line-strong px-5 py-2 text-sm font-bold hover:border-pulse hover:text-pulse">
                   {o.name}（{o.count}）
                 </Link>
               </li>
             ))}
           </ul>
-          <Link href="/contact" data-entry-s="keiri-bpo" className="mt-10 inline-block rounded-full bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow">
+          <Link href="/contact" data-entry-s="keiri-bpo" className="mt-10 inline-block rounded-sm bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow">
             経理の外注を無料で相談する
           </Link>
         </div>

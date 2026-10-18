@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { Reveal } from "@/components/motion";
-import { CtaBand } from "@/components/ui";
+import { CtaBand, PageHead } from "@/components/ui";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 
@@ -84,25 +84,19 @@ export default function PrivacyPage() {
           { name: "プライバシーポリシー", path: "/privacy" },
         ])}
       />
-      <section className="relative overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-4xl px-5 pb-10 pt-12 md:pt-20">
-          <Reveal>
-            <p aria-hidden className="eyebrow" />
-            <h1 className="mt-4 text-3xl font-black md:text-5xl">プライバシーポリシー</h1>
-            <p className="mt-6 text-[15px] leading-[1.9] text-slate">
-              {site.name}の個人情報保護方針です。
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHead
+        crumbs={[{ name: "トップ", href: "/" }, { name: "プライバシーポリシー" }]}
+        title="プライバシーポリシー"
+        lead={`${site.name}の個人情報保護方針です。`}
+      />
 
-      <section className="pb-20 pt-4 md:pb-28">
-        <div className="mx-auto grid max-w-4xl gap-8 px-5">
+      <section className="pb-20 pt-12 md:pb-28 md:pt-16">
+        <div className="mx-auto grid max-w-7xl gap-0 px-5 md:px-8 lg:grid-cols-12">
+          <div className="rule-close lg:col-span-8">
           {SECTIONS.map((s, i) => (
             <Reveal key={s.title} delay={Math.min(i * 0.04, 0.2)}>
-              <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
-                <h2 className="text-base font-bold md:text-lg">{s.title}</h2>
+              <section className="border-t border-line py-7">
+                <h2 className="text-lg font-bold">{s.title}</h2>
                 {s.body.map((p, j) => (
                   <p key={j} className="mt-3 text-[15px] leading-[1.9] text-slate">
                     {p}
@@ -112,24 +106,25 @@ export default function PrivacyPage() {
             </Reveal>
           ))}
           <Reveal delay={0.2}>
-            <section className="rounded-2xl border border-line bg-raise p-7 shadow-card">
-              <h2 className="text-base font-bold md:text-lg">10. お問い合わせ窓口</h2>
+            <section className="border-t border-line py-7">
+              <h2 className="text-lg font-bold">10. お問い合わせ窓口</h2>
               <p className="mt-3 text-[15px] leading-[1.9] text-slate">
                 {site.name}
                 <br />
                 〒{site.postal} {site.address}
                 <br />
                 TEL:{" "}
-                <a href={`tel:${site.tel.replaceAll("-", "")}`} className="num text-pulse underline-offset-4 hover:underline">
+                <a href={`tel:${site.tel.replaceAll("-", "")}`} className="link-u num">
                   {site.tel}
                 </a>
                 (受付時間: {site.hours})
                 <br />
-                または<Link href="/contact" className="text-pulse underline-offset-4 hover:underline">お問い合わせフォーム</Link>よりご連絡ください。
+                または<Link href="/contact" className="link-u">お問い合わせフォーム</Link>よりご連絡ください。
               </p>
-              <p className="mt-5 text-xs text-faint">制定日: 2026年7月28日</p>
+              <p className="mt-5 text-[13px] text-faint">制定日: 2026年7月28日</p>
             </section>
           </Reveal>
+          </div>
         </div>
       </section>
 

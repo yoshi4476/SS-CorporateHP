@@ -25,8 +25,8 @@ export default function ThemeIndex() {
           ]),
         ]}
       />
-      <section className="border-b border-line py-14 md:py-20">
-        <div className="mx-auto max-w-7xl px-5">
+      <section className="border-b border-line pb-14 pt-24 md:pb-20 md:pt-32">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <nav aria-label="パンくず" className="text-xs text-slate">
             <Link href="/blog" className="hover:text-pulse">経理BPOブログ</Link>
           </nav>
@@ -38,7 +38,7 @@ export default function ThemeIndex() {
         </div>
       </section>
       <section className="py-14 md:py-20">
-        <ul className="mx-auto grid max-w-7xl gap-6 px-5 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="mx-auto grid max-w-7xl gap-6 px-5 md:px-8 sm:grid-cols-2 xl:grid-cols-3">
           {themes.map((t) => (
             <li key={t.slug}>
               <Link href={`/blog/theme/${t.slug}`} className="group block h-full overflow-hidden rounded-3xl border border-line bg-raise shadow-card transition-colors hover:border-pulse/40">

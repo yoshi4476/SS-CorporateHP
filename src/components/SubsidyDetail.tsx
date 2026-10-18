@@ -15,7 +15,7 @@ export default function SubsidyDetail() {
       {/* 取扱いと自社導入。補助金の相談相手を選ぶときに効く事実なので、
           金額の話に入る前に置く */}
       <section className="border-t border-line py-14 md:py-16" aria-labelledby="partner-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <Reveal className="rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:p-10">
             <p aria-hidden className="eyebrow" />
             <h2 id="partner-heading" className="mt-3 text-xl font-bold leading-relaxed md:text-2xl">
@@ -34,7 +34,7 @@ export default function SubsidyDetail() {
 
       {/* 費用シミュレーション */}
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="sim-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="いくら圧縮できるのか、図で見る"
             lead={`受発注ソフト・会計ソフトを${modelCase.total}万円で導入した場合のモデルケースです (${subsidy.fiscalYear}・${subsidy.asOf})。`}
@@ -122,7 +122,7 @@ export default function SubsidyDetail() {
 
       {/* スキーム・期間 */}
       <section className="py-20 md:py-28" aria-labelledby="scheme-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="申請から着金まで、4フェーズ"
             lead="お客様の事前準備は==合計1.5〜3時間==。申請から着金までは==約2〜3ヶ月==が目安です。"
@@ -162,7 +162,7 @@ export default function SubsidyDetail() {
                 <article className="flex h-full flex-col rounded-2xl border border-line bg-raise p-6 shadow-card">
                   <div className="flex items-baseline justify-between">
                     <span className="num text-3xl font-bold text-gold/40" aria-hidden>{s.step}</span>
-                    <span className="rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
+                    <span className="rounded-sm bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">
                       {s.period}
                     </span>
                   </div>
@@ -181,7 +181,7 @@ export default function SubsidyDetail() {
 
       {/* お金の流れ */}
       <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="cashflow-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="お金は、いつ・どちらへ動くのか"
             lead="補助金は==精算払い (後払い)==です。お支払いから着金まで約2〜3ヶ月を見込んだ資金計画をおすすめします。"
@@ -213,13 +213,13 @@ export default function SubsidyDetail() {
                 href={site.lpUrl}
                 target="_blank"
                 rel="noopener"
-                  className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  className="rounded-sm bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-card transition-transform"
               >
                 無料診断で対象か確かめる (8問・3分) ↗
               </a>
               <Link
                 href="/contact"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-sm border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 無料相談を予約する
               </Link>

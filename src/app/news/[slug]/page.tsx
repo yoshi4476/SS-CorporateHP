@@ -98,7 +98,7 @@ export default async function NewsDetailPage({ params }: Props) {
               <time dateTime={item.dateISO} className="num text-sm text-slate">
                 {item.date}
               </time>
-              <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
+              <span className="rounded-sm bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
                 {item.category}
               </span>
             </div>

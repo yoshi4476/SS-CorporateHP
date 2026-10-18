@@ -13,7 +13,7 @@ import { Reveal } from "@/components/motion";
 export default function MediaShowcase() {
   return (
     <section className="border-y border-line bg-mist py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-5">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHead
           title="動画と資料で、仕組みを先にご確認ください"
           lead="実際の画面で、記事ができて公開されるまでをご覧いただけます。==人が決めることと、機械に任せることの分担==まで説明しています。ご相談の前に、この場で中身を確かめられます。"
@@ -89,9 +89,9 @@ export default function MediaShowcase() {
         <div className="mt-10 text-center">
           <Link
             href="/contact"
-            className="inline-block rounded-full bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+            className="inline-block rounded-sm bg-pulse px-9 py-4 text-sm font-bold text-white shadow-glow transition-transform"
           >
-            この内容で相談してみる →
+            この内容で相談してみる
           </Link>
           <p className="mt-3 text-sm leading-7 text-ink-soft">
             料金は御社の状況に合わせてお見積りします。営業のお電話はいたしません。

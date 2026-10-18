@@ -66,7 +66,7 @@ function DoneSteps({ slug }: { slug: string }) {
         {nextSteps(slug).map((s) => {
           const inner = (
             <>
-              <span className="w-16 shrink-0 rounded-full bg-gold-tint py-1 text-center text-[13px] font-bold text-gold-deep">{s.kind}</span>
+              <span className="w-16 shrink-0 rounded-sm bg-gold-tint py-1 text-center text-[13px] font-bold text-gold-deep">{s.kind}</span>
               <span className="min-w-0 flex-1">
                 <span className="block text-[15px] font-bold leading-7 text-ink group-hover:text-pulse">
                   {s.title}
@@ -94,15 +94,16 @@ function DoneSteps({ slug }: { slug: string }) {
   );
 }
 
+// 16px は iOS が入力時に拡大しない大きさ。誤りは送る前（触れた後）に山吹の地と枠で示す（赤は使わない・DESIGN.md 3）
 const inputCls =
-  "w-full rounded-xl border border-line bg-mist/50 px-4 py-3 text-sm text-ink placeholder:text-slate/50 focus:border-pulse focus:bg-white focus:outline-none disabled:opacity-60";
+  "w-full rounded-sm border border-line-strong bg-paper px-4 py-3.5 text-base text-ink transition-[border-color,box-shadow] placeholder:text-faint/70 hover:border-slate focus:border-pulse focus:shadow-[0_0_0_3px_rgb(30_58_100/0.15)] focus:outline-none user-invalid:border-gold-deep user-invalid:bg-gold-tint disabled:opacity-60";
 
 function LabelText({ text, required = false }: { text: string; required?: boolean }) {
   return (
     <span className="flex items-center gap-2">
       {text}
       {required && (
-        <span className="rounded bg-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-white">
+        <span className="rounded-sm border border-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-pulse">
           必須
         </span>
       )}
@@ -281,7 +282,7 @@ export default function ContactForm() {
   if (state === "sent") {
     return (
       <div className="py-6 text-center" role="status">
-        <span aria-hidden className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-pulse/10">
+        <span aria-hidden className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-pulse">
           <svg width="26" height="26" viewBox="0 0 24 24" className="text-pulse">
             <path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
@@ -309,18 +310,18 @@ export default function ContactForm() {
       <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="hidden" />
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="お名前" required />
           <input required name="name" autoComplete="name" placeholder="山田 太郎" className={inputCls} disabled={busy} />
         </label>
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="会社名・店舗名（任意）" />
           <input name="company" autoComplete="organization" placeholder="株式会社◯◯（個人の方は空欄で構いません）" className={inputCls} disabled={busy} />
         </label>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="メールアドレス" required />
           <input
             required
@@ -332,13 +333,13 @@ export default function ContactForm() {
             disabled={busy}
           />
         </label>
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="電話番号" />
           <input type="tel" name="tel" autoComplete="tel" placeholder="06-0000-0000" className={inputCls} disabled={busy} />
         </label>
       </div>
 
-      <label className="grid gap-2 text-xs font-bold text-ink">
+      <label className="grid gap-2 text-sm font-bold text-ink">
         <LabelText text="ご相談内容" required />
         <select required name="service" defaultValue="" className={inputCls} disabled={busy}>
           <option value="" disabled>
@@ -352,7 +353,7 @@ export default function ContactForm() {
         </select>
       </label>
 
-      <label className="grid gap-2 text-xs font-bold text-ink">
+      <label className="grid gap-2 text-sm font-bold text-ink">
         <LabelText text="詳細 (任意)" />
         <textarea
           name="message"
@@ -364,7 +365,7 @@ export default function ContactForm() {
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="希望の連絡方法 (任意)" />
           <select name="contact_way" defaultValue="" className={inputCls} disabled={busy}>
             <option value="">指定なし</option>
@@ -373,7 +374,7 @@ export default function ContactForm() {
             <option>オンライン面談</option>
           </select>
         </label>
-        <label className="grid gap-2 text-xs font-bold text-ink">
+        <label className="grid gap-2 text-sm font-bold text-ink">
           <LabelText text="相談したい時期 (任意)" />
           <select name="contact_when" defaultValue="" className={inputCls} disabled={busy}>
             <option value="">指定なし</option>
@@ -398,7 +399,7 @@ export default function ContactForm() {
             プライバシーポリシー
           </Link>
           に同意する
-          <span className="ml-2 rounded bg-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-white">
+          <span className="ml-2 rounded-sm border border-pulse px-1.5 py-0.5 text-xs font-bold leading-none text-pulse">
             必須
           </span>
         </span>
@@ -408,7 +409,7 @@ export default function ContactForm() {
       <div ref={tsBox} />
 
       {state === "error" && (
-        <p role="alert" className="rounded-xl border border-pulse/30 bg-pulse/5 px-4 py-3 text-sm leading-7 text-ink">
+        <p role="alert" className="rounded-sm border border-gold-deep/40 border-l-4 border-l-gold-deep bg-gold-tint px-4 py-3 text-sm leading-7 text-ink">
           {errorMsg}
           <br />
           お急ぎの場合はお電話(
@@ -422,8 +423,15 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={busy}
-                  className="mt-2 rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
+        aria-busy={busy}
+        className="btn btn-primary mt-2 min-h-14 w-full text-base disabled:cursor-wait disabled:opacity-80 sm:w-auto sm:px-10"
       >
+        {busy && (
+          <svg aria-hidden width="16" height="16" viewBox="0 0 16 16" className="animate-spin">
+            <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" />
+            <path d="M14.5 8A6.5 6.5 0 0 0 8 1.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+        )}
         {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>
       <p className="text-sm leading-7 text-slate">

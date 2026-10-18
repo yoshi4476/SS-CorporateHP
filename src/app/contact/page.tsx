@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { Reveal } from "@/components/motion";
 import ContactForm from "@/components/ContactForm";
+import { PageHead } from "@/components/ui";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 import { pageMeta } from "@/lib/meta";
@@ -27,80 +25,42 @@ export default function ContactPage() {
         ])}
       />
 
-      <section className="relative overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-12 md:pt-20">
-          <Reveal>
-            <nav aria-label="パンくずリスト" className="text-xs text-slate">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="tap hover:text-pulse">
-                    トップ
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li aria-current="page" className="text-ink">
-                  お問い合わせ・無料相談
-                </li>
-              </ol>
-            </nav>
-            <p aria-hidden className="eyebrow mt-8" />
-            <h1 className="mt-4 text-3xl font-black md:text-5xl">無料相談・お問い合わせ</h1>
-            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
-              「何から始めればいいか分からない」という段階のご相談も歓迎です。通常1営業日以内にご返信します。お急ぎの場合はお電話ください。
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHead
+        crumbs={[{ name: "トップ", href: "/" }, { name: "お問い合わせ・無料相談" }]}
+        title="無料相談・お問い合わせ"
+        lead="「何から始めればいいか分からない」という段階のご相談も歓迎です。通常1営業日以内にご返信します。お急ぎの場合はお電話ください。"
+      />
 
-      <section className="pb-20 pt-6 md:pb-28">
-        <div className="mx-auto grid max-w-7xl items-start gap-10 px-5 lg:grid-cols-[1.5fr_1fr]">
-          <Reveal delay={0.08} className="rounded-3xl border border-line bg-white p-7 shadow-card md:p-10">
+      <section className="pb-20 pt-12 md:pb-32 md:pt-16">
+        <div className="mx-auto grid max-w-7xl items-start gap-12 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-7">
             <ContactForm />
-          </Reveal>
-
-          <div className="grid gap-5">
-            <Reveal delay={0.14}>
-              <div className="rounded-2xl bg-ink p-7 text-white" data-cta-pos="contact-tel">
-                <p className="eyebrow !text-aqua">お電話でのご相談</p>
-                <a
-                  href={`tel:${site.tel.replaceAll("-", "")}`}
-                  className="num mt-3 block text-3xl font-bold tracking-wide hover:text-aqua"
-                >
-                  {site.tel}
-                </a>
-                <p className="mt-3 text-sm leading-7 text-white/60">受付時間: {site.hours}</p>
-              </div>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div className="rounded-2xl border border-line bg-mist p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <h2 className="text-sm font-bold">ご相談の流れ</h2>
-                  <Image
-                    src="/images/online-meeting.png"
-                    alt="オンライン打ち合わせのイラスト"
-                    width={640}
-                    height={640}
-                    className="-mt-2 h-20 w-20 shrink-0"
-                  />
-                </div>
-                <ol className="mt-2 grid gap-3 text-sm leading-7 text-slate">
-                  <li className="flex gap-3">
-                    <span className="num font-bold text-pulse">1.</span>
-                    フォームまたはお電話でご連絡
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="num font-bold text-pulse">2.</span>
-                    オンラインで現状ヒアリング(30〜60分・無料)
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="num font-bold text-pulse">3.</span>
-                    診断結果と施策のご提案(契約前提ではありません)
-                  </li>
-                </ol>
-              </div>
-            </Reveal>
           </div>
+
+          <aside className="grid gap-10 lg:sticky lg:top-28 lg:col-span-5">
+            <div className="border-t border-ink pt-5" data-cta-pos="contact-tel">
+              <h2 className="text-sm font-bold text-slate">お電話でのご相談</h2>
+              <a href={`tel:${site.tel.replaceAll("-", "")}`} className="num mt-2 block text-[2rem] font-bold tracking-wide text-ink hover:text-pulse">
+                {site.tel}
+              </a>
+              <p className="mt-1 text-sm leading-7 text-slate">受付時間: {site.hours}</p>
+            </div>
+            <div className="border-t border-ink pt-5">
+              <h2 className="text-sm font-bold text-slate">ご相談の流れ</h2>
+              <ol className="mt-3 border-b border-line">
+                {[
+                  "フォームまたはお電話でご連絡",
+                  "オンラインで現状ヒアリング(30〜60分・無料)",
+                  "診断結果と施策のご提案(契約前提ではありません)",
+                ].map((s, i) => (
+                  <li key={s} className="grid grid-cols-[2rem_1fr] border-t border-line py-3 text-[15px] leading-7">
+                    <span className="num font-bold text-pulse">{i + 1}</span>
+                    {s}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </aside>
         </div>
       </section>
     </>

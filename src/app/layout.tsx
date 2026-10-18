@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Effects from "@/components/Effects";
 import JsonLd from "@/components/JsonLd";
 import Tracking from "@/components/Tracking";
 import FirstTouch from "@/components/FirstTouch";
@@ -73,17 +72,6 @@ export default function RootLayout({
         条件にしているため、body ではなく head に直接出力する。
       */}
       <head>
-        {/* イントロを出す回だけ、描画の前に画面を覆う。
-            IntroLoader は JS が動いてから現れるため、それまでの一瞬だけ本編が見えていた。
-            3秒で必ず外す保険つき（JSが落ちても黒いままにならない） */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{if(location.pathname==='/'&&!sessionStorage.getItem('ss-intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!matchMedia('(max-width: 900px)').matches){" +
-              "document.documentElement.classList.add('ss-intro-pending');" +
-              "setTimeout(function(){document.documentElement.classList.remove('ss-intro-pending')},3000);}}catch(e){}",
-          }}
-        />
         {site.ga4Id && (
           <>
             {/* 計測タグ(172KB)は描画の後に読む。それまでの出来事は dataLayer に溜まり、読み込み後にまとめて送られる */}
@@ -100,10 +88,10 @@ export default function RootLayout({
         <Tracking />
         <FirstTouch />
         <Header />
-        <Effects>
-          <main>{children}</main>
-          <Footer />
-        </Effects>
+        {/* イントロ・カスタムカーソル・ページ遷移の幕・慣性スクロールはやめた（DESIGN.md 7）。
+            読む前に待たせるだけで、記事から来た人には約150KBの JS も重かった */}
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

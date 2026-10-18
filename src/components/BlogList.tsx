@@ -63,7 +63,7 @@ export default function BlogList({ items }: { items: ListItem[] }) {
               role="tab"
               aria-selected={on}
               onClick={() => pick(c.slug)}
-              className={`tap rounded-full border px-4 py-1.5 text-xs font-bold transition-colors ${
+              className={`tap rounded-sm border px-4 py-1.5 text-xs font-bold transition-colors ${
                 on
                   ? "border-pulse bg-pulse text-white"
                   : "border-line bg-raise text-ink hover:border-pulse hover:text-pulse"
@@ -90,7 +90,7 @@ export default function BlogList({ items }: { items: ListItem[] }) {
                     alt={`${p.title}のアイキャッチ画像`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                    className="object-cover transition-transform duration-700"
                   />
                 ) : (
                   <span aria-hidden className="grid-field absolute inset-0" />
@@ -98,7 +98,7 @@ export default function BlogList({ items }: { items: ListItem[] }) {
               </span>
               <span className="flex flex-1 flex-col p-6">
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <span className="rounded-full bg-pulse/10 px-2.5 py-0.5 text-xs font-bold text-pulse">
+                  <span className="rounded-sm bg-pulse/10 px-2.5 py-0.5 text-xs font-bold text-pulse">
                     {p.categoryName}
                   </span>
                   <time dateTime={p.date} className="num text-xs text-slate">
@@ -128,7 +128,7 @@ export default function BlogList({ items }: { items: ListItem[] }) {
           <button
             type="button"
             onClick={() => setShown((n) => n + PAGE)}
-            className="tap inline-flex items-center gap-2 rounded-full border border-line-strong px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+            className="tap inline-flex items-center gap-2 rounded-sm border border-line-strong px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
           >
             さらに表示
             <span className="num text-xs text-slate">残り{rest}本</span>

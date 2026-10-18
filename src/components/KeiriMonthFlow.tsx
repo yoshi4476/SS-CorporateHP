@@ -96,7 +96,7 @@ export default function KeiriMonthFlow() {
                   <div key={l.key} className="mt-3 lg:mt-0 lg:flex">
                     <p className={`w-full rounded-xl border-l-4 px-3.5 py-2.5 text-sm leading-6 text-ink lg:px-3 ${l.cell}`}>
                       {/* スマホでは担当の札として見せ、パソコンでは左の列にあるので読み上げ用にだけ残す */}
-                      <span className={`mb-1 mr-2 inline-block rounded-full border px-2 py-px text-xs font-bold lg:sr-only ${l.badge}`}>
+                      <span className={`mb-1 mr-2 inline-block rounded-sm border px-2 py-px text-xs font-bold lg:sr-only ${l.badge}`}>
                         {l.name}
                         <span className="sr-only">：</span>
                       </span>

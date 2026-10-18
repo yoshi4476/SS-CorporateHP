@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
-import { Reveal } from "@/components/motion";
-import { SectionHead, CtaBand } from "@/components/ui";
+import { SectionHead, CtaBand, PageHead, StorySection } from "@/components/ui";
 import { services, areas } from "@/lib/services";
 import { pageMeta } from "@/lib/meta";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -36,7 +35,7 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
           href="https://ai.7senses.co.jp/author/haraguchi/"
           target="_blank"
           rel="noopener"
-          className="ml-3 text-xs text-pulse underline-offset-4 hover:underline"
+          className="link-u ml-3 text-[13px]"
         >
           経歴・執筆記事を見る
         </a>
@@ -53,7 +52,7 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
           href={developerOrg.url}
           target="_blank"
           rel="noopener"
-          className="ml-3 inline-block py-1.5 text-xs text-pulse underline-offset-4 hover:underline"
+          className="link-u ml-3 inline-block py-1.5 text-[13px]"
         >
           {developerOrg.name} ↗
         </a>
@@ -95,7 +94,7 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
       <dl className="grid gap-3">
         {areas.map((a) => (
           <div key={a.group}>
-            <dt className="text-xs font-bold text-gold-deep">
+            <dt className="text-[13px] font-bold text-gold-deep">
               {a.name}
               <span className="ml-2 font-medium text-slate">{a.purpose}</span>
             </dt>
@@ -129,234 +128,134 @@ export default function CompanyPage() {
         ])}
       />
 
-      <section className="relative overflow-hidden pt-16 md:pt-20">
-        <div aria-hidden className="grid-field absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 md:pb-20 md:pt-20">
-          <Reveal>
-            <nav aria-label="パンくずリスト" className="text-xs text-slate">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="tap hover:text-pulse">
-                    トップ
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li aria-current="page" className="text-ink">
-                  会社概要
-                </li>
-              </ol>
-            </nav>
-            <p aria-hidden className="eyebrow mt-8" />
-            <h1 className="mt-4 text-3xl font-black md:text-5xl">会社概要</h1>
-            <p className="mt-6 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
-              「{site.tagline}」。私たちは、テクノロジーの力で事業と暮らしをもっと快適にすることを使命に、大阪から全国の企業・店舗を支援しています。
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHead
+        crumbs={[{ name: "トップ", href: "/" }, { name: "会社概要" }]}
+        title="会社概要"
+        lead={<>「{site.tagline}」。私たちは、テクノロジーの力で事業と暮らしをもっと快適にすることを使命に、大阪から全国の企業・店舗を支援しています。</>}
+      />
 
-      {/* 代表挨拶 */}
-      <section className="relative overflow-hidden bg-ink py-20 text-white md:py-28" aria-labelledby="message-heading">
-        <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 50% 70% at 85% 20%, rgb(37 99 235 / 0.3), transparent 60%)",
-          }}
-        />
-        <div className="relative mx-auto grid max-w-7xl items-end gap-10 px-5 md:grid-cols-[1.3fr_1fr]">
-          <div className="pb-4">
-            <Reveal>
-              <p className="eyebrow !text-aqua">代表メッセージ</p>
-              <h2 id="message-heading" className="mt-3 text-2xl font-bold leading-relaxed md:text-4xl">
-                「運」までも、
-                <br />
-                ご提案するコンサルティングを。
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="mt-8 grid max-w-xl gap-5 text-[15px] leading-[1.9] text-white/70 md:text-base">
-                <p>
-                  社名の「セブンセンシズ」は、五感を超えた第六感——そのさらに先にある「第七感」に由来します。現場で磨かれた事業者の感覚を超えて、お客様の「運」となり得るご提案をしたい。その想いから、セブンセンシズ株式会社を設立しました。
-                </p>
-                <p>
-                  松下幸之助は、成功する経営者の条件に「運」を挙げました。しかし運は、待つものではなく、正しい打ち手を積み重ねた先に舞い込むものです。プロフェッショナルの知見と、運を活かすご提案——その両方をお届けすることが、私たちの仕事です。
-                </p>
-                <p className="font-bold text-white">
-                  店舗ビジネスの常識を、変えていく。
-                </p>
-              </div>
-              <p className="mt-8 text-xs text-white/50">
-                代表取締役 <span className="ml-2 text-base font-bold text-white">{site.ceo}</span>
+      {/* 代表挨拶。代表の写真（実写）と言葉。以前は紺の面に光のぼかしと半円のグラデーションを敷いていた */}
+      <section className="py-20 md:py-32" aria-labelledby="message-heading">
+        <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+          <figure className="max-w-[18rem] sm:max-w-xs lg:col-span-4 lg:max-w-none">
+            <div className="overflow-hidden rounded-md bg-mist">
+              <Image
+                src="/images/ceo-cutout.png"
+                alt={`代表取締役 ${site.ceo}`}
+                width={698}
+                height={876}
+                sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                className="h-auto w-full"
+                priority
+              />
+            </div>
+            <figcaption className="mt-3 flex items-baseline justify-between border-b border-line pb-3 text-sm">
+              <span className="text-slate">代表取締役</span>
+              <span className="text-lg font-bold">{site.ceo}</span>
+            </figcaption>
+          </figure>
+          <div className="lg:col-span-8">
+            <SectionHead id="message-heading" title="「運」までも、ご提案するコンサルティングを。" />
+            <div className="mt-8 grid max-w-[40em] gap-6 text-base leading-[2] text-slate">
+              <p>
+                社名の「セブンセンシズ」は、五感を超えた第六感——そのさらに先にある「第七感」に由来します。現場で磨かれた事業者の感覚を超えて、お客様の「運」となり得るご提案をしたい。その想いから、セブンセンシズ株式会社を設立しました。
               </p>
-            </Reveal>
+              <p>
+                松下幸之助は、成功する経営者の条件に「運」を挙げました。しかし運は、待つものではなく、正しい打ち手を積み重ねた先に舞い込むものです。プロフェッショナルの知見と、運を活かすご提案——その両方をお届けすることが、私たちの仕事です。
+              </p>
+              <p className="text-lg font-bold text-ink">店舗ビジネスの常識を、変えていく。</p>
+            </div>
           </div>
-          <Reveal delay={0.15} className="relative mx-auto w-64 md:w-full md:max-w-sm">
-            <div aria-hidden className="absolute inset-x-8 bottom-0 top-12 rounded-t-full bg-gradient-to-b from-pulse/40 to-aqua/10" />
-            <Image
-              src="/images/ceo-cutout.png"
-              alt={`代表取締役 ${site.ceo}`}
-              width={697}
-              height={886}
-              className="relative h-auto w-full drop-shadow-2xl"
-              priority
-            />
-          </Reveal>
         </div>
       </section>
 
-      {/* ミッション + 現場写真 */}
-      <section className="py-20 md:py-28" aria-labelledby="mission-heading">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2">
-          <div>
-            <SectionHead
-              title="現場の実績を、再現できる仕組みに。"
-              lead="私たちの出発点は、店舗集客の現場です。通算3,200店舗のGoogleビジネスプロフィール運用で積み上げてきたのは、==業種×商圏ごとに「何をすれば数字が動くか」という実践データ==。この蓄積をAIと仕組みの力で磨き上げ、どんな企業でも再現できるサービスとして届けることが、セブンセンシズのミッションです。"
-            />
-            <Reveal delay={0.1}>
-              <div className="mt-8 grid max-w-2xl gap-5 text-[15px] leading-[1.9] text-slate md:text-base">
-                <p>
-                  MEOで培った「検索に選ばれる技術」は、AI検索時代の<mark className="marker">AIO運用代行</mark>へ。現場で目にしてきた業務の非効率は、AIコンサルティングとシステム開発へ。導入コストの壁は、AI導入補助金支援へ——{services.length}つの事業はすべて、現場の課題から逆算して生まれました。だからこそ私たちの提案は机上の空論にならず、<strong className="font-bold text-ink">明日から動く施策</strong>としてお渡しできます。
-                </p>
-                <p>
-                  また、全国でのセミナー登壇やオウンドメディア「AI集客ラボ」を通じて、うまくいった打ち手も、失敗から学んだことも、隠さず発信しています。ノウハウを公開できるのは、<mark className="marker">自社で実践し続けている自信</mark>があるからです。当サイト自体も、構造化データやllms.txtを実装した「AIに引用されるサイト」の実験場になっています。
-                </p>
-              </div>
-            </Reveal>
-          </div>
-          <div className="grid grid-cols-3 gap-3">
-            <Reveal className="col-span-2 row-span-2">
-              <Image
-                src="/images/office-sign.jpg"
-                alt="オフィス入口に掲げられた社名サイン"
-                width={1536}
-                height={1024}
-                className="h-full w-full rounded-2xl object-cover shadow-card"
-              />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <Image
-                src="/images/seminar-2.jpg"
-                alt="セミナー会場の様子"
-                width={700}
-                height={525}
-                className="aspect-square w-full rounded-2xl object-cover"
-              />
-            </Reveal>
-            <Reveal delay={0.16}>
-              <Image
-                src="/images/seminar-3.jpg"
-                alt="登壇中の代表"
-                width={700}
-                height={525}
-                className="aspect-square w-full rounded-2xl object-cover"
-              />
-            </Reveal>
-          </div>
+      {/* ミッション + 現場写真（実写） */}
+      <StorySection
+        id="mission"
+        tone="mist"
+        title="現場の実績を、再現できる仕組みに。"
+        lead="私たちの出発点は、店舗集客の現場です。通算3,200店舗のGoogleビジネスプロフィール運用で積み上げてきたのは、==業種×商圏ごとに「何をすれば数字が動くか」という実践データ==。この蓄積をAIと仕組みの力で磨き上げ、どんな企業でも再現できるサービスとして届けることが、セブンセンシズのミッションです。"
+      >
+        <div className="grid max-w-[42em] gap-6 text-base leading-[2] text-slate">
+          <p>
+            MEOで培った「検索に選ばれる技術」は、AI検索時代の<mark className="marker">AIO運用代行</mark>へ。現場で目にしてきた業務の非効率は、AIコンサルティングとシステム開発へ。導入コストの壁は、AI導入補助金支援へ——{services.length}つの事業はすべて、現場の課題から逆算して生まれました。だからこそ私たちの提案は机上の空論にならず、<strong className="font-bold text-ink">明日から動く施策</strong>としてお渡しできます。
+          </p>
+          <p>
+            また、全国でのセミナー登壇やオウンドメディア「AI集客ラボ」を通じて、うまくいった打ち手も、失敗から学んだことも、隠さず発信しています。ノウハウを公開できるのは、<mark className="marker">自社で実践し続けている自信</mark>があるからです。当サイト自体も、構造化データやllms.txtを実装した「AIに引用されるサイト」の実験場になっています。
+          </p>
         </div>
-      </section>
+        <div className="mt-10 grid grid-cols-2 gap-4">
+          <figure className="col-span-2">
+            <Image src="/images/seminar-2.jpg" alt="セミナー会場の様子" width={700} height={525} sizes="(min-width: 1024px) 60vw, 100vw" className="aspect-[16/9] w-full rounded-md object-cover" />
+          </figure>
+          <figure>
+            <Image src="/images/seminar-3.jpg" alt="登壇中の代表" width={700} height={525} sizes="(min-width: 1024px) 30vw, 50vw" className="aspect-[4/3] w-full rounded-md object-cover" />
+          </figure>
+          <figure>
+            <Image src="/images/seminar-1.jpg" alt="経営者向け勉強会で店舗集客を解説する様子" width={700} height={525} sizes="(min-width: 1024px) 30vw, 50vw" className="aspect-[4/3] w-full rounded-md object-cover" />
+          </figure>
+          <p className="col-span-2 text-[13px] text-slate">全国でのセミナー・勉強会の様子</p>
+        </div>
+      </StorySection>
 
       {/* 概要表 */}
-      <section className="py-20 md:py-28" aria-labelledby="profile-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead title="基本情報" />
-          {/* 表の右が空くので、オフィスとチームの写真（イメージ）を並べる */}
-          <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.35fr_1fr]">
-          <Reveal delay={0.1} className="overflow-hidden rounded-2xl border border-line shadow-card">
-            <table className="w-full border-collapse bg-white text-sm">
-              <tbody>
-                {OVERVIEW.map((row) => (
-                  <tr key={row.label} className="border-b border-line last:border-0">
-                    <th
-                      scope="row"
-                      className="w-32 bg-mist/60 p-5 text-left align-top text-xs font-bold text-slate md:w-44 md:text-sm"
-                    >
-                      {row.label}
-                    </th>
-                    <td className="p-5 leading-7 text-ink">{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </Reveal>
-          <div className="grid gap-5 sm:grid-cols-2 lg:sticky lg:top-28 lg:grid-cols-1">
-            {[
-              { src: "/images/corp-office.webp", alt: "明るい受付と打ち合わせスペースのあるオフィスのイメージ" },
-              { src: "/images/corp-team.webp", alt: "立ち話で進め方を決めるチームのイメージ" },
-            ].map((im, i) => (
-              <Reveal key={im.src} delay={0.15 + i * 0.08}>
-                <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card">
-                  <Image src={im.src} alt={im.alt} fill sizes="(min-width: 1024px) 480px, 50vw" className="object-cover" />
-                </figure>
-              </Reveal>
+      <StorySection id="profile" title="基本情報">
+        <table className="w-full border-collapse text-[15px]">
+          <caption className="sr-only">会社の基本情報</caption>
+          <tbody className="rule-close border-t border-ink">
+            {OVERVIEW.map((row) => (
+              <tr key={row.label} className="border-b border-line last:border-b-0">
+                <th scope="row" className="w-28 py-4 pr-4 text-left align-top text-sm font-bold text-slate md:w-40">
+                  {row.label}
+                </th>
+                <td className="py-4 leading-7 text-ink [overflow-wrap:anywhere]">{row.value}</td>
+              </tr>
             ))}
-            <p className="text-xs text-slate">※ 写真はイメージです。</p>
-          </div>
-          </div>
-        </div>
-      </section>
+          </tbody>
+        </table>
+      </StorySection>
 
       {/* アクセス（地図は押したときだけ読む） */}
-      <section id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
-        <div className="mx-auto max-w-5xl px-5">
-          <Reveal>
-            <p aria-hidden className="eyebrow" />
-            <h2 id="access-heading" className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
-              アクセス
-            </h2>
-          </Reveal>
-          <div className="mt-10 grid items-stretch gap-8 md:grid-cols-[5fr_7fr]">
-            <Reveal delay={0.08}>
-              <p
-                className="num text-2xl font-semibold leading-tight text-ink md:text-3xl"
-                aria-label="北緯34.6791度、東経135.5552度"
-              >
-                34.6791<span className="ml-0.5 text-sm tracking-widest text-pulse">°N</span>
-                <span className="mx-2 font-light text-line-strong">/</span>
-                135.5552<span className="ml-0.5 text-sm tracking-widest text-pulse">°E</span>
-              </p>
-              <dl className="mt-5 grid gap-3 text-sm">
-                {[
-                  ["所在地", <>〒{site.postal}<br />大阪府大阪市東成区神路1丁目7-4<br />コンフォートビル901・902</>],
-                  ["最寄り", mapInfo.station],
-                  ["受付", site.hours],
-                  [
-                    "電話",
-                    <a key="tel" href={`tel:${site.tel.replaceAll("-", "")}`} className="num font-semibold text-pulse underline-offset-4 hover:underline">
-                      {site.tel}
-                    </a>,
-                  ],
-                ].map(([label, value]) => (
-                  <div key={String(label)} className="grid grid-cols-[4.5em_1fr] gap-3 border-b border-line pb-3">
-                    <dt className="pt-0.5 text-xs font-bold tracking-widest text-slate">{label}</dt>
-                    <dd className="leading-7 text-ink">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="mt-5 text-sm leading-7 text-slate">
-                ご来社の際は、お手数ですが事前にお電話にてご連絡ください。オンラインでのご相談も承っています。
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                <a
-                  href={mapInfo.share}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex min-h-11 items-center rounded-full bg-pulse px-5 text-sm font-bold text-white transition-colors hover:bg-pulse-deep"
-                >
-                  Googleマップで開く
-                </a>
-                <a
-                  href={mapInfo.route}
-                  target="_blank"
-                  rel="noopener"
-                  className="inline-flex min-h-11 items-center rounded-full border border-line-strong bg-white px-5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-                >
-                  経路を調べる
-                </a>
-              </div>
-            </Reveal>
+      <section id="access" className="scroll-mt-24 bg-mist py-20 md:py-32" aria-labelledby="access-heading">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <SectionHead id="access-heading" title="アクセス" />
+            <p className="num mt-6 text-xl font-bold text-ink" aria-label="北緯34.6791度、東経135.5552度">
+              34.6791<span className="ml-0.5 text-sm text-slate">°N</span>
+              <span className="mx-2 font-normal text-line-strong">/</span>
+              135.5552<span className="ml-0.5 text-sm text-slate">°E</span>
+            </p>
+            <dl className="mt-5 border-t border-line text-[15px]">
+              {[
+                ["所在地", <>〒{site.postal}<br />大阪府大阪市東成区神路1丁目7-4<br />コンフォートビル901・902</>],
+                ["最寄り", mapInfo.station],
+                ["受付", site.hours],
+                [
+                  "電話",
+                  <a key="tel" href={`tel:${site.tel.replaceAll("-", "")}`} className="num font-bold text-pulse underline-offset-4 hover:underline">
+                    {site.tel}
+                  </a>,
+                ],
+              ].map(([label, value]) => (
+                <div key={String(label)} className="grid grid-cols-[4.5em_1fr] gap-3 border-b border-line py-3">
+                  <dt className="pt-0.5 text-sm font-bold text-slate">{label}</dt>
+                  <dd className="leading-7 text-ink">{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-5 text-sm leading-7 text-slate">
+              ご来社の際は、お手数ですが事前にお電話にてご連絡ください。オンラインでのご相談も承っています。
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+              <a href={mapInfo.share} target="_blank" rel="noopener" className="btn btn-secondary">
+                Googleマップで開く
+              </a>
+              <a href={mapInfo.route} target="_blank" rel="noopener" className="link-u inline-flex min-h-11 items-center text-sm">
+                経路を調べる
+              </a>
+            </div>
+          </div>
+          <div className="lg:col-span-7">
             <MapFacade />
           </div>
         </div>

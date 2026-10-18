@@ -1,26 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import SplitText from "@/components/SplitText";
-import HeroVideo from "@/components/HeroVideo";
-
-// 導入事例の写真（業種の場面のイメージ）
-const CASE_PHOTO: Record<string, string> = {
-  士業事務所: "/images/case-shigyou.webp",
-  リフォーム業: "/images/case-reform.webp",
-  製造業: "/images/case-seizou.webp",
-};
 import BusinessMap from "@/components/BusinessMap";
 import NumberWall from "@/components/NumberWall";
-import GrowthChart from "@/components/GrowthChart";
-import BusinessShowcase from "@/components/BusinessShowcase";
 import SelfCheckBand from "@/components/SelfCheckBand";
 import DevPartnerBand from "@/components/DevPartnerBand";
 import JsonLd from "@/components/JsonLd";
-import { IndustryBars, GaugeDonut, RankTable } from "@/components/charts";
-import { Reveal, CountUp } from "@/components/motion";
-import { SectionHead, FlowSteps, FaqList, CtaBand } from "@/components/ui";
-import { services } from "@/lib/services";
+import { StorySection, FlowSteps, FaqList, CtaBand, Rich, BtnArrow } from "@/components/ui";
+import StoryNav from "@/components/StoryNav";
+import { services, areas } from "@/lib/services";
 import { news } from "@/lib/news";
 import { cases } from "@/lib/cases";
 import { faqSchema } from "@/lib/schema";
@@ -70,569 +58,462 @@ const COMPARE_ROWS: { label: string; seo: string; meo: string; aio: string }[] =
   { label: "当社の対応", seo: "HP制作・メディア運用", meo: "運用代行(通算3,200店舗)", aio: "AIO運用代行" },
 ];
 
-// 帯は事業データから作る。事業を増やせばここも自動で増える。
-// ヒーロー下の帯。支援している業種を並べ、最後に「その他」を添える
-const INDUSTRY_MARQUEE = [
+// 支援している業種。ここに無い業種も全国対応
+const INDUSTRIES = [
   "歯科医院", "クリニック", "整骨院・接骨院", "介護", "不動産", "工務店・注文住宅", "リフォーム", "建設",
   "士業", "コンサル", "BtoB・SaaS", "IT企業", "製造業", "卸売業", "物流", "飲食店", "美容室", "小売",
-  "ホテル・旅館", "フィットネス", "教室・スクール", "EC", "その他の業種も全国対応",
+  "ホテル・旅館", "フィットネス", "教室・スクール", "EC",
+];
+
+// このページの話の順番。読者が「困りごと → 原因 → やり方 → 根拠 → 料金と流れ → 相談」と進む
+const STORY = [
+  { id: "problems", label: "困りごと" },
+  { id: "causes", label: "止まる理由" },
+  { id: "services", label: "当社のやり方" },
+  { id: "numbers", label: "根拠" },
+  { id: "process", label: "料金と流れ" },
+  { id: "selfcheck", label: "相談" },
+];
+
+// 止まる理由。各事業のページ・トップに書いてある文から引く（新しい主張は足さない）
+const CAUSES: { area: string; title: string; body: string; slug: string }[] = [
+  {
+    area: "集客",
+    title: "探す場所が、検索・地図・AIの3つに分かれた",
+    body: "ユーザーはGoogleで調べる前に、ChatGPTに聞き始めています。来店型なら「近くの◯◯」をGoogleマップで探します。==どこで探されているかによって、効く対策が違います==。",
+    slug: "aio",
+  },
+  {
+    area: "経理・社内業務",
+    title: "1人で回している間は、問題が見えない",
+    body: "求人を出しても応募が来ない、採れても引き継ぎで止まる、そもそも1人分の仕事量ではない。1人しかいない状態では、==その人が休んだ月に締めが止まり==、経営判断が丸ごと後ろにずれます。",
+    slug: "keiri-bpo",
+  },
+  {
+    area: "補助金",
+    title: "制度が複雑で、使う前に諦めてしまう",
+    body: "補助金を使いたいが、公募要領が難解で読む気になれない。本業が忙しく、申請の段取りを考える時間がない。==受発注ソフト・会計ソフトを対象とする枠なら、補助上限は350万円==です。",
+    slug: "ai-subsidy",
+  },
+];
+
+// 当社のやり方。トップ・FAQ・事業の説明にある約束を3つに束ねる
+const PRINCIPLES: { title: string; body: string }[] = [
+  {
+    title: "いきなり契約から始めません",
+    body: "まず現状を診断し、==効果の見込みを数字で確認==してから進めます。診断の結果、当社のサービスが不要と判断した場合は正直にそうお伝えします。",
+  },
+  {
+    title: "数字で設計し、数字で報告します",
+    body: "私たちは「頑張ります」とは言いません。支援実績・継続率・改善率——すべての仕事を数字で設計し、月次レポートで成果を可視化して改善を積み重ねます。",
+  },
+  {
+    title: "窓口は、ひとつのチームです",
+    body: `集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。どれを選んでも、窓口はひとつのチームです。すべてを一度に始める必要はありません。`,
+  },
 ];
 
 export default function Home() {
+  const priced = services.filter((s) => s.price);
   return (
     <>
       <JsonLd data={faqSchema(TOP_FAQ)} />
 
-      {/* ヒーロー: 全画面の実写動画（ある街の一日）。どの業種の、どの時間にも仕組みが働いている、という筋 */}
-      <section data-drone-zone className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
-        <HeroVideo objectPosition="60% center" />
-        {/* 読みやすさの覆い: 左（見出し）・上（ヘッダー）・下（業種の帯）だけを暗くし、中央の街は見せる */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(90deg, rgb(8 14 26 / 0.82) 0%, rgb(8 14 26 / 0.55) 38%, rgb(8 14 26 / 0.12) 70%, rgb(8 14 26 / 0.25) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 22%, transparent 62%, rgb(8 14 26 / 0.75) 100%)",
-          }}
-        />
-
-        {/* 最初の画面は見出し・ボタン・数字だけにする。以前は英字のラベル・3つの事業カード・お知らせまで並び、
-            スマホでは最初の画面がそれだけで埋まっていた。事業の入口とお知らせは、すぐ下の区画にある */}
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-24 md:pb-24 md:pt-28">
-          <div className="w-full min-w-0 max-w-3xl">
-            {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
-                スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
-            <h1 className="text-[8vw] font-black leading-[1.24] tracking-tight [text-shadow:0_2px_30px_rgb(0_0_0/0.35)] sm:text-5xl md:text-[2.9rem] lg:text-[3.9rem] xl:text-[4.3rem]">
-              <SplitText text="人を増やさずに、" />
-              <br />
-              <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
+      {/* 最初の画面。左に約束と相談の入口、右に「よくある困りごと → 引き受ける事業」の帳簿。
+          以前の全画面の街の動画（約4MB）とその上の白抜きの見出しをやめ、何をしてくれる会社かを最初に読ませる。
+          動きはこの画面の1回だけ: 見出しが行ごとに現れ、帳簿の罫が引かれ、行が順に置かれる */}
+      <section className="pt-16 md:pt-[72px]">
+        <div className="mx-auto grid max-w-7xl gap-14 px-5 pb-16 pt-12 md:px-8 md:pb-20 md:pt-20 lg:min-h-[calc(100svh-121px)] lg:grid-cols-12 lg:items-center lg:gap-10 lg:py-16">
+          <div className="lg:col-span-6 xl:col-span-7">
+            {/* 「集客も経理も回す。」が最長。320px でも1行に収まる大きさを画面幅から決める */}
+            <h1 className="text-[9.4vw] font-bold leading-[1.18] tracking-[-0.01em] sm:text-[3.4rem] lg:text-[3.75rem] xl:text-[4.75rem]">
+              <span className="line-mask">
+                <span>人を増やさずに、</span>
+              </span>
+              <span className="line-mask">
+                <span style={{ "--d": "90ms" } as React.CSSProperties}>集客も経理も回す。</span>
+              </span>
             </h1>
-            <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/85 md:mt-7 md:text-base">
+            <p className="enter mt-7 max-w-[32em] text-base leading-[1.95] text-slate md:mt-8 md:text-lg" style={{ "--d": "260ms" } as React.CSSProperties}>
               集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
             </p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
-              <Link
-                href="/contact"
-                className="rounded-full bg-gold-bright px-10 py-4 text-center text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5"
-              >
+            <div className="enter mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-7" style={{ "--d": "330ms" } as React.CSSProperties}>
+              <Link href="/contact" className="btn btn-primary min-h-14 px-7 text-base">
                 無料相談を予約する
+                <BtnArrow />
               </Link>
-              <Link
-                href="/#selfcheck"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
-              >
+              <Link href="/#selfcheck" className="link-u inline-flex min-h-11 items-center self-start text-[15px] sm:self-auto">
                 まず無料のセルフチェック
               </Link>
             </div>
-            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
+            <span aria-hidden className="ledger-rule mt-12 max-w-xl text-ink" style={{ "--d": "380ms" } as React.CSSProperties} />
+            <dl className="grid max-w-xl grid-cols-3">
               {[
-                { n: 3200, unit: "店舗", label: ["MEO運用の", "通算支援"] },
-                { n: 350, unit: "万円", label: ["補助上限", "（インボイス枠）"] },
-                { n: services.length, unit: "事業", label: ["一気通貫で", "支援"] },
-              ].map((s) => (
-                <div key={s.unit} className="flex flex-col">
+                { n: "3,200", unit: "店舗", label: ["MEO運用の", "通算支援"] },
+                { n: "350", unit: "万円", label: ["補助上限", "（インボイス枠）"] },
+                { n: String(services.length), unit: "事業", label: ["一気通貫で", "支援"] },
+              ].map((s, i) => (
+                <div
+                  key={s.unit}
+                  className={`enter flex flex-col pt-4 ${i ? "border-l border-line pl-4" : "pr-4"}`}
+                  style={{ "--d": `${440 + i * 60}ms` } as React.CSSProperties}
+                >
                   {/* スマホの3列では語の途中で折れていた（「通算支/援」）。折れる位置を決めておく */}
-                  <dt className="order-last mt-2 text-xs leading-5 text-white/75">
+                  <dt className="order-last mt-2 text-[13px] leading-5 text-slate">
                     {s.label.map((l) => (
                       <span key={l} className="inline-block">{l}</span>
                     ))}
                   </dt>
-                  <dd className="num text-2xl font-bold leading-none md:text-3xl">
-                    <CountUp value={s.n} duration={1.6} />
-                    <span className="ml-0.5 text-sm text-aqua">{s.unit}</span>
+                  <dd className="num whitespace-nowrap text-[1.5rem] font-bold leading-none sm:text-[1.75rem] md:text-[2.125rem]">
+                    {s.n}
+                    <span className="ml-0.5 text-sm">{s.unit}</span>
                   </dd>
                 </div>
               ))}
             </dl>
           </div>
-        </div>
 
-        {/* 支援している業種の帯。ここに無い業種も全国対応 */}
-        <div className="relative z-10" aria-label="対応している業種">
-          <div className="overflow-hidden border-t border-white/15 bg-ink/40 py-4 backdrop-blur-md">
-            <div className="flex">
-              <div className="animate-marquee flex shrink-0 items-center">
-                {[...INDUSTRY_MARQUEE, ...INDUSTRY_MARQUEE].map((m, i) => (
-                  <span key={i} aria-hidden={i >= INDUSTRY_MARQUEE.length} className="flex shrink-0 items-center whitespace-nowrap">
-                    <span className="text-[0.86rem] font-bold tracking-wide text-white">{m}</span>
-                    <span aria-hidden className="mx-7 h-1 w-1 rounded-full bg-aqua/70" />
-                  </span>
+          {/* 引き受ける仕事の帳簿。困りごと（各事業の challenges の先頭）から効く事業へ */}
+          <div className="lg:col-span-6 xl:col-span-5">
+            <p className="enter text-sm font-bold text-ink" style={{ "--d": "200ms" } as React.CSSProperties}>
+              よくある困りごとと、引き受ける事業
+            </p>
+            <span aria-hidden className="ledger-rule mt-3 text-ink" style={{ "--d": "260ms" } as React.CSSProperties} />
+            <table className="w-full border-collapse text-left [word-break:auto-phrase]">
+              <caption className="sr-only">よくある困りごとと、引き受ける事業</caption>
+              <thead>
+                <tr className="ledger-row border-b border-ink text-[13px] text-slate" style={{ "--d": "320ms" } as React.CSSProperties}>
+                  <th scope="col" className="py-2 pr-3 font-bold">困りごと</th>
+                  <th scope="col" className="w-[38%] py-2 pl-3 font-bold">引き受ける事業</th>
+                </tr>
+              </thead>
+              <tbody className="rule-close">
+                {services.map((s, i) => (
+                  <tr
+                    key={s.slug}
+                    className="ledger-row border-b border-line align-top last:border-b-0"
+                    style={{ "--d": `${380 + i * 55}ms` } as React.CSSProperties}
+                  >
+                    <td className="py-3.5 pr-3 text-[14px] leading-[1.7] text-ink">{s.challenges[0]}</td>
+                    <td className="py-3.5 pl-3 text-[14px] leading-[1.7]">
+                      <Link href={`/services/${s.slug}`} className="link-u">
+                        {s.name}
+                      </Link>
+                    </td>
+                  </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      {/* このページの順番。本当に順番がある話なので番号を付ける。ヘッダーの下に止まり、読んでいる段を示す */}
+      <StoryNav items={STORY} />
+
+      {/* 1. 困りごと */}
+      <StorySection
+        id="problems"
+        title="こんな状態が、続いていませんか"
+        lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。==困りごとから、効く事業を選べます==。`}
+      >
+        <BusinessMap />
+        <p className="mt-8 text-sm leading-7 text-slate">
+          <span className="font-bold text-ink">支援している業種:</span> {INDUSTRIES.join("・")}。ここに無い業種も全国対応です。
+        </p>
+      </StorySection>
+
+      {/* 2. 止まる理由 */}
+      <StorySection
+        id="causes"
+        tone="mist"
+        title="止まる理由は、領域ごとに違う"
+        lead="同じ「人が足りない」でも、集客・経理・補助金では止まる場所が違います。だから打ち手も分けて考えます。"
+      >
+        <ol className="border-b border-line-strong">
+          {CAUSES.map((c) => (
+            <li key={c.area} className="grid gap-3 border-t border-line-strong py-7 md:grid-cols-[9rem_1fr] md:gap-8">
+              <p className="text-sm font-bold text-gold-deep">{c.area}</p>
+              <div>
+                <h3 className="text-xl font-bold leading-snug md:text-[1.375rem]">{c.title}</h3>
+                <p className="mt-3 max-w-[40em] text-[15px] leading-[1.9] text-slate">
+                  <Rich text={c.body} />
+                </p>
+                <Link href={`/services/${c.slug}`} className="link-u mt-3 inline-flex min-h-11 items-center text-sm">
+                  {services.find((s) => s.slug === c.slug)?.name}のページを見る
+                </Link>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </li>
+          ))}
+        </ol>
 
-      {/* ステートメント */}
-      <section id="vision" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
-        <div className="relative mx-auto max-w-7xl px-5 text-center">
-          <Reveal>
-            <p className="mx-auto max-w-4xl text-2xl font-black leading-[1.8] md:text-5xl md:leading-[1.7]">
-              成果は、<mark className="marker">数字</mark>で語る。
-              <br />
-              集客は、<span className="text-pulse">AI</span>で仕組みにする。
-            </p>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="mx-auto mt-10 max-w-2xl text-[15px] leading-[1.9] text-slate md:text-base">
-              私たちは「頑張ります」とは言いません。支援実績・継続率・改善率——すべての仕事を
-              <mark className="marker">数字で設計し、数字で報告</mark>
-              します。現場で積み上げた実践データを、誰でも再現できる仕組みへ。それがセブンセンシズの仕事です。
-            </p>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <figure className="group relative mx-auto mt-14 aspect-[16/9] max-w-6xl overflow-hidden rounded-[2rem] shadow-lift md:mt-20 md:aspect-[21/9]">
-              <Image
-                src="/images/scene-vision.webp"
-                alt="明るいオフィスで、施策を数字で話し合うチーム"
-                fill
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                className="object-cover object-[50%_40%] transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
-              />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
-              <figcaption className="absolute bottom-5 left-6 text-left text-white md:bottom-8 md:left-10">
-                <span className="mt-2 block text-base font-bold md:text-2xl">現場のデータを、仕組みに。</span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 事業: 全体像の図（困りごと → 効く事業）と、事業ごとの入口 */}
-      {/* 以前は右に飾りのネットワーク図を置いていたが、経理BPOが入っておらず、どれが何に効くかも読み取れなかった */}
-      <section id="services" className="scroll-mt-24 border-y border-line bg-mist" aria-labelledby="services-heading">
-        <div className="mx-auto max-w-7xl px-5 pt-20 md:pt-28">
-          <SectionHead
-            id="services-heading"
-            title={`${services.length}つの事業が、ひとつにつながる`}
-            lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。==困りごとから、効く事業を選べます==。どれを選んでも、窓口はひとつのチームです。`}
-          />
-          <div className="mt-12">
-            <BusinessMap />
-          </div>
-        </div>
-        <div className="mx-auto max-w-7xl px-5 pb-20 pt-14 md:pb-28 md:pt-16">
-          <BusinessShowcase />
-          <Reveal delay={0.2}>
-            <Link
-              href="/contact"
-              className="group mt-4 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl bg-ink p-8 text-white md:flex-row md:items-center md:p-10"
-            >
-              <span>
-                <span className="mt-3 block text-2xl font-black leading-snug md:text-3xl">
-                  どの事業が合うか、無料で診断します。
-                </span>
-              </span>
-              <span className="inline-flex shrink-0 items-center gap-3 rounded-full bg-gold-bright px-7 py-3.5 text-sm font-bold text-ink transition-transform group-hover:-translate-y-0.5">
-                相談してみる
-                <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                  <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                </svg>
-              </span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 開発・事業づくりの相談は、当社の顧問 YW のサイト（CONFLUX PARTNERS）へ */}
-      <DevPartnerBand />
-
-      {/* 数字の壁 */}
-      <section id="numbers" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-36" aria-labelledby="numbers-heading">
-        <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 55% 70% at 85% 15%, rgb(28 63 124 / 0.4), transparent 60%), radial-gradient(ellipse 40% 50% at 8% 90%, rgb(116 199 214 / 0.12), transparent 60%)",
-          }}
-        />
-        <div className="relative mx-auto max-w-7xl px-5">
-          <Reveal>
-            <p aria-hidden className="eyebrow !text-aqua" />
-            <h2 id="numbers-heading" className="mt-3 text-3xl font-bold md:text-5xl">
-              成果は、数字で語る。
-            </h2>
-          </Reveal>
-          {/* 数字ごとに、中身が一目で分かる小さな図を添える（推移・割合・前後・内訳・削減の目安・対象） */}
-          <NumberWall />
-        </div>
-      </section>
-
-      {/* データセクション */}
-      <section id="data" className="relative scroll-mt-24 bg-paper py-24 md:py-32" aria-labelledby="data-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            title="通算3,200店舗が生んだ、実践データ"
-            lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
-          />
-          <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.4fr_1fr]">
-            <Reveal className="rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
-              <GrowthChart />
-            </Reveal>
-            <div className="grid gap-6">
-              <Reveal delay={0.1} className="rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
-                <IndustryBars />
-              </Reveal>
-            </div>
-          </div>
-          <div className="mt-6 grid items-start gap-6 lg:grid-cols-[1fr_1.4fr]">
-            <Reveal delay={0.05} className="grid grid-cols-2 gap-6 rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
-              <GaugeDonut value={94} label="契約継続率" sub="運用サービス平均" />
-              <GaugeDonut value={87} label="上位3位以内 到達率" sub="主要キーワード・90日" />
-            </Reveal>
-            <Reveal delay={0.12}>
-              <RankTable />
-            </Reveal>
-          </div>
-          <Reveal delay={0.15} className="mt-8 text-center">
-            <Link href="/services/meo" className="tap gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
-              MEO運用代行の詳細を見る
-              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-              </svg>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 無料セルフチェック (相談の手前の入口) */}
-      <SelfCheckBand />
-
-      {/* AIO / 検索対策の権威セクション */}
-      <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
-        <div className="relative mx-auto max-w-7xl px-5">
-          <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
-            <SectionHead
-              title="検索対策の「第三の時代」を、先導する"
-              lead="ユーザーはGoogleで調べる前に、ChatGPTに聞き始めています。SEO・MEOに続く第三の検索対策「AIO(AI最適化)」に、==いま着手する企業が次の集客を制します==。"
-            />
-            <Reveal delay={0.1}>
-              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
-                <Image src="/images/scene-aio.webp" alt="スマートフォンでAIに質問する手元" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-[45%_center]" />
-              </figure>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1} className="mt-12 overflow-x-auto rounded-2xl border border-line shadow-card">
-            <table className="w-full min-w-[680px] border-collapse bg-raise text-sm">
+        {/* 集客の「探す場所」の違い */}
+        <div className="mt-12">
+          <h3 className="text-lg font-bold">検索・地図・AIで、対策はこう違う</h3>
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse bg-paper text-sm">
               <caption className="sr-only">SEO・MEO・AIOの比較表</caption>
               <thead>
-                <tr className="border-b border-line">
-                  <th scope="col" className="w-40 p-5 text-left text-xs font-medium text-slate">
-                    比較項目
+                <tr className="border-y border-ink">
+                  <th scope="col" className="w-36 p-4 text-left text-[13px] font-bold text-slate">比較項目</th>
+                  <th scope="col" className="p-4 text-left">
+                    <span className="font-data text-base font-bold">SEO</span>
+                    <span className="block text-[13px] font-normal text-slate">従来の検索対策</span>
                   </th>
-                  <th scope="col" className="p-5 text-left">
-                    <span className="font-data text-base font-bold text-slate">SEO</span>
-                    <span className="mt-1 block text-xs font-normal text-slate">従来の検索対策</span>
+                  <th scope="col" className="p-4 text-left">
+                    <span className="font-data text-base font-bold">MEO</span>
+                    <span className="block text-[13px] font-normal text-slate">地図検索対策</span>
                   </th>
-                  <th scope="col" className="p-5 text-left">
-                    <span className="font-data text-base font-bold text-ink">MEO</span>
-                    <span className="mt-1 block text-xs font-normal text-slate">地図検索対策</span>
-                  </th>
-                  <th scope="col" className="bg-pulse/5 p-5 text-left">
+                  <th scope="col" className="border-x border-pulse/30 bg-pulse/5 p-4 text-left">
                     <span className="font-data text-base font-bold text-pulse">AIO</span>
-                    <span className="mt-1 block text-xs font-normal text-slate">AI検索対策 — いまここ</span>
+                    <span className="block text-[13px] font-normal text-slate">AI検索対策</span>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {COMPARE_ROWS.map((row) => (
-                  <tr key={row.label} className="border-b border-line last:border-0">
-                    <th scope="row" className="p-5 text-left text-xs font-medium text-slate">
-                      {row.label}
-                    </th>
-                    <td className="p-5 text-slate">{row.seo}</td>
-                    <td className="p-5">{row.meo}</td>
-                    <td className="bg-pulse/5 p-5 font-medium text-ink">{row.aio}</td>
+                  <tr key={row.label} className="border-b border-line">
+                    <th scope="row" className="p-4 text-left text-[13px] font-bold text-slate">{row.label}</th>
+                    <td className="p-4 text-slate">{row.seo}</td>
+                    <td className="p-4 text-slate">{row.meo}</td>
+                    <td className="border-x border-pulse/30 bg-pulse/5 p-4 font-bold text-ink">{row.aio}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </Reveal>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Reveal delay={0.12}>
-              <Link
-                href="/services/aio"
-                  className="rounded-full bg-pulse px-8 py-3.5 text-sm font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
-              >
-                AIO運用代行を見る
-              </Link>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <Link
-                href="/services/meo"
-                  className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-              >
-                MEO運用代行を見る
-              </Link>
-            </Reveal>
-            <Reveal delay={0.24}>
-              <a
-                href={site.labUrl}
-                target="_blank"
-                rel="noopener"
-                  className="rounded-full border border-ink/20 px-8 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-              >
-                AI集客ラボ (運営メディア) ↗
-              </a>
-            </Reveal>
           </div>
+          <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm">
+            <Link href="/services/aio" className="link-u inline-flex min-h-11 items-center">AIO運用代行を見る</Link>
+            <Link href="/services/meo" className="link-u inline-flex min-h-11 items-center">MEO運用代行を見る</Link>
+            <a href={site.labUrl} target="_blank" rel="noopener" className="link-u inline-flex min-h-11 items-center">AI集客ラボ（運営メディア）↗</a>
+          </p>
         </div>
-      </section>
+      </StorySection>
 
-      {/* 現場写真 + 代表メッセージ */}
-      <section id="field" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-32" aria-labelledby="field-heading">
-        <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
-            <div>
-              <Reveal>
-                <p aria-hidden className="eyebrow !text-aqua" />
-                <h2 id="field-heading" className="mt-3 text-3xl font-bold md:text-5xl">
-                  机上ではなく、現場から。
-                </h2>
-                <p className="mt-5 max-w-xl text-[15px] leading-[1.9] text-white/65 md:text-base">
-                  全国でのセミナー登壇や店舗支援の現場——通算3,200店舗と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
-                </p>
-              </Reveal>
-              <Reveal delay={0.12}>
-                <figure className="mt-8 border-l-2 border-aqua pl-6">
-                  <blockquote className="text-base font-bold leading-9 md:text-lg">
-                    「成功に必要なのは、プロの知見と、運を活かす提案。
-                    <br />
-                    その両方を届けるのが、セブンセンシズです。」
-                  </blockquote>
-                  <figcaption className="mt-3 text-xs text-white/50">
-                    代表取締役 {site.ceo}
-                  </figcaption>
-                </figure>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <Link
-                  href="/company"
-                  className="tap mt-8 gap-2 text-sm font-bold text-aqua underline-offset-4 hover:underline"
-                >
-                  代表メッセージ・会社概要を見る
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
-                </Link>
-              </Reveal>
+      {/* 3. 当社のやり方 */}
+      <StorySection
+        id="services"
+        title="数字で設計し、数字で報告する"
+        lead="現場で積み上げた実践データを、誰でも再現できる仕組みへ。それがセブンセンシズの仕事です。"
+        side={
+          <Link href="/services" className="link-u inline-flex min-h-11 items-center text-sm">
+            事業内容の一覧を見る
+          </Link>
+        }
+      >
+        <ul className="grid gap-8 md:grid-cols-3 md:gap-6">
+          {PRINCIPLES.map((p) => (
+            <li key={p.title} className="border-t-2 border-pulse pt-4">
+              <h3 className="text-lg font-bold leading-snug">{p.title}</h3>
+              <p className="mt-3 text-[15px] leading-[1.85] text-slate">
+                <Rich text={p.body} />
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <h3 className="mt-16 text-lg font-bold">{services.length}つの事業</h3>
+        <div className="mt-4 border-b border-line">
+          {areas.map((a) => (
+            <div key={a.group} className="grid gap-2 border-t border-ink py-5 md:grid-cols-[10rem_1fr] md:gap-6">
+              <p className="text-sm font-bold">
+                {a.name}
+                <span className="block text-[13px] font-normal text-slate">{a.purpose}</span>
+              </p>
+              <ul>
+                {services
+                  .filter((s) => s.group === a.group)
+                  .map((s) => (
+                    <li key={s.slug} className="border-b border-line last:border-b-0">
+                      <Link href={`/services/${s.slug}`} className="group grid gap-1 py-4 first:pt-0 md:grid-cols-[13rem_1fr] md:gap-6">
+                        <span className="font-bold text-pulse underline decoration-1 underline-offset-[0.35em] group-hover:decoration-2">{s.name}</span>
+                        <span className="text-[15px] leading-[1.8] text-slate">{s.short}</span>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <Reveal className="col-span-2">
-                <Image
-                  src="/images/seminar-2.jpg"
-                  alt="セブンセンシズ代表によるGoogleビジネスプロフィール活用セミナーの登壇風景"
-                  width={700}
-                  height={525}
-                  className="aspect-[16/10] w-full rounded-2xl object-cover shadow-lift"
-                />
-              </Reveal>
-              <Reveal delay={0.1}>
-                <Image
-                  src="/images/seminar-1.jpg"
-                  alt="経営者向け勉強会で店舗集客を解説する様子"
-                  width={700}
-                  height={525}
-                  className="aspect-square w-full rounded-2xl object-cover"
-                />
-              </Reveal>
-              <Reveal delay={0.16}>
-                <Image
-                  src="/images/seminar-3.jpg"
-                  alt="セミナーで質疑応答に応える代表"
-                  width={700}
-                  height={525}
-                  className="aspect-square w-full rounded-2xl object-cover"
-                />
-              </Reveal>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </StorySection>
 
-      {/* 導入事例 */}
-      <section id="cases" className="scroll-mt-24 border-t border-line bg-mist py-24 md:py-32" aria-labelledby="cases-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            title="数字が動いた、3つの現場"
-            lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
-          />
-          <p className="mt-3 text-xs text-slate">※ 写真はイメージです（支援先の写真ではありません）。</p>
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {cases.map((cs, i) => (
-              <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
-                <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
-                  <figure className="relative aspect-[16/9] w-full">
-                    <Image src={CASE_PHOTO[cs.industry] ?? "/images/case-seizou.webp"} alt={`${cs.industry}の現場のイメージ`} fill sizes="(min-width: 1024px) 400px, 100vw" className="object-cover" />
-                  </figure>
-                  <div className="flex flex-1 flex-col p-7 md:p-8">
-                  <div className="flex items-center justify-between gap-3">
-                    <span className="rounded-full bg-ink px-3 py-1 text-xs font-bold text-white">
-                      {cs.industry}
-                    </span>
-                    <Link href={`/services/${cs.slug}`} className="inline-flex min-h-9 items-center text-xs font-bold text-pulse hover:underline">
-                      {cs.service} →
-                    </Link>
-                  </div>
-                  <h3 className="mt-5 text-lg font-black leading-relaxed md:text-xl">{cs.headline}</h3>
+      {/* 開発・事業づくりの相談は、当社の顧問 YW のサイト（CONFLUX PARTNERS）へ */}
+      <DevPartnerBand />
 
-                  <div className="mt-6 flex items-center gap-3 rounded-2xl border border-line bg-mist/70 p-4">
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-bold text-slate">導入前</p>
-                      <p className="mt-1 text-sm font-medium leading-7 text-slate">{cs.before}</p>
+      {/* 4. 根拠 */}
+      <StorySection
+        id="numbers"
+        title="成果は、数字で語る"
+        lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
+      >
+        <NumberWall />
+
+        <div id="cases" className="mt-16 scroll-mt-24">
+          <h3 className="text-lg font-bold">数字が動いた、3つの現場</h3>
+          <p className="mt-2 text-[15px] leading-[1.85] text-slate">
+            規模も業種も違う3社。共通しているのは、施策を数字で設計し、数字で報告したことです。
+          </p>
+          <div className="mt-6 border-b border-line">
+            {cases.map((cs) => (
+              <article key={cs.industry} className="grid gap-4 border-t border-ink py-7 md:grid-cols-[11rem_1fr] md:gap-8">
+                <div>
+                  <p className="text-sm font-bold">{cs.industry}</p>
+                  <Link href={`/services/${cs.slug}`} className="link-u mt-1 inline-flex min-h-9 items-center text-[13px]">
+                    {cs.service}
+                  </Link>
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold leading-snug">{cs.headline}</h4>
+                  <dl className="mt-4 grid grid-cols-2 border-y border-line text-sm">
+                    <div className="py-3 pr-4">
+                      <dt className="text-[13px] font-bold text-slate">導入前</dt>
+                      <dd className="mt-1 leading-7 text-slate">{cs.before}</dd>
                     </div>
-                    <svg width="22" height="14" viewBox="0 0 34 20" aria-hidden className="shrink-0 text-pulse">
-                      <path d="M2 10h24M20 4l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-xs font-bold text-pulse">導入後</p>
-                      <p className="mt-1 text-sm font-bold leading-7 text-ink">{cs.after}</p>
+                    <div className="border-l border-line py-3 pl-4">
+                      <dt className="text-[13px] font-bold text-pulse">導入後</dt>
+                      <dd className="mt-1 font-bold leading-7">{cs.after}</dd>
                     </div>
-                  </div>
-
-                  <p className="mt-5 leading-none">
-                    <span className="num text-4xl font-bold md:text-5xl">{cs.metric.value}</span>
-                    <span className="ml-1 text-base font-bold text-pulse">{cs.metric.suffix}</span>
-                    <span className="mt-2 block text-xs text-slate">{cs.metric.label}</span>
+                  </dl>
+                  <p className="mt-4 leading-none">
+                    <span className="num text-4xl font-bold">{cs.metric.value}</span>
+                    <span className="ml-1 font-bold">{cs.metric.suffix}</span>
+                    <span className="ml-3 text-[13px] text-slate">{cs.metric.label}</span>
                   </p>
-
-                  <p className="mt-5 text-sm leading-7 text-slate">{cs.body}</p>
-
+                  <p className="mt-4 max-w-[40em] text-[15px] leading-[1.85] text-slate">{cs.body}</p>
                   {cs.voice && (
-                  <figure className="mt-auto border-t border-line pt-5">
-                    <blockquote className="text-sm leading-7 text-ink">
-                      <span className="font-data mr-1.5 text-base font-bold text-pulse">&ldquo;</span>
-                      {cs.voice}
-                    </blockquote>
-                    <figcaption className="mt-2.5 text-xs text-slate">— {cs.industry} ご担当者様</figcaption>
-                  </figure>
+                    <figure className="mt-4 border-l-2 border-line-strong pl-4">
+                      <blockquote className="text-sm leading-7">{cs.voice}</blockquote>
+                      <figcaption className="mt-1 text-[13px] text-slate">{cs.industry} ご担当者様</figcaption>
+                    </figure>
                   )}
-                  </div>
-                </article>
-              </Reveal>
+                </div>
+              </article>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* 進め方 */}
-      <section id="process" className="scroll-mt-24 py-24 md:py-32" aria-labelledby="process-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
-            <SectionHead
-              title="ご相談から成果まで、4つのステップ"
-              lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。"
+        {/* 現場の写真（実写）と代表の言葉 */}
+        <div id="field" className="mt-16 grid scroll-mt-24 gap-8 md:grid-cols-2 md:items-start">
+          <figure>
+            <Image
+              src="/images/seminar-2.jpg"
+              alt="セブンセンシズ代表によるGoogleビジネスプロフィール活用セミナーの登壇風景"
+              width={700}
+              height={525}
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="aspect-[4/3] w-full rounded-md object-cover"
             />
-            <Reveal delay={0.1}>
-              <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
-                <Image src="/images/scene-process.webp" alt="店舗の経営者と、施策の進め方を話し合う担当者" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover" />
-              </figure>
-            </Reveal>
-          </div>
-          <div className="mt-12">
-            <FlowSteps
-              steps={[
-                { title: "無料相談", body: "課題と現状をオンラインで伺います。所要30〜60分です。" },
-                { title: "診断・ご提案", body: "現状分析をもとに、施策の優先度と費用対効果をご提示します。" },
-                { title: "実装・構築", body: "契約後、専任チームが設計から実装までを進めます。" },
-                { title: "運用・改善", body: "月次レポートで成果を可視化し、改善を積み重ねます。" },
-              ]}
-            />
+            <figcaption className="mt-2 text-[13px] text-slate">全国でのセミナー登壇の様子</figcaption>
+          </figure>
+          <div>
+            <h3 className="text-xl font-bold leading-snug">机上ではなく、現場から。</h3>
+            <p className="mt-3 text-[15px] leading-[1.9] text-slate">
+              全国でのセミナー登壇や店舗支援の現場——通算3,200店舗と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
+            </p>
+            <figure className="mt-6 border-l-2 border-gold-bright pl-5">
+              <blockquote className="text-base font-bold leading-8">
+                「成功に必要なのは、プロの知見と、運を活かす提案。その両方を届けるのが、セブンセンシズです。」
+              </blockquote>
+              <figcaption className="mt-2 text-[13px] text-slate">代表取締役 {site.ceo}</figcaption>
+            </figure>
+            <Link href="/company" className="link-u mt-4 inline-flex min-h-11 items-center text-sm">
+              代表メッセージ・会社概要を見る
+            </Link>
           </div>
         </div>
-      </section>
+      </StorySection>
 
-      {/* 補助金バンド */}
-      <section id="subsidy" className="scroll-mt-24 pb-24 md:pb-32" aria-labelledby="subsidy-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal>
-            {/* 白の面が2つ続いて単調になるうえ、内容もお金の話なので、
-                この帯だけ金の淡い面にして視線を止める */}
-            <div className="grid items-center gap-8 overflow-hidden rounded-3xl border border-gold/25 bg-gold-tint p-8 shadow-card md:grid-cols-[1.4fr_1fr] md:p-12">
-              <div>
-                <p className="eyebrow">AI導入補助金</p>
-                <h2 id="subsidy-heading" className="mt-3 text-2xl font-bold md:text-4xl">
-                  受発注・会計ソフトなら、
-                  <br className="sm:hidden" />
-                  <mark className="marker">最大350万円の枠</mark>が使えます
-                </h2>
-                <p className="mt-4 max-w-xl text-[15px] leading-[1.9] text-slate">
-                  当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。受発注ソフト・会計ソフトを対象とする枠なら補助上限は350万円です。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 md:items-end">
-                <figure className="relative mb-2 aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-card md:max-w-sm">
-                  <Image src="/images/scene-subsidy.webp" alt="経営者と担当者が、申請書類を一緒に確かめる様子" fill sizes="(min-width: 768px) 24rem, 100vw" className="object-cover" />
-                </figure>
-                <Link
-                  href="/services/ai-subsidy"
-                  className="rounded-full bg-pulse px-10 py-5 text-center text-base font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
-                >
-                  補助金支援の詳細を見る
-                </Link>
-                <a
-                  href={site.lpUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-center text-xs font-bold text-pulse underline-offset-4 hover:underline"
-                >
-                  まず無料診断で確かめる（8問・3分） ↗
-                </a>
-              </div>
-            </div>
-          </Reveal>
+      {/* 5. 料金と流れ */}
+      <StorySection
+        id="process"
+        tone="mist"
+        title="ご相談から成果まで、4つのステップ"
+        lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。"
+      >
+        <FlowSteps
+          steps={[
+            { title: "無料相談", body: "課題と現状をオンラインで伺います。所要30〜60分です。" },
+            { title: "診断・ご提案", body: "現状分析をもとに、施策の優先度と費用対効果をご提示します。" },
+            { title: "実装・構築", body: "契約後、専任チームが設計から実装までを進めます。" },
+            { title: "運用・改善", body: "月次レポートで成果を可視化し、改善を積み重ねます。" },
+          ]}
+        />
+
+        <h3 className="mt-14 text-lg font-bold">料金の目安</h3>
+        <p className="mt-2 text-[15px] leading-[1.85] text-slate">
+          サービスと規模により異なります。掲載のない事業は、無料相談で現状を伺ったうえでご案内します。
+        </p>
+        <table className="mt-4 w-full border-collapse text-left text-sm">
+          <caption className="sr-only">事業ごとの料金の目安</caption>
+          <tbody className="border-y border-ink">
+            {priced.map((s) => (
+              <tr key={s.slug} className="border-b border-line-strong last:border-b-0">
+                <th scope="row" className="w-[42%] py-4 pr-4 align-top font-bold">
+                  <Link href={`/services/${s.slug}`} className="link-u">{s.name}</Link>
+                </th>
+                <td className="py-4 leading-7 text-slate">{s.price}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* お金の話。金の淡い面で区切る */}
+        <div id="subsidy" className="mt-14 grid scroll-mt-24 gap-6 rounded-md border border-gold/30 bg-gold-tint p-6 md:grid-cols-[1fr_auto] md:items-end md:p-8" aria-labelledby="subsidy-heading">
+          <div>
+            <p className="text-sm font-bold text-gold-deep">AI導入補助金</p>
+            <h3 id="subsidy-heading" className="mt-2 text-xl font-bold leading-snug md:text-2xl">
+              受発注・会計ソフトなら、最大350万円の枠が使えます
+            </h3>
+            <p className="mt-3 max-w-[38em] text-[15px] leading-[1.9] text-slate">
+              当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
+            </p>
+          </div>
+          <div className="flex flex-col gap-2 md:items-end">
+            <Link href="/services/ai-subsidy" className="btn btn-secondary">
+              補助金支援の詳細を見る
+            </Link>
+            <a href={site.lpUrl} target="_blank" rel="noopener" className="link-u inline-flex min-h-11 items-center text-sm">
+              まず無料診断で確かめる（8問・3分）↗
+            </a>
+          </div>
+        </div>
+      </StorySection>
+
+      {/* 6. 相談。いきなり相談が重い人のために、その場で終わるセルフチェックを先に置く */}
+      <SelfCheckBand />
+
+      {/* よくある質問 */}
+      <section id="faq" className="scroll-mt-32 pb-20 md:pb-32" aria-labelledby="faq-heading">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+          <div className="border-t border-ink pt-6 md:pt-8 lg:col-span-4">
+            <h2 id="faq-heading" className="text-[1.625rem] font-bold md:text-[2.25rem]">よくあるご質問</h2>
+          </div>
+          <div className="lg:col-span-8 lg:pt-0">
+            <FaqList items={TOP_FAQ} />
+          </div>
         </div>
       </section>
 
       {/* お知らせ */}
-      <section id="news" className="scroll-mt-24 border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-heading">
-        <div className="mx-auto max-w-5xl px-5">
-          <SectionHead title="お知らせ" />
-          <div className="mt-10 grid gap-3">
-            {news.map((n, i) => (
-              <Reveal key={n.slug} delay={i * 0.06}>
-                <Link
-                  href={`/news/${n.slug}`}
-                  className="group flex flex-wrap items-center gap-x-4 gap-y-1 rounded-2xl border border-line bg-raise px-6 py-5 shadow-card transition-colors hover:border-pulse/40"
-                >
-                  <time dateTime={n.dateISO} className="num text-xs text-slate">
-                    {n.date}
-                  </time>
-                  <span className="rounded-full bg-pulse/10 px-3 py-0.5 text-xs font-bold text-pulse">
-                    {n.category}
-                  </span>
-                  <span className="flex-1 basis-full text-sm font-medium group-hover:text-pulse sm:basis-auto">
-                    {n.title}
-                  </span>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={0.15} className="mt-8 text-center">
-            <Link href="/news" className="tap gap-2 text-sm font-bold text-pulse underline-offset-4 hover:underline">
+      <section id="news" className="scroll-mt-32 pb-20 md:pb-32" aria-labelledby="news-heading">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 md:px-8 lg:grid-cols-12 lg:gap-12">
+          <div className="border-t border-ink pt-6 md:pt-8 lg:col-span-4">
+            <h2 id="news-heading" className="text-[1.625rem] font-bold md:text-[2.25rem]">お知らせ</h2>
+            <Link href="/news" className="link-u mt-4 inline-flex min-h-11 items-center text-sm">
               お知らせ一覧を見る
-              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-              </svg>
             </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="faq-heading">
-        {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead title="よくあるご質問" />
           </div>
-          <div>
-            <FaqList items={TOP_FAQ} />
-          </div>
+          <ul className="border-b border-line lg:col-span-8">
+            {news.map((n) => (
+              <li key={n.slug} className="border-t border-line">
+                <Link href={`/news/${n.slug}`} className="group grid gap-1 py-4 sm:grid-cols-[7.5rem_7rem_1fr] sm:items-baseline sm:gap-4">
+                  <time dateTime={n.dateISO} className="num text-[13px] text-slate">{n.date}</time>
+                  <span className="text-[13px] font-bold text-pulse">{n.category}</span>
+                  <span className="text-[15px] font-bold group-hover:text-pulse group-hover:underline group-hover:underline-offset-4">{n.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

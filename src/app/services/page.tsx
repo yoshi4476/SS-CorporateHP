@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import BusinessMap from "@/components/BusinessMap";
-import { Reveal } from "@/components/motion";
-import { CtaBand, SectionHead } from "@/components/ui";
+import { CtaBand, SectionHead, PageHead, StorySection, BtnArrow } from "@/components/ui";
 import { services } from "@/lib/services";
 import { pageMeta } from "@/lib/meta";
 import { rakushift } from "@/lib/rakushift";
 import { pipeline } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
-import { svcPhoto } from "@/lib/photos";
 
 // 自社プロダクト。受託の7事業とは性質が違うので別枠で並べる
 const PRODUCTS = [
@@ -77,188 +74,121 @@ export default function ServicesIndexPage() {
         ]}
       />
 
-      {/* ヒーロー: オフィスの写真を全幅に（イメージ写真） */}
-      <section className="relative overflow-hidden bg-ink text-white">
-        <Image src="/images/svc/index.webp" alt="窓の大きな明るいオフィスで働く社員のイメージ" fill priority sizes="100vw" className="object-cover" />
-        <div
-          aria-hidden
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(90deg, rgb(8 14 26 / 0.9) 0%, rgb(8 14 26 / 0.7) 45%, rgb(8 14 26 / 0.25) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 30%)" }}
-        />
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pb-24 md:pt-40">
-          <Reveal>
-            <nav aria-label="パンくずリスト" className="text-xs text-white/60">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link href="/" className="tap hover:text-aqua">
-                    トップ
-                  </Link>
-                </li>
-                <li aria-hidden>/</li>
-                <li aria-current="page" className="text-white">
-                  事業内容
-                </li>
-              </ol>
-            </nav>
-            <p aria-hidden className="eyebrow mt-8 !text-aqua" />
-            <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
-            <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
-              戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
-              <strong className="text-white">{services.length}つの事業をひとつのチームで一気通貫</strong>
-              に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
-            </p>
-            <ul className="mt-8 flex flex-wrap gap-2">
+      {/* ページの頭。以前はオフィスのイメージ写真を全幅に敷いていた。事業の名前を先に読ませる */}
+      <PageHead
+        crumbs={[{ name: "トップ", href: "/" }, { name: "事業内容" }]}
+        title="事業内容"
+        lead={
+          <>
+            戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
+            <strong className="font-bold text-ink">{services.length}つの事業をひとつのチームで一気通貫</strong>
+            に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
+          </>
+        }
+        aside={
+          <nav aria-label="事業の一覧">
+            <p className="text-[13px] font-bold text-slate">事業の一覧</p>
+            <ul className="mt-2 border-t border-ink">
               {services.map((sv) => (
-                <li key={sv.slug}>
-                  <a href={`#${sv.slug}`} className="block rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua">
+                <li key={sv.slug} className="border-b border-line">
+                  <a href={`#${sv.slug}`} className="flex min-h-11 items-center justify-between gap-3 text-[15px] font-bold transition-colors hover:text-pulse">
                     {sv.name}
+                    <span className="text-[13px] font-normal text-slate">{sv.group}</span>
                   </a>
                 </li>
               ))}
             </ul>
-          </Reveal>
-        </div>
-      </section>
+          </nav>
+        }
+      />
 
       {/* 困りごとから選ぶ（トップと同じ全体像の図）。一覧の前に、どれが自社に効くかの見当をつけてもらう */}
-      <section id="map" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="map-heading">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            id="map-heading"
-            title="困りごとから選ぶ"
-            lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。よくある困りごとから、効く事業へ線を引きました。`}
-          />
-          <div className="mt-12">
-            <BusinessMap />
-          </div>
-        </div>
-      </section>
+      <StorySection
+        id="map"
+        title="困りごとから選ぶ"
+        lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。よくある困りごとから、効く事業へつなぎました。`}
+      >
+        <BusinessMap />
+      </StorySection>
 
-      {/* 各事業の横展開グリッド */}
-      <section className="border-t border-line bg-mist py-16 md:py-24" aria-label="事業一覧">
-        <div className="mx-auto max-w-7xl px-5">
-          {/* 事業ごとに、写真と文章を左右交互に。写真はその事業の現場のイメージ */}
-          <div className="grid gap-8 md:gap-12">
-            {services.map((s, i) => (
-              <Reveal key={s.slug}>
-                <article id={s.slug} className="group scroll-mt-28 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card lg:grid-cols-2">
-                  <Link href={`/services/${s.slug}`} className={`relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[26rem] ${i % 2 ? "lg:order-2" : ""}`} tabIndex={-1} aria-hidden>
-                    <Image src={svcPhoto(s.slug, 1)} alt={`${s.name}の現場のイメージ`} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                    <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">{s.group}</span>
+      {/* 事業ごとの要点。写真のカードを左右交互に並べていたのをやめ、帳簿の行のように罫で区切る */}
+      <section className="bg-mist py-20 md:py-32" aria-labelledby="list-heading">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <SectionHead id="list-heading" title={`${services.length}つの事業`} lead="「MEOだけ」「補助金だけ」のご依頼も歓迎です。ただ、戦略・実装・集客・資金をひとつのチームで設計すると、施策同士が噛み合い、成果の出る速度が変わります。" />
+          <div className="mt-10 rule-close">
+            {services.map((s) => (
+              <article id={s.slug} key={s.slug} className="grid scroll-mt-28 gap-6 border-t border-line-strong py-9 first:border-ink lg:grid-cols-12 lg:gap-10">
+                <div className="lg:col-span-4">
+                  <p className="text-[13px] font-bold text-gold-deep">{s.group}</p>
+                  <h2 className="mt-2 text-2xl font-bold leading-snug md:text-[1.75rem]">
+                    <Link href={`/services/${s.slug}`} className="transition-colors hover:text-pulse">
+                      {s.name}
+                    </Link>
+                  </h2>
+                  {s.metrics?.[0] ? (
+                    <p className="mt-5 leading-none">
+                      <span className="num text-4xl font-bold">{s.metrics[0].value}</span>
+                      <span className="ml-1 text-sm font-bold">{s.metrics[0].suffix}</span>
+                      <span className="mt-2 block text-[13px] text-slate">{s.metrics[0].label}</span>
+                    </p>
+                  ) : s.price ? (
+                    <p className="mt-5 text-sm leading-7 text-slate">
+                      <span className="font-bold text-ink">料金目安</span>　{s.price.split(" /")[0]}
+                    </p>
+                  ) : null}
+                </div>
+                <div className="lg:col-span-8">
+                  <p className="text-lg font-bold leading-[1.7]">{s.lead}</p>
+                  <p className="mt-2 text-[15px] leading-[1.9] text-slate">{s.short}</p>
+                  <ul className="mt-5 grid gap-x-6 border-t border-line sm:grid-cols-3">
+                    {s.points.slice(0, 3).map((pt) => (
+                      <li key={pt.title} className="border-b border-line py-3 text-sm font-bold leading-6">
+                        {pt.title}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href={`/services/${s.slug}`} className="btn btn-secondary mt-6">
+                    {s.name}を詳しく見る
                   </Link>
-                  <div className="flex flex-col p-7 md:p-10">
-                    <h2 className="mt-2 text-2xl font-black leading-snug md:text-3xl">
-                      <Link href={`/services/${s.slug}`} className="transition-colors hover:text-pulse">
-                        {s.name}
-                      </Link>
-                    </h2>
-                    <p className="mt-4 text-base font-bold leading-8">{s.lead}</p>
-                    <p className="mt-2 text-[15px] leading-[1.9] text-slate">{s.short}</p>
-                    <ul className="mt-5 grid gap-2 border-t border-line pt-5">
-                      {s.points.slice(0, 3).map((pt) => (
-                        <li key={pt.title} className="flex items-center gap-2 text-sm font-medium">
-                          <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden className="shrink-0 text-pulse">
-                            <path d="M2.5 7.5l3 3 6-7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                          {pt.title}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-7">
-                      {s.metrics?.[0] ? (
-                        <p className="leading-none">
-                          <span className="num text-3xl font-bold">{s.metrics[0].value}</span>
-                          <span className="ml-0.5 text-sm font-bold text-pulse">{s.metrics[0].suffix}</span>
-                          <span className="mt-1.5 block text-xs text-slate">{s.metrics[0].label}</span>
-                        </p>
-                      ) : s.price ? (
-                        <p className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-slate">{s.price.split(" /")[0]}</p>
-                      ) : (
-                        <span />
-                      )}
-                      <Link href={`/services/${s.slug}`} className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-pulse">
-                        詳しく見る
-                        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                          <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                        </svg>
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
+                </div>
+              </article>
             ))}
           </div>
-          <p className="mt-4 text-xs text-slate">※ 写真はイメージです。</p>
-
-          {/* 一気通貫の補足 */}
-          <Reveal delay={0.1}>
-            <div className="mt-10 grid items-center gap-6 overflow-hidden rounded-3xl bg-ink p-8 text-white md:grid-cols-[1.5fr_1fr] md:p-10">
-              <div className="relative">
-                <p aria-hidden className="eyebrow !text-aqua" />
-                <h2 className="mt-3 text-xl font-bold md:text-3xl">
-                  {services.length}つの事業は、単品でも。組み合わせれば、もっと。
-                </h2>
-                <p className="mt-4 max-w-xl text-[15px] leading-[1.9] text-white/65">
-                  「MEOだけ」「補助金だけ」のご依頼も歓迎です。ただ、戦略・実装・集客・資金をひとつのチームで設計すると、施策同士が噛み合い、成果の出る速度が変わります。まずは現状に合う入り口を無料相談でご提案します。
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 md:items-end">
-                <Link
-                  href="/contact"
-                  className="rounded-full bg-gold-bright px-8 py-4 text-center text-sm font-bold text-ink transition-transform hover:-translate-y-0.5"
-                >
-                  無料相談で入り口を決める
-                </Link>
-                <a
-                  href={site.lpUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-center text-xs font-bold text-white/60 underline-offset-4 hover:text-white hover:underline md:text-right"
-                >
-                  AI導入補助金 特設サイト ↗
-                </a>
-              </div>
-            </div>
-          </Reveal>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-7">
+            <Link href="/contact" className="btn btn-primary">
+              無料相談で入り口を決める
+              <BtnArrow />
+            </Link>
+            <a href={site.lpUrl} target="_blank" rel="noopener" className="link-u inline-flex min-h-11 items-center text-sm">
+              AI導入補助金 特設サイト ↗
+            </a>
+          </div>
         </div>
       </section>
 
       {/* 自社プロダクト。受託と違い、そのまま契約できるものをここで並べる */}
-      <section className="border-y border-line bg-mist py-16 md:py-24">
-        <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            title="自社の現場で、毎日使っているもの"
-            lead="受託だけでなく、当社が提供し、自社の現場で毎日動かしているプロダクトがあります（開発：YW／CONFLUX PARTNERS）。実物を見てからご判断ください。"
-          />
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {PRODUCTS.map((p, i) => (
-              <Reveal key={p.href} delay={i * 0.08}>
-                <Link
-                  href={p.href}
-                  className="group flex h-full flex-col rounded-3xl border border-line bg-white p-8 shadow-card transition-colors duration-500 hover:border-pulse/40 md:p-10"
-                >
-                  <h3 className="mt-3 text-xl font-black leading-snug group-hover:text-pulse md:text-2xl">
-                    {p.name}
-                  </h3>
-                  <p className="mt-2 text-sm font-bold leading-7 text-ink">{p.catch}</p>
-                  <p className="mt-3 flex-1 text-[15px] leading-[1.9] text-slate">{p.body}</p>
-                  <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-5">
-                    <span className="rounded-full border border-line px-3 py-1.5 text-xs font-bold text-slate">
-                      {p.price}
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-sm font-bold text-pulse">
-                      詳しく見る
-                      <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="transition-transform group-hover:translate-x-1">
-                        <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <StorySection
+        id="products"
+        title="自社の現場で、毎日使っているもの"
+        lead="受託だけでなく、当社が提供し、自社の現場で毎日動かしているプロダクトがあります（開発：YW／CONFLUX PARTNERS）。実物を見てからご判断ください。"
+      >
+        <ul className="rule-close">
+          {PRODUCTS.map((p, i) => (
+            <li key={p.href} className={`border-t py-7 ${i ? "border-line-strong" : "border-ink"}`}>
+              <Link href={p.href} className="group block">
+                <h3 className="text-xl font-bold leading-snug text-pulse underline decoration-1 underline-offset-[0.35em] group-hover:decoration-2 md:text-2xl">
+                  {p.name}
+                </h3>
+                <p className="mt-3 text-[15px] font-bold leading-7">{p.catch}</p>
+                <p className="mt-2 max-w-[42em] text-[15px] leading-[1.9] text-slate">{p.body}</p>
+                <p className="mt-3 text-sm">
+                  <span className="font-bold text-slate">料金</span>　<span className="font-bold">{p.price}</span>
+                </p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </StorySection>
 
       <CtaBand
         title="どの事業から始めるか、一緒に決めましょう。"

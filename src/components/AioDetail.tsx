@@ -28,7 +28,7 @@ export default function AioDetail() {
     <>
       {/* なぜ今AIOか (ゼロクリック) */}
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="why-aio-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="検索は「探す」から「AIに聞く」へ"
             lead="検索結果の最上部をAIの回答が占め、クリックせずに答えを得る行動が広がっています。これからの集客は検索順位に加えて、==AIの回答に引用されるか==で決まります。"
@@ -79,7 +79,7 @@ export default function AioDetail() {
 
       {/* 引用される構造 */}
       <section className="pt-20 md:pt-28" aria-hidden>
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <Reveal>
             <Image
               src="/images/aio-citation.png"
@@ -94,7 +94,7 @@ export default function AioDetail() {
 
       {/* 用語集 */}
       <section className="py-20 md:py-28" aria-labelledby="glossary-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="30秒でわかる、4つの用語"
             lead="AIO・LLMO・SEO・MEO。似ているようで、狙う場所がそれぞれ違います。"
@@ -115,7 +115,7 @@ export default function AioDetail() {
 
       {/* 実装の2層 */}
       <section className="border-y border-line bg-mist py-20 md:py-28" aria-labelledby="layers-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="AIOは「技術」と「コンテンツ」の両輪"
             lead="どちらか一方では引用されません。==サイトの構造をAIが読める形に整え==、==引用したくなる中身を用意する==。両方を同時に進めます。"
@@ -170,7 +170,7 @@ export default function AioDetail() {
 
       {/* SEO+AIO運用 / オウンドメディア運用 の使い分け */}
       <section className="py-20 md:py-28" aria-labelledby="owned-media-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="今あるサイトを直すか、記事で流入をつくるか"
             lead="AIO運用代行には2つの入り口があります。==どちらが上ということはありません==。すでにサイトがあるなら「SEO+AIO運用」、記事で流入そのものをつくるなら「オウンドメディア+LP運用」。両方まとめてお任せいただくこともできます。"
@@ -261,7 +261,7 @@ export default function AioDetail() {
 
       {/* 使用ツール */}
       <section className="border-t border-line bg-mist py-20 md:py-28" aria-labelledby="tools-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="使用するツール"
             lead="推測ではなく==実測==で運用します。計測はGoogle公式ツールで行い、現在地の把握には当社が公開している無料セルフチェック（開発：YW／CONFLUX PARTNERS）を使います。"
@@ -279,7 +279,7 @@ export default function AioDetail() {
                   <li key={t.name} className="border-b border-line p-7 last:border-0 md:p-8">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h4 className="text-base font-bold">{t.name}</h4>
-                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
+                      <span className="rounded-sm bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
                         {t.role}
                       </span>
                     </div>
@@ -293,7 +293,7 @@ export default function AioDetail() {
                   {monitored.map((m) => (
                     <li
                       key={m}
-                      className="font-data rounded-full border border-line-strong bg-raise px-3 py-1.5 text-xs font-bold text-ink"
+                      className="font-data rounded-sm border border-line-strong bg-raise px-3 py-1.5 text-xs font-bold text-ink"
                     >
                       {m}
                     </li>
@@ -377,7 +377,7 @@ export default function AioDetail() {
                   <article className="h-full rounded-2xl border border-line bg-raise p-7 shadow-card">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <h3 className="font-data text-xl font-bold text-pulse">{a.name}</h3>
-                      <span className="rounded-full bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
+                      <span className="rounded-sm bg-pulse/10 px-2.5 py-1 text-xs font-bold text-pulse">
                         {a.role}
                       </span>
                     </div>
@@ -399,7 +399,7 @@ export default function AioDetail() {
 
       {/* 業種別のAIO対策（AI集客ラボの業種別ページ・調査・チェックリスト） */}
       <section className="border-t border-line py-20 md:py-28" aria-labelledby="industries-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="業種ごとに、AIが答えに使う情報は違う"
             lead="医療・不動産・工務店・士業は、業種ごとに==AIが出典にするサイトの種類==を調べ、その結果にもとづいて対策しています。そのほかの業種にも幅広く対応しています。"
@@ -414,9 +414,9 @@ export default function AioDetail() {
                     <h3 className="text-lg font-bold">{x.name}のAIO対策</h3>
                     <p className="mt-3 text-sm leading-7 text-slate">{x.lead}</p>
                     <ul className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
-                      <li><a href={x.lp} target="_blank" rel="noopener" className="inline-block rounded-full bg-pulse px-4 py-2 text-white hover:opacity-90">業種別のご案内 ↗</a></li>
-                      <li><a href={x.research} target="_blank" rel="noopener" className="inline-block rounded-full border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">AIは何を出典にするか（調査） ↗</a></li>
-                      <li><a href={x.checklist} target="_blank" rel="noopener" className="inline-block rounded-full border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">チェックリスト（PDF） ↗</a></li>
+                      <li><a href={x.lp} target="_blank" rel="noopener" className="inline-block rounded-sm bg-pulse px-4 py-2 text-white hover:opacity-90">業種別のご案内 ↗</a></li>
+                      <li><a href={x.research} target="_blank" rel="noopener" className="inline-block rounded-sm border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">AIは何を出典にするか（調査） ↗</a></li>
+                      <li><a href={x.checklist} target="_blank" rel="noopener" className="inline-block rounded-sm border border-line-strong px-4 py-2 text-ink hover:border-pulse hover:text-pulse">チェックリスト（PDF） ↗</a></li>
                     </ul>
                   </div>
                 </article>
@@ -428,7 +428,7 @@ export default function AioDetail() {
 
       {/* 料金プラン */}
       <section className="py-20 md:py-28" aria-labelledby="plans-heading">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
           <SectionHead
             title="診断は無料。まず現在地を知ってから。"
             lead="いきなり運用契約は必要ありません。==サイト診断を無料==で受けて、改善リストだけ持ち帰ることもできます。"
@@ -442,7 +442,7 @@ export default function AioDetail() {
                   }`}
                 >
                   {p.featured && (
-                    <span className="mb-4 w-fit rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
+                    <span className="mb-4 w-fit rounded-sm bg-white/20 px-3 py-1 text-xs font-bold">
                       おすすめ
                     </span>
                   )}
@@ -491,7 +491,7 @@ export default function AioDetail() {
             <div className="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Link
                 href="/contact"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-sm border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 話を聞いてから決めたい（無料相談）
               </Link>
@@ -499,7 +499,7 @@ export default function AioDetail() {
                 href={site.labUrl}
                 target="_blank"
                 rel="noopener"
-                  className="rounded-full border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  className="rounded-sm border border-ink/20 px-8 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
               >
                 運営メディア「AI集客ラボ」で学ぶ ↗
               </a>
