@@ -30,15 +30,15 @@ export default function GrowthChart() {
   return (
     <figure className="w-full">
       <figcaption className="mb-1 text-sm font-bold text-ink">
-        MEO運用 累計支援店舗数の推移
-        {/* 終点の「3,200店舗」と単位をそろえる（以前は (社)・「累計 ◯社」と書いていた） */}
-        <span className="ml-2 text-xs font-normal text-slate">(店舗)</span>
+        AIO・SEO・MEO 累計支援件数の推移
+        {/* 3,200 は AIO・SEO・MEO の累計件数（うち MEO 2,000件以上）。店舗数・社数ではない（2026-10-20 運用者の訂正） */}
+        <span className="ml-2 text-xs font-normal text-slate">(件)</span>
       </figcaption>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="w-full"
         role="img"
-        aria-label="MEO運用の累計支援店舗数は2019年から増え続け、2026年に通算3,200店舗に到達"
+        aria-label="AIO・SEO・MEOの累計支援件数は2019年から増え続け、2026年に累計3,200件に到達"
         onMouseMove={onMove}
         onMouseLeave={() => setHover(null)}
       >
@@ -94,7 +94,7 @@ export default function GrowthChart() {
           fill="#0b1220"
           className="num"
         >
-          3,200店舗
+          3,200件
         </text>
         <text x={x(last) + 12} y={y(DATA[last].total) + 8} fontSize="10" fill="#55637a">
           通算支援
@@ -111,7 +111,7 @@ export default function GrowthChart() {
                 {DATA[hover].year}年
               </text>
               <text x="12" y="35" fontSize="14" fontWeight="700" fill="#fff" className="num">
-                累計 {DATA[hover].total.toLocaleString()}店舗
+                累計 {DATA[hover].total.toLocaleString()}件
               </text>
             </g>
           </g>

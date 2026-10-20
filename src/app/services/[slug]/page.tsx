@@ -562,7 +562,7 @@ export default async function ServicePage({ params }: Props) {
             <div className="mt-20">
               <SectionHead
                 title="データで見るMEO運用の成果"
-                lead="通算3,200店舗の運用から得た実践データ。業種を問わず、90日を目安に順位とアクション数の変化を可視化します。"
+                lead="MEOの運用2,000件以上から得た実践データ。業種を問わず、90日を目安に順位とアクション数の変化を可視化します。"
               />
             </div>
             <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1fr_1.4fr]">

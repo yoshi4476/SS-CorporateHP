@@ -1,6 +1,6 @@
 // ヒーロー下部: 実績ダッシュボードのカード列 (CSSアニメーションのみ)。
 
-const SPARK = [150, 420, 850, 1350, 1950, 2500, 2950, 3200]; // 累計支援店舗数 (実績)
+const SPARK = [150, 420, 850, 1350, 1950, 2500, 2950, 3200]; // AIO・SEO・MEO の累計支援件数 (実績。うち MEO 2,000件以上)
 const W = 260;
 const H = 84;
 const MAX = 3500;
@@ -50,9 +50,9 @@ export default function HeroVisual({ className }: { className?: string }) {
           <div className="mt-2 flex items-end justify-between gap-4">
             <div className="shrink-0">
               <p className="num text-4xl font-bold leading-none">
-                3,200<span className="ml-0.5 text-xl text-pulse">社</span>
+                3,200<span className="ml-0.5 text-xl text-pulse">件</span>
               </p>
-              <p className="mt-1.5 text-[0.62rem] text-slate">MEO運用 通算支援実績</p>
+              <p className="mt-1.5 text-[0.62rem] text-slate">AIO・SEO・MEO 累計支援実績</p>
             </div>
             <svg viewBox={`0 0 ${W} ${H}`} className="w-36" aria-hidden>
               <defs>

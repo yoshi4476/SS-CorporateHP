@@ -29,7 +29,7 @@ function Spark() {
       viewBox={`0 0 ${W} ${H}`}
       className="h-auto w-full"
       role="img"
-      aria-label={`MEO運用の累計支援店舗数は、${first.year}年の${first.total.toLocaleString()}店舗から${last.year}年に${last.total.toLocaleString()}店舗まで増えた`}
+      aria-label={`AIO・SEO・MEOの累計支援件数は、${first.year}年の${first.total.toLocaleString()}件から${last.year}年に${last.total.toLocaleString()}件まで増えた`}
     >
       <line x1="4" x2={W - 6} y1={H - 18} y2={H - 18} stroke="rgb(255 255 255 / 0.18)" strokeWidth="1" />
       <path d={area} fill="rgb(116 199 214 / 0.14)" />
@@ -103,8 +103,8 @@ export default function NumberWall() {
   const tiles: { value: number; suffix: string; label: string; note: React.ReactNode; figure: React.ReactNode }[] = [
     {
       value: last.total,
-      suffix: "店舗",
-      label: "MEO運用の通算支援",
+      suffix: "件",
+      label: "AIO・SEO・MEOの累計支援",
       note: `${first.year}〜${last.year}年の累計の推移`,
       figure: <Spark />,
     },
