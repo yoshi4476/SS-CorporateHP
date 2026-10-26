@@ -1,6 +1,6 @@
 {
- "n_industries": 29,
- "total_questions": 1700,
+ "n_industries": 31,
+ "total_questions": 1800,
  "period": "2026年10月",
  "index_url": "https://ai.7senses.co.jp/research/",
  "ranking_url": "https://ai.7senses.co.jp/research/ranking/",
@@ -60,6 +60,14 @@
    "lc": 39.8,
    "oa": 80.6,
    "url": "https://ai.7senses.co.jp/research/esthe-ai-sources/"
+  },
+  {
+   "name": "システム開発（受託開発）",
+   "questions": 50,
+   "lp": 35.6,
+   "lc": 5.3,
+   "oa": 40.0,
+   "url": "https://ai.7senses.co.jp/research/sysdev-ai-sources/"
   },
   {
    "name": "ネットショップ（EC）",
@@ -172,6 +180,14 @@
    "lc": 62.6,
    "oa": 72.7,
    "url": "https://ai.7senses.co.jp/research/seikotsuin-ai-sources/"
+  },
+  {
+   "name": "経理代行・記帳代行",
+   "questions": 50,
+   "lp": 28.8,
+   "lc": 56.1,
+   "oa": 85.0,
+   "url": "https://ai.7senses.co.jp/research/keiri-ai-sources/"
   },
   {
    "name": "結婚式場",
