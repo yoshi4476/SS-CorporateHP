@@ -49,3 +49,7 @@
 # 広告運用代行は終了（2026-10）。事業一覧へ
 /services/ad-operations   /services   301
 /services/ad-operations/* /services   301
+# 統合: backoffice-bpo-toha に吸収（2026-10-26）
+/blog/keihi-seisan-kichodaiko-bpo-chigai/ /blog/backoffice-bpo-toha/ 301
+# 統合: keiri-zaimu-chigai に吸収（2026-10-26）
+/blog/kaikei-keiri-chigai/ /blog/keiri-zaimu-chigai/ 301
