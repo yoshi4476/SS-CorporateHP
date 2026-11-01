@@ -21,6 +21,7 @@ import {
   adjacentPosts,
   displayDate,
   withToc,
+  markH2Areas,
   splitBody,
   splitAfterLead,
   splitAfterFirstSection,
@@ -48,6 +49,26 @@ const PRODUCT_LINKS = [
     body: "記事を書いて出し続けるAIエージェントを、LPごと納品",
   },
 ];
+
+// 本文の途中の相談の案内。以前は「事業のご案内／事業名／短い説明」のカードで事業ページへ渡すだけで、
+// 2026年10月（日本の訪問）は記事の表示458回に対し、記事から経理BPOのページへ進んだのは1回、記事から相談のページへ進んだのも1回だった。
+// 本文末の相談のボタン（管制塔が入れる cta-box）は83%が本文の8割より後ろにあり、90%まで読まれたのは表示の約8.5%（39回）。
+// 途中で読んでいる人の用件（外に出すか迷っている）に合わせて言い、相談へ直接つなぐ。事業ページは添える
+// 数字は管制塔の data/first_party_facts.json の keiri-bpo-10（運用者の申告 2026-10-20）だけを使う
+const MID_COPY: Record<string, { kicker: string; title: string; body: string; button: string }> = {
+  "keiri-bpo": {
+    kicker: "経理を外に出すか迷っている方へ",
+    title: "どこまで外に出せるかを、現状を伺って切り分けます",
+    body: "記帳・請求・支払・給与のうち、外に出せる範囲と社内に残す範囲を、無料の相談で整理します。当社は2023年4月から2026年9月までに、経理代行・記帳代行を48社で担当しました。",
+    button: "経理の外注を無料で相談する",
+  },
+  "ai-consulting": {
+    kicker: "社内の作業を減らしたい方へ",
+    title: "どの作業から減らすかを、現状を伺って決めます",
+    body: "いまの手順を伺い、AIや仕組みで減らせる作業と、人が判断する作業を分けるところから始めます。相談は無料です。",
+    button: "無料で相談する",
+  },
+};
 
 // 記事は全てビルド時に静的生成する（実行時にファイルを読まないため Workers 上でも安全）
 export const dynamicParams = false;
@@ -84,16 +105,21 @@ export default async function BlogDetailPage({ params }: Props) {
   const post = getAnyPost(slug);
   if (!post) notFound();
 
-  const { html, headings } = withToc(post.html);
+  const toc = withToc(post.html);
+  const { headings } = toc;
+  const html = markH2Areas(toc.html);
   const [bodyHead, bodyTail] = splitBody(html);
   // セルフチェックの入口は最初の節の終わりに1つだけ置く。
   // 節が1つしか無い（直後に事業の案内が来る）記事は、従来どおり1文結論の直後に置く
-  const leadSplit = wantsKeiriCheck(post)
+  const keiri = wantsKeiriCheck(post);
+  const leadSplit = keiri
     ? (splitAfterFirstSection(bodyHead) ?? splitAfterLead(bodyHead))
     : null;
-  // 記事のテーマに合う事業へ渡す。法対応の記事も、行き着く先は外注の判断
-  const pick = post.category === "backoffice" ? "ai-consulting" : "keiri-bpo";
+  // 記事のテーマに合う事業へ渡す。法対応の記事も、行き着く先は外注の判断。
+  // 以前はカテゴリがバックオフィスなら全部 AIコンサルへ渡しており、「バックオフィスBPOとは」の読者まで AI の案内を見ていた
+  const pick = keiri ? "keiri-bpo" : "ai-consulting";
   const svc = services.find((s) => s.slug === pick);
+  const mid = MID_COPY[pick];
   const url = `${site.url}/blog/${post.slug}`;
   // 記事が扱う実体（IT導入補助金など）を公式の場所へ結ぶ。AI検索が同じ実体として束ねる。
   // 表は管制塔側の scripts/entities.py と同じ（entities.json に書き出したもの）
@@ -163,7 +189,7 @@ export default async function BlogDetailPage({ params }: Props) {
         ]}
       />
 
-      <section className="relative overflow-hidden pt-16 md:pt-20">
+      <section data-area="記事の冒頭" data-area-id="hero" className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-5xl px-5 pb-8 pt-10 md:pt-16">
           <Reveal>
@@ -249,13 +275,26 @@ export default async function BlogDetailPage({ params }: Props) {
                 目次アンカーで途中に着地したときに本文が消えるのを避けるため */}
             {/* 記事は長い。読み終える前に離脱する人のために、
                 スマホだけ追従バーを出す (末尾のオファーが見えたら引っ込む) */}
-            <StickyCta
-              label="資料を受け取る"
-              note="経理業務の棚卸しシート・登録不要"
-              href={sheet.href}
-              download
-              endId="article-end-cta"
-            />
+            {/* 経理の記事では、追従バーを PDF からセルフチェックに替える。2026年10月（日本）、記事の PDF の保存は1回だけで
+                （file_download は自前と GA4 の自動計測で1回に2件ずつ記録される）、記事の中で最も押されていたのはセルフチェック
+                （表示297回・押下6回）だった。スマホで4ページの PDF を開くより、その場で答えるほうが進みやすい */}
+            {keiri ? (
+              <StickyCta
+                label="5問で確かめる"
+                note="外に出せる範囲の目安・無料"
+                href="/tools/keiri-check"
+                entryFrom={`/blog/${post.slug}`}
+                endId="article-end-cta"
+              />
+            ) : (
+              <StickyCta
+                label="資料を受け取る"
+                note="経理業務の棚卸しシート・登録不要"
+                href={sheet.href}
+                download
+                endId="article-end-cta"
+              />
+            )}
             <div
               className="article-body article-body-lead mt-10 border-t border-line pt-10 lg:mt-0"
               dangerouslySetInnerHTML={{ __html: leadSplit ? leadSplit[0] : bodyHead }}
@@ -269,27 +308,36 @@ export default async function BlogDetailPage({ params }: Props) {
 
             {/* 読み進めている途中で、記事のテーマに合う事業へ渡す。
                 末尾のオファーだけでは読み切った人にしか届かない */}
-            {svc && bodyTail && (
-              <Link
-                href={`/services/${svc.slug}`}
-                className="group my-10 flex items-start gap-5 rounded-3xl border border-gold/30 bg-gold-tint p-7 transition-colors hover:border-gold/60"
+            {svc && mid && bodyTail && (
+              <div
+                data-area="相談の案内（本文の途中）"
+                data-area-id="mid_cta"
+                className="my-10 rounded-3xl border border-gold/30 bg-gold-tint p-7"
               >
-                <span className="min-w-0 flex-1">
-<span className="text-[13px] font-bold text-gold-deep">事業のご案内</span>
-                  <span className="mt-2 block text-base font-bold text-ink md:text-lg">
-                    {svc.name}
-                  </span>
-                  <span className="mt-2 block text-sm leading-7 text-slate">{svc.short}</span>
-                </span>
-                <span
-                  aria-hidden
-                  className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors group-hover:bg-gold group-hover:text-white"
-                >
-                  <svg width="14" height="14" viewBox="0 0 14 14">
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
-                </span>
-              </Link>
+                <p className="text-[13px] font-bold text-gold-deep">{mid.kicker}</p>
+                <p className="mt-2 text-base font-bold leading-relaxed text-ink md:text-lg">{mid.title}</p>
+                <p className="mt-2 text-sm leading-7 text-slate">{mid.body}</p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <Link
+                    href="/contact"
+                    data-entry-s={svc.slug}
+                    data-cta="article_mid_contact"
+                    className="tap inline-flex items-center justify-center rounded-full bg-pulse px-6 py-3 text-sm font-bold text-white transition-transform hover:-translate-y-0.5"
+                  >
+                    {mid.button}
+                  </Link>
+                  <Link
+                    href={`/services/${svc.slug}`}
+                    data-cta="article_mid_service"
+                    className="tap inline-flex items-center gap-1.5 text-sm font-bold text-pulse underline-offset-4 hover:underline"
+                  >
+                    {svc.name}の内容を見る
+                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
+                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
             )}
 
             {bodyTail && (
@@ -297,7 +345,7 @@ export default async function BlogDetailPage({ params }: Props) {
             )}
 
             <Reveal>
-              <aside id="article-end-cta" className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">
+              <aside id="article-end-cta" data-area="読み終えた方へ" data-area-id="article-end-cta" className="mt-14 overflow-hidden rounded-3xl bg-ink px-7 py-8 text-paper md:px-10">
                 <p className="text-xs font-bold tracking-widest text-gold-bright">読み終えた方へ</p>
                 <h2 className="mt-3 text-lg font-black leading-snug md:text-xl">
                   {sheet.name}
@@ -445,7 +493,7 @@ export default async function BlogDetailPage({ params }: Props) {
       </section>
 
       {related.length > 0 && (
-        <section className="border-t border-line bg-mist py-16 md:py-20">
+        <section data-area="あわせて読みたい" data-area-id="related" className="border-t border-line bg-mist py-16 md:py-20">
           <div className="mx-auto max-w-5xl px-5">
             <h2 className="text-lg font-black md:text-xl">あわせて読みたい</h2>
             <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

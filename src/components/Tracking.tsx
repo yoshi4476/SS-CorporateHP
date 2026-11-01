@@ -12,7 +12,16 @@
 // diagnosis_click は診断の入口だけに送る。以前は AI集客ラボ・補助金LP への単なるサイトリンクも入っていた。
 // diagnosis_click は cta_click と同時に飛ぶので、足し合わせない（管制塔の data_sanity.CO_FIRED と同じ扱い）。
 
+// 区画の到達（ヒートマップ）: data-area を持つ要素が25%見えたら section_view_<区画> と area_reach を1回送る。
+// 名前の規則は AI集客ラボ（管制塔の site/js/site.js）と同じ。GA4 のイベント名は英数字と _ だけ・40字までなので、
+// 区画の名前は data-area-id（英字）から slugId で作る（管制塔の report_heat.slug_id・exit_fix が同じ規則で読む）。
+// 以前は区画の印が1つも無く、どこで読者が離れるかを測れていなかった（2026-10、section_view_* が0件）。
+//
+// data-cta を付けたリンクは、行き先が相談・資料・ツールでなくても数える（事業ページへの案内など）。
+// 付けていないリンクは前と同じく入口だけを数える。
+
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { entryOf, saveEntry, withEntry } from "@/lib/entry";
 
 declare global {
@@ -27,7 +36,12 @@ export function track(event: string, params: Record<string, unknown> = {}) {
   window.gtag("event", event, { ...params, page_path: window.location.pathname });
 }
 
-type Kind = "contact" | "doc" | "tool" | "diagnosis";
+/** 管制塔の site/js/site.js の slugId()・scripts/report_heat.py の slug_id() と同じ規則。片方だけ変えないこと */
+export function slugId(s: string | null | undefined): string {
+  return String(s ?? "").replace(/[^\w]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 30) || "x";
+}
+
+type Kind = "contact" | "doc" | "tool" | "diagnosis" | "nav";
 
 /** ページの種類。cta_id の頭に付ける */
 function pageKind(path: string): string {
@@ -39,13 +53,13 @@ function pageKind(path: string): string {
   return seg[0];
 }
 
-/** 押した場所。data-cta-pos を最優先し、無ければヘッダー・フッター・最初の区画（ヒーロー）・区画の id */
+/** 押した場所。data-cta-pos を最優先し、次に区画の印（data-area-id）、無ければヘッダー・フッター・最初の区画（ヒーロー）・区画の id */
 function position(el: Element): string {
   const box = el.closest(
-    "[data-cta-pos], header, footer, main > section:first-of-type, section[id], aside[id], section[aria-labelledby]",
+    "[data-cta-pos], [data-area-id], header, footer, main > section:first-of-type, section[id], aside[id], section[aria-labelledby]",
   );
   if (!box) return "body";
-  const tagged = box.getAttribute("data-cta-pos");
+  const tagged = box.getAttribute("data-cta-pos") || box.getAttribute("data-area-id");
   if (tagged) return tagged;
   const tag = box.tagName.toLowerCase();
   if (tag === "header" || tag === "footer") return tag;
@@ -93,7 +107,58 @@ function ctaId(el: Element, dest: string): string {
   return el.closest("[data-cta]")?.getAttribute("data-cta") || `${pageKind(window.location.pathname)}_${position(el)}_${dest}`;
 }
 
+/** data-cta を付けた、入口でないリンクの行き先の名前（/services/keiri-bpo → svc-keiri-bpo） */
+function navDest(href: string): string {
+  try {
+    const u = new URL(href, window.location.origin);
+    if (u.origin !== window.location.origin) return u.hostname.split(".")[0];
+    return pageKind(u.pathname);
+  } catch {
+    return "link";
+  }
+}
+
+/** ページの中の data-area を見張り、25%見えたら1回だけ到達を送る。ページを移るたびに描かれた区画を拾い直す */
+function useAreaReach(path: string) {
+  useEffect(() => {
+    if (!("IntersectionObserver" in window)) return;
+    const seen = new WeakSet<Element>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          // 画面の4倍より長い区画（事業一覧など）は25%が一度に見えることがない。画面の半分を占めたら届いたと数える
+          if (!e.isIntersecting) continue;
+          if (e.intersectionRatio < 0.25 && e.intersectionRect.height < window.innerHeight * 0.5) continue;
+          const el = e.target;
+          const name = el.getAttribute("data-area");
+          const id = slugId(el.getAttribute("data-area-id") || name);
+          track(`section_view_${id}`, { area_name: name });
+          track("area_reach", { area_name: name, area_id: id });
+          io.unobserve(el);
+        }
+      },
+      { threshold: [0, 0.01, 0.02, 0.05, 0.1, 0.25] },
+    );
+    const scan = () => {
+      document.querySelectorAll("[data-area]").forEach((el) => {
+        if (seen.has(el)) return;
+        seen.add(el);
+        io.observe(el);
+      });
+    };
+    scan();
+    // ページの切り替えの演出（PageTransition）で、区画が少し遅れて描かれることがある
+    const t = window.setTimeout(scan, 1200);
+    return () => {
+      window.clearTimeout(t);
+      io.disconnect();
+    };
+  }, [path]);
+}
+
 export default function Tracking() {
+  useAreaReach(usePathname());
+
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const a = (e.target as HTMLElement | null)?.closest?.("a");
@@ -105,7 +170,7 @@ export default function Tracking() {
       if (entry) saveEntry(entry, raw.split("?")[0]);
       const href = withEntry(raw, entry);
 
-      const hit = classify(href, label);
+      const hit = classify(href, label) ?? (a.closest("[data-cta]") ? (["nav", navDest(href)] as [Kind, string]) : null);
       if (hit) {
         const [kind, dest] = hit;
         track("cta_click", { cta_id: ctaId(a, dest), cta_kind: kind, link_url: a.href, link_text: label });

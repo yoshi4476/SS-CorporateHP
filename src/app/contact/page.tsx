@@ -27,7 +27,7 @@ export default function ContactPage() {
         ])}
       />
 
-      <section className="relative overflow-hidden pt-16 md:pt-20">
+      <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-12 md:pt-20">
           <Reveal>
@@ -53,7 +53,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="pb-20 pt-6 md:pb-28">
+      <section data-area="フォーム" data-area-id="form" className="pb-20 pt-6 md:pb-28">
         <div className="mx-auto grid max-w-7xl items-start gap-10 px-5 lg:grid-cols-[1.5fr_1fr]">
           <Reveal delay={0.08} className="rounded-3xl border border-line bg-white p-7 shadow-card md:p-10">
             <ContactForm />

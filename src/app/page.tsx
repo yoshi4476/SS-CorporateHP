@@ -84,7 +84,7 @@ export default function Home() {
       <JsonLd data={faqSchema(TOP_FAQ)} />
 
       {/* ヒーロー: 全画面の実写動画（ある街の一日）。どの業種の、どの時間にも仕組みが働いている、という筋 */}
-      <section data-drone-zone className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
+      <section data-drone-zone data-area="メインビジュアル" data-area-id="hero" className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
         <HeroVideo objectPosition="60% center" />
         {/* 読みやすさの覆い: 左（見出し）・上（ヘッダー）・下（業種の帯）だけを暗くし、中央の街は見せる */}
         <div
@@ -107,8 +107,11 @@ export default function Home() {
               <br />
               <SplitText text="集客も経理も回す。" className="text-aqua" startIndex={8} />
             </h1>
+            {/* トップに来る人の大半は社名の検索（GSC・2026年10月・日本: トップの表示1,089回のうち「セブンセンシズ」を含む語が1,083回）で、
+                用件は人によって違う。一方で検索から来る人の用件は経理（ページ別の表示5,714回のうち記事が3,982回・約7割）。最初の一文で経理BPOを先に名指しし、
+                2つ目のボタンは押されていなかったセルフチェック（10月・日本の押下0回。トップを入口にした訪問は114）から経理BPOの案内に替え、他の用件は1行で分ける */}
             <p className="mt-6 max-w-lg text-[15px] leading-[1.9] text-white/85 md:mt-7 md:text-base">
-              集客・社内業務・補助金までをひとつのチームで引き受ける、大阪のAIコンサルティング会社です。
+              経理・記帳の代行（経理BPO）、AI検索・MEOでの集客、補助金の活用までを、ひとつのチームで引き受ける大阪の会社です。
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center md:mt-10">
               <Link
@@ -118,12 +121,27 @@ export default function Home() {
                 無料相談を予約する
               </Link>
               <Link
-                href="/#selfcheck"
+                href="/services/keiri-bpo"
+                data-cta="top_hero_keiri-bpo"
                 className="inline-flex items-center justify-center rounded-full border border-white/40 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
               >
-                まず無料のセルフチェック
+                経理・記帳を任せたい方へ
               </Link>
             </div>
+            <p className="mt-5 text-[13px] leading-7 text-white/75">
+              ほかのご用件:
+              <Link href="/services/aio" data-cta="top_hero_aio" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
+                集客（AI検索・MEO）
+              </Link>
+              ／
+              <Link href="/services/ai-subsidy" data-cta="top_hero_ai-subsidy" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
+                補助金
+              </Link>
+              ／
+              <Link href="/#selfcheck" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
+                無料のセルフチェック
+              </Link>
+            </p>
             <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
               {[
                 { n: 3200, unit: "件", label: ["AIO・SEO・MEOの", "累計支援"] },
@@ -165,7 +183,7 @@ export default function Home() {
       </section>
 
       {/* ステートメント */}
-      <section id="vision" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
+      <section id="vision" data-area="ステートメント" data-area-id="vision" className="relative scroll-mt-24 overflow-hidden py-24 md:py-36">
         <div className="relative mx-auto max-w-7xl px-5 text-center">
           <Reveal>
             <p className="mx-auto max-w-4xl text-2xl font-black leading-[1.8] md:text-5xl md:leading-[1.7]">
@@ -201,7 +219,7 @@ export default function Home() {
 
       {/* 事業: 全体像の図（困りごと → 効く事業）と、事業ごとの入口 */}
       {/* 以前は右に飾りのネットワーク図を置いていたが、経理BPOが入っておらず、どれが何に効くかも読み取れなかった */}
-      <section id="services" className="scroll-mt-24 border-y border-line bg-mist" aria-labelledby="services-heading">
+      <section id="services" data-area="事業" data-area-id="services" className="scroll-mt-24 border-y border-line bg-mist" aria-labelledby="services-heading">
         <div className="mx-auto max-w-7xl px-5 pt-20 md:pt-28">
           <SectionHead
             id="services-heading"
@@ -239,7 +257,7 @@ export default function Home() {
       <DevPartnerBand />
 
       {/* 数字の壁 */}
-      <section id="numbers" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-36" aria-labelledby="numbers-heading">
+      <section id="numbers" data-area="数字" data-area-id="numbers" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-36" aria-labelledby="numbers-heading">
         <div aria-hidden className="grid-field-dark absolute inset-0" />
         <div
           aria-hidden
@@ -262,7 +280,7 @@ export default function Home() {
       </section>
 
       {/* データセクション */}
-      <section id="data" className="relative scroll-mt-24 bg-paper py-24 md:py-32" aria-labelledby="data-heading">
+      <section id="data" data-area="実践データ" data-area-id="data" className="relative scroll-mt-24 bg-paper py-24 md:py-32" aria-labelledby="data-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="累計3,200件の支援が生んだ、実践データ"
@@ -302,7 +320,7 @@ export default function Home() {
       <SelfCheckBand />
 
       {/* AIO / 検索対策の権威セクション */}
-      <section id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
+      <section id="aio" data-area="AI検索対策" data-area-id="aio" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-mist py-24 md:py-32" aria-labelledby="aio-heading">
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
             <SectionHead
@@ -383,7 +401,7 @@ export default function Home() {
       </section>
 
       {/* 現場写真 + 代表メッセージ */}
-      <section id="field" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-32" aria-labelledby="field-heading">
+      <section id="field" data-area="現場と代表" data-area-id="field" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-32" aria-labelledby="field-heading">
         <div aria-hidden className="grid-field-dark absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
@@ -455,7 +473,7 @@ export default function Home() {
       </section>
 
       {/* 導入事例 */}
-      <section id="cases" className="scroll-mt-24 border-t border-line bg-mist py-24 md:py-32" aria-labelledby="cases-heading">
+      <section id="cases" data-area="導入事例" data-area-id="cases" className="scroll-mt-24 border-t border-line bg-mist py-24 md:py-32" aria-labelledby="cases-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="数字が動いた、3つの現場"
@@ -520,7 +538,7 @@ export default function Home() {
       </section>
 
       {/* 進め方 */}
-      <section id="process" className="scroll-mt-24 py-24 md:py-32" aria-labelledby="process-heading">
+      <section id="process" data-area="進め方" data-area-id="process" className="scroll-mt-24 py-24 md:py-32" aria-labelledby="process-heading">
         <div className="mx-auto max-w-7xl px-5">
           <div className="grid items-center gap-10 md:grid-cols-[1.25fr_1fr]">
             <SectionHead
@@ -547,7 +565,7 @@ export default function Home() {
       </section>
 
       {/* 補助金バンド */}
-      <section id="subsidy" className="scroll-mt-24 pb-24 md:pb-32" aria-labelledby="subsidy-heading">
+      <section id="subsidy" data-area="補助金" data-area-id="subsidy" className="scroll-mt-24 pb-24 md:pb-32" aria-labelledby="subsidy-heading">
         <div className="mx-auto max-w-7xl px-5">
           <Reveal>
             {/* 白の面が2つ続いて単調になるうえ、内容もお金の話なので、
@@ -589,7 +607,7 @@ export default function Home() {
       </section>
 
       {/* お知らせ */}
-      <section id="news" className="scroll-mt-24 border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-heading">
+      <section id="news" data-area="お知らせ" data-area-id="news" className="scroll-mt-24 border-t border-line bg-mist py-16 md:py-20" aria-labelledby="news-heading">
         <div className="mx-auto max-w-5xl px-5">
           <SectionHead title="お知らせ" />
           <div className="mt-10 grid gap-3">
@@ -624,7 +642,7 @@ export default function Home() {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="faq-heading">
+      <section id="faq" data-area="よくある質問" data-area-id="faq" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="faq-heading">
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">

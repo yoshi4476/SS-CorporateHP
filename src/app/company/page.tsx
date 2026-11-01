@@ -129,7 +129,7 @@ export default function CompanyPage() {
         ])}
       />
 
-      <section className="relative overflow-hidden pt-16 md:pt-20">
+      <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden pt-16 md:pt-20">
         <div aria-hidden className="grid-field absolute inset-0" />
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-12 md:pb-20 md:pt-20">
           <Reveal>
@@ -156,7 +156,7 @@ export default function CompanyPage() {
       </section>
 
       {/* 代表挨拶 */}
-      <section className="relative overflow-hidden bg-ink py-20 text-white md:py-28" aria-labelledby="message-heading">
+      <section className="relative overflow-hidden bg-ink py-20 text-white md:py-28" aria-labelledby="message-heading" data-area="代表メッセージ" data-area-id="message">
         <div aria-hidden className="grid-field-dark absolute inset-0" />
         <div
           aria-hidden
@@ -208,7 +208,7 @@ export default function CompanyPage() {
       </section>
 
       {/* ミッション + 現場写真 */}
-      <section className="py-20 md:py-28" aria-labelledby="mission-heading">
+      <section className="py-20 md:py-28" aria-labelledby="mission-heading" data-area="ミッション" data-area-id="mission">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-2">
           <div>
             <SectionHead
@@ -259,7 +259,7 @@ export default function CompanyPage() {
       </section>
 
       {/* 概要表 */}
-      <section className="py-20 md:py-28" aria-labelledby="profile-heading">
+      <section className="py-20 md:py-28" aria-labelledby="profile-heading" data-area="基本情報" data-area-id="profile">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead title="基本情報" />
           {/* 表の右が空くので、オフィスとチームの写真（イメージ）を並べる */}
@@ -299,7 +299,7 @@ export default function CompanyPage() {
       </section>
 
       {/* アクセス（地図は押したときだけ読む） */}
-      <section id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
+      <section id="access" data-area="アクセス" data-area-id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
         <div className="mx-auto max-w-5xl px-5">
           <Reveal>
             <p aria-hidden className="eyebrow" />

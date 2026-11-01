@@ -427,7 +427,7 @@ export default function AioDetail() {
       </section>
 
       {/* 料金プラン */}
-      <section className="py-20 md:py-28" aria-labelledby="plans-heading">
+      <section className="py-20 md:py-28" aria-labelledby="plans-heading" data-area="料金" data-area-id="plans">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="診断は無料。まず現在地を知ってから。"

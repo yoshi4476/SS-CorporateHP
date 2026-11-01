@@ -78,7 +78,7 @@ export default function ServicesIndexPage() {
       />
 
       {/* ヒーロー: オフィスの写真を全幅に（イメージ写真） */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden bg-ink text-white">
         <Image src="/images/svc/index.webp" alt="窓の大きな明るいオフィスで働く社員のイメージ" fill priority sizes="100vw" className="object-cover" />
         <div
           aria-hidden
@@ -102,15 +102,16 @@ export default function ServicesIndexPage() {
             </nav>
             <p aria-hidden className="eyebrow mt-8 !text-aqua" />
             <h1 className="mt-4 text-3xl font-black md:text-6xl">事業内容</h1>
+            {/* 一文目は用件の言葉で並べる。以前は戦略・実装・集客・資金・経理の順で、検索から来る人の用件（経理）が最後だった */}
             <p className="mt-7 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
-              戦略 (AIコンサルティング)・実装 (システム開発・HP/LP制作)・集客 (MEO・AIO×オウンドメディア)・資金 (AI導入補助金)・経理 (経理BPO)。
+              経理・記帳を任せたい (経理BPO)、集客を増やしたい (MEO・AIO×オウンドメディア)、補助金を使いたい (AI導入補助金)、仕組みから作りたい (AIコンサルティング・システム開発・HP/LP制作)。
               <strong className="text-white">{services.length}つの事業をひとつのチームで一気通貫</strong>
               に提供するから、窓口はひとつ、責任もひとつ。バラバラに外注したときに起きる「導線の分断」がありません。
             </p>
             <ul className="mt-8 flex flex-wrap gap-2">
               {services.map((sv) => (
                 <li key={sv.slug}>
-                  <a href={`#${sv.slug}`} className="block rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua">
+                  <a href={`#${sv.slug}`} data-cta={`services_hero_${sv.slug}`} className="block rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua">
                     {sv.name}
                   </a>
                 </li>
@@ -121,7 +122,7 @@ export default function ServicesIndexPage() {
       </section>
 
       {/* 困りごとから選ぶ（トップと同じ全体像の図）。一覧の前に、どれが自社に効くかの見当をつけてもらう */}
-      <section id="map" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="map-heading">
+      <section id="map" data-area="困りごとから選ぶ" data-area-id="map" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="map-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="map-heading"
@@ -135,7 +136,7 @@ export default function ServicesIndexPage() {
       </section>
 
       {/* 各事業の横展開グリッド */}
-      <section className="border-t border-line bg-mist py-16 md:py-24" aria-label="事業一覧">
+      <section className="border-t border-line bg-mist py-16 md:py-24" aria-label="事業一覧" data-area="事業一覧" data-area-id="list">
         <div className="mx-auto max-w-7xl px-5">
           {/* 事業ごとに、写真と文章を左右交互に。写真はその事業の現場のイメージ */}
           <div className="grid gap-8 md:gap-12">
@@ -224,7 +225,7 @@ export default function ServicesIndexPage() {
       </section>
 
       {/* 自社プロダクト。受託と違い、そのまま契約できるものをここで並べる */}
-      <section className="border-y border-line bg-mist py-16 md:py-24">
+      <section className="border-y border-line bg-mist py-16 md:py-24" data-area="自社プロダクト" data-area-id="products">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             title="自社の現場で、毎日使っているもの"

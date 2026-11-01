@@ -32,6 +32,8 @@ export default function ResearchBand({ tone = "light", note }: { tone?: "light" 
   return (
     <section
       id="research"
+      data-area="自社の調査"
+      data-area-id="research"
       aria-labelledby="research-heading"
       className={`[word-break:auto-phrase] ${dark ? "relative overflow-hidden bg-ink text-white" : "border-y border-line bg-mist"}`}
     >

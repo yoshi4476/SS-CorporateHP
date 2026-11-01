@@ -209,7 +209,7 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section data-cta-pos="cta-band" className="relative overflow-hidden bg-ink">
+    <section data-cta-pos="cta-band" data-area="相談の案内" data-area-id="cta" className="relative overflow-hidden bg-ink">
       <div
         aria-hidden
         className="absolute inset-0 opacity-40"

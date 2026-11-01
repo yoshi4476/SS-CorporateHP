@@ -178,6 +178,19 @@ export function withToc(html: string): { html: string; headings: Heading[] } {
   return { html: out, headings };
 }
 
+/**
+ * 本文の H2 に区画の印（data-area）を付ける。どの見出しまで読まれて離れたかを、記事ごとに数えるため
+ * （Tracking の section_view_h2_<n>）。番号は上からの順で、記事が違っても同じ名前になる（イベントの種類を増やさない）。
+ */
+export function markH2Areas(html: string): string {
+  let n = 0;
+  return html.replace(/<h2(\s[^>]*)?>([\s\S]*?)<\/h2>/g, (whole, attrs: string | undefined, inner: string) => {
+    if (/\sdata-area=/.test(attrs ?? "")) return whole;
+    const name = inner.replace(/<[^>]+>/g, "").trim().slice(0, 40).replace(/"/g, "&quot;");
+    return `<h2${attrs ?? ""} data-area="${name || `見出し${n + 1}`}" data-area-id="h2_${++n}">${inner}</h2>`;
+  });
+}
+
 function readAll(): BlogPost[] {
   if (!fs.existsSync(CONTENT_DIR)) return [];
   const posts: BlogPost[] = [];

@@ -12,7 +12,7 @@ import InlineToolBox from "@/components/InlineToolBox";
 
 export default function SelfCheckBand() {
   return (
-    <section id="selfcheck" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-ink" aria-labelledby="selfcheck-heading">
+    <section id="selfcheck" data-area="セルフチェック" data-area-id="selfcheck" className="relative scroll-mt-24 overflow-hidden border-y border-line bg-ink" aria-labelledby="selfcheck-heading">
       <div
         aria-hidden
         className="absolute inset-0 opacity-50"

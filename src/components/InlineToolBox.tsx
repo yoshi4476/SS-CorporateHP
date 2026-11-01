@@ -49,6 +49,8 @@ export default function InlineToolBox({ from, place = "article", tone = "light" 
     <div
       ref={ref}
       data-cta-pos={place === "article" ? "inline-tool" : undefined}
+      data-area={place === "article" ? "セルフチェック（本文の途中）" : undefined}
+      data-area-id={place === "article" ? "inline_tool" : undefined}
       className={`rounded-3xl border border-l-4 px-6 py-6 md:px-8 md:py-7 ${
         dark ? "border-white/15 border-l-gold-bright bg-white/[0.06]" : "my-10 border-line border-l-gold bg-raise shadow-card"
       }`}

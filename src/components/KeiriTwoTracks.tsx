@@ -52,7 +52,7 @@ const TRACKS = [
 
 export default function KeiriTwoTracks() {
   return (
-    <section className="border-y border-line bg-mist py-16 md:py-24" id="two-tracks">
+    <section className="border-y border-line bg-mist py-16 md:py-24" id="two-tracks" data-area="任せるか自社で使うか" data-area-id="two-tracks">
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead
           title="任せるか、自社で使うか。2つから選べます"

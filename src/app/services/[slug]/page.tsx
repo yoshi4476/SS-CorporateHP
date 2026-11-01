@@ -98,7 +98,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* ヒーロー */}
       {/* その事業の現場の写真を全幅に敷く（イメージ写真）。文字は左に寄せ、左側だけを暗くする */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden bg-ink text-white">
         <Image src={svcPhoto(service.slug, 1)} alt={`${service.name}の現場のイメージ`} fill priority sizes="100vw" className="object-cover object-[65%_center]" />
         <div
           aria-hidden
@@ -137,6 +137,14 @@ export default async function ServicePage({ params }: Props) {
                 <p className="mt-7 max-w-2xl text-xl font-bold leading-10 text-white md:text-2xl md:leading-[1.9]">
                   {service.lead}
                 </p>
+                {/* 数字は管制塔の data/first_party_facts.json の keiri-bpo-10（運用者の申告 2026-10-20）。以前は1画面目に実績が無かった */}
+                {service.slug === "keiri-bpo" && (
+                  <p className="mt-5 inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-bold leading-6 backdrop-blur-sm">
+                    <span className="text-white/60">担当した会社</span>
+                    <span className="text-aqua">経理代行・記帳代行 48社（うち31社が継続中）</span>
+                    <span className="font-medium text-white/60">2023年4月〜2026年9月</span>
+                  </p>
+                )}
                 {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
                     記号がそのまま出ていた */}
                 <p className="hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
@@ -176,11 +184,13 @@ export default async function ServicePage({ params }: Props) {
                   </div>
                 ) : (
                 <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                  {/* 経理BPOのページに来る人の用件は「経理を外に出せるか」。ボタンもその言葉にし、相談の種類を選んだ状態でフォームを開く */}
                   <Link
                     href="/contact"
+                    data-entry-s={service.slug === "keiri-bpo" ? "keiri-bpo" : undefined}
                   className="rounded-full bg-pulse px-8 py-4 text-center text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
-                    このサービスを相談する
+                    {service.slug === "keiri-bpo" ? "経理の外注を無料で相談する" : "このサービスを相談する"}
                   </Link>
                   {service.slug === "keiri-bpo" && (
                     <a
@@ -233,7 +243,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {service.metrics && (
-        <section className="border-b border-line bg-raise py-10 md:py-14" aria-label="実績の数字">
+        <section className="border-b border-line bg-raise py-10 md:py-14" aria-label="実績の数字" data-area="実績の数字" data-area-id="metrics">
           <div className="mx-auto max-w-7xl px-5">
             <div className="grid gap-5 sm:grid-cols-3">
               {service.metrics.map((m, i) => (
@@ -246,7 +256,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 用途・依頼内容・適した業種 */}
       {(service.useCase || service.menu || service.industries) && (
-        <section className="border-y border-line py-20 md:py-24" aria-labelledby="usecase-heading">
+        <section className="border-y border-line py-20 md:py-24" aria-labelledby="usecase-heading" data-area="用途" data-area-id="usecase">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               id="usecase-heading"
@@ -335,7 +345,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 経理BPOだけ: どこまで任せられるか（FAQの1問目）に、1か月の流れの図と「できること・できないこと」で先に答える。
           記事から来る人がいちばん知りたいのはここ */}
       {service.slug === "keiri-bpo" && (
-        <section id="scope" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="scope-heading">
+        <section id="scope" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="scope-heading" data-area="任せられる範囲" data-area-id="scope">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               id="scope-heading"
@@ -355,7 +365,7 @@ export default async function ServicePage({ params }: Props) {
       )}
 
       {/* こんなお悩みありませんか */}
-      <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading">
+      <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading" data-area="お悩み" data-area-id="challenges">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead id="challenges-heading" title="こんなお悩みはありませんか?" />
           <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -390,7 +400,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 経理BPOだけ: 採用・派遣・外注を同じ軸で比べてから、任せるか自社で使うかを選ばせる */}
       {service.slug === "keiri-bpo" && (
-        <section id="compare" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="compare-heading">
+        <section id="compare" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="compare-heading" data-area="採用・派遣・外注の比較" data-area-id="compare">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               id="compare-heading"
@@ -409,7 +419,7 @@ export default async function ServicePage({ params }: Props) {
       {service.slug === "keiri-bpo" && <DeveloperCredit product="keiri" label="経理システム（セルフ版）" />}
 
       {/* 特長 */}
-      <section className="py-20 md:py-24" aria-labelledby="strength-heading">
+      <section className="py-20 md:py-24" aria-labelledby="strength-heading" data-area="特長" data-area-id="strength">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead id="strength-heading" title={`${service.name}の特長`} />
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
@@ -443,7 +453,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 取り組み例 */}
       {service.examples && (
-        <section id="examples" className="scroll-mt-24 border-t border-line py-20 md:py-24" aria-labelledby="examples-heading">
+        <section id="examples" className="scroll-mt-24 border-t border-line py-20 md:py-24" aria-labelledby="examples-heading" data-area="取り組み例" data-area-id="examples">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               id="examples-heading"
@@ -483,7 +493,7 @@ export default async function ServicePage({ params }: Props) {
       {/* 深掘り解説 */}
       {/* 白と薄灰が交互に続くだけだと最後まで同じ顔に見える。
           読みどころであるこの節だけ金の淡い面にして、縦のリズムを作る */}
-      <section className="border-y border-gold/20 bg-gold-tint py-20 md:py-28" aria-labelledby="insight-heading">
+      <section className="border-y border-gold/20 bg-gold-tint py-20 md:py-28" aria-labelledby="insight-heading" data-area="深掘り解説" data-area-id="insight">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="insight-heading"
@@ -525,7 +535,7 @@ export default async function ServicePage({ params }: Props) {
 
       {/* MEOページのみ: 仕組み解説 + 実績データ */}
       {service.slug === "meo" && (
-        <section className="py-20 md:py-24" aria-labelledby="meo-data-heading">
+        <section className="py-20 md:py-24" aria-labelledby="meo-data-heading" data-area="MEOの仕組みとデータ" data-area-id="meo-data">
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
               id="meo-data-heading"
@@ -596,6 +606,8 @@ export default async function ServicePage({ params }: Props) {
           id="scope"
           className={`scroll-mt-24 border-t border-line pt-20 md:pt-24 ${service.slug === "meo" ? "bg-mist" : ""}`}
           aria-labelledby="scope-heading"
+          data-area="できること・できないこと"
+          data-area-id="scope"
         >
           <div className="mx-auto max-w-7xl px-5">
             <SectionHead
@@ -611,7 +623,7 @@ export default async function ServicePage({ params }: Props) {
       )}
 
       {/* 進め方（段階図） */}
-      <section id="flow" className={`scroll-mt-24 py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading">
+      <section id="flow" className={`scroll-mt-24 py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading" data-area="進め方" data-area-id="flow">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead id="flow-heading" title={service.slug === "keiri-bpo" ? "ご依頼から開始までの流れ" : "ご支援の流れ"} />
           <div className="mt-12">
@@ -624,7 +636,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {/* FAQ */}
-      <section className={`py-20 md:py-24 ${service.slug === "meo" ? "" : "bg-mist"}`} aria-labelledby="faq-heading">
+      <section className={`py-20 md:py-24 ${service.slug === "meo" ? "" : "bg-mist"}`} aria-labelledby="faq-heading" data-area="よくある質問" data-area-id="faq">
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
@@ -637,7 +649,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       {/* 他のサービス */}
-      <section className="py-20 md:py-24" aria-labelledby="others-heading">
+      <section className="py-20 md:py-24" aria-labelledby="others-heading" data-area="他の事業" data-area-id="others">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead id="others-heading" title="他の事業を見る" />
           <div className="mt-10 flex flex-wrap gap-3">

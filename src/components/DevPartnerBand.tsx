@@ -26,7 +26,7 @@ const ARROW = (
 export default function DevPartnerBand() {
   const site = developerOrg.url.replace(/\/$/, "");
   return (
-    <section id="partner" className="scroll-mt-24 bg-paper py-20 md:py-28" aria-labelledby="partner-heading">
+    <section id="partner" data-area="開発の相談" data-area-id="partner" className="scroll-mt-24 bg-paper py-20 md:py-28" aria-labelledby="partner-heading">
       <div className="mx-auto max-w-7xl px-5">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-ink text-white shadow-lift">

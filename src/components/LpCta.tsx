@@ -14,6 +14,7 @@ export function StickyCta({
   href = "/contact",
   download = false,
   endId = "lp-end-cta",
+  entryFrom,
 }: {
   label?: string;
   note?: string;
@@ -22,6 +23,8 @@ export function StickyCta({
   download?: boolean;
   /** これが見えたらバーを引っ込める */
   endId?: string;
+  /** セルフチェックへ渡す出どころ（src/lib/entry.ts の data-entry-from） */
+  entryFrom?: string;
 }) {
   const [show, setShow] = useState(false);
   const sentinel = useRef<HTMLSpanElement>(null);
@@ -68,6 +71,7 @@ export function StickyCta({
           ) : (
             <Link
               href={href}
+              data-entry-from={entryFrom}
               className="shrink-0 rounded-full bg-pulse px-6 py-3 text-xs font-bold text-white shadow-glow"
             >
               {label}
@@ -92,7 +96,7 @@ export function MidCta({
   sub?: string;
 }) {
   return (
-    <section data-cta-pos="mid-cta" className="border-y border-line bg-ink py-14 text-paper md:py-16">
+    <section data-cta-pos="mid-cta" data-area="途中の相談" data-area-id="mid-cta" className="border-y border-line bg-ink py-14 text-paper md:py-16">
       <div className="mx-auto flex max-w-7xl flex-col items-start gap-7 px-5 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <h2 className="text-xl font-black leading-snug md:text-2xl">{title}</h2>
