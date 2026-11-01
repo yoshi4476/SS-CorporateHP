@@ -59,6 +59,11 @@ jobs:
       - name: ビルド
         run: npm run build
 
+      # 写真は同じ名前のまま差し替えるが、端末に7日控えられ、一度見た人には古い写真が出続けた（2026-11-02）。
+      # 書き出した out/ のページとデータの写真の場所に中身の指紋（?v=）を付け、変わった写真だけ取り直させる
+      - name: 写真の場所に版の印を付ける
+        run: python3 scripts/asset_version.py out
+
       # 一時的な通信エラーで止まらないよう、配信は3回まで試す
       - name: Cloudflare Pages へ配信
         env:
