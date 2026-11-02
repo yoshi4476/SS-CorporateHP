@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MediaShowcase from "@/components/MediaShowcase";
 import KeiriTwoTracks from "@/components/KeiriTwoTracks";
+import PhotoBand from "@/components/PhotoBand";
 import InlineToolBox from "@/components/InlineToolBox";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -364,11 +365,22 @@ export default async function ServicePage({ params }: Props) {
         </section>
       )}
 
+      {/* 文字の区画が続くので、写真の帯で区切る */}
+      <PhotoBand src={svcPhoto(service.slug, 4)} alt={`${service.name}を裏で支える仕事のイメージ`} />
+
       {/* こんなお悩みありませんか */}
       <section className="bg-mist py-20 md:py-24" aria-labelledby="challenges-heading" data-area="お悩み" data-area-id="challenges">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead id="challenges-heading" title="こんなお悩みはありませんか?" />
-          <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {/* 広い画面では左に困っている場面の写真、右にお悩みの一覧 */}
+          <div className="mt-10 grid gap-8 lg:grid-cols-[5fr_7fr] lg:items-start">
+          <Reveal>
+            <figure className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-lift lg:aspect-[4/5]">
+              <Image src={svcPhoto(service.slug, 5)} alt={`${service.name}を頼む前に困っている場面のイメージ`} fill loading="lazy" sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
+              <figcaption className="absolute bottom-3 right-4 text-xs text-white/80">※ 写真はイメージです</figcaption>
+            </figure>
+          </Reveal>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
             {service.challenges.map((c, i) => (
               <Reveal key={c} delay={i * 0.07}>
                 <div className="flex items-start gap-4 rounded-2xl border border-line bg-white p-6 shadow-card">
@@ -381,6 +393,7 @@ export default async function ServicePage({ params }: Props) {
                 </div>
               </Reveal>
             ))}
+          </div>
           </div>
           <Reveal delay={0.2}>
             <p className="mt-10 text-center text-lg font-bold md:text-xl">
@@ -621,6 +634,8 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </section>
       )}
+
+      <PhotoBand src={svcPhoto(service.slug, 6)} alt={`${service.name}の仕事が順に流れていく様子のイメージ`} />
 
       {/* 進め方（段階図） */}
       <section id="flow" className={`scroll-mt-24 py-20 md:py-24 ${service.slug === "meo" ? "bg-mist" : ""}`} aria-labelledby="flow-heading" data-area="進め方" data-area-id="flow">

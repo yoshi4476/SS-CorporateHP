@@ -1,8 +1,9 @@
 // 事業ページと業種紹介の写真。名前で引く（public/images/svc/ と public/images/ind/）。
 // どれも生成したイメージ写真で、支援先の写真ではない。
 
-/** 事業ごとの写真。1=ヒーロー（その事業の現場）、2=特長の上（任せた後の姿）、3=用途の横 */
-export function svcPhoto(slug: string, n: 1 | 2 | 3) {
+/** 事業ごとの写真。1=ヒーロー（その事業の現場）、2=特長の上（任せた後の姿）、3=用途の横、
+ *  4=お悩みの前の帯、5=お悩みの横（縦長。困っている場面）、6=進め方の前の帯 */
+export function svcPhoto(slug: string, n: 1 | 2 | 3 | 4 | 5 | 6) {
   return `/images/svc/${slug}-${n}.webp`;
 }
 
