@@ -353,11 +353,12 @@ export default function ContactForm() {
       </label>
 
       <label className="grid gap-2 text-xs font-bold text-ink">
-        <LabelText text="詳細 (任意)" />
+        {/* 送らずに離れた人が最後に触った項目はこの欄が最多（2026-10: 離脱9件のうち5件）。空欄で送れることと、短い書き方の例を見せる */}
+        <LabelText text="詳細 (任意・空欄のままでも送れます)" />
         <textarea
           name="message"
-          rows={5}
-          placeholder="現在の集客状況やお困りごとをご記入ください"
+          rows={3}
+          placeholder="例：記帳と請求書の処理を毎月任せたい／今の経理の流れで無駄な所を知りたい（ひとことで構いません）"
           className={inputCls}
           disabled={busy}
         />
