@@ -53,3 +53,5 @@
 /blog/keihi-seisan-kichodaiko-bpo-chigai/ /blog/backoffice-bpo-toha/ 301
 # 統合: keiri-zaimu-chigai に吸収（2026-10-26）
 /blog/kaikei-keiri-chigai/ /blog/keiri-zaimu-chigai/ 301
+# 統合: corporate-backoffice-chigai に吸収（2026-11-02）
+/blog/middle-office-backoffice-chigai/ /blog/corporate-backoffice-chigai/ 301
