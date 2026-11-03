@@ -20,12 +20,13 @@ export const coDeveloper = {
   name: "株式会社モチクロ",
 };
 
-export type ProductKey = "rakushift" | "keiri" | "aio-agent";
+export type ProductKey = "rakushift" | "keiri" | "aio-agent" | "stage";
 
 export const products: Record<ProductKey, { name: string; press: string; withCo: boolean }> = {
   rakushift: { name: "ラクシフトAI", press: "https://conflux-partners.jp/press/rakushift-ai", withCo: true },
   keiri: { name: "経理システム（セルフ版）", press: "https://conflux-partners.jp/press/keiri-system", withCo: false },
   "aio-agent": { name: "AIO（SEO）対策エージェント", press: "https://conflux-partners.jp/press/aio-seo-agent", withCo: false },
+  stage: { name: "STAGE", press: "https://conflux-partners.jp/press/stage", withCo: false },
 };
 
 /** 構造化データの creator（開発者の Person と、共同開発の会社） */

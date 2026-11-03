@@ -9,6 +9,7 @@ const PRODUCTS = [
   { name: "ラクシフトAI", href: "/rakushift", co: true },
   { name: "経理システム（セルフ版）", href: "/services/keiri-bpo", co: false },
   { name: "AIO（SEO）対策エージェント", href: "/aio-agent", co: false },
+  { name: "STAGE（先行受付）", href: "/stage", co: false },
 ];
 
 const TOPICS = [

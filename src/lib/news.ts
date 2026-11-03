@@ -14,6 +14,21 @@ export type NewsItem = {
 // 日付は旧サイト掲載時の実日付
 export const news: NewsItem[] = [
   {
+    slug: "stage-early-access",
+    date: "2026.11.03",
+    dateISO: "2026-11-03",
+    category: "事業",
+    title: "ホームページ更新サービス「STAGE」の先行受付を始めました。",
+    description:
+      "2026年11月3日、店舗・中小企業向けのホームページ更新サービス「STAGE」の先行受付を始めました。今のホームページを取り込み、許可された箇所だけを迷わず・壊さずに更新できます。提供開始の前に、関心のある方の受付をしています。",
+    body: [
+      "当社は、店舗・中小企業向けのホームページ更新サービス「STAGE」の先行受付を始めました。提供開始の前に、関心のある方の受付をしています。",
+      "STAGE は、今お使いのホームページを当社が取り込み、お客様は許可された箇所だけを、迷わず・壊さずに更新できるサービスです。YW（CONFLUX PARTNERS）が開発しました。",
+      "内容と予定の価格は、サービスのページをご覧ください。機能と価格は、提供開始までに変わることがあります。",
+    ],
+    link: { label: "開発元のプレスリリース（CONFLUX PARTNERS）", url: "https://conflux-partners.jp/press/stage" },
+  },
+  {
     slug: "rakushift-ai-development",
     date: "2026.10.06",
     dateISO: "2026-10-06",

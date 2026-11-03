@@ -120,6 +120,7 @@ const OPTIONS: { value: string; label: string }[] = [
   ...services.map((s) => ({ value: s.slug, label: s.name })),
   // 自社プロダクト。どちらの問い合わせか受信側で分かるようにする
   { value: "rakushift", label: "ラクシフトAI (シフト自動作成)" },
+  { value: "stage", label: "STAGE (ホームページ更新・先行受付)" },
   { value: "aio-agent", label: "AIO（SEO）対策エージェント" },
   { value: "all", label: "まとめて相談したい" },
   { value: "other", label: "その他・まだ決まっていない" },
