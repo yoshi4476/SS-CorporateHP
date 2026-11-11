@@ -48,12 +48,16 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
 
   // 動画はページの読み込みが終わってから読む（最初の画面は軽い静止画で出す）。
   // 全画面の動画を先に読むと、スマホで主要部分が出るまで5秒かかっていた。スマホには小さい動画を渡す
-  const [src, setSrc] = useState<{ webm: string; mp4: string } | null>(null);
+  const [src, setSrc] = useState<string | null>(null);
   const [playing, setPlaying] = useState(false);
   useEffect(() => {
     if (still) return;
     const small = window.matchMedia("(max-width: 900px)").matches;
-    const pick = () => setSrc(small ? { webm: "/videos/hero-m.webm", mp4: "/videos/hero-m.mp4" } : { webm: "/videos/hero.webm", mp4: "/videos/hero.mp4" });
+    // <source> を2つ並べると、両方の形式を読みに行くことがあった（スマホの計測で webm と mp4 の各 1.6MB）。再生できる方を1つだけ渡す
+    const pick = () => {
+      const webm = !!ref.current?.canPlayType('video/webm; codecs="vp9"');
+      setSrc(`/videos/hero${small ? "-m" : ""}.${webm ? "webm" : "mp4"}`);
+    };
     const later = () => window.setTimeout(pick, 600);
     if (document.readyState === "complete") later();
     else window.addEventListener("load", later, { once: true });
@@ -90,11 +94,9 @@ export default function HeroVideo({ objectPosition = "center" }: { objectPositio
           playsInline
           preload="none"
           aria-hidden
+          src={src ?? undefined}
           onPlaying={() => setPlaying(true)}
-        >
-          {src && <source src={src.webm} type="video/webm" />}
-          {src && <source src={src.mp4} type="video/mp4" />}
-        </video>
+        />
       )}
 
       {/* 場面の字幕: 時刻と場面 → その現場で当社が引き受けていること（事業名つき） → 対応業種。
