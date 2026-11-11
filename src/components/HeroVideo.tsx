@@ -1,15 +1,15 @@
 "use client";
 
-// ヒーローの全画面動画。ある街の一日（夜明け → 出勤 → オフィス → 商店街 → 夕方の住宅街 → 夜）を
-// 実写調の場面でつなぎ、その現場で当社が引き受けていることと対応業種を、場面に合わせて入れ替える。
-// 名前は動画の再生位置から決めるので、読み込みが遅れても場面とずれない。
-// 動きを控える設定の人には静止画（最初の場面）と、全業種の一覧だけを出す。
+// ヒーローの全画面の写真。ある街の一日（夜明け → 通勤 → 事務所 → 商店街 → 帰り道 → 閉店後）を
+// 6 枚の写真でつなぎ、その現場で当社が引き受けていることと対応業種を、場面に合わせて入れ替える。
+// 以前は作った動画（夕方の光の映像）を流していたが、作り物に見え、スマホで 1.6MB を読んでいた。
+// いまは人の顔と表情が見える写真を 4.5 秒ごとに切り替える（最初の 1 枚だけ先に読み、残りは読み込みの後）。
+// 動きを控える設定の人には最初の 1 枚と、全業種の一覧だけを出す。写真はイメージ。
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-// 動画と同じ順番・同じ長さ（make_hero_video3.py: 4.5秒ごとに次の場面へ1.5秒かけて切り替わる）
+// 場面を切り替える間隔（秒）
 const SCENE_SEC = 4.5;
-const FADE_MID = 0.75;
 // 場面ごとに「その時間に動いている現場」と「そこで当社が引き受けていること」を対にする。
 // 業種だけを並べると何の話か分からなかったため、支援の中身と事業名を必ず添える
 export const STORY = [
@@ -22,81 +22,53 @@ export const STORY = [
 ];
 
 export default function HeroVideo({ objectPosition = "center" }: { objectPosition?: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
   const [still, setStill] = useState(false);
   const [i, setI] = useState(0);
+  // 2 枚目からは、ページの読み込みが終わってから読む（最初の画面は 1 枚目だけで出す）
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => {
-      setStill(mq.matches);
-      if (mq.matches) ref.current?.pause();
-    };
+    const apply = () => setStill(mq.matches);
     apply();
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
   }, []);
 
   useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    const n = STORY.length;
-    const tick = () => setI(((Math.floor((v.currentTime - FADE_MID) / SCENE_SEC) % n) + n) % n);
-    v.addEventListener("timeupdate", tick);
-    return () => v.removeEventListener("timeupdate", tick);
-  }, [still]);
-
-  // 動画はページの読み込みが終わってから読む（最初の画面は軽い静止画で出す）。
-  // 全画面の動画を先に読むと、スマホで主要部分が出るまで5秒かかっていた。スマホには小さい動画を渡す
-  const [src, setSrc] = useState<string | null>(null);
-  const [playing, setPlaying] = useState(false);
-  useEffect(() => {
     if (still) return;
-    const small = window.matchMedia("(max-width: 900px)").matches;
-    // <source> を2つ並べると、両方の形式を読みに行くことがあった（スマホの計測で webm と mp4 の各 1.6MB）。再生できる方を1つだけ渡す
-    const pick = () => {
-      const webm = !!ref.current?.canPlayType('video/webm; codecs="vp9"');
-      setSrc(`/videos/hero${small ? "-m" : ""}.${webm ? "webm" : "mp4"}`);
-    };
-    const later = () => window.setTimeout(pick, 600);
+    const later = () => window.setTimeout(() => setReady(true), 600);
     if (document.readyState === "complete") later();
     else window.addEventListener("load", later, { once: true });
     return () => window.removeEventListener("load", later);
   }, [still]);
+
   useEffect(() => {
-    const v = ref.current;
-    if (!v || !src) return;
-    v.load();
-    v.play().catch(() => {});
-  }, [src]);
+    if (still || !ready) return;
+    const id = window.setInterval(() => setI((n) => (n + 1) % STORY.length), SCENE_SEC * 1000);
+    return () => window.clearInterval(id);
+  }, [still, ready]);
 
   const s = STORY[i];
   return (
     <>
-      {/* 最初に出す静止画（主要部分）。スマホは小さい版を読む */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/videos/hero-poster.webp"
-        srcSet="/videos/hero-poster-960.webp 960w, /videos/hero-poster.webp 1600w"
-        sizes="100vw"
-        alt="朝の大阪の街並み"
-        fetchPriority="high"
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition }}
-      />
-      {!still && (
-        <video
-          ref={ref}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${playing ? "opacity-100" : "opacity-0"}`}
-          style={{ objectPosition }}
-          muted
-          loop
-          playsInline
-          preload="none"
-          aria-hidden
-          src={src ?? undefined}
-          onPlaying={() => setPlaying(true)}
-        />
+      {STORY.map((scene, n) =>
+        n === 0 || (ready && !still) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            key={scene.time}
+            src={`/videos/hero-scene-${n + 1}.webp`}
+            srcSet={`/videos/hero-scene-${n + 1}-960.webp 960w, /videos/hero-scene-${n + 1}.webp 1600w`}
+            sizes="100vw"
+            alt={n === 0 ? "朝の商店街で、届いた荷物を確かめる店主と配達の担当者" : ""}
+            aria-hidden={n === 0 ? undefined : true}
+            fetchPriority={n === 0 ? "high" : "low"}
+            loading={n === 0 ? "eager" : "lazy"}
+            decoding={n === 0 ? "sync" : "async"}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1500ms] ${n === i ? "opacity-100" : "opacity-0"}`}
+            style={{ objectPosition }}
+          />
+        ) : null,
       )}
 
       {/* 場面の字幕: 時刻と場面 → その現場で当社が引き受けていること（事業名つき） → 対応業種。

@@ -140,7 +140,8 @@ export default function Home() {
             <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
               {[
                 { n: 3200, unit: "件", label: ["AIO・SEO・MEOの", "累計支援"] },
-                { n: 350, unit: "万円", label: ["補助上限", "（インボイス枠）"] },
+                // 以前は補助金の上限額（350万円）を置いていたが、制度の額で当社の実績ではない。経理BPOの実績に替えた（first_party_facts の keiri-bpo-10）
+                { n: 48, unit: "社", label: ["経理代行・記帳代行の", "担当（2023年4月〜）"] },
                 { n: services.length, unit: "事業", label: ["一気通貫で", "支援"] },
               ].map((s) => (
                 <div key={s.unit} className="flex flex-col">
@@ -377,7 +378,7 @@ export default function Home() {
             />
             <Reveal delay={0.1}>
               <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lift">
-                <Image src="/images/scene-aio.webp" alt="スマートフォンでAIに質問する手元" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-[45%_center]" />
+                <Image src="/images/scene-aio.webp" alt="事務所の机で、スマートフォンのAIの答えを確かめる様子" fill sizes="(min-width: 768px) 40vw, 100vw" className="object-cover object-[45%_center]" />
               </figure>
             </Reveal>
           </div>

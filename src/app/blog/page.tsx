@@ -85,7 +85,7 @@ export default function BlogPage() {
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
           style={{ maskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)" }}
         >
-          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書と請求書を読み取って仕分ける経理の手元のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
+          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書と請求書を読み取って仕分ける経理の担当者のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
         </div>
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-14 md:pb-20 md:pt-20">
           <Reveal>
@@ -385,6 +385,24 @@ export default function BlogPage() {
               </a>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* すべての記事（新しい順）。一覧に出るのは新しい数本とテーマ別だけで、どのページからも一覧されない記事が 18 本あった。
+          検索エンジンが「存在は知っているが読みに来ない」（検出 - インデックス未登録）記事が 27 本あり、一覧から 1 回で届くようにする（2026-11-12） */}
+      <section className="border-t border-line py-16 md:py-20" aria-labelledby="all-posts-heading" data-area="すべての記事" data-area-id="all-posts">
+        <div className="mx-auto max-w-7xl px-5">
+          <h2 id="all-posts-heading" className="text-xl font-black md:text-2xl">すべての記事（新しい順・{posts.length}本）</h2>
+          <ul className="mt-6 grid gap-x-8 gap-y-2 md:grid-cols-2">
+            {posts.map((p) => (
+              <li key={p.slug} className="flex gap-3 border-b border-line py-2 text-sm leading-7">
+                <span className="num shrink-0 text-xs leading-7 text-slate">{displayDate(p.date)}</span>
+                <Link href={`/blog/${p.slug}`} className="min-w-0 font-medium text-ink hover:text-pulse hover:underline">
+                  {p.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

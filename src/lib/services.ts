@@ -77,11 +77,11 @@ export const services: Service[] = [
     seoTitle: "経理BPO・記帳代行｜記帳から給与まで外注",
     image: {
       src: "/images/svc/keiri-bpo-1.webp",
-      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の手元",
+      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の担当者",
     },
     cardImage: {
       src: "/images/svc/keiri-bpo-1.webp",
-      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の手元",
+      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の担当者",
     },
     name: "経理BPO・記帳代行",
     en: "Accounting BPO",

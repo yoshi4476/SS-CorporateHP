@@ -287,7 +287,7 @@ export default function CompanyPage() {
           <div className="grid gap-5 sm:grid-cols-2 lg:sticky lg:top-28 lg:grid-cols-1">
             {[
               { src: "/images/corp-office.webp", alt: "朝の光が差す、整った事務所のイメージ" },
-              { src: "/images/corp-team.webp", alt: "窓辺で書類を手に進め方を話し合う三人の後ろ姿のイメージ" },
+              { src: "/images/corp-team.webp", alt: "窓辺で書類を手に進め方を話し合う三人のイメージ" },
             ].map((im, i) => (
               <Reveal key={im.src} delay={0.15 + i * 0.08}>
                 <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card">
