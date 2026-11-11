@@ -12,6 +12,7 @@ import { SectionHead, StatTile, FaqList, CtaBand, Rich, RichLinked } from "@/com
 import { StageDiagram, ScopeTable } from "@/components/ServiceFigures";
 import KeiriMonthFlow from "@/components/KeiriMonthFlow";
 import KeiriCompare from "@/components/KeiriCompare";
+import KeiriCostGuide from "@/components/KeiriCostGuide";
 import ResearchBand from "@/components/ResearchBand";
 import DeveloperCredit from "@/components/DeveloperCredit";
 import { creatorLd } from "@/lib/developer";
@@ -430,6 +431,22 @@ export default async function ServicePage({ params }: Props) {
       {/* 経理BPOだけ: 任せるか自社で使うかを、比較の直後に選ばせる */}
       {service.slug === "keiri-bpo" && <KeiriTwoTracks />}
       {service.slug === "keiri-bpo" && <DeveloperCredit product="keiri" label="経理システム（セルフ版）" />}
+
+      {/* 経理BPOだけ: 費用の目安。料金が個別見積りでも、判断の物差し（公開されている相場）が無いと問い合わせる前に帰ってしまう */}
+      {service.slug === "keiri-bpo" && (
+        <section id="cost" className="scroll-mt-24 bg-mist py-20 md:py-24" aria-labelledby="cost-heading" data-area="費用の目安" data-area-id="cost">
+          <div className="mx-auto max-w-7xl px-5">
+            <SectionHead
+              id="cost-heading"
+              title="費用の目安"
+              lead="当社の料金は、任せる業務の範囲と量を伺ってからお見積りします。判断の物差しとして、==公開されている相場==を載せます。"
+            />
+            <Reveal className="mt-12">
+              <KeiriCostGuide />
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* 特長 */}
       <section className="py-20 md:py-24" aria-labelledby="strength-heading" data-area="特長" data-area-id="strength">
