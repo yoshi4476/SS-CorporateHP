@@ -193,21 +193,79 @@ export default function Home() {
               します。現場で積み上げた実践データを、誰でも再現できる仕組みへ。それがセブンセンシズの仕事です。
             </p>
           </Reveal>
-          <Reveal delay={0.25}>
-            <figure className="group relative mx-auto mt-14 aspect-[16/9] max-w-6xl overflow-hidden rounded-[2rem] shadow-lift md:mt-20 md:aspect-[21/9]">
-              <Image
-                src="/images/scene-vision.webp"
-                alt="明るいオフィスで、施策を数字で話し合うチーム"
-                fill
-                sizes="(min-width: 1280px) 1152px, 100vw"
-                className="object-cover object-[50%_40%] transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
-              />
-              <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent" />
-              <figcaption className="absolute bottom-5 left-6 text-left text-white md:bottom-8 md:left-10">
-                <span className="mt-2 block text-base font-bold md:text-2xl">現場のデータを、仕組みに。</span>
-              </figcaption>
-            </figure>
-          </Reveal>
+        </div>
+      </section>
+
+      {/* 2画面目のすぐ下で、実写（登壇の写真）と代表の言葉を見せる。以前はページの中ほどにあり、先に作った写真が出ていた */}
+      {/* 現場写真 + 代表メッセージ */}
+      <section id="field" data-area="現場と代表" data-area-id="field" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-32" aria-labelledby="field-heading">
+        <div aria-hidden className="grid-field-dark absolute inset-0" />
+        <div className="relative mx-auto max-w-7xl px-5">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
+            <div>
+              <Reveal>
+                <p aria-hidden className="eyebrow !text-aqua" />
+                <h2 id="field-heading" className="mt-3 text-3xl font-bold md:text-5xl">
+                  机上ではなく、現場から。
+                </h2>
+                <p className="mt-5 max-w-xl text-[15px] leading-[1.9] text-white/65 md:text-base">
+                  全国でのセミナー登壇や店舗支援の現場——累計3,200件の支援と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
+                </p>
+              </Reveal>
+              <Reveal delay={0.12}>
+                <figure className="mt-8 border-l-2 border-aqua pl-6">
+                  <blockquote className="text-base font-bold leading-9 md:text-lg">
+                    「成功に必要なのは、プロの知見と、運を活かす提案。
+                    <br />
+                    その両方を届けるのが、セブンセンシズです。」
+                  </blockquote>
+                  <figcaption className="mt-3 text-xs text-white/50">
+                    代表取締役 {site.ceo}
+                  </figcaption>
+                </figure>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <Link
+                  href="/company"
+                  className="tap mt-8 gap-2 text-sm font-bold text-aqua underline-offset-4 hover:underline"
+                >
+                  代表メッセージ・会社概要を見る
+                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
+                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                  </svg>
+                </Link>
+              </Reveal>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <Reveal className="col-span-2">
+                <Image
+                  src="/images/seminar-2.jpg"
+                  alt="セブンセンシズ代表によるGoogleビジネスプロフィール活用セミナーの登壇風景"
+                  width={700}
+                  height={525}
+                  className="aspect-[16/10] w-full rounded-2xl object-cover shadow-lift"
+                />
+              </Reveal>
+              <Reveal delay={0.1}>
+                <Image
+                  src="/images/seminar-1.jpg"
+                  alt="経営者向け勉強会で店舗集客を解説する様子"
+                  width={700}
+                  height={525}
+                  className="aspect-square w-full rounded-2xl object-cover"
+                />
+              </Reveal>
+              <Reveal delay={0.16}>
+                <Image
+                  src="/images/seminar-3.jpg"
+                  alt="セミナーで質疑応答に応える代表"
+                  width={700}
+                  height={525}
+                  className="aspect-square w-full rounded-2xl object-cover"
+                />
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -390,78 +448,6 @@ export default function Home() {
                 AI集客ラボ (運営メディア) ↗
               </a>
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 現場写真 + 代表メッセージ */}
-      <section id="field" data-area="現場と代表" data-area-id="field" className="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white md:py-32" aria-labelledby="field-heading">
-        <div aria-hidden className="grid-field-dark absolute inset-0" />
-        <div className="relative mx-auto max-w-7xl px-5">
-          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_1fr]">
-            <div>
-              <Reveal>
-                <p aria-hidden className="eyebrow !text-aqua" />
-                <h2 id="field-heading" className="mt-3 text-3xl font-bold md:text-5xl">
-                  机上ではなく、現場から。
-                </h2>
-                <p className="mt-5 max-w-xl text-[15px] leading-[1.9] text-white/65 md:text-base">
-                  全国でのセミナー登壇や店舗支援の現場——累計3,200件の支援と向き合ってきたのは、資料の中ではなく現場です。だから私たちの提案は、机上の空論になりません。
-                </p>
-              </Reveal>
-              <Reveal delay={0.12}>
-                <figure className="mt-8 border-l-2 border-aqua pl-6">
-                  <blockquote className="text-base font-bold leading-9 md:text-lg">
-                    「成功に必要なのは、プロの知見と、運を活かす提案。
-                    <br />
-                    その両方を届けるのが、セブンセンシズです。」
-                  </blockquote>
-                  <figcaption className="mt-3 text-xs text-white/50">
-                    代表取締役 {site.ceo}
-                  </figcaption>
-                </figure>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <Link
-                  href="/company"
-                  className="tap mt-8 gap-2 text-sm font-bold text-aqua underline-offset-4 hover:underline"
-                >
-                  代表メッセージ・会社概要を見る
-                  <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden>
-                    <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                  </svg>
-                </Link>
-              </Reveal>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <Reveal className="col-span-2">
-                <Image
-                  src="/images/seminar-2.jpg"
-                  alt="セブンセンシズ代表によるGoogleビジネスプロフィール活用セミナーの登壇風景"
-                  width={700}
-                  height={525}
-                  className="aspect-[16/10] w-full rounded-2xl object-cover shadow-lift"
-                />
-              </Reveal>
-              <Reveal delay={0.1}>
-                <Image
-                  src="/images/seminar-1.jpg"
-                  alt="経営者向け勉強会で店舗集客を解説する様子"
-                  width={700}
-                  height={525}
-                  className="aspect-square w-full rounded-2xl object-cover"
-                />
-              </Reveal>
-              <Reveal delay={0.16}>
-                <Image
-                  src="/images/seminar-3.jpg"
-                  alt="セミナーで質疑応答に応える代表"
-                  width={700}
-                  height={525}
-                  className="aspect-square w-full rounded-2xl object-cover"
-                />
-              </Reveal>
-            </div>
           </div>
         </div>
       </section>
