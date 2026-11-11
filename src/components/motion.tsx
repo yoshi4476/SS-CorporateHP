@@ -12,6 +12,48 @@ function reducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+// 見張りは全部の Reveal で共有し、位置は自分で測らない。
+// 以前は部品ごとに getBoundingClientRect で位置を測ってから隠す印を付けていたため、開いた瞬間に
+// 「測る → 印を付ける → 次の部品が測る（レイアウトのやり直し）」が部品の数だけ（トップで 25、全体で 180 か所）続いていた。
+// いまは 1 つ目の見張り（画面の上下 80px 外まで）が最初の報告で「見えている／いない」を教え、
+// 見えていない部品にだけ隠す印を付けて、2 つ目の見張り（画面の内側 80px）に渡す。
+let first: IntersectionObserver | null = null;
+let enter: IntersectionObserver | null = null;
+
+function watch(el: Element) {
+  if (!enter) {
+    enter = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add("is-in");
+          enter?.unobserve(e.target);
+        }
+      },
+      { rootMargin: "-80px 0px" },
+    );
+  }
+  if (!first) {
+    first = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          first?.unobserve(e.target);
+          if (e.isIntersecting) continue; // 既に見えている＝隠さない
+          e.target.classList.add("rv");
+          enter?.observe(e.target);
+        }
+      },
+      { rootMargin: "80px 0px" },
+    );
+  }
+  first.observe(el);
+}
+
+function unwatch(el: Element) {
+  first?.unobserve(el);
+  enter?.unobserve(el);
+}
+
 export function Reveal({
   children,
   delay = 0,
@@ -26,20 +68,8 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el || reducedMotion()) return;
-    const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight + 80 && r.bottom > -80) return; // 既に見えている＝隠さない
-    el.classList.add("rv");
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          el.classList.add("is-in");
-          io.disconnect();
-        }
-      },
-      { rootMargin: "-80px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
+    watch(el);
+    return () => unwatch(el);
   }, []);
 
   return (
