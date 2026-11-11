@@ -136,10 +136,6 @@ export default function Home() {
               <Link href="/services/ai-subsidy" data-cta="top_hero_ai-subsidy" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
                 補助金
               </Link>
-              ／
-              <Link href="/#selfcheck" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
-                無料のセルフチェック
-              </Link>
             </p>
             <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
               {[

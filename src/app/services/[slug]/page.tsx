@@ -31,7 +31,7 @@ function reviewedLabel() {
   return `${d.getFullYear()}年${d.getMonth() + 1}月`;
 }
 import { site } from "@/lib/site";
-import { industryPhoto, svcPhoto } from "@/lib/photos";
+import { svcPhoto } from "@/lib/photos";
 import { pageMeta } from "@/lib/meta";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -268,7 +268,7 @@ export default async function ServicePage({ params }: Props) {
 
             <div className="mt-12 grid gap-6 lg:grid-cols-[1.25fr_1fr]">
               {service.useCase && (
-                <Reveal className="rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
+                <Reveal className="self-start rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
                   <p className="mt-5 text-[15px] leading-[1.9] text-slate md:text-base">
                     <RichLinked text={service.useCase.body} />
@@ -324,19 +324,16 @@ export default async function ServicePage({ params }: Props) {
                 <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                   {service.industries.map((ind, i) => (
                     <Reveal key={ind.name} delay={(i % 4) * 0.08}>
-                      <article className="group h-full overflow-hidden rounded-2xl border border-line bg-white shadow-card">
-                        <figure className="relative aspect-[16/10] overflow-hidden">
-                          <Image src={industryPhoto(ind.name)} alt={`${ind.name}の現場のイメージ`} fill sizes="(min-width: 1280px) 300px, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                          <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-                          <h3 className="absolute inset-x-4 bottom-3 text-base font-bold leading-snug text-white">{ind.name}</h3>
-                        </figure>
-                        <p className="p-5 text-sm leading-7 text-slate">{ind.body}</p>
+                      {/* 以前は業種ごとに生成のイメージ写真を置いていたが、名前の当て方で同じ写真が2枚並ぶ事業があった。写真をやめて文字で読ませる */}
+                      <article className="h-full rounded-2xl border border-line border-t-2 border-t-pulse bg-white p-6 shadow-card">
+                        <h3 className="text-base font-bold leading-snug text-ink">{ind.name}</h3>
+                        <p className="mt-3 text-sm leading-7 text-slate">{ind.body}</p>
                       </article>
                     </Reveal>
                   ))}
                 </div>
                 <p className="mt-6 text-sm leading-7 text-slate">
-                  ※ 写真はイメージです。上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
+                  ※ 上記以外の業種でもご相談いただけます。適しているかどうかも含めて、無料相談でお答えします。
                 </p>
               </div>
             )}
