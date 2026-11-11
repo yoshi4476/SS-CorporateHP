@@ -13,6 +13,7 @@ import { StageDiagram, ScopeTable } from "@/components/ServiceFigures";
 import KeiriMonthFlow from "@/components/KeiriMonthFlow";
 import KeiriCompare from "@/components/KeiriCompare";
 import KeiriCostGuide from "@/components/KeiriCostGuide";
+import ContactForm from "@/components/ContactForm";
 import ResearchBand from "@/components/ResearchBand";
 import DeveloperCredit from "@/components/DeveloperCredit";
 import { creatorLd } from "@/lib/developer";
@@ -441,6 +442,23 @@ export default async function ServicePage({ params }: Props) {
             <Reveal className="mt-12">
               <KeiriCostGuide />
             </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* 経理BPOだけ: 費用の目安のすぐ後で相談できるようにする。以前はフォームが別のページ（/contact）にしか無く、
+          ここまで読んだ人がページを移らないと相談できなかった */}
+      {service.slug === "keiri-bpo" && (
+        <section id="consult" className="scroll-mt-24 py-20 md:py-24" aria-labelledby="consult-heading" data-area="相談フォーム" data-area-id="consult">
+          <div className="mx-auto max-w-3xl px-5">
+            <SectionHead
+              id="consult-heading"
+              title="経理の外注を、このまま相談する"
+              lead="いまの業務量と体制を伺い、任せられる範囲とお見積りの目安をお返しします。==営業のお電話はしません。=="
+            />
+            <div className="mt-10">
+              <ContactForm service="keiri-bpo" />
+            </div>
           </div>
         </section>
       )}

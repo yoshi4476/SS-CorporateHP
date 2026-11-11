@@ -101,6 +101,9 @@ h4 {
   font-family: var(--font-display);
   line-height: 1.4;
   letter-spacing: 0.03em;
+  /* 見出しを語の途中で折らない（「4つのス／テップ」「作成ツー／ル」のような折れ方をしていた）。行の長さもそろえる */
+  word-break: auto-phrase;
+  text-wrap: balance;
 }
 
 /* 区画の起点の小見出し。以前は英字の大文字（スマホで 9.92px・字間 0.16〜0.32em）で、

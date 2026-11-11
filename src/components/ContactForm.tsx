@@ -145,7 +145,8 @@ function pickOption(want: string): string {
   return NEAR.find(([re]) => re.test(want))?.[1] ?? "other";
 }
 
-export default function ContactForm() {
+/** service: フォームを置いたページの事業（例: 経理BPOのページなら keiri-bpo）。相談の内容の初期値にする */
+export default function ContactForm({ service }: { service?: string } = {}) {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [sentSlug, setSentSlug] = useState("");
@@ -157,11 +158,11 @@ export default function ContactForm() {
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
   // 選び直させると1手増えるので、初期値を入れておく。
   useEffect(() => {
-    const pick = pickOption((new URLSearchParams(entrySearch("/contact")).get("s") ?? "").trim().toLowerCase());
+    const pick = pickOption((service ?? new URLSearchParams(entrySearch("/contact")).get("s") ?? "").trim().toLowerCase());
     if (!pick) return;
     const sel = formRef.current?.elements.namedItem("service");
     if (sel instanceof HTMLSelectElement) sel.value = pick;
-  }, []);
+  }, [service]);
 
   // 送らずに離れた人が、どの欄で止まったか（form_abandon・最後に触った欄つき）。
   // 開いた8人のうち送ったのは1人だったが、どこで止まったかが分からず直しようがなかった（2026-10-04）

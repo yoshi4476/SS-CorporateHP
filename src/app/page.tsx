@@ -119,16 +119,13 @@ export default function Home() {
               >
                 無料相談を予約する
               </Link>
-              <Link
-                href="/services/keiri-bpo"
-                data-cta="top_hero_keiri-bpo"
-                className="inline-flex items-center justify-center rounded-full border border-white/40 px-8 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:border-aqua hover:text-aqua"
-              >
-                経理・記帳を任せたい方へ
-              </Link>
             </div>
             <p className="mt-5 text-[13px] leading-7 text-white/75">
-              ほかのご用件:
+              ご用件別:
+              <Link href="/services/keiri-bpo" data-cta="top_hero_keiri-bpo" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
+                経理・記帳を任せたい
+              </Link>
+              ／
               <Link href="/services/aio" data-cta="top_hero_aio" className="mx-1.5 inline-block font-bold text-white underline decoration-white/40 underline-offset-4 hover:text-aqua">
                 集客（AI検索・MEO）
               </Link>
@@ -141,7 +138,7 @@ export default function Home() {
               {[
                 { n: 3200, unit: "件", label: ["AIO・SEO・MEOの", "累計支援"] },
                 // 以前は補助金の上限額（350万円）を置いていたが、制度の額で当社の実績ではない。経理BPOの実績に替えた（first_party_facts の keiri-bpo-10）
-                { n: 48, unit: "社", label: ["経理代行・記帳代行の", "担当（2023年4月〜）"] },
+                { n: 48, unit: "社", label: ["経理・記帳の", "代行を担当"] },
                 { n: services.length, unit: "事業", label: ["一気通貫で", "支援"] },
               ].map((s) => (
                 <div key={s.unit} className="flex flex-col">
