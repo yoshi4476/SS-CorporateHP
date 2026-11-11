@@ -1,7 +1,7 @@
 "use client";
 
-// ヘッダー: ロゴ + ハンバーガーのみ。
-// 全ナビゲーションはフルスクリーンのオーバーレイメニューに集約。
+// ヘッダー: パソコン（lg 以上）は横並びのメニュー、それより狭い画面はロゴ + 丸いメニューボタン。
+// 以前はパソコンでも両方を出していて、押す所が散っていた。開くメニューは狭い画面だけで使う。
 // 開閉で背面スクロールをロックし、項目はスタッガーで立ち上がる。
 
 import Image from "next/image";
@@ -176,18 +176,8 @@ export default function Header() {
               <Link href="/company" className="text-sm font-medium text-ink transition-colors hover:text-pulse">
                 会社概要
               </Link>
-              {/* 自社で運営している別サイト。別タブで開くことが分かるよう ↗ を添える */}
-              {RELATED_SITES.map((r) => (
-                <a
-                  key={r.href}
-                  href={r.href}
-                  target="_blank"
-                  rel="noopener"
-                  className="hidden text-sm font-medium text-slate transition-colors hover:text-pulse xl:block"
-                >
-                  {r.label} ↗
-                </a>
-              ))}
+              {/* 自社で運営している別サイト（補助金LP・AI集客ラボ）は、相談の手前で人が出ていくのでここには並べない。
+                  スマホの開くメニューとフッターの「運営サイト」に残してある */}
               <div className="group relative">
                 {/* 相談の手前の入口なので、他の項目より少し目立たせる */}
                 <span className="flex cursor-default items-center gap-1.5 rounded-full border border-pulse/35 bg-pulse/5 px-4 py-2 text-sm font-bold text-pulse transition-colors group-hover:border-pulse group-hover:bg-pulse/10">
@@ -233,7 +223,7 @@ export default function Header() {
               </div>
               <Link
                 href="/contact"
-                  className="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white shadow-card transition-colors hover:bg-pulse"
+                  className="rounded-full bg-gold-bright px-6 py-2.5 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5"
               >
                 無料相談
               </Link>
@@ -245,7 +235,7 @@ export default function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "メニューを閉じる" : "メニューを開く"}
-                  className={`flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full shadow-card transition-colors duration-300 md:h-14 md:w-14 ${
+                  className={`flex h-12 w-12 flex-col items-center justify-center gap-1.5 rounded-full shadow-card transition-colors duration-300 md:h-14 md:w-14 lg:hidden ${
               open ? "bg-aqua" : "bg-pulse hover:bg-pulse-deep"
             }`}
           >

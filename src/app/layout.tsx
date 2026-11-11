@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileCta from "@/components/MobileCta";
 import Effects from "@/components/Effects";
 import JsonLd from "@/components/JsonLd";
 import Tracking from "@/components/Tracking";
@@ -93,6 +94,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </Effects>
+        <MobileCta />
       </body>
     </html>
   );

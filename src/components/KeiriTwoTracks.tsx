@@ -121,7 +121,7 @@ export default function KeiriTwoTracks() {
                   <Link
                     href={t.cta.href}
                     data-entry-s={t.cta.s}
-                    className="inline-block rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                    className="inline-block rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5"
                   >
                     {t.cta.label} →
                   </Link>

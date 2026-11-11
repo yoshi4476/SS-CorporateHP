@@ -21,9 +21,11 @@ export default function SelfCheckBand() {
             "radial-gradient(ellipse 55% 75% at 82% 15%, rgb(28 63 124 / 0.55), transparent 62%), radial-gradient(ellipse 45% 60% at 10% 92%, rgb(116 199 214 / 0.12), transparent 62%)",
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+      <div className="relative mx-auto max-w-7xl px-5 py-16 md:py-24">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-start lg:gap-14">
-          <Reveal>
+          {/* 左: 見出しと、経理のチェック。以前は左に写真（机で画面を見る2人）を置いていた。写真を外した分、経理のチェックを左へ移して
+              左右の高さを近づけた（右は Web集客・AI検索の診断） */}
+          <div>
             <p className="eyebrow !text-aqua">無料セルフチェック</p>
             <h2 id="selfcheck-heading" className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">
               相談の前に、
@@ -39,20 +41,15 @@ export default function SelfCheckBand() {
               <li>その場で結果</li>
               <li>費用なし</li>
             </ul>
-            <figure className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:block">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/selfcheck.webp" alt="事務所で、サイトの採点結果を一緒に確かめる二人" loading="lazy" className="h-full w-full object-cover" />
-            </figure>
-          </Reveal>
-
-          <div className="grid gap-4">
-            <Reveal delay={0.04}>
+            <Reveal delay={0.04} className="mt-10">
               <p className="mb-3 text-[13px] font-bold tracking-wide text-gold-bright">経理</p>
               <InlineToolBox from="/" place="top" tone="dark" />
             </Reveal>
+          </div>
 
+          <div className="grid gap-4">
             <Reveal delay={0.08}>
-              <p className="mb-1 mt-6 text-[13px] font-bold tracking-wide text-aqua">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</p>
+              <p className="mb-1 text-[13px] font-bold tracking-wide text-aqua">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</p>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 md:p-7">

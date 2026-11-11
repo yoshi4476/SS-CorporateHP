@@ -902,21 +902,15 @@ html.ss-intro-pending::before {
 @keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .map-facade .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); } }
 
-/* ヒーロー動画の場面名（HeroVideo）。場面が変わるたびに下から静かに出る */
-.hero-scene-caption { animation: hero-caption-in 0.9s cubic-bezier(0.19, 1, 0.22, 1) both; }
-@keyframes hero-caption-in {
-  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
-  to { opacity: 1; transform: none; filter: none; }
-}
-@media (prefers-reduced-motion: reduce) { .hero-scene-caption { animation: none; } }
-
 /* トップの全画面動画の上にいる間のヘッダー（白い文字） */
 .header-on-dark nav > a,
 .header-on-dark nav > .group > a { color: #fff; }
 .header-on-dark nav > a:hover,
 .header-on-dark nav > .group > a:hover { color: var(--color-aqua); }
 .header-on-dark nav > .group > span { color: #fff; border-color: rgb(255 255 255 / 0.45); background: rgb(255 255 255 / 0.08); }
-.header-on-dark nav > a[href="/contact"] { background: #fff; color: var(--color-ink); }
+/* 相談のボタンは暗い写真の上でも主の色（橙）のまま */
+.header-on-dark nav > a[href="/contact"] { color: var(--color-ink); }
+.header-on-dark nav > a[href="/contact"]:hover { color: var(--color-ink); }
 
 /* 画面下の追従バー（LpCta の StickyCta・lg 未満）があるページは、足元の最後の行がバーの下に隠れないよう
    足元の下を空ける（/aio-agent・/rakushift・記事で、制作・顧問の行が隠れていた） */
@@ -929,3 +923,7 @@ html.ss-intro-pending::before {
 /* 暗い写真の上の本文。黄色のマーカーは白の太字に置き換える */
 .hero-rich mark { background: none; color: #fff; font-weight: 700; }
 .hero-rich strong { color: #fff; }
+
+/* 最初の画面の写真の位置。スマホの縦長の切り抜きでは人物の顔が見出しの真下に来るので、人物のいない左側を見せる */
+.hero-scene { object-position: 18% center; }
+@media (min-width: 768px) { .hero-scene { object-position: var(--hero-pos, center); } }
