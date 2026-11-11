@@ -41,7 +41,7 @@ export default function SelfCheckBand() {
             </ul>
             <figure className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:block">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/selfcheck.webp" alt="夜のオフィスで、サイトの採点結果を確かめる経営者" loading="lazy" className="h-full w-full object-cover" />
+              <img src="/images/selfcheck.webp" alt="事務所で、サイトの採点結果を一緒に確かめる二人" loading="lazy" className="h-full w-full object-cover" />
             </figure>
           </Reveal>
 
