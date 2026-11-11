@@ -70,8 +70,7 @@ const COMPARE_ROWS: { label: string; seo: string; meo: string; aio: string }[] =
   { label: "当社の対応", seo: "HP制作・メディア運用", meo: "運用代行(2,000件以上)", aio: "AIO運用代行" },
 ];
 
-// 帯は事業データから作る。事業を増やせばここも自動で増える。
-// ヒーロー下の帯。支援している業種を並べ、最後に「その他」を添える
+// ヒーロー下の帯。支援している業種を並べ、最後に「その他」を添える（流さずに並べる。2026-11-11）
 const INDUSTRY_MARQUEE = [
   "歯科医院", "クリニック", "整骨院・接骨院", "介護", "不動産", "工務店・注文住宅", "リフォーム", "建設",
   "士業", "コンサル", "BtoB・SaaS", "IT企業", "製造業", "卸売業", "物流", "飲食店", "美容室", "小売",
@@ -167,17 +166,12 @@ export default function Home() {
 
         {/* 支援している業種の帯。ここに無い業種も全国対応 */}
         <div className="relative z-10" aria-label="対応している業種">
-          <div className="overflow-hidden border-t border-white/15 bg-ink/40 py-4 backdrop-blur-md">
-            <div className="flex">
-              <div className="animate-marquee flex shrink-0 items-center">
-                {[...INDUSTRY_MARQUEE, ...INDUSTRY_MARQUEE].map((m, i) => (
-                  <span key={i} aria-hidden={i >= INDUSTRY_MARQUEE.length} className="flex shrink-0 items-center whitespace-nowrap">
-                    <span className="text-[0.86rem] font-bold tracking-wide text-white">{m}</span>
-                    <span aria-hidden className="mx-7 h-1 w-1 rounded-full bg-aqua/70" />
-                  </span>
-                ))}
-              </div>
-            </div>
+          <div className="border-t border-white/15 bg-ink/40 py-4 backdrop-blur-md">
+            <ul className="mx-auto flex max-w-7xl flex-wrap items-center gap-x-5 gap-y-1.5 px-5">
+              {INDUSTRY_MARQUEE.map((m) => (
+                <li key={m} className="whitespace-nowrap text-[0.8rem] font-bold tracking-wide text-white/85">{m}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

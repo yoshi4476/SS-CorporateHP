@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Reveal, CountUp } from "@/components/motion";
-import WaveText from "@/components/WaveText";
 import { services } from "@/lib/services";
 import type { Metric } from "@/lib/services";
 
@@ -218,7 +217,6 @@ export function CtaBand({
             "radial-gradient(ellipse 60% 80% at 80% 20%, rgb(28 63 124 / 0.5), transparent 60%), radial-gradient(ellipse 40% 60% at 12% 90%, rgb(116 199 214 / 0.14), transparent 60%)",
         }}
       />
-      <WaveText text="CONTACT" tone="light" className="pointer-events-none absolute -bottom-4 left-0 select-none text-[15vw] leading-none tracking-tighter" />
       <div className="relative mx-auto max-w-7xl px-5 py-24 text-center md:py-36">
         <Reveal>
           <p aria-hidden className="eyebrow !text-aqua" />
