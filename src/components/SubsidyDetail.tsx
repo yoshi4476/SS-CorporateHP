@@ -113,7 +113,7 @@ export default function SubsidyDetail() {
                 ))}
               </ul>
               <p className="mt-6 rounded-xl bg-mist p-4 text-sm leading-7 text-slate">
-                売上が基準に満たない場合も、下位プランでご案内できることがあります。まずはご相談ください。
+                売上高の下限の決まりはありません。当社の支援のプランは、売上の状況を伺って個別にご案内します。まずはご相談ください。
               </p>
             </Reveal>
           </div>

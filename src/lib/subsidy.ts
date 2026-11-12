@@ -11,8 +11,8 @@ export const subsidy = {
 /** 応募要項: 対象になる事業者の4条件 */
 export const eligibility: { label: string; detail: string }[] = [
   {
-    label: "売上",
-    detail: "法人は3,300万円以上 / 個人事業主は3,900万円以上",
+    label: "規模",
+    detail: "中小企業・小規模事業者（個人事業主を含む）。売上高の下限の決まりはありません",
   },
   {
     label: "納税",
@@ -20,11 +20,11 @@ export const eligibility: { label: string; detail: string }[] = [
   },
   {
     label: "決算",
-    detail: "決算を2期終えていること",
+    detail: "決算か確定申告を1回以上終えていること（直近の決算書・確定申告書の控えを出すため）",
   },
   {
     label: "申請歴",
-    detail: "直近4年以内にIT導入補助金の採択・交付を受けていないこと",
+    detail: "2022〜2025年度に交付決定を受けていても申請できる（賃上げの条件が年平均3.5%以上に厳しくなる）",
   },
 ];
 
