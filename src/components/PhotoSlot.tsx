@@ -20,6 +20,7 @@ export default function PhotoSlot({
   sizes = "100vw",
   caption = true,
   ratioClass,
+  imgClass = "",
 }: {
   name: PhotoSlotName;
   className?: string;
@@ -27,12 +28,14 @@ export default function PhotoSlot({
   caption?: boolean;
   /** 画面幅で縦横比を変えるときの Tailwind の aspect-* の組（指定すると枠の既定の比を使わない） */
   ratioClass?: string;
+  /** 枠の比が写真と違うときに、人物を残す切り抜きの位置（object-[x_y]） */
+  imgClass?: string;
 }) {
   if (!hasSlot(name)) return null;
   const def = PHOTO_SLOTS[name];
   return (
     <figure className={`relative overflow-hidden ${ratioClass ?? ""} ${className}`} style={ratioClass ? undefined : { aspectRatio: def.ratio }}>
-      <Image src={slotSrc(name)} alt={def.alt} fill loading="lazy" sizes={sizes} className="object-cover" />
+      <Image src={slotSrc(name)} alt={def.alt} fill loading="lazy" sizes={sizes} className={`object-cover ${imgClass}`} />
       {caption && (
         <figcaption className="absolute bottom-2 right-3 rounded bg-ink/55 px-1.5 py-0.5 text-[11px] text-white/90">※ 写真はイメージです</figcaption>
       )}

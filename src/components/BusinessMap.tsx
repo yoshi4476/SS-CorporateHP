@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
-import { services, areas } from "@/lib/services";
+import PhotoSlot, { hasSlot } from "@/components/PhotoSlot";
+import { services, areas, type Service } from "@/lib/services";
+import { PHOTO_SLOTS, type PhotoSlotName } from "@/lib/photoSlots";
 
 // 事業の全体像（トップと事業一覧）。集客・経理と社内業務・補助金の3つの領域に事業を分け、
 // 困りごと（各事業の challenges の先頭）から効く事業へ線を引く。事業データから描くので、事業を足せば図も増える。
@@ -12,6 +14,18 @@ import { services, areas } from "@/lib/services";
 // 「困りごとから行き先へ振り分ける図」のほうが迷う経営者を導けると、2人とも前の形を選んだ。
 
 const MAIN = ["keiri-bpo", "aio", "meo"];
+
+// focus の写真（運用者「写真は減らさない」。lib/photoSlots.ts の事業の枠7枚）。
+// 領域の頭に、その領域の主力の写真（集客は AIO と MEO の2枚）。主力でない事業は、困りごとの横に小さな写真を置く。
+// 写真の大きさで主力と支える事業の差が分かるようにし、図が長くなりすぎないよう頭の写真は横長（2:1）にする
+const HEAD: Record<Service["group"], { name: PhotoSlotName; img: string }[]> = {
+  業務: [{ name: "svc-keiri-bpo", img: "object-[50%_25%]" }],
+  集客: [
+    { name: "svc-aio", img: "object-[78%_center]" },
+    { name: "svc-meo", img: "object-[35%_center]" },
+  ],
+  資金: [{ name: "svc-ai-subsidy", img: "object-[60%_40%]" }],
+};
 
 export default function BusinessMap({ focus = false }: { focus?: boolean }) {
   // 経理を先にすると補助金の隣が集客になり、補助金から経理へ向ける矢印の行き先がずれる。その並びでは間の矢印を描かない
@@ -37,12 +51,27 @@ export default function BusinessMap({ focus = false }: { focus?: boolean }) {
         {pillars.map((p, pi) => {
           const list = services.filter((s) => s.group === p.group);
           const hasMain = focus && list.some((s) => MAIN.includes(s.slug));
+          const head = focus ? HEAD[p.group].filter((h) => hasSlot(h.name)) : [];
           return (
             <li key={p.group} className="min-w-0">
               <Reveal
                 delay={pi * 0.08}
-                className={`relative flex h-full flex-col rounded-3xl border bg-raise p-6 shadow-card md:p-7 ${hasMain ? "border-pulse/35" : "border-line"}`}
+                className={`relative flex h-full flex-col rounded-3xl border bg-raise p-6 shadow-card md:p-7 ${hasMain ? "border-pulse/35" : "border-line"} ${focus ? "overflow-hidden" : ""}`}
               >
+                {head.length > 0 && (
+                  <div className={`-mx-6 -mt-6 mb-5 grid gap-px md:-mx-7 md:-mt-7 ${head.length > 1 ? "grid-cols-2" : ""}`}>
+                    {head.map((h, hi) => (
+                      <PhotoSlot
+                        key={h.name}
+                        name={h.name}
+                        sizes={head.length > 1 ? "(min-width: 1024px) 210px, 50vw" : "(min-width: 1024px) 420px, 100vw"}
+                        ratioClass={head.length > 1 ? "aspect-square" : "aspect-[2/1]"}
+                        imgClass={h.img}
+                        caption={hi === head.length - 1}
+                      />
+                    ))}
+                  </div>
+                )}
                 {hasMain && <p className="mb-3 w-fit rounded-full bg-pulse/10 px-3 py-1 text-xs font-bold text-pulse">主力の事業</p>}
                 <h3 className="text-xl font-black leading-snug md:text-2xl">{p.name}</h3>
                 <p className="mt-1 text-sm font-bold text-gold-deep">{p.purpose}</p>
@@ -53,9 +82,16 @@ export default function BusinessMap({ focus = false }: { focus?: boolean }) {
                 <ul className="mt-1 grid">
                   {list.map((s) => {
                     const strong = !focus || MAIN.includes(s.slug);
+                    const thumb = `svc-${s.slug}` as PhotoSlotName;
+                    const showThumb = focus && !strong && p.group !== "資金" && thumb in PHOTO_SLOTS && hasSlot(thumb);
                     return (
                       <li key={s.slug} className="border-b border-line py-4 last:border-b-0">
-                        <p className={`text-sm leading-7 text-ink ${focus && strong ? "font-bold" : ""}`}>「{s.challenges[0]}」</p>
+                        <div className={showThumb ? "flex items-start gap-4" : ""}>
+                          {showThumb && (
+                            <PhotoSlot name={thumb} sizes="112px" caption={false} className="w-24 shrink-0 rounded-xl md:w-28" />
+                          )}
+                          <p className={`text-sm leading-7 text-ink ${focus && strong ? "font-bold" : ""}`}>「{s.challenges[0]}」</p>
+                        </div>
                         {/* 困りごとから事業へ、鉤形の線でつなぐ */}
                         <p className="mt-2 flex items-center justify-end gap-2">
                           <span aria-hidden className="h-4 w-6 rounded-bl-lg border-b border-l border-line-strong" />
