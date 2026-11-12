@@ -176,7 +176,7 @@ export default function Home() {
           <SectionHead
             id="services-heading"
             title="主な仕事は、経理の代行と集客の2つです"
-            lead="どちらも、人を増やさずに会社を回すための仕事です。AIの導入やシステム開発、HP制作、補助金の申請支援は、この2つを支える事業として==同じ窓口でお受けします==。"
+            lead="どちらも、人を増やさずに会社を回すための仕事です。AIの導入やシステム開発、HP制作、補助金の申請支援は、この2つを支える事業として同じ窓口でお受けします。"
           />
           <div className="mt-12">
             <TopBusinesses />
@@ -341,7 +341,7 @@ export default function Home() {
           <SectionHead
             id="data-heading"
             title="累計3,200件の支援が生んだ、実践データ"
-            lead="2019年から積み上げてきた、AIO・SEO・MEOの支援の現場データです。業種の内訳と順位の表は、そのうちMEOの運用（2,000件以上）から取ったものです。==この蓄積が、全事業の土台==です。"
+            lead="2019年から積み上げてきた、AIO・SEO・MEOの支援の現場データです。業種の内訳と順位の表は、そのうちMEOの運用（2,000件以上）から取ったものです。この蓄積が、全事業の土台です。"
           />
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.4fr_1fr]">
             <Reveal className="rounded-2xl border border-line bg-raise p-5 shadow-card md:p-8">
@@ -377,8 +377,8 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="cases-heading"
-            title="支援先で、数字はこう動きました"
-            lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
+            title="支援先で、こう変わりました"
+            lead="規模も業種も違う3社です。どの会社でも、施策を数字で設計し、結果を数字で報告しました。"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {cases.map((cs, i) => (
@@ -397,7 +397,7 @@ export default function Home() {
                     </div>
                     <p className="mt-6 leading-none">
                       <span className="num text-5xl font-bold md:text-6xl">{cs.metric.value}</span>
-                      <span className="ml-1.5 text-lg font-bold text-gold-bright">{cs.metric.suffix}</span>
+                      {cs.metric.suffix && <span className="ml-1.5 text-lg font-bold text-gold-bright">{cs.metric.suffix}</span>}
                       <span className="mt-3 block text-xs text-white/70">{cs.metric.label}</span>
                     </p>
                   </div>
@@ -419,6 +419,7 @@ export default function Home() {
                     </div>
 
                     <p className="mt-5 text-sm leading-7 text-slate">{cs.body}</p>
+                    {cs.frame && <p className="mt-4 border-t border-line pt-4 text-xs leading-6 text-slate">{cs.frame}</p>}
 
                     {cs.voice && (
                       <figure className="mt-auto border-t border-line pt-5">
@@ -554,25 +555,26 @@ export default function Home() {
                 <p className="mt-4 max-w-xl text-[15px] leading-[1.9] text-slate">
                   当社はAI導入補助金のベンダーとして、申請支援から導入・実績報告までを一貫対応。受発注ソフト・会計ソフトを対象とする枠なら補助上限は350万円です。「制度が複雑で諦めていた」企業こそご相談ください。8問・3分の無料診断で、活用できる制度がすぐ分かります。
                 </p>
+                {/* ボタンは文の直後に置く。以前は右の写真の下にあり、写真の下で浮いて見えた */}
+                <div className="mt-7 flex flex-col items-start gap-x-6 gap-y-3 sm:flex-row sm:items-center">
+                  <Link
+                    href="/services/ai-subsidy"
+                    className="rounded-full border border-ink/25 bg-white px-9 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                  >
+                    補助金支援の詳細を見る
+                  </Link>
+                  <a
+                    href={site.lpUrl}
+                    target="_blank"
+                    rel="noopener"
+                    className="tap text-sm font-bold text-slate underline underline-offset-4 hover:text-pulse"
+                  >
+                    まず無料診断で確かめる（8問・3分） ↗
+                  </a>
+                </div>
               </div>
-              <div className="flex flex-col gap-4 md:items-end">
-                {/* 写真の枠（ファイルを置くと出る。lib/photoSlots.ts） */}
-                <PhotoSlot name="top-subsidy" sizes="(min-width: 768px) 24rem, 100vw" className="w-full rounded-2xl" />
-                <Link
-                  href="/services/ai-subsidy"
-                  className="rounded-full border border-ink/25 bg-white px-9 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
-                >
-                  補助金支援の詳細を見る
-                </Link>
-                <a
-                  href={site.lpUrl}
-                  target="_blank"
-                  rel="noopener"
-                  className="text-center text-xs font-bold text-slate underline-offset-4 hover:text-pulse hover:underline"
-                >
-                  まず無料診断で確かめる（8問・3分） ↗
-                </a>
-              </div>
+              {/* 写真の枠（ファイルを置くと出る。lib/photoSlots.ts） */}
+              <PhotoSlot name="top-subsidy" sizes="(min-width: 768px) 24rem, 100vw" className="w-full rounded-2xl" />
             </div>
           </Reveal>
         </div>
@@ -599,7 +601,8 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-5">
           <SectionHead id="news-heading" title="お知らせ" />
           <div className="mt-8 grid gap-3">
-            {news.map((n, i) => (
+            {/* 新しい順の上位3件だけ。2023・2024年のお知らせまで並べると、更新が止まった会社に見えた（古いものは一覧のページに残る） */}
+            {news.slice(0, 3).map((n, i) => (
               <Reveal key={n.slug} delay={i * 0.06}>
                 <Link
                   href={`/news/${n.slug}`}

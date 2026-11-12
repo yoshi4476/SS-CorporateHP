@@ -83,7 +83,8 @@ export default function Header() {
           open
             ? "bg-transparent"
             : scrolled
-              ? "bg-paper/85 backdrop-blur-md shadow-[0_1px_0_0_var(--color-line)]"
+              ? // 透ける白（85%）だと、暗い区画の上で帯が濁った灰色になった。帯は不透明の白にする
+                "bg-paper shadow-[0_1px_0_0_var(--color-line)]"
               : "bg-transparent"
         }`}
       >

@@ -8,7 +8,9 @@ import type { CSSProperties } from "react";
 
 const SRC = "/videos/hero-scene-1.webp";
 const SRCSET = "/videos/hero-scene-1-960.webp 960w, /videos/hero-scene-1.webp 1600w";
-const ALT = "厨房用品の卸の店で、納品書を手に客に答える店の人";
+// 前の写真（エプロンの女性が納品書を持つ）は、補助金の LP・AI集客ラボの最初の画面と同じ型で、場面を説明する札も写っていた。
+// 年代・性別・場面・動きを変え、読める札の無い写真にした
+const ALT = "自動車の整備工場の事務所で、作業場から戻り、手を拭きながら質問に答える整備士（イメージ）";
 
 /** パソコン: 最初の画面の全面に敷く */
 export default function HeroVideo({ objectPosition = "center" }: { objectPosition?: string }) {

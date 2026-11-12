@@ -28,7 +28,7 @@ function caseStep(slug: string): Step {
   const svc = services.find((s) => s.slug === slug && s.examples?.length);
   return svc
     ? { kind: "事例", title: `${svc.name}の取り組み例`, body: "どんな状況で、何をして、どう変わったかをまとめています。", href: `/services/${svc.slug}#examples` }
-    : { kind: "事例", title: "支援の事例（3つの現場）", body: "規模も業種も違う3社で、何をして数字がどう動いたかをまとめています。", href: "/#cases" };
+    : { kind: "事例", title: "支援の事例（3つの現場）", body: "規模も業種も違う3社で、何をして何が変わったかをまとめています。", href: "/#cases" };
 }
 
 function nextSteps(slug: string): Step[] {
@@ -427,7 +427,8 @@ export default function ContactForm({ service }: { service?: string } = {}) {
         disabled={busy}
                   className="mt-2 rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
       >
-        {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
+        {/* 経理BPOのページの中のフォームは、ページの相談のボタンと同じ言葉にする */}
+        {busy ? "送信しています…" : service === "keiri-bpo" ? "経理の外注を無料で相談する" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>
       <p className="text-sm leading-7 text-slate">
         いただいた情報は、相談対応の目的以外には使用しません。

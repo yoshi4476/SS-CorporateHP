@@ -25,7 +25,8 @@ const TRACKS = [
     doing: ["書類を送る", "月次の報告を確認する"],
     ours: ["記帳・仕訳", "請求発行と入金消込", "支払データ作成", "給与・賞与・年末調整",
            "経費精算のチェック", "月次決算の早期化"],
-    cta: { label: "無料の現状分析を申し込む", href: "/contact", s: "keiri-bpo" },
+    // 相談のボタンはページの中で同じ言葉・同じ行き先（ページの中のフォーム）にそろえる
+    cta: { label: "経理の外注を無料で相談する", href: "#consult", s: "keiri-bpo", button: true },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
     video: "keiri-bpo",
     videoTitle: "任せた場合に、何がどう変わるか",
@@ -44,7 +45,8 @@ const TRACKS = [
     doing: ["システムで確認して確定する", "月次を締める"],
     ours: ["仕訳の案を自動で作成", "請求と入金の消込", "支払管理", "給与・賞与・年末調整",
            "電子帳簿保存法に沿った保存", "導入時の初期設定と操作説明"],
-    cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self" },
+    // デモは相談とは別の行き先なので、ボタンにせず文字のリンクにする（同じ大きさのボタンが2つ並ぶと、どちらが主か分からなかった）
+    cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self", button: false },
     note: "実際の画面をお見せします。ご契約前提のご案内ではありません。",
     video: "keiri-self",
     videoTitle: "実際の画面で、どう使うか",
@@ -57,7 +59,7 @@ export default function KeiriTwoTracks() {
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead
           title="任せるか、自社で使うか。2つから選べます"
-          lead="経理の悩みは会社によって違います。==実務ごと引き受ける形==と、==同じシステムを自社で使う形==の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
+          lead="経理の悩みは会社によって違います。実務ごと引き受ける形と、同じシステムを自社で使う形の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -113,7 +115,11 @@ export default function KeiriTwoTracks() {
                   <Link
                     href={t.cta.href}
                     data-entry-s={t.cta.s}
-                    className="inline-block rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5"
+                    className={
+                      t.cta.button
+                        ? "inline-block rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5"
+                        : "tap text-sm font-bold text-pulse underline decoration-pulse/40 underline-offset-4 hover:decoration-pulse"
+                    }
                   >
                     {t.cta.label} →
                   </Link>
@@ -134,13 +140,13 @@ export default function KeiriTwoTracks() {
               無料で、ご契約を前提としたご案内ではありません。
               その結果を見てから、任せるか自社で使うかをお決めいただけます。
             </p>
-            <Link
-              href="/contact"
+            <a
+              href="#consult"
               data-entry-s="keiri-shindan"
               className="mt-5 inline-block rounded-full border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
             >
-              無料の現状分析を申し込む →
-            </Link>
+              経理の外注を無料で相談する →
+            </a>
           </div>
         </Reveal>
       </div>

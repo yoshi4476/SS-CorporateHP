@@ -59,8 +59,10 @@ export default function TopBusinesses() {
           <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-raise p-7 shadow-card md:p-10">
             {(hasSlot("svc-aio") || hasSlot("svc-meo")) && (
               <div className="-mx-7 -mt-7 mb-7 grid grid-cols-2 gap-px md:-mx-10 md:-mt-10">
-                <PhotoSlot name="svc-aio" sizes="(min-width: 1024px) 310px, 50vw" caption={false} />
-                <PhotoSlot name="svc-meo" sizes="(min-width: 1024px) 310px, 50vw" />
+                {/* 横並びの2枚は、左のカードの1枚より背が低い。広い画面で同じ比のままだと、右のカードの下が空いた。
+                    右は本文が長い分を差し引いた高さになる比にする */}
+                <PhotoSlot name="svc-aio" sizes="(min-width: 1024px) 310px, 50vw" caption={false} ratioClass="aspect-[16/9] lg:aspect-[10/9]" />
+                <PhotoSlot name="svc-meo" sizes="(min-width: 1024px) 310px, 50vw" ratioClass="aspect-[16/9] lg:aspect-[10/9]" />
               </div>
             )}
             <p className="text-sm font-bold text-pulse">問い合わせと来店を増やしたい</p>

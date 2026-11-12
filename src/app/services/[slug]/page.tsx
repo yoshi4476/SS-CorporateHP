@@ -42,13 +42,14 @@ type Props = { params: Promise<{ slug: string }> };
 const PRIMARY = "rounded-full bg-gold-bright px-8 py-4 text-center text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5";
 
 /** 節の切れ目に置く、ページの中のフォーム（#consult）への短い入口。フォームが最下部にしか無く、途中で相談したくなった人の行き先が無かった */
-function ConsultJump({ lead, label }: { lead: string; label: string }) {
+// 言葉はページの中の相談のボタンすべてと同じにする（以前は節ごとに「範囲を相談する」「見積りの目安を聞く」などと違い、行き先が別に見えた）
+function ConsultJump({ lead }: { lead: string }) {
   return (
     <Reveal>
       <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-gold/30 bg-gold-tint px-6 py-5 sm:flex-row sm:items-center md:px-8">
         <p className="text-[15px] font-bold leading-7 text-ink">{lead}</p>
         <a href="#consult" data-cta="keiri_mid_consult" className={`shrink-0 !py-3.5 ${PRIMARY}`}>
-          {label}
+          経理の外注を無料で相談する
         </a>
       </div>
     </Reveal>
@@ -346,7 +347,7 @@ export default async function ServicePage({ params }: Props) {
               {service.useCase && (
                 <Reveal className="self-start rounded-3xl border border-pulse/30 bg-pulse/5 p-8 shadow-card md:p-10">
                   <h3 className="mt-2 text-xl font-bold md:text-2xl">{service.useCase.title}</h3>
-                  <p className="mt-5 text-[15px] leading-[1.9] text-slate md:text-base">
+                  <p className={`mt-5 text-[15px] leading-[1.9] md:text-base ${isKeiri ? "text-ink-soft" : "text-slate"}`}>
                     <RichLinked text={service.useCase.body} />
                   </p>
                 </Reveal>
@@ -429,12 +430,12 @@ export default async function ServicePage({ params }: Props) {
             <SectionHead
               id="compare-heading"
               title="経理の手を確保する方法は、採用だけではありません"
-              lead="経理の手を確保する方法は、採用だけではありません。自社で担当・派遣やパート・外注の3つを、指示・属人化・繁忙期・確認の体制で比べました。"
+              lead="自社で担当・派遣やパート・外注の3つを、指示・属人化・繁忙期・確認の体制で比べました。"
             />
             <Reveal className="mt-12">
               <KeiriCompare />
             </Reveal>
-            <ConsultJump lead="自社の場合はどれが合うか、いまの体制を伺ってお答えします。" label="このまま相談する" />
+            <ConsultJump lead="自社の場合はどれが合うか、いまの体制を伺ってお答えします。" />
           </div>
         </section>
       )}
@@ -446,7 +447,7 @@ export default async function ServicePage({ params }: Props) {
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
           <Reveal>
             <figure className="relative mt-12 aspect-[2/1] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
-              <Image src={svcPhoto(service.slug, 2)} alt={isKeiri ? "夕方の事務所で、お茶を飲みながら笑い合う社長と社員（イメージ）" : `${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
+              <Image src={svcPhoto(service.slug, 2)} alt={isKeiri ? "工務店の事務所で、お茶を飲みながら笑い合う社長と社員（イメージ）" : `${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
               <figcaption className="absolute bottom-3 right-4 text-xs text-white/80">※ 写真はイメージです</figcaption>
             </figure>
           </Reveal>
@@ -492,7 +493,7 @@ export default async function ServicePage({ params }: Props) {
                 <ScopeTable name={service.name} scope={scope} />
               </div>
             )}
-            <ConsultJump lead="御社の場合にどこまで外に出せるかは、現状を伺ったうえでお答えします。" label="範囲を相談する" />
+            <ConsultJump lead="御社の場合にどこまで外に出せるかは、現状を伺ったうえでお答えします。" />
           </div>
         </section>
       )}
@@ -569,7 +570,8 @@ export default async function ServicePage({ params }: Props) {
                       {ins.title}
                     </h3>
                   </div>
-                  <p className="rounded-2xl border border-line bg-white p-7 text-[15px] leading-[1.9] text-slate shadow-card md:p-10 md:text-base md:leading-10 md:[direction:ltr]">
+                  {/* 経理BPO: 淡い金の面の上の薄い灰色・行間の広い本文は、細く薄く見えて読みにくかった。文字を濃く、行間を詰める */}
+                  <p className={`rounded-2xl border border-line bg-white p-7 text-[15px] leading-[1.9] shadow-card md:p-10 md:text-base md:[direction:ltr] ${isKeiri ? "text-ink-soft md:leading-[2]" : "text-slate md:leading-10"}`}>
                     <Rich text={ins.body} />
                   </p>
                 </article>
@@ -690,7 +692,7 @@ export default async function ServicePage({ params }: Props) {
             <Reveal className="mt-12">
               <KeiriCostGuide />
             </Reveal>
-            <ConsultJump lead="御社の業務量でのお見積りの目安は、現状を伺ってからお返しします。" label="見積りの目安を聞く" />
+            <ConsultJump lead="御社の業務量でのお見積りの目安は、現状を伺ってからお返しします。" />
           </div>
         </section>
       )}

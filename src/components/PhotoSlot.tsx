@@ -19,16 +19,19 @@ export default function PhotoSlot({
   className = "",
   sizes = "100vw",
   caption = true,
+  ratioClass,
 }: {
   name: PhotoSlotName;
   className?: string;
   sizes?: string;
   caption?: boolean;
+  /** 画面幅で縦横比を変えるときの Tailwind の aspect-* の組（指定すると枠の既定の比を使わない） */
+  ratioClass?: string;
 }) {
   if (!hasSlot(name)) return null;
   const def = PHOTO_SLOTS[name];
   return (
-    <figure className={`relative overflow-hidden ${className}`} style={{ aspectRatio: def.ratio }}>
+    <figure className={`relative overflow-hidden ${ratioClass ?? ""} ${className}`} style={ratioClass ? undefined : { aspectRatio: def.ratio }}>
       <Image src={slotSrc(name)} alt={def.alt} fill loading="lazy" sizes={sizes} className="object-cover" />
       {caption && (
         <figcaption className="absolute bottom-2 right-3 rounded bg-ink/55 px-1.5 py-0.5 text-[11px] text-white/90">※ 写真はイメージです</figcaption>
