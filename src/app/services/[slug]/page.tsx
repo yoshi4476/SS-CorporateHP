@@ -125,7 +125,7 @@ export default async function ServicePage({ params }: Props) {
             以前はスマホで人物のいない左側（暗い棚）を見せており、最初の画面に人が写っていなかった */}
         <Image
           src={svcPhoto(service.slug, 1)}
-          alt={isKeiri ? "明るい事務所で、領収書をスキャナーに通す経理の担当者（イメージ）" : `${service.name}の現場のイメージ`}
+          alt={isKeiri ? "明るい事務所で、領収書の金額をパソコンに入力する経理の担当者（イメージ）" : `${service.name}の現場のイメージ`}
           fill
           priority
           sizes="100vw"
@@ -244,7 +244,7 @@ export default async function ServicePage({ params }: Props) {
                   <figure className="relative -mx-5 mt-8 aspect-[4/3] overflow-hidden md:hidden">
                     <Image
                       src={svcPhoto(service.slug, 1)}
-                      alt="明るい事務所で、領収書をスキャナーに通す経理の担当者（イメージ）"
+                      alt="明るい事務所で、領収書の金額をパソコンに入力する経理の担当者（イメージ）"
                       fill
                       priority
                       sizes="100vw"
@@ -295,8 +295,9 @@ export default async function ServicePage({ params }: Props) {
           {/* 広い画面では左に困っている場面の写真、右にお悩みの一覧 */}
           <div className="mt-10 grid gap-8 lg:grid-cols-[5fr_7fr] lg:items-start">
           <Reveal>
+            {/* 縦長の写真は顔が上寄り。スマホの横長の枠で中央を切ると顔が切れて手元だけになるため、上寄りで切る */}
             <figure className={`relative overflow-hidden rounded-3xl shadow-lift lg:aspect-[4/5] ${isKeiri ? "aspect-[4/3]" : "aspect-[16/9]"}`}>
-              <Image src={svcPhoto(service.slug, 5)} alt={isKeiri ? "事務所の棚から請求書の綴りを取り出す、小さな会社の経営者（イメージ）" : `${service.name}を頼む前に困っている場面のイメージ`} fill loading="lazy" sizes="(min-width: 1024px) 480px, 100vw" className={`object-cover ${isKeiri ? "object-[50%_8%] lg:object-center" : ""}`} />
+              <Image src={svcPhoto(service.slug, 5)} alt={isKeiri ? "閉店後の美容室の受付で、束ねた領収書とスマートフォンを手に考え込む店主（イメージ）" : `${service.name}を頼む前に困っている場面のイメージ`} fill loading="lazy" sizes="(min-width: 1024px) 480px, 100vw" className={`object-cover ${isKeiri ? "object-[50%_35%] lg:object-center" : "object-[50%_30%] lg:object-center"}`} />
               <figcaption className="absolute bottom-3 right-4 text-xs text-white/80">※ 写真はイメージです</figcaption>
             </figure>
           </Reveal>
@@ -445,7 +446,7 @@ export default async function ServicePage({ params }: Props) {
           {/* 写真は横長で上に1枚、特長はその下に横並び（左に写真・右に縦の一覧だと、一覧の下で左が長く空いた） */}
           <Reveal>
             <figure className="relative mt-12 aspect-[2/1] overflow-hidden rounded-3xl shadow-lift md:aspect-[21/8]">
-              <Image src={svcPhoto(service.slug, 2)} alt={isKeiri ? "月次の報告書を受付で手渡す担当者と、受け取る事務の方（イメージ）" : `${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
+              <Image src={svcPhoto(service.slug, 2)} alt={isKeiri ? "夕方の事務所で、お茶を飲みながら笑い合う社長と社員（イメージ）" : `${service.name}を任せた後のイメージ`} fill sizes="(min-width: 1280px) 1240px, 100vw" className="object-cover" />
               <figcaption className="absolute bottom-3 right-4 text-xs text-white/80">※ 写真はイメージです</figcaption>
             </figure>
           </Reveal>

@@ -77,11 +77,11 @@ export const services: Service[] = [
     seoTitle: "経理BPO・記帳代行｜記帳から給与まで外注",
     image: {
       src: "/images/svc/keiri-bpo-1.webp",
-      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の担当者",
+      alt: "届いた領収書の金額を、一枚ずつパソコンに入力する経理の担当者",
     },
     cardImage: {
       src: "/images/svc/keiri-bpo-1.webp",
-      alt: "届いた領収書と請求書をスキャナーで読み取り、仕分ける経理の担当者",
+      alt: "届いた領収書の金額を、一枚ずつパソコンに入力する経理の担当者",
     },
     name: "経理BPO・記帳代行",
     en: "Accounting BPO",
@@ -218,11 +218,11 @@ export const services: Service[] = [
     seoTitle: "AI導入補助金ベンダー｜最大350万円・相談無料",
     image: {
       src: "/images/svc/ai-subsidy-1.webp",
-      alt: "申請書類とパソコンを前に、導入計画を確かめる経営者と担当者",
+      alt: "卸の倉庫で、注文の受け方を社長から聞き取る担当者",
     },
     cardImage: {
       src: "/images/svc/ai-subsidy-1.webp",
-      alt: "申請書類とパソコンを前に、導入計画を確かめる経営者と担当者",
+      alt: "卸の倉庫で、注文の受け方を社長から聞き取る担当者",
     },
     name: "AI導入補助金ベンダー",
     en: "AI Subsidy Vendor",
@@ -348,11 +348,11 @@ export const services: Service[] = [
     seoTitle: "MEO運用代行｜2,000件以上の運用実績",
     image: {
       src: "/images/svc/meo-1.webp",
-      alt: "店に入る前に、スマートフォンの地図で店を確かめる人",
+      alt: "自転車を止めて、スマートフォンの地図で店を確かめる人",
     },
     cardImage: {
       src: "/images/svc/meo-1.webp",
-      alt: "店に入る前に、スマートフォンの地図で店を確かめる人",
+      alt: "自転車を止めて、スマートフォンの地図で店を確かめる人",
     },
     name: "MEO運用代行",
     en: "Map Engine Optimization",
@@ -443,11 +443,11 @@ export const services: Service[] = [
     seoTitle: "AIO対策の運用代行｜AIに引用されるサイトへ",
     image: {
       src: "/images/svc/aio-1.webp",
-      alt: "夜、ソファでスマートフォンのAIに質問する人",
+      alt: "スマートフォンとパソコンでAIの答えを見比べ、メモを取る担当者",
     },
     cardImage: {
       src: "/images/svc/aio-1.webp",
-      alt: "夜、ソファでスマートフォンのAIに質問する人",
+      alt: "スマートフォンとパソコンでAIの答えを見比べ、メモを取る担当者",
     },
     name: "AIO運用代行",
     en: "AI Optimization × Owned Media",
@@ -535,11 +535,11 @@ export const services: Service[] = [
     seoTitle: "AIコンサルティング｜棚卸しから定着まで",
     image: {
       src: "/images/svc/ai-consulting-1.webp",
-      alt: "付箋で日々の業務を書き出し、AIに任せる作業を選ぶ社内の勉強会",
+      alt: "食品工場の朝の打ち合わせで、AIに任せる作業を従業員と話し合う相談役",
     },
     cardImage: {
       src: "/images/svc/ai-consulting-1.webp",
-      alt: "付箋で日々の業務を書き出し、AIに任せる作業を選ぶ社内の勉強会",
+      alt: "食品工場の朝の打ち合わせで、AIに任せる作業を従業員と話し合う相談役",
     },
     name: "AIコンサルティング",
     en: "AI Consulting",
@@ -690,11 +690,11 @@ export const services: Service[] = [
     seoTitle: "HP/LP制作｜公開後の集客から逆算して作る",
     image: {
       src: "/images/svc/web-production-1.webp",
-      alt: "2台のモニターでサイトの構成を組むデザイナーの机",
+      alt: "パン工房で、ホームページに載せる写真を撮るカメラマンと、生地を丸めるパン職人",
     },
     cardImage: {
       src: "/images/svc/web-production-1.webp",
-      alt: "2台のモニターでサイトの構成を組むデザイナーの机",
+      alt: "パン工房で、ホームページに載せる写真を撮るカメラマンと、生地を丸めるパン職人",
     },
     name: "HP/LP制作",
     en: "Website & LP Production",
@@ -841,11 +841,11 @@ export const services: Service[] = [
     seoTitle: "システム開発｜業務システムを個別設計",
     image: {
       src: "/images/svc/system-development-1.webp",
-      alt: "ガラスの壁にシステムの構成図を描きながら設計を進める開発者",
+      alt: "部品の倉庫で、作業員の話を聞きながらノートパソコンでシステムを試す技術者",
     },
     cardImage: {
       src: "/images/svc/system-development-1.webp",
-      alt: "ガラスの壁にシステムの構成図を描きながら設計を進める開発者",
+      alt: "部品の倉庫で、作業員の話を聞きながらノートパソコンでシステムを試す技術者",
     },
     name: "システム開発",
     en: "System Development",

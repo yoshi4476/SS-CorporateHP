@@ -12,6 +12,16 @@ import { pipeline } from "@/lib/autopipeline";
 import { breadcrumbSchema } from "@/lib/schema";
 import { site } from "@/lib/site";
 import { svcPhoto } from "@/lib/photos";
+import { hasSlot, slotSrc } from "@/components/PhotoSlot";
+import { PHOTO_SLOTS, type PhotoSlotName } from "@/lib/photoSlots";
+
+// 事業ページの最初の写真は見出しを載せるため左半分を空けてあり、カードに並べると空の壁ばかりが続く。
+// 人物が中ほどにいるトップの事業の写真（写真の枠）があればそちらを使う
+function cardPhoto(slug: string, name: string) {
+  const slot = `svc-${slug}` as PhotoSlotName;
+  if (slot in PHOTO_SLOTS && hasSlot(slot)) return { src: slotSrc(slot), alt: PHOTO_SLOTS[slot].alt };
+  return { src: svcPhoto(slug, 1), alt: `${name}の現場のイメージ` };
+}
 
 // 自社プロダクト。受託の7事業とは性質が違うので別枠で並べる
 const PRODUCTS = [
@@ -79,7 +89,7 @@ export default function ServicesIndexPage() {
 
       {/* ヒーロー: オフィスの写真を全幅に（イメージ写真） */}
       <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden bg-ink text-white">
-        <Image src="/images/svc/index.webp" alt="窓の大きな明るいオフィスで働く社員のイメージ" fill priority sizes="100vw" className="object-cover" />
+        <Image src="/images/svc/index.webp" alt="窓の大きな事務所で、電話を受ける人・机に向かう人・書類を運ぶ人のイメージ" fill priority sizes="100vw" className="object-cover" />
         <div
           aria-hidden
           className="absolute inset-0"
@@ -144,7 +154,7 @@ export default function ServicesIndexPage() {
               <Reveal key={s.slug}>
                 <article id={s.slug} className="group scroll-mt-28 grid overflow-hidden rounded-3xl border border-line bg-raise shadow-card lg:grid-cols-2">
                   <Link href={`/services/${s.slug}`} className={`relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[26rem] ${i % 2 ? "lg:order-2" : ""}`} tabIndex={-1} aria-hidden>
-                    <Image src={svcPhoto(s.slug, 1)} alt={`${s.name}の現場のイメージ`} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <Image {...cardPhoto(s.slug, s.name)} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
                     <span className="absolute left-5 top-5 rounded-full bg-ink/60 px-3 py-1 text-xs font-bold text-white backdrop-blur-sm">{s.group}</span>
                   </Link>
                   <div className="flex flex-col p-7 md:p-10">

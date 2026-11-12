@@ -8,7 +8,7 @@ import type { CSSProperties } from "react";
 
 const SRC = "/videos/hero-scene-1.webp";
 const SRCSET = "/videos/hero-scene-1-960.webp 960w, /videos/hero-scene-1.webp 1600w";
-const ALT = "町工場の事務所で、検品を終えた部品の箱を前に納品書を確かめる人";
+const ALT = "厨房用品の卸の店で、納品書を手に客に答える店の人";
 
 /** パソコン: 最初の画面の全面に敷く */
 export default function HeroVideo({ objectPosition = "center" }: { objectPosition?: string }) {
