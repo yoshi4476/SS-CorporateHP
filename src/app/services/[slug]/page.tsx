@@ -4,6 +4,7 @@ import Link from "next/link";
 import MediaShowcase from "@/components/MediaShowcase";
 import KeiriTwoTracks from "@/components/KeiriTwoTracks";
 import PhotoBand from "@/components/PhotoBand";
+import PhotoSlot from "@/components/PhotoSlot";
 import InlineToolBox from "@/components/InlineToolBox";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
@@ -120,21 +121,23 @@ export default async function ServicePage({ params }: Props) {
       {/* ヒーロー */}
       {/* その事業の現場の写真を全幅に敷く（イメージ写真）。文字は左に寄せ、左側だけを暗くする */}
       <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden bg-ink text-white">
-        {/* 経理BPOの写真は人物が右にいる。スマホの縦長の切り抜きでは人物のいない左側（書類の棚）を見せ、見出しが顔に重ならないようにする */}
+        {/* 経理BPOの写真は人物が右にいる。スマホでは文字の背景に敷かず、主のボタンの下に人物が真ん中に来る帯で出す。
+            以前はスマホで人物のいない左側（暗い棚）を見せており、最初の画面に人が写っていなかった */}
         <Image
           src={svcPhoto(service.slug, 1)}
           alt={isKeiri ? "明るい事務所で、領収書をスキャナーに通す経理の担当者（イメージ）" : `${service.name}の現場のイメージ`}
           fill
           priority
           sizes="100vw"
-          className={`object-cover ${isKeiri ? "object-[14%_center] md:object-[80%_center]" : "object-[65%_center]"}`}
+          className={`object-cover ${isKeiri ? "hidden object-[80%_center] md:block" : "object-[65%_center]"}`}
         />
         <div
           aria-hidden
-          className="absolute inset-0"
+          className={`absolute inset-0 ${isKeiri ? "hidden md:block" : ""}`}
           style={{ background: "linear-gradient(90deg, rgb(8 14 26 / 0.9) 0%, rgb(8 14 26 / 0.72) 45%, rgb(8 14 26 / 0.2) 100%), linear-gradient(180deg, rgb(8 14 26 / 0.55) 0%, transparent 30%)" }}
         />
-        {isKeiri && <div aria-hidden className="absolute inset-0 bg-ink/55 md:bg-transparent md:bg-[linear-gradient(90deg,rgb(8_14_26/0.6)_0%,rgb(8_14_26/0.35)_40%,transparent_58%)]" />}
+        {/* 見出しの後ろに写真の中の札（「11月分」）が透けて読めていた。文字の載る左半分をほぼ塗りつぶす */}
+        {isKeiri && <div aria-hidden className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgb(8_14_26/0.9)_0%,rgb(8_14_26/0.85)_42%,rgb(8_14_26/0.4)_56%,transparent_68%)] md:block" />}
         <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pb-24 md:pt-36">
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-white/60">
@@ -177,7 +180,8 @@ export default async function ServicePage({ params }: Props) {
                 )}
                 {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
                     記号がそのまま出ていた */}
-                <p className="hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
+                {/* 経理BPOのスマホでは、この説明を写真の帯の後ろへ回す（ボタンと人物を最初の画面に収めるため） */}
+                <p className={`hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base ${isKeiri ? "hidden md:block" : ""}`}>
                   <Rich text={service.body} />
                 </p>
               </Reveal>
@@ -223,18 +227,7 @@ export default async function ServicePage({ params }: Props) {
                   >
                     {isKeiri ? "経理の外注を無料で相談する" : "このサービスを相談する"}
                   </Link>
-                  {service.slug === "keiri-bpo" && (
-                    <a
-                      href="/docs/keiri-tanaoroshi-sheet.pdf"
-                      download
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/35 px-8 py-4 text-center text-sm font-bold text-white transition-colors hover:border-aqua hover:text-aqua"
-                    >
-                      <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
-                        <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      棚卸しシートを受け取る (無料)
-                    </a>
-                  )}
+                  {/* 経理BPOの最初の画面の行き先は相談の1つだけ。棚卸しシートは「進め方」の節へ、5問のセルフチェックは「いま起きていること」の節へ移した */}
                   {service.slug === "ai-subsidy" && (
                     <a
                       href={site.lpUrl}
@@ -247,18 +240,23 @@ export default async function ServicePage({ params }: Props) {
                   )}
                 </div>
                 )}
-                {/* 相談・資料の手前の入口。経理の記事から来た人が、まず自分で範囲の目安をつけられるようにする */}
-                {service.slug === "keiri-bpo" && (
-                  <Link
-                    href="/tools/keiri-check"
-                    data-entry-from="/services/keiri-bpo"
-                    className="mt-6 block w-fit text-[15px] font-bold leading-8 text-white underline decoration-gold-bright decoration-2 underline-offset-[6px] transition-colors hover:text-gold-bright"
-                  >
-                    まず5問のセルフチェックで、外に出せる範囲を確かめる
-                    <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden className="ml-1.5 inline-block align-[-1px]">
-                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-                    </svg>
-                  </Link>
+                {isKeiri && (
+                  <figure className="relative -mx-5 mt-8 aspect-[4/3] overflow-hidden md:hidden">
+                    <Image
+                      src={svcPhoto(service.slug, 1)}
+                      alt="明るい事務所で、領収書をスキャナーに通す経理の担当者（イメージ）"
+                      fill
+                      priority
+                      sizes="100vw"
+                      className="object-cover object-[85%_30%]"
+                    />
+                    <figcaption className="absolute bottom-2 left-3 rounded bg-ink/60 px-1.5 py-0.5 text-[11px] text-white/90">※ 写真はイメージです</figcaption>
+                  </figure>
+                )}
+                {isKeiri && (
+                  <p className="hero-rich mt-7 text-[15px] leading-[1.9] text-white/80 md:hidden">
+                    <Rich text={service.body} />
+                  </p>
                 )}
                 {service.price && (
                   <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur-sm">
@@ -420,6 +418,8 @@ export default async function ServicePage({ params }: Props) {
 
       {/* 文字の区画が続くので、写真の帯で区切る。経理BPOは人物の写真を3枚に絞ったので帯を置かない */}
       {!isKeiri && <PhotoBand src={svcPhoto(service.slug, 4)} alt={`${service.name}を裏で支える仕事のイメージ`} />}
+      {/* 経理BPOの写真の帯の枠（ファイルを置くと出る。lib/photoSlots.ts） */}
+      {isKeiri && <PhotoSlot name="keiri-band-1" className="max-h-[360px] w-full" />}
 
       {/* 経理BPOだけ: 採用・派遣・外注を同じ軸で比べてから、任せるか自社で使うかを選ばせる */}
       {service.slug === "keiri-bpo" && (
@@ -546,7 +546,7 @@ export default async function ServicePage({ params }: Props) {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="insight-heading"
-            title={isKeiri ? "頼む前に知っておいてほしい、3つのこと" : "プロの視点で、深掘りする"}
+            title={isKeiri ? "頼む前に、知っておいてほしいこと" : "プロの視点で、深掘りする"}
             lead={`${service.name}で成果を出すために、知っておいてほしいことがあります。`}
           />
           <div className="mt-14 grid gap-14">
@@ -558,10 +558,13 @@ export default async function ServicePage({ params }: Props) {
                   }`}
                 >
                   <div className="md:[direction:ltr]">
-                    <p className="num text-6xl font-bold text-gold/40 md:text-8xl" aria-hidden>
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className="mt-2 border-l-4 border-pulse pl-5 text-xl font-bold leading-relaxed md:text-2xl">
+                    {/* 経理BPOでは飾りの大きな番号（01・02…）を外す。順番に意味が無く、型にはめた作りに見えた */}
+                    {!isKeiri && (
+                      <p className="num text-6xl font-bold text-gold/40 md:text-8xl" aria-hidden>
+                        {String(i + 1).padStart(2, "0")}
+                      </p>
+                    )}
+                    <h3 className={`border-l-4 border-pulse pl-5 text-xl font-bold leading-relaxed md:text-2xl ${isKeiri ? "" : "mt-2"}`}>
                       {ins.title}
                     </h3>
                   </div>
@@ -672,6 +675,7 @@ export default async function ServicePage({ params }: Props) {
       )}
 
       {!isKeiri && <PhotoBand src={svcPhoto(service.slug, 6)} alt={`${service.name}の仕事が順に流れていく様子のイメージ`} />}
+      {isKeiri && <PhotoSlot name="keiri-band-2" className="max-h-[360px] w-full" />}
 
       {/* 経理BPOだけ: 自分の場合はいくらか。費用の目安。料金が個別見積りでも、判断の物差し（公開されている相場）が無いと問い合わせる前に帰ってしまう */}
       {service.slug === "keiri-bpo" && (
@@ -700,6 +704,28 @@ export default async function ServicePage({ params }: Props) {
               caption={`${service.name}の進め方。${service.flow.map((s) => s.title).join("→")}の${service.flow.length}段階で進めます。`}
             />
           </div>
+          {/* 最初の画面から移した棚卸しシート。「現状の棚卸し」の段で使うものなので、流れの直後に置く */}
+          {isKeiri && (
+            <Reveal>
+              <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-line bg-mist px-6 py-5 sm:flex-row sm:items-center md:px-8">
+                <p className="text-[15px] leading-7 text-ink">
+                  <strong className="font-bold">最初の段で使う「経理業務の棚卸しシート」</strong>
+                  <span className="block text-sm text-slate">登録は不要で、その場でダウンロードできます（PDF・無料）。</span>
+                </p>
+                <a
+                  href="/docs/keiri-tanaoroshi-sheet.pdf"
+                  download
+                  data-cta="keiri_flow_sheet"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-full border border-ink/25 bg-white px-7 py-3.5 text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
+                >
+                  <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden>
+                    <path d="M8 1.5v9M4.5 7.5L8 11l3.5-3.5M2 13.5h12" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  棚卸しシートを受け取る
+                </a>
+              </div>
+            </Reveal>
+          )}
         </div>
       </section>
 

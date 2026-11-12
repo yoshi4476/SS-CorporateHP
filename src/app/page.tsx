@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
-import HeroVideo from "@/components/HeroVideo";
-import BusinessMap from "@/components/BusinessMap";
+import HeroVideo, { HeroBand } from "@/components/HeroVideo";
+import TopBusinesses from "@/components/TopBusinesses";
+import PhotoSlot, { hasSlot } from "@/components/PhotoSlot";
+import type { PhotoSlotName } from "@/lib/photoSlots";
 import NumberWall from "@/components/NumberWall";
 import GrowthChart from "@/components/GrowthChart";
 import SelfCheckBand from "@/components/SelfCheckBand";
@@ -12,7 +14,6 @@ import JsonLd from "@/components/JsonLd";
 import { IndustryBars, GaugeDonut, RankTable } from "@/components/charts";
 import { Reveal } from "@/components/motion";
 import { SectionHead, FlowSteps, FaqList, CtaBand } from "@/components/ui";
-import { services } from "@/lib/services";
 import { news } from "@/lib/news";
 import { cases } from "@/lib/cases";
 import { faqSchema } from "@/lib/schema";
@@ -69,6 +70,9 @@ const INDUSTRIES = [
   "ホテル・旅館", "フィットネス", "教室・スクール", "EC", "その他の業種も全国対応",
 ];
 
+// 事例の写真の枠（前回外した写真の場所）。業種ごとに1枠
+const CASE_SLOT: Record<string, PhotoSlotName> = { 士業事務所: "case-shigyou", リフォーム業: "case-reform", 製造業: "case-seizou" };
+
 // 相談への主のボタン。暗い面でも明るい面でも同じ色にする（ページごとに紺・黒・橙と色が違い、どれが主か分からなかった）
 const PRIMARY = "rounded-full bg-gold-bright px-9 py-4 text-center text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5";
 
@@ -89,21 +93,19 @@ export default function Home() {
 
       {/* 1. 誰の話か。最初の画面は見出し・主のボタン1つ・用件別のリンク・数字だけ。
           以前は右下に切り替わる案内板、下に業種22個の帯があり、押す所が散っていた */}
-      <section data-drone-zone data-area="メインビジュアル" data-area-id="hero" className="relative flex min-h-svh flex-col overflow-hidden bg-ink text-white">
+      <section data-drone-zone data-area="メインビジュアル" data-area-id="hero" className="relative flex flex-col overflow-hidden bg-ink text-white md:min-h-svh">
         <HeroVideo objectPosition="100% 20%" />
-        {/* 読みやすさの覆い: 見出しのある左と、ヘッダーのある上だけを暗くし、右の人物は見せる */}
+        {/* 読みやすさの覆い: 見出しのある左と、ヘッダーのある上だけを暗くし、右の人物は見せる（写真を敷くのはパソコンだけ） */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-0 hidden md:block"
           style={{
             background:
               "linear-gradient(90deg, rgb(8 14 26 / 0.9) 0%, rgb(8 14 26 / 0.78) 34%, rgb(8 14 26 / 0.3) 58%, rgb(8 14 26 / 0.05) 78%), linear-gradient(180deg, rgb(8 14 26 / 0.78) 0%, rgb(8 14 26 / 0.45) 9%, transparent 22%)",
           }}
         />
-        {/* スマホは写真の左側（人物のいない棚）の上に文字が載る。全体を暗くして読めるようにする */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-ink/55 md:hidden" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-16 pt-24 md:pb-20 md:pt-28">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 items-center px-5 pb-12 pt-24 md:pb-20 md:pt-28">
           <div className="w-full min-w-0 max-w-2xl">
             {/* 集客も社内業務も補助金も、全部「人を増やさずに回す」ための手段なので、そこを見出しに出す。
                 スマホは「集客も経理も回す。」が最長で折り返せない。320px でも1行に収まる値を画面幅から逆算している */}
@@ -137,15 +139,18 @@ export default function Home() {
                 補助金
               </Link>
             </p>
+            {/* スマホは写真を文字の背景にせず、ここに帯で出す（人物が画面の外に出ないように） */}
+            <HeroBand />
             {/* 数字は最初から確定の値で出す。0から数え上げると、途中で撮られた画面や読み込みの遅い端末で 3,196 のような別の数字に見えた */}
-            <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5">
+            <dl className="mt-8 grid max-w-lg grid-cols-3 gap-4 border-t border-white/20 pt-5 md:mt-10">
               {[
                 { n: "3,200", unit: "件", label: ["AIO・SEO・MEOの", "累計支援"] },
                 // 以前は補助金の上限額（350万円）を置いていたが、制度の額で当社の実績ではない。経理BPOの実績に替えた（first_party_facts の keiri-bpo-10）
                 { n: "48", unit: "社", label: ["経理・記帳の", "代行を担当"] },
-                { n: String(services.length), unit: "事業", label: ["一気通貫で", "支援"] },
+                // 以前は「7事業」。事業の数を最初に出すと何でも屋に見えたので、経理代行の継続中の社数（同じ keiri-bpo-10 の 48社のうち31社）にした
+                { n: "31", unit: "社", label: ["うち", "継続中の会社"] },
               ].map((s) => (
-                <div key={s.unit} className="flex flex-col">
+                <div key={s.n} className="flex flex-col">
                   {/* スマホの3列では語の途中で折れていた（「通算支/援」）。折れる位置を決めておく */}
                   <dt className="order-last mt-2 text-xs leading-5 text-white/75">
                     {s.label.map((l) => (
@@ -161,20 +166,20 @@ export default function Home() {
             </dl>
           </div>
         </div>
-        <p className="absolute bottom-3 left-5 z-10 text-[11px] text-white/70 md:left-8">※ 写真はイメージです</p>
+        <p className="absolute bottom-3 left-8 z-10 hidden text-[11px] text-white/70 md:block">※ 写真はイメージです</p>
       </section>
 
-      {/* 2. 困りごと → 効く事業。事業の入口はこの図の中のボタン。
-          以前はこの下に事業7つの写真のカードも並べていたが、同じ入口を2回見せており、写真も似た構図が続いていた */}
+      {/* 2. 何をする会社か。主役の2つ（経理BPO・集客）を大きく、そのほかは控えめに。
+          以前は7つの事業を同じ大きさの丸ボタンで並べた図（BusinessMap・事業一覧のページでは使う）で、何でも屋に見えた */}
       <section id="services" data-area="事業" data-area-id="services" className="scroll-mt-24 border-b border-line bg-mist py-16 md:py-24" aria-labelledby="services-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="services-heading"
-            title="困りごとは違っても、窓口はひとつのチームです"
-            lead={`集客・経理と社内業務・補助金の3つの領域に、${services.length}つの事業があります。==困りごとから、効く事業を選べます==。どれを選んでも、窓口はひとつのチームです。`}
+            title="主な仕事は、経理の代行と集客の2つです"
+            lead="どちらも、人を増やさずに会社を回すための仕事です。AIの導入やシステム開発、HP制作、補助金の申請支援は、この2つを支える事業として==同じ窓口でお受けします==。"
           />
           <div className="mt-12">
-            <BusinessMap />
+            <TopBusinesses />
           </div>
           <Reveal delay={0.1}>
             <div className="mt-10 border-t border-line pt-6">
@@ -188,7 +193,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-10 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl bg-ink p-8 text-white md:flex-row md:items-center md:p-10">
-              <p className="text-2xl font-black leading-snug md:text-3xl">どの事業が合うか、無料で診断します。</p>
+              <p className="text-2xl font-black leading-snug md:text-3xl">どれから始めるかは、無料相談で一緒に決めます。</p>
               <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
                 <Link href="/contact" className={`inline-flex items-center justify-center gap-3 ${PRIMARY}`}>
                   相談してみる
@@ -329,13 +334,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. 本当か（1）: 実践データ */}
+      {/* 5. 本当か（1）: 実践データ。本文とグラフで対象がずれていた（本文は「MEO運用」、グラフは「AIO・SEO・MEO 累計」）ので、
+          グラフの元データ（lib/meo.ts）に合わせた */}
       <section id="data" data-area="実践データ" data-area-id="data" className="relative scroll-mt-24 bg-paper py-16 md:py-24" aria-labelledby="data-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="data-heading"
             title="累計3,200件の支援が生んだ、実践データ"
-            lead="2019年から積み上げてきたMEO運用の現場データ。どの業種で、どんな施策が、どれだけ順位を動かすか——==この蓄積が全事業の土台==です。"
+            lead="2019年から積み上げてきた、AIO・SEO・MEOの支援の現場データです。業種の内訳と順位の表は、そのうちMEOの運用（2,000件以上）から取ったものです。==この蓄積が、全事業の土台==です。"
           />
           <div className="mt-12 grid items-start gap-6 lg:grid-cols-[1.4fr_1fr]">
             <Reveal className="rounded-2xl border border-line bg-raise p-5 shadow-card md:p-8">
@@ -371,13 +377,15 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="cases-heading"
-            title="数字が動いた、3つの現場"
+            title="支援先で、数字はこう動きました"
             lead="規模も業種も違う3社。共通しているのは、==施策を数字で設計し、数字で報告した==ことです。"
           />
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {cases.map((cs, i) => (
               <Reveal key={cs.industry} delay={(i % 3) * 0.09}>
                 <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-raise shadow-card">
+                  {/* 写真の枠（ファイルを置くと出る。lib/photoSlots.ts） */}
+                  {CASE_SLOT[cs.industry] && <PhotoSlot name={CASE_SLOT[cs.industry]} sizes="(min-width: 1024px) 400px, 100vw" />}
                   <div className="border-b border-line bg-ink p-7 text-white md:p-8">
                     <div className="flex items-center justify-between gap-3">
                       <span className="rounded-full bg-white/12 px-3 py-1 text-xs font-bold text-white">
@@ -507,11 +515,15 @@ export default function Home() {
       {/* 8. 自分の場合はどう進むか */}
       <section id="process" data-area="進め方" data-area-id="process" className="scroll-mt-24 py-16 md:py-24" aria-labelledby="process-heading">
         <div className="mx-auto max-w-7xl px-5">
-          <SectionHead
-            id="process-heading"
-            title="いきなり契約からは、始めません"
-            lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。ご相談から成果までは、4つのステップです。"
-          />
+          {/* 写真の枠（ファイルを置くと見出しの右に出る。lib/photoSlots.ts） */}
+          <div className={hasSlot("top-process") ? "grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]" : ""}>
+            <SectionHead
+              id="process-heading"
+              title="いきなり契約からは、始めません"
+              lead="どのサービスも、いきなり契約から始まることはありません。まず現状を診断し、==効果の見込みを数字で確認==してから進めます。ご相談から成果までは、4つのステップです。"
+            />
+            <PhotoSlot name="top-process" sizes="(min-width: 1024px) 560px, 100vw" className="rounded-3xl shadow-card" />
+          </div>
           <div className="mt-12">
             <FlowSteps
               steps={[
@@ -544,6 +556,8 @@ export default function Home() {
                 </p>
               </div>
               <div className="flex flex-col gap-4 md:items-end">
+                {/* 写真の枠（ファイルを置くと出る。lib/photoSlots.ts） */}
+                <PhotoSlot name="top-subsidy" sizes="(min-width: 768px) 24rem, 100vw" className="w-full rounded-2xl" />
                 <Link
                   href="/services/ai-subsidy"
                   className="rounded-full border border-ink/25 bg-white px-9 py-4 text-center text-sm font-bold text-ink transition-colors hover:border-pulse hover:text-pulse"
@@ -569,7 +583,7 @@ export default function Home() {
         {/* ほかの区画と同じ幅・同じ左端。見出しを左、質問を右に並べる（中央寄せの細い列だけ浮いていた） */}
         <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHead id="faq-heading" title="相談の前に、よく聞かれること" />
+            <SectionHead id="faq-heading" title="ご相談の前によく聞かれること" />
           </div>
           <div>
             <FaqList items={TOP_FAQ} />

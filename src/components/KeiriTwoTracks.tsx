@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SectionHead } from "@/components/ui";
 import { Reveal } from "@/components/motion";
+import KeiriVideo from "@/components/KeiriVideo";
 
 /**
  * 経理BPOの2つの頼み方を選ばせる区画。
@@ -27,7 +28,7 @@ const TRACKS = [
     cta: { label: "無料の現状分析を申し込む", href: "/contact", s: "keiri-bpo" },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
     video: "keiri-bpo",
-    videoNote: "任せた場合に何がどう変わるかを、10分でご説明します",
+    videoTitle: "任せた場合に、何がどう変わるか",
   },
   {
     key: "self",
@@ -46,7 +47,7 @@ const TRACKS = [
     cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self" },
     note: "実際の画面をお見せします。ご契約前提のご案内ではありません。",
     video: "keiri-self",
-    videoNote: "実際の画面で、どう使うかを10分でご説明します",
+    videoTitle: "実際の画面で、どう使うか",
   },
 ];
 
@@ -102,19 +103,10 @@ export default function KeiriTwoTracks() {
                 </div>
 
                 <div className="mt-7">
-                  <p className="mb-2 text-xs font-bold text-pulse">
-                    動画で見る（約10分）
-                  </p>
-                  <video
-                    controls
-                    preload="none"
-                    poster={`https://ai.7senses.co.jp/videos/${t.video}-poster.jpg`}
-                    className="w-full rounded-2xl border border-line"
-                  >
-                    <source src={`https://ai.7senses.co.jp/videos/${t.video}.mp4`} type="video/mp4" />
-                    お使いのブラウザでは動画を再生できません。
-                  </video>
-                  <p className="mt-2 text-sm text-ink-soft">{t.videoNote}</p>
+                  <p className="mb-2 text-xs font-bold text-pulse">動画で見る</p>
+                  <KeiriVideo video={t.video} kind={t.name} title={t.videoTitle} />
+                  {/* 動画の中の製品名は「KEIRI 経理クラウド」。ページの呼び名と違うので、同じものだと添える */}
+                  <p className="mt-2 text-[13px] leading-6 text-slate">動画の中では、経理システムを「KEIRI 経理クラウド」の名前でご紹介しています。</p>
                 </div>
 
                 <div className="mt-auto pt-7">

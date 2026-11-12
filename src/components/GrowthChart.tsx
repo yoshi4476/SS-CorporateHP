@@ -7,10 +7,11 @@ import { meoGrowth as DATA } from "@/lib/meo";
 const MAX = 3500;
 
 // 図の寸法。パソコン用の横長（680×320）をスマホの幅に縮めると、目盛りの字が 5px ほどになり読めなかった。
-// スマホには、同じデータを縦長の寸法・大きい字で描いた図を別に出す（年は1つおき、終点の数字は点の左上）。
-type Dim = { id: string; w: number; h: number; pad: { top: number; right: number; bottom: number; left: number }; fs: number; yearStep: number; endLeft: boolean };
-const WIDE: Dim = { id: "wide", w: 680, h: 320, pad: { top: 28, right: 84, bottom: 40, left: 56 }, fs: 11, yearStep: 1, endLeft: false };
-const NARROW: Dim = { id: "narrow", w: 340, h: 300, pad: { top: 44, right: 18, bottom: 36, left: 46 }, fs: 12.5, yearStep: 2, endLeft: true };
+// スマホには、同じデータを縦長の寸法・大きい字で描いた図を別に出す（終点の数字は点の左上）。
+// 年は全部出す。以前はスマホだけ1つおき（2020・2022…）で、最初の年が2020年に見え、本文の「2019年から」と食い違って読めた
+type Dim = { id: string; w: number; h: number; pad: { top: number; right: number; bottom: number; left: number }; fs: number; yearFs: number; endLeft: boolean };
+const WIDE: Dim = { id: "wide", w: 680, h: 320, pad: { top: 28, right: 84, bottom: 40, left: 56 }, fs: 11, yearFs: 11, endLeft: false };
+const NARROW: Dim = { id: "narrow", w: 340, h: 300, pad: { top: 44, right: 18, bottom: 36, left: 46 }, fs: 12.5, yearFs: 11, endLeft: true };
 
 function Chart({ d: dim, className }: { d: Dim; className: string }) {
   const [hover, setHover] = useState<number | null>(null);
@@ -56,13 +57,11 @@ function Chart({ d: dim, className }: { d: Dim; className: string }) {
           </text>
         </g>
       ))}
-      {DATA.map((d, i) =>
-        (last - i) % dim.yearStep === 0 ? (
-          <text key={d.year} x={x(i)} y={H - 12} textAnchor="middle" fontSize={fs} fill="#55637a" className="num">
-            {d.year}
-          </text>
-        ) : null,
-      )}
+      {DATA.map((d, i) => (
+        <text key={d.year} x={x(i)} y={H - 12} textAnchor="middle" fontSize={dim.yearFs} fill="#55637a" className="num">
+          {d.year}
+        </text>
+      ))}
 
       <motion.path
         d={areaPath}
@@ -127,7 +126,9 @@ export default function GrowthChart() {
       <figcaption className="mb-1 text-sm font-bold text-ink">
         AIO・SEO・MEO 累計支援件数の推移
         {/* 3,200 は AIO・SEO・MEO の累計件数（うち MEO 2,000件以上）。店舗数・社数ではない（2026-10-20 運用者の訂正） */}
-        <span className="ml-2 text-xs font-normal text-slate">(件)</span>
+        <span className="ml-2 text-xs font-normal text-slate">
+          ({DATA[0].year}〜{DATA[DATA.length - 1].year}年・件)
+        </span>
       </figcaption>
       <Chart d={WIDE} className="hidden w-full sm:block" />
       <Chart d={NARROW} className="w-full sm:hidden" />

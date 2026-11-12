@@ -3,6 +3,7 @@ import { Reveal } from "@/components/motion";
 import { diagnostics } from "@/lib/aio";
 import AioScan from "@/components/AioScan";
 import InlineToolBox from "@/components/InlineToolBox";
+import PhotoSlot from "@/components/PhotoSlot";
 
 // 無料セルフチェックへの誘導。
 // 「無料相談」はハードルが高いが、その場で終わる自己診断なら踏み出せる。
@@ -45,6 +46,8 @@ export default function SelfCheckBand() {
               <p className="mb-3 text-[13px] font-bold tracking-wide text-gold-bright">経理</p>
               <InlineToolBox from="/" place="top" tone="dark" />
             </Reveal>
+            {/* 写真の枠（ファイルを置くとパソコンで出る。lib/photoSlots.ts） */}
+            <PhotoSlot name="top-selfcheck" sizes="560px" className="mt-10 hidden rounded-3xl ring-1 ring-white/10 lg:block" />
           </div>
 
           <div className="grid gap-4">

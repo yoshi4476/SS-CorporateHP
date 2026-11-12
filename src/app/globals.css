@@ -24,8 +24,9 @@
   --color-mist: #f1f4f8;
   --color-ink: #0d1420;
   --color-ink-soft: #18243a;
-  --color-slate: #5a6678;
-  --color-faint: #647082;
+  /* 本文の灰色。生成り色・薄灰の地で薄く見えると指摘があり（2026-11）、#5a6678・#647082 から濃くした */
+  --color-slate: #465163;
+  --color-faint: #566173;
   --color-line: #e2e6ec;
   --color-line-strong: #c8cfda;
   --color-pulse: #1c3f7c;
@@ -924,6 +925,3 @@ html.ss-intro-pending::before {
 .hero-rich mark { background: none; color: #fff; font-weight: 700; }
 .hero-rich strong { color: #fff; }
 
-/* 最初の画面の写真の位置。スマホの縦長の切り抜きでは人物の顔が見出しの真下に来るので、人物のいない左側を見せる */
-.hero-scene { object-position: 18% center; }
-@media (min-width: 768px) { .hero-scene { object-position: var(--hero-pos, center); } }
