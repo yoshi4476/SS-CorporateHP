@@ -416,7 +416,6 @@ export const services: Service[] = [
     metrics: [
       { value: "2,000", suffix: "件以上", label: "MEOの運用実績" },
       { value: "1.8", suffix: "倍", label: "マップ経由アクション平均改善" },
-      { value: "94", suffix: "%", label: "契約継続率" },
     ],
     flow: [
       { title: "商圏調査", body: "競合状況と検索キーワードを調査し、勝ち筋を設計します。" },

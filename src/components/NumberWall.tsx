@@ -109,11 +109,11 @@ export default function NumberWall() {
       figure: <Spark />,
     },
     {
-      value: 94,
+      value: 86.5,
       suffix: "%",
-      label: "運用サービスの契約継続率",
-      note: "運用サービスの平均",
-      figure: <Ring value={94} label="契約継続率94%" />,
+      label: "SEO運用の契約継続率",
+      note: "2023年5月〜2026年9月に契約した74件のうち、1年以内に解約しなかった64件",
+      figure: <Ring value={86.5} label="SEO運用の契約継続率86.5%" />,
     },
     {
       value: 1.8,

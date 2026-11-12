@@ -247,7 +247,7 @@ export default async function ServicePage({ params }: Props) {
       {service.metrics && (
         <section className="border-b border-line bg-raise py-10 md:py-14" aria-label="実績の数字" data-area="実績の数字" data-area-id="metrics">
           <div className="mx-auto max-w-7xl px-5">
-            <div className="grid gap-5 sm:grid-cols-3">
+            <div className={`grid gap-5 ${service.metrics.length === 2 ? "sm:grid-cols-2" : "sm:grid-cols-3"}`}>
               {service.metrics.map((m, i) => (
                 <StatTile key={m.label} metric={m} delay={i * 0.08} />
               ))}

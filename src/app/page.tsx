@@ -298,7 +298,7 @@ export default function Home() {
           </div>
           <div className="mt-6 grid items-start gap-6 lg:grid-cols-[1fr_1.4fr]">
             <Reveal delay={0.05} className="grid grid-cols-2 gap-6 rounded-2xl border border-line bg-raise p-6 shadow-card md:p-8">
-              <GaugeDonut value={94} label="契約継続率" sub="運用サービス平均" />
+              <GaugeDonut value={86.5} label="SEO運用の契約継続率" sub="契約74件・1年以内の解約で判定" />
               <GaugeDonut value={87} label="上位3位以内 到達率" sub="主要キーワード・90日" />
             </Reveal>
             <Reveal delay={0.12}>
