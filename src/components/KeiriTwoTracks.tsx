@@ -25,8 +25,8 @@ const TRACKS = [
     doing: ["書類を送る", "月次の報告を確認する"],
     ours: ["記帳・仕訳", "請求発行と入金消込", "支払データ作成", "給与・賞与・年末調整",
            "経費精算のチェック", "月次決算の早期化"],
-    // 相談のボタンはページの中で同じ言葉・同じ行き先（ページの中のフォーム）にそろえる
-    cta: { label: "経理の外注を無料で相談する", href: "#consult", s: "keiri-bpo", button: true },
+    // 行き先はページの中のフォーム。言葉は、この場で得られるもの（現状分析）を言う
+    cta: { label: "無料の現状分析を申し込む", href: "#consult", s: "keiri-bpo", button: true },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
     video: "keiri-bpo",
     videoTitle: "任せた場合に、何がどう変わるか",
@@ -145,7 +145,7 @@ export default function KeiriTwoTracks() {
               data-entry-s="keiri-shindan"
               className="mt-5 inline-block rounded-full border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
             >
-              経理の外注を無料で相談する →
+              無料の現状分析を申し込む →
             </a>
           </div>
         </Reveal>

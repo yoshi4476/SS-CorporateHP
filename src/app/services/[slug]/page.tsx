@@ -42,14 +42,15 @@ type Props = { params: Promise<{ slug: string }> };
 const PRIMARY = "rounded-full bg-gold-bright px-8 py-4 text-center text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5";
 
 /** 節の切れ目に置く、ページの中のフォーム（#consult）への短い入口。フォームが最下部にしか無く、途中で相談したくなった人の行き先が無かった */
-// 言葉はページの中の相談のボタンすべてと同じにする（以前は節ごとに「範囲を相談する」「見積りの目安を聞く」などと違い、行き先が別に見えた）
-function ConsultJump({ lead }: { lead: string }) {
+// 言葉は節ごとに、その場で得られるものにする（「範囲を相談する」「見積りの目安を聞く」）。
+// 一度ページの中ですべて同じ言葉にそろえたが、比べた採点で、得られるものが見えなくなったと2人とも前の形を選んだ
+function ConsultJump({ lead, label }: { lead: string; label: string }) {
   return (
     <Reveal>
       <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-gold/30 bg-gold-tint px-6 py-5 sm:flex-row sm:items-center md:px-8">
         <p className="text-[15px] font-bold leading-7 text-ink">{lead}</p>
         <a href="#consult" data-cta="keiri_mid_consult" className={`shrink-0 !py-3.5 ${PRIMARY}`}>
-          経理の外注を無料で相談する
+          {label}
         </a>
       </div>
     </Reveal>
@@ -122,7 +123,7 @@ export default async function ServicePage({ params }: Props) {
       {/* ヒーロー */}
       {/* その事業の現場の写真を全幅に敷く（イメージ写真）。文字は左に寄せ、左側だけを暗くする */}
       <section data-area="メインビジュアル" data-area-id="hero" className="relative overflow-hidden bg-ink text-white">
-        {/* 経理BPOの写真は人物が右にいる。スマホでは文字の背景に敷かず、主のボタンの下に人物が真ん中に来る帯で出す。
+        {/* 経理BPOの写真は人物が右にいる。スマホでは文字の背景に敷かず、説明と主のボタンの下に人物が真ん中に来る帯で出す。
             以前はスマホで人物のいない左側（暗い棚）を見せており、最初の画面に人が写っていなかった */}
         <Image
           src={svcPhoto(service.slug, 1)}
@@ -139,7 +140,8 @@ export default async function ServicePage({ params }: Props) {
         />
         {/* 見出しの後ろに写真の中の札（「11月分」）が透けて読めていた。文字の載る左半分をほぼ塗りつぶす */}
         {isKeiri && <div aria-hidden className="absolute inset-0 hidden bg-[linear-gradient(90deg,rgb(8_14_26/0.9)_0%,rgb(8_14_26/0.85)_42%,rgb(8_14_26/0.4)_56%,transparent_68%)] md:block" />}
-        <div className="relative mx-auto max-w-7xl px-5 pb-16 pt-28 md:pb-24 md:pt-36">
+        {/* 経理BPOのスマホは、説明とボタンの下の写真の人物まで最初の画面に収めるため、上の余白を詰める */}
+        <div className={`relative mx-auto max-w-7xl px-5 pb-16 md:pb-24 md:pt-36 ${isKeiri ? "pt-20" : "pt-28"}`}>
           <Reveal>
             <nav aria-label="パンくずリスト" className="text-xs text-white/60">
               <ol className="flex flex-wrap items-center gap-2">
@@ -161,14 +163,14 @@ export default async function ServicePage({ params }: Props) {
               </ol>
             </nav>
           </Reveal>
-          <div className="mt-10">
+          <div className={isKeiri ? "mt-6 md:mt-10" : "mt-10"}>
             <div>
               <Reveal delay={0.06}>
                 <p aria-hidden className="eyebrow !text-aqua" />
                 <h1 className="mt-4 max-w-3xl text-3xl font-black leading-normal md:text-6xl md:leading-snug">
                   {service.name}
                 </h1>
-                <p className="mt-7 max-w-2xl text-xl font-bold leading-10 text-white md:text-2xl md:leading-[1.9]">
+                <p className={`max-w-2xl text-xl font-bold leading-10 text-white md:text-2xl md:leading-[1.9] ${isKeiri ? "mt-5 md:mt-7" : "mt-7"}`}>
                   {service.lead}
                 </p>
                 {/* 数字は管制塔の data/first_party_facts.json の keiri-bpo-10（運用者の申告 2026-10-20）。以前は1画面目に実績が無かった */}
@@ -181,8 +183,7 @@ export default async function ServicePage({ params }: Props) {
                 )}
                 {/* body も ==強調== を書ける前提のデータなのに、ここだけ素通しで
                     記号がそのまま出ていた */}
-                {/* 経理BPOのスマホでは、この説明を写真の帯の後ろへ回す（ボタンと人物を最初の画面に収めるため） */}
-                <p className={`hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base ${isKeiri ? "hidden md:block" : ""}`}>
+                <p className="hero-rich mt-5 max-w-2xl text-[15px] leading-[1.9] text-white/75 md:text-base">
                   <Rich text={service.body} />
                 </p>
               </Reveal>
@@ -218,7 +219,7 @@ export default async function ServicePage({ params }: Props) {
                     </p>
                   </div>
                 ) : (
-                <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <div className={`flex flex-col items-start gap-4 sm:flex-row sm:items-center ${isKeiri ? "mt-7 md:mt-9" : "mt-9"}`}>
                   {/* 経理BPOのページに来る人の用件は「経理を外に出せるか」。ボタンもその言葉にし、相談の種類を選んだ状態でフォームを開く */}
                   {/* 経理BPOはこのページの中にフォームがある。別のページへ送らず、そこへ下ろす */}
                   <Link
@@ -241,23 +242,20 @@ export default async function ServicePage({ params }: Props) {
                   )}
                 </div>
                 )}
+                {/* スマホの写真は、説明とボタンの後ろに低い帯で出す。以前は説明より前に大きな帯（4:3）を置き、説明が最初の画面の外へ押し出されていた */}
                 {isKeiri && (
-                  <figure className="relative -mx-5 mt-8 aspect-[4/3] overflow-hidden md:hidden">
+                  <figure className="relative -mx-5 mt-6 aspect-[2/1] overflow-hidden md:hidden">
                     <Image
                       src={svcPhoto(service.slug, 1)}
                       alt="明るい事務所で、領収書の金額をパソコンに入力する経理の担当者（イメージ）"
                       fill
                       priority
-                      sizes="100vw"
-                      className="object-cover object-[85%_30%]"
+                      sizes="160vw"
+                      // 低い帯のままでは顔が帯の下の端に来て、最初の画面からはみ出した。人物に寄せて拡大し、顔を帯の上寄りに出す
+                      className="origin-[75%_100%] scale-[1.6] object-cover object-[75%_30%]"
                     />
                     <figcaption className="absolute bottom-2 left-3 rounded bg-ink/60 px-1.5 py-0.5 text-[11px] text-white/90">※ 写真はイメージです</figcaption>
                   </figure>
-                )}
-                {isKeiri && (
-                  <p className="hero-rich mt-7 text-[15px] leading-[1.9] text-white/80 md:hidden">
-                    <Rich text={service.body} />
-                  </p>
                 )}
                 {service.price && (
                   <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold backdrop-blur-sm">
@@ -435,7 +433,7 @@ export default async function ServicePage({ params }: Props) {
             <Reveal className="mt-12">
               <KeiriCompare />
             </Reveal>
-            <ConsultJump lead="自社の場合はどれが合うか、いまの体制を伺ってお答えします。" />
+            <ConsultJump lead="自社の場合はどれが合うか、いまの体制を伺ってお答えします。" label="このまま相談する" />
           </div>
         </section>
       )}
@@ -493,7 +491,7 @@ export default async function ServicePage({ params }: Props) {
                 <ScopeTable name={service.name} scope={scope} />
               </div>
             )}
-            <ConsultJump lead="御社の場合にどこまで外に出せるかは、現状を伺ったうえでお答えします。" />
+            <ConsultJump lead="御社の場合にどこまで外に出せるかは、現状を伺ったうえでお答えします。" label="範囲を相談する" />
           </div>
         </section>
       )}
@@ -692,7 +690,7 @@ export default async function ServicePage({ params }: Props) {
             <Reveal className="mt-12">
               <KeiriCostGuide />
             </Reveal>
-            <ConsultJump lead="御社の業務量でのお見積りの目安は、現状を伺ってからお返しします。" />
+            <ConsultJump lead="御社の業務量でのお見積りの目安は、現状を伺ってからお返しします。" label="見積りの目安を聞く" />
           </div>
         </section>
       )}

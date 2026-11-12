@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SplitText from "@/components/SplitText";
 import HeroVideo, { HeroBand } from "@/components/HeroVideo";
-import TopBusinesses from "@/components/TopBusinesses";
+import BusinessMap from "@/components/BusinessMap";
 import PhotoSlot, { hasSlot } from "@/components/PhotoSlot";
 import type { PhotoSlotName } from "@/lib/photoSlots";
 import NumberWall from "@/components/NumberWall";
@@ -169,17 +169,18 @@ export default function Home() {
         <p className="absolute bottom-3 left-8 z-10 hidden text-[11px] text-white/70 md:block">※ 写真はイメージです</p>
       </section>
 
-      {/* 2. 何をする会社か。主役の2つ（経理BPO・集客）を大きく、そのほかは控えめに。
-          以前は7つの事業を同じ大きさの丸ボタンで並べた図（BusinessMap・事業一覧のページでは使う）で、何でも屋に見えた */}
+      {/* 2. 困りごと → 効く事業。事業の入口はこの図の中のボタン。主力（経理BPO・集客）を先に、塗りのボタンで示す。
+          一度、主力2つの大きなカードに作り替えたが、比べた採点で2人とも「困りごとから行き先へ振り分ける」この図と、
+          直後の「どの事業が合うか、無料で診断します」の帯を選んだ（迷う経営者を行き先へ導けていた） */}
       <section id="services" data-area="事業" data-area-id="services" className="scroll-mt-24 border-b border-line bg-mist py-16 md:py-24" aria-labelledby="services-heading">
         <div className="mx-auto max-w-7xl px-5">
           <SectionHead
             id="services-heading"
-            title="主な仕事は、経理の代行と集客の2つです"
-            lead="どちらも、人を増やさずに会社を回すための仕事です。AIの導入やシステム開発、HP制作、補助金の申請支援は、この2つを支える事業として同じ窓口でお受けします。"
+            title="困りごとは違っても、窓口はひとつのチームです"
+            lead="主な仕事は、==経理の代行と集客==の2つです。AIの導入やシステム開発、HP制作、補助金の申請支援も、同じチームでお受けします。困りごとから、効く事業を選べます。"
           />
           <div className="mt-12">
-            <TopBusinesses />
+            <BusinessMap focus />
           </div>
           <Reveal delay={0.1}>
             <div className="mt-10 border-t border-line pt-6">
@@ -193,7 +194,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-10 flex flex-col items-start justify-between gap-6 overflow-hidden rounded-2xl bg-ink p-8 text-white md:flex-row md:items-center md:p-10">
-              <p className="text-2xl font-black leading-snug md:text-3xl">どれから始めるかは、無料相談で一緒に決めます。</p>
+              <p className="text-2xl font-black leading-snug md:text-3xl">どの事業が合うか、無料で診断します。</p>
               <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center">
                 <Link href="/contact" className={`inline-flex items-center justify-center gap-3 ${PRIMARY}`}>
                   相談してみる
