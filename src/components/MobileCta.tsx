@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 /**
  * スマホの画面の下に付いてくる相談のボタン。
  * ページが長く（トップ・事業のページで 26,000px 以上）、途中で相談したくなってもメニューを開くしかなかった。
- * 最初の画面（そこには主のボタンがある）・フォーム・フッターが見えている間と、相談のページでは出さない
+ * 最初の画面（そこには主のボタンがある）・フォーム・締めの相談の帯・フッターが見えている間と、相談のページでは出さない
  */
 export default function MobileCta() {
   const path = usePathname();
@@ -26,7 +26,8 @@ export default function MobileCta() {
       }
       setCovered(seen.size > 0);
     });
-    document.querySelectorAll("main form, footer").forEach((el) => io.observe(el));
+    // 締めの相談の帯（同じボタンがある）でも出さない。出したままだと帯のボタンと2つ並び、「会社概要を見る」を隠していた
+    document.querySelectorAll("main form, footer, [data-cta-pos='cta-band']").forEach((el) => io.observe(el));
     return () => {
       window.removeEventListener("scroll", onScroll);
       io.disconnect();

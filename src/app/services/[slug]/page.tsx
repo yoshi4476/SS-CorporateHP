@@ -229,7 +229,6 @@ export default async function ServicePage({ params }: Props) {
                   >
                     {isKeiri ? "経理の外注を無料で相談する" : "このサービスを相談する"}
                   </Link>
-                  {/* 経理BPOの最初の画面の行き先は相談の1つだけ。棚卸しシートは「進め方」の節へ、5問のセルフチェックは「いま起きていること」の節へ移した */}
                   {service.slug === "ai-subsidy" && (
                     <a
                       href={site.lpUrl}
@@ -241,6 +240,19 @@ export default async function ServicePage({ params }: Props) {
                     </a>
                   )}
                 </div>
+                )}
+                {/* 相談の手前の軽い入口。ボタンにせず1行の文字のリンクにして、主のボタンは1つのままにする（比べの採点で2人とも、前の版のこの入口を良いと挙げた） */}
+                {isKeiri && (
+                  <p className="mt-5 text-[14px] leading-7 text-white/75">
+                    相談の前に：
+                    <Link href="/tools/keiri-check" data-entry-from="/services/keiri-bpo" className="mx-1 whitespace-nowrap font-bold text-white underline decoration-gold-bright decoration-2 underline-offset-[5px] hover:text-gold-bright">
+                      5問のセルフチェック
+                    </Link>
+                    ／
+                    <a href="/docs/keiri-tanaoroshi-sheet.pdf" download className="mx-1 whitespace-nowrap font-bold text-white underline decoration-gold-bright decoration-2 underline-offset-[5px] hover:text-gold-bright">
+                      棚卸しシート（無料）
+                    </a>
+                  </p>
                 )}
                 {/* スマホの写真は、説明とボタンの後ろに低い帯で出す。以前は説明より前に大きな帯（4:3）を置き、説明が最初の画面の外へ押し出されていた */}
                 {isKeiri && (
