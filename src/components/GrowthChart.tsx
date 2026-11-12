@@ -4,26 +4,21 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { meoGrowth as DATA } from "@/lib/meo";
 
+const W = 680;
+const H = 320;
+const PAD = { top: 28, right: 84, bottom: 40, left: 56 };
 const MAX = 3500;
 
-// 図の寸法。パソコン用の横長（680×320）をスマホの幅に縮めると、目盛りの字が 5px ほどになり読めなかった。
-// スマホには、同じデータを縦長の寸法・大きい字で描いた図を別に出す（終点の数字は点の左上）。
-// 年は全部出す。以前はスマホだけ1つおき（2020・2022…）で、最初の年が2020年に見え、本文の「2019年から」と食い違って読めた
-type Dim = { id: string; w: number; h: number; pad: { top: number; right: number; bottom: number; left: number }; fs: number; yearFs: number; endLeft: boolean };
-const WIDE: Dim = { id: "wide", w: 680, h: 320, pad: { top: 28, right: 84, bottom: 40, left: 56 }, fs: 11, yearFs: 11, endLeft: false };
-const NARROW: Dim = { id: "narrow", w: 340, h: 300, pad: { top: 44, right: 18, bottom: 36, left: 46 }, fs: 12.5, yearFs: 11, endLeft: true };
+const x = (i: number) => PAD.left + (i / (DATA.length - 1)) * (W - PAD.left - PAD.right);
+const y = (v: number) => PAD.top + (1 - v / MAX) * (H - PAD.top - PAD.bottom);
 
-function Chart({ d: dim, className }: { d: Dim; className: string }) {
+export default function GrowthChart() {
   const [hover, setHover] = useState<number | null>(null);
   const reduce = useReducedMotion();
-  const { w: W, h: H, pad: PAD, fs } = dim;
 
-  const x = (i: number) => PAD.left + (i / (DATA.length - 1)) * (W - PAD.left - PAD.right);
-  const y = (v: number) => PAD.top + (1 - v / MAX) * (H - PAD.top - PAD.bottom);
   const linePath = DATA.map((d, i) => `${i === 0 ? "M" : "L"}${x(i)},${y(d.total)}`).join(" ");
   const areaPath = `${linePath} L${x(DATA.length - 1)},${y(0)} L${x(0)},${y(0)} Z`;
   const last = DATA.length - 1;
-  const grad = `areaGrad-${dim.id}`;
 
   const onMove = (e: React.MouseEvent<SVGSVGElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -33,105 +28,98 @@ function Chart({ d: dim, className }: { d: Dim; className: string }) {
   };
 
   return (
-    <svg
-      viewBox={`0 0 ${W} ${H}`}
-      className={className}
-      role="img"
-      aria-label="AIO・SEO・MEOの累計支援件数は2019年から増え続け、2026年に累計3,200件に到達"
-      onMouseMove={onMove}
-      onMouseLeave={() => setHover(null)}
-    >
-      <defs>
-        <linearGradient id={grad} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1c3f7c" stopOpacity="0.22" />
-          <stop offset="100%" stopColor="#1c3f7c" stopOpacity="0.02" />
-        </linearGradient>
-      </defs>
-
-      {/* recessive grid */}
-      {[0, 1000, 2000, 3000].map((v) => (
-        <g key={v}>
-          <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} stroke="#dfe6f0" strokeWidth="1" />
-          <text x={PAD.left - 8} y={y(v) + 4} textAnchor="end" fontSize={fs} fill="#55637a" className="num">
-            {v.toLocaleString()}
-          </text>
-        </g>
-      ))}
-      {DATA.map((d, i) => (
-        <text key={d.year} x={x(i)} y={H - 12} textAnchor="middle" fontSize={dim.yearFs} fill="#55637a" className="num">
-          {d.year}
-        </text>
-      ))}
-
-      <motion.path
-        d={areaPath}
-        fill={`url(#${grad})`}
-        initial={reduce ? false : { opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, delay: 0.6 }}
-      />
-      <motion.path
-        d={linePath}
-        fill="none"
-        stroke="#1c3f7c"
-        strokeWidth="2"
-        strokeLinecap="round"
-        initial={reduce ? false : { pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-      />
-
-      {/* 終点の直接ラベル */}
-      <circle cx={x(last)} cy={y(DATA[last].total)} r="5" fill="#1c3f7c" stroke="#fff" strokeWidth="2" />
-      {dim.endLeft ? (
-        <text x={x(last) + 6} y={y(DATA[last].total) - 14} textAnchor="end" fontSize={fs + 5} fontWeight="700" fill="#0b1220" className="num">
-          3,200件
-        </text>
-      ) : (
-        <>
-          <text x={x(last) + 12} y={y(DATA[last].total) - 8} fontSize="15" fontWeight="700" fill="#0b1220" className="num">
-            3,200件
-          </text>
-          <text x={x(last) + 12} y={y(DATA[last].total) + 8} fontSize="10" fill="#55637a">
-            通算支援
-          </text>
-        </>
-      )}
-
-      {/* hover crosshair + tooltip */}
-      {hover !== null && (
-        <g pointerEvents="none">
-          <line x1={x(hover)} y1={PAD.top} x2={x(hover)} y2={y(0)} stroke="#0b1220" strokeOpacity="0.25" strokeWidth="1" />
-          <circle cx={x(hover)} cy={y(DATA[hover].total)} r="4.5" fill="#fff" stroke="#1c3f7c" strokeWidth="2" />
-          <g transform={`translate(${Math.min(x(hover) + 10, W - 150)}, ${Math.max(y(DATA[hover].total) - 52, 6)})`}>
-            <rect width="130" height="44" rx="8" fill="#0b1220" />
-            <text x="12" y="18" fontSize="11" fill="#ffffffaa">
-              {DATA[hover].year}年
-            </text>
-            <text x="12" y="35" fontSize="14" fontWeight="700" fill="#fff" className="num">
-              累計 {DATA[hover].total.toLocaleString()}件
-            </text>
-          </g>
-        </g>
-      )}
-    </svg>
-  );
-}
-
-export default function GrowthChart() {
-  return (
     <figure className="w-full">
       <figcaption className="mb-1 text-sm font-bold text-ink">
         AIO・SEO・MEO 累計支援件数の推移
         {/* 3,200 は AIO・SEO・MEO の累計件数（うち MEO 2,000件以上）。店舗数・社数ではない（2026-10-20 運用者の訂正） */}
+        {/* スマホの図は年が1つおき（2020・2022…）で、本文の「2019年から」と食い違って読めたため、期間を添える */}
         <span className="ml-2 text-xs font-normal text-slate">
           ({DATA[0].year}〜{DATA[DATA.length - 1].year}年・件)
         </span>
       </figcaption>
-      <Chart d={WIDE} className="hidden w-full sm:block" />
-      <Chart d={NARROW} className="w-full sm:hidden" />
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        className="w-full"
+        role="img"
+        aria-label="AIO・SEO・MEOの累計支援件数は2019年から増え続け、2026年に累計3,200件に到達"
+        onMouseMove={onMove}
+        onMouseLeave={() => setHover(null)}
+      >
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#1c3f7c" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#1c3f7c" stopOpacity="0.02" />
+          </linearGradient>
+        </defs>
+
+        {/* recessive grid */}
+        {[0, 1000, 2000, 3000].map((v) => (
+          <g key={v}>
+            <line x1={PAD.left} y1={y(v)} x2={W - PAD.right} y2={y(v)} stroke="#dfe6f0" strokeWidth="1" />
+            <text x={PAD.left - 10} y={y(v) + 4} textAnchor="end" fontSize="11" fill="#55637a" className="num">
+              {v.toLocaleString()}
+            </text>
+          </g>
+        ))}
+        {DATA.map((d, i) => (
+          <text key={d.year} x={x(i)} y={H - 14} textAnchor="middle" fontSize="11" fill="#55637a" className="num">
+            {d.year}
+          </text>
+        ))}
+
+        <motion.path
+          d={areaPath}
+          fill="url(#areaGrad)"
+          initial={reduce ? false : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, delay: 0.6 }}
+        />
+        <motion.path
+          d={linePath}
+          fill="none"
+          stroke="#1c3f7c"
+          strokeWidth="2"
+          strokeLinecap="round"
+          initial={reduce ? false : { pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+        />
+
+        {/* 終点の直接ラベル */}
+        <circle cx={x(last)} cy={y(DATA[last].total)} r="5" fill="#1c3f7c" stroke="#fff" strokeWidth="2" />
+        <text
+          x={x(last) + 12}
+          y={y(DATA[last].total) - 8}
+          fontSize="15"
+          fontWeight="700"
+          fill="#0b1220"
+          className="num"
+        >
+          3,200件
+        </text>
+        <text x={x(last) + 12} y={y(DATA[last].total) + 8} fontSize="10" fill="#55637a">
+          通算支援
+        </text>
+
+        {/* hover crosshair + tooltip */}
+        {hover !== null && (
+          <g pointerEvents="none">
+            <line x1={x(hover)} y1={PAD.top} x2={x(hover)} y2={y(0)} stroke="#0b1220" strokeOpacity="0.25" strokeWidth="1" />
+            <circle cx={x(hover)} cy={y(DATA[hover].total)} r="4.5" fill="#fff" stroke="#1c3f7c" strokeWidth="2" />
+            <g transform={`translate(${Math.min(x(hover) + 10, W - 150)}, ${Math.max(y(DATA[hover].total) - 52, 6)})`}>
+              <rect width="130" height="44" rx="8" fill="#0b1220" />
+              <text x="12" y="18" fontSize="11" fill="#ffffffaa">
+                {DATA[hover].year}年
+              </text>
+              <text x="12" y="35" fontSize="14" fontWeight="700" fill="#fff" className="num">
+                累計 {DATA[hover].total.toLocaleString()}件
+              </text>
+            </g>
+          </g>
+        )}
+      </svg>
     </figure>
   );
 }

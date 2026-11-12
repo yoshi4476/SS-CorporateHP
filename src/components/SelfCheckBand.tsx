@@ -1,21 +1,14 @@
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { diagnostics } from "@/lib/aio";
+import AioScan from "@/components/AioScan";
 import InlineToolBox from "@/components/InlineToolBox";
-import PhotoSlot from "@/components/PhotoSlot";
 
 // 無料セルフチェックへの誘導。
 // 「無料相談」はハードルが高いが、その場で終わる自己診断なら踏み出せる。
-// 検索での表示の約8割は経理ブログの記事（GSC の page 次元で84%・2026-10）なので、経理のチェックを主役にする。
-// 以前は経理の5問・URL診断・診断の道具4つ以上を同じ大きさの箱で並べ、どれを押せばいいか決まらなかった。
-// AI集客ラボの診断（Web集客・AI検索）は「ほかの無料診断」として文字のリンクにまとめる（入口は残す）。
-
-const URL_SCAN = "https://ai.7senses.co.jp/lp/?src=corp_top_selfcheck";
-
-const OTHERS: { name: string; spec: string; href: string }[] = [
-  { name: "URL診断（サイトの14項目を採点）", spec: "URL入力だけ", href: URL_SCAN },
-  ...diagnostics.map((d) => ({ name: d.name, spec: d.spec, href: d.href })),
-];
+// 相談前の入口として、目立つ位置に置くための独立セクション。
+// 検索での表示の約8割は経理ブログの記事（GSC の page 次元で84%・2026-10）なので、経理のチェックを先頭に置く。
+// AI集客ラボの診断（Web集客・AI検索）はその後ろにまとめる。
 
 export default function SelfCheckBand() {
   return (
@@ -28,9 +21,9 @@ export default function SelfCheckBand() {
             "radial-gradient(ellipse 55% 75% at 82% 15%, rgb(28 63 124 / 0.55), transparent 62%), radial-gradient(ellipse 45% 60% at 10% 92%, rgb(116 199 214 / 0.12), transparent 62%)",
         }}
       />
-      <div className="relative mx-auto max-w-7xl px-5 py-16 md:py-24">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start lg:gap-14">
-          <div>
+      <div className="relative mx-auto max-w-7xl px-5 py-20 md:py-28">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:items-start lg:gap-14">
+          <Reveal>
             <p className="eyebrow !text-aqua">無料セルフチェック</p>
             <h2 id="selfcheck-heading" className="mt-4 text-3xl font-black tracking-tight text-white md:text-5xl">
               相談の前に、
@@ -39,42 +32,70 @@ export default function SelfCheckBand() {
             </h2>
             <p className="mt-6 max-w-md text-[15px] leading-[1.9] text-white/75 md:text-base">
               いきなり相談するのは気が重いものです。まずはご自身で、いまの状態を確認してください。
-              <strong className="font-bold text-white">登録は不要で、その場で結果が出ます。</strong>
+              <strong className="font-bold text-white">登録は不要、その場で結果が出ます。</strong>
             </p>
-            {/* 写真の枠（ファイルを置くとパソコンで出る。lib/photoSlots.ts） */}
-            {/* 右の列（チェックと文字のリンク）と高さがそろうよう、写真は少し横長に切る */}
-            <PhotoSlot name="top-selfcheck" sizes="560px" ratioClass="aspect-[16/10]" className="mt-10 hidden rounded-3xl ring-1 ring-white/10 lg:block" />
-          </div>
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-white/15 pt-6 text-[13px] font-bold text-white/70">
+              <li>登録不要</li>
+              <li>その場で結果</li>
+              <li>費用なし</li>
+            </ul>
+            <figure className="relative mt-10 hidden aspect-[4/3] overflow-hidden rounded-3xl ring-1 ring-white/10 lg:block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/selfcheck.webp" alt="夜のオフィスで、サイトの採点結果を確かめる経営者" loading="lazy" className="h-full w-full object-cover" />
+            </figure>
+          </Reveal>
 
-          <div>
+          <div className="grid gap-4">
             <Reveal delay={0.04}>
+              <p className="mb-3 text-[13px] font-bold tracking-wide text-gold-bright">経理</p>
               <InlineToolBox from="/" place="top" tone="dark" />
             </Reveal>
 
+            <Reveal delay={0.08}>
+              <p className="mb-1 mt-6 text-[13px] font-bold tracking-wide text-aqua">Web集客・AI検索（運営メディア「AI集客ラボ」の診断）</p>
+            </Reveal>
             <Reveal delay={0.1}>
-              <div className="mt-10 border-t border-white/15 pt-7">
-                <p className="text-sm font-bold text-white">ほかの無料診断</p>
-                <p className="mt-1 text-[13px] leading-6 text-white/60">Web集客・AI検索の診断です（運営メディア「AI集客ラボ」で開きます）。</p>
-                <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
-                  {OTHERS.map((d) => (
-                    <li key={d.name} className="text-sm leading-6">
-                      <a
-                        href={d.href}
-                        target="_blank"
-                        rel="noopener"
-                        className="font-bold text-white underline decoration-white/30 underline-offset-4 hover:text-aqua hover:decoration-aqua"
-                      >
-                        {d.name} ↗
-                      </a>
-                      <span className="mt-0.5 block text-xs text-white/55">{d.spec}</span>
-                    </li>
-                  ))}
-                </ul>
+              <div className="rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 md:p-7">
+                <p className="text-lg font-bold text-white">
+                  URL診断（サイトの14項目を採点）
+                  <span className="ml-3 inline-block rounded-full border border-white/30 px-2.5 py-0.5 align-middle text-xs font-medium text-white/70">URL入力だけ・14項目</span>
+                </p>
+                <p className="mb-5 mt-2 text-sm leading-7 text-white/70">AIと検索にサイトが読まれているかを100点満点で採点し、直す順番まで出します。</p>
+                <AioScan src="corp_top_selfcheck" dark />
               </div>
             </Reveal>
+            {diagnostics.map((d, i) => (
+              <Reveal key={d.name} delay={0.12 + i * 0.06}>
+                <a
+                  href={d.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="group flex items-start gap-5 rounded-2xl border border-aqua/35 bg-white/[0.06] p-6 transition-colors hover:border-aqua hover:bg-white/[0.1] md:p-7"
+                >
+                  <span className="num shrink-0 pt-0.5 text-sm font-bold text-aqua">0{i + 1}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="text-lg font-bold text-white group-hover:text-aqua">{d.name}</span>
+                      <span className="rounded-full border border-white/30 px-2.5 py-0.5 text-xs font-medium text-white/70">
+                        {d.spec}
+                      </span>
+                    </span>
+                    <span className="mt-2 block text-sm leading-7 text-white/70">{d.body}</span>
+                  </span>
+                  <span
+                    aria-hidden
+                    className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-aqua/45 text-white transition-all group-hover:border-aqua group-hover:bg-aqua group-hover:text-ink"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 14 14" className="transition-transform group-hover:translate-x-0.5">
+                      <path d="M2 7h9M8 3.5L11.5 7 8 10.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
+                    </svg>
+                  </span>
+                </a>
+              </Reveal>
+            ))}
 
-            <Reveal delay={0.16}>
-              <p className="mt-8 text-sm leading-7 text-white/60">
+            <Reveal delay={0.3}>
+              <p className="mt-2 text-sm leading-7 text-white/60">
                 簡易的なチェックのため、正確な情報や詳しい内容をお知りになりたい方は
                 <Link href="/contact" className="mx-1 font-bold text-aqua underline-offset-4 hover:underline">
                   無料相談

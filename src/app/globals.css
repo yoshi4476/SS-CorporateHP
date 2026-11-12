@@ -24,9 +24,8 @@
   --color-mist: #f1f4f8;
   --color-ink: #0d1420;
   --color-ink-soft: #18243a;
-  /* 本文の灰色。生成り色・薄灰の地で薄く見えると指摘があり（2026-11）、#5a6678・#647082 から濃くした */
-  --color-slate: #465163;
-  --color-faint: #566173;
+  --color-slate: #5a6678;
+  --color-faint: #647082;
   --color-line: #e2e6ec;
   --color-line-strong: #c8cfda;
   --color-pulse: #1c3f7c;
@@ -102,9 +101,6 @@ h4 {
   font-family: var(--font-display);
   line-height: 1.4;
   letter-spacing: 0.03em;
-  /* 見出しを語の途中で折らない（「4つのス／テップ」「作成ツー／ル」のような折れ方をしていた）。行の長さもそろえる */
-  word-break: auto-phrase;
-  text-wrap: balance;
 }
 
 /* 区画の起点の小見出し。以前は英字の大文字（スマホで 9.92px・字間 0.16〜0.32em）で、
@@ -903,15 +899,21 @@ html.ss-intro-pending::before {
 @keyframes map-ping { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .map-facade .map-pin::before { animation: none; opacity: .5; transform: scale(1.4); } }
 
+/* ヒーロー動画の場面名（HeroVideo）。場面が変わるたびに下から静かに出る */
+.hero-scene-caption { animation: hero-caption-in 0.9s cubic-bezier(0.19, 1, 0.22, 1) both; }
+@keyframes hero-caption-in {
+  from { opacity: 0; transform: translateY(8px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-scene-caption { animation: none; } }
+
 /* トップの全画面動画の上にいる間のヘッダー（白い文字） */
 .header-on-dark nav > a,
 .header-on-dark nav > .group > a { color: #fff; }
 .header-on-dark nav > a:hover,
 .header-on-dark nav > .group > a:hover { color: var(--color-aqua); }
 .header-on-dark nav > .group > span { color: #fff; border-color: rgb(255 255 255 / 0.45); background: rgb(255 255 255 / 0.08); }
-/* 相談のボタンは暗い写真の上でも主の色（橙）のまま */
-.header-on-dark nav > a[href="/contact"] { color: var(--color-ink); }
-.header-on-dark nav > a[href="/contact"]:hover { color: var(--color-ink); }
+.header-on-dark nav > a[href="/contact"] { background: #fff; color: var(--color-ink); }
 
 /* 画面下の追従バー（LpCta の StickyCta・lg 未満）があるページは、足元の最後の行がバーの下に隠れないよう
    足元の下を空ける（/aio-agent・/rakushift・記事で、制作・顧問の行が隠れていた） */
@@ -924,4 +926,3 @@ html.ss-intro-pending::before {
 /* 暗い写真の上の本文。黄色のマーカーは白の太字に置き換える */
 .hero-rich mark { background: none; color: #fff; font-weight: 700; }
 .hero-rich strong { color: #fff; }
-

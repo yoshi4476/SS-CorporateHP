@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { SectionHead } from "@/components/ui";
 import { Reveal } from "@/components/motion";
-import KeiriVideo from "@/components/KeiriVideo";
 
 /**
  * 経理BPOの2つの頼み方を選ばせる区画。
@@ -25,11 +24,10 @@ const TRACKS = [
     doing: ["書類を送る", "月次の報告を確認する"],
     ours: ["記帳・仕訳", "請求発行と入金消込", "支払データ作成", "給与・賞与・年末調整",
            "経費精算のチェック", "月次決算の早期化"],
-    // 行き先はページの中のフォーム。言葉は、この場で得られるもの（現状分析）を言う
-    cta: { label: "無料の現状分析を申し込む", href: "#consult", s: "keiri-bpo", button: true },
+    cta: { label: "無料の現状分析を申し込む", href: "/contact", s: "keiri-bpo" },
     note: "まず何をどこまで出すかを決めるところからご相談ください。",
     video: "keiri-bpo",
-    videoTitle: "任せた場合に、何がどう変わるか",
+    videoNote: "任せた場合に何がどう変わるかを、10分でご説明します",
   },
   {
     key: "self",
@@ -45,11 +43,10 @@ const TRACKS = [
     doing: ["システムで確認して確定する", "月次を締める"],
     ours: ["仕訳の案を自動で作成", "請求と入金の消込", "支払管理", "給与・賞与・年末調整",
            "電子帳簿保存法に沿った保存", "導入時の初期設定と操作説明"],
-    // デモは相談とは別の行き先なので、ボタンにせず文字のリンクにする（同じ大きさのボタンが2つ並ぶと、どちらが主か分からなかった）
-    cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self", button: false },
+    cta: { label: "デモを見てみる", href: "/contact", s: "keiri-self" },
     note: "実際の画面をお見せします。ご契約前提のご案内ではありません。",
     video: "keiri-self",
-    videoTitle: "実際の画面で、どう使うか",
+    videoNote: "実際の画面で、どう使うかを10分でご説明します",
   },
 ];
 
@@ -59,7 +56,7 @@ export default function KeiriTwoTracks() {
       <div className="mx-auto max-w-7xl px-5">
         <SectionHead
           title="任せるか、自社で使うか。2つから選べます"
-          lead="経理の悩みは会社によって違います。実務ごと引き受ける形と、同じシステムを自社で使う形の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
+          lead="経理の悩みは会社によって違います。==実務ごと引き受ける形==と、==同じシステムを自社で使う形==の2つをご用意しました。どちらが合うかは、下の「向いている会社」でご確認ください。"
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -105,21 +102,28 @@ export default function KeiriTwoTracks() {
                 </div>
 
                 <div className="mt-7">
-                  <p className="mb-2 text-xs font-bold text-pulse">動画で見る</p>
-                  <KeiriVideo video={t.video} kind={t.name} title={t.videoTitle} />
+                  <p className="mb-2 text-xs font-bold text-pulse">
+                    動画で見る（約10分）
+                  </p>
+                  <video
+                    controls
+                    preload="none"
+                    poster={`https://ai.7senses.co.jp/videos/${t.video}-poster.jpg`}
+                    className="w-full rounded-2xl border border-line"
+                  >
+                    <source src={`https://ai.7senses.co.jp/videos/${t.video}.mp4`} type="video/mp4" />
+                    お使いのブラウザでは動画を再生できません。
+                  </video>
+                  <p className="mt-2 text-sm text-ink-soft">{t.videoNote}</p>
                   {/* 動画の中の製品名は「KEIRI 経理クラウド」。ページの呼び名と違うので、同じものだと添える */}
-                  <p className="mt-2 text-[13px] leading-6 text-slate">動画の中では、経理システムを「KEIRI 経理クラウド」の名前でご紹介しています。</p>
+                  <p className="mt-1 text-xs leading-6 text-slate">動画の中では、経理システムを「KEIRI 経理クラウド」の名前でご紹介しています。</p>
                 </div>
 
                 <div className="mt-auto pt-7">
                   <Link
                     href={t.cta.href}
                     data-entry-s={t.cta.s}
-                    className={
-                      t.cta.button
-                        ? "inline-block rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5"
-                        : "tap text-sm font-bold text-pulse underline decoration-pulse/40 underline-offset-4 hover:decoration-pulse"
-                    }
+                    className="inline-block rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-glow transition-transform hover:-translate-y-0.5"
                   >
                     {t.cta.label} →
                   </Link>
@@ -140,13 +144,13 @@ export default function KeiriTwoTracks() {
               無料で、ご契約を前提としたご案内ではありません。
               その結果を見てから、任せるか自社で使うかをお決めいただけます。
             </p>
-            <a
-              href="#consult"
+            <Link
+              href="/contact"
               data-entry-s="keiri-shindan"
               className="mt-5 inline-block rounded-full border border-pulse px-7 py-3.5 text-sm font-bold text-pulse transition-colors hover:bg-pulse hover:text-white"
             >
               無料の現状分析を申し込む →
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>

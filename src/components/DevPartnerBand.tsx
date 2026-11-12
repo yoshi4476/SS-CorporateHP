@@ -27,7 +27,7 @@ const ARROW = (
 export default function DevPartnerBand() {
   const site = developerOrg.url.replace(/\/$/, "");
   return (
-    <section id="partner" data-area="開発の相談" data-area-id="partner" className="scroll-mt-24 bg-paper pb-16 pt-4 md:pb-24 md:pt-6" aria-labelledby="partner-heading">
+    <section id="partner" data-area="開発の相談" data-area-id="partner" className="scroll-mt-24 bg-paper py-20 md:py-28" aria-labelledby="partner-heading">
       <div className="mx-auto max-w-7xl px-5">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl bg-ink text-white shadow-lift">
@@ -54,7 +54,7 @@ export default function DevPartnerBand() {
                     href={developerOrg.url}
                     target="_blank"
                     rel="noopener"
-                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/40 px-6 py-4 text-sm font-bold text-white transition-transform hover:-translate-y-0.5 sm:px-8"
+                    className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gold-bright px-6 py-4 text-sm font-bold text-ink shadow-card transition-transform hover:-translate-y-0.5 sm:px-8"
                   >
                     {developerOrg.name} を見る ↗
                   </a>

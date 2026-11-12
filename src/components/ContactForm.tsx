@@ -28,7 +28,7 @@ function caseStep(slug: string): Step {
   const svc = services.find((s) => s.slug === slug && s.examples?.length);
   return svc
     ? { kind: "事例", title: `${svc.name}の取り組み例`, body: "どんな状況で、何をして、どう変わったかをまとめています。", href: `/services/${svc.slug}#examples` }
-    : { kind: "事例", title: "支援の事例（3つの現場）", body: "規模も業種も違う3社で、何をして何が変わったかをまとめています。", href: "/#cases" };
+    : { kind: "事例", title: "支援の事例（3つの現場）", body: "規模も業種も違う3社で、何をして数字がどう動いたかをまとめています。", href: "/#cases" };
 }
 
 function nextSteps(slug: string): Step[] {
@@ -145,8 +145,7 @@ function pickOption(want: string): string {
   return NEAR.find(([re]) => re.test(want))?.[1] ?? "other";
 }
 
-/** service: フォームを置いたページの事業（例: 経理BPOのページなら keiri-bpo）。相談の内容の初期値にする */
-export default function ContactForm({ service }: { service?: string } = {}) {
+export default function ContactForm() {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [sentSlug, setSentSlug] = useState("");
@@ -158,11 +157,11 @@ export default function ContactForm({ service }: { service?: string } = {}) {
   // 記事やLPから ?s=... で来た人は、何の相談かがもう決まっている。
   // 選び直させると1手増えるので、初期値を入れておく。
   useEffect(() => {
-    const pick = pickOption((service ?? new URLSearchParams(entrySearch("/contact")).get("s") ?? "").trim().toLowerCase());
+    const pick = pickOption((new URLSearchParams(entrySearch("/contact")).get("s") ?? "").trim().toLowerCase());
     if (!pick) return;
     const sel = formRef.current?.elements.namedItem("service");
     if (sel instanceof HTMLSelectElement) sel.value = pick;
-  }, [service]);
+  }, []);
 
   // 送らずに離れた人が、どの欄で止まったか（form_abandon・最後に触った欄つき）。
   // 開いた8人のうち送ったのは1人だったが、どこで止まったかが分からず直しようがなかった（2026-10-04）
@@ -425,7 +424,7 @@ export default function ContactForm({ service }: { service?: string } = {}) {
       <button
         type="submit"
         disabled={busy}
-                  className="mt-2 rounded-full bg-gold-bright px-8 py-4 text-sm font-bold text-ink shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
+                  className="mt-2 rounded-full bg-pulse px-8 py-4 text-sm font-bold text-white shadow-lift transition-transform hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0"
       >
         {busy ? "送信しています…" : "無料相談を申し込む (現状分析レポート付き)"}
       </button>

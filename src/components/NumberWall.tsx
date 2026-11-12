@@ -1,4 +1,4 @@
-import { Reveal } from "@/components/motion";
+import { Reveal, CountUp } from "@/components/motion";
 import { services, areas } from "@/lib/services";
 import { meoGrowth } from "@/lib/meo";
 
@@ -193,9 +193,7 @@ export default function NumberWall() {
           <div className="flex h-full flex-col rounded-2xl border border-white/12 bg-white/[0.04] p-6 md:p-7">
             <p className="text-sm font-bold leading-6 text-white/85">{t.label}</p>
             <p className="mega-num mt-3 text-5xl text-white md:text-6xl">
-              {/* 数え上げをやめ、確定の値で出す。途中で見た人・撮った画面に 3,186件・91% のような別の数字が出て、
-                  同じページの 3,200件・94% と食い違って見えた（最初の画面の数字と同じ理由） */}
-              {t.value.toLocaleString("ja-JP")}
+              <CountUp value={t.value} duration={1.4 + (i % 3) * 0.3} />
               <span className="ml-1 text-2xl text-gold-bright md:text-3xl">{t.suffix}</span>
             </p>
             <div className="mt-6 flex min-h-[4.5rem] items-end">{t.figure}</div>

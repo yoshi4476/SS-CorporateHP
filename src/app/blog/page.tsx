@@ -85,7 +85,7 @@ export default function BlogPage() {
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
           style={{ maskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)", WebkitMaskImage: "linear-gradient(90deg, transparent 0%, rgba(0,0,0,.85) 40%, #000 100%)" }}
         >
-          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書の金額をパソコンに入力する経理の担当者のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
+          <Image src="/images/svc/keiri-bpo-1.webp" alt="領収書と請求書を読み取って仕分ける経理の手元のイメージ" fill priority sizes="52vw" className="object-cover opacity-90" />
         </div>
         <div className="relative mx-auto max-w-7xl px-5 pb-14 pt-14 md:pb-20 md:pt-20">
           <Reveal>

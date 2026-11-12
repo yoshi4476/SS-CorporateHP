@@ -259,7 +259,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <PhotoBand src="/images/company-band-1.webp" alt="事務所の受付で、訪ねて来られたお客様を迎える二人のイメージ" />
+      <PhotoBand src="/images/company-band-1.webp" alt="夜明けの事務所に並ぶ、整理された書類の棚のイメージ" />
 
       {/* 概要表 */}
       <section className="py-20 md:py-28" aria-labelledby="profile-heading" data-area="基本情報" data-area-id="profile">
@@ -286,8 +286,8 @@ export default function CompanyPage() {
           </Reveal>
           <div className="grid gap-5 sm:grid-cols-2 lg:sticky lg:top-28 lg:grid-cols-1">
             {[
-              { src: "/images/corp-office.webp", alt: "朝の事務所で、ブラインドを上げる人と、お湯を沸かす人のイメージ" },
-              { src: "/images/corp-team.webp", alt: "昼休みに、弁当を食べながら話す三人のイメージ" },
+              { src: "/images/corp-office.webp", alt: "朝の光が差す、整った事務所のイメージ" },
+              { src: "/images/corp-team.webp", alt: "窓辺で書類を手に進め方を話し合う三人の後ろ姿のイメージ" },
             ].map((im, i) => (
               <Reveal key={im.src} delay={0.15 + i * 0.08}>
                 <figure className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-card">
@@ -301,7 +301,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <PhotoBand src="/images/company-band-2.webp" alt="お客様の事務所を出て、見送りを受けながら話す担当者のイメージ" />
+      <PhotoBand src="/images/company-band-2.webp" alt="事務所の窓から見る朝の街のイメージ" />
 
       {/* アクセス（地図は押したときだけ読む） */}
       <section id="access" data-area="アクセス" data-area-id="access" className="bg-mist/50 py-20 md:py-28" aria-labelledby="access-heading">
