@@ -8,9 +8,11 @@ import { readingLinks } from "@/lib/reading";
 
 // 制作・顧問の関係を書いた表記。関係を書いた相互リンクなので文言を省かず、リンクの評価を止める rel も付けない
 // （管制塔の門 tests/test_gates.py はこのファイルにその属性名の文字列が無いことを見るため、注記にも書かない）
+// リンクにするのは link（社名・名前）の部分だけ。全ページに置くリンクの文字に「サイト制作」「経営コンサルタント」の
+// 狙う語を入れない（Google のリンクスパムのポリシーの「フッターやテンプレートに広く置かれたリンク」への備え。2026-11-15）
 const credits = [
-  { label: "サイト制作：YW（CONFLUX PARTNERS）", href: "https://conflux-partners.jp/works/7senses-corp" },
-  { label: "顧問：YW（AI × 経営コンサルタント）", href: "https://conflux-partners.jp/about" },
+  { label: "サイト制作：YW（CONFLUX PARTNERS）", link: "CONFLUX PARTNERS", href: "https://conflux-partners.jp/works/7senses-corp" },
+  { label: "顧問：YW（AI × 経営コンサルタント）", link: "YW", href: "https://conflux-partners.jp/about" },
 ];
 
 export default function Footer() {
@@ -226,18 +228,23 @@ export default function Footer() {
           </ul>
         </div>
         <ul className="mx-auto grid max-w-7xl list-none gap-0 px-5 pb-6 text-xs text-white/60 md:gap-1" aria-label="制作・顧問">
-          {credits.map((c) => (
-            <li key={c.href}>
-              <a
-                href={c.href}
-                target="_blank"
-                rel="noopener"
-                className="tap underline underline-offset-4 transition-colors hover:text-white"
-              >
-                {c.label}
-              </a>
-            </li>
-          ))}
+          {credits.map((c) => {
+            const i = c.label.indexOf(c.link);
+            return (
+              <li key={c.href}>
+                {c.label.slice(0, i)}
+                <a
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="tap underline underline-offset-4 transition-colors hover:text-white"
+                >
+                  {c.link}
+                </a>
+                {c.label.slice(i + c.link.length)}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </footer>
