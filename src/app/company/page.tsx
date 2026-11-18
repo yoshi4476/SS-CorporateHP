@@ -90,6 +90,23 @@ const OVERVIEW: { label: string; value: React.ReactNode }[] = [
   { label: "営業時間", value: site.hours },
   { label: "取引銀行", value: site.banks },
   {
+    // 先方の会社概要も当社を「協力会社」として載せている。関係を書いた相互リンクなので、評価を止める rel は付けない（2026-11-18 運用者の指示）
+    label: "協力会社",
+    value: (
+      <>
+        <a
+          href="https://reiscom.co.jp/"
+          target="_blank"
+          rel="noopener"
+          className="text-pulse underline-offset-4 hover:underline"
+        >
+          株式会社リズコム ↗
+        </a>
+        <span className="mt-1 block text-sm text-slate">システム開発・サイト制作と運用（SEO・AIO）・店舗集客（MEO）・経理BPO</span>
+      </>
+    ),
+  },
+  {
     // 7つを1列に並べるだけだと、何の事業がいくつあるのか見えなかった。トップの全体像の図と同じ3つの領域で束ね、各事業へリンクする
     label: "事業内容",
     value: (
