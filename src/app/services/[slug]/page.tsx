@@ -15,6 +15,7 @@ import KeiriCompare from "@/components/KeiriCompare";
 import KeiriCostGuide from "@/components/KeiriCostGuide";
 import ResearchBand from "@/components/ResearchBand";
 import DeveloperCredit from "@/components/DeveloperCredit";
+import WebSamples from "@/components/WebSamples";
 import { creatorLd } from "@/lib/developer";
 import { IndustryBars, RankTable } from "@/components/charts";
 import SubsidyDetail from "@/components/SubsidyDetail";
@@ -519,6 +520,8 @@ export default async function ServicePage({ params }: Props) {
           </div>
         </section>
       )}
+
+      {service.slug === "web-production" && <WebSamples />}
 
       {/* 深掘り解説 */}
       {/* 白と薄灰が交互に続くだけだと最後まで同じ顔に見える。
