@@ -64,6 +64,12 @@ jobs:
       - name: 写真の場所に版の印を付ける
         run: python3 scripts/asset_version.py out
 
+      # 制作見本（/samples/）が書き出しにそろっているか。判定そのものの試しも先に通す
+      - name: 制作見本がそろっているか
+        run: |
+          node scripts/check-samples.test.mjs
+          node scripts/check-samples.mjs --files out/samples
+
       # 一時的な通信エラーで止まらないよう、配信は3回まで試す
       - name: Cloudflare Pages へ配信
         env:
@@ -85,3 +91,8 @@ jobs:
       # ここが落ちれば Actions が失敗として通知されるので、無言の停止を防げる
       - name: 公開の確認
         run: node scripts/verify-live.mjs
+
+      # 制作見本が本番で見られるか（開ける・CSP が付いていない・Web制作のページからリンクがある）。
+      # 毎日の定時の配信でも走るので、毎日の見張りを兼ねる
+      - name: 制作見本が本番で見られるか
+        run: node scripts/check-samples.mjs --base https://corp.7senses.co.jp --page /services/web-production/
