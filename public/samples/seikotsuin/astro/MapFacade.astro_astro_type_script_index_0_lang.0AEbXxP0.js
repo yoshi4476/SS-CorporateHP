@@ -1,0 +1,1 @@
+document.querySelectorAll(`[data-map]`).forEach(e=>{e.querySelector(`[data-map-load]`)?.addEventListener(`click`,()=>{let t=document.createElement(`iframe`);t.src=e.dataset.src,t.title=`〇〇鍼灸整骨院の地図（Google マップ）`,t.loading=`lazy`,t.referrerPolicy=`no-referrer-when-downgrade`,t.allowFullscreen=!0,e.replaceChildren(t),t.focus()})});

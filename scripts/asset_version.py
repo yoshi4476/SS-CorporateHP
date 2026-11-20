@@ -104,6 +104,9 @@ def run(root):
     for page in root.rglob("*"):
         if page.suffix not in SUFFIXES or not page.is_file():
             continue
+        # 制作見本（samples/）は元のサイトの書き出しのまま置く。写真は名前ごと差し替えないので印は要らない
+        if page.relative_to(root).parts[0] == "samples":
+            continue
         text = page.read_text(encoding="utf-8", errors="surrogateescape")
         new = version_text(text, page, root, memo)
         if new != text:

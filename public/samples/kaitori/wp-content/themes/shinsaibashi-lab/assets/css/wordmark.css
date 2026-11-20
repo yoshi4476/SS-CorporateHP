@@ -1,0 +1,77 @@
+/* =========================================================
+   ブランドの文字ロゴ（ワードマーク）
+   公式ロゴ画像は使わず、各ブランドの雰囲気に近い書体で店側が組んだもの。
+   ========================================================= */
+.wm { display: inline-block; line-height: 1.1; white-space: nowrap; text-align: center; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; }
+.wm--hermes { font-family: "Zilla Slab", serif; font-weight: 500; letter-spacing: .16em; }
+.wm--louis-vuitton { font-family: "Jost", sans-serif; font-weight: 400; letter-spacing: .24em; font-size: 18px; }
+.wm--chanel { font-family: "Josefin Sans", sans-serif; font-weight: 700; letter-spacing: .38em; }
+.wm--gucci { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: .2em; }
+.wm--prada { font-family: "Cormorant Garamond", serif; font-weight: 700; letter-spacing: .12em; font-size: 26px; }
+.wm--dior { font-family: "Bodoni Moda", serif; font-weight: 400; text-transform: none; letter-spacing: .02em; font-size: 32px; }
+.wm--celine { font-family: "Montserrat", sans-serif; font-weight: 700; letter-spacing: .04em; }
+.wm--fendi { font-family: "Jost", sans-serif; font-weight: 600; letter-spacing: .14em; }
+.wm--bottega-veneta { font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: .16em; font-size: 17px; }
+.wm--saint-laurent { font-family: "Montserrat", sans-serif; font-weight: 500; letter-spacing: .3em; font-size: 16px; }
+.wm--balenciaga { font-family: "Archivo Black", sans-serif; letter-spacing: .02em; font-size: 19px; }
+.wm--loewe { font-family: "Jost", sans-serif; font-weight: 500; letter-spacing: .34em; }
+.wm--goyard { font-family: "Playfair Display", serif; font-weight: 700; letter-spacing: .1em; }
+.wm--miumiu { font-family: "Montserrat", sans-serif; font-weight: 700; text-transform: lowercase; letter-spacing: .02em; font-size: 26px; }
+.wm--moncler { font-family: "Jost", sans-serif; font-weight: 500; letter-spacing: .16em; }
+.wm--rolex { font-family: "Cinzel", serif; font-weight: 600; letter-spacing: .14em; font-size: 26px; }
+.wm--omega { font-family: "Cormorant Garamond", serif; font-weight: 700; letter-spacing: .22em; font-size: 24px; }
+.wm--patek-philippe { font-family: "Cinzel", serif; font-weight: 500; letter-spacing: .1em; font-size: 16px; }
+.wm--audemars-piguet { font-family: "Cormorant Garamond", serif; font-weight: 500; letter-spacing: .12em; font-size: 17px; }
+.wm--hublot { font-family: "Montserrat", sans-serif; font-weight: 800; letter-spacing: .12em; }
+.wm--cartier { font-family: "Great Vibes", cursive; text-transform: none; letter-spacing: 0; font-size: 38px; }
+.wm--iwc { font-family: "Montserrat", sans-serif; font-weight: 700; letter-spacing: .28em; font-size: 26px; }
+.wm--panerai { font-family: "Josefin Sans", sans-serif; font-weight: 600; letter-spacing: .22em; }
+.wm--tag-heuer { font-family: "Archivo Black", sans-serif; letter-spacing: .06em; }
+.wm--breitling { font-family: "Playfair Display", serif; font-weight: 700; letter-spacing: .08em; }
+.wm--franck-muller { font-family: "Playfair Display", serif; font-style: italic; font-weight: 500; text-transform: none; letter-spacing: .02em; font-size: 24px; }
+.wm--grand-seiko { font-family: "Cormorant Garamond", serif; font-weight: 600; text-transform: none; letter-spacing: .04em; font-size: 27px; }
+.wm--tiffany { font-family: "Cormorant Garamond", serif; font-weight: 500; letter-spacing: .1em; font-size: 20px; }
+.wm--bvlgari { font-family: "Cinzel", serif; font-weight: 500; letter-spacing: .26em; font-size: 24px; }
+.wm--van-cleef-arpels { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; text-transform: none; letter-spacing: .01em; font-size: 22px; }
+.wm--harry-winston { font-family: "Cinzel", serif; font-weight: 400; letter-spacing: .16em; font-size: 18px; }
+.wm--damiani { font-family: "Cormorant Garamond", serif; font-weight: 600; letter-spacing: .22em; }
+.wm--fred { font-family: "Montserrat", sans-serif; font-weight: 800; letter-spacing: .12em; font-size: 28px; }
+.wm--chaumet { font-family: "Cinzel", serif; font-weight: 500; letter-spacing: .2em; }
+.wm--chrome-hearts { font-family: "UnifrakturMaguntia", serif; text-transform: none; letter-spacing: .02em; font-size: 27px; }
+.wm--loneones { font-family: "UnifrakturMaguntia", serif; text-transform: none; letter-spacing: .02em; font-size: 27px; }
+.wm--goros { font-family: "Great Vibes", cursive; text-transform: none; letter-spacing: 0; font-size: 36px; }
+
+/* ロゴウォール（トップ） */
+.logo-wall__tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 18px; }
+.logo-wall__tabs button { padding: 9px 16px; border: 1px solid var(--hair-dark); background: none; color: var(--ink); font-size: 13px; letter-spacing: .08em; cursor: pointer; }
+.logo-wall__tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper-2); border-color: var(--ink); }
+.logo-wall { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--hair-dark); border: 1px solid var(--hair-dark); max-width: 1700px; }
+@media (min-width: 700px) { .logo-wall { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1200px) { .logo-wall { grid-template-columns: repeat(6, 1fr); } }
+.logo-wall li[hidden] { display: none; }
+.logo-wall a { position: relative; display: grid; place-items: center; aspect-ratio: 3 / 2; padding: 14px; background: var(--paper); color: var(--ink); text-decoration: none; overflow: hidden; isolation: isolate; }
+.logo-wall__img { position: absolute; inset: 0; z-index: -1; display: grid; place-items: center; background: #fff; opacity: 0; transition: opacity .45s ease; }
+.logo-wall__img img { max-width: 70%; max-height: 70%; width: auto; height: auto; object-fit: contain; transform: scale(1.06); transition: transform .8s ease; }
+.logo-wall a::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(233, 230, 224, .95) 18%, rgba(233, 230, 224, .55) 60%, rgba(233, 230, 224, .15)); opacity: 0; transition: opacity .45s; }
+.logo-wall a:hover .logo-wall__img, .logo-wall a:focus-visible .logo-wall__img, .logo-wall a:hover::after, .logo-wall a:focus-visible::after { opacity: 1; }
+.logo-wall a:hover .logo-wall__img img { transform: scale(1); }
+.logo-wall .wm { transition: transform .45s cubic-bezier(.2, .7, .2, 1); max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+.logo-wall a:hover .wm { transform: translateY(-18px); }
+.logo-wall__ja { position: absolute; left: 0; right: 0; bottom: 12px; text-align: center; font-size: 11.5px; letter-spacing: .12em; color: #6c655c; opacity: 0; transform: translateY(6px); transition: opacity .45s, transform .45s; }
+.logo-wall a:hover .logo-wall__ja, .logo-wall a:focus-visible .logo-wall__ja { opacity: 1; transform: none; }
+@media (hover: none) { .logo-wall__ja { opacity: 1; transform: none; } .logo-wall a .wm { transform: translateY(-8px); } }
+@media (max-width: 699px) { .wm { font-size: 17px !important; } .wm--cartier, .wm--goros { font-size: 28px !important; } }
+
+/* ブランド一覧・ブランドページの見出しにも使う */
+.brand-grid__wm { display: grid; place-items: center; min-height: 48px; padding: 6px 10px 2px; color: var(--ink); }
+.brand-grid__wm .wm { font-size: 17px; max-width: 100%; overflow: hidden; }
+.brand-grid__wm .wm--cartier, .brand-grid__wm .wm--goros { font-size: 28px; }
+.page-banner .wm { color: var(--paper-2); font-size: clamp(28px, 4vw, 48px); margin-bottom: 6px; }
+.page-banner .wm--cartier, .page-banner .wm--goros { font-size: clamp(44px, 6vw, 72px); }
+.logo-wall__more { grid-column: span 1; }
+@media (min-width: 700px) { .logo-wall__more { grid-column: span 3; } }
+@media (min-width: 1200px) { .logo-wall__more { grid-column: span 5; } }
+.logo-wall__more a { aspect-ratio: auto; height: 100%; min-height: 120px; background: var(--ink); color: var(--paper-2); display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 6px; padding: 20px 28px; }
+.logo-wall__more-en { font: italic 400 clamp(26px, 3vw, 40px)/1 var(--serif-en); color: var(--champagne); }
+.logo-wall__more-ja { font-size: 14px; letter-spacing: .06em; }
+.logo-wall__more a:hover { background: #2a2622; }

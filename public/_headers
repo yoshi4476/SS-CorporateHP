@@ -14,6 +14,12 @@
   Cross-Origin-Opener-Policy: same-origin
   Content-Security-Policy: default-src 'self'; frame-src https://challenges.cloudflare.com https://www.google.com https://maps.google.com https://www.youtube-nocookie.com; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://i.ytimg.com https://ai.7senses.co.jp https://www.googletagmanager.com https://www.google-analytics.com https://www.google.com https://*.g.doubleclick.net; media-src 'self' https://ai.7senses.co.jp; font-src 'self' data:; worker-src 'self' blob:; connect-src 'self' https://challenges.cloudflare.com https://script.google.com https://script.googleusercontent.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.google.com https://*.g.doubleclick.net; form-action 'self'; upgrade-insecure-requests
 
+# 制作見本（お客様に向けてつくったサイトを、社名・連絡先を伏せて置いたもの）。元のサイトのスクリプト・書体・地図を
+# そのまま使うので、このサイトの CSP を外す。検索には出さない（各ページの noindex と同じ）
+/samples/*
+  ! Content-Security-Policy
+  X-Robots-Tag: noindex, nofollow
+
 # 内容が変わるとファイル名も変わるため、長期キャッシュして良い
 /_next/static/*
   Cache-Control: public, max-age=31536000, immutable

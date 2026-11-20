@@ -1,0 +1,30 @@
+/* =========================================================
+   配色の統一（下層ページ）：旧テーマの紺・青を、トップと同じ
+   ワイン × シャンパンゴールド × 生成りに置き換える。
+   トップ（.home）は cine.css 側で独自に定義しているので対象外。
+   ========================================================= */
+/* グラフは html の変数を読むので html 側で定義する */
+html:not(:has(body.home)), body:not(.home) {
+  --night: #140d0c;
+  --night-2: #1f1513;
+  --night-3: #2c1d1a;
+  --ink-2: #2e211d;
+  --c1: #7a1f24;
+  --c1-soft: rgba(122, 31, 36, .16);
+  --c2: #b0823f;
+  --c3: #3f6b5c;
+  --c4: #6b5a8a;
+  --gold: #a07a3c;
+}
+/* 暗い面の上のリンクは明るく */
+body:not(.home) .site-footer a, body:not(.home) .page-banner a, body:not(.home) .mag-hero a { color: #e3c89a; }
+/* 見出し帯・マガジンの冒頭：紺のグラデーションをワインの夜色に */
+body:not(.home) .page-banner, body:not(.home) .mag-hero {
+  background-color: #1a100f;
+  background-image: radial-gradient(1000px 360px at 85% 0%, rgba(193, 39, 45, .28), transparent 60%), linear-gradient(180deg, #1d1210, #120b0a);
+}
+/* 表の見出し行：黒に近い焦げ茶で */
+body:not(.home) .data-table thead th { background: #231816; color: #f3ede4; }
+/* 曜日別の営業時間：縦並び */
+.data-table--hours th { width: 3.5em; text-align: center; }
+body:not(.home) .page-banner::after { background: linear-gradient(90deg, rgba(20, 12, 11, .94) 0%, rgba(40, 16, 16, .72) 55%, rgba(20, 12, 11, .3) 100%); }

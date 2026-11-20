@@ -8,7 +8,7 @@ export type WebSample = {
   /** 業種と地域だけ（社名は書かない） */
   who: string;
   name: string;
-  /** 見本のページ（制作した CONFLUX PARTNERS のサイトの中に置いた見本。前の claude.ai のアーティファクトは版を直すたびに共有をやり直す必要があった） */
+  /** 見本のページ（このサイトの public/samples/ に置いた見本。前の claude.ai のアーティファクトは版を直すたびに共有をやり直す必要があった） */
   url: string;
   text: string;
 };
@@ -18,49 +18,49 @@ export const webSamples: WebSample[] = [
     id: "sample-artmake",
     who: "看護師向けの研修の主催者",
     name: "アートメイク研修のサイト",
-    url: "https://conflux-partners.jp/samples/artmake/",
+    url: "/samples/artmake/",
     text: "韓国・釜山で学ぶ少人数制の研修を、3つのコースと受講の内容で伝え、LINEでの相談につなげます。",
   },
   {
     id: "sample-india-recruit",
     who: "東京の採用支援会社",
     name: "インド理系人材の新卒採用支援のサイト",
-    url: "https://conflux-partners.jp/samples/india-recruit/",
+    url: "/samples/india-recruit/",
     text: "3つのサービスと課題別の解決策を伝え、採用の診断と資料のダウンロードにつなげます。",
   },
   {
     id: "sample-luxury-guide",
     who: "大阪のメディア運営会社",
     name: "ハイブランド図鑑のメディア",
-    url: "https://conflux-partners.jp/samples/luxury-guide/",
+    url: "/samples/luxury-guide/",
     text: "ブランドと定番モデルを、選び方の記事・実物の写真・中古価格のデータで紹介します（WordPress）。",
   },
   {
     id: "sample-kaitori",
     who: "大阪・心斎橋のブランド買取・質店",
     name: "ブランド買取・質店のサイト",
-    url: "https://conflux-partners.jp/samples/kaitori/",
+    url: "/samples/kaitori/",
     text: "いまの営業状況と、モデル別の買取相場のグラフを見せて、来店・電話・LINEでの査定につなげます。",
   },
   {
     id: "sample-seikotsuin",
     who: "堺市西区の鍼灸整骨院",
     name: "鍼灸整骨院のサイト",
-    url: "https://conflux-partners.jp/samples/seikotsuin/",
+    url: "/samples/seikotsuin/",
     text: "痛む場所を選べる3Dの人体模型、お悩みのセルフチェック、Web予約・Web問診を備えています。",
   },
   {
     id: "sample-realestate-satei",
     who: "愛知・西三河の不動産会社",
     name: "不動産の査定・売却のサイト",
-    url: "https://conflux-partners.jp/samples/realestate-satei/",
+    url: "/samples/realestate-satei/",
     text: "名前のいらないWeb査定と、売り方を選ぶ診断、お悩み別・市町村別の相場のページで、査定の相談につなげます。",
   },
   {
     id: "sample-yakiniku",
     who: "大阪・なんばと福島の焼肉店",
     name: "焼肉店のサイト",
-    url: "https://conflux-partners.jp/samples/yakiniku/",
+    url: "/samples/yakiniku/",
     text: "季節ごとのコースと店舗別の予約を前に出し、目的から5店舗を選べる比較表を入れました。",
   },
 ];

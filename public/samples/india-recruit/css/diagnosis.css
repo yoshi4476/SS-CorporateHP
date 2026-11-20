@@ -1,0 +1,216 @@
+/* 採用診断（サービス色＝行動領域） */
+.dx-hero { background: var(--kaki-soft); padding: 48px 0 40px; }
+.dx-hero .chapter-label { color: var(--kaki-deep); }
+.dx-hero h1 { font-family: var(--font-serif); color: var(--ai-deep); font-size: clamp(1.7rem, 3.6vw, 2.5rem); line-height: 1.45; margin: 4px 0 14px; }
+.dx-meta { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 16px 0 0; }
+.dx-meta li { background: var(--paper); border: 1px solid #efd6c2; border-radius: 999px; padding: 4px 14px; font-size: .88rem; }
+
+.dx-app { background: var(--paper); border: 1px solid var(--border); border-radius: 18px; padding: 32px; margin: -24px auto 0; position: relative; max-width: 820px; box-shadow: 0 18px 40px -28px rgba(16, 36, 64, .4); }
+@media (max-width: 600px) { .dx-app { padding: 22px 18px; border-radius: 14px; } }
+
+/* アニメーション8: 進捗バー＝ロゴの線が伸びる */
+.dx-progress { display: none; align-items: center; gap: 12px; margin-bottom: 20px; }
+.js .dx-progress { display: flex; }
+.dx-progress svg { flex: 1; min-width: 0; width: 100%; height: 28px; overflow: visible; }
+.dx-progress .track { stroke: var(--border); stroke-width: 4; fill: none; stroke-linecap: round; }
+.dx-progress .bar { stroke: var(--kaki); stroke-width: 4; fill: none; stroke-linecap: round; transition: stroke-dashoffset .3s var(--ease-out); }
+.dx-progress .goal { fill: var(--paper); stroke: var(--ai); stroke-width: 2; transition: fill .3s; }
+.dx-progress.done .goal { fill: var(--ai); }
+.dx-progress output { font-size: .85rem; color: var(--sumi-sub); min-width: 4.5em; text-align: right; }
+
+.dx-form fieldset { border: 0; padding: 0; margin: 0 0 32px; }
+.dx-form legend { font-weight: 700; font-size: 1.12rem; color: var(--ai-deep); margin-bottom: 14px; padding: 0; }
+.dx-form legend .qno { display: block; font-size: .8rem; color: var(--kaki-ink); letter-spacing: .1em; font-weight: 700; }
+.dx-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 600px) { .dx-options { grid-template-columns: 1fr; } }
+.dx-options label {
+  display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 1.5px solid var(--border);
+  border-radius: 10px; cursor: pointer; background: #fff; transition: border-color .15s, background-color .15s; line-height: 1.5;
+}
+.dx-options label:hover { border-color: var(--kaki); }
+.dx-options input { accent-color: var(--kaki-ink); width: 18px; height: 18px; flex: none; }
+.dx-options label:has(input:checked) { border-color: var(--kaki-ink); background: var(--kaki-soft); font-weight: 700; }
+.dx-form legend .qno { color: var(--kaki-deep); }
+.dx-select { display: grid; gap: 12px; }
+.dx-select select { font: inherit; padding: 12px; border: 1.5px solid var(--border); border-radius: 10px; background: #fff; max-width: 320px; }
+
+/* JS有効時：1問1画面 */
+.js .dx-form fieldset { display: none; margin: 0; }
+.js .dx-form fieldset.is-current { display: block; }
+.js .dx-form .dx-submit-nojs { display: none; }
+.dx-nav { display: none; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; }
+.js .dx-nav { display: flex; }
+.dx-back { background: none; border: 0; color: var(--ai); font: inherit; cursor: pointer; text-decoration: underline; padding: 8px 0; }
+.dx-back[hidden] { visibility: hidden; display: inline; }
+
+/* 結果 */
+.dx-result[hidden] { display: none; }
+.dx-connect { width: 100%; height: 90px; margin-bottom: 8px; }
+.dx-connect path { fill: none; stroke: var(--kaki); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1s var(--ease-out) forwards; }
+@media (prefers-reduced-motion: reduce) { .dx-connect path { stroke-dashoffset: 0; } }
+.dx-connect .company { fill: var(--ai-soft); stroke: var(--ai); stroke-width: 2; }
+.dx-connect .company-door { fill: var(--ai); }
+.dx-type { display: inline-block; background: var(--ai); color: #fff; font-size: .82rem; font-weight: 700; padding: 2px 12px; border-radius: 999px; }
+.dx-result h2 { font-family: var(--font-serif); color: var(--ai-deep); font-size: 1.55rem; line-height: 1.5; margin: 10px 0 12px; }
+.dx-comments { background: var(--kinari); border-left: 4px solid var(--kaki); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 18px 0; }
+.dx-comments ul { margin: 0; padding-left: 1.2em; }
+.dx-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.dx-links { font-size: .92rem; }
+.dx-note { font-size: .82rem; color: var(--sumi-sub); }
+.dx-lead-form { border-top: 1px solid var(--border); margin-top: 28px; padding-top: 24px; }
+.dx-lead-form h3 { margin: 0 0 6px; color: var(--ai-deep); }
+.form-grid { display: grid; gap: 14px; margin: 16px 0; }
+.form-grid label { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; font-weight: 700; font-size: .92rem; }
+.form-grid input, .form-grid select, .form-grid textarea { flex-basis: 100%; font: inherit; font-weight: 400; padding: 12px; border: 1.5px solid var(--border); border-radius: 8px; background: #fff; }
+.req { color: #fff; background: var(--kaki-ink); font-size: .72rem; padding: 0 6px; border-radius: 4px; margin-left: 6px; }
+.opt { color: var(--sumi-sub); font-size: .76rem; margin-left: 6px; font-weight: 400; }
+
+/* 解説記事（AIO） */
+.dx-article { padding: 72px 0; }
+.dx-article h2 { font-family: var(--font-serif); color: var(--ai-deep); font-size: clamp(1.4rem, 2.8vw, 1.9rem); line-height: 1.5; margin: 56px 0 12px; }
+.dx-article h2:first-child { margin-top: 0; }
+.dx-article .container { max-width: 860px; }
+.types { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--s5); list-style: none; padding: 0; }
+.types li { border-top: 1px solid var(--text); padding: var(--s4) 0; }
+.types h3 { margin: 0 0 6px; font-size: 1rem; color: var(--ai-deep); }
+.types p { margin: 0; font-size: .92rem; }
+@media (max-width: 700px) { .types { grid-template-columns: 1fr; } }
+
+/* 2列のステージ：左に説明、右に設問（PCで中央に寄せない） */
+.dx-stage { padding: var(--s5) 0 var(--s7); border-bottom: 1px solid var(--line); background: var(--bg); }
+.dx-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 5vw, 88px); align-items: start; }
+.dx-intro { position: sticky; top: 104px; }
+.dx-intro h1 { font-family: var(--font-display); font-weight: 800; color: var(--ai-deep); font-size: clamp(1.9rem, 3.4vw, 3rem); line-height: 1.4; margin: 6px 0 18px; }
+
+.dx-intro .lead { margin-bottom: 0; }
+.dx-intro .dx-meta li { background: var(--paper); border: 1px solid var(--border); border-radius: 2px; font-family: var(--font-mono); font-size: .76rem; letter-spacing: .04em; }
+.dx-stage .dx-app { margin: 0; max-width: none; border-radius: var(--r-m); border: 1px solid var(--line); box-shadow: none; padding: var(--s5); }
+.dx-options label { border-radius: 4px; }
+.dx-options label:has(input:checked) { background: var(--saffron-soft); }
+.dx-progress .bar { stroke: var(--saffron); stroke-width: 5; }
+.dx-progress .goal { stroke: var(--ai); }
+@media (max-width: 1000px) { .dx-grid { grid-template-columns: 1fr; gap: var(--s4); } .dx-intro { position: static; } .dx-intro .lead { display: none; } .dx-intro h1 { margin-bottom: 0; } .dx-stage .dx-app { padding: var(--s4); } }
+.page-diagnosis .mobile-cta { grid-template-columns: 1fr 1.2fr; }
+.page-diagnosis .mobile-cta a[href="/diagnosis/"] { display: none; }
+.dx-stage .grid-paper, .dx-stage.grid-paper { background-image: none; }
+
+/* =========================================================
+   採用診断 v2（2026-10-17 オーナー指示「文字ばかりで見にくい」）
+   青い帯の上に診断のカードを重ね、説明は図とカードで見せる
+   ========================================================= */
+.dx-stage { position: relative; overflow: hidden; background: linear-gradient(160deg, #0a4fae 0%, #0b5fc4 55%, #0e6fd3 100%); color: #fff; padding: var(--s6) 0 var(--s7); border-bottom: 0; }
+.dx-stage::after { content: "Diagnosis"; position: absolute; right: -.04em; bottom: -.22em; font-family: var(--font-display); font-weight: 900; font-size: clamp(5rem, 14vw, 14rem); line-height: 1; letter-spacing: -.03em; color: rgba(255,255,255,.07); pointer-events: none; }
+.dx-stage .container { position: relative; z-index: 1; }
+.dx-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s6); align-items: start; }
+.dx-intro { padding-top: var(--s3); }
+.dx-intro .breadcrumb, .dx-intro .breadcrumb a, .dx-intro .breadcrumb li { color: #fff; }
+.dx-intro .breadcrumb { margin-bottom: var(--s6); }
+.dx-intro h1 { color: #fff; font-size: clamp(2.4rem, 4.6vw, 3.8rem); font-weight: 900; margin: 0 0 var(--s4); line-height: 1.2; }
+.dx-lead { font-size: var(--fs-l); line-height: 1.85; font-weight: 500; margin: 0 0 var(--s5); }
+.dx-badges { list-style: none; margin: 0 0 var(--s4); padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s2); }
+.dx-badges li { display: grid; justify-items: start; gap: 2px; padding: var(--s3) var(--s3) var(--s3); background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.35); border-radius: var(--r-m); }
+.dx-badges svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; margin-bottom: var(--s1); }
+.dx-badges b { font-size: var(--fs-xl); font-weight: 900; line-height: 1.2; }
+.dx-badges span { font-size: var(--fs-xs); }
+.dx-note-hero { font-size: var(--fs-s); margin: 0; }
+.dx-app { margin: 0; max-width: none; border: 0; border-radius: var(--r-m); padding: var(--s5); box-shadow: 0 30px 60px -30px rgba(2, 20, 60, .6); color: var(--text); }
+.dx-app legend { color: var(--brand-deep); }
+@media (max-width: 960px) {
+  .dx-grid { grid-template-columns: 1fr; gap: var(--s5); }
+  .dx-intro .breadcrumb { margin-bottom: var(--s4); }
+}
+@media (max-width: 600px) {
+  .dx-stage { padding: var(--s4) 0 var(--s6); }
+  .dx-badges b { font-size: var(--fs-l); }
+  .dx-app { padding: var(--s4); }
+  .dx-lead { font-size: var(--fs-m); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .dx-intro > * { animation: bandIn .9s var(--ease-out) both; }
+  .dx-intro > :nth-child(3) { animation-delay: .06s; }
+  .dx-intro > :nth-child(4) { animation-delay: .12s; }
+  .dx-badges li { animation: bandIn .8s var(--ease-out) both; }
+  .dx-badges li:nth-child(1) { animation-delay: .2s; } .dx-badges li:nth-child(2) { animation-delay: .3s; } .dx-badges li:nth-child(3) { animation-delay: .4s; }
+  .dx-app { animation: photoIn 1s var(--ease-out) .15s both; }
+}
+
+/* 診断の流れ：3段の図 */
+.dx-flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); counter-reset: f; position: relative; }
+.dx-flow::before { content: ""; position: absolute; left: 16%; right: 16%; top: 44px; height: 2px; background: repeating-linear-gradient(90deg, var(--sky) 0 8px, transparent 8px 16px); }
+.dx-flow li { position: relative; counter-increment: f; text-align: center; background: #fff; border-radius: var(--r-m); padding: var(--s5) var(--s4); box-shadow: 0 0 0 1px var(--line); }
+.dx-flow-ico { position: relative; display: grid; place-items: center; width: 88px; height: 88px; margin: calc(-1 * var(--s5) - 4px) auto var(--s3); border-radius: 50%; background: var(--grad); box-shadow: 0 12px 28px -12px rgba(11, 77, 162, .6); }
+.dx-flow-ico::after { content: counter(f, decimal-leading-zero); position: absolute; right: -6px; top: -6px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--signature); color: #fff; font-size: var(--fs-xs); font-weight: 900; font-variant-numeric: tabular-nums; }
+.dx-flow-ico svg { width: 44px; height: 44px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.dx-flow h3 { font-size: var(--fs-l); color: var(--brand-deep); margin: 0 0 var(--s2); }
+.dx-flow p { margin: 0; font-size: var(--fs-s); color: var(--muted); line-height: 1.9; }
+.dx-flow { margin-top: var(--s7); }
+@media (max-width: 800px) { .dx-flow { grid-template-columns: 1fr; gap: var(--s7); } .dx-flow::before { display: none; } }
+
+/* 4つのタイプ：頭文字の色分けカード */
+.dx-types { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s4); }
+.dx-types li { --tc: var(--accent); position: relative; display: flex; flex-direction: column; background: #fff; border-radius: var(--r-m); padding: var(--s5) var(--s4) var(--s4); overflow: hidden; }
+.dx-types li::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 6px; background: var(--tc); }
+.dx-types .t-b { --tc: #1f8fe6; } .dx-types .t-c { --tc: #c96a0d; } .dx-types .t-d { --tc: #55637a; }
+.dx-type-mark { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--tc); color: #fff; font-family: var(--font-display); font-size: 2rem; font-weight: 900; line-height: 1; margin-bottom: var(--s3); }
+.dx-type-k { margin: 0; font-size: var(--fs-xs); font-weight: 700; color: var(--tc); }
+.dx-types h3 { font-size: var(--fs-xl); color: var(--brand-deep); margin: 0 0 var(--s2); line-height: 1.35; }
+.dx-types li > p:not(.dx-type-k):not(.dx-type-next) { margin: 0 0 var(--s3); font-size: var(--fs-s); line-height: 1.9; color: var(--muted); }
+.dx-type-next { margin: auto 0 0; padding: var(--s3); background: var(--surface); border-radius: var(--r-s); font-size: var(--fs-s); line-height: 1.8; }
+.dx-type-next span { display: block; font-size: var(--fs-xs); font-weight: 700; color: var(--tc); }
+.dx-start-again { text-align: center; margin: var(--s6) 0 0; }
+@media (max-width: 1000px) { .dx-types { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .dx-types { grid-template-columns: 1fr; } }
+.dx-types > li.rv { transform: translateY(30px) scale(.94); transition: opacity .7s var(--ease-out), transform .8s cubic-bezier(.34, 1.56, .64, 1); transition-delay: calc(var(--d, 0) * 110ms); }
+.dx-types > li.rv.in { transform: none; }
+
+/* 向いている企業：写真付きカード（5枚） */
+.dx-fit { grid-template-columns: repeat(5, 1fr); }
+.dx-fit h3 { font-size: var(--fs-m); }
+@media (max-width: 1200px) { .dx-fit { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1000px) { .dx-fit { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .dx-fit { grid-template-columns: 1fr; } }
+
+/* 合いにくいケース：条件 → 代わりの進め方 */
+.dx-alt { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
+.dx-alt li { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: stretch; }
+.dx-alt li::after { content: ""; grid-column: 2; grid-row: 1; align-self: center; justify-self: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12h13M12 6l6 6-6 6' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 55% no-repeat; }
+.dx-alt-if { grid-column: 1; grid-row: 1; background: #fff; border-radius: var(--r-m); padding: var(--s4) var(--s5); display: grid; gap: var(--s1); align-content: center; }
+.dx-alt-then { grid-column: 3; grid-row: 1; background: var(--wash); border-radius: var(--r-m); padding: var(--s4) var(--s5); display: grid; gap: var(--s1); align-content: center; box-shadow: inset 0 0 0 1px #c6e0f6; }
+.dx-alt .k { font-size: var(--fs-xs); font-weight: 700; color: var(--muted); }
+.dx-alt-then .k { color: var(--accent-deep); }
+.dx-alt b { font-size: var(--fs-l); color: var(--brand-deep); line-height: 1.5; }
+.dx-alt .why { font-size: var(--fs-s); color: var(--muted); }
+.dx-alt-then p { margin: 0; font-weight: 700; line-height: 1.8; }
+@media (max-width: 760px) {
+  .dx-alt li { grid-template-columns: 1fr; grid-template-rows: auto 48px auto; }
+  .dx-alt-if { grid-row: 1; } .dx-alt-then { grid-column: 1; grid-row: 3; }
+  .dx-alt li::after { grid-column: 1; grid-row: 2; transform: rotate(90deg); }
+}
+
+/* 進み具合：10個の区切り（線と丸の図をやめる） */
+.dx-progress { gap: var(--s3); margin-bottom: var(--s4); }
+.dx-progress svg { display: none; }
+.dx-seg { flex: 1; min-width: 0; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.dx-seg li { height: 6px; border-radius: 3px; background: var(--line); transition: background-color .3s ease; }
+.dx-seg li.is-done { background: var(--accent); }
+.dx-seg li.is-cur { background: linear-gradient(90deg, var(--accent), var(--sky)); }
+.dx-progress.done .dx-seg li { background: var(--accent); }
+.dx-progress output { font-weight: 700; color: var(--brand-deep); font-variant-numeric: tabular-nums; }
+
+/* 帯の大きな英字は、診断のカードに隠れて途中で切れて見えるため出さない */
+.dx-stage::after { content: none; }
+
+/* 選択肢：古い配色（オレンジ）を青にそろえる */
+.dx-options label { border-color: var(--line); border-radius: var(--r-m); }
+@media (hover: hover) { .dx-options label:hover { border-color: var(--accent); background: var(--surface); } }
+.dx-options input { accent-color: var(--accent); }
+.dx-options label:has(input:checked) { border-color: var(--accent); background: var(--wash); color: var(--brand-deep); }
+.dx-options label:has(input:focus-visible) { outline: 3px solid #062f6e; outline-offset: 2px; }
+.dx-form legend .qno { color: var(--accent-deep); }
+.page-diagnosis { --kaki: var(--accent); --kaki-ink: var(--accent); --kaki-deep: var(--accent-deep); --kaki-soft: var(--wash); }
+
+/* 結果の見出し（線と建物の図をやめる） */
+.dx-result-k { display: inline-flex; align-items: center; gap: var(--s2); margin: 0 0 var(--s3); font-size: var(--fs-s); font-weight: 700; color: var(--accent-deep); }
+.dx-result-k svg { width: 28px; height: 28px; fill: var(--accent); stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) { .dx-result:not([hidden]) .dx-result-k svg { animation: exPop .6s cubic-bezier(.34, 1.56, .64, 1) both; } }
+.dx-result-k { display: flex; }

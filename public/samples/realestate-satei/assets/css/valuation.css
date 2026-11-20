@@ -1,0 +1,77 @@
+/* Web査定ページ */
+.va-layout { display: grid; gap: 24px; align-items: start; }
+.va-layout > * { min-width: 0; }
+@media (min-width: 1080px) {
+  .va-layout { grid-template-columns: 440px 1fr; }
+  #va-form { position: sticky; top: 84px; max-height: calc(100vh - 100px); overflow-y: auto; }
+}
+.va-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px; box-shadow: var(--shadow); margin-bottom: 20px; }
+@media (min-width: 700px) { .va-card { padding: 28px; } }
+.va-h { font-size: 20px; margin: 22px 0 12px; }
+.va-card > .va-h:first-child { margin-top: 0; }
+.va-map { height: 0; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); margin-top: 12px; }
+.va-map.is-on { height: 320px; }
+.va-check label { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; font-size: 15px; cursor: pointer; padding-top: 30px; line-height: 1.6; }
+.va-card .va-check label { padding-top: 0; }
+.va-check input { width: 22px; height: 22px; accent-color: var(--cta); flex: none; margin-top: 2px; }
+#va-submit:disabled { opacity: .7; cursor: progress; }
+
+.va-result:focus { outline: none; }
+.va-empty { border: 2px dashed var(--line); border-radius: 18px; padding: 32px 24px; color: var(--ink-3); background: var(--paper-2); }
+.va-empty svg { width: 48px; height: 48px; color: var(--gold); margin-bottom: 8px; }
+.va-empty ul { margin: 8px 0 0; font-size: 15px; }
+
+.va-price { border: 2px solid var(--ink); background: #fffdf8; }
+.va-price.is-na { border-color: var(--cta); }
+.va-label { font-size: 14px; color: var(--ink-3); font-weight: 700; margin: 0; }
+.va-big { font-family: var(--font-serif); font-weight: 700; font-size: clamp(30px, 6vw, 48px); line-height: 1.25; margin: 6px 0 2px; }
+.va-big small { font-size: .42em; margin-left: 2px; }
+.va-mid { margin: 0; color: var(--ink-2); }
+.va-cta { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 16px; }
+.va-cta-sub { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.va-cta-sub .btn { min-height: 48px; font-size: 15px; padding: 0 12px; }
+
+.va-table { min-width: 520px; }
+.va-table td.num, .va-table th + td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.va-table small { color: var(--ink-3); font-weight: 400; }
+.va-table tr.sum > * { font-weight: 700; background: var(--paper-2); font-size: 16px; }
+.va-table tbody th[scope="rowgroup"] { vertical-align: middle; text-align: center; background: var(--ink); color: #fff; }
+#pc-table { min-width: 0; }
+
+.va-layers { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 10px 0 14px; font-size: 14px; }
+.va-layers label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; min-height: 32px; }
+.va-layers input { accent-color: var(--ink); width: 18px; height: 18px; }
+.va-pt-label { background: transparent; border: 0; box-shadow: none; color: #fff; font-weight: 700; font-size: 13px; }
+.va-pt-label::before { display: none; }
+
+.va-dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0 0 10px; }
+.va-dl dt { color: var(--ink-3); }
+.va-dl dd { margin: 0; font-weight: 700; }
+
+.va-hazard { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 8px; }
+@media (min-width: 640px) { .va-hazard { grid-template-columns: 1fr 1fr; } }
+.va-hazard li { display: flex; justify-content: space-between; gap: 10px; align-items: center; border-radius: 10px; padding: 12px 14px; border: 1px solid var(--line); font-size: 15px; }
+.va-hazard li b { font-size: 14px; text-align: right; }
+.va-hazard .lv-none { background: #f1f8f4; border-color: #cfe6d8; }
+.va-hazard .lv-none b { color: var(--ok); }
+.va-hazard .lv-warn { background: #fff7e6; border-color: #f0d49a; }
+.va-hazard .lv-warn b { color: #8a5a00; }
+.va-hazard .lv-danger { background: var(--danger-bg); border-color: #efb3b3; }
+.va-hazard .lv-danger b { color: var(--danger); }
+.va-hazard .lv-unknown b { color: var(--ink-3); }
+.va-hazard .is-loading { color: var(--ink-3); }
+.va-disclaimer { border-top: 1px solid var(--line); padding-top: 14px; }
+
+
+@media print {
+  .site-header, .fixed-bar, .no-print, .breadcrumb, .site-footer .footer-grid, .va-cta, .va-layers { display: none !important; }
+  body { padding: 0; font-size: 13px; }
+  .section { padding: 0; }
+  .va-layout { display: block; }
+  .va-card { box-shadow: none; break-inside: avoid; border-color: #bbb; }
+  .va-map.is-on { height: 260px; }
+  .table-wrap { overflow: visible; }
+}
+.va-hazard li span small { display: block; font-size: 13px; color: var(--ink-3); line-height: 1.5; }
+.pc-warn { margin: 12px 0 0; padding-left: 1.2em; font-size: 14px; color: #8a5a00; line-height: 1.7; }
+.pc-warn:empty { display: none; }

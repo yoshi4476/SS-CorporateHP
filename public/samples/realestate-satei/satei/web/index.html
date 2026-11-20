@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ja" class="no-js">
+<head><meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Web不動産査定｜地価公示×建築費統計で算出｜〇〇不動産</title>
+<meta name="description" content="住所と物件情報を入れるだけで、国の地価公示・地価調査と国税庁の建築費統計から売却価格の目安を計算。根拠の地点、地価の推移、浸水・土砂災害の想定、売却後の手取りまで一度に確認できます。名前・電話番号は不要です。">
+
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+<meta name="theme-color" content="#f7f5f0">
+
+
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@600;700&display=swap"></noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link rel="stylesheet" href="../../assets/css/valuation.css">
+
+<script>document.documentElement.classList.remove('no-js')</script>
+</head>
+<body><style>#cfx-sample-note{position:fixed;left:12px;bottom:12px;z-index:2147483647;display:flex;align-items:center;gap:8px;background:rgba(20,22,28,.9);color:#fff;font:12px/1.5 system-ui,-apple-system,sans-serif;padding:6px 6px 6px 12px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.25)}#cfx-sample-note button{all:unset;cursor:pointer;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.15);font-size:14px}#cfx-sample-note .s{display:none}@media(max-width:600px){#cfx-sample-note{font-size:11px;left:auto;right:8px;bottom:auto;top:76px}#cfx-sample-note .l{display:none}#cfx-sample-note .s{display:inline}}</style><div id="cfx-sample-note" role="note"><span class="l">制作見本（CONFLUX PARTNERS 制作）・社名と連絡先は伏せています</span><span class="s">制作見本・社名は伏せています</span><button type="button" aria-label="この表示を閉じる" onclick="this.parentNode.remove()">×</button></div><script>document.addEventListener('submit',function(e){e.preventDefault();alert('見本のため送信できません');},true);</script>
+<a class="skip" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="../../index.html">
+      <span class="brand__mark" aria-hidden="true" style="background:transparent;border:1.5px dashed currentColor;color:#8a8a8a;font:600 10px/1 sans-serif;letter-spacing:.04em">LOGO</span>
+      <span><span class="brand__name">〇〇不動産</span><span class="brand__sub">不動産査定</span></span>
+    </a>
+    <nav class="gnav" aria-label="メイン"><ul><li><a href="../../index.html#plans">査定プラン</a></li><li><a href="../../nayami/index.html">お悩み別</a></li><li><a href="../../method/index.html">売り方</a></li><li><a href="../../wakeari/index.html">訳アリ物件</a></li><li><a href="../../area/aichi/index.html">エリア</a></li><li><a href="../../blog/index.html">コラム</a></li><li><a href="../../company/index.html">会社紹介</a></li></ul></nav>
+    <div class="header-cta">
+      <a class="header-tel" href="#"><b>000-0000-0000</b><small>21時・土日祝も相談OK</small></a>
+      <a class="btn btn--cta" href="../index.html">無料査定</a>
+    </div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer"><span></span><span class="sr-only">メニュー</span></button>
+  </div>
+  <nav id="drawer" class="drawer" aria-label="メイン（スマホ）">
+    <ul>
+      <li><a href="../../index.html">トップ</a></li>
+      <li><a href="../index.html">無料査定フォーム</a></li>
+      <li><a href="../../index.html#plans">4つの査定プラン</a></li>
+      <li><a href="../../index.html#faq">よくある質問</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <nav class="breadcrumb wrap" aria-label="パンくずリスト"><ol><li><a href="../../index.html">トップ</a></li><li><a href="../index.html">無料査定</a></li><li aria-current="page">Web査定</li></ol></nav>
+
+  <section class="page-hero no-print">
+    <div class="wrap">
+      <span class="eyebrow">WEB APPRAISAL</span>
+      <h1>Web不動産査定</h1>
+      <p class="section-lead">国の<span class="marker">地価公示・地価調査</span>、全国の実際の<span class="marker">取引価格・成約価格 約200万件</span>、国税庁の建築費統計から、今の売却価格の目安を計算します。根拠の地点・地価の推移・災害の想定・売却後の手取りまで、まとめて確認できます。</p>
+      <ul class="cta-promise" style="justify-content:flex-start"><li>名前・電話番号 不要</li><li>計算の根拠をすべて公開</li><li>営業電話はしません</li></ul>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:36px">
+    <div class="wrap va-layout">
+      <!-- ===== 入力 ===== -->
+      <form id="va-form" class="va-card no-print" novalidate>
+        <h2 class="va-h">1. 物件の場所</h2>
+        <div class="field-row va-zip">
+          <div class="field">
+            <label for="va-zip">郵便番号<span class="opt">任意</span></label>
+            <input type="text" id="va-zip" inputmode="numeric" autocomplete="postal-code" placeholder="例）4461234" maxlength="8">
+          </div>
+          <div class="field">
+            <label for="va-addr">住所<span class="req">必須</span></label>
+            <input type="text" id="va-addr" name="addr" autocomplete="street-address" placeholder="例）安城市御幸本町">
+          </div>
+        </div>
+        <button type="button" class="btn btn--ghost btn--block" id="va-locate">地図で場所を確認する</button>
+        <p class="hint" id="va-loc-msg" aria-live="polite">住所を入れて「地図で場所を確認する」を押してください。地図のピンは動かせます。</p>
+        <div id="va-map" class="va-map" role="application" aria-label="物件の位置の地図"></div>
+        <p class="note">地図：国土地理院（淡色地図）</p>
+
+        <h2 class="va-h">2. 物件のこと</h2>
+        <fieldset class="field" style="border:0;padding:0">
+          <legend class="label" style="font-weight:700;margin-bottom:6px">物件の種類<span class="req">必須</span></legend>
+          <div class="seg">
+            <input type="radio" name="type" id="va-t1" value="house" checked><label for="va-t1">一戸建て</label>
+            <input type="radio" name="type" id="va-t2" value="mansion"><label for="va-t2">マンション</label>
+            <input type="radio" name="type" id="va-t3" value="land"><label for="va-t3">土地</label>
+          </div>
+        </fieldset>
+
+        <div data-show="house land">
+          <div class="field">
+            <label for="va-landArea">土地の広さ<span class="req">必須</span></label>
+            <div class="unit-input"><input type="number" id="va-landArea" name="landArea" inputmode="decimal" min="1" step="0.01" placeholder="例）165" data-area aria-describedby="va-land-help"><span>㎡</span></div>
+            <details class="area-help" id="va-land-help">
+              <summary>土地の広さが分からないときは</summary>
+              <p>土地の広さ（地積）は、次の書類に書いてあります。</p>
+              <ul>
+                <li>固定資産税の<b>課税明細書</b>（毎年4〜6月ごろ市役所から届く）の「地積」</li>
+                <li><b>登記簿</b>（登記事項証明書・権利証）の「地積」</li>
+                <li>買ったときの<b>売買契約書・測量図</b></li>
+              </ul>
+              <p>手元になくても大丈夫です。目安の広さで計算して、あとで正確な値に直せます。</p>
+              <button type="button" class="btn btn--ghost btn--sm" data-typical="land">この地域の一戸建ての標準的な広さを入れる</button>
+              <p class="hint" data-typical-msg="land" aria-live="polite"></p>
+            </details>
+          </div>
+          <div class="field">
+            <label for="va-shape">土地の形</label>
+            <select id="va-shape" name="shape">
+              <option value="seikei">四角形に近い</option><option value="yaya">少しいびつ（台形など）</option><option value="fusei">いびつ・三角形など</option><option value="hatazao">旗竿地（細い通路の奥）</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="va-dir">道路に面している方角</label>
+              <select id="va-dir" name="dir">
+                <option value="">分からない</option><option value="south">南（南東・南西も）</option><option value="east">東</option><option value="west">西</option><option value="north">北（北東・北西も）</option><option value="none">道路に接していない</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="va-roadW">前面道路の幅</label>
+              <select id="va-roadW" name="roadW">
+                <option value="">分からない</option><option value="3">4m未満</option><option value="5">4〜6m</option><option value="7">6〜8m</option><option value="9">8m以上</option>
+              </select>
+            </div>
+          </div>
+          <div class="field va-check">
+            <label><input type="checkbox" name="corner" value="1"> 角地（2つの道路に面している）</label>
+          </div>
+        </div>
+
+        <div data-show="house mansion">
+          <div class="field-row">
+            <div class="field">
+              <label for="va-bldgArea" data-label-house="建物の延床面積" data-label-mansion="専有面積">建物の延床面積<span class="req">必須</span></label>
+              <div class="unit-input"><input type="number" id="va-bldgArea" name="bldgArea" inputmode="decimal" min="1" step="0.01" placeholder="例）100" data-area aria-describedby="va-bldg-help"><span>㎡</span></div>
+            </div>
+            <div class="field">
+              <label for="va-builtYear">建てた年<span class="req">必須</span></label>
+              <select id="va-builtYear" name="builtYear"></select>
+            </div>
+          </div>
+          <details class="area-help" id="va-bldg-help">
+            <summary><span data-show="house">延床面積が分からないときは</span><span data-show="mansion">専有面積が分からないときは</span></summary>
+            <div data-show="house">
+              <p><b>延床面積</b>は、1階と2階など<b>各階の床面積を合計した広さ</b>です（敷地の広さではありません）。次の書類に書いてあります。</p>
+              <ul>
+                <li>固定資産税の<b>課税明細書</b>の、家屋の「床面積」</li>
+                <li><b>登記簿</b>（登記事項証明書）の「床面積」（1階・2階の合計）</li>
+                <li>建てたときの<b>建築確認済証・図面</b></li>
+              </ul>
+              <button type="button" class="btn btn--ghost btn--sm" data-typical="floor">この地域の一戸建ての標準的な広さを入れる</button>
+              <p class="hint" data-typical-msg="floor" aria-live="polite"></p>
+            </div>
+            <div data-show="mansion">
+              <p><b>専有面積</b>は、お部屋の広さです。<b>売買契約書・重要事項説明書・購入時のパンフレット</b>に書いてあります。</p>
+              <p>分からなければ、間取りから目安を選んでください（実際の取引の中央値）。</p>
+              <div class="layout-picks" role="group" aria-label="間取りから専有面積の目安を選ぶ">
+                <button type="button" data-layout="20">1K・1R</button><button type="button" data-layout="30">1DK</button><button type="button" data-layout="45">1LDK・2DK</button>
+                <button type="button" data-layout="60">2LDK</button><button type="button" data-layout="75">3LDK・3DK</button><button type="button" data-layout="90">4LDK</button><button type="button" data-layout="110">5LDK以上</button>
+              </div>
+              <p class="note">目安：国土交通省「不動産情報ライブラリ」の中古マンション取引（愛知県・東京都・大阪府 2021〜2026年）の間取り別の専有面積の中央値</p>
+            </div>
+          </details>
+        </div>
+
+        <div data-show="house">
+          <div class="field-row">
+            <div class="field">
+              <label for="va-structure">建物の構造</label>
+              <select id="va-structure" name="structure">
+                <option value="wood">木造</option><option value="lsteel">軽量鉄骨造</option><option value="steel">鉄骨造</option><option value="rc">鉄筋コンクリート造</option><option value="src">鉄骨鉄筋コンクリート造</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="va-condition">建物の状態</label>
+              <select id="va-condition" name="condition">
+                <option value="normal">ふつう・きれい</option><option value="repair">傷み・修繕が必要</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div data-show="mansion">
+          <div class="field">
+            <label for="va-reform">リフォーム（改装）</label>
+            <select id="va-reform" name="reform">
+              <option value="unknown">分からない</option><option value="none">していない</option><option value="done">している</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="va-walk">最寄り駅から歩いて</label>
+          <select id="va-walk" name="walk">
+            <option value="">分からない</option><option value="3">5分以内</option><option value="8">6〜10分</option><option value="13">11〜15分</option><option value="18">16〜20分</option><option value="25">21〜30分</option><option value="45">30分以上・バス</option>
+          </select>
+        </div>
+
+        <fieldset class="field" style="border:0;padding:0">
+          <legend class="label" style="font-weight:700;margin-bottom:6px">当てはまるもの<span class="opt">任意</span></legend>
+          <div class="checks">
+            <input type="checkbox" name="wakeari" id="va-w1" value="再建築不可"><label for="va-w1">再建築不可</label>
+            <input type="checkbox" name="wakeari" id="va-w2" value="連棟・長屋"><label for="va-w2">連棟・長屋</label>
+            <input type="checkbox" name="wakeari" id="va-w3" value="雨漏り・シロアリ"><label for="va-w3">雨漏り・シロアリ</label>
+            <input type="checkbox" name="wakeari" id="va-w4" value="残置物・ゴミが多い"><label for="va-w4">残置物・ゴミが多い</label>
+            <input type="checkbox" name="wakeari" id="va-w5" value="相続でもめている"><label for="va-w5">相続でもめている</label>
+            <input type="checkbox" name="wakeari" id="va-w6" value="共有名義"><label for="va-w6">共有名義</label>
+          </div>
+        </fieldset>
+
+        <p class="error-msg" id="va-error" role="alert" hidden></p>
+        <button type="submit" class="btn btn--cta btn--block btn--lg" id="va-submit">査定価格を計算する<span class="arrow" aria-hidden="true">→</span></button>
+        <p class="hint center">お名前・電話番号は不要です。</p>
+      </form>
+
+      <!-- ===== 結果 ===== -->
+      <div id="va-result" class="va-result" aria-live="polite" tabindex="-1">
+        <div class="va-empty no-print">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+          <p><b>ここに査定結果が表示されます</b></p>
+          <ul>
+            <li>売却価格の目安（価格帯）</li>
+            <li>土地・建物それぞれの計算内訳</li>
+            <li>根拠にした地価公示・地価調査の地点</li>
+            <li>近くの地価の推移グラフ</li>
+            <li>浸水・高潮・津波・土砂災害の想定</li>
+            <li>売却後の手取りシミュレーション</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p><b>〇〇不動産（株式会社〇〇〇〇）</b><br>〒000-0000 愛知県高浜市〇〇町0丁目0番地0 〇〇ビル1F／TEL 000-0000-0000／FAX 000-0000-0000<br>営業時間 9:00〜18:00／定休日 水曜日</p>
+    <div class="footer-legal">
+      
+      <p>宅地建物取引業免許 愛知県知事（2）第00000号／(公社)愛知県宅地建物取引業協会／(公社)全国宅地建物取引業保証協会／東海不動産公正取引協議会 加盟</p>
+      <p>本査定は宅地建物取引業者による価格の目安であり、不動産鑑定士による不動産鑑定評価ではありません。</p>
+    </div>
+  </div>
+</footer>
+
+<nav class="fixed-bar no-print" aria-label="お問い合わせ">
+  <a class="fb-tel" href="#">電話<small>土日祝OK</small></a>
+  <a class="fb-line" href="#" rel="noopener">LINE<small>24時間</small></a>
+  <a class="fb-form" href="../index.html">代表に査定を依頼<small>無料</small></a>
+</nav>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+<script src="../../assets/js/proceeds.js" defer></script>
+<script src="../../assets/js/area-input.js" defer></script>
+<script src="../../assets/js/valuation-app.js" defer></script>
+<script src="../../assets/js/common.js" defer></script>
+</body>
+</html>
