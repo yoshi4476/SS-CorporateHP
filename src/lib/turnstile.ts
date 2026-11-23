@@ -43,7 +43,7 @@ function load(): Promise<Turnstile | null> {
 type State = "" | "wait" | "run" | "ask" | "ok" | "err" | "off";
 
 export function useTurnstile(formRef: RefObject<HTMLFormElement | null>, boxRef: RefObject<HTMLDivElement | null>) {
-  const st = useRef<{ state: State; id: string | null }>({ state: "", id: null });
+  const st = useRef<{ state: State; id: string | null; at: number }>({ state: "", id: null, at: 0 });
 
   useEffect(() => {
     const form = formRef.current;
@@ -53,6 +53,7 @@ export function useTurnstile(formRef: RefObject<HTMLFormElement | null>, boxRef:
     const mount = () => {
       if (st.current.state) return;
       st.current.state = "wait";
+      st.current.at = Date.now();
       load().then((ts) => {
         if (!ts || !box.isConnected) {
           st.current.state = "off";
@@ -111,5 +112,12 @@ export function useTurnstile(formRef: RefObject<HTMLFormElement | null>, boxRef:
     }
   }, []);
 
-  return { token, renew };
+  /** 答えが無いまま送るときに添える、部品の状態と待った秒（例 wait:6）。管制塔が記録の codes に page-<状態> と残す。
+   *  本物の相談が答え無しで届いた件（2026-11-10）は、部品が読めなかったのか待ち切れなかったのかが分からなかった */
+  const state = useCallback(() => {
+    const s = st.current;
+    return `${s.state || "none"}:${s.at ? Math.round((Date.now() - s.at) / 1000) : 0}`;
+  }, []);
+
+  return { token, renew, state };
 }

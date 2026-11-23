@@ -252,7 +252,8 @@ export default function ContactForm() {
           // 最初に来たときの流入元と入口（台帳の送信元ページに「流入: …｜入口: …｜送信: …」と入る）
           ...firstTouch(),
           // ロボットよけの答え。管制塔が Cloudflare に確かめる（台帳には残らない）
-          ...(tsToken ? { "cf-turnstile-response": tsToken } : {}),
+          // 答えが無いときは、部品の状態と待った秒を添える（管制塔が記録の codes に残す。台帳には残らない）
+          ...(tsToken ? { "cf-turnstile-response": tsToken } : { ts_state: turnstile.state() }),
         }),
       });
       turnstile.renew();
